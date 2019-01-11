@@ -1,0 +1,303 @@
+\section{proxygen\+:\+:Rendezvous\+Hash Class Reference}
+\label{classproxygen_1_1RendezvousHash}\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+
+
+{\ttfamily \#include $<$Rendezvous\+Hash.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Rendezvous\+Hash\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1RendezvousHash}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf get\+Max\+Error\+Rate} () const override
+\item 
+void {\bf build} (std\+::vector$<$ std\+::pair$<$ std\+::string, uint64\+\_\+t $>$$>$ \&) override
+\item 
+size\+\_\+t {\bf get} (const uint64\+\_\+t key, const size\+\_\+t rank=0) const override
+\item 
+std\+::vector$<$ size\+\_\+t $>$ {\bf select\+N\+Unweighted} (const uint64\+\_\+t key, const size\+\_\+t rank) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t {\bf get\+Nth\+By\+Weighted\+Hash} (const uint64\+\_\+t key, const size\+\_\+t mod\+Rank, std\+::vector$<$ size\+\_\+t $>$ $\ast$return\+Rank\+Ids) const 
+\item 
+uint64\+\_\+t {\bf compute\+Hash} (const char $\ast$data, size\+\_\+t len) const 
+\item 
+uint64\+\_\+t {\bf compute\+Hash} (uint64\+\_\+t i) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::pair$<$ uint64\+\_\+t, uint64\+\_\+t $>$ $>$ {\bf weights\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 24 of file Rendezvous\+Hash.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!build@{build}}
+\index{build@{build}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{build(std\+::vector$<$ std\+::pair$<$ std\+::string, uint64\+\_\+t $>$$>$ \&) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Rendezvous\+Hash\+::build (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::pair$<$ std\+::string, uint64\+\_\+t $>$$>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1RendezvousHash_a83564ee60260d2c2d649665d04737643}
+
+
+Definition at line 20 of file Rendezvous\+Hash.\+cpp.
+
+
+
+References compute\+Hash(), and weights\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+21                                                          \{
+22   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it = nodes.begin(); it != nodes.end(); ++it) \{
+23     std::string key = it->first;
+24     uint64\_t weight = it->second;
+25     weights_.emplace\_back(computeHash(key.c\_str(), key.size()), weight);
+26   \}
+27 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!compute\+Hash@{compute\+Hash}}
+\index{compute\+Hash@{compute\+Hash}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{compute\+Hash(const char $\ast$data, size\+\_\+t len) const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Rendezvous\+Hash\+::compute\+Hash (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{data, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1RendezvousHash_ac03308bfbe637deb088b354d652cca43}
+
+
+Definition at line 214 of file Rendezvous\+Hash.\+cpp.
+
+
+
+Referenced by build(), and get\+Nth\+By\+Weighted\+Hash().
+
+
+\begin{DoxyCode}
+214                                                                        \{
+215   \textcolor{keywordflow}{return} folly::hash::fnv64\_buf(data, len);
+216 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!compute\+Hash@{compute\+Hash}}
+\index{compute\+Hash@{compute\+Hash}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{compute\+Hash(uint64\+\_\+t i) const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Rendezvous\+Hash\+::compute\+Hash (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1RendezvousHash_ab201076df6283f2041429d6fd752223e}
+
+
+Definition at line 218 of file Rendezvous\+Hash.\+cpp.
+
+
+\begin{DoxyCode}
+218                                                      \{
+219   \textcolor{keywordflow}{return} folly::hash::twang\_mix64(i);
+220 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!get@{get}}
+\index{get@{get}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{get(const uint64\+\_\+t key, const size\+\_\+t rank=0) const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Rendezvous\+Hash\+::get (
+\begin{DoxyParamCaption}
+\item[{const uint64\+\_\+t}]{key, }
+\item[{const size\+\_\+t}]{rank = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1RendezvousHash_abf63d7fce1a3b5e85b6f13047054e8bb}
+get(key, N) finds the node ranked N in the consistent hashing space for the given key.
+
+The returning value is the node\textquotesingle{}s index in the input vector of \doxyref{build()}{p.}{classproxygen_1_1RendezvousHash_a83564ee60260d2c2d649665d04737643}. 
+
+Implements {\bf proxygen\+::\+Consistent\+Hash} \doxyref{}{p.}{classproxygen_1_1ConsistentHash_aff314a6a770935974172e5579be928e3}.
+
+
+
+Definition at line 127 of file Rendezvous\+Hash.\+cpp.
+
+
+
+References get\+Nth\+By\+Weighted\+Hash().
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+127                                                                       \{
+128   \textcolor{keywordflow}{return} getNthByWeightedHash(key, rank, \textcolor{keyword}{nullptr});
+129 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!get\+Max\+Error\+Rate@{get\+Max\+Error\+Rate}}
+\index{get\+Max\+Error\+Rate@{get\+Max\+Error\+Rate}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{get\+Max\+Error\+Rate() const override}]{\setlength{\rightskip}{0pt plus 5cm}double proxygen\+::\+Rendezvous\+Hash\+::get\+Max\+Error\+Rate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1RendezvousHash_a2453618b03612ba068c2cef6964e818e}
+get max error rate the current hashing space 
+
+Implements {\bf proxygen\+::\+Consistent\+Hash} \doxyref{}{p.}{classproxygen_1_1ConsistentHash_a979601c4ebab25cbab4d72cf3ed8988f}.
+
+
+
+Definition at line 222 of file Rendezvous\+Hash.\+cpp.
+
+
+\begin{DoxyCode}
+222                                              \{
+223   \textcolor{keywordflow}{return} 0;
+224 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!get\+Nth\+By\+Weighted\+Hash@{get\+Nth\+By\+Weighted\+Hash}}
+\index{get\+Nth\+By\+Weighted\+Hash@{get\+Nth\+By\+Weighted\+Hash}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{get\+Nth\+By\+Weighted\+Hash(const uint64\+\_\+t key, const size\+\_\+t mod\+Rank, std\+::vector$<$ size\+\_\+t $>$ $\ast$return\+Rank\+Ids) const }]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Rendezvous\+Hash\+::get\+Nth\+By\+Weighted\+Hash (
+\begin{DoxyParamCaption}
+\item[{const uint64\+\_\+t}]{key, }
+\item[{const size\+\_\+t}]{mod\+Rank, }
+\item[{std\+::vector$<$ size\+\_\+t $>$ $\ast$}]{return\+Rank\+Ids}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1RendezvousHash_a4a16e84cea67513bb27ee9dd072df146}
+
+
+Definition at line 134 of file Rendezvous\+Hash.\+cpp.
+
+
+
+References compute\+Hash(), and weights\+\_\+.
+
+
+
+Referenced by get(), and select\+N\+Unweighted().
+
+
+\begin{DoxyCode}
+137                                             \{
+138   \textcolor{keywordtype}{size\_t} modRank = rank % weights_.size();
+139   \textcolor{comment}{// optimize if required to return element with max weight, rank ==}
+140   \textcolor{comment}{// weights\_.size(), keep track of the maxWeightIndex instead of populating}
+141   \textcolor{comment}{// scaledWeights array.}
+142   \textcolor{keywordtype}{double} maxWeight = -1;
+143   \textcolor{keywordtype}{int} maxWeightIndex = 0;
+144 
+145   std::vector<std::pair<double, size\_t>> scaledWeights;
+146   \textcolor{keywordflow}{if} (modRank != 0) \{
+147     scaledWeights.reserve(weights_.size());
+148   \}
+149   FOR\_EACH\_ENUMERATE(i, entry, weights_) \{
+150     \textcolor{comment}{// combine the hash with the cluster together}
+151     \textcolor{keywordtype}{double} combinedHash = computeHash(entry->first + key);
+152     \textcolor{keywordtype}{double} scaledHash =
+153         (double)combinedHash / std::numeric\_limits<uint64\_t>::max();
+154     \textcolor{keywordtype}{double} scaledWeight = 0;
+155     \textcolor{keywordflow}{if} (entry->second != 0) \{
+156       scaledWeight = pow(scaledHash, (\textcolor{keywordtype}{double})1 / entry->second);
+157     \}
+158     \textcolor{keywordflow}{if} (modRank == 0) \{
+159       \textcolor{keywordflow}{if} (scaledWeight > maxWeight) \{
+160         maxWeight = scaledWeight;
+161         maxWeightIndex = i;
+162       \}
+163     \} \textcolor{keywordflow}{else} \{
+164       scaledWeights.emplace\_back(scaledWeight, i);
+165     \}
+166   \}
+167 
+168   \textcolor{keywordtype}{size\_t} rankIndex;
+169   \textcolor{keywordflow}{if} (modRank == 0) \{
+170     rankIndex = maxWeightIndex;
+171   \} \textcolor{keywordflow}{else} \{
+172     std::nth\_element(scaledWeights.begin(),
+173                      scaledWeights.begin() + modRank,
+174                      scaledWeights.end(),
+175                      std::greater<std::pair<double, size\_t>>());
+176     rankIndex = scaledWeights[modRank].second;
+177   \}
+178 
+179   \textcolor{keywordflow}{if} (returnRankIds) \{
+180     \textcolor{keywordflow}{if} (modRank == 0) \{
+181       returnRankIds->push\_back(rankIndex);
+182     \} \textcolor{keywordflow}{else} \{
+183       returnRankIds->reserve(modRank);
+184       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < modRank; i++) \{
+185         returnRankIds->push\_back(scaledWeights[i].second);
+186       \}
+187     \}
+188   \}
+189 
+190   \textcolor{keywordflow}{return} rankIndex;
+191 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!select\+N\+Unweighted@{select\+N\+Unweighted}}
+\index{select\+N\+Unweighted@{select\+N\+Unweighted}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{select\+N\+Unweighted(const uint64\+\_\+t key, const size\+\_\+t rank) const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ size\+\_\+t $>$ proxygen\+::\+Rendezvous\+Hash\+::select\+N\+Unweighted (
+\begin{DoxyParamCaption}
+\item[{const uint64\+\_\+t}]{key, }
+\item[{const size\+\_\+t}]{rank}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1RendezvousHash_a748dc61b496a69154a9247d6169124a1}
+
+
+Definition at line 199 of file Rendezvous\+Hash.\+cpp.
+
+
+
+References get\+Nth\+By\+Weighted\+Hash(), and weights\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+200                                                                                \{
+201   std::vector<size\_t> selection;
+202   \textcolor{comment}{// shortcut if rank is equal or larger than array size}
+203   \textcolor{keywordflow}{if} (rank >= weights_.size()) \{
+204     selection = std::vector<size\_t>(weights_.size());
+205     std::generate(
+206         selection.begin(), selection.end(), [n = 0]() \textcolor{keyword}{mutable} \{ \textcolor{keywordflow}{return} n++; \});
+207     \textcolor{keywordflow}{return} selection;
+208   \}
+209 
+210   getNthByWeightedHash(key, rank, &selection);
+211   \textcolor{keywordflow}{return} selection;
+212 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}!weights\+\_\+@{weights\+\_\+}}
+\index{weights\+\_\+@{weights\+\_\+}!proxygen\+::\+Rendezvous\+Hash@{proxygen\+::\+Rendezvous\+Hash}}
+\subsubsection[{weights\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::pair$<$uint64\+\_\+t, uint64\+\_\+t$>$ $>$ proxygen\+::\+Rendezvous\+Hash\+::weights\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1RendezvousHash_a674d7f22ddb7370c942d0764d6d73498}
+
+
+Definition at line 43 of file Rendezvous\+Hash.\+h.
+
+
+
+Referenced by build(), get\+Nth\+By\+Weighted\+Hash(), and select\+N\+Unweighted().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Rendezvous\+Hash.\+h}\item 
+proxygen/lib/utils/{\bf Rendezvous\+Hash.\+cpp}\end{DoxyCompactItemize}

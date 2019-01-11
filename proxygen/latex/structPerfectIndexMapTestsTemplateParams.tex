@@ -1,0 +1,117 @@
+\section{Perfect\+Index\+Map\+Tests\+Template\+Params$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$ Struct Template Reference}
+\label{structPerfectIndexMapTestsTemplateParams}\index{Perfect\+Index\+Map\+Tests\+Template\+Params$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$@{Perfect\+Index\+Map\+Tests\+Template\+Params$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef Key {\bf T\+Key}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Key {\bf Hash} (const std\+::string \&{\bf name})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const Key {\bf T\+Other\+Key} = Other\+Key
+\item 
+static const Key {\bf T\+None\+Key} = None\+Key
+\item 
+static const bool {\bf T\+Allow\+Duplicates} = Allow\+Duplicates
+\item 
+static const bool {\bf T\+Case\+Insensitive} = Case\+Insensitive
+\item 
+static const uint8\+\_\+t {\bf T\+Key\+Common\+Offset} = Key\+Common\+Offset
+\item 
+static const uint64\+\_\+t {\bf T\+Num\+Keys} = Num\+Keys
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Key, Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$\\*
+struct Perfect\+Index\+Map\+Tests\+Template\+Params$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$}
+
+
+
+Definition at line 31 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!T\+Key@{T\+Key}}
+\index{T\+Key@{T\+Key}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{T\+Key}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ typedef Key {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::{\bf T\+Key}}\label{structPerfectIndexMapTestsTemplateParams_a141a3924d2fab56fda0b771497a3f225}
+
+
+Definition at line 32 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!Hash@{Hash}}
+\index{Hash@{Hash}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{Hash(const std\+::string \&name)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ static Key {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::Hash (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{structPerfectIndexMapTestsTemplateParams_afcf82490b867eb28c3cf666105bffde2}
+
+
+Definition at line 41 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+41                                         \{
+42     \textcolor{keywordflow}{return} PerfectHashStrToKey(name);
+43   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!T\+Allow\+Duplicates@{T\+Allow\+Duplicates}}
+\index{T\+Allow\+Duplicates@{T\+Allow\+Duplicates}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{T\+Allow\+Duplicates}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ const bool {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::T\+Allow\+Duplicates = Allow\+Duplicates\hspace{0.3cm}{\ttfamily [static]}}\label{structPerfectIndexMapTestsTemplateParams_a55b1be77b6de9aaafbd5735101be2838}
+
+
+Definition at line 35 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!T\+Case\+Insensitive@{T\+Case\+Insensitive}}
+\index{T\+Case\+Insensitive@{T\+Case\+Insensitive}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{T\+Case\+Insensitive}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ const bool {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::T\+Case\+Insensitive = Case\+Insensitive\hspace{0.3cm}{\ttfamily [static]}}\label{structPerfectIndexMapTestsTemplateParams_ace7184579cb2a4c7e3aa3f5ded7772e9}
+
+
+Definition at line 36 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!T\+Key\+Common\+Offset@{T\+Key\+Common\+Offset}}
+\index{T\+Key\+Common\+Offset@{T\+Key\+Common\+Offset}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{T\+Key\+Common\+Offset}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ const uint8\+\_\+t {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::T\+Key\+Common\+Offset = Key\+Common\+Offset\hspace{0.3cm}{\ttfamily [static]}}\label{structPerfectIndexMapTestsTemplateParams_aff3b8033437e6997a2d4783289335ec3}
+
+
+Definition at line 45 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!T\+None\+Key@{T\+None\+Key}}
+\index{T\+None\+Key@{T\+None\+Key}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{T\+None\+Key}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ const Key {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::T\+None\+Key = None\+Key\hspace{0.3cm}{\ttfamily [static]}}\label{structPerfectIndexMapTestsTemplateParams_a40ac198ed134c4385d6070bdc7957772}
+
+
+Definition at line 34 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!T\+Num\+Keys@{T\+Num\+Keys}}
+\index{T\+Num\+Keys@{T\+Num\+Keys}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{T\+Num\+Keys}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ const uint64\+\_\+t {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::T\+Num\+Keys = Num\+Keys\hspace{0.3cm}{\ttfamily [static]}}\label{structPerfectIndexMapTestsTemplateParams_abacc377919ab0e3a8248fb6ed61df06c}
+
+
+Definition at line 46 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+\index{Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}!T\+Other\+Key@{T\+Other\+Key}}
+\index{T\+Other\+Key@{T\+Other\+Key}!Perfect\+Index\+Map\+Tests\+Template\+Params@{Perfect\+Index\+Map\+Tests\+Template\+Params}}
+\subsubsection[{T\+Other\+Key}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Key , Key Other\+Key, Key None\+Key, Key($\ast$)(const std\+::string \&) Perfect\+Hash\+Str\+To\+Key, bool Allow\+Duplicates, bool Case\+Insensitive, uint8\+\_\+t Key\+Common\+Offset, uint64\+\_\+t Num\+Keys$>$ const Key {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$\+::T\+Other\+Key = Other\+Key\hspace{0.3cm}{\ttfamily [static]}}\label{structPerfectIndexMapTestsTemplateParams_a08090ca927745238377f0eb11f92a95f}
+
+
+Definition at line 33 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/test/{\bf Perfect\+Index\+Map\+Test.\+cpp}\end{DoxyCompactItemize}

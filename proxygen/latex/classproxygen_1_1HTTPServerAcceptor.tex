@@ -1,0 +1,360 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Server\+Acceptor Class Reference}
+\label{classproxygen_1_1HTTPServerAcceptor}\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Server\+Acceptor.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Server\+Acceptor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classproxygen_1_1HTTPServerAcceptor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf set\+Completion\+Callback} (std\+::function$<$ void()$>$ f)
+\item 
+{\bf $\sim$\+H\+T\+T\+P\+Server\+Acceptor} () override
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf Acceptor\+Configuration} {\bf make\+Config} (const {\bf H\+T\+T\+P\+Server\+::\+I\+P\+Config} \&ip\+Config, const {\bf H\+T\+T\+P\+Server\+Options} \&opts)
+\item 
+static std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Server\+Acceptor} $>$ {\bf make} (const {\bf Acceptor\+Configuration} \&conf, const {\bf H\+T\+T\+P\+Server\+Options} \&opts, const std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ \&codec\+Factory={\bf nullptr})
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Server\+Acceptor} (const {\bf Acceptor\+Configuration} \&conf, const std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ \&codec\+Factory, std\+::vector$<$ {\bf Request\+Handler\+Factory} $\ast$ $>$ handler\+Factories, const {\bf H\+T\+T\+P\+Server\+Options} \&options)
+\item 
+{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ {\bf new\+Handler} ({\bf H\+T\+T\+P\+Transaction} \&txn, {\bf H\+T\+T\+P\+Message} $\ast$msg) noexceptoverride
+\item 
+void {\bf on\+New\+Connection} (folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr sock, const folly\+::\+Socket\+Address $\ast$address, const std\+::string \&next\+Protocol\+Name, wangle\+::\+Secure\+Transport\+Type secure\+Transport\+Type, const wangle\+::\+Transport\+Info \&tinfo) override
+\item 
+void {\bf on\+Connections\+Drained} () override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf H\+T\+T\+P\+Server\+Options} \& {\bf server\+Options\+\_\+}
+\item 
+std\+::function$<$ void()$>$ {\bf completion\+Callback\+\_\+}
+\item 
+const std\+::vector$<$ {\bf Request\+Handler\+Factory} $\ast$ $>$ {\bf handler\+Factories\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file H\+T\+T\+P\+Server\+Acceptor.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!````~H\+T\+T\+P\+Server\+Acceptor@{$\sim$\+H\+T\+T\+P\+Server\+Acceptor}}
+\index{````~H\+T\+T\+P\+Server\+Acceptor@{$\sim$\+H\+T\+T\+P\+Server\+Acceptor}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Server\+Acceptor() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::$\sim$\+H\+T\+T\+P\+Server\+Acceptor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1HTTPServerAcceptor_ad2a710a609747e63ac59a3ff349d9e8b}
+
+
+Definition at line 95 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+\begin{DoxyCode}
+95                                         \{
+96 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!H\+T\+T\+P\+Server\+Acceptor@{H\+T\+T\+P\+Server\+Acceptor}}
+\index{H\+T\+T\+P\+Server\+Acceptor@{H\+T\+T\+P\+Server\+Acceptor}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{H\+T\+T\+P\+Server\+Acceptor(const Acceptor\+Configuration \&conf, const std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Codec\+Factory $>$ \&codec\+Factory, std\+::vector$<$ Request\+Handler\+Factory $\ast$ $>$ handler\+Factories, const H\+T\+T\+P\+Server\+Options \&options)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::\+H\+T\+T\+P\+Server\+Acceptor (
+\begin{DoxyParamCaption}
+\item[{const {\bf Acceptor\+Configuration} \&}]{conf, }
+\item[{const std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ \&}]{codec\+Factory, }
+\item[{std\+::vector$<$ {\bf Request\+Handler\+Factory} $\ast$ $>$}]{handler\+Factories, }
+\item[{const {\bf H\+T\+T\+P\+Server\+Options} \&}]{options}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPServerAcceptor_a1e19de1824234338a5e1c4f0847db288}
+
+
+Definition at line 81 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+
+Referenced by make().
+
+
+\begin{DoxyCode}
+86     : HTTPSessionAcceptor(conf, codecFactory),
+87       serverOptions_(options),
+88       handlerFactories_(handlerFactories) \{
+89 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!make@{make}}
+\index{make@{make}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{make(const Acceptor\+Configuration \&conf, const H\+T\+T\+P\+Server\+Options \&opts, const std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Codec\+Factory $>$ \&codec\+Factory=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Server\+Acceptor} $>$ proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::make (
+\begin{DoxyParamCaption}
+\item[{const {\bf Acceptor\+Configuration} \&}]{conf, }
+\item[{const {\bf H\+T\+T\+P\+Server\+Options} \&}]{opts, }
+\item[{const std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ \&}]{codec\+Factory = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPServerAcceptor_a8f899c4e2d2089153949073ac550af83}
+
+
+Definition at line 65 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::handler\+Factories, and H\+T\+T\+P\+Server\+Acceptor().
+
+
+
+Referenced by proxygen\+::\+Acceptor\+Factory\+::new\+Acceptor().
+
+
+\begin{DoxyCode}
+68                                                        \{
+69   \textcolor{comment}{// Create a copy of the filter chain in reverse order since we need to create}
+70   \textcolor{comment}{// Handlers in that order.}
+71   std::vector<RequestHandlerFactory*> handlerFactories;
+72   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& f: opts.handlerFactories) \{
+73     handlerFactories.push\_back(f.get());
+74   \}
+75   std::reverse(handlerFactories.begin(), handlerFactories.end());
+76 
+77   \textcolor{keywordflow}{return} std::unique\_ptr<HTTPServerAcceptor>(
+78       \textcolor{keyword}{new} HTTPServerAcceptor(conf, codecFactory, handlerFactories, opts));
+79 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!make\+Config@{make\+Config}}
+\index{make\+Config@{make\+Config}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{make\+Config(const H\+T\+T\+P\+Server\+::\+I\+P\+Config \&ip\+Config, const H\+T\+T\+P\+Server\+Options \&opts)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Acceptor\+Configuration} proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::make\+Config (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Server\+::\+I\+P\+Config} \&}]{ip\+Config, }
+\item[{const {\bf H\+T\+T\+P\+Server\+Options} \&}]{opts}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPServerAcceptor_a440a58e1591f2ea4ce46cf145c673a5b}
+
+
+Definition at line 23 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::acceptor\+Socket\+Options, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::address, proxygen\+::\+Acceptor\+Configuration\+::allowed\+Plaintext\+Upgrade\+Protocols, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::allow\+Insecure\+Connections\+On\+Secure\+Server, proxygen\+::\+Acceptor\+Configuration\+::egress\+Settings, proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::enable\+Ex\+Headers, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::enable\+T\+C\+P\+Fast\+Open, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::fast\+Open\+Queue\+Size, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::h2c\+Enabled, proxygen\+::\+H\+T\+T\+P\+Server\+::\+H\+T\+T\+P2, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::idle\+Timeout, proxygen\+::\+Acceptor\+Configuration\+::initial\+Receive\+Window, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::initial\+Receive\+Window, proxygen\+::http2\+::k\+Protocol\+Cleartext\+String, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::listen\+Backlog, proxygen\+::\+Acceptor\+Configuration\+::max\+Concurrent\+Incoming\+Streams, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::max\+Concurrent\+Incoming\+Streams, proxygen\+::\+Acceptor\+Configuration\+::plaintext\+Protocol, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::protocol, proxygen\+::\+Acceptor\+Configuration\+::receive\+Session\+Window\+Size, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::receive\+Session\+Window\+Size, proxygen\+::\+Acceptor\+Configuration\+::receive\+Stream\+Window\+Size, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::receive\+Stream\+Window\+Size, proxygen\+::\+H\+T\+T\+P\+Server\+::\+S\+P\+DY, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::ssl\+Configs, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::strict\+S\+SL, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::ticket\+Seeds, and proxygen\+::\+Acceptor\+Configuration\+::transaction\+Idle\+Timeout.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Server\+::start().
+
+
+\begin{DoxyCode}
+25                                    \{
+26 
+27   AcceptorConfiguration conf;
+28   conf.bindAddress = ipConfig.address;
+29   conf.connectionIdleTimeout = opts.idleTimeout;
+30   conf.transactionIdleTimeout = opts.idleTimeout;
+31   conf.initialReceiveWindow = opts.initialReceiveWindow;
+32   conf.receiveStreamWindowSize = opts.receiveStreamWindowSize;
+33   conf.receiveSessionWindowSize = opts.receiveSessionWindowSize;
+34   conf.acceptBacklog = opts.listenBacklog;
+35   conf.maxConcurrentIncomingStreams = opts.maxConcurrentIncomingStreams;
+36 
+37   \textcolor{keywordflow}{if} (opts.enableExHeaders) \{
+38     conf.egressSettings.push\_back(
+39       HTTPSetting(SettingsId::ENABLE_EX_HEADERS, 1));
+40   \}
+41 
+42   \textcolor{keywordflow}{if} (ipConfig.protocol == HTTPServer::Protocol::SPDY) \{
+43     conf.plaintextProtocol = \textcolor{stringliteral}{"spdy/3.1"};
+44   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ipConfig.protocol == HTTPServer::Protocol::HTTP2) \{
+45     conf.plaintextProtocol = http2::kProtocolCleartextString;
+46   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (opts.h2cEnabled) \{
+47     conf.allowedPlaintextUpgradeProtocols = \{ http2::kProtocolCleartextString \};
+48   \}
+49 
+50   conf.sslContextConfigs = ipConfig.sslConfigs;
+51   conf.strictSSL = ipConfig.strictSSL;
+52   conf.allowInsecureConnectionsOnSecureServer =
+53       ipConfig.allowInsecureConnectionsOnSecureServer;
+54   conf.enableTCPFastOpen = ipConfig.enableTCPFastOpen;
+55   conf.fastOpenQueueSize = ipConfig.fastOpenQueueSize;
+56   \textcolor{keywordflow}{if} (ipConfig.ticketSeeds) \{
+57     conf.initialTicketSeeds = *ipConfig.ticketSeeds;
+58   \}
+59   \textcolor{keywordflow}{if} (ipConfig.acceptorSocketOptions.hasValue()) \{
+60     conf.setSocketOptions(ipConfig.acceptorSocketOptions.value());
+61   \}
+62   \textcolor{keywordflow}{return} conf;
+63 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!new\+Handler@{new\+Handler}}
+\index{new\+Handler@{new\+Handler}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{new\+Handler(\+H\+T\+T\+P\+Transaction \&txn, H\+T\+T\+P\+Message $\ast$msg) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$ proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::new\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} \&}]{txn, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPServerAcceptor_a3c2e4393964245f2868deeff34d5fa55}
+Create a Handler for a new transaction. The transaction and H\+T\+TP message (request) are passed so the implementation can construct different handlers based on these. The transaction will be explicitly set on the handler later via set\+Transaction. The request message will be passed in on\+Headers\+Complete. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor} \doxyref{}{p.}{classproxygen_1_1HTTPSessionAcceptor_aaf24d4ddcf78a27d32330633a22e4a9b}.
+
+
+
+Definition at line 98 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+
+References handler\+Factories\+\_\+, and proxygen\+::\+Request\+Handler\+::on\+Request().
+
+
+\begin{DoxyCode}
+100                                \{
+101 
+102   SocketAddress clientAddr, vipAddr;
+103   txn.getPeerAddress(clientAddr);
+104   txn.getLocalAddress(vipAddr);
+105   msg->setClientAddress(clientAddr);
+106   msg->setDstAddress(vipAddr);
+107 
+108   \textcolor{comment}{// Create filters chain}
+109   RequestHandler* h = \textcolor{keyword}{nullptr};
+110   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& factory: handlerFactories_) \{
+111     h = factory->onRequest(h, msg);
+112   \}
+113 
+114   \textcolor{keywordflow}{return} \textcolor{keyword}{new} RequestHandlerAdaptor(h);
+115 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!on\+Connections\+Drained@{on\+Connections\+Drained}}
+\index{on\+Connections\+Drained@{on\+Connections\+Drained}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{on\+Connections\+Drained() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::on\+Connections\+Drained (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}}\label{classproxygen_1_1HTTPServerAcceptor_ad17caab0b384feab6968d57313485565}
+
+
+Definition at line 137 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+
+References completion\+Callback\+\_\+.
+
+
+\begin{DoxyCode}
+137                                               \{
+138   \textcolor{keywordflow}{if} (completionCallback_) \{
+139     completionCallback_();
+140   \}
+141 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!on\+New\+Connection@{on\+New\+Connection}}
+\index{on\+New\+Connection@{on\+New\+Connection}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{on\+New\+Connection(folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr sock, const folly\+::\+Socket\+Address $\ast$address, const std\+::string \&next\+Protocol\+Name, wangle\+::\+Secure\+Transport\+Type secure\+Transport\+Type, const wangle\+::\+Transport\+Info \&tinfo) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::on\+New\+Connection (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr}]{sock, }
+\item[{const folly\+::\+Socket\+Address $\ast$}]{address, }
+\item[{const std\+::string \&}]{next\+Protocol\+Name, }
+\item[{wangle\+::\+Secure\+Transport\+Type}]{secure\+Transport\+Type, }
+\item[{const wangle\+::\+Transport\+Info \&}]{tinfo}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}}\label{classproxygen_1_1HTTPServerAcceptor_a0f127172c7321b8adabe1819f2762474}
+
+
+Definition at line 117 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::new\+Connection\+Filter, proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::on\+New\+Connection(), and server\+Options\+\_\+.
+
+
+\begin{DoxyCode}
+122                                       \{
+123   \textcolor{keyword}{auto}& filter = serverOptions_.newConnectionFilter;
+124   \textcolor{keywordflow}{if} (filter) \{
+125     \textcolor{keywordflow}{try} \{
+126       filter(sock.get(), address, nextProtocolName, secureTransportType, tinfo);
+127     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception& e) \{
+128       sock->closeWithReset();
+129       LOG(INFO) << \textcolor{stringliteral}{"Exception filtering new socket: "} << folly::exceptionStr(e);
+130       \textcolor{keywordflow}{return};
+131     \}
+132   \}
+133   HTTPSessionAcceptor::onNewConnection(
+134       std::move(sock), address, nextProtocolName, secureTransportType, tinfo);
+135 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!set\+Completion\+Callback@{set\+Completion\+Callback}}
+\index{set\+Completion\+Callback@{set\+Completion\+Callback}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{set\+Completion\+Callback(std\+::function$<$ void()$>$ f)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::set\+Completion\+Callback (
+\begin{DoxyParamCaption}
+\item[{std\+::function$<$ void()$>$}]{f}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPServerAcceptor_ad6c52d1c360afd07f04369016d656af6}
+Invokes the given method when all the connections are drained 
+
+Definition at line 91 of file H\+T\+T\+P\+Server\+Acceptor.\+cpp.
+
+
+
+References completion\+Callback\+\_\+.
+
+
+\begin{DoxyCode}
+91                                                                     \{
+92   completionCallback_ = f;
+93 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!completion\+Callback\+\_\+@{completion\+Callback\+\_\+}}
+\index{completion\+Callback\+\_\+@{completion\+Callback\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{completion\+Callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::function$<$void()$>$ proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::completion\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPServerAcceptor_a18fdbdba32786f4e7ef5c634c45a77d1}
+
+
+Definition at line 55 of file H\+T\+T\+P\+Server\+Acceptor.\+h.
+
+
+
+Referenced by on\+Connections\+Drained(), and set\+Completion\+Callback().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!handler\+Factories\+\_\+@{handler\+Factories\+\_\+}}
+\index{handler\+Factories\+\_\+@{handler\+Factories\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{handler\+Factories\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<${\bf Request\+Handler\+Factory}$\ast$$>$ proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::handler\+Factories\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPServerAcceptor_aef8eb81740a89f904fb0fbd937533b1e}
+
+
+Definition at line 56 of file H\+T\+T\+P\+Server\+Acceptor.\+h.
+
+
+
+Referenced by new\+Handler().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}!server\+Options\+\_\+@{server\+Options\+\_\+}}
+\index{server\+Options\+\_\+@{server\+Options\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor}}
+\subsubsection[{server\+Options\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+T\+T\+P\+Server\+Options}\& proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::server\+Options\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPServerAcceptor_a778456339def5144ad264495b9964f4e}
+
+
+Definition at line 54 of file H\+T\+T\+P\+Server\+Acceptor.\+h.
+
+
+
+Referenced by on\+New\+Connection().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/{\bf H\+T\+T\+P\+Server\+Acceptor.\+h}\item 
+proxygen/httpserver/{\bf H\+T\+T\+P\+Server\+Acceptor.\+cpp}\end{DoxyCompactItemize}

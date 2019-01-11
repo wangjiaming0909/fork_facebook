@@ -1,0 +1,930 @@
+\section{proxygen\+:\+:spdy Namespace Reference}
+\label{namespaceproxygen_1_1spdy}\index{proxygen\+::spdy@{proxygen\+::spdy}}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Frame\+Type} \{ \\*
+{\bf S\+Y\+N\+\_\+\+S\+T\+R\+E\+AM} = 1, 
+{\bf S\+Y\+N\+\_\+\+R\+E\+P\+LY} = 2, 
+{\bf R\+S\+T\+\_\+\+S\+T\+R\+E\+AM} = 3, 
+{\bf S\+E\+T\+T\+I\+N\+GS} = 4, 
+\\*
+{\bf N\+O\+OP} = 5, 
+{\bf P\+I\+NG} = 6, 
+{\bf G\+O\+A\+W\+AY} = 7, 
+{\bf H\+E\+A\+D\+E\+RS} = 8, 
+\\*
+{\bf W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE} = 9, 
+{\bf C\+R\+E\+D\+E\+N\+T\+I\+AL} = 10
+ \}
+\item 
+enum {\bf Ctrl\+Flag} \{ {\bf C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+N\+O\+NE} = 0, 
+{\bf C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN} = 1, 
+{\bf C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL} = 2
+ \}
+\item 
+enum {\bf Settings\+Flag} \{ {\bf F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE} = 0, 
+{\bf F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+E\+T\+T\+I\+N\+GS} = 1
+ \}
+\item 
+enum {\bf Settings\+Id\+Flag} \{ {\bf I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE} = 0, 
+{\bf I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+\_\+\+V\+A\+L\+UE} = 1, 
+{\bf I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+ED} = 2
+ \}
+\item 
+enum {\bf Settings\+Id} \{ \\*
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH} = 1, 
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH} = 2, 
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME} = 3, 
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS} = 4, 
+\\*
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND} = 5, 
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE} = 6, 
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE} = 7, 
+{\bf S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE} = 8
+ \}
+\item 
+enum {\bf Reset\+Status\+Code} \{ \\*
+{\bf R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR} = 1, 
+{\bf R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM} = 2, 
+{\bf R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM} = 3, 
+{\bf R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON} = 4, 
+\\*
+{\bf R\+S\+T\+\_\+\+C\+A\+N\+C\+EL} = 5, 
+{\bf R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR} = 6, 
+{\bf R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR} = 7, 
+{\bf R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE} = 8, 
+\\*
+{\bf R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED} = 9, 
+{\bf R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS} = 10, 
+{\bf R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE} = 11
+ \}
+\item 
+enum {\bf Goaway\+Status\+Code} \{ {\bf G\+O\+A\+W\+A\+Y\+\_\+\+OK} = 0, 
+{\bf G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR} = 1, 
+{\bf G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR} = 2, 
+{\bf G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR} = 7
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Goaway\+Status\+Code} {\bf error\+Code\+To\+Goaway} ({\bf Error\+Code} code)
+\item 
+{\bf Reset\+Status\+Code} {\bf error\+Code\+To\+Reset} ({\bf Error\+Code} code)
+\item 
+{\bf Error\+Code} {\bf goaway\+To\+Error\+Code} ({\bf Goaway\+Status\+Code} code)
+\item 
+{\bf Error\+Code} {\bf rst\+To\+Error\+Code} (uint32\+\_\+t code)
+\item 
+folly\+::\+Optional$<$ {\bf proxygen\+::spdy\+::\+Settings\+Id} $>$ {\bf http\+To\+Spdy\+Settings\+Id} ({\bf proxygen\+::\+Settings\+Id} id)
+\item 
+folly\+::\+Optional$<$ {\bf proxygen\+::\+Settings\+Id} $>$ {\bf spdy\+To\+Http\+Settings\+Id} ({\bf proxygen\+::spdy\+::\+Settings\+Id} id)
+\item 
+const std\+::string {\bf k\+Session\+Proto\+Name\+S\+P\+D\+Y3} (\char`\"{}spdy/3\char`\"{})
+\item 
+const std\+::string {\bf http\+Version} (\char`\"{}H\+T\+TP/1.\+1\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Versionv2} (\char`\"{}version\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Versionv3} (\char`\"{}\+:version\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Statusv2} (\char`\"{}status\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Statusv3} (\char`\"{}\+:status\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Methodv2} (\char`\"{}method\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Methodv3} (\char`\"{}\+:method\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Pathv2} (\char`\"{}url\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Pathv3} (\char`\"{}\+:path\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Schemev2} (\char`\"{}scheme\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Schemev3} (\char`\"{}\+:scheme\char`\"{})
+\item 
+const std\+::string {\bf k\+Name\+Hostv3} (\char`\"{}\+:host\char`\"{})
+\item 
+const std\+::string {\bf k\+Version\+Strv2} (\char`\"{}spdy/2\char`\"{})
+\item 
+const std\+::string {\bf k\+Version\+Strv3} (\char`\"{}spdy/3\char`\"{})
+\item 
+const std\+::string {\bf k\+Version\+Strv31} (\char`\"{}spdy/3.\+1\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t {\bf k\+Initial\+Window} = 65536
+\item 
+const uint32\+\_\+t {\bf k\+Max\+Concurrent\+Streams} = 100
+\item 
+const uint32\+\_\+t {\bf k\+Max\+Frame\+Length} = (1 $<$$<$ 24) -\/ 1
+\item 
+const size\+\_\+t {\bf S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR} = 2
+\item 
+const std\+::string {\bf k\+Session\+Proto\+Name\+S\+P\+D\+Y2}
+\item 
+const std\+::string {\bf k\+Session\+Proto\+Name\+S\+P\+D\+Y3}
+\item 
+const std\+::string {\bf http\+Version}
+\item 
+const std\+::string {\bf k\+Name\+Versionv2}
+\item 
+const std\+::string {\bf k\+Name\+Versionv3}
+\item 
+const std\+::string {\bf k\+Name\+Statusv2}
+\item 
+const std\+::string {\bf k\+Name\+Statusv3}
+\item 
+const std\+::string {\bf k\+Name\+Methodv2}
+\item 
+const std\+::string {\bf k\+Name\+Methodv3}
+\item 
+const std\+::string {\bf k\+Name\+Pathv2}
+\item 
+const std\+::string {\bf k\+Name\+Pathv3}
+\item 
+const std\+::string {\bf k\+Name\+Schemev2}
+\item 
+const std\+::string {\bf k\+Name\+Schemev3}
+\item 
+const std\+::string {\bf k\+Name\+Hostv3}
+\item 
+const std\+::string {\bf k\+Version\+Strv2}
+\item 
+const std\+::string {\bf k\+Version\+Strv3}
+\item 
+const std\+::string {\bf k\+Version\+Strv31}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!Ctrl\+Flag@{Ctrl\+Flag}}
+\index{Ctrl\+Flag@{Ctrl\+Flag}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{Ctrl\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::spdy\+::\+Ctrl\+Flag}}\label{namespaceproxygen_1_1spdy_a5190a2d3fb8446a91f8aa50529f14b0e}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+N\+O\+NE@{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+N\+O\+NE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+N\+O\+NE@{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+N\+O\+NE}}\item[{\em 
+C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+N\+O\+NE\label{namespaceproxygen_1_1spdy_a5190a2d3fb8446a91f8aa50529f14b0eafe5154463eff87848ec295998148d7c0}
+}]\index{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN@{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN@{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN}}\item[{\em 
+C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN\label{namespaceproxygen_1_1spdy_a5190a2d3fb8446a91f8aa50529f14b0ea80da2b28eb0a86a860ed4a4af8091d74}
+}]\index{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL@{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL@{C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL}}\item[{\em 
+C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL\label{namespaceproxygen_1_1spdy_a5190a2d3fb8446a91f8aa50529f14b0ea3ef314845e5755d8467b480a3450776c}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 33 of file S\+P\+D\+Y\+Constants.\+h.
+
+
+\begin{DoxyCode}
+33               \{
+34   CTRL_FLAG_NONE = 0,
+35   CTRL_FLAG_FIN = 1,
+36   CTRL_FLAG_UNIDIRECTIONAL = 2
+37 \};
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!Frame\+Type@{Frame\+Type}}
+\index{Frame\+Type@{Frame\+Type}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{Frame\+Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::spdy\+::\+Frame\+Type}}\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93ce}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{S\+Y\+N\+\_\+\+S\+T\+R\+E\+AM@{S\+Y\+N\+\_\+\+S\+T\+R\+E\+AM}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+Y\+N\+\_\+\+S\+T\+R\+E\+AM@{S\+Y\+N\+\_\+\+S\+T\+R\+E\+AM}}\item[{\em 
+S\+Y\+N\+\_\+\+S\+T\+R\+E\+AM\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93ceab642b40c9c45be987a8804d9e553ff78}
+}]\index{S\+Y\+N\+\_\+\+R\+E\+P\+LY@{S\+Y\+N\+\_\+\+R\+E\+P\+LY}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+Y\+N\+\_\+\+R\+E\+P\+LY@{S\+Y\+N\+\_\+\+R\+E\+P\+LY}}\item[{\em 
+S\+Y\+N\+\_\+\+R\+E\+P\+LY\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93cea9c03a4a83ce88f02a2e8ac997391e647}
+}]\index{R\+S\+T\+\_\+\+S\+T\+R\+E\+AM@{R\+S\+T\+\_\+\+S\+T\+R\+E\+AM}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+S\+T\+R\+E\+AM@{R\+S\+T\+\_\+\+S\+T\+R\+E\+AM}}\item[{\em 
+R\+S\+T\+\_\+\+S\+T\+R\+E\+AM\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93cea81390e7ba3d60d69cafe7dbaf2cfd7fb}
+}]\index{S\+E\+T\+T\+I\+N\+GS@{S\+E\+T\+T\+I\+N\+GS}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+GS@{S\+E\+T\+T\+I\+N\+GS}}\item[{\em 
+S\+E\+T\+T\+I\+N\+GS\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93cea9363215ca524daf36a8c887b07366e9c}
+}]\index{N\+O\+OP@{N\+O\+OP}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!N\+O\+OP@{N\+O\+OP}}\item[{\em 
+N\+O\+OP\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93ceae797e4f9a24b86f156d7f8bd114e2459}
+}]\index{P\+I\+NG@{P\+I\+NG}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!P\+I\+NG@{P\+I\+NG}}\item[{\em 
+P\+I\+NG\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93ceaed7578d75678285043c0967a7a836346}
+}]\index{G\+O\+A\+W\+AY@{G\+O\+A\+W\+AY}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!G\+O\+A\+W\+AY@{G\+O\+A\+W\+AY}}\item[{\em 
+G\+O\+A\+W\+AY\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93cea576144c43cc1449d896e46bdc170e864}
+}]\index{H\+E\+A\+D\+E\+RS@{H\+E\+A\+D\+E\+RS}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!H\+E\+A\+D\+E\+RS@{H\+E\+A\+D\+E\+RS}}\item[{\em 
+H\+E\+A\+D\+E\+RS\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93cea3301e0cdc66de229f87e2b01aaef4a68}
+}]\index{W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE@{W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE@{W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE}}\item[{\em 
+W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93ceaab20599698b646554f8dfb5dfa7f7e8b}
+}]\index{C\+R\+E\+D\+E\+N\+T\+I\+AL@{C\+R\+E\+D\+E\+N\+T\+I\+AL}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!C\+R\+E\+D\+E\+N\+T\+I\+AL@{C\+R\+E\+D\+E\+N\+T\+I\+AL}}\item[{\em 
+C\+R\+E\+D\+E\+N\+T\+I\+AL\label{namespaceproxygen_1_1spdy_a1c0beada09f46e15ac536394114b93ceac4f9c26db2cb91d2dde721ba735a1421}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 19 of file S\+P\+D\+Y\+Constants.\+h.
+
+
+\begin{DoxyCode}
+19                \{
+20   SYN_STREAM = 1,
+21   SYN_REPLY = 2,
+22   RST_STREAM = 3,
+23   SETTINGS = 4,
+24   NOOP = 5,
+25   PING = 6,
+26   GOAWAY = 7,
+27   HEADERS = 8,
+28   WINDOW_UPDATE = 9,
+29   \textcolor{comment}{// The CREDENTIAL frame is removed in SPDY/3.1}
+30   CREDENTIAL = 10
+31 \};
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!Goaway\+Status\+Code@{Goaway\+Status\+Code}}
+\index{Goaway\+Status\+Code@{Goaway\+Status\+Code}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{Goaway\+Status\+Code}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::spdy\+::\+Goaway\+Status\+Code}}\label{namespaceproxygen_1_1spdy_aac2e3e0c7956c92bdc8856b259294539}
+The status codes for the G\+O\+A\+W\+AY control frame. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{G\+O\+A\+W\+A\+Y\+\_\+\+OK@{G\+O\+A\+W\+A\+Y\+\_\+\+OK}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!G\+O\+A\+W\+A\+Y\+\_\+\+OK@{G\+O\+A\+W\+A\+Y\+\_\+\+OK}}\item[{\em 
+G\+O\+A\+W\+A\+Y\+\_\+\+OK\label{namespaceproxygen_1_1spdy_aac2e3e0c7956c92bdc8856b259294539a258ca50d0fd10ecd860adf93aec845e4}
+}]\index{G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR@{G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR@{G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR\label{namespaceproxygen_1_1spdy_aac2e3e0c7956c92bdc8856b259294539a1b648796eb8c0e3a6e6633e3cbb97aa4}
+}]\index{G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR@{G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR@{G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR\label{namespaceproxygen_1_1spdy_aac2e3e0c7956c92bdc8856b259294539a7842c1796151a285aaecca51ae7aab7c}
+}]\index{G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR@{G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR@{G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR\label{namespaceproxygen_1_1spdy_aac2e3e0c7956c92bdc8856b259294539a631fb5b44b19c0b8d6e5350edc92c2ef}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 83 of file S\+P\+D\+Y\+Constants.\+h.
+
+
+\begin{DoxyCode}
+83                       \{
+84   GOAWAY_OK = 0,
+85   GOAWAY_PROTOCOL_ERROR = 1,
+86   GOAWAY_INTERNAL_ERROR = 2,
+87   \textcolor{comment}{// Only for SPDY/3.1 for connection-level flow control errors}
+88   GOAWAY_FLOW_CONTROL_ERROR = 7
+89 \};
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!Reset\+Status\+Code@{Reset\+Status\+Code}}
+\index{Reset\+Status\+Code@{Reset\+Status\+Code}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{Reset\+Status\+Code}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::spdy\+::\+Reset\+Status\+Code}}\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2f}
+The status codes for the R\+S\+T\+\_\+\+S\+T\+R\+E\+AM control frame. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR@{R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR@{R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa2881b88a0b363567a7b34bd44a640335}
+}]\index{R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM@{R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM@{R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM}}\item[{\em 
+R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2faa0c6ed2b3d2be6dc0c0f1d4330370907}
+}]\index{R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM@{R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM@{R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM}}\item[{\em 
+R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa5856adff38593684d14f0003e8eb2a23}
+}]\index{R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON@{R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON@{R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON}}\item[{\em 
+R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2faee1f26d3a97cee8419e30605cbc4d97b}
+}]\index{R\+S\+T\+\_\+\+C\+A\+N\+C\+EL@{R\+S\+T\+\_\+\+C\+A\+N\+C\+EL}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+C\+A\+N\+C\+EL@{R\+S\+T\+\_\+\+C\+A\+N\+C\+EL}}\item[{\em 
+R\+S\+T\+\_\+\+C\+A\+N\+C\+EL\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2faf2f2d5419fa4890dc3bb6b8df85890c4}
+}]\index{R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR@{R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR@{R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa20afddcbd1c43f4078e8c48633448902}
+}]\index{R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR@{R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR@{R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR}}\item[{\em 
+R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa99596a8327fd1b25f2e15e97c3596997}
+}]\index{R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE@{R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE@{R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE}}\item[{\em 
+R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa3b41d6a4a9af7925304c47f4246f8e8d}
+}]\index{R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED@{R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED@{R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED}}\item[{\em 
+R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa2c0428f3ec965c056300d32a2cf7575b}
+}]\index{R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS@{R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS@{R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS}}\item[{\em 
+R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa4c0271329e0dbc5b96fbdba523278fc2}
+}]\index{R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}}\item[{\em 
+R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE\label{namespaceproxygen_1_1spdy_acad181927e2127ae4b608bbd2bed5f2fa45175e7d1f1cd1da380a0880bc76257f}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 64 of file S\+P\+D\+Y\+Constants.\+h.
+
+
+\begin{DoxyCode}
+64                      \{
+65   RST_PROTOCOL_ERROR = 1,
+66   RST_INVALID_STREAM = 2,
+67   RST_REFUSED_STREAM = 3,
+68   RST_UNSUPPORTED_VERSION = 4,
+69   RST_CANCEL = 5,
+70   RST_INTERNAL_ERROR = 6,
+71   RST_FLOW_CONTROL_ERROR = 7,
+72   \textcolor{comment}{// The following status codes were added in SPDY/3}
+73   \textcolor{comment}{// and are not supported in SPDY/2}
+74   RST_STREAM_IN_USE = 8,
+75   RST_STREAM_ALREADY_CLOSED = 9,
+76   RST_INVALID_CREDENTIALS = 10,
+77   RST_FRAME_TOO_LARGE = 11
+78 \};
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!Settings\+Flag@{Settings\+Flag}}
+\index{Settings\+Flag@{Settings\+Flag}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{Settings\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::spdy\+::\+Settings\+Flag}}\label{namespaceproxygen_1_1spdy_ad4243db100434d4cc3fc95a15b5252f4}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE@{F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE@{F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE}}\item[{\em 
+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE\label{namespaceproxygen_1_1spdy_ad4243db100434d4cc3fc95a15b5252f4aff34358561d61968c21204140ea3e10d}
+}]\index{F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+E\+T\+T\+I\+N\+GS@{F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+E\+T\+T\+I\+N\+GS}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+E\+T\+T\+I\+N\+GS@{F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+E\+T\+T\+I\+N\+GS}}\item[{\em 
+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+E\+T\+T\+I\+N\+GS\label{namespaceproxygen_1_1spdy_ad4243db100434d4cc3fc95a15b5252f4a061988ce58ca017ccf35b5e7eddcc926}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 39 of file S\+P\+D\+Y\+Constants.\+h.
+
+
+\begin{DoxyCode}
+39                   \{
+40   FLAG_SETTINGS_NONE = 0,
+41   FLAG_SETTINGS_CLEAR_SETTINGS = 1
+42 \};
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!Settings\+Id@{Settings\+Id}}
+\index{Settings\+Id@{Settings\+Id}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{Settings\+Id}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::spdy\+::\+Settings\+Id}}\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16a926bfd9590254688f782fab2479a8f03}
+}]\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16a65eef21a3a043c688d4adc795a573b04}
+}]\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16a46a05527a08284c28be84ad49a39f221}
+}]\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16aab7fb4c3ab3506fa02dc572973f4903a}
+}]\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16ae91da55ec87aa2c037ea51925eb02659}
+}]\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16aa12e2e6319f4984302f3319e58c2a1b1}
+}]\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16afc3f422d8cde311f996db425b1f838b0}
+}]\index{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE@{S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE}}\item[{\em 
+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE\label{namespaceproxygen_1_1spdy_afc89465ee572d9de0be06132c4380a16a77edc9afedc6f9bf1aa98ff0043ca240}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 50 of file S\+P\+D\+Y\+Constants.\+h.
+
+
+\begin{DoxyCode}
+50                 \{
+51   SETTINGS_UPLOAD_BANDWIDTH = 1,
+52   SETTINGS_DOWNLOAD_BANDWIDTH = 2,
+53   SETTINGS_ROUND_TRIP_TIME = 3,
+54   SETTINGS_MAX_CONCURRENT_STREAMS = 4,
+55   SETTINGS_CURRENT_CWND = 5,
+56   SETTINGS_DOWNLOAD_RETRANS_RATE = 6,
+57   SETTINGS_INITIAL_WINDOW_SIZE = 7,
+58   SETTINGS_CLIENT_CERTIFICATE_VECTOR_SIZE = 8
+59 \};
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!Settings\+Id\+Flag@{Settings\+Id\+Flag}}
+\index{Settings\+Id\+Flag@{Settings\+Id\+Flag}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{Settings\+Id\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::spdy\+::\+Settings\+Id\+Flag}}\label{namespaceproxygen_1_1spdy_a1bb79c8a84c10e589aba333e07fb68b6}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE@{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE@{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE}}\item[{\em 
+I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE\label{namespaceproxygen_1_1spdy_a1bb79c8a84c10e589aba333e07fb68b6a46e5857d431de0122b359632c6b9bd26}
+}]\index{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+\_\+\+V\+A\+L\+UE@{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+\_\+\+V\+A\+L\+UE}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+\_\+\+V\+A\+L\+UE@{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+\_\+\+V\+A\+L\+UE}}\item[{\em 
+I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+\_\+\+V\+A\+L\+UE\label{namespaceproxygen_1_1spdy_a1bb79c8a84c10e589aba333e07fb68b6a70fd8ec658fac714b350c67f3ff0be02}
+}]\index{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+ED@{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+ED}!proxygen\+::spdy@{proxygen\+::spdy}}\index{proxygen\+::spdy@{proxygen\+::spdy}!I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+ED@{I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+ED}}\item[{\em 
+I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+ED\label{namespaceproxygen_1_1spdy_a1bb79c8a84c10e589aba333e07fb68b6aee6cadfe05766778c598eb4a1c7e0a12}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 44 of file S\+P\+D\+Y\+Constants.\+h.
+
+
+\begin{DoxyCode}
+44                     \{
+45   ID_FLAG_SETTINGS_NONE = 0,
+46   ID_FLAG_SETTINGS_PERSIST_VALUE = 1,
+47   ID_FLAG_SETTINGS_PERSISTED = 2
+48 \};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!error\+Code\+To\+Goaway@{error\+Code\+To\+Goaway}}
+\index{error\+Code\+To\+Goaway@{error\+Code\+To\+Goaway}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{error\+Code\+To\+Goaway(\+Error\+Code code)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Goaway\+Status\+Code} proxygen\+::spdy\+::error\+Code\+To\+Goaway (
+\begin{DoxyParamCaption}
+\item[{{\bf Error\+Code}}]{code}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a39ea42cfe7d15a223b038e9e7bdc717a}
+
+
+Definition at line 14 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+References proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM, proxygen\+::\+C\+A\+N\+C\+EL, proxygen\+::\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR, proxygen\+::\+C\+O\+N\+N\+E\+C\+T\+\_\+\+E\+R\+R\+OR, proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, proxygen\+::\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+F\+R\+A\+M\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+E\+R\+R\+OR, G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, G\+O\+A\+W\+A\+Y\+\_\+\+OK, G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+H\+T\+T\+P\+\_\+1\+\_\+1\+\_\+\+R\+E\+Q\+U\+I\+R\+ED, proxygen\+::\+I\+N\+A\+D\+E\+Q\+U\+A\+T\+E\+\_\+\+S\+E\+C\+U\+R\+I\+TY, proxygen\+::\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+N\+O\+\_\+\+E\+R\+R\+OR, proxygen\+::\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM, proxygen\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+T\+I\+M\+E\+O\+UT, and proxygen\+::\+S\+T\+R\+E\+A\+M\+\_\+\+C\+L\+O\+S\+ED.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway().
+
+
+\begin{DoxyCode}
+14                                                    \{
+15   \textcolor{keywordflow}{switch} (code) \{
+16     \textcolor{keywordflow}{case} ErrorCode::NO\_ERROR: \textcolor{keywordflow}{return} GOAWAY_OK;
+17     \textcolor{keywordflow}{case} ErrorCode::INTERNAL\_ERROR: \textcolor{keywordflow}{return} GOAWAY_INTERNAL_ERROR;
+18     \textcolor{keywordflow}{case} ErrorCode::FLOW\_CONTROL\_ERROR: \textcolor{keywordflow}{return} GOAWAY_FLOW_CONTROL_ERROR;
+19     \textcolor{keywordflow}{case} ErrorCode::PROTOCOL\_ERROR:       \textcolor{keywordflow}{break};
+20     \textcolor{keywordflow}{case} ErrorCode::SETTINGS\_TIMEOUT:     \textcolor{keywordflow}{break};
+21     \textcolor{keywordflow}{case} ErrorCode::STREAM\_CLOSED:        \textcolor{keywordflow}{break};
+22     \textcolor{keywordflow}{case} ErrorCode::FRAME\_SIZE\_ERROR:     \textcolor{keywordflow}{break};
+23     \textcolor{keywordflow}{case} ErrorCode::REFUSED\_STREAM:       \textcolor{keywordflow}{break};
+24     \textcolor{keywordflow}{case} ErrorCode::CANCEL:               \textcolor{keywordflow}{break};
+25     \textcolor{keywordflow}{case} ErrorCode::COMPRESSION\_ERROR:    \textcolor{keywordflow}{break};
+26     \textcolor{keywordflow}{case} ErrorCode::CONNECT\_ERROR:        \textcolor{keywordflow}{break};
+27     \textcolor{keywordflow}{case} ErrorCode::ENHANCE\_YOUR\_CALM:    \textcolor{keywordflow}{break};
+28     \textcolor{keywordflow}{case} ErrorCode::INADEQUATE\_SECURITY:  \textcolor{keywordflow}{break};
+29     \textcolor{keywordflow}{case} ErrorCode::HTTP\_1\_1\_REQUIRED:    \textcolor{keywordflow}{break};
+30     \textcolor{keywordflow}{case} ErrorCode::\_SPDY\_INVALID\_STREAM: \textcolor{keywordflow}{break};
+31   \}
+32   \textcolor{keywordflow}{return} GOAWAY_PROTOCOL_ERROR;
+33 \}
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!error\+Code\+To\+Reset@{error\+Code\+To\+Reset}}
+\index{error\+Code\+To\+Reset@{error\+Code\+To\+Reset}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{error\+Code\+To\+Reset(\+Error\+Code code)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Reset\+Status\+Code} proxygen\+::spdy\+::error\+Code\+To\+Reset (
+\begin{DoxyParamCaption}
+\item[{{\bf Error\+Code}}]{code}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_abd3b3cdb0e5f584089c4978147c1b840}
+
+
+Definition at line 35 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+References proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM, proxygen\+::\+C\+A\+N\+C\+EL, proxygen\+::\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR, proxygen\+::\+C\+O\+N\+N\+E\+C\+T\+\_\+\+E\+R\+R\+OR, proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, proxygen\+::\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+F\+R\+A\+M\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+E\+R\+R\+OR, proxygen\+::\+H\+T\+T\+P\+\_\+1\+\_\+1\+\_\+\+R\+E\+Q\+U\+I\+R\+ED, proxygen\+::\+I\+N\+A\+D\+E\+Q\+U\+A\+T\+E\+\_\+\+S\+E\+C\+U\+R\+I\+TY, proxygen\+::\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+N\+O\+\_\+\+E\+R\+R\+OR, proxygen\+::\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM, R\+S\+T\+\_\+\+C\+A\+N\+C\+EL, R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE, R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS, R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM, R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM, R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED, proxygen\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+T\+I\+M\+E\+O\+UT, and proxygen\+::\+S\+T\+R\+E\+A\+M\+\_\+\+C\+L\+O\+S\+ED.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Rst\+Stream().
+
+
+\begin{DoxyCode}
+35                                                  \{
+36   \textcolor{keywordflow}{switch} (code) \{
+37     \textcolor{keywordflow}{case} ErrorCode::NO\_ERROR: \textcolor{keywordflow}{break};
+38     \textcolor{keywordflow}{case} ErrorCode::INTERNAL\_ERROR: \textcolor{keywordflow}{return} RST_INTERNAL_ERROR;
+39     \textcolor{keywordflow}{case} ErrorCode::FLOW\_CONTROL\_ERROR: \textcolor{keywordflow}{return} RST_FLOW_CONTROL_ERROR;
+40     \textcolor{keywordflow}{case} ErrorCode::PROTOCOL\_ERROR: \textcolor{keywordflow}{return} RST_PROTOCOL_ERROR;
+41     \textcolor{keywordflow}{case} ErrorCode::SETTINGS\_TIMEOUT: \textcolor{keywordflow}{break};
+42     \textcolor{keywordflow}{case} ErrorCode::STREAM\_CLOSED: \textcolor{keywordflow}{return} RST_STREAM_ALREADY_CLOSED;
+43     \textcolor{keywordflow}{case} ErrorCode::FRAME\_SIZE\_ERROR: \textcolor{keywordflow}{return} RST_FRAME_TOO_LARGE;
+44     \textcolor{keywordflow}{case} ErrorCode::REFUSED\_STREAM: \textcolor{keywordflow}{return} RST_REFUSED_STREAM;
+45     \textcolor{keywordflow}{case} ErrorCode::CANCEL: \textcolor{keywordflow}{return} RST_CANCEL;
+46     \textcolor{keywordflow}{case} ErrorCode::COMPRESSION\_ERROR: \textcolor{keywordflow}{return} RST_INTERNAL_ERROR;
+47     \textcolor{keywordflow}{case} ErrorCode::CONNECT\_ERROR: \textcolor{keywordflow}{break};
+48     \textcolor{keywordflow}{case} ErrorCode::ENHANCE\_YOUR\_CALM: \textcolor{keywordflow}{break};
+49     \textcolor{keywordflow}{case} ErrorCode::INADEQUATE\_SECURITY: \textcolor{keywordflow}{return} RST_INVALID_CREDENTIALS;
+50     \textcolor{keywordflow}{case} ErrorCode::HTTP\_1\_1\_REQUIRED: \textcolor{keywordflow}{break};
+51     \textcolor{keywordflow}{case} ErrorCode::\_SPDY\_INVALID\_STREAM: \textcolor{keywordflow}{return} RST_INVALID_STREAM;
+52   \}
+53   \textcolor{keywordflow}{return} RST_PROTOCOL_ERROR;
+54 \}
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!goaway\+To\+Error\+Code@{goaway\+To\+Error\+Code}}
+\index{goaway\+To\+Error\+Code@{goaway\+To\+Error\+Code}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{goaway\+To\+Error\+Code(\+Goaway\+Status\+Code code)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Error\+Code} proxygen\+::spdy\+::goaway\+To\+Error\+Code (
+\begin{DoxyParamCaption}
+\item[{{\bf Goaway\+Status\+Code}}]{code}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a5ed721a448815a4a4786d9cfd6642eda}
+
+
+Definition at line 56 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+References proxygen\+::\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, G\+O\+A\+W\+A\+Y\+\_\+\+OK, G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+N\+O\+\_\+\+E\+R\+R\+OR, and proxygen\+::\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::fail\+Session(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Goaway().
+
+
+\begin{DoxyCode}
+56                                                    \{
+57   \textcolor{keywordflow}{switch} (code) \{
+58     \textcolor{keywordflow}{case} GOAWAY_OK: \textcolor{keywordflow}{return} ErrorCode::NO\_ERROR;
+59     \textcolor{keywordflow}{case} GOAWAY_PROTOCOL_ERROR: \textcolor{keywordflow}{return} ErrorCode::PROTOCOL\_ERROR;
+60     \textcolor{keywordflow}{case} GOAWAY_INTERNAL_ERROR: \textcolor{keywordflow}{return} ErrorCode::INTERNAL\_ERROR;
+61     \textcolor{keywordflow}{case} GOAWAY_FLOW_CONTROL_ERROR: \textcolor{keywordflow}{return} ErrorCode::FLOW\_CONTROL\_ERROR;
+62   \}
+63   \textcolor{keywordflow}{return} ErrorCode::PROTOCOL\_ERROR;
+64 \}
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!http\+To\+Spdy\+Settings\+Id@{http\+To\+Spdy\+Settings\+Id}}
+\index{http\+To\+Spdy\+Settings\+Id@{http\+To\+Spdy\+Settings\+Id}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{http\+To\+Spdy\+Settings\+Id(proxygen\+::\+Settings\+Id id)}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Optional$<$ {\bf proxygen\+::spdy\+::\+Settings\+Id} $>$ proxygen\+::spdy\+::http\+To\+Spdy\+Settings\+Id (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Settings\+Id}}]{id}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_ac681fc18353eb600588055768f8933cf}
+
+
+Definition at line 83 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+References proxygen\+::\+\_\+\+H\+Q\+\_\+\+N\+U\+M\+\_\+\+P\+L\+A\+C\+E\+H\+O\+L\+D\+E\+RS, proxygen\+::\+\_\+\+H\+Q\+\_\+\+Q\+P\+A\+C\+K\+\_\+\+B\+L\+O\+C\+K\+E\+D\+\_\+\+S\+T\+R\+E\+A\+MS, proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE, proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND, proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH, proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE, proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME, proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH, proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+P\+R\+O\+T\+O\+C\+OL, proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+P\+U\+SH, proxygen\+::\+H\+E\+A\+D\+E\+R\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, proxygen\+::\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE, proxygen\+::\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS, proxygen\+::\+M\+A\+X\+\_\+\+F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE, proxygen\+::\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+I\+S\+T\+\_\+\+S\+I\+ZE, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE, proxygen\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+H\+T\+T\+P\+\_\+\+C\+E\+R\+T\+\_\+\+A\+U\+TH, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH, proxygen\+::\+T\+H\+R\+I\+F\+T\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+ID, and proxygen\+::\+T\+H\+R\+I\+F\+T\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+I\+D\+\_\+\+D\+E\+P\+R\+E\+C\+A\+T\+ED.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Settings().
+
+
+\begin{DoxyCode}
+84                          \{
+85   \textcolor{keywordflow}{switch} (\textcolor{keywordtype}{id}) \{
+86     \textcolor{comment}{// no mapping}
+87     \textcolor{keywordflow}{case} proxygen::SettingsId::HEADER_TABLE_SIZE:
+88     \textcolor{keywordflow}{case} proxygen::SettingsId::ENABLE_PUSH:
+89     \textcolor{keywordflow}{case} proxygen::SettingsId::MAX_FRAME_SIZE:
+90     \textcolor{keywordflow}{case} proxygen::SettingsId::MAX_HEADER_LIST_SIZE:
+91       \textcolor{keywordflow}{return} folly::none;
+92     \textcolor{keywordflow}{case} proxygen::SettingsId::ENABLE_EX_HEADERS:
+93       \textcolor{keywordflow}{return} folly::none;
+94     \textcolor{keywordflow}{case} proxygen::SettingsId::MAX_CONCURRENT_STREAMS:
+95       \textcolor{keywordflow}{return} SETTINGS_MAX_CONCURRENT_STREAMS;
+96     \textcolor{keywordflow}{case} proxygen::SettingsId::INITIAL_WINDOW_SIZE:
+97       \textcolor{keywordflow}{return} SETTINGS_INITIAL_WINDOW_SIZE;
+98     \textcolor{keywordflow}{case} proxygen::SettingsId::_SPDY_UPLOAD_BANDWIDTH:
+99       \textcolor{keywordflow}{return} SETTINGS_UPLOAD_BANDWIDTH;
+100     \textcolor{keywordflow}{case} proxygen::SettingsId::_SPDY_DOWNLOAD_BANDWIDTH:
+101       \textcolor{keywordflow}{return} SETTINGS_DOWNLOAD_BANDWIDTH;
+102     \textcolor{keywordflow}{case} proxygen::SettingsId::_SPDY_ROUND_TRIP_TIME:
+103       \textcolor{keywordflow}{return} SETTINGS_ROUND_TRIP_TIME;
+104     \textcolor{keywordflow}{case} proxygen::SettingsId::_SPDY_CURRENT_CWND:
+105       \textcolor{keywordflow}{return} SETTINGS_CURRENT_CWND;
+106     \textcolor{keywordflow}{case} proxygen::SettingsId::_SPDY_DOWNLOAD_RETRANS_RATE:
+107       \textcolor{keywordflow}{return} SETTINGS_DOWNLOAD_RETRANS_RATE;
+108     \textcolor{keywordflow}{case} proxygen::SettingsId::_SPDY_CLIENT_CERTIFICATE_VECTOR_SIZE:
+109       \textcolor{keywordflow}{return} SETTINGS_CLIENT_CERTIFICATE_VECTOR_SIZE;
+110     \textcolor{keywordflow}{case} proxygen::SettingsId::ENABLE_CONNECT_PROTOCOL:
+111       \textcolor{keywordflow}{return} folly::none;
+112     \textcolor{keywordflow}{case} proxygen::SettingsId::THRIFT_CHANNEL_ID_DEPRECATED:
+113     \textcolor{keywordflow}{case} proxygen::SettingsId::THRIFT_CHANNEL_ID:
+114       \textcolor{keywordflow}{return} folly::none;
+115     \textcolor{keywordflow}{case} proxygen::SettingsId::_HQ_NUM_PLACEHOLDERS:
+116     \textcolor{keywordflow}{case} proxygen::SettingsId::_HQ_QPACK_BLOCKED_STREAMS:
+117     \textcolor{keywordflow}{case} proxygen::SettingsId::SETTINGS_HTTP_CERT_AUTH:
+118       \textcolor{keywordflow}{return} folly::none;
+119   \}
+120   \textcolor{keywordflow}{return} folly::none;
+121 \}
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!http\+Version@{http\+Version}}
+\index{http\+Version@{http\+Version}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{http\+Version(""H\+T\+T\+P/1.\+1"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::http\+Version (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}H\+T\+TP/1.\+1\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_ae17150c60dfbf66cde828467c79c1adf}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Hostv3@{k\+Name\+Hostv3}}
+\index{k\+Name\+Hostv3@{k\+Name\+Hostv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Hostv3(""\+:host"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Hostv3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}\+:host\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_abe8be5f1d03d845b86d66a147c3a4ecd}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Methodv2@{k\+Name\+Methodv2}}
+\index{k\+Name\+Methodv2@{k\+Name\+Methodv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Methodv2(""method"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Methodv2 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}method\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a3c4fd8705cb57d4d0c245a393b55fa74}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Methodv3@{k\+Name\+Methodv3}}
+\index{k\+Name\+Methodv3@{k\+Name\+Methodv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Methodv3(""\+:method"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Methodv3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}\+:method\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a6e22bb711ed597e978af92ce6ef4ad52}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Pathv2@{k\+Name\+Pathv2}}
+\index{k\+Name\+Pathv2@{k\+Name\+Pathv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Pathv2(""url"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Pathv2 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}url\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_adc303acca706f56de8a0185a2dcb3c13}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Pathv3@{k\+Name\+Pathv3}}
+\index{k\+Name\+Pathv3@{k\+Name\+Pathv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Pathv3(""\+:path"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Pathv3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}\+:path\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a05edc42cb4a8cbd33eaab75ab8a61001}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Schemev2@{k\+Name\+Schemev2}}
+\index{k\+Name\+Schemev2@{k\+Name\+Schemev2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Schemev2(""scheme"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Schemev2 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}scheme\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a5e11c0ce1f6b5d159766c2b653e6c692}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Schemev3@{k\+Name\+Schemev3}}
+\index{k\+Name\+Schemev3@{k\+Name\+Schemev3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Schemev3(""\+:scheme"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Schemev3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}\+:scheme\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a6f85fd2bff21fb3f25b4dd874be8c14c}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Statusv2@{k\+Name\+Statusv2}}
+\index{k\+Name\+Statusv2@{k\+Name\+Statusv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Statusv2(""status"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Statusv2 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}status\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a04edb440620dad065b05638f81acafc7}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Statusv3@{k\+Name\+Statusv3}}
+\index{k\+Name\+Statusv3@{k\+Name\+Statusv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Statusv3(""\+:status"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Statusv3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}\+:status\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a407a91e220200d6a9616e8d67b8d89bf}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Versionv2@{k\+Name\+Versionv2}}
+\index{k\+Name\+Versionv2@{k\+Name\+Versionv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Versionv2(""version"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Versionv2 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}version\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a10d05d8cfc7256e8f46aafab2ccba4a1}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Versionv3@{k\+Name\+Versionv3}}
+\index{k\+Name\+Versionv3@{k\+Name\+Versionv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Versionv3(""\+:version"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Versionv3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}\+:version\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a2c26e6a9f63ca275e30b3118149ea069}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Session\+Proto\+Name\+S\+P\+D\+Y3@{k\+Session\+Proto\+Name\+S\+P\+D\+Y3}}
+\index{k\+Session\+Proto\+Name\+S\+P\+D\+Y3@{k\+Session\+Proto\+Name\+S\+P\+D\+Y3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Session\+Proto\+Name\+S\+P\+D\+Y3(""spdy/3"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Session\+Proto\+Name\+S\+P\+D\+Y3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}spdy/3\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_ad3c11f98874b5b5ee16f33ca192fb5eb}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Version\+Strv2@{k\+Version\+Strv2}}
+\index{k\+Version\+Strv2@{k\+Version\+Strv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Version\+Strv2(""spdy/2"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Version\+Strv2 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}spdy/2\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_ae7af094f73d4559b9544a7427001a70c}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Version\+Strv3@{k\+Version\+Strv3}}
+\index{k\+Version\+Strv3@{k\+Version\+Strv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Version\+Strv3(""spdy/3"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Version\+Strv3 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}spdy/3\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a6b15719f61d60f7be606829c18fd13f5}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Version\+Strv31@{k\+Version\+Strv31}}
+\index{k\+Version\+Strv31@{k\+Version\+Strv31}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Version\+Strv31(""spdy/3.\+1"")}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Version\+Strv31 (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}spdy/3.\+1\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_ad8a0384853cbacbaec3c53c20d498e37}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!rst\+To\+Error\+Code@{rst\+To\+Error\+Code}}
+\index{rst\+To\+Error\+Code@{rst\+To\+Error\+Code}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{rst\+To\+Error\+Code(uint32\+\_\+t code)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Error\+Code} proxygen\+::spdy\+::rst\+To\+Error\+Code (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{code}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_aba8643c9d8cc69eb4f7bd82154a61db0}
+
+
+Definition at line 66 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+References proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM, proxygen\+::\+C\+A\+N\+C\+EL, proxygen\+::\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+F\+R\+A\+M\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+E\+R\+R\+OR, proxygen\+::\+I\+N\+A\+D\+E\+Q\+U\+A\+T\+E\+\_\+\+S\+E\+C\+U\+R\+I\+TY, proxygen\+::\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM, R\+S\+T\+\_\+\+C\+A\+N\+C\+EL, R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR, R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE, R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR, R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS, R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM, R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM, R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED, R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE, R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON, and proxygen\+::\+S\+T\+R\+E\+A\+M\+\_\+\+C\+L\+O\+S\+ED.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::fail\+Stream(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Rst\+Stream(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+66                                         \{
+67   \textcolor{keywordflow}{switch} (code) \{
+68     \textcolor{keywordflow}{case} RST_PROTOCOL_ERROR: \textcolor{keywordflow}{break};
+69     \textcolor{keywordflow}{case} RST_INVALID_STREAM: \textcolor{keywordflow}{return} ErrorCode::\_SPDY\_INVALID\_STREAM;
+70     \textcolor{keywordflow}{case} RST_REFUSED_STREAM: \textcolor{keywordflow}{return} ErrorCode::REFUSED\_STREAM;
+71     \textcolor{keywordflow}{case} RST_UNSUPPORTED_VERSION: \textcolor{keywordflow}{break}; \textcolor{comment}{// not used anyway}
+72     \textcolor{keywordflow}{case} RST_CANCEL: \textcolor{keywordflow}{return} ErrorCode::CANCEL;
+73     \textcolor{keywordflow}{case} RST_INTERNAL_ERROR: \textcolor{keywordflow}{return} ErrorCode::INTERNAL\_ERROR;
+74     \textcolor{keywordflow}{case} RST_FLOW_CONTROL_ERROR: \textcolor{keywordflow}{return} ErrorCode::FLOW\_CONTROL\_ERROR;
+75     \textcolor{keywordflow}{case} RST_STREAM_IN_USE: \textcolor{keywordflow}{return} ErrorCode::FLOW\_CONTROL\_ERROR;
+76     \textcolor{keywordflow}{case} RST_STREAM_ALREADY_CLOSED: \textcolor{keywordflow}{return} ErrorCode::STREAM\_CLOSED;
+77     \textcolor{keywordflow}{case} RST_INVALID_CREDENTIALS: \textcolor{keywordflow}{return} ErrorCode::INADEQUATE\_SECURITY;
+78     \textcolor{keywordflow}{case} RST_FRAME_TOO_LARGE: \textcolor{keywordflow}{return} ErrorCode::FRAME\_SIZE\_ERROR;
+79   \}
+80   \textcolor{keywordflow}{return} ErrorCode::PROTOCOL\_ERROR;
+81 \}
+\end{DoxyCode}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!spdy\+To\+Http\+Settings\+Id@{spdy\+To\+Http\+Settings\+Id}}
+\index{spdy\+To\+Http\+Settings\+Id@{spdy\+To\+Http\+Settings\+Id}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{spdy\+To\+Http\+Settings\+Id(proxygen\+::spdy\+::\+Settings\+Id id)}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Optional$<$ {\bf proxygen\+::\+Settings\+Id} $>$ proxygen\+::spdy\+::spdy\+To\+Http\+Settings\+Id (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::spdy\+::\+Settings\+Id}}]{id}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1spdy_a56b00c4cdbe0fa790ac4d67e098c82bb}
+
+
+Definition at line 123 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+References proxygen\+::\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE, proxygen\+::\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS, S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME, and S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Settings().
+
+
+\begin{DoxyCode}
+124                              \{
+125   \textcolor{keywordflow}{switch} (\textcolor{keywordtype}{id}) \{
+126     \textcolor{keywordflow}{case} SETTINGS_UPLOAD_BANDWIDTH:
+127     \textcolor{keywordflow}{case} SETTINGS_DOWNLOAD_BANDWIDTH:
+128     \textcolor{keywordflow}{case} SETTINGS_ROUND_TRIP_TIME:
+129     \textcolor{keywordflow}{case} SETTINGS_CURRENT_CWND:
+130     \textcolor{keywordflow}{case} SETTINGS_DOWNLOAD_RETRANS_RATE:
+131     \textcolor{keywordflow}{case} SETTINGS_CLIENT_CERTIFICATE_VECTOR_SIZE:
+132       \textcolor{comment}{// These mappings are possible, but not needed right now}
+133       \textcolor{keywordflow}{return} folly::none;
+134     \textcolor{keywordflow}{case} SETTINGS_MAX_CONCURRENT_STREAMS:
+135       \textcolor{keywordflow}{return} proxygen::SettingsId::MAX_CONCURRENT_STREAMS;
+136     \textcolor{keywordflow}{case} SETTINGS_INITIAL_WINDOW_SIZE:
+137       \textcolor{keywordflow}{return} proxygen::SettingsId::INITIAL_WINDOW_SIZE;
+138   \}
+139   \textcolor{keywordflow}{return} folly::none;
+140 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!http\+Version@{http\+Version}}
+\index{http\+Version@{http\+Version}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{http\+Version}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::http\+Version}\label{namespaceproxygen_1_1spdy_a59f207220b2fa6bb93f0822ddc0add1d}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::encode\+Headers().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Initial\+Window@{k\+Initial\+Window}}
+\index{k\+Initial\+Window@{k\+Initial\+Window}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Initial\+Window}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t proxygen\+::spdy\+::k\+Initial\+Window = 65536}\label{namespaceproxygen_1_1spdy_aaaff7f359fcc0ce69e8e1a3964c32376}
+
+
+Definition at line 142 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Max\+Concurrent\+Streams@{k\+Max\+Concurrent\+Streams}}
+\index{k\+Max\+Concurrent\+Streams@{k\+Max\+Concurrent\+Streams}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Max\+Concurrent\+Streams}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t proxygen\+::spdy\+::k\+Max\+Concurrent\+Streams = 100}\label{namespaceproxygen_1_1spdy_ac11c0debec19c3db427516f40c5acbed}
+
+
+Definition at line 143 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Syn\+Stream(), and T\+E\+S\+T().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Max\+Frame\+Length@{k\+Max\+Frame\+Length}}
+\index{k\+Max\+Frame\+Length@{k\+Max\+Frame\+Length}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Max\+Frame\+Length}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t proxygen\+::spdy\+::k\+Max\+Frame\+Length = (1 $<$$<$ 24) -\/ 1}\label{namespaceproxygen_1_1spdy_aa2923ca43517a52d7c833701ffc50014}
+
+
+Definition at line 144 of file S\+P\+D\+Y\+Constants.\+cpp.
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Hostv3@{k\+Name\+Hostv3}}
+\index{k\+Name\+Hostv3@{k\+Name\+Hostv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Hostv3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Hostv3}\label{namespaceproxygen_1_1spdy_a9647ead2ae5255c530962632d3731570}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings(), and T\+E\+S\+T().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Methodv2@{k\+Name\+Methodv2}}
+\index{k\+Name\+Methodv2@{k\+Name\+Methodv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Methodv2}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Methodv2}\label{namespaceproxygen_1_1spdy_a89fc028420cae8a8a26666dc96e36567}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::is\+S\+P\+D\+Y\+Reserved().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Methodv3@{k\+Name\+Methodv3}}
+\index{k\+Name\+Methodv3@{k\+Name\+Methodv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Methodv3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Methodv3}\label{namespaceproxygen_1_1spdy_af41ab4fcf60b0d017c7665024baa74bf}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings(), and T\+E\+S\+T().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Pathv2@{k\+Name\+Pathv2}}
+\index{k\+Name\+Pathv2@{k\+Name\+Pathv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Pathv2}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Pathv2}\label{namespaceproxygen_1_1spdy_a6a467400545ca9959f70808b470d0044}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::is\+S\+P\+D\+Y\+Reserved().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Pathv3@{k\+Name\+Pathv3}}
+\index{k\+Name\+Pathv3@{k\+Name\+Pathv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Pathv3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Pathv3}\label{namespaceproxygen_1_1spdy_ab2189897a69579cc967e976fdad061a6}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings(), and T\+E\+S\+T().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Schemev2@{k\+Name\+Schemev2}}
+\index{k\+Name\+Schemev2@{k\+Name\+Schemev2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Schemev2}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Schemev2}\label{namespaceproxygen_1_1spdy_a7285235fc8ee77fe459478d13b65308e}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::is\+S\+P\+D\+Y\+Reserved().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Schemev3@{k\+Name\+Schemev3}}
+\index{k\+Name\+Schemev3@{k\+Name\+Schemev3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Schemev3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Schemev3}\label{namespaceproxygen_1_1spdy_ad74bdfff696d9e55ba98cba711ba537a}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings(), and T\+E\+S\+T().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Statusv2@{k\+Name\+Statusv2}}
+\index{k\+Name\+Statusv2@{k\+Name\+Statusv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Statusv2}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Statusv2}\label{namespaceproxygen_1_1spdy_a4b4637bbac5bd414ad2041e46e746e00}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::is\+S\+P\+D\+Y\+Reserved().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Statusv3@{k\+Name\+Statusv3}}
+\index{k\+Name\+Statusv3@{k\+Name\+Statusv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Statusv3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Statusv3}\label{namespaceproxygen_1_1spdy_ae90241cf342501701f981843c99e5497}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings(), and T\+E\+S\+T().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Versionv2@{k\+Name\+Versionv2}}
+\index{k\+Name\+Versionv2@{k\+Name\+Versionv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Versionv2}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Versionv2}\label{namespaceproxygen_1_1spdy_a7c1598b5e18470255bf192b483a5971d}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::is\+S\+P\+D\+Y\+Reserved().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Name\+Versionv3@{k\+Name\+Versionv3}}
+\index{k\+Name\+Versionv3@{k\+Name\+Versionv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Name\+Versionv3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Name\+Versionv3}\label{namespaceproxygen_1_1spdy_a7890c883be74cc9c13c3dff58297dd05}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings(), and T\+E\+S\+T().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Session\+Proto\+Name\+S\+P\+D\+Y2@{k\+Session\+Proto\+Name\+S\+P\+D\+Y2}}
+\index{k\+Session\+Proto\+Name\+S\+P\+D\+Y2@{k\+Session\+Proto\+Name\+S\+P\+D\+Y2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Session\+Proto\+Name\+S\+P\+D\+Y2}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Session\+Proto\+Name\+S\+P\+D\+Y2}\label{namespaceproxygen_1_1spdy_a94bf0ac0bb87f698b2baa0ca72ab9f06}
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Session\+Proto\+Name\+S\+P\+D\+Y3@{k\+Session\+Proto\+Name\+S\+P\+D\+Y3}}
+\index{k\+Session\+Proto\+Name\+S\+P\+D\+Y3@{k\+Session\+Proto\+Name\+S\+P\+D\+Y3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Session\+Proto\+Name\+S\+P\+D\+Y3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Session\+Proto\+Name\+S\+P\+D\+Y3}\label{namespaceproxygen_1_1spdy_a1c5c100098f94865ba8c5c1e47a9f7e8}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Version\+Strv2@{k\+Version\+Strv2}}
+\index{k\+Version\+Strv2@{k\+Version\+Strv2}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Version\+Strv2}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Version\+Strv2}\label{namespaceproxygen_1_1spdy_a865d59c4d11c8d1f013f40cf6d18f0b8}
+
+
+Referenced by proxygen\+::get\+Priority\+Message().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Version\+Strv3@{k\+Version\+Strv3}}
+\index{k\+Version\+Strv3@{k\+Version\+Strv3}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Version\+Strv3}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Version\+Strv3}\label{namespaceproxygen_1_1spdy_afcd2294577af5ecdec202e35d91cf7f1}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!k\+Version\+Strv31@{k\+Version\+Strv31}}
+\index{k\+Version\+Strv31@{k\+Version\+Strv31}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{k\+Version\+Strv31}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::spdy\+::k\+Version\+Strv31}\label{namespaceproxygen_1_1spdy_a10c78d8f4f818571b707fdb1c69f7aec}
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version\+Settings().
+
+\index{proxygen\+::spdy@{proxygen\+::spdy}!S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR@{S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR}}
+\index{S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR@{S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR}!proxygen\+::spdy@{proxygen\+::spdy}}
+\subsubsection[{S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR}]{\setlength{\rightskip}{0pt plus 5cm}const size\+\_\+t proxygen\+::spdy\+::\+S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR = 2}\label{namespaceproxygen_1_1spdy_ab08cb56e5c6b8971b83d060b212ab2e0}
+
+
+Definition at line 175 of file S\+P\+D\+Y\+Constants.\+cpp.
+

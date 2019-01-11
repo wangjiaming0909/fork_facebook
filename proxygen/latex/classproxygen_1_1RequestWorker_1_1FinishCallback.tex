@@ -1,0 +1,74 @@
+\section{proxygen\+:\+:Request\+Worker\+:\+:Finish\+Callback Class Reference}
+\label{classproxygen_1_1RequestWorker_1_1FinishCallback}\index{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback@{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback}}
+
+
+{\ttfamily \#include $<$Request\+Worker.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Finish\+Callback} () noexcept
+\item 
+virtual void {\bf worker\+Started} ({\bf Request\+Worker} $\ast$)=0
+\item 
+virtual void {\bf worker\+Finished} ({\bf Request\+Worker} $\ast$)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 27 of file Request\+Worker.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback@{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback}!````~Finish\+Callback@{$\sim$\+Finish\+Callback}}
+\index{````~Finish\+Callback@{$\sim$\+Finish\+Callback}!proxygen\+::\+Request\+Worker\+::\+Finish\+Callback@{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback}}
+\subsubsection[{$\sim$\+Finish\+Callback() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Request\+Worker\+::\+Finish\+Callback\+::$\sim$\+Finish\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1RequestWorker_1_1FinishCallback_ac3252388de108ddaefa1577a43544024}
+
+
+Definition at line 29 of file Request\+Worker.\+h.
+
+
+
+References proxygen\+::\+Request\+Worker\+::next\+Request\+Id(), proxygen\+::\+Request\+Worker\+::\+Request\+Worker(), worker\+Finished(), and worker\+Started().
+
+
+\begin{DoxyCode}
+29 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback@{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback}!worker\+Finished@{worker\+Finished}}
+\index{worker\+Finished@{worker\+Finished}!proxygen\+::\+Request\+Worker\+::\+Finish\+Callback@{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback}}
+\subsubsection[{worker\+Finished(\+Request\+Worker $\ast$)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Request\+Worker\+::\+Finish\+Callback\+::worker\+Finished (
+\begin{DoxyParamCaption}
+\item[{{\bf Request\+Worker} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1RequestWorker_1_1FinishCallback_afbfd637b55e9c057d819c42b9e506a00}
+
+
+Referenced by proxygen\+::\+Request\+Worker\+::cleanup(), and $\sim$\+Finish\+Callback().
+
+\index{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback@{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback}!worker\+Started@{worker\+Started}}
+\index{worker\+Started@{worker\+Started}!proxygen\+::\+Request\+Worker\+::\+Finish\+Callback@{proxygen\+::\+Request\+Worker\+::\+Finish\+Callback}}
+\subsubsection[{worker\+Started(\+Request\+Worker $\ast$)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Request\+Worker\+::\+Finish\+Callback\+::worker\+Started (
+\begin{DoxyParamCaption}
+\item[{{\bf Request\+Worker} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1RequestWorker_1_1FinishCallback_a7d88abe5b4446d57da8c44b6f8794da0}
+
+
+Referenced by proxygen\+::\+Request\+Worker\+::setup(), and $\sim$\+Finish\+Callback().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/services/{\bf Request\+Worker.\+h}\end{DoxyCompactItemize}

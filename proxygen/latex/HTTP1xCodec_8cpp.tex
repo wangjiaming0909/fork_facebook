@@ -1,0 +1,54 @@
+\section{proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.cpp File Reference}
+\label{HTTP1xCodec_8cpp}\index{proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.\+cpp@{proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Memory.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Random.\+h$>$}\\*
+{\ttfamily \#include $<$folly/ssl/\+Open\+S\+S\+L\+Hash.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+R\+F\+C2616.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Codec\+Protocol.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Base64.\+h$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf append\+Literal}(queue,  len,  str)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr folly\+::\+String\+Piece {\bf proxygen\+::k\+Upgrade\+Token} = \char`\"{}websocket\char`\"{}
+\item 
+constexpr folly\+::\+String\+Piece {\bf proxygen\+::k\+Upgrade\+Connection\+Token} = \char`\"{}Upgrade\char`\"{}
+\item 
+constexpr folly\+::\+String\+Piece {\bf proxygen\+::k\+W\+S\+Magic\+String} = \char`\"{}258\+E\+A\+F\+A5-\/\+E914-\/47\+D\+A-\/95\+C\+A-\/\+C5\+A\+B0\+D\+C85\+B11\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{H\+T\+T\+P1x\+Codec.\+cpp@{H\+T\+T\+P1x\+Codec.\+cpp}!append\+Literal@{append\+Literal}}
+\index{append\+Literal@{append\+Literal}!H\+T\+T\+P1x\+Codec.\+cpp@{H\+T\+T\+P1x\+Codec.\+cpp}}
+\subsubsection[{append\+Literal}]{\setlength{\rightskip}{0pt plus 5cm}\#define append\+Literal(
+\begin{DoxyParamCaption}
+\item[{}]{queue, }
+\item[{}]{len, }
+\item[{}]{str}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodec_8cpp_a382f839cf88fa084ff9c39ea10f06d39}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(len) += (\textcolor{keyword}{sizeof}(str) - 1); \(\backslash\)
+  (queue).append(str, \textcolor{keyword}{sizeof}(str) - 1)
+\end{DoxyCode}
+
+
+Definition at line 68 of file H\+T\+T\+P1x\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::add\+Date\+Header(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+E\+O\+M(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Trailers(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::serialize\+Websocket\+Header().
+

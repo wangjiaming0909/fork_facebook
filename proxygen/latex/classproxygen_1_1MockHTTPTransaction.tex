@@ -1,0 +1,499 @@
+\section{proxygen\+:\+:Mock\+H\+T\+T\+P\+Transaction Class Reference}
+\label{classproxygen_1_1MockHTTPTransaction}\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Transaction\+Mocks.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Mock\+H\+T\+T\+P\+Transaction\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1MockHTTPTransaction}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Mock\+H\+T\+T\+P\+Transaction} ({\bf Transport\+Direction} direction, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, uint32\+\_\+t seq\+No, const {\bf H\+T\+T\+P2\+Priority\+Queue} \&egress\+Queue, folly\+::\+H\+H\+Wheel\+Timer $\ast$timer={\bf nullptr}, const folly\+::\+Optional$<$ std\+::chrono\+::milliseconds $>$ \&transaction\+Timeout=folly\+::\+Optional$<$ std\+::chrono\+::milliseconds $>$(), {\bf H\+T\+T\+P\+Session\+Stats} $\ast$stats={\bf nullptr}, bool use\+Flow\+Control=false, uint32\+\_\+t receive\+Initial\+Window\+Size=0, uint32\+\_\+t send\+Initial\+Window\+Size=0, {\bf http2\+::\+Priority\+Update} priority={\bf http2\+::\+Default\+Priority}, folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} $>$ assoc\+Stream\+Id={\bf H\+T\+T\+P\+Codec\+::\+No\+Stream}, folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Ex\+Attributes} $>$ ex\+Attributes={\bf H\+T\+T\+P\+Codec\+::\+No\+Ex\+Attributes})
+\item 
+{\bf Mock\+H\+T\+T\+P\+Transaction} ({\bf Transport\+Direction} direction, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, uint32\+\_\+t seq\+No, const {\bf H\+T\+T\+P2\+Priority\+Queue} \&egress\+Queue, const {\bf Wheel\+Timer\+Instance} \&timeout, {\bf H\+T\+T\+P\+Session\+Stats} $\ast$stats={\bf nullptr}, bool use\+Flow\+Control=false, uint32\+\_\+t receive\+Initial\+Window\+Size=0, uint32\+\_\+t send\+Initial\+Window\+Size=0, {\bf http2\+::\+Priority\+Update} priority={\bf http2\+::\+Default\+Priority}, folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} $>$ assoc\+Stream\+Id={\bf H\+T\+T\+P\+Codec\+::\+No\+Stream}, folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Ex\+Attributes} $>$ ex\+Attributes={\bf H\+T\+T\+P\+Codec\+::\+No\+Ex\+Attributes})
+\item 
+{\bf Mock\+H\+T\+T\+P\+Transaction} ({\bf Transport\+Direction} direction, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, uint32\+\_\+t seq\+No, const {\bf H\+T\+T\+P2\+Priority\+Queue} \&egress\+Queue, const {\bf Wheel\+Timer\+Instance} \&timeout, folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Ex\+Attributes} $>$ ex\+Attributes)
+\item 
+{\bf M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf extra\+Response\+Expected}, bool())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf set\+Handler}, void({\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$))
+\item 
+void {\bf set\+Handler\+Unmocked} ({\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$handler)
+\item 
+{\bf M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf can\+Send\+Headers}, bool())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf send\+Headers}, void(const {\bf H\+T\+T\+P\+Message} \&headers))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf send\+Headers\+With\+E\+OM}, void(const {\bf H\+T\+T\+P\+Message} \&headers))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf send\+Body}, void(std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))
+\item 
+void {\bf send\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ iob) noexceptoverride
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf send\+Chunk\+Header}, void(size\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf send\+Chunk\+Terminator}, void())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf send\+Trailers}, void(const {\bf H\+T\+T\+P\+Headers} \&trailers))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf send\+E\+OM}, void())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf send\+Abort}, void())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} (drop, void())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf pause\+Ingress}, void())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf resume\+Ingress}, void())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0} (handler\+Egress\+Paused, bool())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf new\+Pushed\+Transaction}, {\bf H\+T\+T\+P\+Transaction} $\ast$({\bf H\+T\+T\+P\+Push\+Transaction\+Handler} $\ast$))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf set\+Receive\+Window}, void(uint32\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf get\+Receive\+Window}, const {\bf Window} \&())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf add\+Waiting\+For\+Replay\+Safety}, void(folly\+::\+Async\+Transport\+::\+Replay\+Safety\+Callback $\ast$))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf remove\+Waiting\+For\+Replay\+Safety}, void(folly\+::\+Async\+Transport\+::\+Replay\+Safety\+Callback $\ast$))
+\item 
+void {\bf enable\+Push} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+testing\+::\+Nice\+Mock$<$ {\bf Mock\+H\+T\+T\+P\+Transaction\+Transport} $>$ {\bf mock\+Transport\+\_\+}
+\item 
+const folly\+::\+Socket\+Address {\bf default\+Address\+\_\+}
+\item 
+{\bf Mock\+H\+T\+T\+P\+Codec} {\bf mock\+Codec\+\_\+}
+\item 
+wangle\+::\+Transport\+Info {\bf setup\+Transport\+Info\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 127 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!Mock\+H\+T\+T\+P\+Transaction@{Mock\+H\+T\+T\+P\+Transaction}}
+\index{Mock\+H\+T\+T\+P\+Transaction@{Mock\+H\+T\+T\+P\+Transaction}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{Mock\+H\+T\+T\+P\+Transaction(\+Transport\+Direction direction, H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, uint32\+\_\+t seq\+No, const H\+T\+T\+P2\+Priority\+Queue \&egress\+Queue, folly\+::\+H\+H\+Wheel\+Timer $\ast$timer=nullptr, const folly\+::\+Optional$<$ std\+::chrono\+::milliseconds $>$ \&transaction\+Timeout=folly\+::\+Optional$<$ std\+::chrono\+::milliseconds $>$(), H\+T\+T\+P\+Session\+Stats $\ast$stats=nullptr, bool use\+Flow\+Control=false, uint32\+\_\+t receive\+Initial\+Window\+Size=0, uint32\+\_\+t send\+Initial\+Window\+Size=0, http2\+::\+Priority\+Update priority=http2\+::\+Default\+Priority, folly\+::\+Optional$<$ H\+T\+T\+P\+Codec\+::\+Stream\+I\+D $>$ assoc\+Stream\+Id=\+H\+T\+T\+P\+Codec\+::\+No\+Stream, folly\+::\+Optional$<$ H\+T\+T\+P\+Codec\+::\+Ex\+Attributes $>$ ex\+Attributes=\+H\+T\+T\+P\+Codec\+::\+No\+Ex\+Attributes)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+Mock\+H\+T\+T\+P\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf Transport\+Direction}}]{direction, }
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{uint32\+\_\+t}]{seq\+No, }
+\item[{const {\bf H\+T\+T\+P2\+Priority\+Queue} \&}]{egress\+Queue, }
+\item[{folly\+::\+H\+H\+Wheel\+Timer $\ast$}]{timer = {\ttfamily {\bf nullptr}}, }
+\item[{const folly\+::\+Optional$<$ std\+::chrono\+::milliseconds $>$ \&}]{transaction\+Timeout = {\ttfamily folly\+:\+:Optional$<$std\+:\+:chrono\+:\+:milliseconds$>$()}, }
+\item[{{\bf H\+T\+T\+P\+Session\+Stats} $\ast$}]{stats = {\ttfamily {\bf nullptr}}, }
+\item[{bool}]{use\+Flow\+Control = {\ttfamily false}, }
+\item[{uint32\+\_\+t}]{receive\+Initial\+Window\+Size = {\ttfamily 0}, }
+\item[{uint32\+\_\+t}]{send\+Initial\+Window\+Size = {\ttfamily 0}, }
+\item[{{\bf http2\+::\+Priority\+Update}}]{priority = {\ttfamily {\bf http2\+::\+Default\+Priority}}, }
+\item[{folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} $>$}]{assoc\+Stream\+Id = {\ttfamily {\bf H\+T\+T\+P\+Codec\+::\+No\+Stream}}, }
+\item[{folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Ex\+Attributes} $>$}]{ex\+Attributes = {\ttfamily {\bf H\+T\+T\+P\+Codec\+::\+No\+Ex\+Attributes}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockHTTPTransaction_a4a0f0d2015eb0976e7e090b5d2545309}
+
+
+Definition at line 129 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::mock\+Codec\+\_\+.
+
+
+\begin{DoxyCode}
+146                                                :
+147       HTTPTransaction(direction, \textcolor{keywordtype}{id}, seqNo, mockTransport_,
+148                       const\_cast<HTTP2PriorityQueue&>(egressQueue),
+149                       timer, transactionTimeout, stats, useFlowControl,
+150                       receiveInitialWindowSize,
+151                       sendInitialWindowSize,
+152                       priority, assocStreamId, exAttributes),
+153       defaultAddress_(\textcolor{stringliteral}{"127.0.0.1"}, 80) \{
+154     EXPECT\_CALL(mockTransport_, getLocalAddressNonConst())
+155       .WillRepeatedly(testing::ReturnRef(defaultAddress_));
+156     EXPECT\_CALL(mockTransport_, getPeerAddressNonConst())
+157       .WillRepeatedly(testing::ReturnRef(defaultAddress_));
+158     EXPECT\_CALL(mockTransport_, getCodecNonConst())
+159       .WillRepeatedly(testing::ReturnRef(mockCodec_));
+160     EXPECT\_CALL(mockTransport_, getSetupTransportInfoNonConst())
+161       .WillRepeatedly(testing::ReturnRef(setupTransportInfo_));
+162 
+163     \textcolor{comment}{// Some tests unfortunately require a half-mocked HTTPTransaction.}
+164     ON\_CALL(*\textcolor{keyword}{this}, setHandler(testing::\_))
+165       .WillByDefault(testing::Invoke([\textcolor{keyword}{this}] (HTTPTransactionHandler* handler) \{
+166             this->setHandlerUnmocked(handler);
+167         \}));
+168 
+169     \textcolor{comment}{// By default we expect canSendHeaders in test to return true}
+170     \textcolor{comment}{// Tests that specifically require canSendHeaders to return false need}
+171     \textcolor{comment}{// to set the behavior locally.  This is due to the fact that the mocked}
+172     \textcolor{comment}{// methods below imply internal state is not correctly tracked/managed}
+173     \textcolor{comment}{// in the context of tests}
+174     ON\_CALL(*\textcolor{keyword}{this}, canSendHeaders()).WillByDefault(testing::Return(\textcolor{keyword}{true}));
+175   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!Mock\+H\+T\+T\+P\+Transaction@{Mock\+H\+T\+T\+P\+Transaction}}
+\index{Mock\+H\+T\+T\+P\+Transaction@{Mock\+H\+T\+T\+P\+Transaction}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{Mock\+H\+T\+T\+P\+Transaction(\+Transport\+Direction direction, H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, uint32\+\_\+t seq\+No, const H\+T\+T\+P2\+Priority\+Queue \&egress\+Queue, const Wheel\+Timer\+Instance \&timeout, H\+T\+T\+P\+Session\+Stats $\ast$stats=nullptr, bool use\+Flow\+Control=false, uint32\+\_\+t receive\+Initial\+Window\+Size=0, uint32\+\_\+t send\+Initial\+Window\+Size=0, http2\+::\+Priority\+Update priority=http2\+::\+Default\+Priority, folly\+::\+Optional$<$ H\+T\+T\+P\+Codec\+::\+Stream\+I\+D $>$ assoc\+Stream\+Id=\+H\+T\+T\+P\+Codec\+::\+No\+Stream, folly\+::\+Optional$<$ H\+T\+T\+P\+Codec\+::\+Ex\+Attributes $>$ ex\+Attributes=\+H\+T\+T\+P\+Codec\+::\+No\+Ex\+Attributes)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+Mock\+H\+T\+T\+P\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf Transport\+Direction}}]{direction, }
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{uint32\+\_\+t}]{seq\+No, }
+\item[{const {\bf H\+T\+T\+P2\+Priority\+Queue} \&}]{egress\+Queue, }
+\item[{const {\bf Wheel\+Timer\+Instance} \&}]{timeout, }
+\item[{{\bf H\+T\+T\+P\+Session\+Stats} $\ast$}]{stats = {\ttfamily {\bf nullptr}}, }
+\item[{bool}]{use\+Flow\+Control = {\ttfamily false}, }
+\item[{uint32\+\_\+t}]{receive\+Initial\+Window\+Size = {\ttfamily 0}, }
+\item[{uint32\+\_\+t}]{send\+Initial\+Window\+Size = {\ttfamily 0}, }
+\item[{{\bf http2\+::\+Priority\+Update}}]{priority = {\ttfamily {\bf http2\+::\+Default\+Priority}}, }
+\item[{folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} $>$}]{assoc\+Stream\+Id = {\ttfamily {\bf H\+T\+T\+P\+Codec\+::\+No\+Stream}}, }
+\item[{folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Ex\+Attributes} $>$}]{ex\+Attributes = {\ttfamily {\bf H\+T\+T\+P\+Codec\+::\+No\+Ex\+Attributes}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockHTTPTransaction_a1dbd8a45432edf43f322be851cc6d3aa}
+
+
+Definition at line 177 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+\begin{DoxyCode}
+191                                                :
+192   MockHTTPTransaction(direction,
+193                       \textcolor{keywordtype}{id},
+194                       seqNo,
+195                       egressQueue,
+196                       timeout.getWheelTimer(),
+197                       timeout.getDefaultTimeout(),
+198                       stats,
+199                       useFlowControl,
+200                       receiveInitialWindowSize,
+201                       sendInitialWindowSize,
+202                       priority,
+203                       assocStreamId,
+204                       exAttributes) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!Mock\+H\+T\+T\+P\+Transaction@{Mock\+H\+T\+T\+P\+Transaction}}
+\index{Mock\+H\+T\+T\+P\+Transaction@{Mock\+H\+T\+T\+P\+Transaction}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{Mock\+H\+T\+T\+P\+Transaction(\+Transport\+Direction direction, H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, uint32\+\_\+t seq\+No, const H\+T\+T\+P2\+Priority\+Queue \&egress\+Queue, const Wheel\+Timer\+Instance \&timeout, folly\+::\+Optional$<$ H\+T\+T\+P\+Codec\+::\+Ex\+Attributes $>$ ex\+Attributes)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+Mock\+H\+T\+T\+P\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf Transport\+Direction}}]{direction, }
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{uint32\+\_\+t}]{seq\+No, }
+\item[{const {\bf H\+T\+T\+P2\+Priority\+Queue} \&}]{egress\+Queue, }
+\item[{const {\bf Wheel\+Timer\+Instance} \&}]{timeout, }
+\item[{folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Codec\+::\+Ex\+Attributes} $>$}]{ex\+Attributes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockHTTPTransaction_aae4f2b838f01381e6a40510e44a08fad}
+
+
+Definition at line 206 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(), and proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1().
+
+
+\begin{DoxyCode}
+212                                                                          :
+213   MockHTTPTransaction(direction,
+214                       \textcolor{keywordtype}{id},
+215                       seqNo,
+216                       egressQueue,
+217                       timeout.getWheelTimer(),
+218                       timeout.getDefaultTimeout(),
+219                       \textcolor{keyword}{nullptr},
+220                       \textcolor{keyword}{false},
+221                       0,
+222                       0,
+223                       http2::DefaultPriority,
+224                       HTTPCodec::NoStream,
+225                       exAttributes) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!enable\+Push@{enable\+Push}}
+\index{enable\+Push@{enable\+Push}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{enable\+Push()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::enable\+Push (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockHTTPTransaction_a298bd14b809a6d12e135ae42e7583bee}
+
+
+Definition at line 261 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::mock\+Codec\+\_\+.
+
+
+\begin{DoxyCode}
+261                     \{
+262     EXPECT\_CALL(mockCodec_, supportsPushTransactions())
+263       .WillRepeatedly(testing::Return(\textcolor{keyword}{true}));
+264   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(extra\+Response\+Expected, bool())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf extra\+Response\+Expected}}]{, }
+\item[{bool()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_aa3631a64f81087caad0d798f3cef4e75}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(can\+Send\+Headers, bool())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf can\+Send\+Headers}}]{, }
+\item[{bool()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a551c098f926cb2e5a0ee5b4846a13da6}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(handler\+Egress\+Paused, bool())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{handler\+Egress\+Paused}]{, }
+\item[{bool()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_abcd460edb6f85f4880de90e7ce5ac298}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(get\+Receive\+Window, const Window \&())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf get\+Receive\+Window}}]{, }
+\item[{const {\bf Window} \&}]{()}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a7f22bbb6ae47d31802bffe97d6107778}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(send\+Chunk\+Terminator, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+Chunk\+Terminator}}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a878bf21fd553a7dae71f25ef51dda089}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(send\+E\+O\+M, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+E\+OM}}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a2e3470203f927016b1c9ce8146ad95b3}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(send\+Abort, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+Abort}}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a4d64ba80c28f3cae9edfc1f9090f2ac9}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(drop, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{drop}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_af808c03edc99740a51a5e3b621f56cdf}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(pause\+Ingress, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf pause\+Ingress}}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a1463a353644d3d0a858bbef499b5bfaa}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(resume\+Ingress, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf resume\+Ingress}}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a2736e048354a85d019f7b17027fd7900}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(set\+Handler, void(\+H\+T\+T\+P\+Transaction\+Handler $\ast$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf set\+Handler}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_aa8937967eeffddcb803a83c10171824e}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(send\+Headers, void(const H\+T\+T\+P\+Message \&headers))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+Headers}}]{, }
+\item[{void(const {\bf H\+T\+T\+P\+Message} \&headers)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a3f4e8a5f0808a26063380be60c533cfa}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(send\+Headers\+With\+E\+O\+M, void(const H\+T\+T\+P\+Message \&headers))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+Headers\+With\+E\+OM}}]{, }
+\item[{void(const {\bf H\+T\+T\+P\+Message} \&headers)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_ad54e4a6140644485f0371bda5ea229c2}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(send\+Body, void(std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+Body}}]{, }
+\item[{void(std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_acde36b21d29e4ebb18c69b54eb043344}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(send\+Chunk\+Header, void(size\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+Chunk\+Header}}]{, }
+\item[{void(size\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_abcf3a02e1017327fee9239953fa67055}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(send\+Trailers, void(const H\+T\+T\+P\+Headers \&trailers))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf send\+Trailers}}]{, }
+\item[{void(const {\bf H\+T\+T\+P\+Headers} \&trailers)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_acb1967c511185ffc9e436241ca6c4ca0}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(new\+Pushed\+Transaction, H\+T\+T\+P\+Transaction $\ast$(\+H\+T\+T\+P\+Push\+Transaction\+Handler $\ast$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf new\+Pushed\+Transaction}}]{, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{H\+T\+T\+P\+Push\+Transaction\+Handler $\ast$}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_aca087c21aafd498d4dc78c351f2d7a08}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(set\+Receive\+Window, void(uint32\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf set\+Receive\+Window}}]{, }
+\item[{void(uint32\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_aa66ab98e01ec5fa838a450c937131449}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(add\+Waiting\+For\+Replay\+Safety, void(folly\+::\+Async\+Transport\+::\+Replay\+Safety\+Callback $\ast$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf add\+Waiting\+For\+Replay\+Safety}}]{, }
+\item[{void(folly\+::\+Async\+Transport\+::\+Replay\+Safety\+Callback $\ast$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_a04d8748cbc322a61bcaaf9c748210f37}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(remove\+Waiting\+For\+Replay\+Safety, void(folly\+::\+Async\+Transport\+::\+Replay\+Safety\+Callback $\ast$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf remove\+Waiting\+For\+Replay\+Safety}}]{, }
+\item[{void(folly\+::\+Async\+Transport\+::\+Replay\+Safety\+Callback $\ast$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPTransaction_adcedaf862e2b5572e7d7178c56519bc8}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!send\+Body@{send\+Body}}
+\index{send\+Body@{send\+Body}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{send\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ iob) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::send\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1MockHTTPTransaction_ab366b5d7bbee5e4970697314724688e5}
+Send part or all of the egress message body to the Transport. If flow control is enabled, the chunk boundaries may not be respected. This method does not actually write the message out on the wire immediately. All writes happen at the end of the event loop at the earliest. Note\+: This method may be called zero or more times per message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em body} & Message body data; the Transport will take care of applying any necessary protocol framing, such as chunk headers. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction} \doxyref{}{p.}{classproxygen_1_1HTTPTransaction_aea212f62c9bfdd6facd1667a624abce6}.
+
+
+
+Definition at line 239 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::add\+Waiting\+For\+Replay\+Safety(), proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(), proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(), proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::new\+Pushed\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::pause\+Ingress(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::remove\+Waiting\+For\+Replay\+Safety(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::resume\+Ingress(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::send\+Abort(), proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::send\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::send\+Chunk\+Header(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::send\+Chunk\+Terminator(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::send\+E\+O\+M().
+
+
+\begin{DoxyCode}
+239                                                                  \{
+240     sendBody(std::shared\_ptr<folly::IOBuf>(iob.release()));
+241   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!set\+Handler\+Unmocked@{set\+Handler\+Unmocked}}
+\index{set\+Handler\+Unmocked@{set\+Handler\+Unmocked}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{set\+Handler\+Unmocked(\+H\+T\+T\+P\+Transaction\+Handler $\ast$handler)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::set\+Handler\+Unmocked (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockHTTPTransaction_adf6a3d3a2194d4881f9313edc5bc59ea}
+
+
+Definition at line 231 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(), proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(), proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+Transport\+::send\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::send\+Headers(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::set\+Handler().
+
+
+\begin{DoxyCode}
+231                                                            \{
+232     HTTPTransaction::setHandler(handler);
+233   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!default\+Address\+\_\+@{default\+Address\+\_\+}}
+\index{default\+Address\+\_\+@{default\+Address\+\_\+}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{default\+Address\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const folly\+::\+Socket\+Address proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::default\+Address\+\_\+}\label{classproxygen_1_1MockHTTPTransaction_ab8081a78d112f3fed669bbee62bfae37}
+
+
+Definition at line 267 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!mock\+Codec\+\_\+@{mock\+Codec\+\_\+}}
+\index{mock\+Codec\+\_\+@{mock\+Codec\+\_\+}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{mock\+Codec\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mock\+H\+T\+T\+P\+Codec} proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::mock\+Codec\+\_\+}\label{classproxygen_1_1MockHTTPTransaction_aadd70d1fbb0876da21f2949d5df74bda}
+
+
+Definition at line 268 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!mock\+Transport\+\_\+@{mock\+Transport\+\_\+}}
+\index{mock\+Transport\+\_\+@{mock\+Transport\+\_\+}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{mock\+Transport\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}testing\+::\+Nice\+Mock$<${\bf Mock\+H\+T\+T\+P\+Transaction\+Transport}$>$ proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::mock\+Transport\+\_\+}\label{classproxygen_1_1MockHTTPTransaction_a88c03f3c707fcbad4f0274019abdf237}
+
+
+Definition at line 266 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}!setup\+Transport\+Info\+\_\+@{setup\+Transport\+Info\+\_\+}}
+\index{setup\+Transport\+Info\+\_\+@{setup\+Transport\+Info\+\_\+}!proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction@{proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction}}
+\subsubsection[{setup\+Transport\+Info\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}wangle\+::\+Transport\+Info proxygen\+::\+Mock\+H\+T\+T\+P\+Transaction\+::setup\+Transport\+Info\+\_\+}\label{classproxygen_1_1MockHTTPTransaction_a21608737c7c19c69b7c43df6af9a9722}
+
+
+Definition at line 269 of file H\+T\+T\+P\+Transaction\+Mocks.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P\+Transaction\+Mocks.\+h}\end{DoxyCompactItemize}

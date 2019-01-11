@@ -1,0 +1,162 @@
+\section{proxygen\+:\+:R\+F\+C1867\+Base Class Reference}
+\label{classproxygen_1_1RFC1867Base}\index{proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}}
+Inheritance diagram for proxygen\+:\+:R\+F\+C1867\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1RFC1867Base}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Set\+Up} ()
+\item 
+void {\bf parse} (unique\+\_\+ptr$<$ I\+O\+Buf $>$ input, size\+\_\+t chunk\+Size=0)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf test\+Simple} (unique\+\_\+ptr$<$ I\+O\+Buf $>$ data, size\+\_\+t file\+Size, size\+\_\+t split\+Size, size\+\_\+t parts)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Strict\+Mock$<$ {\bf Mock1867\+Callback} $>$ {\bf callback\+\_\+}
+\item 
+{\bf R\+F\+C1867\+Codec} {\bf codec\+\_\+} \{k\+Test\+Boundary\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 119 of file R\+F\+C1867\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}!parse@{parse}}
+\index{parse@{parse}!proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}}
+\subsubsection[{parse(unique\+\_\+ptr$<$ I\+O\+Buf $>$ input, size\+\_\+t chunk\+Size=0)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+R\+F\+C1867\+Base\+::parse (
+\begin{DoxyParamCaption}
+\item[{unique\+\_\+ptr$<$ I\+O\+Buf $>$}]{input, }
+\item[{size\+\_\+t}]{chunk\+Size = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1RFC1867Base_a59ec26f35276a49fce1a10ac1602f276}
+
+
+Definition at line 126 of file R\+F\+C1867\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+126                                                             \{
+127     IOBufQueue ibuf\{IOBufQueue::cacheChainLength()\};
+128     ibuf.append(std::move(input));
+129     \textcolor{keywordflow}{if} (chunkSize == 0) \{
+130       chunkSize = ibuf.chainLength();
+131     \}
+132     unique\_ptr<IOBuf> rem;
+133     \textcolor{keywordflow}{while} (!ibuf.empty()) \{
+134       \textcolor{keyword}{auto} chunk = ibuf.split(std::min(chunkSize, ibuf.chainLength()));
+135       \textcolor{keywordflow}{if} (rem) \{
+136         rem->prependChain(std::move(chunk));
+137         chunk = std::move(rem);
+138       \}
+139       rem = codec_.onIngress(std::move(chunk));
+140     \}
+141     codec_.onIngressEOM();
+142   \}
+\end{DoxyCode}
+\index{proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}}
+\subsubsection[{Set\+Up()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+R\+F\+C1867\+Base\+::\+Set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1RFC1867Base_a9f877d03d9d3cc40ab7c3e7b22771a0d}
+
+
+Definition at line 122 of file R\+F\+C1867\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+122                \{
+123     codec_.setCallback(&callback_);
+124   \}
+\end{DoxyCode}
+\index{proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}!test\+Simple@{test\+Simple}}
+\index{test\+Simple@{test\+Simple}!proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}}
+\subsubsection[{test\+Simple(unique\+\_\+ptr$<$ I\+O\+Buf $>$ data, size\+\_\+t file\+Size, size\+\_\+t split\+Size, size\+\_\+t parts)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+R\+F\+C1867\+Base\+::test\+Simple (
+\begin{DoxyParamCaption}
+\item[{unique\+\_\+ptr$<$ I\+O\+Buf $>$}]{data, }
+\item[{size\+\_\+t}]{file\+Size, }
+\item[{size\+\_\+t}]{split\+Size, }
+\item[{size\+\_\+t}]{parts}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1RFC1867Base_aa5d319921b19b4fdc8c5971e4efdbe40}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & full multipart content \\
+\hline
+{\em filesize} & sum of all parts \\
+\hline
+{\em parts} & number of parts \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 167 of file R\+F\+C1867\+Test.\+cpp.
+
+
+
+References parse().
+
+
+\begin{DoxyCode}
+170                                            \{
+171   \textcolor{keywordtype}{size\_t} fileLength = 0;
+172   IOBufQueue parsedData\{IOBufQueue::cacheChainLength()\};
+173   EXPECT\_CALL(callback_, onFieldStartImpl(\_, \_, \_, \_))
+174           .Times(parts)
+175           .WillRepeatedly(Return(0));
+176   EXPECT\_CALL(callback_, onFieldData(\_, \_))
+177     .WillRepeatedly(Invoke([&] (std::shared\_ptr<IOBuf> data, uint64\_t) \{
+178           fileLength += data->computeChainDataLength();
+179           parsedData.append(data->clone());
+180           \textcolor{keywordflow}{return} 0;
+181         \}));
+182   EXPECT\_CALL(callback_, onFieldEnd(\textcolor{keyword}{true}, \_))
+183           .Times(parts)
+184           .WillRepeatedly(Return());
+185   parse(data->clone(), splitSize);
+186   \textcolor{keyword}{auto} parsedDataBuf = parsedData.move();
+187   \textcolor{keywordflow}{if} (fileLength > 0) \{
+188     \textcolor{comment}{// isChained() called from coalesce below asserts if no data has}
+189     \textcolor{comment}{// been added}
+190     parsedDataBuf->coalesce();
+191   \}
+192   CHECK\_EQ(fileLength, fileSize);
+193 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}!callback\+\_\+@{callback\+\_\+}}
+\index{callback\+\_\+@{callback\+\_\+}!proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}}
+\subsubsection[{callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Strict\+Mock$<${\bf Mock1867\+Callback}$>$ proxygen\+::\+R\+F\+C1867\+Base\+::callback\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1RFC1867Base_afabcbb3699afee1943b2c909c19787c7}
+
+
+Definition at line 150 of file R\+F\+C1867\+Test.\+cpp.
+
+\index{proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}!codec\+\_\+@{codec\+\_\+}}
+\index{codec\+\_\+@{codec\+\_\+}!proxygen\+::\+R\+F\+C1867\+Base@{proxygen\+::\+R\+F\+C1867\+Base}}
+\subsubsection[{codec\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\+F\+C1867\+Codec} proxygen\+::\+R\+F\+C1867\+Base\+::codec\+\_\+ \{k\+Test\+Boundary\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1RFC1867Base_ad7b71eda83158917ec128fad2d0d7553}
+
+
+Definition at line 151 of file R\+F\+C1867\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/experimental/test/{\bf R\+F\+C1867\+Test.\+cpp}\end{DoxyCompactItemize}

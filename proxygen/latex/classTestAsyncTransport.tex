@@ -1,0 +1,1562 @@
+\section{Test\+Async\+Transport Class Reference}
+\label{classTestAsyncTransport}\index{Test\+Async\+Transport@{Test\+Async\+Transport}}
+
+
+{\ttfamily \#include $<$Test\+Async\+Transport.\+h$>$}
+
+Inheritance diagram for Test\+Async\+Transport\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestAsyncTransport}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Read\+Event}
+\item 
+class {\bf Write\+Event}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Test\+Async\+Transport} (folly\+::\+Event\+Base $\ast$event\+Base)
+\item 
+void {\bf set\+Read\+CB} (Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$callback) override
+\item 
+Read\+Callback $\ast$ {\bf get\+Read\+Callback} () const override
+\item 
+void {\bf write} (Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const void $\ast$buf, size\+\_\+t bytes, folly\+::\+Write\+Flags {\bf flags}=folly\+::\+Write\+Flags\+::\+N\+O\+NE) override
+\item 
+void {\bf writev} (Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const struct iovec $\ast$vec, size\+\_\+t count, folly\+::\+Write\+Flags {\bf flags}=folly\+::\+Write\+Flags\+::\+N\+O\+NE) override
+\item 
+void {\bf write\+Chain} (Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ \&\&iob, folly\+::\+Write\+Flags {\bf flags}=folly\+::\+Write\+Flags\+::\+N\+O\+NE) override
+\item 
+void {\bf close} () override
+\item 
+void {\bf close\+Now} () override
+\item 
+void {\bf shutdown\+Write} () override
+\item 
+void {\bf shutdown\+Write\+Now} () override
+\item 
+void {\bf get\+Peer\+Address} (folly\+::\+Socket\+Address $\ast$addr) const override
+\item 
+void {\bf get\+Local\+Address} (folly\+::\+Socket\+Address $\ast$addr) const override
+\item 
+bool {\bf good} () const override
+\item 
+bool {\bf readable} () const override
+\item 
+bool {\bf connecting} () const override
+\item 
+bool {\bf error} () const override
+\item 
+void {\bf attach\+Event\+Base} (folly\+::\+Event\+Base $\ast$event\+Base) override
+\item 
+void {\bf detach\+Event\+Base} () override
+\item 
+bool {\bf is\+Detachable} () const override
+\item 
+folly\+::\+Event\+Base $\ast$ {\bf get\+Event\+Base} () const override
+\item 
+void {\bf set\+Send\+Timeout} (uint32\+\_\+t milliseconds) override
+\item 
+uint32\+\_\+t {\bf get\+Send\+Timeout} () const override
+\item 
+void {\bf add\+Read\+Event} (const void $\ast$buf, size\+\_\+t buflen, std\+::chrono\+::milliseconds delay\+From\+Previous)
+\item 
+void {\bf add\+Read\+Event} (folly\+::\+I\+O\+Buf\+Queue \&chain, std\+::chrono\+::milliseconds delay\+From\+Previous)
+\item 
+void {\bf add\+Read\+Event} (const char $\ast$buf, std\+::chrono\+::milliseconds delay\+From\+Previous=std\+::chrono\+::milliseconds(0))
+\item 
+void {\bf add\+Read\+E\+OF} (std\+::chrono\+::milliseconds delay\+From\+Previous)
+\item 
+void {\bf add\+Read\+Error} (const folly\+::\+Async\+Socket\+Exception \&ex, std\+::chrono\+::milliseconds delay\+From\+Previous)
+\item 
+void {\bf start\+Read\+Events} ()
+\item 
+void {\bf pause\+Writes} ()
+\item 
+void {\bf resume\+Writes} ()
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ {\bf Write\+Event} $>$ $>$ $\ast$ {\bf get\+Write\+Events} ()
+\item 
+uint32\+\_\+t {\bf get\+E\+O\+R\+Count} ()
+\item 
+uint32\+\_\+t {\bf get\+Cork\+Count} ()
+\item 
+size\+\_\+t {\bf get\+App\+Bytes\+Written} () const override
+\item 
+size\+\_\+t {\bf get\+Raw\+Bytes\+Written} () const override
+\item 
+size\+\_\+t {\bf get\+App\+Bytes\+Received} () const override
+\item 
+size\+\_\+t {\bf get\+Raw\+Bytes\+Received} () const override
+\item 
+bool {\bf is\+Eor\+Tracking\+Enabled} () const override
+\item 
+void {\bf set\+Eor\+Tracking} (bool) override
+\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf State\+Enum} \{ {\bf k\+State\+Open}, 
+{\bf k\+State\+Paused}, 
+{\bf k\+State\+Closed}, 
+{\bf k\+State\+Error}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf writes\+Allowed} () const 
+\item 
+{\bf Test\+Async\+Transport} ({\bf Test\+Async\+Transport} const \&)
+\item 
+{\bf Test\+Async\+Transport} \& {\bf operator=} ({\bf Test\+Async\+Transport} const \&)
+\item 
+void {\bf add\+Read\+Event} (const std\+::shared\+\_\+ptr$<$ {\bf Read\+Event} $>$ \&event)
+\item 
+void {\bf schedule\+Next\+Read\+Event} ({\bf proxygen\+::\+Time\+Point} now)
+\item 
+void {\bf fire\+Next\+Read\+Event} ()
+\item 
+void {\bf fire\+One\+Read\+Event} ()
+\item 
+void {\bf fail\+Pending\+Writes} ()
+\item 
+void {\bf timeout\+Expired} () noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+Event\+Base $\ast$ {\bf event\+Base\+\_\+}
+\item 
+folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$ {\bf read\+Callback\+\_\+}
+\item 
+uint32\+\_\+t {\bf send\+Timeout\+\_\+}
+\item 
+{\bf proxygen\+::\+Time\+Point} {\bf prev\+Read\+Event\+Time\+\_\+} \{\}
+\item 
+{\bf proxygen\+::\+Time\+Point} {\bf next\+Read\+Event\+Time\+\_\+} \{\}
+\item 
+{\bf State\+Enum} {\bf read\+State\+\_\+}
+\item 
+{\bf State\+Enum} {\bf write\+State\+\_\+}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ {\bf Read\+Event} $>$ $>$ {\bf read\+Events\+\_\+}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ {\bf Write\+Event} $>$ $>$ {\bf write\+Events\+\_\+}
+\item 
+std\+::deque$<$ std\+::pair$<$ std\+::shared\+\_\+ptr$<$ {\bf Write\+Event} $>$, Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$ $>$ $>$ {\bf pending\+Write\+Events\+\_\+}
+\item 
+uint32\+\_\+t {\bf eor\+Count\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf cork\+Count\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Test\+Async\+Transport.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!State\+Enum@{State\+Enum}}
+\index{State\+Enum@{State\+Enum}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{State\+Enum}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Test\+Async\+Transport\+::\+State\+Enum}\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a5aa5ca163a3260fec33aa2b9a8a06486}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{k\+State\+Open@{k\+State\+Open}!Test\+Async\+Transport@{Test\+Async\+Transport}}\index{Test\+Async\+Transport@{Test\+Async\+Transport}!k\+State\+Open@{k\+State\+Open}}\item[{\em 
+k\+State\+Open\label{classTestAsyncTransport_a5aa5ca163a3260fec33aa2b9a8a06486af559604c6675fba75b4337a8e3a98ebd}
+}]\index{k\+State\+Paused@{k\+State\+Paused}!Test\+Async\+Transport@{Test\+Async\+Transport}}\index{Test\+Async\+Transport@{Test\+Async\+Transport}!k\+State\+Paused@{k\+State\+Paused}}\item[{\em 
+k\+State\+Paused\label{classTestAsyncTransport_a5aa5ca163a3260fec33aa2b9a8a06486ab9ae68a1cda9fd3490d9d7d439e74fca}
+}]\index{k\+State\+Closed@{k\+State\+Closed}!Test\+Async\+Transport@{Test\+Async\+Transport}}\index{Test\+Async\+Transport@{Test\+Async\+Transport}!k\+State\+Closed@{k\+State\+Closed}}\item[{\em 
+k\+State\+Closed\label{classTestAsyncTransport_a5aa5ca163a3260fec33aa2b9a8a06486ae6952fa9a48430843adabf31d100e569}
+}]\index{k\+State\+Error@{k\+State\+Error}!Test\+Async\+Transport@{Test\+Async\+Transport}}\index{Test\+Async\+Transport@{Test\+Async\+Transport}!k\+State\+Error@{k\+State\+Error}}\item[{\em 
+k\+State\+Error\label{classTestAsyncTransport_a5aa5ca163a3260fec33aa2b9a8a06486af79a2c8af2d9951708cfedac3492aacc}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 121 of file Test\+Async\+Transport.\+h.
+
+
+\begin{DoxyCode}
+121                  \{
+122     kStateOpen,
+123     kStatePaused,
+124     kStateClosed,
+125     kStateError,
+126   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{Test\+Async\+Transport(folly\+::\+Event\+Base $\ast$event\+Base)}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Async\+Transport\+::\+Test\+Async\+Transport (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{event\+Base}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classTestAsyncTransport_acab509aa1a0df4f9a0902425b79d79af}
+
+
+Referenced by Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event(), and writes\+Allowed().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{Test\+Async\+Transport(\+Test\+Async\+Transport const \&)}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Async\+Transport\+::\+Test\+Async\+Transport (
+\begin{DoxyParamCaption}
+\item[{{\bf Test\+Async\+Transport} const \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a4eb0e7c5af09b5c0eda3f5569a2f0de7}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!add\+Read\+E\+OF@{add\+Read\+E\+OF}}
+\index{add\+Read\+E\+OF@{add\+Read\+E\+OF}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{add\+Read\+E\+O\+F(std\+::chrono\+::milliseconds delay\+From\+Previous)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::add\+Read\+E\+OF (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::milliseconds}]{delay\+From\+Previous}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_aaaac5d5fb78fd8aa09e8b5d19bba657d}
+
+
+Definition at line 455 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References add\+Read\+Event().
+
+
+\begin{DoxyCode}
+455                                                                       \{
+456   addReadEvent(\textcolor{keyword}{nullptr}, 0, delayFromPrevious);
+457 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!add\+Read\+Error@{add\+Read\+Error}}
+\index{add\+Read\+Error@{add\+Read\+Error}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{add\+Read\+Error(const folly\+::\+Async\+Socket\+Exception \&ex, std\+::chrono\+::milliseconds delay\+From\+Previous)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::add\+Read\+Error (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{ex, }
+\item[{std\+::chrono\+::milliseconds}]{delay\+From\+Previous}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_a21479d14899d655b8c9aadbb877d551d}
+
+
+Definition at line 460 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References add\+Read\+Event(), proxygen\+::get\+Current\+Time(), next\+Read\+Event\+Time\+\_\+, prev\+Read\+Event\+Time\+\_\+, read\+Callback\+\_\+, read\+Events\+\_\+, schedule\+Next\+Read\+Event(), and proxygen\+::time\+Point\+Initialized().
+
+
+\begin{DoxyCode}
+461                                                                           \{
+462   \textcolor{keywordflow}{if} (!readEvents_.empty() && readEvents_.back()->isFinalEvent()) \{
+463     LOG(FATAL) << \textcolor{stringliteral}{"cannot add a read error after an error or EOF"};
+464   \}
+465 
+466   \textcolor{keyword}{auto} \textcolor{keyword}{event} = std::make\_shared<ReadEvent>(ex, delayFromPrevious);
+467   addReadEvent(event);
+468 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!add\+Read\+Event@{add\+Read\+Event}}
+\index{add\+Read\+Event@{add\+Read\+Event}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{add\+Read\+Event(const void $\ast$buf, size\+\_\+t buflen, std\+::chrono\+::milliseconds delay\+From\+Previous)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::add\+Read\+Event (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{buf, }
+\item[{size\+\_\+t}]{buflen, }
+\item[{std\+::chrono\+::milliseconds}]{delay\+From\+Previous}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_aadecdff89c3b318475ff86af41736130}
+
+
+Definition at line 438 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References read\+Events\+\_\+.
+
+
+
+Referenced by add\+Read\+E\+O\+F(), add\+Read\+Error(), add\+Read\+Event(), and writes\+Allowed().
+
+
+\begin{DoxyCode}
+439                                                                           \{
+440   \textcolor{keywordflow}{if} (!readEvents_.empty() && readEvents_.back()->isFinalEvent()) \{
+441     LOG(FATAL) << \textcolor{stringliteral}{"cannot add more read events after an error or EOF"};
+442   \}
+443 
+444   \textcolor{keyword}{auto} \textcolor{keyword}{event} = std::make\_shared<ReadEvent>(buf, buflen, delayFromPrevious);
+445   addReadEvent(event);
+446 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!add\+Read\+Event@{add\+Read\+Event}}
+\index{add\+Read\+Event@{add\+Read\+Event}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{add\+Read\+Event(folly\+::\+I\+O\+Buf\+Queue \&chain, std\+::chrono\+::milliseconds delay\+From\+Previous)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::add\+Read\+Event (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+I\+O\+Buf\+Queue \&}]{chain, }
+\item[{std\+::chrono\+::milliseconds}]{delay\+From\+Previous}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_abce4688559af666f406bba15c7f9a49c}
+
+
+Definition at line 426 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References add\+Read\+Event().
+
+
+\begin{DoxyCode}
+427                                                                           \{
+428   \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{
+429     unique\_ptr<IOBuf> cur = chain.pop\_front();
+430     \textcolor{keywordflow}{if} (!cur) \{
+431       \textcolor{keywordflow}{break};
+432     \}
+433     addReadEvent(cur->data(), cur->length(), delayFromPrevious);
+434   \}
+435 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!add\+Read\+Event@{add\+Read\+Event}}
+\index{add\+Read\+Event@{add\+Read\+Event}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{add\+Read\+Event(const char $\ast$buf, std\+::chrono\+::milliseconds delay\+From\+Previous=std\+::chrono\+::milliseconds(0))}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::add\+Read\+Event (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buf, }
+\item[{std\+::chrono\+::milliseconds}]{delay\+From\+Previous = {\ttfamily std\+:\+:chrono\+:\+:milliseconds(0)}}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_a588267e0924e6a589c91e217411b4a99}
+
+
+Definition at line 449 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References add\+Read\+Event().
+
+
+\begin{DoxyCode}
+450                                                                           \{
+451   addReadEvent(buf, strlen(buf), delayFromPrevious);
+452 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!add\+Read\+Event@{add\+Read\+Event}}
+\index{add\+Read\+Event@{add\+Read\+Event}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{add\+Read\+Event(const std\+::shared\+\_\+ptr$<$ Read\+Event $>$ \&event)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::add\+Read\+Event (
+\begin{DoxyParamCaption}
+\item[{const std\+::shared\+\_\+ptr$<$ {\bf Read\+Event} $>$ \&}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_aef8f8cd010c6f96559e9a6c802182cfa}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!attach\+Event\+Base@{attach\+Event\+Base}}
+\index{attach\+Event\+Base@{attach\+Event\+Base}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{attach\+Event\+Base(folly\+::\+Event\+Base $\ast$event\+Base) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::attach\+Event\+Base (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{event\+Base}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_ac202e51e710c3557de4d3e3cf45635b4}
+
+
+Definition at line 351 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References event\+Base\+\_\+, and read\+Callback\+\_\+.
+
+
+\begin{DoxyCode}
+351                                                         \{
+352   CHECK(\textcolor{keyword}{nullptr} == eventBase_);
+353   CHECK(\textcolor{keyword}{nullptr} == readCallback_);
+354   eventBase_ = eventBase;
+355 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!close@{close}}
+\index{close@{close}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{close() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a7266b5c9c411db6e8d36a0167d3fdf0d}
+
+
+Definition at line 285 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References close\+Now().
+
+
+\begin{DoxyCode}
+285                           \{
+286   closeNow();
+287 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!close\+Now@{close\+Now}}
+\index{close\+Now@{close\+Now}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{close\+Now() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::close\+Now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_ad6271e7c47ded5ced1d54010de54fbd8}
+
+
+Definition at line 290 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References k\+State\+Closed, k\+State\+Open, read\+Callback\+\_\+, read\+State\+\_\+, and shutdown\+Write\+Now().
+
+
+
+Referenced by close().
+
+
+\begin{DoxyCode}
+290                              \{
+291   \textcolor{keywordflow}{if} (readState_ == kStateOpen) \{
+292     readState_ = kStateClosed;
+293 
+294     \textcolor{keywordflow}{if} (readCallback_ != \textcolor{keyword}{nullptr}) \{
+295       folly::AsyncTransportWrapper::ReadCallback* callback = readCallback_;
+296       readCallback_ = \textcolor{keyword}{nullptr};
+297       callback->readEOF();
+298     \}
+299   \}
+300   shutdownWriteNow();
+301 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!connecting@{connecting}}
+\index{connecting@{connecting}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{connecting() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Async\+Transport\+::connecting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a4012904c7138f0fa7e396a03ecffbb74}
+
+
+Definition at line 341 of file Test\+Async\+Transport.\+cpp.
+
+
+\begin{DoxyCode}
+341                                      \{
+342   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+343 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!detach\+Event\+Base@{detach\+Event\+Base}}
+\index{detach\+Event\+Base@{detach\+Event\+Base}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{detach\+Event\+Base() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::detach\+Event\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_aac8829e7f37c7d3e035f586a6d4c52ae}
+
+
+Definition at line 358 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References event\+Base\+\_\+, and read\+Callback\+\_\+.
+
+
+\begin{DoxyCode}
+358                                     \{
+359   CHECK\_NOTNULL(eventBase_);
+360   CHECK(\textcolor{keyword}{nullptr} == readCallback_);
+361   eventBase_ = \textcolor{keyword}{nullptr};
+362 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!error@{error}}
+\index{error@{error}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{error() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Async\+Transport\+::error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a962f197daf642646104e05428345d6cb}
+
+
+Definition at line 346 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References k\+State\+Error, read\+State\+\_\+, and write\+State\+\_\+.
+
+
+\begin{DoxyCode}
+346                                 \{
+347   \textcolor{keywordflow}{return} (readState_ == kStateError || writeState_ == kStateError);
+348 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!fail\+Pending\+Writes@{fail\+Pending\+Writes}}
+\index{fail\+Pending\+Writes@{fail\+Pending\+Writes}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{fail\+Pending\+Writes()}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::fail\+Pending\+Writes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a262aed3c088116820f6a5712620dd65a}
+
+
+Definition at line 410 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References pending\+Write\+Events\+\_\+.
+
+
+
+Referenced by shutdown\+Write\+Now(), and writes\+Allowed().
+
+
+\begin{DoxyCode}
+410                                       \{
+411   \textcolor{comment}{// writeError() callback might try to delete this object}
+412   DestructorGuard g(\textcolor{keyword}{this});
+413   \textcolor{keywordflow}{while} (!pendingWriteEvents_.empty()) \{
+414     \textcolor{keyword}{auto} \textcolor{keyword}{event} = pendingWriteEvents_.front();
+415     pendingWriteEvents_.pop\_front();
+416     AsyncSocketException ex(AsyncSocketException::NOT\_OPEN,
+417                            \textcolor{stringliteral}{"Transport closed locally"});
+418     \textcolor{keyword}{auto} cb = \textcolor{keyword}{dynamic\_cast<}WriteCallback*\textcolor{keyword}{>}(\textcolor{keyword}{event}.second);
+419     \textcolor{keywordflow}{if} (cb) \{
+420       cb->writeErr(0, ex);
+421     \}
+422   \}
+423 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!fire\+Next\+Read\+Event@{fire\+Next\+Read\+Event}}
+\index{fire\+Next\+Read\+Event@{fire\+Next\+Read\+Event}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{fire\+Next\+Read\+Event()}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::fire\+Next\+Read\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_aa0f2a6cfbeaacd93f061a1d59da5cb08}
+
+
+Definition at line 518 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References event\+Base\+\_\+, fire\+One\+Read\+Event(), proxygen\+::get\+Current\+Time(), next\+Read\+Event\+Time\+\_\+, read\+Callback\+\_\+, read\+Events\+\_\+, and proxygen\+::time\+Point\+Initialized().
+
+
+
+Referenced by schedule\+Next\+Read\+Event(), timeout\+Expired(), and writes\+Allowed().
+
+
+\begin{DoxyCode}
+518                                       \{
+519   DestructorGuard dg(\textcolor{keyword}{this});
+520   CHECK(!readEvents_.empty());
+521   CHECK\_NOTNULL(readCallback_);
+522 
+523   \textcolor{comment}{// maxReadAtOnce prevents us from starving other users of this EventBase}
+524   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \textcolor{keyword}{const} maxReadAtOnce = 30;
+525   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} n = 0; n < maxReadAtOnce; ++n) \{
+526     fireOneReadEvent();
+527 
+528     \textcolor{keywordflow}{if} (readCallback_ == \textcolor{keyword}{nullptr} || eventBase_ == \textcolor{keyword}{nullptr} ||
+529         !proxygen::timePointInitialized(nextReadEventTime_)) \{
+530       \textcolor{keywordflow}{return};
+531     \}
+532     \textcolor{keyword}{auto} now = proxygen::getCurrentTime();
+533     \textcolor{keywordflow}{if} (nextReadEventTime_ > now) \{
+534       scheduleTimeout(std::chrono::duration\_cast<std::chrono::milliseconds>
+535                       (nextReadEventTime_ - now));
+536       \textcolor{keywordflow}{return};
+537     \}
+538   \}
+539 
+540   \textcolor{comment}{// Trigger fireNextReadEvent() to be called the next time around the event}
+541   \textcolor{comment}{// loop.}
+542   eventBase_->runInLoop(std::bind(&TestAsyncTransport::fireNextReadEvent,
+543                                        \textcolor{keyword}{this}));
+544 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!fire\+One\+Read\+Event@{fire\+One\+Read\+Event}}
+\index{fire\+One\+Read\+Event@{fire\+One\+Read\+Event}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{fire\+One\+Read\+Event()}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::fire\+One\+Read\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a02edd5892117cebbe376dc0287df7cf0}
+
+
+Definition at line 547 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References k\+State\+Closed, k\+State\+Error, next\+Read\+Event\+Time\+\_\+, prev\+Read\+Event\+Time\+\_\+, read\+Callback\+\_\+, read\+Events\+\_\+, read\+State\+\_\+, and write\+State\+\_\+.
+
+
+
+Referenced by fire\+Next\+Read\+Event(), and writes\+Allowed().
+
+
+\begin{DoxyCode}
+547                                      \{
+548   CHECK(!readEvents_.empty());
+549   CHECK\_NOTNULL(readCallback_);
+550 
+551   \textcolor{keyword}{const} shared\_ptr<ReadEvent>& \textcolor{keyword}{event} = readEvents_.front();
+552 
+553   \textcolor{comment}{// Note that we call getReadBuffer() here even if we know the next event may}
+554   \textcolor{comment}{// be an EOF or an error.  This matches the behavior of AsyncSocket.}
+555   \textcolor{comment}{// (Because AsyncSocket merely gets notification that the socket is readable,}
+556   \textcolor{comment}{// and has to call getReadBuffer() before it can make the actual read call to}
+557   \textcolor{comment}{// get an error or EOF.)}
+558   \textcolor{keywordtype}{void}* buf;
+559   \textcolor{keywordtype}{size\_t} buflen;
+560   \textcolor{keywordflow}{try} \{
+561     readCallback_->getReadBuffer(&buf, &buflen);
+562   \} \textcolor{keywordflow}{catch} (...) \{
+563     \textcolor{comment}{// TODO: we should convert the error to a AsyncSocketException and call}
+564     \textcolor{comment}{// readError() here.}
+565     LOG(FATAL) << \textcolor{stringliteral}{"readCallback\_->getReadBuffer() threw an error"};
+566   \}
+567   \textcolor{keywordflow}{if} (buf == \textcolor{keyword}{nullptr} || buflen == 0) \{
+568     \textcolor{comment}{// TODO: we should just call readError() here.}
+569     LOG(FATAL) << \textcolor{stringliteral}{"readCallback\_->getReadBuffer() returned a nullptr or "}
+570       \textcolor{stringliteral}{"empty buffer"};
+571   \}
+572 
+573   \textcolor{comment}{// Handle errors}
+574   \textcolor{keywordflow}{if} (event->isError()) \{
+575     \textcolor{comment}{// Errors immediately move both read and write to an error state}
+576     readState_ = kStateError;
+577     writeState_ = kStateError;
+578 
+579     \textcolor{comment}{// event is just a reference to the shared\_ptr, so make a real copy of the}
+580     \textcolor{comment}{// pointer before popping it off the readEvents\_ list.}
+581     shared\_ptr<ReadEvent> eventPointerCopy = readEvents_.front();
+582     readEvents_.pop\_front();
+583     CHECK(readEvents_.empty());
+584     nextReadEventTime_ = \{\};
+585 
+586     \textcolor{keyword}{auto} callback = readCallback_;
+587     readCallback_ = \textcolor{keyword}{nullptr};
+588     callback->readErr(eventPointerCopy->getException());
+589     \textcolor{keywordflow}{return};
+590   \}
+591 
+592   \textcolor{comment}{// Handle EOF}
+593   \textcolor{keywordtype}{size\_t} available = \textcolor{keyword}{event}->getLength();
+594   \textcolor{keywordflow}{if} (available == 0) \{
+595     readState_ = kStateClosed;
+596 
+597     readEvents_.pop\_front();
+598     CHECK(readEvents_.empty());
+599     nextReadEventTime\_ = \{\};
+600 
+601     \textcolor{keyword}{auto} callback = readCallback_;
+602     readCallback_ = \textcolor{keyword}{nullptr};
+603     callback->readEOF();
+604     \textcolor{keywordflow}{return};
+605   \}
+606 
+607   \textcolor{comment}{// Handle a normal read event}
+608   \textcolor{keywordtype}{size\_t} readlen;
+609   \textcolor{keywordtype}{bool} more;
+610   \textcolor{keywordflow}{if} (available <= buflen) \{
+611     readlen = available;
+612     more = \textcolor{keyword}{false};
+613   \} \textcolor{keywordflow}{else} \{
+614     readlen = buflen;
+615     more = \textcolor{keyword}{true};
+616   \}
+617   memcpy(buf, event->getBuffer(), readlen);
+618   \textcolor{keywordflow}{if} (more) \{
+619     \textcolor{keyword}{event}->consumeData(readlen);
+620   \} \textcolor{keywordflow}{else} \{
+621     prevReadEventTime_ = nextReadEventTime_;
+622     \textcolor{comment}{// Note: since event is just a reference to the shared\_ptr in readEvents\_,}
+623     \textcolor{comment}{// we shouldn't access the event any more after popping it off here.}
+624     readEvents_.pop\_front();
+625 
+626     \textcolor{keywordflow}{if} (readEvents_.empty()) \{
+627       nextReadEventTime\_ = \{\};
+628     \} \textcolor{keywordflow}{else} \{
+629       nextReadEventTime\_ = prevReadEventTime_ + readEvents_.front()->getDelay();
+630     \}
+631   \}
+632   readCallback_->readDataAvailable(readlen);
+633 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+App\+Bytes\+Received@{get\+App\+Bytes\+Received}}
+\index{get\+App\+Bytes\+Received@{get\+App\+Bytes\+Received}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+App\+Bytes\+Received() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Test\+Async\+Transport\+::get\+App\+Bytes\+Received (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestAsyncTransport_aa8bb910bbecc2b2af9561648a086f818}
+
+
+Definition at line 115 of file Test\+Async\+Transport.\+h.
+
+
+\begin{DoxyCode}
+115 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+App\+Bytes\+Written@{get\+App\+Bytes\+Written}}
+\index{get\+App\+Bytes\+Written@{get\+App\+Bytes\+Written}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+App\+Bytes\+Written() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Test\+Async\+Transport\+::get\+App\+Bytes\+Written (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestAsyncTransport_ab820a2b745f3e06b438668c49ad239d1}
+
+
+Definition at line 113 of file Test\+Async\+Transport.\+h.
+
+
+\begin{DoxyCode}
+113 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Cork\+Count@{get\+Cork\+Count}}
+\index{get\+Cork\+Count@{get\+Cork\+Count}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Cork\+Count()}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Test\+Async\+Transport\+::get\+Cork\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestAsyncTransport_a79a422171b9370e2b6e90c11a916d02a}
+
+
+Definition at line 109 of file Test\+Async\+Transport.\+h.
+
+
+
+References cork\+Count\+\_\+.
+
+
+\begin{DoxyCode}
+109                           \{
+110     \textcolor{keywordflow}{return} corkCount_;
+111   \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+E\+O\+R\+Count@{get\+E\+O\+R\+Count}}
+\index{get\+E\+O\+R\+Count@{get\+E\+O\+R\+Count}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+E\+O\+R\+Count()}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Test\+Async\+Transport\+::get\+E\+O\+R\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestAsyncTransport_aeb4c7d2626fed80bbe4ddf3f17fcc307}
+
+
+Definition at line 105 of file Test\+Async\+Transport.\+h.
+
+
+
+References eor\+Count\+\_\+.
+
+
+\begin{DoxyCode}
+105                          \{
+106     \textcolor{keywordflow}{return} eorCount_;
+107   \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Event\+Base@{get\+Event\+Base}}
+\index{get\+Event\+Base@{get\+Event\+Base}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Event\+Base() const override}]{\setlength{\rightskip}{0pt plus 5cm}Event\+Base $\ast$ Test\+Async\+Transport\+::get\+Event\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_ab05b44c650f79834582e6e1a59d68616}
+
+
+Definition at line 370 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References event\+Base\+\_\+.
+
+
+\begin{DoxyCode}
+370                                        \{
+371   \textcolor{keywordflow}{return} eventBase_;
+372 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Local\+Address@{get\+Local\+Address}}
+\index{get\+Local\+Address@{get\+Local\+Address}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Local\+Address(folly\+::\+Socket\+Address $\ast$addr) const override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::get\+Local\+Address (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Socket\+Address $\ast$}]{addr}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_ace1e4a195e96af671179c2ed307b2d96}
+
+
+Definition at line 325 of file Test\+Async\+Transport.\+cpp.
+
+
+\begin{DoxyCode}
+325                                                              \{
+326   \textcolor{comment}{// This isn't really accurate, but close enough for testing.}
+327   addr->setFromIpPort(\textcolor{stringliteral}{"127.0.0.1"}, 0);
+328 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Peer\+Address@{get\+Peer\+Address}}
+\index{get\+Peer\+Address@{get\+Peer\+Address}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Peer\+Address(folly\+::\+Socket\+Address $\ast$addr) const override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::get\+Peer\+Address (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Socket\+Address $\ast$}]{addr}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_ac500f38d5cdffefdf57b7ff53fa7ae21}
+
+
+Definition at line 319 of file Test\+Async\+Transport.\+cpp.
+
+
+\begin{DoxyCode}
+319                                                             \{
+320   \textcolor{comment}{// This isn't really accurate, but close enough for testing.}
+321   addr->setFromIpPort(\textcolor{stringliteral}{"127.0.0.1"}, 0);
+322 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Raw\+Bytes\+Received@{get\+Raw\+Bytes\+Received}}
+\index{get\+Raw\+Bytes\+Received@{get\+Raw\+Bytes\+Received}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Raw\+Bytes\+Received() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Test\+Async\+Transport\+::get\+Raw\+Bytes\+Received (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestAsyncTransport_abf9fafce8c2e90daaa145964795217d9}
+
+
+Definition at line 116 of file Test\+Async\+Transport.\+h.
+
+
+\begin{DoxyCode}
+116 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Raw\+Bytes\+Written@{get\+Raw\+Bytes\+Written}}
+\index{get\+Raw\+Bytes\+Written@{get\+Raw\+Bytes\+Written}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Raw\+Bytes\+Written() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Test\+Async\+Transport\+::get\+Raw\+Bytes\+Written (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestAsyncTransport_a76649a81e4fd6a2dc2a6a4167476f90f}
+
+
+Definition at line 114 of file Test\+Async\+Transport.\+h.
+
+
+\begin{DoxyCode}
+114 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Read\+Callback@{get\+Read\+Callback}}
+\index{get\+Read\+Callback@{get\+Read\+Callback}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Read\+Callback() const override}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Async\+Transport\+::\+Read\+Callback $\ast$ Test\+Async\+Transport\+::get\+Read\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a156e9620539852c559fd376bdfca46e9}
+
+
+Definition at line 225 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References read\+Callback\+\_\+.
+
+
+\begin{DoxyCode}
+225                                           \{
+226   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}TestAsyncTransport::ReadCallback*\textcolor{keyword}{>}(readCallback_);
+227 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Send\+Timeout@{get\+Send\+Timeout}}
+\index{get\+Send\+Timeout@{get\+Send\+Timeout}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Send\+Timeout() const override}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Test\+Async\+Transport\+::get\+Send\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a6610bfc58e1f6c10111b475f13ddb59e}
+
+
+Definition at line 380 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References send\+Timeout\+\_\+.
+
+
+\begin{DoxyCode}
+380                                          \{
+381   \textcolor{keywordflow}{return} sendTimeout_;
+382 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!get\+Write\+Events@{get\+Write\+Events}}
+\index{get\+Write\+Events@{get\+Write\+Events}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{get\+Write\+Events()}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$ std\+::shared\+\_\+ptr$<${\bf Write\+Event}$>$ $>$$\ast$ Test\+Async\+Transport\+::get\+Write\+Events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestAsyncTransport_a868b84b536e34136c476bb44485eafca}
+
+
+Definition at line 101 of file Test\+Async\+Transport.\+h.
+
+
+
+References write\+Events\+\_\+.
+
+
+\begin{DoxyCode}
+101                                                           \{
+102     \textcolor{keywordflow}{return} &writeEvents_;
+103   \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!good@{good}}
+\index{good@{good}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{good() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Async\+Transport\+::good (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a5b7c4d4fb2c5c02e3cc2e5c7015fdaac}
+
+
+Definition at line 331 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References k\+State\+Open, read\+State\+\_\+, and writes\+Allowed().
+
+
+\begin{DoxyCode}
+331                                \{
+332   \textcolor{keywordflow}{return} (readState_ == kStateOpen && writesAllowed());
+333 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!is\+Detachable@{is\+Detachable}}
+\index{is\+Detachable@{is\+Detachable}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{is\+Detachable() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Async\+Transport\+::is\+Detachable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a569770f2098d290559e7cae06d3a3234}
+
+
+Definition at line 365 of file Test\+Async\+Transport.\+cpp.
+
+
+\begin{DoxyCode}
+365                                        \{
+366   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+367 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!is\+Eor\+Tracking\+Enabled@{is\+Eor\+Tracking\+Enabled}}
+\index{is\+Eor\+Tracking\+Enabled@{is\+Eor\+Tracking\+Enabled}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{is\+Eor\+Tracking\+Enabled() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Async\+Transport\+::is\+Eor\+Tracking\+Enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestAsyncTransport_aa029e7edcfd606c1232660738d5f756e}
+
+
+Definition at line 117 of file Test\+Async\+Transport.\+h.
+
+
+\begin{DoxyCode}
+117 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!operator=@{operator=}}
+\index{operator=@{operator=}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{operator=(\+Test\+Async\+Transport const \&)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Test\+Async\+Transport}\& Test\+Async\+Transport\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Test\+Async\+Transport} const \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_abf03153d8b1257f74799bbb9b7a09d8c}
+
+
+Referenced by writes\+Allowed().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!pause\+Writes@{pause\+Writes}}
+\index{pause\+Writes@{pause\+Writes}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{pause\+Writes()}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::pause\+Writes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_a7b3a70f572075946e7167364a73c92b7}
+
+
+Definition at line 385 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References k\+State\+Open, k\+State\+Paused, and write\+State\+\_\+.
+
+
+\begin{DoxyCode}
+385                                 \{
+386   \textcolor{keywordflow}{if} (writeState_ != kStateOpen) \{
+387     LOG(FATAL) << \textcolor{stringliteral}{"cannot pause writes on non-open transport; state="} <<
+388       writeState_;
+389   \}
+390   writeState_ = kStatePaused;
+391 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!readable@{readable}}
+\index{readable@{readable}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{readable() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Async\+Transport\+::readable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_ad628da00ec360831313cd17b939d924b}
+
+
+Definition at line 336 of file Test\+Async\+Transport.\+cpp.
+
+
+\begin{DoxyCode}
+336                                    \{
+337   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+338 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!resume\+Writes@{resume\+Writes}}
+\index{resume\+Writes@{resume\+Writes}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{resume\+Writes()}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::resume\+Writes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_a8e86662a17790980714be5eea91e94ae}
+
+
+Definition at line 394 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References k\+State\+Open, k\+State\+Paused, pending\+Write\+Events\+\_\+, write\+Events\+\_\+, and write\+State\+\_\+.
+
+
+\begin{DoxyCode}
+394                                  \{
+395   \textcolor{keywordflow}{if} (writeState_ != kStatePaused) \{
+396     LOG(FATAL) << \textcolor{stringliteral}{"cannot resume writes on non-paused transport; state="} <<
+397       writeState_;
+398   \}
+399   writeState_ = kStateOpen;
+400   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} event = pendingWriteEvents_.begin();
+401        \textcolor{keyword}{event} != pendingWriteEvents_.end() && writeState_ == kStateOpen;
+402        \textcolor{keyword}{event} = pendingWriteEvents_.begin()) \{
+403     writeEvents_.push\_back(event->first);
+404     pendingWriteEvents_.pop\_front();
+405     \textcolor{keyword}{event}->second->writeSuccess();
+406   \}
+407 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!schedule\+Next\+Read\+Event@{schedule\+Next\+Read\+Event}}
+\index{schedule\+Next\+Read\+Event@{schedule\+Next\+Read\+Event}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{schedule\+Next\+Read\+Event(proxygen\+::\+Time\+Point now)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::schedule\+Next\+Read\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Time\+Point}}]{now}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a38d18bad0a6782590610d1470dc308ac}
+
+
+Definition at line 508 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References fire\+Next\+Read\+Event(), and next\+Read\+Event\+Time\+\_\+.
+
+
+
+Referenced by add\+Read\+Error(), set\+Read\+C\+B(), start\+Read\+Events(), and writes\+Allowed().
+
+
+\begin{DoxyCode}
+508                                                        \{
+509   \textcolor{keywordflow}{if} (nextReadEventTime_ <= now) \{
+510     fireNextReadEvent();
+511   \} \textcolor{keywordflow}{else} \{
+512     scheduleTimeout(std::chrono::duration\_cast<std::chrono::milliseconds>
+513                     (nextReadEventTime_ - now));
+514   \}
+515 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!set\+Eor\+Tracking@{set\+Eor\+Tracking}}
+\index{set\+Eor\+Tracking@{set\+Eor\+Tracking}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{set\+Eor\+Tracking(bool) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::set\+Eor\+Tracking (
+\begin{DoxyParamCaption}
+\item[{bool}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestAsyncTransport_a4cb8715289ca89050c75a9fd188877c0}
+
+
+Definition at line 118 of file Test\+Async\+Transport.\+h.
+
+
+\begin{DoxyCode}
+118 \{ \textcolor{keywordflow}{return}; \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!set\+Read\+CB@{set\+Read\+CB}}
+\index{set\+Read\+CB@{set\+Read\+CB}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{set\+Read\+C\+B(\+Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$callback) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::set\+Read\+CB (
+\begin{DoxyParamCaption}
+\item[{Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$}]{callback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a722134b0c4d823898a20ee916852dc00}
+
+
+Definition at line 180 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References proxygen\+::get\+Current\+Time(), k\+State\+Closed, k\+State\+Error, k\+State\+Open, next\+Read\+Event\+Time\+\_\+, read\+Callback\+\_\+, read\+Events\+\_\+, read\+State\+\_\+, schedule\+Next\+Read\+Event(), and proxygen\+::time\+Point\+Initialized().
+
+
+\begin{DoxyCode}
+180                                                                          \{
+181   \textcolor{keywordflow}{if} (readCallback_ == callback) \{
+182     \textcolor{keywordflow}{return};
+183   \}
+184 
+185   \textcolor{keywordflow}{if} (callback == \textcolor{keyword}{nullptr}) \{
+186     cancelTimeout();
+187     readCallback_ = \textcolor{keyword}{nullptr};
+188     \textcolor{keywordflow}{return};
+189   \}
+190 
+191   \textcolor{keywordtype}{bool} wasNull = (readCallback_ == \textcolor{keyword}{nullptr});
+192 
+193   \textcolor{keywordflow}{if} (readState_ == kStateClosed) \{
+194     callback->readEOF();
+195     \textcolor{keywordflow}{return};
+196   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (readState_ == kStateError) \{
+197     folly::AsyncSocketException ex(folly::AsyncSocketException::NOT\_OPEN,
+198                            \textcolor{stringliteral}{"setReadCB() called with socket in "}
+199                            \textcolor{stringliteral}{"invalid state"});
+200     callback->readErr(ex);
+201     \textcolor{keywordflow}{return};
+202   \}
+203 
+204   CHECK\_EQ(readState_, kStateOpen);
+205   readCallback_ = callback;
+206 
+207   \textcolor{comment}{// If the callback was previously nullptr, read events were paused, so we need}
+208   \textcolor{comment}{// to reschedule them now.}
+209   \textcolor{comment}{//}
+210   \textcolor{comment}{// If it was set before, read events are still scheduled, so we are done now}
+211   \textcolor{comment}{// and can return.}
+212   \textcolor{keywordflow}{if} (!wasNull) \{
+213     \textcolor{keywordflow}{return};
+214   \}
+215 
+216   \textcolor{keywordflow}{if} (!proxygen::timePointInitialized(nextReadEventTime_)) \{
+217     \textcolor{comment}{// Either readEvents\_ is empty, or startReadEvents() hasn't been called yet}
+218     \textcolor{keywordflow}{return};
+219   \}
+220   CHECK(!readEvents_.empty());
+221   scheduleNextReadEvent(proxygen::getCurrentTime());
+222 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!set\+Send\+Timeout@{set\+Send\+Timeout}}
+\index{set\+Send\+Timeout@{set\+Send\+Timeout}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{set\+Send\+Timeout(uint32\+\_\+t milliseconds) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::set\+Send\+Timeout (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{milliseconds}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a041100d0fb2312e72392ddb333b0401a}
+
+
+Definition at line 375 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References send\+Timeout\+\_\+.
+
+
+\begin{DoxyCode}
+375                                                         \{
+376   sendTimeout_ = milliseconds;
+377 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!shutdown\+Write@{shutdown\+Write}}
+\index{shutdown\+Write@{shutdown\+Write}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{shutdown\+Write() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::shutdown\+Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a7cf9eb6eb01e1eb836a48fa82c8b30fe}
+
+
+Definition at line 304 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References shutdown\+Write\+Now().
+
+
+\begin{DoxyCode}
+304                                   \{
+305   shutdownWriteNow();
+306 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!shutdown\+Write\+Now@{shutdown\+Write\+Now}}
+\index{shutdown\+Write\+Now@{shutdown\+Write\+Now}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{shutdown\+Write\+Now() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::shutdown\+Write\+Now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_aa7a845e5ee6f1330af32899dbbbf8583}
+
+
+Definition at line 309 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References fail\+Pending\+Writes(), k\+State\+Closed, k\+State\+Open, k\+State\+Paused, and write\+State\+\_\+.
+
+
+
+Referenced by close\+Now(), and shutdown\+Write().
+
+
+\begin{DoxyCode}
+309                                      \{
+310   DestructorGuard g(\textcolor{keyword}{this});
+311   failPendingWrites();
+312   \textcolor{keywordflow}{if} (writeState_ == kStateOpen ||
+313       writeState_ == kStatePaused) \{
+314     writeState_ = kStateClosed;
+315   \}
+316 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!start\+Read\+Events@{start\+Read\+Events}}
+\index{start\+Read\+Events@{start\+Read\+Events}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{start\+Read\+Events()}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::start\+Read\+Events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classTestAsyncTransport_a8af6a8fa921d4f81b4a2afc30bbe4f2f}
+
+
+Definition at line 491 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References proxygen\+::get\+Current\+Time(), next\+Read\+Event\+Time\+\_\+, prev\+Read\+Event\+Time\+\_\+, read\+Callback\+\_\+, read\+Events\+\_\+, and schedule\+Next\+Read\+Event().
+
+
+\begin{DoxyCode}
+491                                     \{
+492   \textcolor{keyword}{auto} now = proxygen::getCurrentTime();
+493   prevReadEventTime_ = now;
+494 
+495   \textcolor{keywordflow}{if} (readEvents_.empty()) \{
+496     \textcolor{keywordflow}{return};
+497   \}
+498   nextReadEventTime_ = prevReadEventTime_ + readEvents_.front()->getDelay();
+499 
+500   \textcolor{keywordflow}{if} (readCallback_ == \textcolor{keyword}{nullptr}) \{
+501     \textcolor{keywordflow}{return};
+502   \}
+503 
+504   scheduleNextReadEvent(now);
+505 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!timeout\+Expired@{timeout\+Expired}}
+\index{timeout\+Expired@{timeout\+Expired}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{timeout\+Expired() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::timeout\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classTestAsyncTransport_ad106680812a0483178d50efe54322691}
+
+
+Definition at line 636 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References fire\+Next\+Read\+Event(), read\+Callback\+\_\+, and read\+Events\+\_\+.
+
+
+
+Referenced by writes\+Allowed().
+
+
+\begin{DoxyCode}
+636                                             \{
+637   CHECK\_NOTNULL(readCallback_);
+638   CHECK(!readEvents_.empty());
+639   fireNextReadEvent();
+640 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!write@{write}}
+\index{write@{write}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{write(\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const void $\ast$buf, size\+\_\+t bytes, folly\+::\+Write\+Flags flags=folly\+::\+Write\+Flags\+::\+N\+O\+N\+E) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::write (
+\begin{DoxyParamCaption}
+\item[{Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{const void $\ast$}]{buf, }
+\item[{size\+\_\+t}]{bytes, }
+\item[{folly\+::\+Write\+Flags}]{flags = {\ttfamily folly\+:\+:WriteFlags\+:\+:NONE}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_a7f58ce08f7f55d3125c48e720f81be40}
+
+
+Definition at line 230 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References writev().
+
+
+\begin{DoxyCode}
+232                                             \{
+233   iovec op;
+234   op.iov\_base = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(buf);
+235   op.iov\_len = bytes;
+236   this->writev(callback, &op, 1, flags);
+237 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!write\+Chain@{write\+Chain}}
+\index{write\+Chain@{write\+Chain}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{write\+Chain(\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ \&\&iob, folly\+::\+Write\+Flags flags=folly\+::\+Write\+Flags\+::\+N\+O\+N\+E) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::write\+Chain (
+\begin{DoxyParamCaption}
+\item[{Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ \&\&}]{iob, }
+\item[{folly\+::\+Write\+Flags}]{flags = {\ttfamily folly\+:\+:WriteFlags\+:\+:NONE}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_ab2b26dbce2e7af5f91f793c766561882}
+
+
+Definition at line 268 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References writev().
+
+
+\begin{DoxyCode}
+270                                                  \{
+271   \textcolor{keywordtype}{size\_t} count = iob->countChainElements();
+272   iovec vec[count];
+273   \textcolor{keyword}{const} IOBuf* head = iob.get();
+274   \textcolor{keyword}{const} IOBuf* next = head;
+275   \textcolor{keywordtype}{unsigned} i = 0;
+276   \textcolor{keywordflow}{do} \{
+277     vec[i].iov\_base = \textcolor{keyword}{const\_cast<}uint8\_t *\textcolor{keyword}{>}(next->data());
+278     vec[i++].iov\_len = next->length();
+279     next = next->next();
+280   \} \textcolor{keywordflow}{while} (next != head);
+281   this->writev(callback, vec, count, flags);
+282 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!writes\+Allowed@{writes\+Allowed}}
+\index{writes\+Allowed@{writes\+Allowed}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{writes\+Allowed() const }]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Async\+Transport\+::writes\+Allowed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classTestAsyncTransport_a4915b6f8263ca9f095c3f7164552986b}
+
+
+Definition at line 130 of file Test\+Async\+Transport.\+h.
+
+
+
+References add\+Read\+Event(), fail\+Pending\+Writes(), fire\+Next\+Read\+Event(), fire\+One\+Read\+Event(), k\+State\+Open, k\+State\+Paused, operator=(), schedule\+Next\+Read\+Event(), Test\+Async\+Transport(), timeout\+Expired(), and write\+State\+\_\+.
+
+
+
+Referenced by good(), and writev().
+
+
+\begin{DoxyCode}
+130                              \{ \textcolor{keywordflow}{return} writeState_ == kStateOpen ||
+131       writeState_ == kStatePaused; \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!writev@{writev}}
+\index{writev@{writev}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{writev(\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const struct iovec $\ast$vec, size\+\_\+t count, folly\+::\+Write\+Flags flags=folly\+::\+Write\+Flags\+::\+N\+O\+N\+E) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::writev (
+\begin{DoxyParamCaption}
+\item[{Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{const struct iovec $\ast$}]{vec, }
+\item[{size\+\_\+t}]{count, }
+\item[{folly\+::\+Write\+Flags}]{flags = {\ttfamily folly\+:\+:WriteFlags\+:\+:NONE}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classTestAsyncTransport_add2349efc5d2a64e1a373145dc0c02f6}
+
+
+Definition at line 240 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References cork\+Count\+\_\+, eor\+Count\+\_\+, k\+State\+Open, k\+State\+Paused, Test\+Async\+Transport\+::\+Write\+Event\+::new\+Event(), pending\+Write\+Events\+\_\+, write\+Events\+\_\+, writes\+Allowed(), and write\+State\+\_\+.
+
+
+
+Referenced by write(), and write\+Chain().
+
+
+\begin{DoxyCode}
+242                                              \{
+243   \textcolor{keywordflow}{if} (isSet(flags, WriteFlags::CORK)) \{
+244     corkCount_++;
+245   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (isSet(flags, WriteFlags::EOR)) \{
+246     eorCount_++;
+247   \}
+248   \textcolor{keywordflow}{if} (!writesAllowed()) \{
+249     AsyncSocketException ex(AsyncSocketException::NOT\_OPEN,
+250                            \textcolor{stringliteral}{"write() called on non-open TestAsyncTransport"});
+251     \textcolor{keyword}{auto} cb = \textcolor{keyword}{dynamic\_cast<}WriteCallback*\textcolor{keyword}{>}(callback);
+252     DCHECK(cb);
+253     cb->writeErr(0, ex);
+254     \textcolor{keywordflow}{return};
+255   \}
+256 
+257   shared\_ptr<WriteEvent> \textcolor{keyword}{event} = WriteEvent::newEvent(vec, count);
+258   \textcolor{keywordflow}{if} (writeState_ == kStatePaused || pendingWriteEvents_.size() > 0)  \{
+259     pendingWriteEvents_.push\_back(std::make\_pair(event, callback));
+260   \} \textcolor{keywordflow}{else} \{
+261     CHECK\_EQ(writeState_, kStateOpen);
+262     writeEvents_.push\_back(event);
+263     callback->writeSuccess();
+264   \}
+265 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!cork\+Count\+\_\+@{cork\+Count\+\_\+}}
+\index{cork\+Count\+\_\+@{cork\+Count\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{cork\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Test\+Async\+Transport\+::cork\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a9a8e914efb90cdeb46f45a361f3b3b6d}
+
+
+Definition at line 160 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by get\+Cork\+Count(), and writev().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!eor\+Count\+\_\+@{eor\+Count\+\_\+}}
+\index{eor\+Count\+\_\+@{eor\+Count\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{eor\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Test\+Async\+Transport\+::eor\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a55b74950fe2aa4fc9ee68cd32b9c3b43}
+
+
+Definition at line 159 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by get\+E\+O\+R\+Count(), and writev().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!event\+Base\+\_\+@{event\+Base\+\_\+}}
+\index{event\+Base\+\_\+@{event\+Base\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{event\+Base\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Event\+Base$\ast$ Test\+Async\+Transport\+::event\+Base\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_ae04c4b0d1b7c498c579ae4f8d822c7cd}
+
+
+Definition at line 146 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by attach\+Event\+Base(), Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event(), detach\+Event\+Base(), fire\+Next\+Read\+Event(), and get\+Event\+Base().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!next\+Read\+Event\+Time\+\_\+@{next\+Read\+Event\+Time\+\_\+}}
+\index{next\+Read\+Event\+Time\+\_\+@{next\+Read\+Event\+Time\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{next\+Read\+Event\+Time\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+Time\+Point} Test\+Async\+Transport\+::next\+Read\+Event\+Time\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a5ade01589e08071a3425c6d5391a954d}
+
+
+Definition at line 151 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by add\+Read\+Error(), fire\+Next\+Read\+Event(), fire\+One\+Read\+Event(), schedule\+Next\+Read\+Event(), set\+Read\+C\+B(), and start\+Read\+Events().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!pending\+Write\+Events\+\_\+@{pending\+Write\+Events\+\_\+}}
+\index{pending\+Write\+Events\+\_\+@{pending\+Write\+Events\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{pending\+Write\+Events\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$ std\+::pair$<$std\+::shared\+\_\+ptr$<${\bf Write\+Event}$>$, Async\+Transport\+Wrapper\+::\+Write\+Callback$\ast$$>$ $>$ Test\+Async\+Transport\+::pending\+Write\+Events\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a6fdd9f307a5b68f33fd5b19a46805661}
+
+
+Definition at line 157 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by fail\+Pending\+Writes(), resume\+Writes(), and writev().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!prev\+Read\+Event\+Time\+\_\+@{prev\+Read\+Event\+Time\+\_\+}}
+\index{prev\+Read\+Event\+Time\+\_\+@{prev\+Read\+Event\+Time\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{prev\+Read\+Event\+Time\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+Time\+Point} Test\+Async\+Transport\+::prev\+Read\+Event\+Time\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a4b24c8a65caff1ad61f87636d0371a64}
+
+
+Definition at line 150 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by add\+Read\+Error(), fire\+One\+Read\+Event(), and start\+Read\+Events().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!read\+Callback\+\_\+@{read\+Callback\+\_\+}}
+\index{read\+Callback\+\_\+@{read\+Callback\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{read\+Callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback$\ast$ Test\+Async\+Transport\+::read\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a0fda776b1f7d17d58117109188de6776}
+
+
+Definition at line 147 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by add\+Read\+Error(), attach\+Event\+Base(), close\+Now(), Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event(), detach\+Event\+Base(), fire\+Next\+Read\+Event(), fire\+One\+Read\+Event(), get\+Read\+Callback(), set\+Read\+C\+B(), start\+Read\+Events(), and timeout\+Expired().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!read\+Events\+\_\+@{read\+Events\+\_\+}}
+\index{read\+Events\+\_\+@{read\+Events\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{read\+Events\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$ std\+::shared\+\_\+ptr$<${\bf Read\+Event}$>$ $>$ Test\+Async\+Transport\+::read\+Events\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a653392ae86c59b3f7d5c0327701ae7ab}
+
+
+Definition at line 154 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by add\+Read\+Error(), add\+Read\+Event(), Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event(), fire\+Next\+Read\+Event(), fire\+One\+Read\+Event(), set\+Read\+C\+B(), start\+Read\+Events(), and timeout\+Expired().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!read\+State\+\_\+@{read\+State\+\_\+}}
+\index{read\+State\+\_\+@{read\+State\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{read\+State\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Enum} Test\+Async\+Transport\+::read\+State\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_a5cfbe9ecf78aa32b30c12169741d0b91}
+
+
+Definition at line 152 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by close\+Now(), Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event(), error(), fire\+One\+Read\+Event(), good(), and set\+Read\+C\+B().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!send\+Timeout\+\_\+@{send\+Timeout\+\_\+}}
+\index{send\+Timeout\+\_\+@{send\+Timeout\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{send\+Timeout\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Test\+Async\+Transport\+::send\+Timeout\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_af83665d1d83f2cc5a37e349c75985780}
+
+
+Definition at line 148 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event(), get\+Send\+Timeout(), and set\+Send\+Timeout().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!write\+Events\+\_\+@{write\+Events\+\_\+}}
+\index{write\+Events\+\_\+@{write\+Events\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{write\+Events\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$ std\+::shared\+\_\+ptr$<${\bf Write\+Event}$>$ $>$ Test\+Async\+Transport\+::write\+Events\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_aa35af69247ce015d3e0f62d3ae438c96}
+
+
+Definition at line 155 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by get\+Write\+Events(), resume\+Writes(), and writev().
+
+\index{Test\+Async\+Transport@{Test\+Async\+Transport}!write\+State\+\_\+@{write\+State\+\_\+}}
+\index{write\+State\+\_\+@{write\+State\+\_\+}!Test\+Async\+Transport@{Test\+Async\+Transport}}
+\subsubsection[{write\+State\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Enum} Test\+Async\+Transport\+::write\+State\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_ab2fcfdfed39ccd4f68c4e0496ecca4da}
+
+
+Definition at line 153 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event(), error(), fire\+One\+Read\+Event(), pause\+Writes(), resume\+Writes(), shutdown\+Write\+Now(), writes\+Allowed(), and writev().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/test/{\bf Test\+Async\+Transport.\+h}\item 
+proxygen/lib/test/{\bf Test\+Async\+Transport.\+cpp}\end{DoxyCompactItemize}

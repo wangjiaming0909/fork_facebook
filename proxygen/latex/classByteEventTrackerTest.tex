@@ -1,0 +1,150 @@
+\section{Byte\+Event\+Tracker\+Test Class Reference}
+\label{classByteEventTrackerTest}\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+Inheritance diagram for Byte\+Event\+Tracker\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classByteEventTrackerTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Set\+Up} () override
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+Event\+Base {\bf event\+Base\+\_\+}
+\item 
+{\bf Wheel\+Timer\+Instance} {\bf transaction\+Timeouts\+\_\+}
+\item 
+Nice\+Mock$<$ {\bf Mock\+H\+T\+T\+P\+Transaction\+Transport} $>$ {\bf transport\+\_\+}
+\item 
+Strict\+Mock$<$ {\bf Mock\+H\+T\+T\+P\+Handler} $>$ {\bf handler\+\_\+}
+\item 
+{\bf H\+T\+T\+P2\+Priority\+Queue} {\bf txn\+Egress\+Queue\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Transaction} {\bf txn\+\_\+}
+\item 
+{\bf Mock\+H\+T\+T\+P\+Transaction\+Transport\+Callback} {\bf transport\+Callback\+\_\+}
+\item 
+{\bf Mock\+Byte\+Event\+Tracker\+Callback} {\bf callback\+\_\+}
+\item 
+std\+::shared\+\_\+ptr$<$ {\bf Byte\+Event\+Tracker} $>$ {\bf byte\+Event\+Tracker\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 31 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{Set\+Up() override}]{\setlength{\rightskip}{0pt plus 5cm}void Byte\+Event\+Tracker\+Test\+::\+Set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classByteEventTrackerTest_a5517d78c03c7d3d587d5fdcf6094d9b5}
+
+
+Definition at line 34 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+34                         \{
+35     txn_.setTransportCallback(&transportCallback_);
+36   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!byte\+Event\+Tracker\+\_\+@{byte\+Event\+Tracker\+\_\+}}
+\index{byte\+Event\+Tracker\+\_\+@{byte\+Event\+Tracker\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{byte\+Event\+Tracker\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf Byte\+Event\+Tracker}$>$ Byte\+Event\+Tracker\+Test\+::byte\+Event\+Tracker\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_a207e905ea8f6ae94c217d577ec64fc59}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    \textcolor{keyword}{new} ByteEventTracker(&callback_)\}
+\end{DoxyCode}
+
+
+Definition at line 52 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!callback\+\_\+@{callback\+\_\+}}
+\index{callback\+\_\+@{callback\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mock\+Byte\+Event\+Tracker\+Callback} Byte\+Event\+Tracker\+Test\+::callback\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_a5d21bf7da10e433def8a600b1f107189}
+
+
+Definition at line 51 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!event\+Base\+\_\+@{event\+Base\+\_\+}}
+\index{event\+Base\+\_\+@{event\+Base\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{event\+Base\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Event\+Base Byte\+Event\+Tracker\+Test\+::event\+Base\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_a08a0b259562be8f85573ca39bac5fc67}
+
+
+Definition at line 39 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!handler\+\_\+@{handler\+\_\+}}
+\index{handler\+\_\+@{handler\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{handler\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Strict\+Mock$<${\bf Mock\+H\+T\+T\+P\+Handler}$>$ Byte\+Event\+Tracker\+Test\+::handler\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_afa3e5b3068f14f2b2e308bcd9e2b73e7}
+
+
+Definition at line 43 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!transaction\+Timeouts\+\_\+@{transaction\+Timeouts\+\_\+}}
+\index{transaction\+Timeouts\+\_\+@{transaction\+Timeouts\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{transaction\+Timeouts\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Wheel\+Timer\+Instance} Byte\+Event\+Tracker\+Test\+::transaction\+Timeouts\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_a6dbf6cabdc76968395daa871c96fa519}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{std::chrono::milliseconds(500),
+      &eventBase_\}
+\end{DoxyCode}
+
+
+Definition at line 40 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!transport\+\_\+@{transport\+\_\+}}
+\index{transport\+\_\+@{transport\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{transport\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Nice\+Mock$<${\bf Mock\+H\+T\+T\+P\+Transaction\+Transport}$>$ Byte\+Event\+Tracker\+Test\+::transport\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_a5b7d70dbb9aa4ce97f2bd0f2dc102571}
+
+
+Definition at line 42 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!transport\+Callback\+\_\+@{transport\+Callback\+\_\+}}
+\index{transport\+Callback\+\_\+@{transport\+Callback\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{transport\+Callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mock\+H\+T\+T\+P\+Transaction\+Transport\+Callback} Byte\+Event\+Tracker\+Test\+::transport\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_a29bbc40f55eed805ac63dd413126c9f9}
+
+
+Definition at line 50 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!txn\+\_\+@{txn\+\_\+}}
+\index{txn\+\_\+@{txn\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{txn\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction} Byte\+Event\+Tracker\+Test\+::txn\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_ab771899d98eda449aa48a53656b34f3f}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    TransportDirection::DOWNSTREAM,
+      HTTPCodec::StreamID(1), 1, transport_,
+      txnEgressQueue_, transactionTimeouts_.getWheelTimer(),
+      transactionTimeouts_.getDefaultTimeout()\}
+\end{DoxyCode}
+
+
+Definition at line 45 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+\index{Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}!txn\+Egress\+Queue\+\_\+@{txn\+Egress\+Queue\+\_\+}}
+\index{txn\+Egress\+Queue\+\_\+@{txn\+Egress\+Queue\+\_\+}!Byte\+Event\+Tracker\+Test@{Byte\+Event\+Tracker\+Test}}
+\subsubsection[{txn\+Egress\+Queue\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P2\+Priority\+Queue} Byte\+Event\+Tracker\+Test\+::txn\+Egress\+Queue\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classByteEventTrackerTest_a035ebc82fae6cc2aabcd6f3dd0184b76}
+
+
+Definition at line 44 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf Byte\+Event\+Tracker\+Test.\+cpp}\end{DoxyCompactItemize}

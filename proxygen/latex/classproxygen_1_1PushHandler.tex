@@ -1,0 +1,247 @@
+\section{proxygen\+:\+:Push\+Handler Class Reference}
+\label{classproxygen_1_1PushHandler}\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+
+
+{\ttfamily \#include $<$Push\+Handler.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Push\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1PushHandler}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Inner\+Push\+Handler}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Push\+Handler} ()
+\item 
+void {\bf request\+Complete} () noexceptoverride
+\item 
+void {\bf on\+Error} ({\bf Proxygen\+Error}) noexceptoverride
+\item 
+{\bf H\+T\+T\+P\+Push\+Transaction\+Handler} $\ast$ {\bf get\+Handler} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf on\+Request} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$) noexceptoverride
+\item 
+void {\bf on\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$) noexceptoverride
+\item 
+void {\bf on\+Upgrade} ({\bf proxygen\+::\+Upgrade\+Protocol}) noexceptoverride
+\item 
+void {\bf on\+E\+OM} () noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Inner\+Push\+Handler} {\bf inner\+Handler\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file Push\+Handler.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!Push\+Handler@{Push\+Handler}}
+\index{Push\+Handler@{Push\+Handler}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{Push\+Handler()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Push\+Handler\+::\+Push\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1PushHandler_a670ed91cfccfd95123339dda21a5980a}
+
+
+Definition at line 19 of file Push\+Handler.\+h.
+
+
+\begin{DoxyCode}
+20     : innerHandler_(*\textcolor{keyword}{this}) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!get\+Handler@{get\+Handler}}
+\index{get\+Handler@{get\+Handler}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{get\+Handler()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Push\+Transaction\+Handler}$\ast$ proxygen\+::\+Push\+Handler\+::get\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1PushHandler_aee1f11fa55c0a2a8df35826af99d1b4f}
+
+
+Definition at line 26 of file Push\+Handler.\+h.
+
+
+
+References inner\+Handler\+\_\+.
+
+
+\begin{DoxyCode}
+26                                            \{
+27     \textcolor{keywordflow}{return} &innerHandler_;
+28   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{on\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Push\+Handler\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PushHandler_a79971ad1fce3791773138e70862aa3cb}
+Invoked when we get part of body for the request. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aaf0ed3bb94384e6240e15cca63de82bb}.
+
+
+
+Definition at line 56 of file Push\+Handler.\+h.
+
+
+\begin{DoxyCode}
+56                                                              \{
+57     LOG(FATAL) << \textcolor{stringliteral}{"Unreachable"};
+58   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!on\+E\+OM@{on\+E\+OM}}
+\index{on\+E\+OM@{on\+E\+OM}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{on\+E\+O\+M() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Push\+Handler\+::on\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PushHandler_acdbd7fae5e799fdf5913537b19884670}
+Invoked when we finish receiving the body. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a24f26d2cf71effaf154ce53aeff51aab}.
+
+
+
+Definition at line 64 of file Push\+Handler.\+h.
+
+
+\begin{DoxyCode}
+64                                  \{
+65     LOG(FATAL) << \textcolor{stringliteral}{"Unreachable"};
+66   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{on\+Error(\+Proxygen\+Error) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Push\+Handler\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf Proxygen\+Error}}]{err}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PushHandler_a582c924ce49343c9000e041433450421}
+Request failed. Maybe because of read/write error on socket or client not being able to send request in time.
+
+N\+O\+TE\+: Can be invoked at any time (except for before on\+Request).
+
+No more callbacks will be invoked after this. You should clean up after yourself. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_ad7e6428b925840a334adc58ff6f4f680}.
+
+
+
+Definition at line 24 of file Push\+Handler.\+h.
+
+
+
+Referenced by proxygen\+::\+Push\+Handler\+::\+Inner\+Push\+Handler\+::on\+Error().
+
+
+\begin{DoxyCode}
+24 \{ \textcolor{keyword}{delete} \textcolor{keyword}{this}; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{on\+Request(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Push\+Handler\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{headers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PushHandler_a24a98a912f7621e58308b05838de6755}
+Invoked when we have successfully fetched headers from client. This will always be the first callback invoked on your handler. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a61f59e1155f906c7b73062147164320f}.
+
+
+
+Definition at line 52 of file Push\+Handler.\+h.
+
+
+\begin{DoxyCode}
+52                                                                  \{
+53     LOG(FATAL) << \textcolor{stringliteral}{"Unreachable"};
+54   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!on\+Upgrade@{on\+Upgrade}}
+\index{on\+Upgrade@{on\+Upgrade}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{on\+Upgrade(proxygen\+::\+Upgrade\+Protocol) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Push\+Handler\+::on\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Upgrade\+Protocol}}]{prot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PushHandler_adaa48462f3850e1289266eaf3da5c736}
+Invoked when the session has been upgraded to a different protocol 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aefed2946bc5558baf6e36a2d11290b79}.
+
+
+
+Definition at line 60 of file Push\+Handler.\+h.
+
+
+\begin{DoxyCode}
+60                                                               \{
+61     LOG(FATAL) << \textcolor{stringliteral}{"Unreachable"};
+62   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!request\+Complete@{request\+Complete}}
+\index{request\+Complete@{request\+Complete}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{request\+Complete() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Push\+Handler\+::request\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PushHandler_a0400a142f37b40246a3ac21b4125b8fd}
+Invoked when request processing has been completed and nothing more needs to be done. This may be a good place to log some stats and clean up resources. This is distinct from \doxyref{on\+E\+O\+M()}{p.}{classproxygen_1_1PushHandler_acdbd7fae5e799fdf5913537b19884670} because it is invoked after the response is fully sent. Once this callback has been received, {\ttfamily downstream\+\_\+} should be considered invalid. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a0ec159751b407bcd3667994c6d8d7cfe}.
+
+
+
+Definition at line 23 of file Push\+Handler.\+h.
+
+
+
+Referenced by proxygen\+::\+Push\+Handler\+::\+Inner\+Push\+Handler\+::detach\+Transaction().
+
+
+\begin{DoxyCode}
+23 \{ \textcolor{keyword}{delete} \textcolor{keyword}{this}; \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}!inner\+Handler\+\_\+@{inner\+Handler\+\_\+}}
+\index{inner\+Handler\+\_\+@{inner\+Handler\+\_\+}!proxygen\+::\+Push\+Handler@{proxygen\+::\+Push\+Handler}}
+\subsubsection[{inner\+Handler\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Inner\+Push\+Handler} proxygen\+::\+Push\+Handler\+::inner\+Handler\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1PushHandler_ab53085667eba237b903506fe1b138d15}
+
+
+Definition at line 68 of file Push\+Handler.\+h.
+
+
+
+Referenced by get\+Handler().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/{\bf Push\+Handler.\+h}\end{DoxyCompactItemize}

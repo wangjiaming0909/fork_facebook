@@ -1,0 +1,398 @@
+\section{proxygen\+:\+:Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$ Class Template Reference}
+\label{classproxygen_1_1GenericFilter}\index{proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$@{proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$}}
+
+
+{\ttfamily \#include $<$Filter\+Chain.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.769231cm]{classproxygen_1_1GenericFilter}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Filter} = {\bf Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Generic\+Filter} (bool calls, bool callbacks)
+\item 
+{\bf $\sim$\+Generic\+Filter} () override
+\item 
+void {\bf append} ({\bf Filter} $\ast$next\+Filter)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const bool {\bf k\+Wants\+Calls\+\_\+}
+\item 
+const bool {\bf k\+Wants\+Callbacks\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf set\+Callback\+Internal} (T2 $\ast$cb)
+\item 
+void {\bf drop} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T1 $\ast$ {\bf call\+\_\+} \{{\bf nullptr}\}
+\item 
+T2 $\ast$ {\bf callback\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf set\+Callback\+Internal\+Impl} (T2 $\ast$cb, T2 $\ast$source\+Set)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Filter} $\ast$ {\bf next\+\_\+} \{{\bf nullptr}\}
+\item 
+{\bf Filter} $\ast$ {\bf prev\+\_\+} \{{\bf nullptr}\}
+\item 
+{\bf Filter} $\ast$ {\bf call\+Source\+\_\+} \{{\bf nullptr}\}
+\item 
+T1 $\ast$ {\bf callback\+Source\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class A , class B , class F , void(\+A\+::$\ast$)(\+B $\ast$) fn, bool Own$>$ }\\class {\bf Filter\+Chain}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$\\*
+class proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$}
+
+A generic two-\/way filter. That is, this filter intercepts calls from an object A to some object B on an interface T1. It also intercepts calls from B to A on an interface T2.
+
+Subclass \doxyref{Generic\+Filter}{p.}{classproxygen_1_1GenericFilter} templatized on the appropriate interfaces to intercept calls between T1 and T2.
+
+T2 must have the ability to tell T1 to call it back using a certain object. Many different callback patterns have a different name for this function, but this filter needs to be informed when the callback object changes. Therefore, when you subclass this object, you must call
+
+void \doxyref{set\+Callback\+Internal(\+T2$\ast$)}{p.}{classproxygen_1_1GenericFilter_a5ffa361695d72c2d93ccd762d1a072c7};
+
+from the appropriate virtual function and not forward that function call along the chain, or the filter will not work and may have errors! 
+
+Definition at line 40 of file Filter\+Chain.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!Filter@{Filter}}
+\index{Filter@{Filter}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{Filter}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ using {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::{\bf Filter} =  {\bf Generic\+Filter}$<$T1, T2, set\+\_\+callback, Take\+Ownership, Dp$>$}\label{classproxygen_1_1GenericFilter_a389d3bbe1cc982d293812386191da67e}
+
+
+Definition at line 42 of file Filter\+Chain.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!Generic\+Filter@{Generic\+Filter}}
+\index{Generic\+Filter@{Generic\+Filter}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{Generic\+Filter(bool calls, bool callbacks)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::{\bf Generic\+Filter} (
+\begin{DoxyParamCaption}
+\item[{bool}]{calls, }
+\item[{bool}]{callbacks}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1GenericFilter_a84f317808c140aee6e5c61cd08cc2462}
+
+\begin{DoxyParams}{Parameters}
+{\em calls} & You will intercept calls to T1 interface iff you pass true for this parameter. \\
+\hline
+{\em callbacks} & You will intercept calls to T2 interface iff you pass true for this parameter. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file Filter\+Chain.\+h.
+
+
+\begin{DoxyCode}
+49                                            :
+50       kWantsCalls_(calls),
+51       kWantsCallbacks_(callbacks) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!````~Generic\+Filter@{$\sim$\+Generic\+Filter}}
+\index{````~Generic\+Filter@{$\sim$\+Generic\+Filter}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{$\sim$\+Generic\+Filter() override}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::$\sim${\bf Generic\+Filter} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classproxygen_1_1GenericFilter_ac735a06aa304a9af961cde1fed669d9e}
+
+
+Definition at line 53 of file Filter\+Chain.\+h.
+
+
+\begin{DoxyCode}
+53                             \{
+54     \textcolor{keywordflow}{if} (TakeOwnership) \{
+55       callbackSource_ = \textcolor{keyword}{nullptr};
+56     \}
+57     \textcolor{comment}{// For the last filter in the chain, next\_ is null, and call\_ points}
+58     \textcolor{comment}{// to the concrete implementation object.}
+59     \textcolor{keyword}{auto} next = next_ ? next_ : call_;
+60     drop();
+61     \textcolor{keywordflow}{if} (TakeOwnership && next) \{
+62       Dp()(next);
+63     \}
+64   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!append@{append}}
+\index{append@{append}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{append(\+Filter $\ast$next\+Filter)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ void {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::append (
+\begin{DoxyParamCaption}
+\item[{{\bf Filter} $\ast$}]{next\+Filter}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1GenericFilter_a5ace1a9c6b836f9c47e9a5ffcda41d1d}
+
+\begin{DoxyParams}{Parameters}
+{\em next\+Filter} & the new filter to insert after this filter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 69 of file Filter\+Chain.\+h.
+
+
+\begin{DoxyCode}
+69                                   \{
+70     nextFilter->next\_ = next_;
+71     nextFilter->prev_ = \textcolor{keyword}{this};
+72     nextFilter->call_ = call_;
+73     nextFilter->callback\_ = kWantsCallbacks_ ? \textcolor{keyword}{this} : callback_;
+74     nextFilter->callSource\_ = kWantsCalls_ ? \textcolor{keyword}{this} : callSource_;
+75     nextFilter->callbackSource_ = callbackSource_;
+76     \textcolor{keywordflow}{if} (next_) \{
+77       next_->prev_ = nextFilter;
+78     \}
+79 
+80     \textcolor{keywordflow}{if} (nextFilter->kWantsCalls\_) \{
+81       \textcolor{keywordflow}{if} (kWantsCalls_) \{
+82         call_ = nextFilter;
+83       \} \textcolor{keywordflow}{else} \{
+84         callSource_->call_ = nextFilter;
+85       \}
+86       \textcolor{keywordflow}{if} (next_) \{
+87         next_->callSource_ = nextFilter;
+88       \}
+89     \}
+90     \textcolor{keywordflow}{if} (nextFilter->kWantsCallbacks\_) \{
+91       \textcolor{comment}{// Find the first filter before this one that wants callbacks}
+92       \textcolor{keyword}{auto} cur = \textcolor{keyword}{this};
+93       \textcolor{keywordflow}{while} (cur->prev\_ && !cur->kWantsCallbacks\_) \{
+94         cur = cur->prev_;
+95       \}
+96       cur->callbackSource_ = nextFilter;
+97       \textcolor{comment}{// Make sure nextFilter gets callbacks}
+98       ((nextFilter->callbackSource\_)->*(set\_callback))(nextFilter);
+99     \}
+100     next_ = nextFilter;
+101   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!drop@{drop}}
+\index{drop@{drop}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{drop()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ void {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::drop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1GenericFilter_a58cd678895ea4703cc87cded78e9d4c6}
+Removes this filter from the chain. For owning chains the caller must manually delete the filter 
+
+Definition at line 119 of file Filter\+Chain.\+h.
+
+
+\begin{DoxyCode}
+119               \{
+120     \textcolor{keywordflow}{if} (prev_) \{
+121       prev_->next_ = next_;
+122     \}
+123     \textcolor{keywordflow}{if} (next_) \{
+124       next_->prev_ = prev_;
+125     \}
+126     \textcolor{comment}{// TODO: could call fn gated by std::enable\_if}
+127     \textcolor{keywordflow}{if} (kWantsCalls_ && callSource_) \{
+128       callSource_->call_ = call_;
+129       \textcolor{keywordflow}{if} (call_) \{
+130         \textcolor{keyword}{auto} callFilter = \textcolor{keyword}{dynamic\_cast<}Filter*\textcolor{keyword}{>}(call_);
+131         \textcolor{keywordflow}{if} (callFilter) \{
+132           callFilter->callSource\_ = callSource_;
+133         \}
+134       \}
+135     \}
+136     \textcolor{comment}{// TODO: could call fn gated by std::enable\_if}
+137     \textcolor{keywordflow}{if} (kWantsCallbacks_ && callbackSource_) \{
+138       ((callbackSource_)->*(set\_callback))(callback_);
+139       \textcolor{keywordflow}{if} (callback_) \{
+140         \textcolor{keyword}{auto} callbackFilter = \textcolor{keyword}{dynamic\_cast<}Filter*\textcolor{keyword}{>}(callback_);
+141         \textcolor{keywordflow}{if} (callbackFilter) \{
+142           callbackFilter->callbackSource\_ = callbackSource_;
+143         \}
+144       \}
+145     \}
+146     call_ = callbackSource_ = \textcolor{keyword}{nullptr};
+147     callback_ = \textcolor{keyword}{nullptr};
+148     callSource_ = next_ = prev_ = \textcolor{keyword}{nullptr};
+149   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!set\+Callback\+Internal@{set\+Callback\+Internal}}
+\index{set\+Callback\+Internal@{set\+Callback\+Internal}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{set\+Callback\+Internal(\+T2 $\ast$cb)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ void {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::set\+Callback\+Internal (
+\begin{DoxyParamCaption}
+\item[{T2 $\ast$}]{cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1GenericFilter_a5ffa361695d72c2d93ccd762d1a072c7}
+Note\+: you M\+U\+ST override the set\+\_\+callback function and call \doxyref{set\+Callback\+Internal()}{p.}{classproxygen_1_1GenericFilter_a5ffa361695d72c2d93ccd762d1a072c7} from your derived class. 
+
+Definition at line 111 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::set\+Callback().
+
+
+\begin{DoxyCode}
+111                                    \{
+112     setCallbackInternalImpl(cb, \textcolor{keyword}{this});
+113   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!set\+Callback\+Internal\+Impl@{set\+Callback\+Internal\+Impl}}
+\index{set\+Callback\+Internal\+Impl@{set\+Callback\+Internal\+Impl}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{set\+Callback\+Internal\+Impl(\+T2 $\ast$cb, T2 $\ast$source\+Set)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ void {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::set\+Callback\+Internal\+Impl (
+\begin{DoxyParamCaption}
+\item[{T2 $\ast$}]{cb, }
+\item[{T2 $\ast$}]{source\+Set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classproxygen_1_1GenericFilter_a9e1df9cbd76eed567e7103d23a108e6a}
+
+
+Definition at line 158 of file Filter\+Chain.\+h.
+
+
+\begin{DoxyCode}
+158                                                       \{
+159     \textcolor{keywordflow}{if} (callback_ != cb) \{
+160       callback_ = cb;
+161       ((callbackSource_)->*(set\_callback))(cb ? sourceSet : \textcolor{keyword}{nullptr});
+162     \}
+163   \}
+\end{DoxyCode}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!Filter\+Chain@{Filter\+Chain}}
+\index{Filter\+Chain@{Filter\+Chain}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{Filter\+Chain}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ template$<$class A , class B , class F , void(\+A\+::$\ast$)(\+B $\ast$) fn, bool Own$>$ friend class {\bf Filter\+Chain}\hspace{0.3cm}{\ttfamily [friend]}}\label{classproxygen_1_1GenericFilter_a95c29b20c364e8ebbb6c546ecff2a6b2}
+
+
+Definition at line 177 of file Filter\+Chain.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!call\+\_\+@{call\+\_\+}}
+\index{call\+\_\+@{call\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{call\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ T1$\ast$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1GenericFilter_a5aa6e457a5679089f5ae167d87e64cc9}
+
+
+Definition at line 152 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::add\+Priority\+Nodes(), proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::close\+On\+Egress\+Complete(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::create\+Stream(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::enable\+Double\+Goaway\+Drain(), proxygen\+::\+Flow\+Control\+Filter\+::generate\+Body(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Body(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Certificate(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Certificate\+Request(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Chunk\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Chunk\+Terminator(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Connection\+Preface(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+E\+O\+M(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Ex\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Goaway(), proxygen\+::\+H\+T\+T\+P\+Checks\+::generate\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Ping\+Reply(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Ping\+Request(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Priority(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Push\+Promise(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Rst\+Stream(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Settings(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Settings\+Ack(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Trailers(), proxygen\+::\+Flow\+Control\+Filter\+::generate\+Window\+Update(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::generate\+Window\+Update(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Compression\+Info(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Default\+Window\+Size(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Egress\+Settings(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Ingress\+Settings(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Last\+Incoming\+Stream\+I\+D(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Protocol(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Transport\+Direction(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+User\+Agent(), proxygen\+::\+Flow\+Control\+Filter\+::ingress\+Bytes\+Processed(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::is\+Busy(), proxygen\+::\+Flow\+Control\+Filter\+::is\+Reusable(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::is\+Reusable(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::is\+Waiting\+To\+Drain(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::map\+Dependency\+To\+Priority(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::map\+Priority\+To\+Dependency(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Frame\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Ingress(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Ingress\+E\+O\+F(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Ingress\+Upgrade\+Message(), proxygen\+::\+Filter\+Chain$<$ H\+T\+T\+P\+Codec, H\+T\+T\+P\+Codec\+::\+Callback, Pass\+Through\+H\+T\+T\+P\+Codec\+Filter,\&\+H\+T\+T\+P\+Codec\+::set\+Callback, true $>$\+::set\+Destination(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::set\+Header\+Codec\+Stats(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::set\+Parser\+Paused(), proxygen\+::\+Flow\+Control\+Filter\+::set\+Receive\+Window\+Size(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::supports\+Parallel\+Requests(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::supports\+Push\+Transactions(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::supports\+Session\+Flow\+Control(), and proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::supports\+Stream\+Flow\+Control().
+
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!callback\+\_\+@{callback\+\_\+}}
+\index{callback\+\_\+@{callback\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ T2$\ast$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::callback\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1GenericFilter_a220493bfd47fb9557b93c5ce9389adc7}
+
+
+Definition at line 154 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::num\+Incoming\+Streams(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::num\+Outgoing\+Streams(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Abort(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Abort(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Body(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Body(), proxygen\+::\+Flow\+Control\+Filter\+::on\+Body(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Certificate(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Certificate\+Request(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Chunk\+Complete(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Chunk\+Header(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Error(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Error(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Ex\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Frame\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Frame\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Generate\+Frame\+Header(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Goaway(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Goaway(), proxygen\+::\+H\+T\+T\+P\+Checks\+::on\+Headers\+Complete(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Headers\+Complete(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Message\+Complete(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Message\+Complete(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Native\+Protocol\+Upgrade(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Ping\+Reply(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Ping\+Reply(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Ping\+Request(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Ping\+Request(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Priority(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Push\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Settings(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Settings(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Settings\+Ack(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Settings\+Ack(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Trailers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Codec\+Printer\+::on\+Window\+Update(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::on\+Window\+Update(), and proxygen\+::\+Flow\+Control\+Filter\+::on\+Window\+Update().
+
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!callback\+Source\+\_\+@{callback\+Source\+\_\+}}
+\index{callback\+Source\+\_\+@{callback\+Source\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{callback\+Source\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ T1$\ast$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::callback\+Source\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GenericFilter_a2fb8d99f9d9e9d0ed2e8722edba98285}
+
+
+Definition at line 174 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append(), proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::drop(), and proxygen\+::\+Filter\+Chain$<$ H\+T\+T\+P\+Codec, H\+T\+T\+P\+Codec\+::\+Callback, Pass\+Through\+H\+T\+T\+P\+Codec\+Filter,\&\+H\+T\+T\+P\+Codec\+::set\+Callback, true $>$\+::set\+Destination().
+
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!call\+Source\+\_\+@{call\+Source\+\_\+}}
+\index{call\+Source\+\_\+@{call\+Source\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{call\+Source\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ {\bf Filter}$\ast$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+Source\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GenericFilter_ab7c3f69b09585ac6b25ad3a4515d1bef}
+
+
+Definition at line 171 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append(), and proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::drop().
+
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!k\+Wants\+Callbacks\+\_\+@{k\+Wants\+Callbacks\+\_\+}}
+\index{k\+Wants\+Callbacks\+\_\+@{k\+Wants\+Callbacks\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{k\+Wants\+Callbacks\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ const bool {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::k\+Wants\+Callbacks\+\_\+}\label{classproxygen_1_1GenericFilter_a6c3532dbdc77a23c87ea57618f398130}
+
+
+Definition at line 104 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append(), and proxygen\+::\+Filter\+Chain$<$ H\+T\+T\+P\+Codec, H\+T\+T\+P\+Codec\+::\+Callback, Pass\+Through\+H\+T\+T\+P\+Codec\+Filter,\&\+H\+T\+T\+P\+Codec\+::set\+Callback, true $>$\+::set\+Destination().
+
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!k\+Wants\+Calls\+\_\+@{k\+Wants\+Calls\+\_\+}}
+\index{k\+Wants\+Calls\+\_\+@{k\+Wants\+Calls\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{k\+Wants\+Calls\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ const bool {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::k\+Wants\+Calls\+\_\+}\label{classproxygen_1_1GenericFilter_ab0bcf0b3db5befb74a31a255f0ed78a3}
+
+
+Definition at line 103 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append(), and proxygen\+::\+Filter\+Chain$<$ H\+T\+T\+P\+Codec, H\+T\+T\+P\+Codec\+::\+Callback, Pass\+Through\+H\+T\+T\+P\+Codec\+Filter,\&\+H\+T\+T\+P\+Codec\+::set\+Callback, true $>$\+::set\+Destination().
+
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!next\+\_\+@{next\+\_\+}}
+\index{next\+\_\+@{next\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{next\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ {\bf Filter}$\ast$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::next\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GenericFilter_a3c357bc09758a6b0f091ceb059cf3dcc}
+
+
+Definition at line 166 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append(), and proxygen\+::\+Filter\+Chain$<$ H\+T\+T\+P\+Codec, H\+T\+T\+P\+Codec\+::\+Callback, Pass\+Through\+H\+T\+T\+P\+Codec\+Filter,\&\+H\+T\+T\+P\+Codec\+::set\+Callback, true $>$\+::set\+Destination().
+
+\index{proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}!prev\+\_\+@{prev\+\_\+}}
+\index{prev\+\_\+@{prev\+\_\+}!proxygen\+::\+Generic\+Filter@{proxygen\+::\+Generic\+Filter}}
+\subsubsection[{prev\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1, typename T2, void(\+T1\+::$\ast$)(\+T2 $\ast$) set\+\_\+callback, bool Take\+Ownership, typename Dp = std\+::default\+\_\+delete$<$\+T1$>$$>$ {\bf Filter}$\ast$ {\bf proxygen\+::\+Generic\+Filter}$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::prev\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GenericFilter_a7754951315e1d98be092785991500685}
+
+
+Definition at line 168 of file Filter\+Chain.\+h.
+
+
+
+Referenced by proxygen\+::\+Generic\+Filter$<$ Tester\+Interface, Tester\+Interface\+::\+Callback,\&\+Tester\+Interface\+::set\+Callback, Owned $>$\+::append().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Filter\+Chain.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,161 @@
+\section{proxygen\+:\+:Structured\+Headers\+:\+:Structured\+Header\+Item Class Reference}
+\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem}\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}
+
+
+{\ttfamily \#include $<$Structured\+Headers\+Constants.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Type} \{ \\*
+{\bf Type\+::\+N\+O\+NE}, 
+{\bf Type\+::\+S\+T\+R\+I\+NG}, 
+{\bf Type\+::\+B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT}, 
+{\bf Type\+::\+I\+D\+E\+N\+T\+I\+F\+I\+ER}, 
+\\*
+{\bf Type\+::\+D\+O\+U\+B\+LE}, 
+{\bf Type\+::\+I\+N\+T64}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool {\bf operator!=} (const {\bf T} \&other) const 
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool {\bf operator==} (const {\bf T} \&other) const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Type} {\bf tag}
+\item 
+boost\+::variant$<$ int64\+\_\+t, double, std\+::string $>$ {\bf value}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 24 of file Structured\+Headers\+Constants.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!Type@{Type}}
+\index{Type@{Type}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}
+\subsubsection[{Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+Type}\hspace{0.3cm}{\ttfamily [strong]}}\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1755ce8c9f3cd2be76cc56c14c7055d9}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+O\+NE@{N\+O\+NE}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!N\+O\+NE@{N\+O\+NE}}\item[{\em 
+N\+O\+NE\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1755ce8c9f3cd2be76cc56c14c7055d9ab50339a10e1de285ac99d4c3990b8693}
+}]\index{S\+T\+R\+I\+NG@{S\+T\+R\+I\+NG}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!S\+T\+R\+I\+NG@{S\+T\+R\+I\+NG}}\item[{\em 
+S\+T\+R\+I\+NG\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1755ce8c9f3cd2be76cc56c14c7055d9a63b588d5559f64f89a416e656880b949}
+}]\index{B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT@{B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT@{B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT}}\item[{\em 
+B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1755ce8c9f3cd2be76cc56c14c7055d9a3509f59bb1e74146b6758051b16ec906}
+}]\index{I\+D\+E\+N\+T\+I\+F\+I\+ER@{I\+D\+E\+N\+T\+I\+F\+I\+ER}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!I\+D\+E\+N\+T\+I\+F\+I\+ER@{I\+D\+E\+N\+T\+I\+F\+I\+ER}}\item[{\em 
+I\+D\+E\+N\+T\+I\+F\+I\+ER\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1755ce8c9f3cd2be76cc56c14c7055d9a6fcc416051346daca31c571646af127a}
+}]\index{D\+O\+U\+B\+LE@{D\+O\+U\+B\+LE}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!D\+O\+U\+B\+LE@{D\+O\+U\+B\+LE}}\item[{\em 
+D\+O\+U\+B\+LE\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1755ce8c9f3cd2be76cc56c14c7055d9afd3e4ece78a7d422280d5ed379482229}
+}]\index{I\+N\+T64@{I\+N\+T64}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!I\+N\+T64@{I\+N\+T64}}\item[{\em 
+I\+N\+T64\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1755ce8c9f3cd2be76cc56c14c7055d9a4e866b275c85fbb439f6484251cfb31c}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 26 of file Structured\+Headers\+Constants.\+h.
+
+
+\begin{DoxyCode}
+26                   \{
+27     NONE,
+28     STRING,
+29     BINARYCONTENT,
+30     IDENTIFIER,
+31     DOUBLE,
+32     INT64
+33   \};
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}
+\subsubsection[{operator"!=(const T \&other) const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::operator!= (
+\begin{DoxyParamCaption}
+\item[{const {\bf T} \&}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a29d47528a18b11c02020ac79a5e4dc1b}
+
+
+Definition at line 36 of file Structured\+Headers\+Constants.\+h.
+
+
+
+References operator==().
+
+
+\begin{DoxyCode}
+36                                         \{
+37     \textcolor{keywordflow}{return} !operator==(other);
+38   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!operator==@{operator==}}
+\index{operator==@{operator==}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}
+\subsubsection[{operator==(const T \&other) const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf T} \&}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a265dcbabd0e7379c730182ad61bc8116}
+
+
+Definition at line 41 of file Structured\+Headers\+Constants.\+h.
+
+
+
+References value.
+
+
+
+Referenced by operator!=().
+
+
+\begin{DoxyCode}
+41                                         \{
+42     \textcolor{keywordflow}{try} \{
+43       \textcolor{keywordflow}{return} boost::get<T>(value) == other;
+44     \} \textcolor{keywordflow}{catch} (boost::bad\_get& ) \{
+45       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+46     \}
+47   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!tag@{tag}}
+\index{tag@{tag}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}
+\subsubsection[{tag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::tag}\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_abcc65cfdb4bd74bf9d9abd74c8d02c13}
+
+
+Definition at line 49 of file Structured\+Headers\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Decoder\+::decode\+Map(), proxygen\+::\+Structured\+Headers\+Encoder\+::encode\+Item(), proxygen\+::\+Structured\+Headers\+::item\+Type\+Matches\+Content(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Binary\+Content(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Float(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Identifier(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Integer(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+String(), proxygen\+::\+T\+E\+S\+T\+\_\+\+F(), proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+\+F(), and proxygen\+::\+T\+E\+S\+T\+\_\+\+P().
+
+\index{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}!value@{value}}
+\index{value@{value}!proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item@{proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item}}
+\subsubsection[{value}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::variant$<$int64\+\_\+t, double, std\+::string$>$ proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::value}\label{classproxygen_1_1StructuredHeaders_1_1StructuredHeaderItem_a1e21d3855c8356151ef0277bd7b32a46}
+
+
+Definition at line 50 of file Structured\+Headers\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Encoder\+::encode\+Item(), proxygen\+::\+Structured\+Headers\+::item\+Type\+Matches\+Content(), operator==(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Binary\+Content(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Float(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Identifier(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Integer(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+String(), proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+\+F(), and proxygen\+::\+T\+E\+S\+T\+\_\+\+F().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/structuredheaders/{\bf Structured\+Headers\+Constants.\+h}\end{DoxyCompactItemize}

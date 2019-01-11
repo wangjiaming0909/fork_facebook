@@ -1,0 +1,114 @@
+\section{proxygen/lib/http/session/test/\+H\+T\+T\+P2\+Priority\+Queue\+Test.cpp File Reference}
+\label{HTTP2PriorityQueueTest_8cpp}\index{proxygen/lib/http/session/test/\+H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp@{proxygen/lib/http/session/test/\+H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp}}
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include $<$folly/\+Random.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/test/\+Mock\+Timeout\+Manager.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/test/\+Undelayed\+Destruction.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/\+H\+T\+T\+P2\+Priority\+Queue.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf proxygen\+::\+Queue\+Test}
+\item 
+class {\bf proxygen\+::\+Dangling\+Queue\+Test\+Base}
+\item 
+class {\bf proxygen\+::\+Dangling\+Queue\+Test}
+\item 
+class {\bf proxygen\+::\+Dummy\+Timeout}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf proxygen\+::\+I\+D\+List} = std\+::list$<$ std\+::pair$<$ H\+T\+T\+P\+Codec\+::\+Stream\+ID, uint8\+\_\+t $>$$>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Basic)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Remove\+Leaf)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Remove\+Parent)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Remove\+Parent\+Weights)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Node\+Depth)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Weight)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Duplicate\+ID)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Weight\+Not\+Enqueued)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Weight\+Excl)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Weight\+Excl\+Dequeued)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Weight\+Unknown\+Parent)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Parent\+Sibling)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Parent\+Sibling\+Excl)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Parent\+Ancestor)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Parent\+Ancestor\+Excl)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Parent\+Descendant)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Parent\+Descendant\+Excl)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Exclusive\+Add)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Add\+Unknown)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Add\+Max)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Misc)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Iterate\+B\+FS)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Next\+Egress)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Next\+Egress\+Exclusive\+Add)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Next\+Egress\+Exclusive\+Add\+With\+Egress)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Update\+Priority\+Reparent\+Subtree)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Next\+Egress\+Remove\+Parent)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Add\+Exclusive\+Descendant\+Enqueued)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Next\+Egress\+Remove\+Parent\+Enqueued)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Next\+Egress\+Remove\+Parent\+Enqueued\+Indirect)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Chrome\+Test)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Next\+Egress\+Spdy)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Add\+Or\+Update)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Dangling\+Queue\+Test, Basic)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Dangling\+Queue\+Test, Chain)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Dangling\+Queue\+Test, Drop)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Dangling\+Queue\+Test, Expire\+Parent\+Of\+Mismatched\+Twins)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Dangling\+Queue\+Test, Refresh)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Dangling\+Queue\+Test, Max)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Queue\+Test, Rebuild)
+\end{DoxyCompactItemize}

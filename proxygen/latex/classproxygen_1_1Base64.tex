@@ -1,0 +1,203 @@
+\section{proxygen\+:\+:Base64 Class Reference}
+\label{classproxygen_1_1Base64}\index{proxygen\+::\+Base64@{proxygen\+::\+Base64}}
+
+
+{\ttfamily \#include $<$Base64.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string {\bf decode} (const std\+::string \&b64message, int padding)
+\item 
+static std\+::string {\bf url\+Decode} (const std\+::string \&b64message)
+\item 
+static std\+::string {\bf encode} (folly\+::\+Byte\+Range buffer)
+\item 
+static std\+::string {\bf url\+Encode} (folly\+::\+Byte\+Range buffer)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file Base64.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Base64@{proxygen\+::\+Base64}!decode@{decode}}
+\index{decode@{decode}!proxygen\+::\+Base64@{proxygen\+::\+Base64}}
+\subsubsection[{decode(const std\+::string \&b64message, int padding)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Base64\+::decode (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{b64message, }
+\item[{int}]{padding}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1Base64_ab376d71fadcfd556f774b8ed1b9b991c}
+
+
+Definition at line 51 of file Base64.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+51                                                                  \{
+52   \textcolor{keywordflow}{if} (b64message.length() % 4 != 0 || padding >= 3) \{
+53     \textcolor{keywordflow}{return} std::string();
+54   \}
+55 
+56   std::unique\_ptr<BIO, BIODeleter> bio, b64;
+57   \textcolor{keywordtype}{size\_t} decodeLen = b64message.length() * 3/4 - padding;
+58   std::string result(decodeLen, \textcolor{charliteral}{'\(\backslash\)0'});
+59 
+60   bio.reset(BIO\_new\_mem\_buf((\textcolor{keywordtype}{void}*)b64message.data(), -1));
+61   \textcolor{keywordflow}{if} (!bio) \{
+62     \textcolor{keywordflow}{return} std::string();
+63   \}
+64   b64.reset(BIO\_new(BIO\_f\_base64()));
+65   \textcolor{keywordflow}{if} (!b64) \{
+66     \textcolor{keywordflow}{return} std::string();
+67   \}
+68   bio.reset(BIO\_push(b64.release(), bio.release()));
+69 
+70   \textcolor{comment}{// Do not use newlines to flush buffer}
+71   BIO\_set\_flags(bio.get(), BIO\_FLAGS\_BASE64\_NO\_NL);
+72   BIO\_read(bio.get(), (\textcolor{keywordtype}{char}*)result.data(), b64message.length());
+73   DCHECK\_LE(result.length(), decodeLen);
+74   \textcolor{keywordflow}{if} (result.length() < decodeLen) \{
+75     \textcolor{keywordflow}{return} std::string();
+76   \}
+77   \textcolor{keywordflow}{return} result;
+78 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Base64@{proxygen\+::\+Base64}!encode@{encode}}
+\index{encode@{encode}!proxygen\+::\+Base64@{proxygen\+::\+Base64}}
+\subsubsection[{encode(folly\+::\+Byte\+Range buffer)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Base64\+::encode (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Byte\+Range}]{buffer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1Base64_a6cdf14a42c5986d783ff60a5cbcb30b7}
+
+
+Definition at line 80 of file Base64.\+cpp.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Websocket\+Accept(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Websocket\+Key().
+
+
+\begin{DoxyCode}
+80                                               \{
+81   std::unique\_ptr<BIO, BIODeleter> bio, b64;
+82   BUF\_MEM* bufferPtr;
+83 
+84   b64.reset(BIO\_new(BIO\_f\_base64()));
+85   \textcolor{keywordflow}{if} (!b64) \{
+86     \textcolor{keywordflow}{throw} std::bad\_alloc();
+87   \}
+88   bio.reset(BIO\_new(BIO\_s\_mem()));
+89   \textcolor{keywordflow}{if} (!bio) \{
+90     \textcolor{keywordflow}{throw} std::bad\_alloc();
+91   \}
+92   bio.reset(BIO\_push(b64.release(), bio.release()));
+93 
+94   \textcolor{comment}{// Ignore newlines - write everything in one line}
+95   BIO\_set\_flags(bio.get(), BIO\_FLAGS\_BASE64\_NO\_NL);
+96   BIO\_write(bio.get(), buffer.data(), buffer.size());
+97   (void)BIO\_flush(bio.get());
+98   BIO\_get\_mem\_ptr(bio.get(), &bufferPtr);
+99   (void)BIO\_set\_close(bio.get(), BIO\_NOCLOSE);
+100 
+101   std::string result(bufferPtr->data, bufferPtr->length);
+102   BUF\_MEM\_free(bufferPtr);
+103   \textcolor{keywordflow}{return} result;
+104 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Base64@{proxygen\+::\+Base64}!url\+Decode@{url\+Decode}}
+\index{url\+Decode@{url\+Decode}!proxygen\+::\+Base64@{proxygen\+::\+Base64}}
+\subsubsection[{url\+Decode(const std\+::string \&b64message)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Base64\+::url\+Decode (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{b64message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1Base64_abe3a003552a73026aa2c488a80f584fe}
+
+
+Definition at line 26 of file Base64.\+cpp.
+
+
+
+References proxygen\+::hpack\+::decode().
+
+
+\begin{DoxyCode}
+26                                                           \{
+27   std::unique\_ptr<BIO, BIODeleter> bio, b64;
+28   uint8\_t padding = (4 - urlB64message.length() % 4) % 4;
+29   \textcolor{keywordflow}{if} (padding == 3) \{
+30     \textcolor{keywordflow}{return} std::string();
+31   \}
+32 
+33   std::string b64message(urlB64message.length() + padding, 0);
+34   std::transform(
+35     urlB64message.begin(), urlB64message.end(), b64message.begin(),
+36     [](\textcolor{keywordtype}{char} c) \{
+37       \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'-'}) \{
+38         \textcolor{keywordflow}{return} \textcolor{charliteral}{'+'};
+39       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'\_'}) \{
+40         \textcolor{keywordflow}{return} \textcolor{charliteral}{'/'};
+41       \}
+42       \textcolor{keywordflow}{return} c;
+43     \});
+44   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = urlB64message.length(); i < urlB64message.length() + padding;
+45        i++) \{
+46     b64message[i] = \textcolor{charliteral}{'='};
+47   \}
+48   \textcolor{keywordflow}{return} decode(b64message, padding);
+49 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Base64@{proxygen\+::\+Base64}!url\+Encode@{url\+Encode}}
+\index{url\+Encode@{url\+Encode}!proxygen\+::\+Base64@{proxygen\+::\+Base64}}
+\subsubsection[{url\+Encode(folly\+::\+Byte\+Range buffer)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Base64\+::url\+Encode (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Byte\+Range}]{buffer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1Base64_a2c7fd3fb8150302ddaacbe64bc500aef}
+
+
+Definition at line 107 of file Base64.\+cpp.
+
+
+
+References encode().
+
+
+\begin{DoxyCode}
+107                                                  \{
+108   std::string result = encode(buffer);
+109   folly::StringPiece sp(result.data(), result.length());
+110   uint8\_t padding = 0;
+111   std::transform(
+112     sp.begin(), sp.end(), result.begin(),
+113     [&padding](\textcolor{keywordtype}{char} c) \{
+114       \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'+'}) \{
+115         \textcolor{keywordflow}{return} \textcolor{charliteral}{'-'};
+116       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'/'}) \{
+117         \textcolor{keywordflow}{return} \textcolor{charliteral}{'\_'};
+118       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (c == \textcolor{charliteral}{'='}) \{
+119         padding++;
+120       \}
+121       \textcolor{keywordflow}{return} c;
+122     \});
+123   DCHECK\_LE(padding, result.length());
+124   result.resize(result.length() - padding);
+125   \textcolor{keywordflow}{return} result;
+126 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Base64.\+h}\item 
+proxygen/lib/utils/{\bf Base64.\+cpp}\end{DoxyCompactItemize}

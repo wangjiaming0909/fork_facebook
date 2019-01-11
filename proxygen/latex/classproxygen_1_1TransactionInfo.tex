@@ -1,0 +1,164 @@
+\section{proxygen\+:\+:Transaction\+Info Class Reference}
+\label{classproxygen_1_1TransactionInfo}\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Transaction.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Transaction\+Info} ()
+\item 
+{\bf Transaction\+Info} (std\+::chrono\+::milliseconds ttfb, std\+::chrono\+::milliseconds ttlb, uint64\+\_\+t e\+Header, uint64\+\_\+t in\+Header, uint64\+\_\+t e\+Body, uint64\+\_\+t in\+Body, bool completed)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::chrono\+::milliseconds {\bf time\+To\+First\+Byte} \{0\}
+\item 
+std\+::chrono\+::milliseconds {\bf time\+To\+Last\+Byte} \{0\}
+\item 
+uint64\+\_\+t {\bf egress\+Header\+Bytes} \{0\}
+\item 
+uint64\+\_\+t {\bf ingress\+Header\+Bytes} \{0\}
+\item 
+uint64\+\_\+t {\bf egress\+Body\+Bytes} \{0\}
+\item 
+uint64\+\_\+t {\bf ingress\+Body\+Bytes} \{0\}
+\item 
+bool {\bf is\+Completed} \{false\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An \doxyref{H\+T\+T\+P\+Transaction}{p.}{classproxygen_1_1HTTPTransaction} represents a single request/response pair for some H\+T\+T\+P-\/like protocol. It works with a Transport that performs the network processing and wire-\/protocol formatting and a Handler that implements some sort of application logic.
+
+The typical sequence of events for a simple application is\+:
+
+
+\begin{DoxyItemize}
+\item The application accepts a connection and creates a Transport.
+\item The Transport reads from the connection, parses whatever protocol the client is speaking, and creates a Transaction to represent the first request.
+\item Once the Transport has received the full request headers, it creates a Handler, plugs the handler into the Transaction, and calls the Transaction\textquotesingle{}s on\+Ingress\+Headers\+Complete() method.
+\item The Transaction calls the Handler\textquotesingle{}s on\+Headers\+Complete() method and the Handler begins processing the request.
+\item If there is a request body, the Transport streams it through the Transaction to the Handler.
+\item When the Handler is ready to produce a response, it streams the response through the Transaction to the Transport.
+\item When the Transaction has seen the end of both the request and the response, it detaches itself from the Handler and Transport and deletes itself.
+\item The Handler deletes itself at some point after the Transaction has detached from it.
+\item The Transport may, depending on the protocol, process other requests after -- or even in parallel with -- that first request. Each request gets its own Transaction and Handler.
+\end{DoxyItemize}
+
+For some applications, like proxying, a Handler implementation may obtain one or more upstream connections, each represented by another Transport, and create outgoing requests on the upstream connection(s), with each request represented as a new Transaction.
+
+With a multiplexing protocol like S\+P\+DY on both sides of a proxy, the cardinality relationship can be\+: \begin{DoxyVerb}            +-----------+     +-----------+     +-------+
+\end{DoxyVerb}
+ (Client-\/side) $\vert$ Transport $\vert$1---$\ast$$\vert$\+Transaction$\vert$1---1$\vert$\+Handler$\vert$ +-\/-\/-\/-\/-\/------+ +-\/-\/-\/-\/-\/------+ +-\/------+ 1 $\vert$ $\vert$ 1 +-\/-\/-\/------+ +-\/-\/-\/-\/-\/------+ (Server-\/side) $\vert$\+Transport$\vert$1---$\ast$$\vert$\+Transaction$\vert$ +-\/-\/-\/------+ +-\/-\/-\/-\/-\/------+
+
+A key design goal of \doxyref{H\+T\+T\+P\+Transaction}{p.}{classproxygen_1_1HTTPTransaction} is to serve as a protocol-\/ independent abstraction that insulates Handlers from the semantics different of H\+T\+T\+P-\/like protocols.\+Info about Transaction running on this session 
+
+Definition at line 92 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!Transaction\+Info@{Transaction\+Info}}
+\index{Transaction\+Info@{Transaction\+Info}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{Transaction\+Info()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Transaction\+Info\+::\+Transaction\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TransactionInfo_a36cbf95eb0e00db7d7efac547dbfa8ab}
+
+
+Definition at line 94 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+94 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!Transaction\+Info@{Transaction\+Info}}
+\index{Transaction\+Info@{Transaction\+Info}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{Transaction\+Info(std\+::chrono\+::milliseconds ttfb, std\+::chrono\+::milliseconds ttlb, uint64\+\_\+t e\+Header, uint64\+\_\+t in\+Header, uint64\+\_\+t e\+Body, uint64\+\_\+t in\+Body, bool completed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Transaction\+Info\+::\+Transaction\+Info (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::milliseconds}]{ttfb, }
+\item[{std\+::chrono\+::milliseconds}]{ttlb, }
+\item[{uint64\+\_\+t}]{e\+Header, }
+\item[{uint64\+\_\+t}]{in\+Header, }
+\item[{uint64\+\_\+t}]{e\+Body, }
+\item[{uint64\+\_\+t}]{in\+Body, }
+\item[{bool}]{completed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TransactionInfo_a7b736afe09a90e4830e92d79783435e6}
+
+
+Definition at line 96 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+103                    :
+104       timeToFirstByte(ttfb),
+105       timeToLastByte(ttlb),
+106       egressHeaderBytes(eHeader),
+107       ingressHeaderBytes(inHeader),
+108       egressBodyBytes(eBody),
+109       ingressBodyBytes(inBody),
+110       isCompleted(completed) \{
+111   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!egress\+Body\+Bytes@{egress\+Body\+Bytes}}
+\index{egress\+Body\+Bytes@{egress\+Body\+Bytes}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{egress\+Body\+Bytes}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Transaction\+Info\+::egress\+Body\+Bytes \{0\}}\label{classproxygen_1_1TransactionInfo_abcb8bec59390d4aeff6ff9d454c7e90d}
+Number of bytes send in body 
+
+Definition at line 123 of file H\+T\+T\+P\+Transaction.\+h.
+
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!egress\+Header\+Bytes@{egress\+Header\+Bytes}}
+\index{egress\+Header\+Bytes@{egress\+Header\+Bytes}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{egress\+Header\+Bytes}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Transaction\+Info\+::egress\+Header\+Bytes \{0\}}\label{classproxygen_1_1TransactionInfo_aac0f6ab4c2ec4f3d52f4e5797c7d8911}
+Number of bytes send in headers 
+
+Definition at line 119 of file H\+T\+T\+P\+Transaction.\+h.
+
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!ingress\+Body\+Bytes@{ingress\+Body\+Bytes}}
+\index{ingress\+Body\+Bytes@{ingress\+Body\+Bytes}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{ingress\+Body\+Bytes}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Transaction\+Info\+::ingress\+Body\+Bytes \{0\}}\label{classproxygen_1_1TransactionInfo_a4ce361c9dfbe4160c49d12c89efcf2ea}
+Number of bytes receive in body 
+
+Definition at line 125 of file H\+T\+T\+P\+Transaction.\+h.
+
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!ingress\+Header\+Bytes@{ingress\+Header\+Bytes}}
+\index{ingress\+Header\+Bytes@{ingress\+Header\+Bytes}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{ingress\+Header\+Bytes}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Transaction\+Info\+::ingress\+Header\+Bytes \{0\}}\label{classproxygen_1_1TransactionInfo_afc26a73df27aa2156de17ddf84299005}
+Number of bytes receive headers 
+
+Definition at line 121 of file H\+T\+T\+P\+Transaction.\+h.
+
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!is\+Completed@{is\+Completed}}
+\index{is\+Completed@{is\+Completed}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{is\+Completed}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Transaction\+Info\+::is\+Completed \{false\}}\label{classproxygen_1_1TransactionInfo_adc6d1372a715e73c7c0bf4ae6cd25615}
+Is the transaction was completed without error 
+
+Definition at line 128 of file H\+T\+T\+P\+Transaction.\+h.
+
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!time\+To\+First\+Byte@{time\+To\+First\+Byte}}
+\index{time\+To\+First\+Byte@{time\+To\+First\+Byte}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{time\+To\+First\+Byte}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+Transaction\+Info\+::time\+To\+First\+Byte \{0\}}\label{classproxygen_1_1TransactionInfo_a55e782ddea11b4580084a81321eb5ad1}
+Time to first byte 
+
+Definition at line 114 of file H\+T\+T\+P\+Transaction.\+h.
+
+\index{proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}!time\+To\+Last\+Byte@{time\+To\+Last\+Byte}}
+\index{time\+To\+Last\+Byte@{time\+To\+Last\+Byte}!proxygen\+::\+Transaction\+Info@{proxygen\+::\+Transaction\+Info}}
+\subsubsection[{time\+To\+Last\+Byte}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+Transaction\+Info\+::time\+To\+Last\+Byte \{0\}}\label{classproxygen_1_1TransactionInfo_a0c44437f3ce46140f75d31c59dc656c0}
+Time to last byte 
+
+Definition at line 116 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Transaction.\+h}\end{DoxyCompactItemize}

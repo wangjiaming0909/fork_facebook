@@ -1,0 +1,59 @@
+\section{proxygen/lib/http/codec/test/\+Default\+H\+T\+T\+P\+Codec\+Factory\+Test.cpp File Reference}
+\label{DefaultHTTPCodecFactoryTest_8cpp}\index{proxygen/lib/http/codec/test/\+Default\+H\+T\+T\+P\+Codec\+Factory\+Test.\+cpp@{proxygen/lib/http/codec/test/\+Default\+H\+T\+T\+P\+Codec\+Factory\+Test.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Default\+H\+T\+T\+P\+Codec\+Factory.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$limits$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P2\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P2\+Constants.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+ST} (Default\+H\+T\+T\+P\+Codec\+Factory\+Test, Get\+Codec)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Default\+H\+T\+T\+P\+Codec\+Factory\+Test.\+cpp@{Default\+H\+T\+T\+P\+Codec\+Factory\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Default\+H\+T\+T\+P\+Codec\+Factory\+Test.\+cpp@{Default\+H\+T\+T\+P\+Codec\+Factory\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Default\+H\+T\+T\+P\+Codec\+Factory\+Test, Get\+Codec)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Default\+H\+T\+T\+P\+Codec\+Factory\+Test}]{, }
+\item[{Get\+Codec}]{}
+\end{DoxyParamCaption}
+)}\label{DefaultHTTPCodecFactoryTest_8cpp_ad9785149e49ac3a9de6d2344312cf3b2}
+
+
+Definition at line 21 of file Default\+H\+T\+T\+P\+Codec\+Factory\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Default\+H\+T\+T\+P\+Codec\+Factory\+::get\+Codec(), proxygen\+::http2\+::k\+Protocol\+String, and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+21                                             \{
+22   DefaultHTTPCodecFactory factory(\textcolor{keyword}{false});
+23 
+24   \textcolor{keyword}{auto} codec = factory.getCodec(\textcolor{stringliteral}{"spdy/3.1"}, TransportDirection::UPSTREAM, \textcolor{keyword}{true});
+25   SPDYCodec* spdyCodec = \textcolor{keyword}{dynamic\_cast<}SPDYCodec*\textcolor{keyword}{>}(codec.get());
+26   EXPECT\_NE(spdyCodec, \textcolor{keyword}{nullptr});
+27 
+28   codec = factory.getCodec(http2::kProtocolString, TransportDirection::UPSTREAM, \textcolor{keyword}{true});
+29   HTTP2Codec* http2Codec = \textcolor{keyword}{dynamic\_cast<}HTTP2Codec*\textcolor{keyword}{>}(codec.get());
+30   EXPECT\_NE(http2Codec, \textcolor{keyword}{nullptr});
+31 
+32   codec = factory.getCodec(\textcolor{stringliteral}{"http/1.1"}, TransportDirection::UPSTREAM, \textcolor{keyword}{true});
+33   HTTP1xCodec* http1xCodec = \textcolor{keyword}{dynamic\_cast<}HTTP1xCodec*\textcolor{keyword}{>}(codec.get());
+34   EXPECT\_NE(http1xCodec, \textcolor{keyword}{nullptr});
+35 
+36   codec = factory.getCodec(\textcolor{stringliteral}{""}, TransportDirection::UPSTREAM, \textcolor{keyword}{true});
+37   http1xCodec = \textcolor{keyword}{dynamic\_cast<}HTTP1xCodec*\textcolor{keyword}{>}(codec.get());
+38   EXPECT\_NE(http1xCodec, \textcolor{keyword}{nullptr});
+39 
+40   codec = factory.getCodec(\textcolor{stringliteral}{"not/supported"}, TransportDirection::UPSTREAM, \textcolor{keyword}{true});
+41   http1xCodec = \textcolor{keyword}{dynamic\_cast<}HTTP1xCodec*\textcolor{keyword}{>}(codec.get());
+42   EXPECT\_NE(http1xCodec, \textcolor{keyword}{nullptr});
+43 \}
+\end{DoxyCode}

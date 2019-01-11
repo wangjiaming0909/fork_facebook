@@ -1,0 +1,153 @@
+\section{proxygen/httpserver/samples/echo/\+Echo\+Server.cpp File Reference}
+\label{EchoServer_8cpp}\index{proxygen/httpserver/samples/echo/\+Echo\+Server.\+cpp@{proxygen/httpserver/samples/echo/\+Echo\+Server.\+cpp}}
+{\ttfamily \#include $<$folly/\+Memory.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Event\+Base\+Manager.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Flags.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+Unistd.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpserver/\+H\+T\+T\+P\+Server.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpserver/\+Request\+Handler\+Factory.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Echo\+Handler.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Echo\+Stats.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Echo\+Handler\+Factory}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Protocol} = {\bf H\+T\+T\+P\+Server\+::\+Protocol}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf D\+E\+F\+I\+N\+E\+\_\+int32} (http\+\_\+port, 11000,\char`\"{}Port to listen on with H\+T\+TP protocol\char`\"{})
+\item 
+{\bf D\+E\+F\+I\+N\+E\+\_\+int32} (spdy\+\_\+port, 11001,\char`\"{}Port to listen on with S\+P\+DY protocol\char`\"{})
+\item 
+{\bf D\+E\+F\+I\+N\+E\+\_\+int32} (h2\+\_\+port, 11002,\char`\"{}Port to listen on with H\+T\+TP/2 protocol\char`\"{})
+\item 
+{\bf D\+E\+F\+I\+N\+E\+\_\+string} (ip,\char`\"{}localhost\char`\"{},\char`\"{}IP/Hostname to bind to\char`\"{})
+\item 
+{\bf D\+E\+F\+I\+N\+E\+\_\+int32} (threads, 0,\char`\"{}Number of threads to listen on. Numbers $<$= 0 \char`\"{}\char`\"{}will use the number of cores on this machine.\char`\"{})
+\item 
+int {\bf main} (int argc, char $\ast$argv[$\,$])
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{Echo\+Server.\+cpp@{Echo\+Server.\+cpp}!Protocol@{Protocol}}
+\index{Protocol@{Protocol}!Echo\+Server.\+cpp@{Echo\+Server.\+cpp}}
+\subsubsection[{Protocol}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Protocol} =  {\bf H\+T\+T\+P\+Server\+::\+Protocol}}\label{EchoServer_8cpp_a0c4543274a4aa8135167669efe8688c7}
+
+
+Definition at line 27 of file Echo\+Server.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{Echo\+Server.\+cpp@{Echo\+Server.\+cpp}!D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}}
+\index{D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}!Echo\+Server.\+cpp@{Echo\+Server.\+cpp}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+int32(http\+\_\+port, 11000,""Port to listen on with H\+T\+T\+P protocol"")}]{\setlength{\rightskip}{0pt plus 5cm}D\+E\+F\+I\+N\+E\+\_\+int32 (
+\begin{DoxyParamCaption}
+\item[{http\+\_\+port}]{, }
+\item[{11000}]{, }
+\item[{\char`\"{}Port to listen on with H\+T\+TP protocol\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{EchoServer_8cpp_ae695d59a814b6f82a613e2a1b2ecf174}
+\index{Echo\+Server.\+cpp@{Echo\+Server.\+cpp}!D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}}
+\index{D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}!Echo\+Server.\+cpp@{Echo\+Server.\+cpp}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+int32(spdy\+\_\+port, 11001,""Port to listen on with S\+P\+D\+Y protocol"")}]{\setlength{\rightskip}{0pt plus 5cm}D\+E\+F\+I\+N\+E\+\_\+int32 (
+\begin{DoxyParamCaption}
+\item[{spdy\+\_\+port}]{, }
+\item[{11001}]{, }
+\item[{\char`\"{}Port to listen on with S\+P\+DY protocol\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{EchoServer_8cpp_a4258883bc4db2998936e7b55c6dab080}
+\index{Echo\+Server.\+cpp@{Echo\+Server.\+cpp}!D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}}
+\index{D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}!Echo\+Server.\+cpp@{Echo\+Server.\+cpp}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+int32(h2\+\_\+port, 11002,""Port to listen on with H\+T\+T\+P/2 protocol"")}]{\setlength{\rightskip}{0pt plus 5cm}D\+E\+F\+I\+N\+E\+\_\+int32 (
+\begin{DoxyParamCaption}
+\item[{h2\+\_\+port}]{, }
+\item[{11002}]{, }
+\item[{\char`\"{}Port to listen on with H\+T\+TP/2 protocol\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{EchoServer_8cpp_a169356b0b07b254cb75ef6c6f0e78a92}
+\index{Echo\+Server.\+cpp@{Echo\+Server.\+cpp}!D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}}
+\index{D\+E\+F\+I\+N\+E\+\_\+int32@{D\+E\+F\+I\+N\+E\+\_\+int32}!Echo\+Server.\+cpp@{Echo\+Server.\+cpp}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+int32(threads, 0,""Number of threads to listen on. Numbers $<$= 0 """"will use the number of cores on this machine."")}]{\setlength{\rightskip}{0pt plus 5cm}D\+E\+F\+I\+N\+E\+\_\+int32 (
+\begin{DoxyParamCaption}
+\item[{threads}]{, }
+\item[{0}]{, }
+\item[{\char`\"{}Number of threads to listen on. Numbers $<$= 0 \char`\"{}\char`\"{}will use the number of cores on this machine.\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{EchoServer_8cpp_a19bae5ae436a5e6c508c6af9279fa6ff}
+\index{Echo\+Server.\+cpp@{Echo\+Server.\+cpp}!D\+E\+F\+I\+N\+E\+\_\+string@{D\+E\+F\+I\+N\+E\+\_\+string}}
+\index{D\+E\+F\+I\+N\+E\+\_\+string@{D\+E\+F\+I\+N\+E\+\_\+string}!Echo\+Server.\+cpp@{Echo\+Server.\+cpp}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+string(ip,""localhost"",""I\+P/\+Hostname to bind to"")}]{\setlength{\rightskip}{0pt plus 5cm}D\+E\+F\+I\+N\+E\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{ip}]{, }
+\item[{\char`\"{}localhost\char`\"{}}]{, }
+\item[{\char`\"{}IP/Hostname to bind to\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{EchoServer_8cpp_a9b3b3d9e62cd9f4d4950f95b83b7ad2e}
+\index{Echo\+Server.\+cpp@{Echo\+Server.\+cpp}!main@{main}}
+\index{main@{main}!Echo\+Server.\+cpp@{Echo\+Server.\+cpp}}
+\subsubsection[{main(int argc, char $\ast$argv[])}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv[$\,$]}
+\end{DoxyParamCaption}
+)}\label{EchoServer_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Definition at line 54 of file Echo\+Server.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Handler\+Chain\+::add\+Then(), proxygen\+::\+H\+T\+T\+P\+Server\+::bind(), proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::enable\+Content\+Compression, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::h2c\+Enabled, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::handler\+Factories, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::idle\+Timeout, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::initial\+Receive\+Window, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::receive\+Session\+Window\+Size, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::receive\+Stream\+Window\+Size, proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::shutdown\+On, proxygen\+::\+H\+T\+T\+P\+Server\+::start(), and proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::threads.
+
+
+\begin{DoxyCode}
+54                                  \{
+55   gflags::ParseCommandLineFlags(&argc, &argv, \textcolor{keyword}{true});
+56   google::InitGoogleLogging(argv[0]);
+57   google::InstallFailureSignalHandler();
+58 
+59   std::vector<HTTPServer::IPConfig> IPs = \{
+60     \{SocketAddress(FLAGS\_ip, FLAGS\_http\_port, \textcolor{keyword}{true}), Protocol::HTTP\},
+61     \{SocketAddress(FLAGS\_ip, FLAGS\_spdy\_port, \textcolor{keyword}{true}), Protocol::SPDY\},
+62     \{SocketAddress(FLAGS\_ip, FLAGS\_h2\_port, \textcolor{keyword}{true}), Protocol::HTTP2\},
+63   \};
+64 
+65   \textcolor{keywordflow}{if} (FLAGS\_threads <= 0) \{
+66     FLAGS\_threads = sysconf(\_SC\_NPROCESSORS\_ONLN);
+67     CHECK(FLAGS\_threads > 0);
+68   \}
+69 
+70   HTTPServerOptions options;
+71   options.threads = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(FLAGS\_threads);
+72   options.idleTimeout = std::chrono::milliseconds(60000);
+73   options.shutdownOn = \{SIGINT, SIGTERM\};
+74   options.enableContentCompression = \textcolor{keyword}{false};
+75   options.handlerFactories = RequestHandlerChain()
+76       .addThen<EchoHandlerFactory>()
+77       .build();
+78   \textcolor{comment}{// Increase the default flow control to 1MB/10MB}
+79   options.initialReceiveWindow = uint32\_t(1 << 20);
+80   options.receiveStreamWindowSize = uint32\_t(1 << 20);
+81   options.receiveSessionWindowSize = 10 * (1 << 20);
+82   options.h2cEnabled = \textcolor{keyword}{true};
+83 
+84   HTTPServer server(std::move(options));
+85   server.bind(IPs);
+86 
+87   \textcolor{comment}{// Start HTTPServer mainloop in a separate thread}
+88   std::thread t([&] () \{
+89     server.start();
+90   \});
+91 
+92   t.join();
+93   \textcolor{keywordflow}{return} 0;
+94 \}
+\end{DoxyCode}

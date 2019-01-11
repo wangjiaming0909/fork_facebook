@@ -1,0 +1,57 @@
+\section{proxygen/lib/http/session/\+H\+T\+T\+P\+Transaction.h File Reference}
+\label{HTTPTransaction_8h}\index{proxygen/lib/http/session/\+H\+T\+T\+P\+Transaction.\+h@{proxygen/lib/http/session/\+H\+T\+T\+P\+Transaction.\+h}}
+{\ttfamily \#include $<$boost/heap/d\+\_\+ary\+\_\+heap.\+hpp$>$}\\*
+{\ttfamily \#include $<$climits$>$}\\*
+{\ttfamily \#include $<$folly/\+Optional.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Socket\+Address.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Async\+Transport.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Delayed\+Destruction\+Base.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+H\+H\+Wheel\+Timer.\+h$>$}\\*
+{\ttfamily \#include $<$iosfwd$>$}\\*
+{\ttfamily \#include $<$wangle/acceptor/\+Transport\+Info.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Constants.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Message.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+Proxygen\+Error\+Enum.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+Window.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/\+H\+T\+T\+P2\+Priority\+Queue.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/\+H\+T\+T\+P\+Event.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/\+H\+T\+T\+P\+Transaction\+Egress\+S\+M.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Time.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Wheel\+Timer\+Instance.\+h$>$}\\*
+{\ttfamily \#include $<$set$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf proxygen\+::\+Transaction\+Info}
+\item 
+class {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler}
+\item 
+class {\bf proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}
+\item 
+class {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}
+\item 
+class {\bf proxygen\+::\+H\+T\+T\+P\+Transaction}
+\item 
+class {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport}
+\item 
+struct {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+Summary}
+\item 
+struct {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+Summary\+::\+Weighted\+Average}
+\item 
+class {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}
+\item 
+struct {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Chunk}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& {\bf proxygen\+::operator$<$$<$} (std\+::ostream \&os, const H\+T\+T\+P\+Transaction \&txn)
+\end{DoxyCompactItemize}

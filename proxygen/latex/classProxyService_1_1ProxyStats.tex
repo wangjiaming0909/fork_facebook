@@ -1,0 +1,114 @@
+\section{Proxy\+Service\+:\+:Proxy\+Stats Class Reference}
+\label{classProxyService_1_1ProxyStats}\index{Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}}
+
+
+{\ttfamily \#include $<$Proxy\+Stats.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Proxy\+Stats} ()
+\item 
+virtual void {\bf record\+Request} ()
+\item 
+virtual uint64\+\_\+t {\bf get\+Request\+Count} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t {\bf req\+Count\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Just some dummy class containing request count. Since we keep one instance of this in each class, there is no need of synchronization 
+
+Definition at line 21 of file Proxy\+Stats.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}!````~Proxy\+Stats@{$\sim$\+Proxy\+Stats}}
+\index{````~Proxy\+Stats@{$\sim$\+Proxy\+Stats}!Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}}
+\subsubsection[{$\sim$\+Proxy\+Stats()}]{\setlength{\rightskip}{0pt plus 5cm}virtual Proxy\+Service\+::\+Proxy\+Stats\+::$\sim$\+Proxy\+Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classProxyService_1_1ProxyStats_a348c66f7f3c4021a9febbe04a71d0c4d}
+
+
+Definition at line 23 of file Proxy\+Stats.\+h.
+
+
+\begin{DoxyCode}
+23                         \{
+24   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}!get\+Request\+Count@{get\+Request\+Count}}
+\index{get\+Request\+Count@{get\+Request\+Count}!Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}}
+\subsubsection[{get\+Request\+Count()}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint64\+\_\+t Proxy\+Service\+::\+Proxy\+Stats\+::get\+Request\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classProxyService_1_1ProxyStats_aa946030e71d3bcd16c49103aa75167aa}
+
+
+Definition at line 35 of file Proxy\+Stats.\+h.
+
+
+
+References req\+Count\+\_\+.
+
+
+\begin{DoxyCode}
+35                                      \{
+36     \textcolor{keywordflow}{return} reqCount_;
+37   \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}!record\+Request@{record\+Request}}
+\index{record\+Request@{record\+Request}!Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}}
+\subsubsection[{record\+Request()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Proxy\+Service\+::\+Proxy\+Stats\+::record\+Request (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classProxyService_1_1ProxyStats_a0c5072916e00f6bd147d6343874198ef}
+
+
+Definition at line 31 of file Proxy\+Stats.\+h.
+
+
+
+References req\+Count\+\_\+.
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::on\+Request().
+
+
+\begin{DoxyCode}
+31                                \{
+32     ++reqCount_;
+33   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}!req\+Count\+\_\+@{req\+Count\+\_\+}}
+\index{req\+Count\+\_\+@{req\+Count\+\_\+}!Proxy\+Service\+::\+Proxy\+Stats@{Proxy\+Service\+::\+Proxy\+Stats}}
+\subsubsection[{req\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t Proxy\+Service\+::\+Proxy\+Stats\+::req\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyStats_aeacb71ec7bc4a05316ddfbf59d7f67c5}
+
+
+Definition at line 40 of file Proxy\+Stats.\+h.
+
+
+
+Referenced by get\+Request\+Count(), and record\+Request().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/proxy/{\bf Proxy\+Stats.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,294 @@
+\section{proxygen/lib/http/codec/compress/test/\+R\+F\+C\+Examples\+Tests.cpp File Reference}
+\label{RFCExamplesTests_8cpp}\index{proxygen/lib/http/codec/compress/test/\+R\+F\+C\+Examples\+Tests.\+cpp@{proxygen/lib/http/codec/compress/test/\+R\+F\+C\+Examples\+Tests.\+cpp}}
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Decoder.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Encoder.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+Logging.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/test/\+Test\+Util.\+h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$folly/\+String.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf R\+F\+C\+Request\+Test}
+\item 
+class {\bf R\+F\+C\+Response\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Rfc\+Param} = std\+::pair$<$ bool, vector$<$ string $>$$>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Rfc\+Param} {\bf d3} (false, {\bf example\+Hex1})
+\item 
+{\bf Rfc\+Param} {\bf d4} (true, {\bf example\+Hex2})
+\item 
+{\bf Rfc\+Param} {\bf d5} (false, {\bf example\+Hex3})
+\item 
+{\bf Rfc\+Param} {\bf d6} (true, {\bf example\+Hex4})
+\item 
+{\bf T\+E\+S\+T\+\_\+P} ({\bf R\+F\+C\+Request\+Test}, Rfc\+Example\+Request)
+\item 
+{\bf I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P} (Huffman, {\bf R\+F\+C\+Request\+Test},\+::testing\+::\+Values({\bf d3}, {\bf d4}))
+\item 
+{\bf T\+E\+S\+T\+\_\+P} ({\bf R\+F\+C\+Response\+Test}, Rfc\+Example\+Response)
+\item 
+{\bf I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P} (Huffman, {\bf R\+F\+C\+Response\+Test},\+::testing\+::\+Values({\bf d5}, {\bf d6}))
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ string $>$ {\bf example\+Hex1}
+\item 
+vector$<$ string $>$ {\bf example\+Hex2}
+\item 
+vector$<$ string $>$ {\bf example\+Hex3}
+\item 
+vector$<$ string $>$ {\bf example\+Hex4}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!Rfc\+Param@{Rfc\+Param}}
+\index{Rfc\+Param@{Rfc\+Param}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{Rfc\+Param}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Rfc\+Param} =  std\+::pair$<$bool, vector$<$string$>$$>$}\label{RFCExamplesTests_8cpp_ad1c8ddb4f52c18b6e192c16cb18c25ee}
+
+
+Definition at line 26 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!d3@{d3}}
+\index{d3@{d3}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{d3(false, example\+Hex1)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rfc\+Param} d3 (
+\begin{DoxyParamCaption}
+\item[{false}]{, }
+\item[{{\bf example\+Hex1}}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_a8202484642786703833c7ef21a0ee1d4}
+
+
+Referenced by T\+E\+S\+T\+\_\+\+P().
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!d4@{d4}}
+\index{d4@{d4}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{d4(true, example\+Hex2)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rfc\+Param} d4 (
+\begin{DoxyParamCaption}
+\item[{true}]{, }
+\item[{{\bf example\+Hex2}}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_a2a037d156f7874a7dc4c2ae241688d4f}
+
+
+Referenced by T\+E\+S\+T\+\_\+\+P().
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!d5@{d5}}
+\index{d5@{d5}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{d5(false, example\+Hex3)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rfc\+Param} d5 (
+\begin{DoxyParamCaption}
+\item[{false}]{, }
+\item[{{\bf example\+Hex3}}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_a765f4dc096f0c07e91492d34878e5925}
+
+
+Referenced by T\+E\+S\+T\+\_\+\+P().
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!d6@{d6}}
+\index{d6@{d6}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{d6(true, example\+Hex4)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rfc\+Param} d6 (
+\begin{DoxyParamCaption}
+\item[{true}]{, }
+\item[{{\bf example\+Hex4}}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_af1c13520eb587c1f6a3592c1da2a20d4}
+
+
+Referenced by T\+E\+S\+T\+\_\+\+P().
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P@{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}}
+\index{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P@{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+\+P(\+Huffman, R\+F\+C\+Request\+Test,\+::testing\+::\+Values(d3, d4))}]{\setlength{\rightskip}{0pt plus 5cm}I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P (
+\begin{DoxyParamCaption}
+\item[{Huffman}]{, }
+\item[{{\bf R\+F\+C\+Request\+Test}}]{, }
+\item[{\+::testing\+::\+Values({\bf d3}, {\bf d4})}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_ab19cfcf9ea1da16e2e03ccb496f2d116}
+
+
+Referenced by T\+E\+S\+T\+\_\+\+P().
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P@{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}}
+\index{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P@{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+\+P(\+Huffman, R\+F\+C\+Response\+Test,\+::testing\+::\+Values(d5, d6))}]{\setlength{\rightskip}{0pt plus 5cm}I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P (
+\begin{DoxyParamCaption}
+\item[{Huffman}]{, }
+\item[{{\bf R\+F\+C\+Response\+Test}}]{, }
+\item[{\+::testing\+::\+Values({\bf d5}, {\bf d6})}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_a538759894d7121fff89f9a4d4a00ebe2}
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!T\+E\+S\+T\+\_\+P@{T\+E\+S\+T\+\_\+P}}
+\index{T\+E\+S\+T\+\_\+P@{T\+E\+S\+T\+\_\+P}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+P(\+R\+F\+C\+Request\+Test, Rfc\+Example\+Request)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+P (
+\begin{DoxyParamCaption}
+\item[{{\bf R\+F\+C\+Request\+Test}}]{, }
+\item[{Rfc\+Example\+Request}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_a642d4da3b70461582aa062aebb362108}
+
+
+Definition at line 132 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+Header\+Table\+::bytes(), d3(), d4(), encode\+Decode(), proxygen\+::\+H\+P\+A\+C\+K\+Context\+::get\+Table(), I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+\+P(), and proxygen\+::\+Header\+Table\+::size().
+
+
+\begin{DoxyCode}
+132                                           \{
+133   HPACKEncoder encoder(GetParam().first);
+134   HPACKDecoder decoder;
+135   \textcolor{comment}{// first request}
+136   unique\_ptr<IOBuf> encoded = hpack::encodeDecode(req1, encoder, decoder);
+137   EXPECT\_EQ(encoded->moveToFbString(), unhexlify(GetParam().second[0]));
+138   EXPECT\_EQ(encoder.getTable().bytes(), 57);
+139   EXPECT\_EQ(encoder.getTable().size(), 1);
+140 
+141   \textcolor{comment}{// second request}
+142   encoded = hpack::encodeDecode(req2, encoder, decoder);
+143   EXPECT\_EQ(encoded->moveToFbString(), unhexlify(GetParam().second[1]));
+144   EXPECT\_EQ(encoder.getTable().bytes(), 110);
+145   EXPECT\_EQ(encoder.getTable().size(), 2);
+146 
+147   \textcolor{comment}{// third request}
+148   encoded = hpack::encodeDecode(req3, encoder, decoder);
+149   EXPECT\_EQ(encoded->moveToFbString(), unhexlify(GetParam().second[2]));
+150   EXPECT\_EQ(encoder.getTable().bytes(), 164);
+151   EXPECT\_EQ(encoder.getTable().size(), 3);
+152 \}
+\end{DoxyCode}
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!T\+E\+S\+T\+\_\+P@{T\+E\+S\+T\+\_\+P}}
+\index{T\+E\+S\+T\+\_\+P@{T\+E\+S\+T\+\_\+P}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+P(\+R\+F\+C\+Response\+Test, Rfc\+Example\+Response)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+P (
+\begin{DoxyParamCaption}
+\item[{{\bf R\+F\+C\+Response\+Test}}]{, }
+\item[{Rfc\+Example\+Response}]{}
+\end{DoxyParamCaption}
+)}\label{RFCExamplesTests_8cpp_a0e672e91a6b44a897009257a3add1f30}
+
+
+Definition at line 160 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+Header\+Table\+::bytes(), d5(), d6(), encode\+Decode(), proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name\+::get(), proxygen\+::\+H\+P\+A\+C\+K\+Context\+::get\+Header(), proxygen\+::\+H\+P\+A\+C\+K\+Context\+::get\+Table(), I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+\+P(), proxygen\+::\+H\+P\+A\+C\+K\+Header\+::name, proxygen\+::\+Header\+Table\+::size(), and proxygen\+::\+H\+P\+A\+C\+K\+Header\+::value.
+
+
+\begin{DoxyCode}
+160                                             \{
+161   \textcolor{comment}{// this test does some evictions}
+162   uint32\_t tableSize = 256;
+163   HPACKEncoder encoder(GetParam().first, tableSize);
+164   HPACKDecoder decoder(tableSize);
+165 
+166   \textcolor{comment}{// first}
+167   unique\_ptr<IOBuf> encoded = hpack::encodeDecode(resp1, encoder, decoder);
+168   EXPECT\_EQ(encoded->moveToFbString(), unhexlify(GetParam().second[0]));
+169   EXPECT\_EQ(encoder.getTable().bytes(), 222);
+170   EXPECT\_EQ(encoder.getTable().size(), 4);
+171   EXPECT\_EQ(encoder.getHeader(64).name.get(), \textcolor{stringliteral}{"cache-control"});
+172   EXPECT\_EQ(encoder.getHeader(64).value, \textcolor{stringliteral}{"private"});
+173 
+174   \textcolor{comment}{// second}
+175   encoded = hpack::encodeDecode(resp2, encoder, decoder);
+176   EXPECT\_EQ(encoded->moveToFbString(), unhexlify(GetParam().second[1]));
+177   EXPECT\_EQ(encoder.getTable().bytes(), 222);
+178   EXPECT\_EQ(encoder.getTable().size(), 4);
+179 
+180   \textcolor{comment}{// third}
+181   encoded = hpack::encodeDecode(resp3, encoder, decoder);
+182   EXPECT\_EQ(encoded->moveToFbString(), unhexlify(GetParam().second[2]));
+183 
+184   EXPECT\_EQ(encoder.getTable().size(), 3);
+185   EXPECT\_EQ(encoder.getTable().bytes(), 215);
+186 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!example\+Hex1@{example\+Hex1}}
+\index{example\+Hex1@{example\+Hex1}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{example\+Hex1}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ example\+Hex1}\label{RFCExamplesTests_8cpp_a4cf5abdea0d1e860e03dbbde8646fe28}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  \textcolor{stringliteral}{"828684410f7777772e6578616d706c652e636f6d"},
+  \textcolor{stringliteral}{"828684be58086e6f2d6361636865"},
+  \textcolor{stringliteral}{"828785bf400a637573746f6d2d6b65790c637573746f6d2d76616c7565"}
+\}
+\end{DoxyCode}
+
+
+Definition at line 87 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!example\+Hex2@{example\+Hex2}}
+\index{example\+Hex2@{example\+Hex2}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{example\+Hex2}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ example\+Hex2}\label{RFCExamplesTests_8cpp_a7c0345f36fc99fd41fc778be41908df4}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  \textcolor{stringliteral}{"828684418cf1e3c2e5f23a6ba0ab90f4ff"},
+  \textcolor{stringliteral}{"828684be5886a8eb10649cbf"},
+  \textcolor{stringliteral}{"828785bf408825a849e95ba97d7f8925a849e95bb8e8b4bf"}
+\}
+\end{DoxyCode}
+
+
+Definition at line 93 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!example\+Hex3@{example\+Hex3}}
+\index{example\+Hex3@{example\+Hex3}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{example\+Hex3}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ example\+Hex3}\label{RFCExamplesTests_8cpp_a72a9738a65427389003ae168f13ad7a7}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  \textcolor{stringliteral}{"4803333032580770726976617465611d4d6f6e2c203231204f63742032303133"}
+  \textcolor{stringliteral}{"2032303a31333a323120474d546e1768747470733a2f2f7777772e6578616d70"}
+  \textcolor{stringliteral}{"6c652e636f6d"},
+  \textcolor{stringliteral}{"4803333037c1c0bf"},
+  \textcolor{stringliteral}{"88c1611d4d6f6e2c203231204f637420323031332032303a31333a323220474d"}
+  \textcolor{stringliteral}{"54c05a04677a69707738666f6f3d4153444a4b48514b425a584f5157454f5049"}
+  \textcolor{stringliteral}{"5541585157454f49553b206d61782d6167653d333630303b2076657273696f6e"}
+  \textcolor{stringliteral}{"3d31"}
+\}
+\end{DoxyCode}
+
+
+Definition at line 102 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+\index{R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}!example\+Hex4@{example\+Hex4}}
+\index{example\+Hex4@{example\+Hex4}!R\+F\+C\+Examples\+Tests.\+cpp@{R\+F\+C\+Examples\+Tests.\+cpp}}
+\subsubsection[{example\+Hex4}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ example\+Hex4}\label{RFCExamplesTests_8cpp_a8f2c55ac0f2af172368e6ceabf00d834}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  \textcolor{stringliteral}{"488264025885aec3771a4b6196d07abe941054d444a8200595040b8166e082a6"}
+  \textcolor{stringliteral}{"2d1bff6e919d29ad171863c78f0b97c8e9ae82ae43d3"},
+  \textcolor{stringliteral}{"4883640effc1c0bf"},
+  \textcolor{stringliteral}{"88c16196d07abe941054d444a8200595040b8166e084a62d1bffc05a839bd9ab"}
+  \textcolor{stringliteral}{"77ad94e7821dd7f2e6c7b335dfdfcd5b3960d5af27087f3672c1ab270fb5291f"}
+  \textcolor{stringliteral}{"9587316065c003ed4ee5b1063d5007"}
+\}
+\end{DoxyCode}
+
+
+Definition at line 112 of file R\+F\+C\+Examples\+Tests.\+cpp.
+

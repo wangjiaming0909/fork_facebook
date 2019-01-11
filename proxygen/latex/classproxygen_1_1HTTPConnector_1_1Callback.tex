@@ -1,0 +1,88 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Connector\+:\+:Callback Class Reference}
+\label{classproxygen_1_1HTTPConnector_1_1Callback}\index{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Connector.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Connector\+:\+:Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPConnector_1_1Callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Callback} ()
+\item 
+virtual void {\bf connect\+Success} ({\bf H\+T\+T\+P\+Upstream\+Session} $\ast$session)=0
+\item 
+virtual void {\bf connect\+Error} (const folly\+::\+Async\+Socket\+Exception \&ex)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class defines the pure virtual interface on which to receive the result on. 
+
+Definition at line 38 of file H\+T\+T\+P\+Connector.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback}!````~Callback@{$\sim$\+Callback}}
+\index{````~Callback@{$\sim$\+Callback}!proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback}}
+\subsubsection[{$\sim$\+Callback()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback\+::$\sim$\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPConnector_1_1Callback_a315f807f6e668c7a30640ca2c8e78a99}
+
+
+Definition at line 40 of file H\+T\+T\+P\+Connector.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Connector\+::connect(), connect\+Error(), proxygen\+::\+H\+T\+T\+P\+Connector\+::connect\+S\+S\+L(), connect\+Success(), proxygen\+::\+H\+T\+T\+P\+Connector\+::\+H\+T\+T\+P\+Connector(), proxygen\+::\+H\+T\+T\+P\+Connector\+::reset(), proxygen\+::\+H\+T\+T\+P\+Connector\+::set\+H\+T\+T\+P\+Version\+Override(), proxygen\+::\+H\+T\+T\+P\+Connector\+::set\+Plaintext\+Protocol(), proxygen\+::\+H\+T\+T\+P\+Connector\+::time\+Elapsed(), and proxygen\+::\+H\+T\+T\+P\+Connector\+::$\sim$\+H\+T\+T\+P\+Connector().
+
+
+\begin{DoxyCode}
+40 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback}!connect\+Error@{connect\+Error}}
+\index{connect\+Error@{connect\+Error}!proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback}}
+\subsubsection[{connect\+Error(const folly\+::\+Async\+Socket\+Exception \&ex)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback\+::connect\+Error (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{ex}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPConnector_1_1Callback_a4f01da41ef58437eeb47c1dee4a5bc47}
+
+
+Implemented in {\bf Proxy\+Service\+::\+Proxy\+Handler} \doxyref{}{p.}{classProxyService_1_1ProxyHandler_a7c14c1ee3b04187e72ea5f42cde84dff}, and {\bf Curl\+Service\+::\+Curl\+Client} \doxyref{}{p.}{classCurlService_1_1CurlClient_af37e3647eb96eda96323787207c33e80}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Connector\+::connect\+Err(), and $\sim$\+Callback().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback}!connect\+Success@{connect\+Success}}
+\index{connect\+Success@{connect\+Success}!proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback}}
+\subsubsection[{connect\+Success(\+H\+T\+T\+P\+Upstream\+Session $\ast$session)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback\+::connect\+Success (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Upstream\+Session} $\ast$}]{session}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPConnector_1_1Callback_aae878d2da74442ffc19ecb3bbbee7d9e}
+
+
+Implemented in {\bf Proxy\+Service\+::\+Proxy\+Handler} \doxyref{}{p.}{classProxyService_1_1ProxyHandler_a0a4e260a80e44acec79c992015a7546c}, and {\bf Curl\+Service\+::\+Curl\+Client} \doxyref{}{p.}{classCurlService_1_1CurlClient_a8e0166bd540cf4a16b0ef1dd3accf882}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Connector\+::connect\+Success(), proxygen\+::\+H\+T\+T\+P\+Connector\+::set\+H\+T\+T\+P\+Codec\+Factory(), and $\sim$\+Callback().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/{\bf H\+T\+T\+P\+Connector.\+h}\end{DoxyCompactItemize}

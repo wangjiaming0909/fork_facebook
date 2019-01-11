@@ -1,0 +1,335 @@
+\section{proxygen\+:\+:Request\+Worker Class Reference}
+\label{classproxygen_1_1RequestWorker}\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+
+
+{\ttfamily \#include $<$Request\+Worker.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Request\+Worker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1RequestWorker}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Finish\+Callback}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Request\+Worker} ({\bf Finish\+Callback} \&callback, uint8\+\_\+t thread\+Id, const std\+::string \&evb\+Name=std\+::string())
+\item 
+void {\bf add\+Service\+Worker} ({\bf Service} $\ast$service, {\bf Service\+Worker} $\ast$sw)
+\item 
+{\bf Service\+Worker} $\ast$ {\bf get\+Service\+Worker} ({\bf Service} $\ast$service) const 
+\item 
+void {\bf flush\+Stats} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint64\+\_\+t {\bf next\+Request\+Id} ()
+\item 
+static {\bf Request\+Worker} $\ast$ {\bf get\+Request\+Worker} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf setup} () override
+\item 
+void {\bf cleanup} () override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t {\bf next\+Request\+Id\+\_\+}
+\item 
+std\+::map$<$ {\bf Service} $\ast$, {\bf Service\+Worker} $\ast$ $>$ {\bf service\+Workers\+\_\+}
+\item 
+{\bf Finish\+Callback} \& {\bf callback\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\doxyref{Request\+Worker}{p.}{classproxygen_1_1RequestWorker} extends \doxyref{Worker\+Thread}{p.}{classproxygen_1_1WorkerThread}, and also contains a list of Service\+Workers running in this thread. 
+
+Definition at line 25 of file Request\+Worker.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!Request\+Worker@{Request\+Worker}}
+\index{Request\+Worker@{Request\+Worker}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{Request\+Worker(\+Finish\+Callback \&callback, uint8\+\_\+t thread\+Id, const std\+::string \&evb\+Name=std\+::string())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Request\+Worker\+::\+Request\+Worker (
+\begin{DoxyParamCaption}
+\item[{{\bf Finish\+Callback} \&}]{callback, }
+\item[{uint8\+\_\+t}]{thread\+Id, }
+\item[{const std\+::string \&}]{evb\+Name = {\ttfamily std\+:\+:string()}}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1RequestWorker_a966adef15443005c8a0dbc2651f5e4f4}
+Create a new \doxyref{Request\+Worker}{p.}{classproxygen_1_1RequestWorker}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em proxygen} & The object to notify when this worker finishes. \\
+\hline
+{\em thread\+Id} & A unique ID for this worker. \\
+\hline
+{\em evb\+Name} & The event base will ne named to this name (thread name) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 17 of file Request\+Worker.\+cpp.
+
+
+
+Referenced by proxygen\+::\+Request\+Worker\+::\+Finish\+Callback\+::$\sim$\+Finish\+Callback().
+
+
+\begin{DoxyCode}
+19     : WorkerThread(folly::EventBaseManager::get(), evbName),
+20       nextRequestId_(static\_cast<uint64\_t>(threadId) << 56),
+21       callback_(callback) \{
+22 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!add\+Service\+Worker@{add\+Service\+Worker}}
+\index{add\+Service\+Worker@{add\+Service\+Worker}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{add\+Service\+Worker(\+Service $\ast$service, Service\+Worker $\ast$sw)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Request\+Worker\+::add\+Service\+Worker (
+\begin{DoxyParamCaption}
+\item[{{\bf Service} $\ast$}]{service, }
+\item[{{\bf Service\+Worker} $\ast$}]{sw}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1RequestWorker_a2a5e381eabc3f275c967378aabdc4e8e}
+Track the \doxyref{Service\+Worker}{p.}{classproxygen_1_1ServiceWorker} objects in-\/use by this worker. 
+
+Definition at line 57 of file Request\+Worker.\+h.
+
+
+
+References service\+Workers\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Service\+::add\+Service\+Worker().
+
+
+\begin{DoxyCode}
+57                                                              \{
+58     CHECK(serviceWorkers_.find(service) == serviceWorkers_.end());
+59     serviceWorkers_[service] = sw;
+60   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{cleanup() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Request\+Worker\+::cleanup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1RequestWorker_a12d78f930553110068bb14cac39c815a}
+
+
+Reimplemented from {\bf proxygen\+::\+Worker\+Thread} \doxyref{}{p.}{classproxygen_1_1WorkerThread_a08a1ebe42a2cf0d9516ffe646efa06ed}.
+
+
+
+Definition at line 40 of file Request\+Worker.\+cpp.
+
+
+
+References callback\+\_\+, proxygen\+::\+Worker\+Thread\+::cleanup(), and proxygen\+::\+Request\+Worker\+::\+Finish\+Callback\+::worker\+Finished().
+
+
+
+Referenced by get\+Service\+Worker().
+
+
+\begin{DoxyCode}
+40                             \{
+41   WorkerThread::cleanup();
+42   callback_.workerFinished(\textcolor{keyword}{this});
+43 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!flush\+Stats@{flush\+Stats}}
+\index{flush\+Stats@{flush\+Stats}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{flush\+Stats()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Request\+Worker\+::flush\+Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1RequestWorker_ae819635233e2a7c43f2ed3075b00c817}
+Flush any thread-\/local stats being tracked by our Service\+Workers.
+
+This must be invoked from within worker\textquotesingle{}s thread. 
+
+Definition at line 28 of file Request\+Worker.\+cpp.
+
+
+
+References proxygen\+::\+Worker\+Thread\+::get\+Event\+Base(), and service\+Workers\+\_\+.
+
+
+
+Referenced by get\+Service\+Worker().
+
+
+\begin{DoxyCode}
+28                                \{
+29   CHECK(getEventBase()->isInEventBaseThread());
+30   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& p: serviceWorkers_) \{
+31     p.second->flushStats();
+32   \}
+33 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!get\+Request\+Worker@{get\+Request\+Worker}}
+\index{get\+Request\+Worker@{get\+Request\+Worker}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{get\+Request\+Worker()}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Request\+Worker}$\ast$ proxygen\+::\+Request\+Worker\+::get\+Request\+Worker (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1RequestWorker_aec5204046da7d3f6f023a08ebeef4492}
+
+
+Definition at line 47 of file Request\+Worker.\+h.
+
+
+
+References proxygen\+::\+Worker\+Thread\+::get\+Current\+Worker\+Thread().
+
+
+
+Referenced by next\+Request\+Id().
+
+
+\begin{DoxyCode}
+47                                            \{
+48     RequestWorker* \textcolor{keyword}{self} = \textcolor{keyword}{dynamic\_cast<}RequestWorker*\textcolor{keyword}{>}(
+49       WorkerThread::getCurrentWorkerThread());
+50     CHECK\_NOTNULL(\textcolor{keyword}{self});
+51     \textcolor{keywordflow}{return} \textcolor{keyword}{self};
+52   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!get\+Service\+Worker@{get\+Service\+Worker}}
+\index{get\+Service\+Worker@{get\+Service\+Worker}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{get\+Service\+Worker(\+Service $\ast$service) const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf Service\+Worker}$\ast$ proxygen\+::\+Request\+Worker\+::get\+Service\+Worker (
+\begin{DoxyParamCaption}
+\item[{{\bf Service} $\ast$}]{service}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1RequestWorker_a80d507bcddfd7998381ab14fc234c4e3}
+For a given service, returns the \doxyref{Service\+Worker}{p.}{classproxygen_1_1ServiceWorker} associated with this \doxyref{Request\+Worker}{p.}{classproxygen_1_1RequestWorker} 
+
+Definition at line 66 of file Request\+Worker.\+h.
+
+
+
+References cleanup(), flush\+Stats(), service\+Workers\+\_\+, and setup().
+
+
+\begin{DoxyCode}
+66                                                           \{
+67     \textcolor{keyword}{auto} it = serviceWorkers_.find(service);
+68     CHECK(it != serviceWorkers_.end());
+69     \textcolor{keywordflow}{return} it->second;
+70   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!next\+Request\+Id@{next\+Request\+Id}}
+\index{next\+Request\+Id@{next\+Request\+Id}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{next\+Request\+Id()}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Request\+Worker\+::next\+Request\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1RequestWorker_a5652a68c4c169853656eddc764dbbdd1}
+
+
+Definition at line 24 of file Request\+Worker.\+cpp.
+
+
+
+References get\+Request\+Worker(), and next\+Request\+Id\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Request\+Worker\+::\+Finish\+Callback\+::$\sim$\+Finish\+Callback().
+
+
+\begin{DoxyCode}
+24                                       \{
+25   \textcolor{keywordflow}{return} getRequestWorker()->nextRequestId_++;
+26 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!setup@{setup}}
+\index{setup@{setup}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{setup() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Request\+Worker\+::setup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1RequestWorker_a0b48beda6efa8b5b4bc44b6120661ea0}
+
+
+Reimplemented from {\bf proxygen\+::\+Worker\+Thread} \doxyref{}{p.}{classproxygen_1_1WorkerThread_abfff0b79758075c7604736c77c0f1201}.
+
+
+
+Definition at line 35 of file Request\+Worker.\+cpp.
+
+
+
+References callback\+\_\+, proxygen\+::\+Worker\+Thread\+::setup(), and proxygen\+::\+Request\+Worker\+::\+Finish\+Callback\+::worker\+Started().
+
+
+
+Referenced by get\+Service\+Worker().
+
+
+\begin{DoxyCode}
+35                           \{
+36   WorkerThread::setup();
+37   callback_.workerStarted(\textcolor{keyword}{this});
+38 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!callback\+\_\+@{callback\+\_\+}}
+\index{callback\+\_\+@{callback\+\_\+}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Finish\+Callback}\& proxygen\+::\+Request\+Worker\+::callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1RequestWorker_a0082122b48169320f8022c5339021062}
+
+
+Definition at line 90 of file Request\+Worker.\+h.
+
+
+
+Referenced by cleanup(), and setup().
+
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!next\+Request\+Id\+\_\+@{next\+Request\+Id\+\_\+}}
+\index{next\+Request\+Id\+\_\+@{next\+Request\+Id\+\_\+}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{next\+Request\+Id\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Request\+Worker\+::next\+Request\+Id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1RequestWorker_aad3ba68471c2ac58cb233ef24eb7fa59}
+
+
+Definition at line 85 of file Request\+Worker.\+h.
+
+
+
+Referenced by next\+Request\+Id().
+
+\index{proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}!service\+Workers\+\_\+@{service\+Workers\+\_\+}}
+\index{service\+Workers\+\_\+@{service\+Workers\+\_\+}!proxygen\+::\+Request\+Worker@{proxygen\+::\+Request\+Worker}}
+\subsubsection[{service\+Workers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Service}$\ast$, {\bf Service\+Worker}$\ast$$>$ proxygen\+::\+Request\+Worker\+::service\+Workers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1RequestWorker_a510fbeb3304ed56f47bc6973540a4e7f}
+
+
+Definition at line 88 of file Request\+Worker.\+h.
+
+
+
+Referenced by add\+Service\+Worker(), flush\+Stats(), and get\+Service\+Worker().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/services/{\bf Request\+Worker.\+h}\item 
+proxygen/lib/services/{\bf Request\+Worker.\+cpp}\end{DoxyCompactItemize}

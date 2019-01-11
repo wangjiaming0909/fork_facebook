@@ -1,0 +1,217 @@
+\section{proxygen/lib/utils/test/\+Perfect\+Index\+Map\+Test.cpp File Reference}
+\label{PerfectIndexMapTest_8cpp}\index{proxygen/lib/utils/test/\+Perfect\+Index\+Map\+Test.\+cpp@{proxygen/lib/utils/test/\+Perfect\+Index\+Map\+Test.\+cpp}}
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Common\+Headers.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Perfect\+Index\+Map.\+h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Perfect\+Index\+Map\+Tests\+Template\+Params$<$ Key, Other\+Key, None\+Key, Perfect\+Hash\+Str\+To\+Key, Allow\+Duplicates, Case\+Insensitive, Key\+Common\+Offset, Num\+Keys $>$}
+\item 
+class {\bf Perfect\+Index\+Map\+Tests$<$ T $>$}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef testing\+::\+Types$<$ {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, false, true, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes $>$, {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, true, true, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes $>$, {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, true, false, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes $>$, {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, false, false, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes $>$ $>$ {\bf Test\+Types}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE} ({\bf Perfect\+Index\+Map\+Tests}, {\bf Test\+Types})
+\item 
+{\bf T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST} ({\bf Perfect\+Index\+Map\+Tests}, Basic\+Key\+Set\+Add\+Remove\+Get\+Single\+Or\+None)
+\item 
+{\bf T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST} ({\bf Perfect\+Index\+Map\+Tests}, Basic\+Other\+Key\+Set\+Add\+Remove\+Get\+Single\+Or\+None)
+\item 
+{\bf T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST} ({\bf Perfect\+Index\+Map\+Tests}, Other\+String\+Case\+Sensitivity)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}!Test\+Types@{Test\+Types}}
+\index{Test\+Types@{Test\+Types}!Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}}
+\subsubsection[{Test\+Types}]{\setlength{\rightskip}{0pt plus 5cm}typedef testing\+::\+Types$<$ {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, false, true, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes$>$, {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, true, true, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes$>$, {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, true, false, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes$>$, {\bf Perfect\+Index\+Map\+Tests\+Template\+Params}$<$ {\bf H\+T\+T\+P\+Header\+Code}, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+NE, H\+T\+T\+P\+Common\+Headers\+::hash, false, false, H\+T\+T\+P\+Header\+Code\+Common\+Offset, H\+T\+T\+P\+Common\+Headers\+::num\+\_\+header\+\_\+codes$>$ $>$ {\bf Test\+Types}}\label{PerfectIndexMapTest_8cpp_ae16511366a77c1997dc454718c576062}
+
+
+Definition at line 102 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}!T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}}
+\index{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}!Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}}
+\subsubsection[{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T(\+Perfect\+Index\+Map\+Tests, Basic\+Key\+Set\+Add\+Remove\+Get\+Single\+Or\+None)}]{\setlength{\rightskip}{0pt plus 5cm}T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Perfect\+Index\+Map\+Tests}}]{, }
+\item[{Basic\+Key\+Set\+Add\+Remove\+Get\+Single\+Or\+None}]{}
+\end{DoxyParamCaption}
+)}\label{PerfectIndexMapTest_8cpp_abd221f26d5b97e9305359bef1faceaa3}
+
+
+Definition at line 105 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+105                                                                       \{
+106   \textcolor{keyword}{typedef} \textcolor{keyword}{typename} TypeParam::TKey Key;
+107 
+108   EXPECT\_EQ(this->testMap\_.size(), 0);
+109 
+110   \textcolor{comment}{// Insert numInserted distinct keys and duplicate values into the map.}
+111   \textcolor{keyword}{auto} numInserted = TypeParam::TNumKeys - TypeParam::TKeyCommonOffset;
+112   \textcolor{keywordflow}{for} (uint64\_t j = TypeParam::TKeyCommonOffset; j < TypeParam::TNumKeys; ++j) \{
+113     this->testMap\_.set(static\_cast<Key>(j), std::to\_string(j));
+114   \}
+115   EXPECT\_EQ(this->testMap\_.size(), numInserted);
+116 
+117   \textcolor{comment}{// Setting a duplicate should not increase the size of the map, regardless}
+118   \textcolor{comment}{// of whether duplicates are supported}
+119   Key key = \textcolor{keyword}{static\_cast<}Key\textcolor{keyword}{>}(TypeParam::TKeyCommonOffset);
+120   this->testMap\_.set(key, std::to\_string(TypeParam::TKeyCommonOffset));
+121   EXPECT\_EQ(this->testMap\_.size(), numInserted);
+122 
+123   \textcolor{comment}{// Adding is only allowed when duplicates are and so here we expect the size}
+124   \textcolor{comment}{// of the map to change.}
+125   \textcolor{keywordflow}{if} (TypeParam::TAllowDuplicates) \{
+126     this->testMap\_.add(key, std::to\_string(TypeParam::TKeyCommonOffset));
+127     EXPECT\_EQ(this->testMap\_.size(), numInserted + 1);
+128   \}
+129 
+130   \textcolor{comment}{// Remove the last added element in the map (and its duplicate if applicable)}
+131   \textcolor{comment}{// Adjusts numInserted as appropriate}
+132   this->testMap\_.remove(key);
+133   EXPECT\_EQ(this->testMap\_.size(), --numInserted);
+134 
+135   \textcolor{comment}{// Verify the integrity of the map}
+136   \textcolor{keywordflow}{for} (uint64\_t j = TypeParam::TKeyCommonOffset + 1;
+137        j < TypeParam::TNumKeys; ++j) \{
+138     key = \textcolor{keyword}{static\_cast<}Key\textcolor{keyword}{>}(j);
+139     \textcolor{keyword}{auto} optional = this->testMap\_.getSingleOrNone(key);
+140     ASSERT\_TRUE(optional.hasValue());
+141     ASSERT\_EQ(optional.value(), std::to\_string(j));
+142   \}
+143 \}
+\end{DoxyCode}
+\index{Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}!T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}}
+\index{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}!Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}}
+\subsubsection[{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T(\+Perfect\+Index\+Map\+Tests, Basic\+Other\+Key\+Set\+Add\+Remove\+Get\+Single\+Or\+None)}]{\setlength{\rightskip}{0pt plus 5cm}T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Perfect\+Index\+Map\+Tests}}]{, }
+\item[{Basic\+Other\+Key\+Set\+Add\+Remove\+Get\+Single\+Or\+None}]{}
+\end{DoxyParamCaption}
+)}\label{PerfectIndexMapTest_8cpp_af9c86580076f1d0ea829e2ce3e8d4258}
+
+
+Definition at line 145 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+145                                                                            \{
+146   EXPECT\_EQ(this->testMap\_.size(), 0);
+147 
+148   \textcolor{comment}{// Insert numInserted distinct keys and values in to the map}
+149   \textcolor{keywordtype}{int} numInserted = 10;
+150   std::string val;
+151   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} num = 0; num < numInserted; ++num) \{
+152     val = std::to\_string(num);
+153     this->testMap\_.set(val, val);
+154   \}
+155   EXPECT\_EQ(this->testMap\_.size(), numInserted);
+156 
+157   \textcolor{comment}{// Setting a duplicate should not increase the size of the map, regardless}
+158   \textcolor{comment}{// of whether duplicates are supported}
+159   this->testMap\_.set(val, val);
+160   EXPECT\_EQ(this->testMap\_.size(), numInserted);
+161 
+162   \textcolor{comment}{// Adding is only allowed when duplicates are and so here we expect the size}
+163   \textcolor{comment}{// of the map to change.}
+164   \textcolor{keywordflow}{if} (TypeParam::TAllowDuplicates) \{
+165     this->testMap\_.add(val, val);
+166     EXPECT\_EQ(this->testMap\_.size(), numInserted + 1);
+167   \}
+168 
+169   \textcolor{comment}{// Remove the last added element in the map (and its duplicate if applicable)}
+170   \textcolor{comment}{// Adjusts numInserted as appropriate}
+171   this->testMap\_.remove(val);
+172   EXPECT\_EQ(this->testMap\_.size(), --numInserted);
+173 
+174   \textcolor{comment}{// Verify the integrity of the map}
+175   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} num = 0; num < numInserted; ++num) \{
+176     val = std::to\_string(num);
+177     \textcolor{keyword}{auto} optional = this->testMap\_.getSingleOrNone(val);
+178     ASSERT\_TRUE(optional.hasValue());
+179     ASSERT\_EQ(optional.value(), val);
+180   \}
+181 \}
+\end{DoxyCode}
+\index{Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}!T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}}
+\index{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST}!Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}}
+\subsubsection[{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T(\+Perfect\+Index\+Map\+Tests, Other\+String\+Case\+Sensitivity)}]{\setlength{\rightskip}{0pt plus 5cm}T\+Y\+P\+E\+D\+\_\+\+T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Perfect\+Index\+Map\+Tests}}]{, }
+\item[{Other\+String\+Case\+Sensitivity}]{}
+\end{DoxyParamCaption}
+)}\label{PerfectIndexMapTest_8cpp_a0fadfd68676cb220abbf44579e87c56b}
+
+
+Definition at line 188 of file Perfect\+Index\+Map\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+188                                                              \{
+189   std::string testString = \textcolor{stringliteral}{"test"};
+190   std::string modTestString = \textcolor{stringliteral}{"tEsT"};
+191   std::string addModTestString = \textcolor{stringliteral}{"TeSt"};
+192   this->testMap\_.set(testString, testString);
+193 
+194   \textcolor{keyword}{auto} currentCount = this->testMap\_.size();
+195   folly::Optional<std::string> optional;
+196   \textcolor{keywordflow}{if} (TypeParam::TCaseInsensitive) \{
+197     optional = this->testMap\_.getSingleOrNone(modTestString);
+198     ASSERT\_TRUE(optional.hasValue());
+199     ASSERT\_EQ(optional.value(), testString);
+200 
+201     this->testMap\_.set(modTestString, modTestString);
+202     EXPECT\_EQ(this->testMap\_.size(), currentCount);
+203 
+204     optional = this->testMap\_.getSingleOrNone(testString);
+205     ASSERT\_TRUE(optional.hasValue());
+206     ASSERT\_EQ(optional.value(), modTestString);
+207   \} \textcolor{keywordflow}{else} \{
+208     this->testMap\_.set(modTestString, modTestString);
+209     EXPECT\_EQ(this->testMap\_.size(), ++currentCount);
+210 
+211     this->testMap\_.set(testString, testString);
+212     EXPECT\_EQ(this->testMap\_.size(), currentCount);
+213 
+214     optional = this->testMap\_.getSingleOrNone(testString);
+215     ASSERT\_TRUE(optional.hasValue());
+216     ASSERT\_EQ(optional.value(), testString);
+217 
+218     optional = this->testMap\_.getSingleOrNone(modTestString);
+219     ASSERT\_TRUE(optional.hasValue());
+220     ASSERT\_EQ(optional.value(), modTestString);
+221   \}
+222 
+223   \textcolor{keywordflow}{if} (TypeParam::TAllowDuplicates) \{
+224     \textcolor{comment}{// Finally verify that two exact same keys are treated as duplicates.}
+225     this->testMap\_.add(addModTestString, addModTestString);
+226     optional = this->testMap\_.getSingleOrNone(testString);
+227     \textcolor{keywordflow}{if} (TypeParam::TCaseInsensitive) \{
+228       EXPECT\_FALSE(optional.hasValue());
+229     \} \textcolor{keywordflow}{else} \{
+230       EXPECT\_TRUE(optional.has\_value());
+231     \}
+232   \}
+233 \}
+\end{DoxyCode}
+\index{Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}!T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE}}
+\index{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE@{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE}!Perfect\+Index\+Map\+Test.\+cpp@{Perfect\+Index\+Map\+Test.\+cpp}}
+\subsubsection[{T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E(\+Perfect\+Index\+Map\+Tests, Test\+Types)}]{\setlength{\rightskip}{0pt plus 5cm}T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+SE (
+\begin{DoxyParamCaption}
+\item[{{\bf Perfect\+Index\+Map\+Tests}}]{, }
+\item[{{\bf Test\+Types}}]{}
+\end{DoxyParamCaption}
+)}\label{PerfectIndexMapTest_8cpp_a9efec34719e883d1ce02315e5bb7fe15}

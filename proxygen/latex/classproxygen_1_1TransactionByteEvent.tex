@@ -1,0 +1,112 @@
+\section{proxygen\+:\+:Transaction\+Byte\+Event Class Reference}
+\label{classproxygen_1_1TransactionByteEvent}\index{proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}}
+
+
+{\ttfamily \#include $<$Byte\+Events.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Transaction\+Byte\+Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1TransactionByteEvent}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Transaction\+Byte\+Event} (uint64\+\_\+t byte\+No, {\bf Event\+Type} event\+Type, {\bf H\+T\+T\+P\+Transaction} $\ast$txn)
+\item 
+{\bf $\sim$\+Transaction\+Byte\+Event} ()
+\item 
+{\bf H\+T\+T\+P\+Transaction} $\ast$ {\bf get\+Transaction} () override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Transaction} $\ast$ {\bf txn\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 43 of file Byte\+Events.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}!Transaction\+Byte\+Event@{Transaction\+Byte\+Event}}
+\index{Transaction\+Byte\+Event@{Transaction\+Byte\+Event}!proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}}
+\subsubsection[{Transaction\+Byte\+Event(uint64\+\_\+t byte\+No, Event\+Type event\+Type, H\+T\+T\+P\+Transaction $\ast$txn)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Transaction\+Byte\+Event\+::\+Transaction\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{byte\+No, }
+\item[{{\bf Event\+Type}}]{event\+Type, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TransactionByteEvent_a662748c596e3b83c60c2b3a20235b5e6}
+
+
+Definition at line 45 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+48       : ByteEvent(byteNo, eventType), txn_(txn) \{
+49     txn_->incrementPendingByteEvents();
+50   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}!````~Transaction\+Byte\+Event@{$\sim$\+Transaction\+Byte\+Event}}
+\index{````~Transaction\+Byte\+Event@{$\sim$\+Transaction\+Byte\+Event}!proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}}
+\subsubsection[{$\sim$\+Transaction\+Byte\+Event()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Transaction\+Byte\+Event\+::$\sim$\+Transaction\+Byte\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TransactionByteEvent_a195ca1339276b6082e738bb816656af7}
+
+
+Definition at line 52 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+52                           \{
+53     txn_->decrementPendingByteEvents();
+54   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}!get\+Transaction@{get\+Transaction}}
+\index{get\+Transaction@{get\+Transaction}!proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}}
+\subsubsection[{get\+Transaction() override}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction}$\ast$ proxygen\+::\+Transaction\+Byte\+Event\+::get\+Transaction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1TransactionByteEvent_affb42e3c628b508a798b44e6367b13ef}
+
+
+Reimplemented from {\bf proxygen\+::\+Byte\+Event} \doxyref{}{p.}{classproxygen_1_1ByteEvent_a1b193cbf3dcac88db6d439d0f7a3b798}.
+
+
+
+Definition at line 56 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+56                                              \{
+57     \textcolor{keywordflow}{return} txn_;
+58   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}!txn\+\_\+@{txn\+\_\+}}
+\index{txn\+\_\+@{txn\+\_\+}!proxygen\+::\+Transaction\+Byte\+Event@{proxygen\+::\+Transaction\+Byte\+Event}}
+\subsubsection[{txn\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction}$\ast$ proxygen\+::\+Transaction\+Byte\+Event\+::txn\+\_\+}\label{classproxygen_1_1TransactionByteEvent_a41aa9126f7877f5a54614be2c323aad9}
+
+
+Definition at line 60 of file Byte\+Events.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf Byte\+Events.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,439 @@
+\section{proxygen/lib/http/codec/compress/experimental/simulator/\+Q\+M\+I\+N\+Scheme.h File Reference}
+\label{QMINScheme_8h}\index{proxygen/lib/http/codec/compress/experimental/simulator/\+Q\+M\+I\+N\+Scheme.\+h@{proxygen/lib/http/codec/compress/experimental/simulator/\+Q\+M\+I\+N\+Scheme.\+h}}
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+String.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Queue.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+No\+Path\+Indexing\+Strategy.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/experimental/simulator/\+Compression\+Scheme.\+h$>$}\\*
+{\ttfamily \#include $<$sys/queue.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf qmin\+\_\+ctl\+\_\+out}
+\item 
+struct {\bf stream\+\_\+chunk}
+\item 
+struct {\bf stream}
+\item 
+class {\bf proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme}
+\item 
+struct {\bf proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::\+Q\+M\+I\+N\+Ack}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\item 
+ {\bf proxygen\+::compress}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf qmin\+\_\+index\+\_\+type} \{ {\bf Q\+I\+T\+\_\+\+Y\+ES}, 
+{\bf Q\+I\+T\+\_\+\+NO}, 
+{\bf Q\+I\+T\+\_\+\+N\+E\+V\+ER}
+ \}
+\item 
+enum \{ {\bf Q\+S\+I\+D\+E\+\_\+\+C\+L\+I\+E\+NT}, 
+{\bf Q\+S\+I\+D\+E\+\_\+\+S\+E\+R\+V\+ER}
+ \}
+\item 
+enum {\bf qmin\+\_\+encode\+\_\+status} \{ {\bf Q\+E\+S\+\_\+\+OK}, 
+{\bf Q\+E\+S\+\_\+\+N\+O\+B\+U\+FS}, 
+{\bf Q\+E\+S\+\_\+\+E\+RR}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static struct qmin\+\_\+enc $\ast$ {\bf qmin\+\_\+enc\+\_\+new} (int, unsigned, const struct {\bf qmin\+\_\+ctl\+\_\+out} $\ast$, const char $\ast$)
+\item 
+static ssize\+\_\+t {\bf qmin\+\_\+enc\+\_\+cmds\+\_\+in} (struct qmin\+\_\+enc $\ast$, const void $\ast$, size\+\_\+t)
+\item 
+static enum {\bf qmin\+\_\+encode\+\_\+status} {\bf qmin\+\_\+enc\+\_\+encode} (struct qmin\+\_\+enc $\ast$, unsigned, const char $\ast$, unsigned, const char $\ast$, unsigned, enum {\bf qmin\+\_\+index\+\_\+type}, unsigned char $\ast$, size\+\_\+t, size\+\_\+t $\ast$)
+\item 
+static int {\bf qmin\+\_\+enc\+\_\+end\+\_\+stream\+\_\+headers} (struct qmin\+\_\+enc $\ast$)
+\item 
+static char $\ast$ {\bf qmin\+\_\+enc\+\_\+to\+\_\+str} (struct qmin\+\_\+enc $\ast$, size\+\_\+t $\ast$)
+\item 
+static void {\bf qmin\+\_\+enc\+\_\+destroy} (struct qmin\+\_\+enc $\ast$)
+\item 
+static struct qmin\+\_\+dec $\ast$ {\bf qmin\+\_\+dec\+\_\+new} (int, unsigned, const struct {\bf qmin\+\_\+ctl\+\_\+out} $\ast$, const char $\ast$)
+\item 
+static ssize\+\_\+t {\bf qmin\+\_\+dec\+\_\+cmds\+\_\+in} (struct qmin\+\_\+dec $\ast$, const void $\ast$, size\+\_\+t)
+\item 
+static ssize\+\_\+t {\bf qmin\+\_\+dec\+\_\+decode} (struct qmin\+\_\+dec $\ast$, const void $\ast$, size\+\_\+t, char $\ast$, size\+\_\+t, unsigned $\ast$, unsigned $\ast$)
+\item 
+static int {\bf qmin\+\_\+dec\+\_\+stream\+\_\+done} (struct qmin\+\_\+dec $\ast$, unsigned)
+\item 
+static void {\bf qmin\+\_\+dec\+\_\+destroy} (struct qmin\+\_\+dec $\ast$)
+\item 
+{\bf T\+A\+I\+L\+Q\+\_\+\+H\+E\+AD} (stream\+\_\+chunks\+\_\+head, {\bf stream\+\_\+chunk})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned {\bf s\+\_\+seq}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}\label{QMINScheme_8h_a726ca809ffd3d67ab4b8476646f26635}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Q\+S\+I\+D\+E\+\_\+\+C\+L\+I\+E\+NT@{Q\+S\+I\+D\+E\+\_\+\+C\+L\+I\+E\+NT}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+S\+I\+D\+E\+\_\+\+C\+L\+I\+E\+NT@{Q\+S\+I\+D\+E\+\_\+\+C\+L\+I\+E\+NT}}\item[{\em 
+Q\+S\+I\+D\+E\+\_\+\+C\+L\+I\+E\+NT\label{QMINScheme_8h_a726ca809ffd3d67ab4b8476646f26635a65695af0366542a77190776b37b1eb54}
+}]\index{Q\+S\+I\+D\+E\+\_\+\+S\+E\+R\+V\+ER@{Q\+S\+I\+D\+E\+\_\+\+S\+E\+R\+V\+ER}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+S\+I\+D\+E\+\_\+\+S\+E\+R\+V\+ER@{Q\+S\+I\+D\+E\+\_\+\+S\+E\+R\+V\+ER}}\item[{\em 
+Q\+S\+I\+D\+E\+\_\+\+S\+E\+R\+V\+ER\label{QMINScheme_8h_a726ca809ffd3d67ab4b8476646f26635aa70e5129c553a4c69b3b1131f54afe56}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 32 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+\begin{DoxyCode}
+32      \{
+33   QSIDE_CLIENT,
+34   QSIDE_SERVER,
+35 \};
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+encode\+\_\+status@{qmin\+\_\+encode\+\_\+status}}
+\index{qmin\+\_\+encode\+\_\+status@{qmin\+\_\+encode\+\_\+status}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+encode\+\_\+status}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf qmin\+\_\+encode\+\_\+status}}\label{QMINScheme_8h_ad6019ce8c665c5c044e3daa0b967f9b6}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Q\+E\+S\+\_\+\+OK@{Q\+E\+S\+\_\+\+OK}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+E\+S\+\_\+\+OK@{Q\+E\+S\+\_\+\+OK}}\item[{\em 
+Q\+E\+S\+\_\+\+OK\label{QMINScheme_8h_ad6019ce8c665c5c044e3daa0b967f9b6a8fb967e196c1a2cfc4c8883ffde21c73}
+}]\index{Q\+E\+S\+\_\+\+N\+O\+B\+U\+FS@{Q\+E\+S\+\_\+\+N\+O\+B\+U\+FS}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+E\+S\+\_\+\+N\+O\+B\+U\+FS@{Q\+E\+S\+\_\+\+N\+O\+B\+U\+FS}}\item[{\em 
+Q\+E\+S\+\_\+\+N\+O\+B\+U\+FS\label{QMINScheme_8h_ad6019ce8c665c5c044e3daa0b967f9b6a051629b3e8293e359c3609e889a445bf}
+}]\index{Q\+E\+S\+\_\+\+E\+RR@{Q\+E\+S\+\_\+\+E\+RR}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+E\+S\+\_\+\+E\+RR@{Q\+E\+S\+\_\+\+E\+RR}}\item[{\em 
+Q\+E\+S\+\_\+\+E\+RR\label{QMINScheme_8h_ad6019ce8c665c5c044e3daa0b967f9b6af228fe7155040c69659a2a1032dbcfb3}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 36 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+\begin{DoxyCode}
+36                         \{
+37   QES_OK,
+38   QES_NOBUFS,
+39   QES_ERR,
+40 \};
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+index\+\_\+type@{qmin\+\_\+index\+\_\+type}}
+\index{qmin\+\_\+index\+\_\+type@{qmin\+\_\+index\+\_\+type}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+index\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf qmin\+\_\+index\+\_\+type}}\label{QMINScheme_8h_ad65b59d50b940f44a8dd6e3864c7c387}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Q\+I\+T\+\_\+\+Y\+ES@{Q\+I\+T\+\_\+\+Y\+ES}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+I\+T\+\_\+\+Y\+ES@{Q\+I\+T\+\_\+\+Y\+ES}}\item[{\em 
+Q\+I\+T\+\_\+\+Y\+ES\label{QMINScheme_8h_ad65b59d50b940f44a8dd6e3864c7c387a0d560e25b8e96095d056209e37fe6cc4}
+}]\index{Q\+I\+T\+\_\+\+NO@{Q\+I\+T\+\_\+\+NO}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+I\+T\+\_\+\+NO@{Q\+I\+T\+\_\+\+NO}}\item[{\em 
+Q\+I\+T\+\_\+\+NO\label{QMINScheme_8h_ad65b59d50b940f44a8dd6e3864c7c387a7d8e6159fcf48cdba9bb33ebd131a42f}
+}]\index{Q\+I\+T\+\_\+\+N\+E\+V\+ER@{Q\+I\+T\+\_\+\+N\+E\+V\+ER}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!Q\+I\+T\+\_\+\+N\+E\+V\+ER@{Q\+I\+T\+\_\+\+N\+E\+V\+ER}}\item[{\em 
+Q\+I\+T\+\_\+\+N\+E\+V\+ER\label{QMINScheme_8h_ad65b59d50b940f44a8dd6e3864c7c387a7d17055b7d0e00d171d238edafa63112}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 27 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+\begin{DoxyCode}
+27                      \{
+28   QIT_YES,
+29   QIT_NO,
+30   QIT_NEVER,
+31 \};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+dec\+\_\+cmds\+\_\+in@{qmin\+\_\+dec\+\_\+cmds\+\_\+in}}
+\index{qmin\+\_\+dec\+\_\+cmds\+\_\+in@{qmin\+\_\+dec\+\_\+cmds\+\_\+in}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+dec\+\_\+cmds\+\_\+in(struct qmin\+\_\+dec $\ast$, const void $\ast$, size\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}static ssize\+\_\+t qmin\+\_\+dec\+\_\+cmds\+\_\+in (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+dec $\ast$}]{, }
+\item[{const void $\ast$}]{, }
+\item[{size\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_a21f5bfcd465825f6badffa1528f40423}
+
+
+Definition at line 84 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::decode().
+
+
+\begin{DoxyCode}
+86                                           \{
+87   \textcolor{keywordflow}{return} -1;
+88 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+dec\+\_\+decode@{qmin\+\_\+dec\+\_\+decode}}
+\index{qmin\+\_\+dec\+\_\+decode@{qmin\+\_\+dec\+\_\+decode}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+dec\+\_\+decode(struct qmin\+\_\+dec $\ast$, const void $\ast$, size\+\_\+t, char $\ast$, size\+\_\+t, unsigned $\ast$, unsigned $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static ssize\+\_\+t qmin\+\_\+dec\+\_\+decode (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+dec $\ast$}]{, }
+\item[{const void $\ast$}]{, }
+\item[{size\+\_\+t}]{, }
+\item[{char $\ast$}]{, }
+\item[{size\+\_\+t}]{, }
+\item[{unsigned $\ast$}]{, }
+\item[{unsigned $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_aa6fb4eeb89d09a6a60461d32085f6ddd}
+
+
+Definition at line 89 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::decode().
+
+
+\begin{DoxyCode}
+95                                              \{
+96   \textcolor{keywordflow}{return} -1;
+97 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+dec\+\_\+destroy@{qmin\+\_\+dec\+\_\+destroy}}
+\index{qmin\+\_\+dec\+\_\+destroy@{qmin\+\_\+dec\+\_\+destroy}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+dec\+\_\+destroy(struct qmin\+\_\+dec $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static void qmin\+\_\+dec\+\_\+destroy (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+dec $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_a8fc770fd19137b20f6f33d5f445f6463}
+
+
+Definition at line 102 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::$\sim$\+Q\+M\+I\+N\+Scheme().
+
+
+\begin{DoxyCode}
+102                                                   \{
+103 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+dec\+\_\+new@{qmin\+\_\+dec\+\_\+new}}
+\index{qmin\+\_\+dec\+\_\+new@{qmin\+\_\+dec\+\_\+new}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+dec\+\_\+new(int, unsigned, const struct qmin\+\_\+ctl\+\_\+out $\ast$, const char $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static struct qmin\+\_\+dec$\ast$ qmin\+\_\+dec\+\_\+new (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{unsigned}]{, }
+\item[{const struct {\bf qmin\+\_\+ctl\+\_\+out} $\ast$}]{, }
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_a97fdcd1cb10bea0a6edb98051297970e}
+
+
+Definition at line 78 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::\+Q\+M\+I\+N\+Scheme().
+
+
+\begin{DoxyCode}
+81                                                      \{
+82   \textcolor{keywordflow}{return} NULL;
+83 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+dec\+\_\+stream\+\_\+done@{qmin\+\_\+dec\+\_\+stream\+\_\+done}}
+\index{qmin\+\_\+dec\+\_\+stream\+\_\+done@{qmin\+\_\+dec\+\_\+stream\+\_\+done}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+dec\+\_\+stream\+\_\+done(struct qmin\+\_\+dec $\ast$, unsigned)}]{\setlength{\rightskip}{0pt plus 5cm}static int qmin\+\_\+dec\+\_\+stream\+\_\+done (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+dec $\ast$}]{, }
+\item[{unsigned}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_aebbca63e0f95d02f0c0118edbbb62873}
+
+
+Definition at line 98 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::decode().
+
+
+\begin{DoxyCode}
+99                                             \{
+100   \textcolor{keywordflow}{return} -1;
+101 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+enc\+\_\+cmds\+\_\+in@{qmin\+\_\+enc\+\_\+cmds\+\_\+in}}
+\index{qmin\+\_\+enc\+\_\+cmds\+\_\+in@{qmin\+\_\+enc\+\_\+cmds\+\_\+in}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+enc\+\_\+cmds\+\_\+in(struct qmin\+\_\+enc $\ast$, const void $\ast$, size\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}static ssize\+\_\+t qmin\+\_\+enc\+\_\+cmds\+\_\+in (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+enc $\ast$}]{, }
+\item[{const void $\ast$}]{, }
+\item[{size\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_adf120f4a5c91dee056dc0cb8271556c5}
+
+
+Definition at line 52 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::recv\+Ack().
+
+
+\begin{DoxyCode}
+54                                           \{
+55   \textcolor{keywordflow}{return} -1;
+56 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+enc\+\_\+destroy@{qmin\+\_\+enc\+\_\+destroy}}
+\index{qmin\+\_\+enc\+\_\+destroy@{qmin\+\_\+enc\+\_\+destroy}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+enc\+\_\+destroy(struct qmin\+\_\+enc $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static void qmin\+\_\+enc\+\_\+destroy (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+enc $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_aea0df78e273f1749c6684af0065e8120}
+
+
+Definition at line 75 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::$\sim$\+Q\+M\+I\+N\+Scheme().
+
+
+\begin{DoxyCode}
+75                                                   \{
+76 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+enc\+\_\+encode@{qmin\+\_\+enc\+\_\+encode}}
+\index{qmin\+\_\+enc\+\_\+encode@{qmin\+\_\+enc\+\_\+encode}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+enc\+\_\+encode(struct qmin\+\_\+enc $\ast$, unsigned, const char $\ast$, unsigned, const char $\ast$, unsigned, enum qmin\+\_\+index\+\_\+type, unsigned char $\ast$, size\+\_\+t, size\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static enum {\bf qmin\+\_\+encode\+\_\+status} qmin\+\_\+enc\+\_\+encode (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+enc $\ast$}]{, }
+\item[{unsigned}]{, }
+\item[{const char $\ast$}]{, }
+\item[{unsigned}]{, }
+\item[{const char $\ast$}]{, }
+\item[{unsigned}]{, }
+\item[{enum}]{qmin\+\_\+index\+\_\+type, }
+\item[{unsigned char $\ast$}]{, }
+\item[{size\+\_\+t}]{, }
+\item[{size\+\_\+t $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_afa8e585cc0653483ca8eb940fe8c6e4b}
+
+
+Definition at line 57 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+References Q\+E\+S\+\_\+\+E\+RR.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::encode().
+
+
+\begin{DoxyCode}
+66                                                            \{
+67   \textcolor{keywordflow}{return} QES_ERR;
+68 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+enc\+\_\+end\+\_\+stream\+\_\+headers@{qmin\+\_\+enc\+\_\+end\+\_\+stream\+\_\+headers}}
+\index{qmin\+\_\+enc\+\_\+end\+\_\+stream\+\_\+headers@{qmin\+\_\+enc\+\_\+end\+\_\+stream\+\_\+headers}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+enc\+\_\+end\+\_\+stream\+\_\+headers(struct qmin\+\_\+enc $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static int qmin\+\_\+enc\+\_\+end\+\_\+stream\+\_\+headers (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+enc $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_a163801a5ca211d33fae8ac675d101062}
+
+
+Definition at line 69 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::encode().
+
+
+\begin{DoxyCode}
+69                                                             \{
+70   \textcolor{keywordflow}{return} -1;
+71 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+enc\+\_\+new@{qmin\+\_\+enc\+\_\+new}}
+\index{qmin\+\_\+enc\+\_\+new@{qmin\+\_\+enc\+\_\+new}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+enc\+\_\+new(int, unsigned, const struct qmin\+\_\+ctl\+\_\+out $\ast$, const char $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static struct qmin\+\_\+enc$\ast$ qmin\+\_\+enc\+\_\+new (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{unsigned}]{, }
+\item[{const struct {\bf qmin\+\_\+ctl\+\_\+out} $\ast$}]{, }
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_a14b8128f1ad1a399554eea7fead45c19}
+
+
+Definition at line 46 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::\+Q\+M\+I\+N\+Scheme().
+
+
+\begin{DoxyCode}
+49                                                      \{
+50   \textcolor{keywordflow}{return} NULL;
+51 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!qmin\+\_\+enc\+\_\+to\+\_\+str@{qmin\+\_\+enc\+\_\+to\+\_\+str}}
+\index{qmin\+\_\+enc\+\_\+to\+\_\+str@{qmin\+\_\+enc\+\_\+to\+\_\+str}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{qmin\+\_\+enc\+\_\+to\+\_\+str(struct qmin\+\_\+enc $\ast$, size\+\_\+t $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}static char$\ast$ qmin\+\_\+enc\+\_\+to\+\_\+str (
+\begin{DoxyParamCaption}
+\item[{struct qmin\+\_\+enc $\ast$}]{, }
+\item[{size\+\_\+t $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_a75167fe669f3eccf1a11cb49a4e5e0e1}
+
+
+Definition at line 72 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::encode().
+
+
+\begin{DoxyCode}
+72                                                               \{
+73   \textcolor{keywordflow}{return} strdup(\textcolor{stringliteral}{""});
+74 \}
+\end{DoxyCode}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!T\+A\+I\+L\+Q\+\_\+\+H\+E\+AD@{T\+A\+I\+L\+Q\+\_\+\+H\+E\+AD}}
+\index{T\+A\+I\+L\+Q\+\_\+\+H\+E\+AD@{T\+A\+I\+L\+Q\+\_\+\+H\+E\+AD}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{T\+A\+I\+L\+Q\+\_\+\+H\+E\+A\+D(stream\+\_\+chunks\+\_\+head, stream\+\_\+chunk)}]{\setlength{\rightskip}{0pt plus 5cm}T\+A\+I\+L\+Q\+\_\+\+H\+E\+AD (
+\begin{DoxyParamCaption}
+\item[{stream\+\_\+chunks\+\_\+head}]{, }
+\item[{{\bf stream\+\_\+chunk}}]{}
+\end{DoxyParamCaption}
+)}\label{QMINScheme_8h_a6072095322265802481a6d1a81993ae2}
+
+
+\subsection{Variable Documentation}
+\index{Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}!s\+\_\+seq@{s\+\_\+seq}}
+\index{s\+\_\+seq@{s\+\_\+seq}!Q\+M\+I\+N\+Scheme.\+h@{Q\+M\+I\+N\+Scheme.\+h}}
+\subsubsection[{s\+\_\+seq}]{\setlength{\rightskip}{0pt plus 5cm}unsigned s\+\_\+seq\hspace{0.3cm}{\ttfamily [static]}}\label{QMINScheme_8h_a830973375e0566d764fcbdad688fdee9}
+
+
+Definition at line 107 of file Q\+M\+I\+N\+Scheme.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+M\+I\+N\+Scheme\+::\+Q\+M\+I\+N\+Scheme().
+

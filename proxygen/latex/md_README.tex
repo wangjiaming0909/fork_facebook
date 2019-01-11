@@ -1,0 +1,98 @@
+{\tt }
+
+This project comprises the core C++ H\+T\+TP abstractions used at Facebook. Internally, it is used as the basis for building many H\+T\+TP servers, proxies, and clients. This release focuses on the common H\+T\+TP abstractions and our simple H\+T\+T\+P\+Server framework. Future releases will provide simple client A\+P\+Is as well. The framework supports H\+T\+T\+P/1.\+1, S\+P\+D\+Y/3, S\+P\+D\+Y/3.\+1, and H\+T\+T\+P/2. The goal is to provide a simple, performant, and modern C++ H\+T\+TP library.
+
+We have a Google group for general discussions at {\tt https\+://groups.\+google.\+com/d/forum/facebook-\/proxygen}.
+
+The {\tt original blog post} also has more background on the project.
+
+\subsubsection*{Installing}
+
+Note that currently this project has only been tested on Ubuntu 14.\+04, although it likely works on many other platforms. Support for Mac O\+SX is incomplete.
+
+You will need at least 3 GiB of memory to compile {\ttfamily proxygen} and its dependencies.
+
+\subparagraph*{Easy Install}
+
+Just run {\ttfamily ./deps.sh} from the {\ttfamily proxygen/} directory to get and build all the dependencies and {\ttfamily proxygen}. It will also run all the tests. Then run {\ttfamily ./reinstall.sh} to install it. You can run {\ttfamily ./deps.sh \&\& ./reinstall.sh} whenever to rebase the dependencies, and then rebuild and reinstall {\ttfamily proxygen}.
+
+A note on compatibility\+: this project relies on system installed {\tt folly}. If you rebase {\ttfamily proxygen} and {\ttfamily make} starts to fail, you likely need to update to the latest version of {\ttfamily folly}. Running {\ttfamily ./deps.sh \&\& ./reinstall.sh} will do this for you. We are still working on a solution to manage dependencies more predictably.
+
+\subparagraph*{Other Platforms}
+
+If you are running on another platform, you may need to install several packages first. Proxygen and {\ttfamily folly} are all autotools based projects.
+
+\subsubsection*{Introduction}
+
+Directory structure and contents\+:
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*2{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Directory }&{\bf Purpose  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}{\bf Directory }&{\bf Purpose  }\\\cline{1-2}
+\endhead
+{\ttfamily proxygen/external/} &Contains non-\/installed 3rd-\/party code proxygen depends on. \\\cline{1-2}
+{\ttfamily proxygen/lib/} &Core networking abstractions. \\\cline{1-2}
+{\ttfamily proxygen/lib/http/} &H\+T\+TP specific code. \\\cline{1-2}
+{\ttfamily proxygen/lib/services/} &Connection management and server code. \\\cline{1-2}
+{\ttfamily proxygen/lib/utils/} &Miscellaneous helper code. \\\cline{1-2}
+{\ttfamily proxygen/httpserver/} &Contains code wrapping {\ttfamily proxygen/lib/} for building simple C++ http servers. We recommend building on top of these A\+P\+Is. \\\cline{1-2}
+\end{longtabu}
+\subsubsection*{Architecture}
+
+The central abstractions to understand in {\ttfamily proxygen/lib} are the session, codec, transaction, and handler. These are the lowest level abstractions, and we don\textquotesingle{}t generally recommend building off of these directly.
+
+When bytes are read off the wire, the {\ttfamily H\+T\+T\+P\+Codec} stored inside {\ttfamily H\+T\+T\+P\+Session} parses these into higher level objects and associates with it a transaction identifier. The codec then calls into {\ttfamily H\+T\+T\+P\+Session} which is responsible for maintaining the mapping between transaction identifier and {\ttfamily H\+T\+T\+P\+Transaction} objects. Each H\+T\+TP request/response pair has a separate {\ttfamily H\+T\+T\+P\+Transaction} object. Finally, {\ttfamily H\+T\+T\+P\+Transaction} forwards the call to a handler object which implements {\ttfamily H\+T\+T\+P\+Transaction\+::\+Handler}. The handler is responsible for implementing business logic for the request or response.
+
+The handler then calls back into the transaction to generate egress (whether the egress is a request or response). The call flows from the transaction back to the session, which uses the codec to convert the higher level semantics of the particular call into the appropriate bytes to send on the wire.
+
+The same handler and transaction interfaces are used to both create requests and handle responses. The A\+PI is generic enough to allow both. {\ttfamily H\+T\+T\+P\+Session} is specialized slightly differently depending on whether you are using the connection to issue or respond to H\+T\+TP requests.
+
+
+
+Moving into higher levels of abstraction, {\ttfamily proxygen/httpserver} has a simpler set of A\+P\+Is and is the recommended way to interface with {\ttfamily proxygen} when acting as a server if you don\textquotesingle{}t need the full control of the lower level abstractions.
+
+The basic components here are {\ttfamily H\+T\+T\+P\+Server}, {\ttfamily Request\+Handler\+Factory}, and {\ttfamily Request\+Handler}. An {\ttfamily H\+T\+T\+P\+Server} takes some configuration and is given a {\ttfamily Request\+Handler\+Factory}. Once the server is started, the installed {\ttfamily Request\+Handler\+Factory} spawns a {\ttfamily Request\+Handler} for each H\+T\+TP request. {\ttfamily Request\+Handler} is a simple interface users of the library implement. Subclasses of {\ttfamily Request\+Handler} should use the inherited protected member {\ttfamily Response\+Handler$\ast$ downstream\+\_\+} to send the response.
+
+\subsubsection*{Using it}
+
+Proxygen is a library. After installing it, you can build your own C++ server. Try {\ttfamily cd}ing to the directory containing the echo server at {\ttfamily proxygen/httpserver/samples/echo/}. You can then build it with this one liner\+:
+
+{\ttfamily  g++ -\/std=c++14 -\/o my\+\_\+echo \doxyref{Echo\+Server.\+cpp}{p.}{EchoServer_8cpp} \doxyref{Echo\+Handler.\+cpp}{p.}{EchoHandler_8cpp} -\/lproxygenhttpserver -\/lfolly -\/lglog -\/lgflags -\/pthread }
+
+After running {\ttfamily ./my\+\_\+echo}, we can verify it works using curl in a different terminal\+: 
+\begin{DoxyCode}
+1 $ curl -v http://localhost:11000/
+2 *   Trying 127.0.0.1...
+3 * Connected to localhost (127.0.0.1) port 11000 (#0)
+4 > GET / HTTP/1.1
+5 > User-Agent: curl/7.35.0
+6 > Host: localhost:11000
+7 > Accept: */*
+8 >
+9 < HTTP/1.1 200 OK
+10 < Request-Number: 1
+11 < Date: Thu, 30 Oct 2014 17:07:36 GMT
+12 < Connection: keep-alive
+13 < Content-Length: 0
+14 <
+15 * Connection #0 to host localhost left intact
+\end{DoxyCode}
+
+
+\subsubsection*{Documentation}
+
+We use Doxygen for Proxygen\textquotesingle{}s internal documentation. You can generate a copy of these docs by running {\ttfamily doxygen Doxyfile} from the project root. You\textquotesingle{}ll want to look at {\ttfamily html/namespaceproxygen.\+html} to start. This will also generate {\ttfamily folly} documentation.
+
+\subsubsection*{Contributing}
+
+Contributions to Proxygen are more than welcome. \doxyref{Read the guidelines in C\+O\+N\+T\+R\+I\+B\+U\+T\+I\+NG.md}{p.}{md_CONTRIBUTING}. Make sure you\textquotesingle{}ve {\tt signed the C\+LA} before sending in a pull request.
+
+\subsubsection*{Whitehat}
+
+Facebook has a {\tt bounty program} for the safe disclosure of security bugs. If you find a vulnerability, please go through the process outlined on that page and do not file a public issue. 

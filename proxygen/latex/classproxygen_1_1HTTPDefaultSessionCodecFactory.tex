@@ -1,0 +1,188 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Default\+Session\+Codec\+Factory Class Reference}
+\label{classproxygen_1_1HTTPDefaultSessionCodecFactory}\index{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Default\+Session\+Codec\+Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPDefaultSessionCodecFactory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Default\+Session\+Codec\+Factory} (const {\bf Acceptor\+Configuration} \&acc\+Config)
+\item 
+{\bf $\sim$\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory} () override
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ {\bf get\+Codec} (const std\+::string \&next\+Protocol, {\bf Transport\+Direction} direction, bool is\+T\+LS) override
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf Acceptor\+Configuration} \& {\bf acc\+Config\+\_\+}
+\item 
+folly\+::\+Optional$<$ {\bf S\+P\+D\+Y\+Version} $>$ {\bf always\+Use\+S\+P\+D\+Y\+Version\+\_\+} \{\}
+\item 
+folly\+::\+Optional$<$ bool $>$ {\bf always\+Use\+H\+T\+T\+P2\+\_\+} \{\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\index{H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\subsubsection[{H\+T\+T\+P\+Default\+Session\+Codec\+Factory(const Acceptor\+Configuration \&acc\+Config)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory (
+\begin{DoxyParamCaption}
+\item[{const {\bf Acceptor\+Configuration} \&}]{acc\+Config}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1HTTPDefaultSessionCodecFactory_a3445f39ea991798b89b14ecd4613beb3}
+
+
+Definition at line 19 of file H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+cpp.
+
+
+
+References always\+Use\+H\+T\+T\+P2\+\_\+, always\+Use\+S\+P\+D\+Y\+Version\+\_\+, proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version(), proxygen\+::http2\+::k\+Protocol\+Cleartext\+String, and proxygen\+::\+Acceptor\+Configuration\+::plaintext\+Protocol.
+
+
+\begin{DoxyCode}
+21     : accConfig_(accConfig) \{
+22   \textcolor{comment}{// set up codec defaults in the case of plaintext connections}
+23   \textcolor{keyword}{auto} version = SPDYCodec::getVersion(accConfig.plaintextProtocol);
+24   \textcolor{keywordflow}{if} (version) \{
+25     alwaysUseSPDYVersion_ = *version;
+26   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (accConfig.plaintextProtocol == http2::kProtocolCleartextString) \{
+27     alwaysUseHTTP2_ = \textcolor{keyword}{true};
+28   \}
+29 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!````~H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{$\sim$\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\index{````~H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{$\sim$\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory\+::$\sim$\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classproxygen_1_1HTTPDefaultSessionCodecFactory_a71df4e05efb35b84b6e82772cf74fa00}
+
+
+Definition at line 22 of file H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+h.
+
+
+
+References get\+Codec().
+
+
+\begin{DoxyCode}
+22 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!get\+Codec@{get\+Codec}}
+\index{get\+Codec@{get\+Codec}!proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\subsubsection[{get\+Codec(const std\+::string \&next\+Protocol, Transport\+Direction direction, bool is\+T\+L\+S) override}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory\+::get\+Codec (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{next\+Protocol, }
+\item[{{\bf Transport\+Direction}}]{direction, }
+\item[{bool}]{is\+T\+LS}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPDefaultSessionCodecFactory_ab274955051b45a2fb377f44859c51e32}
+Get a codec instance 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+Factory} \doxyref{}{p.}{classproxygen_1_1HTTPCodecFactory_ab0d8d25513603c7d4bd0d7036ab78066}.
+
+
+
+Definition at line 31 of file H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+cpp.
+
+
+
+References acc\+Config\+\_\+, proxygen\+::\+Acceptor\+Configuration\+::allowed\+Plaintext\+Upgrade\+Protocols, always\+Use\+H\+T\+T\+P2\+\_\+, always\+Use\+S\+P\+D\+Y\+Version\+\_\+, proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version(), proxygen\+::http2\+::k\+Protocol\+Draft\+String, proxygen\+::http2\+::k\+Protocol\+Experimental\+String, proxygen\+::http2\+::k\+Protocol\+String, proxygen\+::\+Acceptor\+Configuration\+::spdy\+Compression\+Level, and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::supports\+Next\+Protocol().
+
+
+
+Referenced by T\+E\+S\+T(), and $\sim$\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory().
+
+
+\begin{DoxyCode}
+32                                                                              \{
+33   \textcolor{keywordflow}{if} (!isTLS && alwaysUseSPDYVersion_) \{
+34     \textcolor{keywordflow}{return} std::make\_unique<SPDYCodec>(direction,
+35                                        alwaysUseSPDYVersion_.value(),
+36                                        accConfig_.spdyCompressionLevel);
+37   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!isTLS && alwaysUseHTTP2_) \{
+38     \textcolor{keywordflow}{return} std::make\_unique<HTTP2Codec>(direction);
+39   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nextProtocol.empty() ||
+40              HTTP1xCodec::supportsNextProtocol(nextProtocol)) \{
+41     \textcolor{keyword}{auto} codec = std::make\_unique<HTTP1xCodec>(direction);
+42     \textcolor{keywordflow}{if} (!isTLS) \{
+43       codec->setAllowedUpgradeProtocols(
+44         accConfig_.allowedPlaintextUpgradeProtocols);
+45     \}
+46     \textcolor{keywordflow}{return} std::move(codec);
+47   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} version = SPDYCodec::getVersion(nextProtocol)) \{
+48     \textcolor{keywordflow}{return} std::make\_unique<SPDYCodec>(direction, *version,
+49                                          accConfig_.spdyCompressionLevel);
+50   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nextProtocol == http2::kProtocolString ||
+51              nextProtocol == http2::kProtocolDraftString ||
+52              nextProtocol == http2::kProtocolExperimentalString) \{
+53     \textcolor{keywordflow}{return} std::make\_unique<HTTP2Codec>(direction);
+54   \} \textcolor{keywordflow}{else} \{
+55     VLOG(2) << \textcolor{stringliteral}{"Client requested unrecognized next protocol "} << nextProtocol;
+56   \}
+57 
+58   \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+59 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!acc\+Config\+\_\+@{acc\+Config\+\_\+}}
+\index{acc\+Config\+\_\+@{acc\+Config\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\subsubsection[{acc\+Config\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Acceptor\+Configuration}\& proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory\+::acc\+Config\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPDefaultSessionCodecFactory_a56cfa7591c3edb804fc5670c32681592}
+
+
+Definition at line 32 of file H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+h.
+
+
+
+Referenced by get\+Codec().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!always\+Use\+H\+T\+T\+P2\+\_\+@{always\+Use\+H\+T\+T\+P2\+\_\+}}
+\index{always\+Use\+H\+T\+T\+P2\+\_\+@{always\+Use\+H\+T\+T\+P2\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\subsubsection[{always\+Use\+H\+T\+T\+P2\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Optional$<$bool$>$ proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory\+::always\+Use\+H\+T\+T\+P2\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPDefaultSessionCodecFactory_a5687125a4cf4e0078b4089448fd13376}
+
+
+Definition at line 34 of file H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+h.
+
+
+
+Referenced by get\+Codec(), and H\+T\+T\+P\+Default\+Session\+Codec\+Factory().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}!always\+Use\+S\+P\+D\+Y\+Version\+\_\+@{always\+Use\+S\+P\+D\+Y\+Version\+\_\+}}
+\index{always\+Use\+S\+P\+D\+Y\+Version\+\_\+@{always\+Use\+S\+P\+D\+Y\+Version\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory}}
+\subsubsection[{always\+Use\+S\+P\+D\+Y\+Version\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Optional$<${\bf S\+P\+D\+Y\+Version}$>$ proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory\+::always\+Use\+S\+P\+D\+Y\+Version\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPDefaultSessionCodecFactory_a3d9f2955dbec63e619e2baea9f5ea67f}
+
+
+Definition at line 33 of file H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+h.
+
+
+
+Referenced by get\+Codec(), and H\+T\+T\+P\+Default\+Session\+Codec\+Factory().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+h}\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Default\+Session\+Codec\+Factory.\+cpp}\end{DoxyCompactItemize}

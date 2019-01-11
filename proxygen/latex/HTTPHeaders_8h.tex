@@ -1,0 +1,118 @@
+\section{proxygen/lib/http/\+H\+T\+T\+P\+Headers.h File Reference}
+\label{HTTPHeaders_8h}\index{proxygen/lib/http/\+H\+T\+T\+P\+Headers.\+h@{proxygen/lib/http/\+H\+T\+T\+P\+Headers.\+h}}
+{\ttfamily \#include $<$folly/\+F\+B\+Vector.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Range.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Common\+Headers.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Export.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Util\+Inl.\+h$>$}\\*
+{\ttfamily \#include $<$bitset$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$initializer\+\_\+list$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf proxygen\+::\+H\+T\+T\+P\+Headers}
+\item 
+struct {\bf proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+C\+O\+D\+ES}(Code,  Block)
+\item 
+\#define {\bf I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+GS}(String,  Block)
+\item 
+\#define {\bf I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+G\+S\+\_\+\+A\+L\+L\+\_\+\+V\+E\+R\+S\+I\+ON}(String,  Block)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf proxygen\+::is\+L\+WS} (char c)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{H\+T\+T\+P\+Headers.\+h@{H\+T\+T\+P\+Headers.\+h}!I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+C\+O\+D\+ES@{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+C\+O\+D\+ES}}
+\index{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+C\+O\+D\+ES@{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+C\+O\+D\+ES}!H\+T\+T\+P\+Headers.\+h@{H\+T\+T\+P\+Headers.\+h}}
+\subsubsection[{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+C\+O\+D\+ES}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+C\+O\+D\+ES(
+\begin{DoxyParamCaption}
+\item[{}]{Code, }
+\item[{}]{Block}
+\end{DoxyParamCaption}
+)}\label{HTTPHeaders_8h_a019dcd3c95198f9ac5af4cdb5bfb8d8f}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{                                                                   \(\backslash\)
+    const HTTPHeaderCode* ptr = codes\_.data();                        \(\backslash\)
+    while (ptr) \{                                                     \(\backslash\)
+      ptr = (HTTPHeaderCode*)memchr(                                  \(\backslash\)
+          (\textcolor{keywordtype}{void}*)ptr, (Code), codes\_.size() - (ptr - codes\_.data())); \(\backslash\)
+      if (ptr == \textcolor{keyword}{nullptr})                                             \(\backslash\)
+        break;                                                        \(\backslash\)
+      const \textcolor{keywordtype}{size\_t} pos = ptr - codes\_.data();                         \(\backslash\)
+      \{Block\} ptr++;                                                  \(\backslash\)
+    \}                                                                 \(\backslash\)
+  \}
+\end{DoxyCode}
+
+
+Definition at line 321 of file H\+T\+T\+P\+Headers.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Headers\+::for\+Each\+Value\+Of\+Header(), proxygen\+::\+H\+T\+T\+P\+Headers\+::get\+Number\+Of\+Values(), proxygen\+::\+H\+T\+T\+P\+Headers\+::remove(), and proxygen\+::\+H\+T\+T\+P\+Headers\+::transfer\+Header\+If\+Present().
+
+\index{H\+T\+T\+P\+Headers.\+h@{H\+T\+T\+P\+Headers.\+h}!I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+GS@{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+GS}}
+\index{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+GS@{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+GS}!H\+T\+T\+P\+Headers.\+h@{H\+T\+T\+P\+Headers.\+h}}
+\subsubsection[{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+GS}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+GS(
+\begin{DoxyParamCaption}
+\item[{}]{String, }
+\item[{}]{Block}
+\end{DoxyParamCaption}
+)}\label{HTTPHeaders_8h_a33ca6dd7137a5d91ca1c665ebaf37f96}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+ITERATE_OVER_CODES(HTTP_HEADER_OTHER, \{ \(\backslash\)
+  if (caseInsensitiveEqual((String), *headerNames\_[pos])) \{ \(\backslash\)
+    \{Block\} \(\backslash\)
+  \} \(\backslash\)
+\})
+\end{DoxyCode}
+
+
+Definition at line 335 of file H\+T\+T\+P\+Headers.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Headers\+::exists(), proxygen\+::\+H\+T\+T\+P\+Headers\+::for\+Each\+Value\+Of\+Header(), proxygen\+::\+H\+T\+T\+P\+Headers\+::remove(), and proxygen\+::\+H\+T\+T\+P\+Headers\+::transfer\+Header\+If\+Present().
+
+\index{H\+T\+T\+P\+Headers.\+h@{H\+T\+T\+P\+Headers.\+h}!I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+G\+S\+\_\+\+A\+L\+L\+\_\+\+V\+E\+R\+S\+I\+ON@{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+G\+S\+\_\+\+A\+L\+L\+\_\+\+V\+E\+R\+S\+I\+ON}}
+\index{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+G\+S\+\_\+\+A\+L\+L\+\_\+\+V\+E\+R\+S\+I\+ON@{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+G\+S\+\_\+\+A\+L\+L\+\_\+\+V\+E\+R\+S\+I\+ON}!H\+T\+T\+P\+Headers.\+h@{H\+T\+T\+P\+Headers.\+h}}
+\subsubsection[{I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+G\+S\+\_\+\+A\+L\+L\+\_\+\+V\+E\+R\+S\+I\+ON}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+T\+E\+R\+A\+T\+E\+\_\+\+O\+V\+E\+R\+\_\+\+S\+T\+R\+I\+N\+G\+S\+\_\+\+A\+L\+L\+\_\+\+V\+E\+R\+S\+I\+ON(
+\begin{DoxyParamCaption}
+\item[{}]{String, }
+\item[{}]{Block}
+\end{DoxyParamCaption}
+)}\label{HTTPHeaders_8h_ae158d6b84eb132a4c95c3c2cf7df3a97}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+ITERATE_OVER_CODES(HTTP_HEADER_OTHER, \{ \(\backslash\)
+  if (caseUnderscoreInsensitiveEqual((String), *headerNames\_[pos])) \{ \(\backslash\)
+    \{Block\} \(\backslash\)
+  \} \(\backslash\)
+\})
+\end{DoxyCode}
+
+
+Definition at line 343 of file H\+T\+T\+P\+Headers.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Headers\+::remove\+All\+Versions().
+

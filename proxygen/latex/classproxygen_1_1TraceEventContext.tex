@@ -1,0 +1,177 @@
+\section{proxygen\+:\+:Trace\+Event\+Context Class Reference}
+\label{classproxygen_1_1TraceEventContext}\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+
+
+{\ttfamily \#include $<$Trace\+Event\+Context.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Trace\+Event\+Context} (uint32\+\_\+t p\+ID, std\+::vector$<$ {\bf Trace\+Event\+Observer} $\ast$ $>$ observers, bool all\+Trace\+Event\+Needed=false)
+\item 
+{\bf Trace\+Event\+Context} (uint32\+\_\+t p\+ID=0, {\bf Trace\+Event\+Observer} $\ast$observer={\bf nullptr}, bool all\+Trace\+Event\+Needed=false)
+\item 
+void {\bf trace\+Event\+Available} ({\bf Trace\+Event} event)
+\item 
+bool {\bf is\+All\+Trace\+Event\+Needed} () const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf parent\+ID}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ {\bf Trace\+Event\+Observer} $\ast$ $>$ {\bf observers\+\_\+}
+\item 
+bool {\bf all\+Trace\+Event\+Needed\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file Trace\+Event\+Context.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}!Trace\+Event\+Context@{Trace\+Event\+Context}}
+\index{Trace\+Event\+Context@{Trace\+Event\+Context}!proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+\subsubsection[{Trace\+Event\+Context(uint32\+\_\+t p\+I\+D, std\+::vector$<$ Trace\+Event\+Observer $\ast$ $>$ observers, bool all\+Trace\+Event\+Needed=false)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+Context\+::\+Trace\+Event\+Context (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{p\+ID, }
+\item[{std\+::vector$<$ {\bf Trace\+Event\+Observer} $\ast$ $>$}]{observers, }
+\item[{bool}]{all\+Trace\+Event\+Needed = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TraceEventContext_a58bb010e87d855c4bbcaf1bec6ce5dea}
+
+
+Definition at line 25 of file Trace\+Event\+Context.\+h.
+
+
+\begin{DoxyCode}
+28       : parentID(pID)
+29       , observers_(std::move(observers))
+30       , allTraceEventNeeded_(allTraceEventNeeded) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}!Trace\+Event\+Context@{Trace\+Event\+Context}}
+\index{Trace\+Event\+Context@{Trace\+Event\+Context}!proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+\subsubsection[{Trace\+Event\+Context(uint32\+\_\+t p\+I\+D=0, Trace\+Event\+Observer $\ast$observer=nullptr, bool all\+Trace\+Event\+Needed=false)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+Context\+::\+Trace\+Event\+Context (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{p\+ID = {\ttfamily 0}, }
+\item[{{\bf Trace\+Event\+Observer} $\ast$}]{observer = {\ttfamily {\bf nullptr}}, }
+\item[{bool}]{all\+Trace\+Event\+Needed = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1TraceEventContext_aeaaa74a41b7f2fb09573883642a27e47}
+
+
+Definition at line 32 of file Trace\+Event\+Context.\+h.
+
+
+
+References is\+All\+Trace\+Event\+Needed(), observers\+\_\+, and trace\+Event\+Available().
+
+
+\begin{DoxyCode}
+35       : parentID(pID)
+36       , allTraceEventNeeded_(allTraceEventNeeded) \{
+37     \textcolor{keywordflow}{if} (observer) \{
+38       observers_.push\_back(observer);
+39     \}
+40   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}!is\+All\+Trace\+Event\+Needed@{is\+All\+Trace\+Event\+Needed}}
+\index{is\+All\+Trace\+Event\+Needed@{is\+All\+Trace\+Event\+Needed}!proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+\subsubsection[{is\+All\+Trace\+Event\+Needed() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Trace\+Event\+Context\+::is\+All\+Trace\+Event\+Needed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1TraceEventContext_a1d1b73b92cbf6573289fd9122004a601}
+
+
+Definition at line 22 of file Trace\+Event\+Context.\+cpp.
+
+
+
+References all\+Trace\+Event\+Needed\+\_\+.
+
+
+
+Referenced by Trace\+Event\+Context().
+
+
+\begin{DoxyCode}
+22                                                     \{
+23   \textcolor{keywordflow}{return} allTraceEventNeeded_;
+24 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}!trace\+Event\+Available@{trace\+Event\+Available}}
+\index{trace\+Event\+Available@{trace\+Event\+Available}!proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+\subsubsection[{trace\+Event\+Available(\+Trace\+Event event)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Trace\+Event\+Context\+::trace\+Event\+Available (
+\begin{DoxyParamCaption}
+\item[{{\bf Trace\+Event}}]{event}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1TraceEventContext_ab963210cd3c4140356a46c9b509b61a2}
+
+
+Definition at line 16 of file Trace\+Event\+Context.\+cpp.
+
+
+
+References observers\+\_\+.
+
+
+
+Referenced by Trace\+Event\+Context().
+
+
+\begin{DoxyCode}
+16                                                             \{
+17   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} observer : observers_) \{
+18     observer->traceEventAvailable(event);
+19   \}
+20 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}!all\+Trace\+Event\+Needed\+\_\+@{all\+Trace\+Event\+Needed\+\_\+}}
+\index{all\+Trace\+Event\+Needed\+\_\+@{all\+Trace\+Event\+Needed\+\_\+}!proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+\subsubsection[{all\+Trace\+Event\+Needed\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Trace\+Event\+Context\+::all\+Trace\+Event\+Needed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1TraceEventContext_ada0ab67b1a2076379783c5edc83f2159}
+
+
+Definition at line 52 of file Trace\+Event\+Context.\+h.
+
+
+
+Referenced by is\+All\+Trace\+Event\+Needed().
+
+\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}!observers\+\_\+@{observers\+\_\+}}
+\index{observers\+\_\+@{observers\+\_\+}!proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+\subsubsection[{observers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Trace\+Event\+Observer}$\ast$$>$ proxygen\+::\+Trace\+Event\+Context\+::observers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1TraceEventContext_ac95d21212aab8f06b2d1b0467b93dbfa}
+
+
+Definition at line 48 of file Trace\+Event\+Context.\+h.
+
+
+
+Referenced by trace\+Event\+Available(), and Trace\+Event\+Context().
+
+\index{proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}!parent\+ID@{parent\+ID}}
+\index{parent\+ID@{parent\+ID}!proxygen\+::\+Trace\+Event\+Context@{proxygen\+::\+Trace\+Event\+Context}}
+\subsubsection[{parent\+ID}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Trace\+Event\+Context\+::parent\+ID}\label{classproxygen_1_1TraceEventContext_acf637620f9a47557e08bd93320e512de}
+
+
+Definition at line 23 of file Trace\+Event\+Context.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Trace\+Event\+Context.\+h}\item 
+proxygen/lib/utils/{\bf Trace\+Event\+Context.\+cpp}\end{DoxyCompactItemize}

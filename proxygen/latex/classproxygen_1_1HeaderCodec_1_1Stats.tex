@@ -1,0 +1,137 @@
+\section{proxygen\+:\+:Header\+Codec\+:\+:Stats Class Reference}
+\label{classproxygen_1_1HeaderCodec_1_1Stats}\index{proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}}
+
+
+{\ttfamily \#include $<$Header\+Codec.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Header\+Codec\+:\+:Stats\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HeaderCodec_1_1Stats}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Stats} ()
+\item 
+virtual {\bf $\sim$\+Stats} ()
+\item 
+virtual void {\bf record\+Encode} ({\bf Type} type, {\bf H\+T\+T\+P\+Header\+Size} \&size)=0
+\item 
+virtual void {\bf record\+Decode} ({\bf Type} type, {\bf H\+T\+T\+P\+Header\+Size} \&size)=0
+\item 
+virtual void {\bf record\+Decode\+Error} ({\bf Type} type)=0
+\item 
+virtual void {\bf record\+Decode\+Too\+Large} ({\bf Type} type)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 45 of file Header\+Codec.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}!Stats@{Stats}}
+\index{Stats@{Stats}!proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}}
+\subsubsection[{Stats()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Header\+Codec\+::\+Stats\+::\+Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HeaderCodec_1_1Stats_a47e62677cf06ecd50574e7464e6fffad}
+
+
+Definition at line 47 of file Header\+Codec.\+h.
+
+
+\begin{DoxyCode}
+47 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}!````~Stats@{$\sim$\+Stats}}
+\index{````~Stats@{$\sim$\+Stats}!proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}}
+\subsubsection[{$\sim$\+Stats()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Header\+Codec\+::\+Stats\+::$\sim$\+Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HeaderCodec_1_1Stats_a972ac37dcdccef0903147da55d12791a}
+
+
+Definition at line 48 of file Header\+Codec.\+h.
+
+
+\begin{DoxyCode}
+48 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}!record\+Decode@{record\+Decode}}
+\index{record\+Decode@{record\+Decode}!proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}}
+\subsubsection[{record\+Decode(\+Type type, H\+T\+T\+P\+Header\+Size \&size)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Header\+Codec\+::\+Stats\+::record\+Decode (
+\begin{DoxyParamCaption}
+\item[{{\bf Type}}]{type, }
+\item[{{\bf H\+T\+T\+P\+Header\+Size} \&}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HeaderCodec_1_1Stats_a5c41229f07ae48c83244339dcd9bea0a}
+
+
+Implemented in {\bf proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats} \doxyref{}{p.}{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a9af40ff4c4596af7485980a3c5ea3820}.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode(), and proxygen\+::\+Gzip\+Header\+Codec\+::decode().
+
+\index{proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}!record\+Decode\+Error@{record\+Decode\+Error}}
+\index{record\+Decode\+Error@{record\+Decode\+Error}!proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}}
+\subsubsection[{record\+Decode\+Error(\+Type type)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Header\+Codec\+::\+Stats\+::record\+Decode\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf Type}}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HeaderCodec_1_1Stats_a7df1fd8943c6ea5ca0a30b9ffa2d5b82}
+
+
+Implemented in {\bf proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats} \doxyref{}{p.}{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a9d08c2623a905518e6a5dda82fd00a5b}.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode().
+
+\index{proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}!record\+Decode\+Too\+Large@{record\+Decode\+Too\+Large}}
+\index{record\+Decode\+Too\+Large@{record\+Decode\+Too\+Large}!proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}}
+\subsubsection[{record\+Decode\+Too\+Large(\+Type type)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Header\+Codec\+::\+Stats\+::record\+Decode\+Too\+Large (
+\begin{DoxyParamCaption}
+\item[{{\bf Type}}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HeaderCodec_1_1Stats_af92db6dfd70045341b609bdab7ec46fa}
+
+
+Implemented in {\bf proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats} \doxyref{}{p.}{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a655a25c5dfe836dd1a8207e1329079da}.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode().
+
+\index{proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}!record\+Encode@{record\+Encode}}
+\index{record\+Encode@{record\+Encode}!proxygen\+::\+Header\+Codec\+::\+Stats@{proxygen\+::\+Header\+Codec\+::\+Stats}}
+\subsubsection[{record\+Encode(\+Type type, H\+T\+T\+P\+Header\+Size \&size)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Header\+Codec\+::\+Stats\+::record\+Encode (
+\begin{DoxyParamCaption}
+\item[{{\bf Type}}]{type, }
+\item[{{\bf H\+T\+T\+P\+Header\+Size} \&}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HeaderCodec_1_1Stats_ac831a607d6eb6e55902232612256952b}
+
+
+Implemented in {\bf proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats} \doxyref{}{p.}{classproxygen_1_1hpack_1_1TestHeaderCodecStats_ac95532762676b510371bed62e8d2fff3}.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::encode(), proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::record\+Compressed\+Size(), and proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::record\+Compressed\+Size().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Header\+Codec.\+h}\end{DoxyCompactItemize}

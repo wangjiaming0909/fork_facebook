@@ -1,0 +1,55 @@
+\section{proxygen/lib/http/codec/test/\+Test\+Utils.cpp File Reference}
+\label{codec_2test_2TestUtils_8cpp}\index{proxygen/lib/http/codec/test/\+Test\+Utils.\+cpp@{proxygen/lib/http/codec/test/\+Test\+Utils.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P2\+Constants.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Test\+Utils.\+h$>$}\\*
+{\ttfamily \#include $<$boost/optional/optional\+\_\+io.\+hpp$>$}\\*
+{\ttfamily \#include $<$folly/\+Random.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+Cursor.\+h$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ {\bf proxygen\+::get\+Priority\+Message} (uint8\+\_\+t priority)
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf proxygen\+::make\+Buf} (uint32\+\_\+t size)
+\item 
+std\+::unique\+\_\+ptr$<$ testing\+::\+Nice\+Mock$<$ Mock\+H\+T\+T\+P\+Codec $>$ $>$ {\bf proxygen\+::make\+Mock\+Parallel\+Codec} (Transport\+Direction dir)
+\item 
+std\+::unique\+\_\+ptr$<$ testing\+::\+Nice\+Mock$<$ Mock\+H\+T\+T\+P\+Codec $>$ $>$ {\bf proxygen\+::make\+Downstream\+Parallel\+Codec} ()
+\item 
+std\+::unique\+\_\+ptr$<$ testing\+::\+Nice\+Mock$<$ Mock\+H\+T\+T\+P\+Codec $>$ $>$ {\bf proxygen\+::make\+Upstream\+Parallel\+Codec} ()
+\item 
+H\+T\+T\+P\+Message {\bf proxygen\+::get\+Get\+Request} (const std\+::string \&url)
+\item 
+H\+T\+T\+P\+Message {\bf proxygen\+::get\+Big\+Get\+Request} (const std\+::string \&url)
+\item 
+std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ {\bf proxygen\+::make\+Get\+Request} ()
+\item 
+H\+T\+T\+P\+Message {\bf proxygen\+::get\+Post\+Request} (uint32\+\_\+t content\+Length)
+\item 
+H\+T\+T\+P\+Message {\bf proxygen\+::get\+Chunked\+Post\+Request} ()
+\item 
+std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ {\bf proxygen\+::make\+Post\+Request} (uint32\+\_\+t content\+Length)
+\item 
+H\+T\+T\+P\+Message {\bf proxygen\+::get\+Pub\+Request} (const std\+::string \&url)
+\item 
+H\+T\+T\+P\+Message {\bf proxygen\+::get\+Response} (uint32\+\_\+t code, uint32\+\_\+t body\+Len)
+\item 
+std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ {\bf proxygen\+::make\+Response} (uint16\+\_\+t {\bf status\+Code})
+\item 
+std\+::tuple$<$ std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ $>$ {\bf proxygen\+::make\+Response} (uint16\+\_\+t {\bf status\+Code}, size\+\_\+t len)
+\item 
+H\+T\+T\+P\+Message {\bf proxygen\+::get\+Upgrade\+Request} (const std\+::string \&upgrade\+Header, {\bf H\+T\+T\+P\+Method} method, uint32\+\_\+t body\+Len)
+\item 
+void {\bf proxygen\+::fake\+Mock\+Codec} (Mock\+H\+T\+T\+P\+Codec \&codec)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const H\+T\+T\+P\+Settings {\bf proxygen\+::k\+Default\+Ingress\+Settings}
+\end{DoxyCompactItemize}

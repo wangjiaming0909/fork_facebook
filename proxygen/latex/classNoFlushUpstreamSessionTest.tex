@@ -1,0 +1,106 @@
+\section{No\+Flush\+Upstream\+Session\+Test Class Reference}
+\label{classNoFlushUpstreamSessionTest}\index{No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}}
+Inheritance diagram for No\+Flush\+Upstream\+Session\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classNoFlushUpstreamSessionTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf on\+Write\+Chain} (folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::shared\+\_\+ptr$<$ I\+O\+Buf $>$, Write\+Flags) override
+\item 
+{\bf $\sim$\+No\+Flush\+Upstream\+Session\+Test} () override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf times\+Called\+\_\+} \{0\}
+\item 
+std\+::vector$<$ folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$ $>$ {\bf cbs\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 1666 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}!````~No\+Flush\+Upstream\+Session\+Test@{$\sim$\+No\+Flush\+Upstream\+Session\+Test}}
+\index{````~No\+Flush\+Upstream\+Session\+Test@{$\sim$\+No\+Flush\+Upstream\+Session\+Test}!No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}}
+\subsubsection[{$\sim$\+No\+Flush\+Upstream\+Session\+Test() override}]{\setlength{\rightskip}{0pt plus 5cm}No\+Flush\+Upstream\+Session\+Test\+::$\sim$\+No\+Flush\+Upstream\+Session\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classNoFlushUpstreamSessionTest_aed8086b1772c7b374886d0fcd5449738}
+
+
+Definition at line 1679 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+1679                                          \{
+1680     AsyncSocketException ex(AsyncSocketException::UNKNOWN, \textcolor{stringliteral}{""});
+1681     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& cb : cbs_) \{
+1682       cb->writeErr(0, ex);
+1683     \}
+1684   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}!on\+Write\+Chain@{on\+Write\+Chain}}
+\index{on\+Write\+Chain@{on\+Write\+Chain}!No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}}
+\subsubsection[{on\+Write\+Chain(folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::shared\+\_\+ptr$<$ I\+O\+Buf $>$, Write\+Flags) override}]{\setlength{\rightskip}{0pt plus 5cm}void No\+Flush\+Upstream\+Session\+Test\+::on\+Write\+Chain (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{std\+::shared\+\_\+ptr$<$ I\+O\+Buf $>$}]{, }
+\item[{Write\+Flags}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classNoFlushUpstreamSessionTest_a52ffb620bb37eadacc8bc95c99d65869}
+
+
+Reimplemented from {\bf H\+T\+T\+P\+Upstream\+Test$<$ S\+P\+D\+Y3\+Codec\+Pair $>$} \doxyref{}{p.}{classHTTPUpstreamTest_ae4dd4ff4f4fb988e601884bad097a4f5}.
+
+
+
+Definition at line 1668 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+1670                                          \{
+1671     \textcolor{keywordflow}{if} (!timesCalled_++) \{
+1672       callback->writeSuccess();
+1673     \} \textcolor{keywordflow}{else} \{
+1674       cbs_.push\_back(callback);
+1675     \}
+1676     \textcolor{comment}{// do nothing -- let unacked egress build up}
+1677   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}!cbs\+\_\+@{cbs\+\_\+}}
+\index{cbs\+\_\+@{cbs\+\_\+}!No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}}
+\subsubsection[{cbs\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback$\ast$$>$ No\+Flush\+Upstream\+Session\+Test\+::cbs\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classNoFlushUpstreamSessionTest_a9534fa10c2da3a774050729348ef6985}
+
+
+Definition at line 1687 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+\index{No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}!times\+Called\+\_\+@{times\+Called\+\_\+}}
+\index{times\+Called\+\_\+@{times\+Called\+\_\+}!No\+Flush\+Upstream\+Session\+Test@{No\+Flush\+Upstream\+Session\+Test}}
+\subsubsection[{times\+Called\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t No\+Flush\+Upstream\+Session\+Test\+::times\+Called\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classNoFlushUpstreamSessionTest_ac22170e599babfd3f0427c907eac8947}
+
+
+Definition at line 1686 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp}\end{DoxyCompactItemize}

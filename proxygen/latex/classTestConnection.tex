@@ -1,0 +1,147 @@
+\section{Test\+Connection Class Reference}
+\label{classTestConnection}\index{Test\+Connection@{Test\+Connection}}
+Inheritance diagram for Test\+Connection\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestConnection}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf timeout\+Expired} () noexceptoverride
+\item 
+void {\bf describe} (std\+::ostream \&) const override
+\item 
+bool {\bf is\+Busy} () const override
+\item 
+void {\bf notify\+Pending\+Shutdown} () override
+\item 
+void {\bf close\+When\+Idle} () override
+\item 
+void {\bf drop\+Connection} () override
+\item 
+void {\bf dump\+Connection\+State} (uint8\+\_\+t) override
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file Acceptor\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Connection@{Test\+Connection}!close\+When\+Idle@{close\+When\+Idle}}
+\index{close\+When\+Idle@{close\+When\+Idle}!Test\+Connection@{Test\+Connection}}
+\subsubsection[{close\+When\+Idle() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Connection\+::close\+When\+Idle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestConnection_a744232c6c5bef4e1e3f22d4ae1906789}
+
+
+Definition at line 24 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+24 \{\}
+\end{DoxyCode}
+\index{Test\+Connection@{Test\+Connection}!describe@{describe}}
+\index{describe@{describe}!Test\+Connection@{Test\+Connection}}
+\subsubsection[{describe(std\+::ostream \&) const override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Connection\+::describe (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestConnection_abcbdc76e4783b5a24c5f9f7c168d953d}
+
+
+Definition at line 21 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+21 \{\}
+\end{DoxyCode}
+\index{Test\+Connection@{Test\+Connection}!drop\+Connection@{drop\+Connection}}
+\index{drop\+Connection@{drop\+Connection}!Test\+Connection@{Test\+Connection}}
+\subsubsection[{drop\+Connection() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Connection\+::drop\+Connection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestConnection_a58660ca06e9c0b866e53d2cf503ed08b}
+
+
+Definition at line 25 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+25                                  \{
+26     \textcolor{keyword}{delete} \textcolor{keyword}{this};
+27   \}
+\end{DoxyCode}
+\index{Test\+Connection@{Test\+Connection}!dump\+Connection\+State@{dump\+Connection\+State}}
+\index{dump\+Connection\+State@{dump\+Connection\+State}!Test\+Connection@{Test\+Connection}}
+\subsubsection[{dump\+Connection\+State(uint8\+\_\+t) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Connection\+::dump\+Connection\+State (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestConnection_aede83fa9674b2c76c12fa34d81c6b2e3}
+
+
+Definition at line 28 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+28 \{\}
+\end{DoxyCode}
+\index{Test\+Connection@{Test\+Connection}!is\+Busy@{is\+Busy}}
+\index{is\+Busy@{is\+Busy}!Test\+Connection@{Test\+Connection}}
+\subsubsection[{is\+Busy() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool Test\+Connection\+::is\+Busy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestConnection_a68a03369ac1763d05b5be5c11a04809a}
+
+
+Definition at line 22 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+22 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}
+\end{DoxyCode}
+\index{Test\+Connection@{Test\+Connection}!notify\+Pending\+Shutdown@{notify\+Pending\+Shutdown}}
+\index{notify\+Pending\+Shutdown@{notify\+Pending\+Shutdown}!Test\+Connection@{Test\+Connection}}
+\subsubsection[{notify\+Pending\+Shutdown() override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Connection\+::notify\+Pending\+Shutdown (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestConnection_abb72d4d61feefc870079a02b2d811d2c}
+
+
+Definition at line 23 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+23 \{\}
+\end{DoxyCode}
+\index{Test\+Connection@{Test\+Connection}!timeout\+Expired@{timeout\+Expired}}
+\index{timeout\+Expired@{timeout\+Expired}!Test\+Connection@{Test\+Connection}}
+\subsubsection[{timeout\+Expired() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Connection\+::timeout\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classTestConnection_a696619a45beefcd9b7f118a9d4967fcc}
+
+
+Definition at line 20 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+20 \{\}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/services/test/{\bf Acceptor\+Test.\+cpp}\end{DoxyCompactItemize}

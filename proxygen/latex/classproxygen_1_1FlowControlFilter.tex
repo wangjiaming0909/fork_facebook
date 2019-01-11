@@ -1,0 +1,496 @@
+\section{proxygen\+:\+:Flow\+Control\+Filter Class Reference}
+\label{classproxygen_1_1FlowControlFilter}\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+
+
+{\ttfamily \#include $<$Flow\+Control\+Filter.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Flow\+Control\+Filter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.698795cm]{classproxygen_1_1FlowControlFilter}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Callback}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Flow\+Control\+Filter} ({\bf Callback} \&callback, folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, {\bf H\+T\+T\+P\+Codec} $\ast$codec, uint32\+\_\+t recv\+Capacity=0)
+\item 
+void {\bf set\+Receive\+Window\+Size} (folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, uint32\+\_\+t capacity)
+\item 
+bool {\bf ingress\+Bytes\+Processed} (folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, uint32\+\_\+t delta)
+\item 
+uint32\+\_\+t {\bf get\+Available\+Send} () const 
+\item 
+bool {\bf is\+Reusable} () const override
+\item 
+void {\bf on\+Body} (Stream\+ID {\bf stream}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t padding) override
+\item 
+void {\bf on\+Window\+Update} (Stream\+ID {\bf stream}, uint32\+\_\+t amount) override
+\item 
+size\+\_\+t {\bf generate\+Body} (folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, Stream\+ID {\bf stream}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, folly\+::\+Optional$<$ uint8\+\_\+t $>$ padding, bool eom) override
+\item 
+size\+\_\+t {\bf generate\+Window\+Update} (folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, Stream\+ID {\bf stream}, uint32\+\_\+t delta) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Callback} \& {\bf notify\+\_\+}
+\item 
+{\bf Window} {\bf recv\+Window\+\_\+}
+\item 
+{\bf Window} {\bf send\+Window\+\_\+}
+\item 
+int32\+\_\+t {\bf to\+Ack\+\_\+} \{0\}
+\item 
+bool {\bf error\+\_\+}\+:1
+\item 
+bool {\bf sends\+Blocked\+\_\+}\+:1
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class implements the logic for managing per-\/session flow control. Not every codec is interested in per-\/session flow control, so this filter can only be added in that case or else it is an error. 
+
+Definition at line 26 of file Flow\+Control\+Filter.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!Flow\+Control\+Filter@{Flow\+Control\+Filter}}
+\index{Flow\+Control\+Filter@{Flow\+Control\+Filter}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{Flow\+Control\+Filter(\+Callback \&callback, folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, H\+T\+T\+P\+Codec $\ast$codec, uint32\+\_\+t recv\+Capacity=0)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Flow\+Control\+Filter\+::\+Flow\+Control\+Filter (
+\begin{DoxyParamCaption}
+\item[{{\bf Callback} \&}]{callback, }
+\item[{folly\+::\+I\+O\+Buf\+Queue \&}]{write\+Buf, }
+\item[{{\bf H\+T\+T\+P\+Codec} $\ast$}]{codec, }
+\item[{uint32\+\_\+t}]{recv\+Capacity = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1FlowControlFilter_abdf232714fbd79b346d3987cb6d31263}
+Construct a flow control filter. 
+\begin{DoxyParams}{Parameters}
+{\em callback} & A channel to be notified when the window is not full anymore. \\
+\hline
+{\em write\+Buf} & The buffer to write egress on. This constructor may generate a window update frame on this buffer. \\
+\hline
+{\em codec} & The codec implementation. \\
+\hline
+{\em recv\+Capacity} & The initial size of the conn-\/level recv window. It must be $>$= codec-\/$>$\doxyref{get\+Default\+Window\+Size()}{p.}{classproxygen_1_1PassThroughHTTPCodecFilter_aef9204b1a66354eef9e579d0d84832df}, or it will generate an immediate window update into write\+Buf. 0 means use the codec default. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 23 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Codec\+::generate\+Window\+Update(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::get\+Default\+Window\+Size(), proxygen\+::\+H\+T\+T\+P\+Codec\+::get\+Default\+Window\+Size(), recv\+Window\+\_\+, and proxygen\+::\+Window\+::set\+Capacity().
+
+
+\begin{DoxyCode}
+26                                                            :
+27     notify_(callback),
+28     recvWindow_(codec->getDefaultWindowSize()),
+29     sendWindow_(codec->getDefaultWindowSize()),
+30     error_(\textcolor{keyword}{false}),
+31     sendsBlocked_(\textcolor{keyword}{false}) \{
+32   \textcolor{keywordflow}{if} (recvCapacity > 0) \{
+33     \textcolor{keywordflow}{if} (recvCapacity < codec->getDefaultWindowSize()) \{
+34       VLOG(4) << \textcolor{stringliteral}{"Ignoring low conn-level recv window size of "} << recvCapacity;
+35     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (recvCapacity > codec->getDefaultWindowSize()) \{
+36       \textcolor{keyword}{auto} delta = recvCapacity - codec->getDefaultWindowSize();
+37       VLOG(4) << \textcolor{stringliteral}{"Incrementing default conn-level recv window by "} << delta;
+38       CHECK(recvWindow_.setCapacity(recvCapacity));
+39       codec->generateWindowUpdate(writeBuf, 0, delta);
+40     \}
+41   \}
+42 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!generate\+Body@{generate\+Body}}
+\index{generate\+Body@{generate\+Body}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{generate\+Body(folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, folly\+::\+Optional$<$ uint8\+\_\+t $>$ padding, bool eom) override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Flow\+Control\+Filter\+::generate\+Body (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+I\+O\+Buf\+Queue \&}]{write\+Buf, }
+\item[{Stream\+ID}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain, }
+\item[{folly\+::\+Optional$<$ uint8\+\_\+t $>$}]{padding, }
+\item[{bool}]{eom}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1FlowControlFilter_a1deadb80c07145c7d5eeb99553dc3777}
+
+
+Definition at line 145 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+\_\+, proxygen\+::\+Window\+::get\+Non\+Negative\+Size(), proxygen\+::\+Window\+::get\+Size(), notify\+\_\+, proxygen\+::\+Flow\+Control\+Filter\+::\+Callback\+::on\+Connection\+Send\+Window\+Closed(), proxygen\+::\+Window\+::reserve(), sends\+Blocked\+\_\+, and send\+Window\+\_\+.
+
+
+\begin{DoxyCode}
+149                                                  \{
+150   uint8\_t padLen = padding ? *padding : 0;
+151   \textcolor{keywordtype}{bool} success = sendWindow_.reserve(
+152     chain->computeChainDataLength() + padLen);
+153   VLOG(5) << \textcolor{stringliteral}{"Sending "} << chain->computeChainDataLength()
+154           << \textcolor{stringliteral}{" bytes, sendWindow="} << sendWindow_.getSize();
+155 
+156   \textcolor{comment}{// In the future, maybe make this DCHECK}
+157   CHECK(success) << \textcolor{stringliteral}{"Session-level send window underflowed! "}
+158                  << \textcolor{stringliteral}{"Too much data sent without WINDOW\_UPDATES!"};
+159 
+160   \textcolor{keywordflow}{if} (sendWindow_.getNonNegativeSize() == 0) \{
+161     \textcolor{comment}{// Need to inform when the send window is no longer full}
+162     VLOG(4) << \textcolor{stringliteral}{"Send window closed"};
+163     sendsBlocked_ = \textcolor{keyword}{true};
+164     notify_.onConnectionSendWindowClosed();
+165   \}
+166 
+167   \textcolor{keywordflow}{return} call_->generateBody(writeBuf, stream, std::move(chain), padding,
+168                              eom);
+169 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!generate\+Window\+Update@{generate\+Window\+Update}}
+\index{generate\+Window\+Update@{generate\+Window\+Update}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{generate\+Window\+Update(folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, Stream\+I\+D stream, uint32\+\_\+t delta) override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Flow\+Control\+Filter\+::generate\+Window\+Update (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+I\+O\+Buf\+Queue \&}]{write\+Buf, }
+\item[{Stream\+ID}]{stream, }
+\item[{uint32\+\_\+t}]{delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1FlowControlFilter_afd7cd516f4bdf431201cc6e47f2e1d8f}
+
+
+Definition at line 171 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+\_\+.
+
+
+\begin{DoxyCode}
+173                                                                \{
+174   CHECK(stream) << \textcolor{stringliteral}{" someone tried to manually manipulate a conn-level window"};
+175   \textcolor{keywordflow}{return} call_->generateWindowUpdate(writeBuf, stream, delta);
+176 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!get\+Available\+Send@{get\+Available\+Send}}
+\index{get\+Available\+Send@{get\+Available\+Send}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{get\+Available\+Send() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Flow\+Control\+Filter\+::get\+Available\+Send (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1FlowControlFilter_a12903e2114e8367ffebc4a8e119bca59}
+\begin{DoxyReturn}{Returns}
+the number of bytes available in the connection-\/level send window 
+\end{DoxyReturn}
+
+
+Definition at line 85 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Window\+::get\+Non\+Negative\+Size(), and send\+Window\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Next\+To\+Send(), proxygen\+::\+H\+T\+T\+P\+Session\+::is\+Conn\+Window\+Full(), and proxygen\+::\+H\+T\+T\+P\+Session\+::run\+Loop\+Callback().
+
+
+\begin{DoxyCode}
+85                                                    \{
+86   \textcolor{keywordflow}{return} sendWindow_.getNonNegativeSize();
+87 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!ingress\+Bytes\+Processed@{ingress\+Bytes\+Processed}}
+\index{ingress\+Bytes\+Processed@{ingress\+Bytes\+Processed}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{ingress\+Bytes\+Processed(folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, uint32\+\_\+t delta)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Flow\+Control\+Filter\+::ingress\+Bytes\+Processed (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+I\+O\+Buf\+Queue \&}]{write\+Buf, }
+\item[{uint32\+\_\+t}]{delta}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1FlowControlFilter_ab23466dac5f1a5c5cf202d975ce41f2c}
+Notify the flow control filter that some ingress bytes were processed. If the number of bytes to acknowledge exceeds half the receive window\textquotesingle{}s capacity, a W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE frame will be written. 
+\begin{DoxyParams}{Parameters}
+{\em write\+Buf} & The buffer to write egress on. This function may generate a W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE on this buffer. \\
+\hline
+{\em delta} & The number of bytes that were processed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true iff we wrote a W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE frame to the write buf. 
+\end{DoxyReturn}
+
+
+Definition at line 69 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+\_\+, proxygen\+::\+Window\+::free(), proxygen\+::\+Window\+::get\+Capacity(), recv\+Window\+\_\+, and to\+Ack\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::notify\+Ingress\+Body\+Processed(), and proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Body().
+
+
+\begin{DoxyCode}
+70                                                               \{
+71   toAck_ += delta;
+72   \textcolor{keywordtype}{bool} willAck = (toAck_ > 0 &&
+73                   uint32\_t(toAck_) > recvWindow_.getCapacity() / 2);
+74   VLOG(4) << \textcolor{stringliteral}{"processed "} << delta << \textcolor{stringliteral}{" toAck\_="} << toAck_
+75           << \textcolor{stringliteral}{" bytes, will ack="} << willAck;
+76   \textcolor{keywordflow}{if} (willAck) \{
+77     CHECK(recvWindow_.free(toAck_));
+78     call_->generateWindowUpdate(writeBuf, 0, toAck_);
+79     toAck_ = 0;
+80     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+81   \}
+82   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+83 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!is\+Reusable@{is\+Reusable}}
+\index{is\+Reusable@{is\+Reusable}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{is\+Reusable() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Flow\+Control\+Filter\+::is\+Reusable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1FlowControlFilter_aca52eaf12ed5ee17bfd223a197bc509e}
+
+
+Definition at line 89 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+\_\+, and error\+\_\+.
+
+
+\begin{DoxyCode}
+89                                          \{
+90   \textcolor{keywordflow}{if} (error_) \{
+91     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+92   \}
+93   \textcolor{keywordflow}{return} call_->isReusable();
+94 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{on\+Body(\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t padding) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Flow\+Control\+Filter\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{Stream\+ID}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain, }
+\item[{uint16\+\_\+t}]{padding}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1FlowControlFilter_a563283685583483b1f579514b081e837}
+
+
+Definition at line 96 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::callback\+\_\+, error\+\_\+, proxygen\+::\+Window\+::free(), proxygen\+::\+Window\+::get\+Size(), recv\+Window\+\_\+, proxygen\+::\+Window\+::reserve(), and to\+Ack\+\_\+.
+
+
+\begin{DoxyCode}
+98                                                  \{
+99   uint64\_t amount = chain->computeChainDataLength();
+100   \textcolor{keywordflow}{if} (!recvWindow_.reserve(amount + padding)) \{
+101     error_ = \textcolor{keyword}{true};
+102     HTTPException ex = getException(
+103       folly::to<std::string>(
+104         \textcolor{stringliteral}{"Failed to reserve receive window, window size="},
+105         recvWindow_.getSize(), \textcolor{stringliteral}{", amount="}, amount));
+106     callback_->onError(0, ex, \textcolor{keyword}{false});
+107   \} \textcolor{keywordflow}{else} \{
+108     \textcolor{keywordflow}{if} (VLOG\_IS\_ON(4) && recvWindow_.getSize() == 0) \{
+109       VLOG(4) << \textcolor{stringliteral}{"recvWindow full"};
+110     \}
+111     toAck_ += padding;
+112     CHECK(recvWindow_.free(padding));
+113     callback_->onBody(stream, std::move(chain), padding);
+114   \}
+115 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!on\+Window\+Update@{on\+Window\+Update}}
+\index{on\+Window\+Update@{on\+Window\+Update}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{on\+Window\+Update(\+Stream\+I\+D stream, uint32\+\_\+t amount) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Flow\+Control\+Filter\+::on\+Window\+Update (
+\begin{DoxyParamCaption}
+\item[{Stream\+ID}]{stream, }
+\item[{uint32\+\_\+t}]{amount}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1FlowControlFilter_a3be2c9d9ec687d49f8c8e0e974a8e0a4}
+
+
+Definition at line 117 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::callback\+\_\+, error\+\_\+, proxygen\+::\+Window\+::free(), proxygen\+::\+Window\+::get\+Non\+Negative\+Size(), proxygen\+::\+Window\+::get\+Outstanding(), proxygen\+::\+Window\+::get\+Size(), notify\+\_\+, proxygen\+::\+Flow\+Control\+Filter\+::\+Callback\+::on\+Connection\+Send\+Window\+Open(), sends\+Blocked\+\_\+, and send\+Window\+\_\+.
+
+
+\begin{DoxyCode}
+117                                                                        \{
+118   \textcolor{keywordflow}{if} (!stream) \{
+119     \textcolor{keywordtype}{bool} success = sendWindow_.free(amount);
+120     VLOG(4) << \textcolor{stringliteral}{"Remote side ack'd "} << amount << \textcolor{stringliteral}{" bytes, sendWindow="} <<
+121       sendWindow_.getSize();
+122     \textcolor{keywordflow}{if} (!success) \{
+123       LOG(WARNING) << \textcolor{stringliteral}{"Remote side sent connection-level WINDOW\_UPDATE "}
+124                    << \textcolor{stringliteral}{"that could not be applied. Aborting session."};
+125       \textcolor{comment}{// If something went wrong applying the flow control change, abort}
+126       \textcolor{comment}{// the entire session.}
+127       error_ = \textcolor{keyword}{true};
+128       HTTPException ex = getException(
+129         folly::to<std::string>(
+130           \textcolor{stringliteral}{"Failed to update send window, outstanding="},
+131           sendWindow_.getOutstanding(), \textcolor{stringliteral}{", amount="}, amount));
+132       callback_->onError(stream, ex, \textcolor{keyword}{false});
+133     \}
+134     \textcolor{keywordflow}{if} (sendsBlocked_ && sendWindow_.getNonNegativeSize()) \{
+135       VLOG(4) << \textcolor{stringliteral}{"Send window opened"};
+136       sendsBlocked_ = \textcolor{keyword}{false};
+137       notify_.onConnectionSendWindowOpen();
+138     \}
+139     \textcolor{comment}{// Don't forward.}
+140   \} \textcolor{keywordflow}{else} \{
+141     callback_->onWindowUpdate(stream, amount);
+142   \}
+143 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!set\+Receive\+Window\+Size@{set\+Receive\+Window\+Size}}
+\index{set\+Receive\+Window\+Size@{set\+Receive\+Window\+Size}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{set\+Receive\+Window\+Size(folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, uint32\+\_\+t capacity)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Flow\+Control\+Filter\+::set\+Receive\+Window\+Size (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+I\+O\+Buf\+Queue \&}]{write\+Buf, }
+\item[{uint32\+\_\+t}]{capacity}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1FlowControlFilter_a1a9cd3f414379ab670d92cd59cf2a43e}
+Modify the session receive window
+
+
+\begin{DoxyParams}{Parameters}
+{\em write\+Buf} & The buffer to write egress on. This constructor may generate a window update frame on this buffer. \\
+\hline
+{\em capacity} & The initial size of the conn-\/level recv window. It must be $>$= the codec default. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file Flow\+Control\+Filter.\+cpp.
+
+
+
+References proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+\_\+, proxygen\+::\+Window\+::get\+Capacity(), recv\+Window\+\_\+, proxygen\+::\+Window\+::set\+Capacity(), and to\+Ack\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Native\+Protocol\+Upgrade\+Impl(), and proxygen\+::\+H\+T\+T\+P\+Session\+::start\+Now().
+
+
+\begin{DoxyCode}
+45                                                                 \{
+46   \textcolor{keywordflow}{if} (capacity < recvWindow_.getCapacity()) \{
+47     VLOG(4) << \textcolor{stringliteral}{"Ignoring low conn-level recv window size of "} << capacity;
+48     \textcolor{keywordflow}{return};
+49   \}
+50   int32\_t delta = capacity - recvWindow_.getCapacity();
+51   \textcolor{keywordflow}{if} (delta < 0) \{
+52     \textcolor{comment}{// For now, we're disallowing shrinking the window, since it can lead}
+53     \textcolor{comment}{// to FLOW\_CONTROL\_ERRORs if there is data in flight.}
+54     VLOG(4) << \textcolor{stringliteral}{"Refusing to shrink the recv window"};
+55     \textcolor{keywordflow}{return};
+56   \}
+57   VLOG(4) << \textcolor{stringliteral}{"Incrementing default conn-level recv window by "} << delta;
+58   \textcolor{keywordflow}{if} (!recvWindow_.setCapacity(capacity)) \{
+59     VLOG(2) << \textcolor{stringliteral}{"Failed setting conn-level recv window capacity to "} << capacity;
+60     \textcolor{keywordflow}{return};
+61   \}
+62   toAck_ += delta;
+63   \textcolor{keywordflow}{if} (toAck_ > 0) \{
+64     call_->generateWindowUpdate(writeBuf, 0, delta);
+65     toAck_ = 0;
+66   \}
+67 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!error\+\_\+@{error\+\_\+}}
+\index{error\+\_\+@{error\+\_\+}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{error\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Flow\+Control\+Filter\+::error\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1FlowControlFilter_af7238ed554ee81463ec466ad5fb5ba6b}
+
+
+Definition at line 108 of file Flow\+Control\+Filter.\+h.
+
+
+
+Referenced by is\+Reusable(), on\+Body(), and on\+Window\+Update().
+
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!notify\+\_\+@{notify\+\_\+}}
+\index{notify\+\_\+@{notify\+\_\+}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{notify\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Callback}\& proxygen\+::\+Flow\+Control\+Filter\+::notify\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1FlowControlFilter_a154bdddf7844976fccd882290fe9a3ee}
+
+
+Definition at line 104 of file Flow\+Control\+Filter.\+h.
+
+
+
+Referenced by generate\+Body(), and on\+Window\+Update().
+
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!recv\+Window\+\_\+@{recv\+Window\+\_\+}}
+\index{recv\+Window\+\_\+@{recv\+Window\+\_\+}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{recv\+Window\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Window} proxygen\+::\+Flow\+Control\+Filter\+::recv\+Window\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1FlowControlFilter_aa576f7941fdcec7f8c2674d7d9757bfb}
+
+
+Definition at line 105 of file Flow\+Control\+Filter.\+h.
+
+
+
+Referenced by Flow\+Control\+Filter(), ingress\+Bytes\+Processed(), on\+Body(), and set\+Receive\+Window\+Size().
+
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!sends\+Blocked\+\_\+@{sends\+Blocked\+\_\+}}
+\index{sends\+Blocked\+\_\+@{sends\+Blocked\+\_\+}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{sends\+Blocked\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Flow\+Control\+Filter\+::sends\+Blocked\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1FlowControlFilter_a411ba3374f13584968d1bc5abe935c95}
+
+
+Definition at line 109 of file Flow\+Control\+Filter.\+h.
+
+
+
+Referenced by generate\+Body(), and on\+Window\+Update().
+
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!send\+Window\+\_\+@{send\+Window\+\_\+}}
+\index{send\+Window\+\_\+@{send\+Window\+\_\+}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{send\+Window\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Window} proxygen\+::\+Flow\+Control\+Filter\+::send\+Window\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1FlowControlFilter_aaaf44106f2efed6fdd091dc436310bcb}
+
+
+Definition at line 106 of file Flow\+Control\+Filter.\+h.
+
+
+
+Referenced by generate\+Body(), get\+Available\+Send(), and on\+Window\+Update().
+
+\index{proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}!to\+Ack\+\_\+@{to\+Ack\+\_\+}}
+\index{to\+Ack\+\_\+@{to\+Ack\+\_\+}!proxygen\+::\+Flow\+Control\+Filter@{proxygen\+::\+Flow\+Control\+Filter}}
+\subsubsection[{to\+Ack\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t proxygen\+::\+Flow\+Control\+Filter\+::to\+Ack\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1FlowControlFilter_a78735906ba3e077be2447a8979a5820b}
+
+
+Definition at line 107 of file Flow\+Control\+Filter.\+h.
+
+
+
+Referenced by ingress\+Bytes\+Processed(), on\+Body(), and set\+Receive\+Window\+Size().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf Flow\+Control\+Filter.\+h}\item 
+proxygen/lib/http/codec/{\bf Flow\+Control\+Filter.\+cpp}\end{DoxyCompactItemize}

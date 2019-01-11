@@ -1,0 +1,325 @@
+\section{proxygen\+:\+:hpack\+:\+:Test\+Header\+Codec\+Stats Class Reference}
+\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats}\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+
+
+{\ttfamily \#include $<$Test\+Util.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:hpack\+:\+:Test\+Header\+Codec\+Stats\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1hpack_1_1TestHeaderCodecStats}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Test\+Header\+Codec\+Stats} ({\bf Header\+Codec\+::\+Type} type)
+\item 
+void {\bf record\+Encode} ({\bf Header\+Codec\+::\+Type} type, {\bf H\+T\+T\+P\+Header\+Size} \&size) override
+\item 
+void {\bf record\+Decode} ({\bf Header\+Codec\+::\+Type} type, {\bf H\+T\+T\+P\+Header\+Size} \&size) override
+\item 
+void {\bf record\+Decode\+Error} ({\bf Header\+Codec\+::\+Type} type) override
+\item 
+void {\bf record\+Decode\+Too\+Large} ({\bf Header\+Codec\+::\+Type} type) override
+\item 
+void {\bf reset} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Header\+Codec\+::\+Type} {\bf type\+\_\+}
+\item 
+uint32\+\_\+t {\bf encodes} \{0\}
+\item 
+uint32\+\_\+t {\bf encoded\+Bytes\+Compr} \{0\}
+\item 
+uint32\+\_\+t {\bf encoded\+Bytes\+Uncompr} \{0\}
+\item 
+uint32\+\_\+t {\bf decodes} \{0\}
+\item 
+uint32\+\_\+t {\bf decoded\+Bytes\+Compr} \{0\}
+\item 
+uint32\+\_\+t {\bf decoded\+Bytes\+Uncompr} \{0\}
+\item 
+uint32\+\_\+t {\bf errors} \{0\}
+\item 
+uint32\+\_\+t {\bf too\+Large} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 44 of file Test\+Util.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!Test\+Header\+Codec\+Stats@{Test\+Header\+Codec\+Stats}}
+\index{Test\+Header\+Codec\+Stats@{Test\+Header\+Codec\+Stats}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{Test\+Header\+Codec\+Stats(\+Header\+Codec\+::\+Type type)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::\+Test\+Header\+Codec\+Stats (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Codec\+::\+Type}}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_ad76f2d6173c7f5d36af390c1a1b329bc}
+
+
+Definition at line 47 of file Test\+Util.\+h.
+
+
+\begin{DoxyCode}
+48       : type_(type) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!record\+Decode@{record\+Decode}}
+\index{record\+Decode@{record\+Decode}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{record\+Decode(\+Header\+Codec\+::\+Type type, H\+T\+T\+P\+Header\+Size \&size) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::record\+Decode (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Codec\+::\+Type}}]{type, }
+\item[{{\bf H\+T\+T\+P\+Header\+Size} \&}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a9af40ff4c4596af7485980a3c5ea3820}
+
+
+Implements {\bf proxygen\+::\+Header\+Codec\+::\+Stats} \doxyref{}{p.}{classproxygen_1_1HeaderCodec_1_1Stats_a5c41229f07ae48c83244339dcd9bea0a}.
+
+
+
+Definition at line 57 of file Test\+Util.\+h.
+
+
+
+References decoded\+Bytes\+Compr, decoded\+Bytes\+Uncompr, decodes, and type\+\_\+.
+
+
+\begin{DoxyCode}
+57                                                                          \{
+58     EXPECT\_EQ(type, type_);
+59     decodes++;
+60     decodedBytesCompr += size.compressed;
+61     decodedBytesUncompr += size.uncompressed;
+62   \}
+\end{DoxyCode}
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!record\+Decode\+Error@{record\+Decode\+Error}}
+\index{record\+Decode\+Error@{record\+Decode\+Error}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{record\+Decode\+Error(\+Header\+Codec\+::\+Type type) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::record\+Decode\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Codec\+::\+Type}}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a9d08c2623a905518e6a5dda82fd00a5b}
+
+
+Implements {\bf proxygen\+::\+Header\+Codec\+::\+Stats} \doxyref{}{p.}{classproxygen_1_1HeaderCodec_1_1Stats_a7df1fd8943c6ea5ca0a30b9ffa2d5b82}.
+
+
+
+Definition at line 64 of file Test\+Util.\+h.
+
+
+
+References errors, and type\+\_\+.
+
+
+\begin{DoxyCode}
+64                                                         \{
+65     EXPECT\_EQ(type, type_);
+66     errors++;
+67   \}
+\end{DoxyCode}
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!record\+Decode\+Too\+Large@{record\+Decode\+Too\+Large}}
+\index{record\+Decode\+Too\+Large@{record\+Decode\+Too\+Large}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{record\+Decode\+Too\+Large(\+Header\+Codec\+::\+Type type) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::record\+Decode\+Too\+Large (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Codec\+::\+Type}}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a655a25c5dfe836dd1a8207e1329079da}
+
+
+Implements {\bf proxygen\+::\+Header\+Codec\+::\+Stats} \doxyref{}{p.}{classproxygen_1_1HeaderCodec_1_1Stats_af92db6dfd70045341b609bdab7ec46fa}.
+
+
+
+Definition at line 69 of file Test\+Util.\+h.
+
+
+
+References too\+Large, and type\+\_\+.
+
+
+\begin{DoxyCode}
+69                                                            \{
+70     EXPECT\_EQ(type, type_);
+71     tooLarge++;
+72   \}
+\end{DoxyCode}
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!record\+Encode@{record\+Encode}}
+\index{record\+Encode@{record\+Encode}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{record\+Encode(\+Header\+Codec\+::\+Type type, H\+T\+T\+P\+Header\+Size \&size) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::record\+Encode (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Codec\+::\+Type}}]{type, }
+\item[{{\bf H\+T\+T\+P\+Header\+Size} \&}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_ac95532762676b510371bed62e8d2fff3}
+
+
+Implements {\bf proxygen\+::\+Header\+Codec\+::\+Stats} \doxyref{}{p.}{classproxygen_1_1HeaderCodec_1_1Stats_ac831a607d6eb6e55902232612256952b}.
+
+
+
+Definition at line 50 of file Test\+Util.\+h.
+
+
+
+References encoded\+Bytes\+Compr, encoded\+Bytes\+Uncompr, encodes, and type\+\_\+.
+
+
+\begin{DoxyCode}
+50                                                                          \{
+51     EXPECT\_EQ(type, type_);
+52     encodes++;
+53     encodedBytesCompr += size.compressed;
+54     encodedBytesUncompr += size.uncompressed;
+55   \}
+\end{DoxyCode}
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!reset@{reset}}
+\index{reset@{reset}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{reset()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_aa8c8d132cace1309a9e19717b7281956}
+
+
+Definition at line 74 of file Test\+Util.\+h.
+
+
+
+References decoded\+Bytes\+Compr, decoded\+Bytes\+Uncompr, decodes, encoded\+Bytes\+Compr, encoded\+Bytes\+Uncompr, encodes, errors, and too\+Large.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+74                \{
+75     encodes = 0;
+76     decodes = 0;
+77     encodedBytesCompr = 0;
+78     encodedBytesUncompr = 0;
+79     decodedBytesCompr = 0;
+80     decodedBytesUncompr = 0;
+81     errors = 0;
+82     tooLarge = 0;
+83   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!decoded\+Bytes\+Compr@{decoded\+Bytes\+Compr}}
+\index{decoded\+Bytes\+Compr@{decoded\+Bytes\+Compr}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{decoded\+Bytes\+Compr}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::decoded\+Bytes\+Compr \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_ac274ede07d535da4e3515b9d91a769a2}
+
+
+Definition at line 90 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Decode(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!decoded\+Bytes\+Uncompr@{decoded\+Bytes\+Uncompr}}
+\index{decoded\+Bytes\+Uncompr@{decoded\+Bytes\+Uncompr}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{decoded\+Bytes\+Uncompr}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::decoded\+Bytes\+Uncompr \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_ab00bed674f6316881c74c60ab3e7aae4}
+
+
+Definition at line 91 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Decode(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!decodes@{decodes}}
+\index{decodes@{decodes}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{decodes}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::decodes \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a79532e7fee7084fab7cd1ef3c97c771a}
+
+
+Definition at line 89 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Decode(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!encoded\+Bytes\+Compr@{encoded\+Bytes\+Compr}}
+\index{encoded\+Bytes\+Compr@{encoded\+Bytes\+Compr}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{encoded\+Bytes\+Compr}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::encoded\+Bytes\+Compr \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_acb1cb201b5a4810f8ff99f10a3cce798}
+
+
+Definition at line 87 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Encode(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!encoded\+Bytes\+Uncompr@{encoded\+Bytes\+Uncompr}}
+\index{encoded\+Bytes\+Uncompr@{encoded\+Bytes\+Uncompr}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{encoded\+Bytes\+Uncompr}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::encoded\+Bytes\+Uncompr \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a23a6f15921d4031f3653c046014fb295}
+
+
+Definition at line 88 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Encode(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!encodes@{encodes}}
+\index{encodes@{encodes}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{encodes}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::encodes \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a84819cd59a598277fd6e129a03e56740}
+
+
+Definition at line 86 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Encode(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!errors@{errors}}
+\index{errors@{errors}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{errors}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::errors \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_a6ae3759e4201f86018370c8d5026708d}
+
+
+Definition at line 92 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Decode\+Error(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!too\+Large@{too\+Large}}
+\index{too\+Large@{too\+Large}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{too\+Large}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::too\+Large \{0\}}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_af1715f821f459bd496a20af7b09b30a5}
+
+
+Definition at line 93 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Decode\+Too\+Large(), reset(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}!type\+\_\+@{type\+\_\+}}
+\index{type\+\_\+@{type\+\_\+}!proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats@{proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats}}
+\subsubsection[{type\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Header\+Codec\+::\+Type} proxygen\+::hpack\+::\+Test\+Header\+Codec\+Stats\+::type\+\_\+}\label{classproxygen_1_1hpack_1_1TestHeaderCodecStats_ac26a66767f9e2df710a50d477a4b2617}
+
+
+Definition at line 85 of file Test\+Util.\+h.
+
+
+
+Referenced by record\+Decode(), record\+Decode\+Error(), record\+Decode\+Too\+Large(), and record\+Encode().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf Test\+Util.\+h}\end{DoxyCompactItemize}

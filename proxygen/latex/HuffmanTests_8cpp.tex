@@ -1,0 +1,414 @@
+\section{proxygen/lib/http/codec/compress/test/\+Huffman\+Tests.cpp File Reference}
+\label{HuffmanTests_8cpp}\index{proxygen/lib/http/codec/compress/test/\+Huffman\+Tests.\+cpp@{proxygen/lib/http/codec/compress/test/\+Huffman\+Tests.\+cpp}}
+{\ttfamily \#include $<$folly/io/\+Cursor.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+I\+O\+Buf\+Queue.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+Huffman.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+Logging.\+h$>$}\\*
+{\ttfamily \#include $<$tuple$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Huffman\+Tests}
+\item 
+class {\bf Testing\+Huff\+Tree}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Codes)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Size)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Encode)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Decode)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Non\+Printable\+Decode)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Example\+Com)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, User\+Agent)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Fit\+In\+Buffer)
+\item 
+uint32\+\_\+t {\bf tree\+Dfs} (const {\bf Super\+Huff\+Node} $\ast$all\+Snodes, const uint32\+\_\+t \&snode\+Index, const uint32\+\_\+t \&depth, const uint32\+\_\+t \&full\+Code, const uint32\+\_\+t \&eos\+Code, const uint32\+\_\+t \&eos\+Code\+Bits)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Huffman\+Tests}, Sanity\+Checks)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Codes)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Codes}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_aafe2d92a5d39a045d493db3a83a112c9}
+
+
+Definition at line 29 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+29                             \{
+30   uint32\_t code;
+31   uint8\_t bits;
+32   \textcolor{comment}{// check 'e' for both requests and responses}
+33   tie(code, bits) = tree\_.getCode(\textcolor{charliteral}{'e'});
+34   EXPECT\_EQ(code, 0x05);
+35   EXPECT\_EQ(bits, 5);
+36   \textcolor{comment}{// some extreme cases}
+37   tie(code, bits) = tree\_.getCode(0);
+38   EXPECT\_EQ(code, 0x1ff8);
+39   EXPECT\_EQ(bits, 13);
+40   tie(code, bits) = tree\_.getCode(255);
+41   EXPECT\_EQ(code, 0x3ffffee);
+42   EXPECT\_EQ(bits, 26);
+43 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Size)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Size}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_a7d75f430dd6e61d7c65d212bfde8dcf4}
+
+
+Definition at line 45 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+45                            \{
+46   uint32\_t size;
+47   folly::fbstring onebyte(\textcolor{stringliteral}{"x"});
+48   size = tree\_.getEncodeSize(onebyte);
+49   EXPECT\_EQ(size, 1);
+50 
+51   folly::fbstring accept(\textcolor{stringliteral}{"accept-encoding"});
+52   size = tree\_.getEncodeSize(accept);
+53   EXPECT\_EQ(size, 11);
+54 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Encode)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Encode}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_a4842db1e23b74acec608f3cbce2516c3}
+
+
+Definition at line 56 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+56                              \{
+57   uint32\_t size;
+58   \textcolor{comment}{// this is going to fit perfectly into 3 bytes}
+59   folly::fbstring gzip(\textcolor{stringliteral}{"gzip"});
+60   IOBufQueue bufQueue;
+61   QueueAppender appender(&bufQueue, 512);
+62   \textcolor{comment}{// force the allocation}
+63   appender.ensure(512);
+64 
+65   size = tree\_.encode(gzip, appender);
+66   EXPECT\_EQ(size, 3);
+67   \textcolor{keyword}{const} IOBuf* buf = bufQueue.front();
+68   \textcolor{keyword}{const} uint8\_t* data = buf->data();
+69   EXPECT\_EQ(data[0], 0x9b);  \textcolor{comment}{// 10011011}
+70   EXPECT\_EQ(data[1], 0xd9);  \textcolor{comment}{// 11011001}
+71   EXPECT\_EQ(data[2], 0xab);  \textcolor{comment}{// 10101011}
+72 
+73   \textcolor{comment}{// size must equal with the actual encoding}
+74   folly::fbstring accept(\textcolor{stringliteral}{"accept-encoding"});
+75   size = tree\_.getEncodeSize(accept);
+76   uint32\_t encodedSize = tree\_.encode(accept, appender);
+77   EXPECT\_EQ(size, encodedSize);
+78 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Decode)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Decode}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_ad54e299d0c21729e1b00e86ec1c9974d}
+
+
+Definition at line 80 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+80                              \{
+81   uint8\_t buffer[3];
+82   \textcolor{comment}{// simple test with one byte}
+83   buffer[0] = 0x60; \textcolor{comment}{//}
+84   buffer[1] = 0xbf; \textcolor{comment}{//}
+85   folly::fbstring literal;
+86   tree\_.decode(buffer, 2, literal);
+87   EXPECT\_EQ(literal, \textcolor{stringliteral}{"/e"});
+88 
+89   \textcolor{comment}{// simple test with "gzip"}
+90   buffer[0] = 0x9b;
+91   buffer[1] = 0xd9;
+92   buffer[2] = 0xab;
+93   literal.clear();
+94   tree\_.decode(buffer, 3, literal);
+95   EXPECT\_EQ(literal, \textcolor{stringliteral}{"gzip"});
+96 
+97   \textcolor{comment}{// something with padding}
+98   buffer[0] = 0x98;
+99   buffer[1] = 0xbf;
+100   literal.clear();
+101   tree\_.decode(buffer, 2, literal);
+102   EXPECT\_EQ(literal, \textcolor{stringliteral}{"ge"});
+103 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Non\+Printable\+Decode)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Non\+Printable\+Decode}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_af5f535325bb20f5cbc141418583840e3}
+
+
+Definition at line 108 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+108                                          \{
+109   \textcolor{comment}{// character code 9 and 38 (&) that have 24 + 8 = 32 bits}
+110   uint8\_t buffer1[4] = \{
+111     0xFF, 0xFF, 0xEA, 0xF8
+112   \};
+113   folly::fbstring literal;
+114   tree\_.decode(buffer1, 4, literal);
+115   EXPECT\_EQ(literal.size(), 2);
+116   EXPECT\_EQ((uint8\_t)literal[0], 9);
+117   EXPECT\_EQ((uint8\_t)literal[1], 38);
+118 
+119   \textcolor{comment}{// two weird characters and padding}
+120   \textcolor{comment}{// 1 and 240 will have 26 + 23 = 49 bits + 7 bits padding}
+121   uint8\_t buffer2[7] = \{
+122     0xFF, 0xFF, 0xB1, 0xFF, 0xFF, 0xF5, 0xFF
+123   \};
+124   literal.clear();
+125   tree\_.decode(buffer2, 7, literal);
+126   EXPECT\_EQ(literal.size(), 2);
+127   EXPECT\_EQ((uint8\_t) literal[0], 1);
+128   EXPECT\_EQ((uint8\_t) literal[1], 240);
+129 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Example\+Com)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Example\+Com}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_a7e3180ec7d2550cada54a71140b5a208}
+
+
+Definition at line 131 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+131                                  \{
+132   \textcolor{comment}{// interesting case of one bit with value 0 in the last byte}
+133   IOBufQueue bufQueue;
+134   QueueAppender appender(&bufQueue, 512);
+135   appender.ensure(512);
+136 
+137   folly::fbstring example(\textcolor{stringliteral}{"www.example.com"});
+138   uint32\_t size = tree\_.getEncodeSize(example);
+139   EXPECT\_EQ(size, 12);
+140   uint32\_t encodedSize = tree\_.encode(example, appender);
+141   EXPECT\_EQ(size, encodedSize);
+142 
+143   folly::fbstring decoded;
+144   tree\_.decode(bufQueue.front()->data(), size, decoded);
+145   CHECK\_EQ(example, decoded);
+146 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, User\+Agent)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{User\+Agent}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_aeb60deed002b40da2344199255b508eb}
+
+
+Definition at line 148 of file Huffman\+Tests.\+cpp.
+
+
+
+References proxygen\+::huffman\+::\+Huff\+Tree\+::decode(), proxygen\+::huffman\+::\+Huff\+Tree\+::encode(), proxygen\+::huffman\+::\+Huff\+Tree\+::get\+Encode\+Size(), and proxygen\+::huffman\+::huff\+Tree().
+
+
+\begin{DoxyCode}
+148                                 \{
+149   folly::fbstring user\_agent(
+150     \textcolor{stringliteral}{"Mozilla/5.0 (iPhone; CPU iPhone OS 7\_0\_4 like Mac OS X) AppleWebKit/537.51"}
+151     \textcolor{stringliteral}{".1 (KHTML, like Gecko) Mobile/11B554a [FBAN/FBIOS;FBAV/6.7;FBBV/566055;FBD"}
+152     \textcolor{stringliteral}{"V/iPhone5,1;FBMD/iPhone;FBSN/iPhone OS;FBSV/7.0.4;FBSS/2; FBCR/AT&T;FBID/p"}
+153     \textcolor{stringliteral}{"hone;FBLC/en\_US;FBOP/5]"});
+154   IOBufQueue bufQueue;
+155   QueueAppender appender(&bufQueue, 512);
+156   appender.ensure(512);
+157   \textcolor{keyword}{const} HuffTree& tree = huffTree();
+158   uint32\_t size = tree.getEncodeSize(user\_agent);
+159   uint32\_t encodedSize = tree.encode(user\_agent, appender);
+160   EXPECT\_EQ(size, encodedSize);
+161 
+162   folly::fbstring decoded;
+163   tree.decode(bufQueue.front()->data(), size, decoded);
+164   CHECK\_EQ(user\_agent, decoded);
+165 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Fit\+In\+Buffer)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Fit\+In\+Buffer}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_a821289e9fc6976eb107c6ed172c8e06f}
+
+
+Definition at line 170 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+170                                   \{
+171   IOBufQueue bufQueue;
+172   QueueAppender appender(&bufQueue, 128);
+173 
+174   \textcolor{comment}{// call with an empty string}
+175   folly::fbstring literal(\textcolor{stringliteral}{""});
+176   tree\_.encode(literal, appender);
+177 
+178   \textcolor{comment}{// allow just 1 byte}
+179   appender.ensure(128);
+180   appender.append(appender.length() - 1);
+181   literal = \textcolor{stringliteral}{"g"};
+182   tree\_.encode(literal, appender);
+183   CHECK\_EQ(appender.length(), 0);
+184 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Huffman\+Tests, Sanity\+Checks)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Huffman\+Tests}}]{, }
+\item[{Sanity\+Checks}]{}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_a6884a0ca1f004c5ddd44e819ed77cf5b}
+
+
+Definition at line 280 of file Huffman\+Tests.\+cpp.
+
+
+
+References Testing\+Huff\+Tree\+::get\+Huff\+Tree(), Testing\+Huff\+Tree\+::get\+Internal\+Table(), and tree\+Dfs().
+
+
+\begin{DoxyCode}
+280                                    \{
+281   TestingHuffTree reqTree = TestingHuffTree::getHuffTree();
+282   \textcolor{keyword}{const} SuperHuffNode* allSnodesReq = reqTree.getInternalTable();
+283   uint32\_t totalReqChars = treeDfs(allSnodesReq, 0, 0, 0, 0x3fffffff, 30);
+284   EXPECT\_EQ(totalReqChars, 256);
+285 \}
+\end{DoxyCode}
+\index{Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}!tree\+Dfs@{tree\+Dfs}}
+\index{tree\+Dfs@{tree\+Dfs}!Huffman\+Tests.\+cpp@{Huffman\+Tests.\+cpp}}
+\subsubsection[{tree\+Dfs(const Super\+Huff\+Node $\ast$all\+Snodes, const uint32\+\_\+t \&snode\+Index, const uint32\+\_\+t \&depth, const uint32\+\_\+t \&full\+Code, const uint32\+\_\+t \&eos\+Code, const uint32\+\_\+t \&eos\+Code\+Bits)}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t tree\+Dfs (
+\begin{DoxyParamCaption}
+\item[{const {\bf Super\+Huff\+Node} $\ast$}]{all\+Snodes, }
+\item[{const uint32\+\_\+t \&}]{snode\+Index, }
+\item[{const uint32\+\_\+t \&}]{depth, }
+\item[{const uint32\+\_\+t \&}]{full\+Code, }
+\item[{const uint32\+\_\+t \&}]{eos\+Code, }
+\item[{const uint32\+\_\+t \&}]{eos\+Code\+Bits}
+\end{DoxyParamCaption}
+)}\label{HuffmanTests_8cpp_a240b2fa26ea784b9bd23c172d9ed75f2}
+
+
+Definition at line 199 of file Huffman\+Tests.\+cpp.
+
+
+
+References proxygen\+::huffman\+::\+Huff\+Node\+::bits, proxygen\+::huffman\+::\+Huff\+Node\+::ch, proxygen\+::huffman\+::\+Huff\+Node\+::data, proxygen\+::huffman\+::\+Super\+Huff\+Node\+::index, proxygen\+::huffman\+::\+Huff\+Node\+::is\+Leaf(), proxygen\+::huffman\+::\+Huff\+Node\+::metadata, and proxygen\+::huffman\+::\+Huff\+Node\+::super\+Node\+Index.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+205                                  \{
+206 
+207   EXPECT\_TRUE(depth < 4);
+208 
+209   unordered\_set<uint32\_t> leaves;
+210   uint32\_t subtreeLeafCount = 0;
+211 
+212   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < 256; i++) \{
+213     \textcolor{keyword}{const} HuffNode& node = allSnodes[snodeIndex].index[i];
+214 
+215     uint32\_t newFullCode = fullCode ^ (i << (24 - 8 * depth));
+216     uint32\_t eosCodeDepth = (eosCodeBits - 1) / 8;
+217 
+218     \textcolor{keywordflow}{if}(eosCodeDepth == depth
+219         && (newFullCode >> (32 - eosCodeBits)) == eosCode) \{
+220 
+221       \textcolor{comment}{// this condition corresponds to an EOS code}
+222       \textcolor{comment}{// this should be a leaf that doesn't have supernode or bits set}
+223 
+224       EXPECT\_TRUE(node.isLeaf());
+225       EXPECT\_TRUE(node.metadata.bits == 0);
+226     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (node.isLeaf()) \{
+227 
+228       \textcolor{comment}{// this condition is a normal leaf}
+229       \textcolor{comment}{// this should have bits set}
+230 
+231       EXPECT\_TRUE(node.isLeaf());
+232       EXPECT\_TRUE(node.metadata.bits > 0);
+233       EXPECT\_TRUE(node.metadata.bits <= 8);
+234 
+235       \textcolor{comment}{// used to count unique leaves at this node}
+236       leaves.insert(node.data.ch);
+237     \} \textcolor{keywordflow}{else} \{
+238 
+239       \textcolor{comment}{// this condition is a branching node}
+240       \textcolor{comment}{// this should have the superNodeIndex set but not bits should be set}
+241 
+242       EXPECT\_TRUE(!node.isLeaf());
+243       EXPECT\_TRUE(node.data.superNodeIndex > 0);
+244       EXPECT\_TRUE(node.metadata.bits == 0);
+245       EXPECT\_TRUE(node.data.superNodeIndex < 46);
+246 
+247       \textcolor{comment}{// keep track of leaf counts for this subtree}
+248       subtreeLeafCount += treeDfs(
+249           allSnodes,
+250           node.data.superNodeIndex,
+251           depth + 1,
+252           newFullCode,
+253           eosCode,
+254           eosCodeBits);
+255     \}
+256   \}
+257   \textcolor{keywordflow}{return} subtreeLeafCount + leaves.size();
+258 \}
+\end{DoxyCode}

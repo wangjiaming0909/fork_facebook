@@ -1,0 +1,398 @@
+\section{Static\+Service\+:\+:Static\+Handler Class Reference}
+\label{classStaticService_1_1StaticHandler}\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+
+
+{\ttfamily \#include $<$Static\+Handler.\+h$>$}
+
+Inheritance diagram for Static\+Service\+:\+:Static\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classStaticService_1_1StaticHandler}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf on\+Request} (std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$ headers) noexceptoverride
+\item 
+void {\bf on\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride
+\item 
+void {\bf on\+E\+OM} () noexceptoverride
+\item 
+void {\bf on\+Upgrade} ({\bf proxygen\+::\+Upgrade\+Protocol} proto) noexceptoverride
+\item 
+void {\bf request\+Complete} () noexceptoverride
+\item 
+void {\bf on\+Error} ({\bf proxygen\+::\+Proxygen\+Error} err) noexceptoverride
+\item 
+void {\bf on\+Egress\+Paused} () noexceptoverride
+\item 
+void {\bf on\+Egress\+Resumed} () noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf read\+File} (folly\+::\+Event\+Base $\ast$evb)
+\item 
+bool {\bf check\+For\+Completion} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+File $>$ {\bf file\+\_\+}
+\item 
+bool {\bf read\+File\+Scheduled\+\_\+} \{false\}
+\item 
+std\+::atomic$<$ bool $>$ {\bf paused\+\_\+} \{false\}
+\item 
+bool {\bf finished\+\_\+} \{false\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file Static\+Handler.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!check\+For\+Completion@{check\+For\+Completion}}
+\index{check\+For\+Completion@{check\+For\+Completion}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{check\+For\+Completion()}]{\setlength{\rightskip}{0pt plus 5cm}bool Static\+Service\+::\+Static\+Handler\+::check\+For\+Completion (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classStaticService_1_1StaticHandler_a7fb4fb48273193341a208cad85df4217}
+
+
+Definition at line 147 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+147                                        \{
+148   \textcolor{keywordflow}{if} (finished_ && !readFileScheduled_) \{
+149     VLOG(4) << \textcolor{stringliteral}{"deleting StaticHandler"};
+150     \textcolor{keyword}{delete} \textcolor{keyword}{this};
+151     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+152   \}
+153   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+154 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{on\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_aa0b9ec2f6b60f1cfffd078f81bbf91b4}
+Invoked when we get part of body for the request. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aaf0ed3bb94384e6240e15cca63de82bb}.
+
+
+
+Definition at line 124 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+124                                                                \{
+125   \textcolor{comment}{// ignore, only support GET}
+126 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!on\+Egress\+Paused@{on\+Egress\+Paused}}
+\index{on\+Egress\+Paused@{on\+Egress\+Paused}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{on\+Egress\+Paused() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::on\+Egress\+Paused (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_a4f792c461b3cad54c75924f68a4aa790}
+Signals from H\+T\+TP layer when client queue is full or empty. If you are sending a streaming response, consider implementing these and acting accordingly. Saves your server from running out of memory. 
+
+Reimplemented from {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a2791a2a46b57712ad177116d43fbc8e3}.
+
+
+
+Definition at line 103 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+103                                             \{
+104   \textcolor{comment}{// This will terminate readFile soon}
+105   VLOG(4) << \textcolor{stringliteral}{"StaticHandler paused"};
+106   paused_ = \textcolor{keyword}{true};
+107 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!on\+Egress\+Resumed@{on\+Egress\+Resumed}}
+\index{on\+Egress\+Resumed@{on\+Egress\+Resumed}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{on\+Egress\+Resumed() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::on\+Egress\+Resumed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_aea695f82f9f48bab1798e3d1e0b0e1d0}
+
+
+Reimplemented from {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a8128e8661fa526a6d10fd9c03dbe4dc3}.
+
+
+
+Definition at line 109 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+109                                              \{
+110   VLOG(4) << \textcolor{stringliteral}{"StaticHandler resumed"};
+111   paused_ = \textcolor{keyword}{false};
+112   \textcolor{comment}{// If readFileScheduled\_, it will reschedule itself}
+113   \textcolor{keywordflow}{if} (!readFileScheduled_ && file_) \{
+114     readFileScheduled_ = \textcolor{keyword}{true};
+115     folly::getCPUExecutor()->add(
+116       std::bind(&StaticHandler::readFile, \textcolor{keyword}{this},
+117                 folly::EventBaseManager::get()->getEventBase()));
+118   \} \textcolor{keywordflow}{else} \{
+119     VLOG(4) << \textcolor{stringliteral}{"Deferred scheduling readFile"};
+120   \}
+121 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!on\+E\+OM@{on\+E\+OM}}
+\index{on\+E\+OM@{on\+E\+OM}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{on\+E\+O\+M() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::on\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_ad0b17fe738d859435b46c06db1ffed48}
+Invoked when we finish receiving the body. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a24f26d2cf71effaf154ce53aeff51aab}.
+
+
+
+Definition at line 128 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+128                                    \{
+129 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{on\+Error(proxygen\+::\+Proxygen\+Error err) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Proxygen\+Error}}]{err}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_ac4f77b0de9e40f285a7f4c802c7a8de5}
+Request failed. Maybe because of read/write error on socket or client not being able to send request in time.
+
+N\+O\+TE\+: Can be invoked at any time (except for before on\+Request).
+
+No more callbacks will be invoked after this. You should clean up after yourself. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_ad7e6428b925840a334adc58ff6f4f680}.
+
+
+
+Definition at line 141 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+141                                                     \{
+142   finished_ = \textcolor{keyword}{true};
+143   paused_ = \textcolor{keyword}{true};
+144   checkForCompletion();
+145 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{on\+Request(std\+::unique\+\_\+ptr$<$ proxygen\+::\+H\+T\+T\+P\+Message $>$ headers) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$}]{headers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_a51cdc7688cd8ff7a60ab297efbd6b201}
+Handles requests by serving the file named in path. Only supports G\+ET. reads happen in a C\+PU thread pool since read(2) is blocking. If egress pauses, file reading is also paused. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a61f59e1155f906c7b73062147164320f}.
+
+
+
+Definition at line 28 of file Static\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Response\+Builder\+::body(), proxygen\+::\+G\+ET, proxygen\+::\+Response\+Builder\+::send(), proxygen\+::\+Response\+Builder\+::send\+With\+E\+O\+M(), and proxygen\+::\+Response\+Builder\+::status().
+
+
+\begin{DoxyCode}
+28                                                                          \{
+29   \textcolor{keywordflow}{if} (headers->getMethod() != HTTPMethod::GET) \{
+30     ResponseBuilder(downstream_)
+31       .status(400, \textcolor{stringliteral}{"Bad method"})
+32       .body(\textcolor{stringliteral}{"Only GET is supported"})
+33       .sendWithEOM();
+34     \textcolor{keywordflow}{return};
+35   \}
+36   \textcolor{comment}{// a real webserver would validate this path didn't contain malicious}
+37   \textcolor{comment}{// characters like '//' or '..'}
+38   \textcolor{keywordflow}{try} \{
+39     \textcolor{comment}{// + 1 to kill leading /}
+40     file_ = std::make\_unique<folly::File>(headers->getPath().c\_str() + 1);
+41   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::system\_error& ex) \{
+42     ResponseBuilder(downstream_)
+43       .status(404, \textcolor{stringliteral}{"Not Found"})
+44       .body(folly::to<std::string>(\textcolor{stringliteral}{"Could not find "}, headers->getPath(),
+45                                    \textcolor{stringliteral}{" ex="}, folly::exceptionStr(ex)))
+46       .sendWithEOM();
+47     \textcolor{keywordflow}{return};
+48   \}
+49   ResponseBuilder(downstream_)
+50     .status(200, \textcolor{stringliteral}{"Ok"})
+51     .send();
+52   \textcolor{comment}{// use a CPU executor since read(2) of a file can block}
+53   readFileScheduled_ = \textcolor{keyword}{true};
+54   folly::getCPUExecutor()->add(
+55     std::bind(&StaticHandler::readFile, \textcolor{keyword}{this},
+56               folly::EventBaseManager::get()->getEventBase()));
+57 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!on\+Upgrade@{on\+Upgrade}}
+\index{on\+Upgrade@{on\+Upgrade}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{on\+Upgrade(proxygen\+::\+Upgrade\+Protocol proto) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::on\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Upgrade\+Protocol}}]{prot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_a18c926fb3b9598df709ca710e3b0a2a3}
+Invoked when the session has been upgraded to a different protocol 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aefed2946bc5558baf6e36a2d11290b79}.
+
+
+
+Definition at line 131 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+131                                                         \{
+132   \textcolor{comment}{// handler doesn't support upgrades}
+133 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!read\+File@{read\+File}}
+\index{read\+File@{read\+File}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{read\+File(folly\+::\+Event\+Base $\ast$evb)}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::read\+File (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{evb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classStaticService_1_1StaticHandler_af6c36b09f07174bdb97427cea277ab65}
+
+
+Definition at line 59 of file Static\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Response\+Builder\+::body(), proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+Response\+Builder\+::send(), and proxygen\+::\+Response\+Builder\+::send\+With\+E\+O\+M().
+
+
+\begin{DoxyCode}
+59                                                 \{
+60   folly::IOBufQueue buf;
+61   \textcolor{keywordflow}{while} (file_ && !paused_) \{
+62     \textcolor{comment}{// read 4k-ish chunks and foward each one to the client}
+63     \textcolor{keyword}{auto} data = buf.preallocate(4000, 4000);
+64     \textcolor{keyword}{auto} rc = folly::readNoInt(file_->fd(), data.first, data.second);
+65     \textcolor{keywordflow}{if} (rc < 0) \{
+66       \textcolor{comment}{// error}
+67       VLOG(4) << \textcolor{stringliteral}{"Read error="} << rc;
+68       file_.reset();
+69       evb->runInEventBaseThread([\textcolor{keyword}{this}] \{
+70           LOG(ERROR) << \textcolor{stringliteral}{"Error reading file"};
+71           downstream_->sendAbort();
+72         \});
+73       \textcolor{keywordflow}{break};
+74     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (rc == 0) \{
+75       \textcolor{comment}{// done}
+76       file_.reset();
+77       VLOG(4) << \textcolor{stringliteral}{"Read EOF"};
+78       evb->runInEventBaseThread([\textcolor{keyword}{this}] \{
+79           ResponseBuilder(downstream_)
+80             .sendWithEOM();
+81         \});
+82       \textcolor{keywordflow}{break};
+83     \} \textcolor{keywordflow}{else} \{
+84       buf.postallocate(rc);
+85       evb->runInEventBaseThread([\textcolor{keyword}{this}, body=buf.move()] () \textcolor{keyword}{mutable} \{
+86           ResponseBuilder(downstream_)
+87             .body(std::move(body))
+88             .send();
+89         \});
+90     \}
+91   \}
+92 
+93   \textcolor{comment}{// Notify the request thread that we terminated the readFile loop}
+94   evb->runInEventBaseThread([\textcolor{keyword}{this}] \{
+95       readFileScheduled_ = \textcolor{keyword}{false};
+96       \textcolor{keywordflow}{if} (!checkForCompletion() && !paused_) \{
+97         VLOG(4) << \textcolor{stringliteral}{"Resuming deferred readFile"};
+98         onEgressResumed();
+99       \}
+100     \});
+101 \}
+\end{DoxyCode}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!request\+Complete@{request\+Complete}}
+\index{request\+Complete@{request\+Complete}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{request\+Complete() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Static\+Service\+::\+Static\+Handler\+::request\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classStaticService_1_1StaticHandler_a809e5cca363d9a8d6d791c86b33f3f44}
+Invoked when request processing has been completed and nothing more needs to be done. This may be a good place to log some stats and clean up resources. This is distinct from \doxyref{on\+E\+O\+M()}{p.}{classStaticService_1_1StaticHandler_ad0b17fe738d859435b46c06db1ffed48} because it is invoked after the response is fully sent. Once this callback has been received, {\ttfamily downstream\+\_\+} should be considered invalid. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a0ec159751b407bcd3667994c6d8d7cfe}.
+
+
+
+Definition at line 135 of file Static\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+135                                              \{
+136   finished_ = \textcolor{keyword}{true};
+137   paused_ = \textcolor{keyword}{true};
+138   checkForCompletion();
+139 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!file\+\_\+@{file\+\_\+}}
+\index{file\+\_\+@{file\+\_\+}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{file\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+File$>$ Static\+Service\+::\+Static\+Handler\+::file\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classStaticService_1_1StaticHandler_a9b5f2db00d5b151e40307ad5bb38d6a5}
+
+
+Definition at line 45 of file Static\+Handler.\+h.
+
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!finished\+\_\+@{finished\+\_\+}}
+\index{finished\+\_\+@{finished\+\_\+}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{finished\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Static\+Service\+::\+Static\+Handler\+::finished\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classStaticService_1_1StaticHandler_ab3a8920c5fcef83d02e8fe11a1b70d2b}
+
+
+Definition at line 48 of file Static\+Handler.\+h.
+
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!paused\+\_\+@{paused\+\_\+}}
+\index{paused\+\_\+@{paused\+\_\+}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{paused\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::atomic$<$bool$>$ Static\+Service\+::\+Static\+Handler\+::paused\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classStaticService_1_1StaticHandler_af2d5d0c5be19959932af099833435772}
+
+
+Definition at line 47 of file Static\+Handler.\+h.
+
+\index{Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}!read\+File\+Scheduled\+\_\+@{read\+File\+Scheduled\+\_\+}}
+\index{read\+File\+Scheduled\+\_\+@{read\+File\+Scheduled\+\_\+}!Static\+Service\+::\+Static\+Handler@{Static\+Service\+::\+Static\+Handler}}
+\subsubsection[{read\+File\+Scheduled\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Static\+Service\+::\+Static\+Handler\+::read\+File\+Scheduled\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classStaticService_1_1StaticHandler_a68a1df3fd05acfce5e31b1b71a536865}
+
+
+Definition at line 46 of file Static\+Handler.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/static/{\bf Static\+Handler.\+h}\item 
+proxygen/httpserver/samples/static/{\bf Static\+Handler.\+cpp}\end{DoxyCompactItemize}

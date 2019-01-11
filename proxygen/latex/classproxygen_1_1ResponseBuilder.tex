@@ -1,0 +1,604 @@
+\section{proxygen\+:\+:Response\+Builder Class Reference}
+\label{classproxygen_1_1ResponseBuilder}\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+
+
+{\ttfamily \#include $<$Response\+Builder.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Upgrade\+Type} \{ {\bf Upgrade\+Type\+::\+C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST} = 0, 
+{\bf Upgrade\+Type\+::\+H\+T\+T\+P\+\_\+\+U\+P\+G\+R\+A\+DE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Response\+Builder} ({\bf Response\+Handler} $\ast$txn)
+\item 
+{\bf Response\+Builder} \& {\bf promise} (const std\+::string \&url, const std\+::string \&host)
+\item 
+{\bf Response\+Builder} \& {\bf status} (uint16\+\_\+t code, const std\+::string \&{\bf message})
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf Response\+Builder} \& {\bf header} (const std\+::string \&header\+In, const {\bf T} \&value)
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf Response\+Builder} \& {\bf header} ({\bf H\+T\+T\+P\+Header\+Code} code, const {\bf T} \&value)
+\item 
+{\bf Response\+Builder} \& {\bf body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body\+In)
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf Response\+Builder} \& {\bf body} ({\bf T} \&\&t)
+\item 
+{\bf Response\+Builder} \& {\bf close\+Connection} ()
+\item 
+{\bf Response\+Builder} \& {\bf trailers} (const {\bf H\+T\+T\+P\+Headers} \&trailers)
+\item 
+void {\bf send\+With\+E\+OM} ()
+\item 
+void {\bf send} ()
+\item 
+void {\bf accept\+Upgrade\+Request} ({\bf Upgrade\+Type} upgrade\+Type, const std\+::string upgrade\+Protocol=\char`\"{}\char`\"{})
+\item 
+void {\bf reject\+Upgrade\+Request} ()
+\item 
+{\bf Response\+Builder} \& {\bf set\+Egress\+Websocket\+Headers} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Response\+Handler} $\ast$const {\bf txn\+\_\+} \{{\bf nullptr}\}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ {\bf headers\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf body\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$ {\bf trailers\+\_\+}
+\item 
+bool {\bf send\+E\+O\+M\+\_\+} \{false\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helps you make responses and send them on demand.
+
+N\+O\+TE\+: We don\textquotesingle{}t do any correctness checks here, we depend on state machine in \doxyref{H\+T\+T\+P\+Transaction}{p.}{classproxygen_1_1HTTPTransaction} to tell us when an error occurs
+
+Three expected use cases are
+
+
+\begin{DoxyEnumerate}
+\item Send all response at once. If this is an error response, most probably you also want \textquotesingle{}close\+Connection\textquotesingle{}.
+\end{DoxyEnumerate}
+
+Response\+Builder(handler) .status(200, \char`\"{}\+O\+K\char`\"{}) .body(...) .\doxyref{send\+With\+E\+O\+M()}{p.}{classproxygen_1_1ResponseBuilder_ac9d8d1ecea366e5a9e180bce782b60ae};
+
+
+\begin{DoxyEnumerate}
+\item Sending back response in chunks.
+\end{DoxyEnumerate}
+
+Response\+Builder(handler) .status(200, \char`\"{}\+O\+K\char`\"{}) .body(...) .\doxyref{send()}{p.}{classproxygen_1_1ResponseBuilder_a1b269d5833c52ff5ff44261da50a0425}; // Without {\ttfamily With\+E\+OM} we make it chunked
+
+1 or more time
+
+Response\+Builder(handler) .body(...) .\doxyref{send()}{p.}{classproxygen_1_1ResponseBuilder_a1b269d5833c52ff5ff44261da50a0425};
+
+At last
+
+Response\+Builder(handler) .body(...) .\doxyref{send\+With\+E\+O\+M()}{p.}{classproxygen_1_1ResponseBuilder_ac9d8d1ecea366e5a9e180bce782b60ae};
+
+
+\begin{DoxyEnumerate}
+\item Accept or reject Upgrade Requests
+\end{DoxyEnumerate}
+
+Response\+Builder(handler) .\doxyref{accept\+Upgrade\+Request()}{p.}{classproxygen_1_1ResponseBuilder_ac0ba8ac391575137aa420786d0aad528} // send \textquotesingle{}200 OK\textquotesingle{} without E\+OM
+
+or
+
+Response\+Builder(handler) .\doxyref{reject\+Upgrade\+Request()}{p.}{classproxygen_1_1ResponseBuilder_a19899c9d8a3071b1381d0df1439d85b9} // send \textquotesingle{}400 Bad Request\textquotesingle{} 
+
+Definition at line 64 of file Response\+Builder.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!Upgrade\+Type@{Upgrade\+Type}}
+\index{Upgrade\+Type@{Upgrade\+Type}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{Upgrade\+Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+Response\+Builder\+::\+Upgrade\+Type}\hspace{0.3cm}{\ttfamily [strong]}}\label{classproxygen_1_1ResponseBuilder_a49ffac8f96ef3a153d1a90d1f8c7d8cd}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}}\item[{\em 
+C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST\label{classproxygen_1_1ResponseBuilder_a49ffac8f96ef3a153d1a90d1f8c7d8cdac8b1ac17ffa9f347a03de40402930b00}
+}]\index{H\+T\+T\+P\+\_\+\+U\+P\+G\+R\+A\+DE@{H\+T\+T\+P\+\_\+\+U\+P\+G\+R\+A\+DE}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!H\+T\+T\+P\+\_\+\+U\+P\+G\+R\+A\+DE@{H\+T\+T\+P\+\_\+\+U\+P\+G\+R\+A\+DE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+U\+P\+G\+R\+A\+DE\label{classproxygen_1_1ResponseBuilder_a49ffac8f96ef3a153d1a90d1f8c7d8cdaa5fa7941537f7df64043eb38b3e7b9e3}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 181 of file Response\+Builder.\+h.
+
+
+\begin{DoxyCode}
+181                          \{
+182     CONNECT_REQUEST = 0,
+183     HTTP\_UPGRADE,
+184   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!Response\+Builder@{Response\+Builder}}
+\index{Response\+Builder@{Response\+Builder}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{Response\+Builder(\+Response\+Handler $\ast$txn)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Response\+Builder\+::\+Response\+Builder (
+\begin{DoxyParamCaption}
+\item[{{\bf Response\+Handler} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1ResponseBuilder_a5bf7aa7b2051b4492ad1d36cdcd70e9b}
+
+
+Definition at line 66 of file Response\+Builder.\+h.
+
+
+\begin{DoxyCode}
+66                                                 : txn_(txn) \{
+67   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!accept\+Upgrade\+Request@{accept\+Upgrade\+Request}}
+\index{accept\+Upgrade\+Request@{accept\+Upgrade\+Request}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{accept\+Upgrade\+Request(\+Upgrade\+Type upgrade\+Type, const std\+::string upgrade\+Protocol="""")}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Response\+Builder\+::accept\+Upgrade\+Request (
+\begin{DoxyParamCaption}
+\item[{{\bf Upgrade\+Type}}]{upgrade\+Type, }
+\item[{const std\+::string}]{upgrade\+Protocol = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_ac0ba8ac391575137aa420786d0aad528}
+
+
+Definition at line 186 of file Response\+Builder.\+h.
+
+
+
+References C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST, headers\+\_\+, proxygen\+::\+Response\+Handler\+::send\+Headers(), and txn\+\_\+.
+
+
+\begin{DoxyCode}
+187                                                                   \{
+188     headers_ = std::make\_unique<HTTPMessage>();
+189     \textcolor{keywordflow}{if} (upgradeType == UpgradeType::CONNECT_REQUEST) \{
+190       headers_->constructDirectResponse(\{1, 1\}, 200, \textcolor{stringliteral}{"OK"});
+191     \} \textcolor{keywordflow}{else} \{
+192       CHECK(!upgradeProtocol.empty());
+193       headers_->constructDirectResponse(\{1, 1\}, 101, \textcolor{stringliteral}{"Switching Protocols"});
+194       headers_->getHeaders().add(HTTP\_HEADER\_UPGRADE, upgradeProtocol);
+195       headers_->getHeaders().add(HTTP\_HEADER\_CONNECTION, \textcolor{stringliteral}{"Upgrade"});
+196     \}
+197     txn_->sendHeaders(*headers_);
+198   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!body@{body}}
+\index{body@{body}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body\+In)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body\+In}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a3cbf16af85d2052e35bb50377bca2071}
+
+
+Definition at line 99 of file Response\+Builder.\+h.
+
+
+
+References body\+\_\+.
+
+
+
+Referenced by body(), Zlib\+Server\+Filter\+Test\+::exercise\+\_\+compression(), Echo\+Service\+::\+Echo\+Handler\+::on\+E\+O\+M(), Push\+Service\+::\+Push\+Request\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Direct\+Response\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Scoped\+Handler$<$ Handler\+Type $>$\+::on\+E\+O\+M(), Test\+Handler\+Factory\+::\+Test\+Handler\+::on\+E\+O\+M(), Static\+Service\+::\+Static\+Handler\+::on\+Request(), Push\+Service\+::\+Push\+Request\+Handler\+::on\+Request(), Proxy\+Service\+::\+Proxy\+Handler\+::on\+Request(), and Static\+Service\+::\+Static\+Handler\+::read\+File().
+
+
+\begin{DoxyCode}
+99                                                           \{
+100     \textcolor{keywordflow}{if} (bodyIn) \{
+101       \textcolor{keywordflow}{if} (body_) \{
+102         body_->prependChain(std::move(bodyIn));
+103       \} \textcolor{keywordflow}{else} \{
+104         body_ = std::move(bodyIn);
+105       \}
+106     \}
+107 
+108     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+109   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!body@{body}}
+\index{body@{body}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{body(\+T \&\&t)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::body (
+\begin{DoxyParamCaption}
+\item[{{\bf T} \&\&}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_ae5c243bae13c6d90f81e173e2c7c78ec}
+
+
+Definition at line 112 of file Response\+Builder.\+h.
+
+
+
+References body().
+
+
+\begin{DoxyCode}
+112                                \{
+113     \textcolor{keywordflow}{return} body(folly::IOBuf::maybeCopyBuffer(
+114         folly::to<std::string>(std::forward<T>(t))));
+115   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!close\+Connection@{close\+Connection}}
+\index{close\+Connection@{close\+Connection}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{close\+Connection()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::close\+Connection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a8288b13199b16f80b35b3f3101620474}
+
+
+Definition at line 117 of file Response\+Builder.\+h.
+
+
+
+References header().
+
+
+
+Referenced by proxygen\+::\+Request\+Handler\+Adaptor\+::on\+Error(), and proxygen\+::\+Request\+Handler\+Adaptor\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+117                                      \{
+118     \textcolor{keywordflow}{return} header(HTTP\_HEADER\_CONNECTION, \textcolor{stringliteral}{"close"});
+119   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!header@{header}}
+\index{header@{header}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{header(const std\+::string \&header\+In, const T \&value)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::header (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{header\+In, }
+\item[{const {\bf T} \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a7dfbd7c7d733d07d0eccb5c9106b706b}
+
+
+Definition at line 86 of file Response\+Builder.\+h.
+
+
+
+References headers\+\_\+.
+
+
+
+Referenced by close\+Connection(), Zlib\+Server\+Filter\+Test\+::exercise\+\_\+compression(), Push\+Service\+::\+Push\+Request\+Handler\+::on\+E\+O\+M(), Echo\+Service\+::\+Echo\+Handler\+::on\+E\+O\+M(), Test\+Handler\+Factory\+::\+Test\+Handler\+::on\+E\+O\+M(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+86                                                                      \{
+87     CHECK(headers_) << \textcolor{stringliteral}{"You need to call `status` before adding headers"};
+88     headers_->getHeaders().add(headerIn, value);
+89     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+90   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!header@{header}}
+\index{header@{header}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{header(\+H\+T\+T\+P\+Header\+Code code, const T \&value)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::header (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Header\+Code}}]{code, }
+\item[{const {\bf T} \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_adebe9bf474aef418a2e31b68b8f16337}
+
+
+Definition at line 93 of file Response\+Builder.\+h.
+
+
+
+References headers\+\_\+.
+
+
+\begin{DoxyCode}
+93                                                                \{
+94     CHECK(headers_) << \textcolor{stringliteral}{"You need to call `status` before adding headers"};
+95     headers_->getHeaders().add(code, value);
+96     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+97   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!promise@{promise}}
+\index{promise@{promise}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{promise(const std\+::string \&url, const std\+::string \&host)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::promise (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{url, }
+\item[{const std\+::string \&}]{host}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a0711a040188cab434631e251cbf98e2f}
+
+
+Definition at line 69 of file Response\+Builder.\+h.
+
+
+
+References headers\+\_\+.
+
+
+
+Referenced by Push\+Service\+::\+Push\+Request\+Handler\+::on\+Request().
+
+
+\begin{DoxyCode}
+69                                                                         \{
+70     headers_ = std::make\_unique<HTTPMessage>();
+71     headers_->setHTTPVersion(1, 1);
+72     headers_->setURL(url);
+73     headers_->getHeaders().set(HTTP\_HEADER\_HOST, host);
+74     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+75   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!reject\+Upgrade\+Request@{reject\+Upgrade\+Request}}
+\index{reject\+Upgrade\+Request@{reject\+Upgrade\+Request}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{reject\+Upgrade\+Request()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Response\+Builder\+::reject\+Upgrade\+Request (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a19899c9d8a3071b1381d0df1439d85b9}
+
+
+Definition at line 200 of file Response\+Builder.\+h.
+
+
+
+References headers\+\_\+, proxygen\+::\+Response\+Handler\+::send\+E\+O\+M(), proxygen\+::\+Response\+Handler\+::send\+Headers(), and txn\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Reject\+Connect\+Filter\+::on\+Request().
+
+
+\begin{DoxyCode}
+200                               \{
+201     headers_ = std::make\_unique<HTTPMessage>();
+202     headers_->constructDirectResponse(\{1, 1\}, 400, \textcolor{stringliteral}{"Bad Request"});
+203     txn_->sendHeaders(*headers_);
+204     txn_->sendEOM();
+205   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!send@{send}}
+\index{send@{send}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{send()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Response\+Builder\+::send (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a1b269d5833c52ff5ff44261da50a0425}
+
+
+Definition at line 131 of file Response\+Builder.\+h.
+
+
+
+References body\+\_\+, proxygen\+::\+Response\+Handler\+::get\+Transaction(), headers\+\_\+, proxygen\+::\+Response\+Handler\+::send\+Body(), proxygen\+::\+Response\+Handler\+::send\+Chunk\+Header(), proxygen\+::\+Response\+Handler\+::send\+Chunk\+Terminator(), proxygen\+::\+Response\+Handler\+::send\+E\+O\+M(), send\+E\+O\+M\+\_\+, proxygen\+::\+Response\+Handler\+::send\+Headers(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Trailers(), trailers\+\_\+, and txn\+\_\+.
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Success(), Zlib\+Server\+Filter\+Test\+::exercise\+\_\+compression(), proxygen\+::\+Request\+Handler\+Adaptor\+::on\+Headers\+Complete(), Static\+Service\+::\+Static\+Handler\+::on\+Request(), Static\+Service\+::\+Static\+Handler\+::read\+File(), send\+With\+E\+O\+M(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+131               \{
+132     \textcolor{comment}{// Once we send them, we don't want to send them again}
+133     SCOPE\_EXIT \{ headers_.reset(); \};
+134 
+135     \textcolor{comment}{// By default, chunked}
+136     \textcolor{keywordtype}{bool} chunked = \textcolor{keyword}{true};
+137 
+138     \textcolor{comment}{// If we have complete response, we can use Content-Length and get done}
+139     \textcolor{keywordflow}{if} (headers_ && sendEOM_) \{
+140       chunked = \textcolor{keyword}{false};
+141     \}
+142 
+143     \textcolor{keywordflow}{if} (headers_) \{
+144       \textcolor{comment}{// We don't need to add Content-Length or Encoding for 1xx responses}
+145       \textcolor{keywordflow}{if} (headers_->isResponse() && headers_->getStatusCode() >= 200) \{
+146         \textcolor{keywordflow}{if} (chunked) \{
+147           headers_->setIsChunked(\textcolor{keyword}{true});
+148         \} \textcolor{keywordflow}{else} \{
+149           \textcolor{keyword}{const} \textcolor{keyword}{auto} len = body_ ? body_->computeChainDataLength() : 0;
+150           headers_->getHeaders().add(
+151               HTTP\_HEADER\_CONTENT\_LENGTH,
+152               folly::to<std::string>(len));
+153         \}
+154       \}
+155 
+156       txn_->sendHeaders(*headers_);
+157     \}
+158 
+159     \textcolor{keywordflow}{if} (body_) \{
+160       \textcolor{keywordflow}{if} (chunked) \{
+161         txn_->sendChunkHeader(body_->computeChainDataLength());
+162         txn_->sendBody(std::move(body_));
+163         txn_->sendChunkTerminator();
+164       \} \textcolor{keywordflow}{else} \{
+165         txn_->sendBody(std::move(body_));
+166       \}
+167     \}
+168 
+169     \textcolor{keywordflow}{if} (sendEOM_) \{
+170       \textcolor{keywordflow}{if} (trailers_) \{
+171         \textcolor{keyword}{auto} txn = txn_->getTransaction();
+172         \textcolor{keywordflow}{if} (txn) \{
+173           txn->sendTrailers(*trailers_);
+174         \}
+175         trailers_.reset();
+176       \}
+177       txn_->sendEOM();
+178     \}
+179   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!send\+With\+E\+OM@{send\+With\+E\+OM}}
+\index{send\+With\+E\+OM@{send\+With\+E\+OM}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{send\+With\+E\+O\+M()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Response\+Builder\+::send\+With\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_ac9d8d1ecea366e5a9e180bce782b60ae}
+
+
+Definition at line 126 of file Response\+Builder.\+h.
+
+
+
+References send(), and send\+E\+O\+M\+\_\+.
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Error(), Zlib\+Server\+Filter\+Test\+::exercise\+\_\+compression(), Push\+Service\+::\+Push\+Request\+Handler\+::on\+E\+O\+M(), Echo\+Service\+::\+Echo\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Direct\+Response\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Scoped\+Handler$<$ Handler\+Type $>$\+::on\+E\+O\+M(), Test\+Handler\+Factory\+::\+Test\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Request\+Handler\+Adaptor\+::on\+Error(), proxygen\+::\+Request\+Handler\+Adaptor\+::on\+Headers\+Complete(), Static\+Service\+::\+Static\+Handler\+::on\+Request(), Push\+Service\+::\+Push\+Request\+Handler\+::on\+Request(), Proxy\+Service\+::\+Proxy\+Handler\+::on\+Request(), Static\+Service\+::\+Static\+Handler\+::read\+File(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+126                      \{
+127     sendEOM_ = \textcolor{keyword}{true};
+128     send();
+129   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!set\+Egress\+Websocket\+Headers@{set\+Egress\+Websocket\+Headers}}
+\index{set\+Egress\+Websocket\+Headers@{set\+Egress\+Websocket\+Headers}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{set\+Egress\+Websocket\+Headers()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::set\+Egress\+Websocket\+Headers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a9486151618e5d20c3a6ee7bd7af3d096}
+
+
+Definition at line 207 of file Response\+Builder.\+h.
+
+
+
+References headers\+\_\+.
+
+
+\begin{DoxyCode}
+207                                                \{
+208     headers_->setEgressWebsocketUpgrade();
+209     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+210   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!status@{status}}
+\index{status@{status}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{status(uint16\+\_\+t code, const std\+::string \&message)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::status (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{code, }
+\item[{const std\+::string \&}]{message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_a30fcb001f04158265837a2ff5d20df26}
+
+
+Definition at line 77 of file Response\+Builder.\+h.
+
+
+
+References headers\+\_\+.
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Error(), Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Success(), Zlib\+Server\+Filter\+Test\+::exercise\+\_\+compression(), Push\+Service\+::\+Push\+Request\+Handler\+::on\+E\+O\+M(), Echo\+Service\+::\+Echo\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Direct\+Response\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Scoped\+Handler$<$ Handler\+Type $>$\+::on\+E\+O\+M(), Test\+Handler\+Factory\+::\+Test\+Handler\+::on\+E\+O\+M(), proxygen\+::\+Request\+Handler\+Adaptor\+::on\+Error(), proxygen\+::\+Request\+Handler\+Adaptor\+::on\+Headers\+Complete(), Static\+Service\+::\+Static\+Handler\+::on\+Request(), Push\+Service\+::\+Push\+Request\+Handler\+::on\+Request(), Proxy\+Service\+::\+Proxy\+Handler\+::on\+Request(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+77                                                                    \{
+78     headers_ = std::make\_unique<HTTPMessage>();
+79     headers_->setHTTPVersion(1, 1);
+80     headers_->setStatusCode(code);
+81     headers_->setStatusMessage(message);
+82     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+83   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!trailers@{trailers}}
+\index{trailers@{trailers}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{trailers(const H\+T\+T\+P\+Headers \&trailers)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response\+Builder}\& proxygen\+::\+Response\+Builder\+::trailers (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Headers} \&}]{trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ResponseBuilder_aa5703131a81575d1c6dd84848779ae4a}
+
+
+Definition at line 121 of file Response\+Builder.\+h.
+
+
+
+References trailers\+\_\+.
+
+
+\begin{DoxyCode}
+121                                                          \{
+122     trailers_.reset(\textcolor{keyword}{new} HTTPHeaders(trailers));
+123     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+124   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!body\+\_\+@{body\+\_\+}}
+\index{body\+\_\+@{body\+\_\+}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{body\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ proxygen\+::\+Response\+Builder\+::body\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ResponseBuilder_abc0161e1507c5c64bbbad93c050ceaac}
+
+
+Definition at line 216 of file Response\+Builder.\+h.
+
+
+
+Referenced by body(), and send().
+
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!headers\+\_\+@{headers\+\_\+}}
+\index{headers\+\_\+@{headers\+\_\+}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{headers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Message}$>$ proxygen\+::\+Response\+Builder\+::headers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ResponseBuilder_ac37322efdd11dd1e9e4a015f0179107e}
+
+
+Definition at line 215 of file Response\+Builder.\+h.
+
+
+
+Referenced by accept\+Upgrade\+Request(), header(), promise(), reject\+Upgrade\+Request(), send(), set\+Egress\+Websocket\+Headers(), and status().
+
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!send\+E\+O\+M\+\_\+@{send\+E\+O\+M\+\_\+}}
+\index{send\+E\+O\+M\+\_\+@{send\+E\+O\+M\+\_\+}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{send\+E\+O\+M\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Response\+Builder\+::send\+E\+O\+M\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ResponseBuilder_a5e733b1ba18fd0ccfed8982cca697a0d}
+
+
+Definition at line 220 of file Response\+Builder.\+h.
+
+
+
+Referenced by send(), and send\+With\+E\+O\+M().
+
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!trailers\+\_\+@{trailers\+\_\+}}
+\index{trailers\+\_\+@{trailers\+\_\+}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{trailers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Headers}$>$ proxygen\+::\+Response\+Builder\+::trailers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ResponseBuilder_ad7cfea9f5726088c7f010005fa7e0ecd}
+
+
+Definition at line 217 of file Response\+Builder.\+h.
+
+
+
+Referenced by send(), and trailers().
+
+\index{proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}!txn\+\_\+@{txn\+\_\+}}
+\index{txn\+\_\+@{txn\+\_\+}!proxygen\+::\+Response\+Builder@{proxygen\+::\+Response\+Builder}}
+\subsubsection[{txn\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Response\+Handler}$\ast$ const proxygen\+::\+Response\+Builder\+::txn\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ResponseBuilder_a9a808475db2fde5bb8e4802d629bde9b}
+
+
+Definition at line 213 of file Response\+Builder.\+h.
+
+
+
+Referenced by accept\+Upgrade\+Request(), reject\+Upgrade\+Request(), and send().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/{\bf Response\+Builder.\+h}\end{DoxyCompactItemize}

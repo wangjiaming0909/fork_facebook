@@ -1,0 +1,184 @@
+\section{proxygen\+:\+:Compression\+Info Struct Reference}
+\label{structproxygen_1_1CompressionInfo}\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+
+
+{\ttfamily \#include $<$Compression\+Info.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Compression\+Info} (uint32\+\_\+t egress\+Header\+Table\+Size, uint32\+\_\+t egress\+Bytes\+Stored, uint32\+\_\+t egress\+Headers\+Stored, uint32\+\_\+t ingress\+Header\+Table\+Size, uint32\+\_\+t ingress\+Bytes\+Stored, uint32\+\_\+t ingress\+Headers\+Stored)
+\item 
+{\bf Compression\+Info} ()
+\item 
+bool {\bf operator==} (const {\bf Compression\+Info} \&table\+Info) const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf egress\+Header\+Table\+Size\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf egress\+Bytes\+Stored\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf egress\+Headers\+Stored\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf ingress\+Header\+Table\+Size\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf ingress\+Bytes\+Stored\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf ingress\+Headers\+Stored\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Compression\+Info.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!Compression\+Info@{Compression\+Info}}
+\index{Compression\+Info@{Compression\+Info}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{Compression\+Info(uint32\+\_\+t egress\+Header\+Table\+Size, uint32\+\_\+t egress\+Bytes\+Stored, uint32\+\_\+t egress\+Headers\+Stored, uint32\+\_\+t ingress\+Header\+Table\+Size, uint32\+\_\+t ingress\+Bytes\+Stored, uint32\+\_\+t ingress\+Headers\+Stored)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Compression\+Info\+::\+Compression\+Info (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{egress\+Header\+Table\+Size, }
+\item[{uint32\+\_\+t}]{egress\+Bytes\+Stored, }
+\item[{uint32\+\_\+t}]{egress\+Headers\+Stored, }
+\item[{uint32\+\_\+t}]{ingress\+Header\+Table\+Size, }
+\item[{uint32\+\_\+t}]{ingress\+Bytes\+Stored, }
+\item[{uint32\+\_\+t}]{ingress\+Headers\+Stored}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1CompressionInfo_a3e7e54d103585f718218257e25c50f38}
+
+
+Definition at line 30 of file Compression\+Info.\+h.
+
+
+\begin{DoxyCode}
+35                                                 :
+36       egressHeaderTableSize_(egressHeaderTableSize),
+37       egressBytesStored_(egressBytesStored),
+38       egressHeadersStored_(egressHeadersStored),
+39       ingressHeaderTableSize_(ingressHeaderTableSize),
+40       ingressBytesStored_(ingressBytesStored),
+41       ingressHeadersStored_(ingressHeadersStored) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!Compression\+Info@{Compression\+Info}}
+\index{Compression\+Info@{Compression\+Info}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{Compression\+Info()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Compression\+Info\+::\+Compression\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1CompressionInfo_af7be9f80ea8788c865d00677ee972ff5}
+
+
+Definition at line 43 of file Compression\+Info.\+h.
+
+
+\begin{DoxyCode}
+43 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!operator==@{operator==}}
+\index{operator==@{operator==}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{operator==(const Compression\+Info \&table\+Info) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Compression\+Info\+::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf Compression\+Info} \&}]{table\+Info}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1CompressionInfo_a3979ee9306fdc8224373e02bcea3f54c}
+
+
+Definition at line 45 of file Compression\+Info.\+h.
+
+
+
+References egress\+Bytes\+Stored\+\_\+, egress\+Headers\+Stored\+\_\+, egress\+Header\+Table\+Size\+\_\+, ingress\+Bytes\+Stored\+\_\+, ingress\+Headers\+Stored\+\_\+, and ingress\+Header\+Table\+Size\+\_\+.
+
+
+\begin{DoxyCode}
+45                                                           \{
+46     \textcolor{keywordflow}{return} egressHeaderTableSize_ == tableInfo.egressHeaderTableSize\_ &&
+47            egressBytesStored_ == tableInfo.egressBytesStored\_ &&
+48            egressHeadersStored_ == tableInfo.egressHeadersStored\_ &&
+49            ingressHeaderTableSize_ == tableInfo.ingressHeaderTableSize\_ &&
+50            ingressBytesStored_ == tableInfo.ingressBytesStored\_ &&
+51            ingressHeadersStored_ == tableInfo.ingressHeadersStored\_;
+52   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!egress\+Bytes\+Stored\+\_\+@{egress\+Bytes\+Stored\+\_\+}}
+\index{egress\+Bytes\+Stored\+\_\+@{egress\+Bytes\+Stored\+\_\+}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{egress\+Bytes\+Stored\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Compression\+Info\+::egress\+Bytes\+Stored\+\_\+ \{0\}}\label{structproxygen_1_1CompressionInfo_ab78106ba4defb0d422206c5430a8b7e6}
+
+
+Definition at line 22 of file Compression\+Info.\+h.
+
+
+
+Referenced by operator==(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Egress\+Compression\+Info().
+
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!egress\+Headers\+Stored\+\_\+@{egress\+Headers\+Stored\+\_\+}}
+\index{egress\+Headers\+Stored\+\_\+@{egress\+Headers\+Stored\+\_\+}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{egress\+Headers\+Stored\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Compression\+Info\+::egress\+Headers\+Stored\+\_\+ \{0\}}\label{structproxygen_1_1CompressionInfo_a8505af2a2798b0e40c86c05600f0a67b}
+
+
+Definition at line 23 of file Compression\+Info.\+h.
+
+
+
+Referenced by operator==(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Egress\+Compression\+Info().
+
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!egress\+Header\+Table\+Size\+\_\+@{egress\+Header\+Table\+Size\+\_\+}}
+\index{egress\+Header\+Table\+Size\+\_\+@{egress\+Header\+Table\+Size\+\_\+}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{egress\+Header\+Table\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Compression\+Info\+::egress\+Header\+Table\+Size\+\_\+ \{0\}}\label{structproxygen_1_1CompressionInfo_a22477e99d07b08d4f8fdb72b65479de2}
+
+
+Definition at line 21 of file Compression\+Info.\+h.
+
+
+
+Referenced by operator==(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Egress\+Compression\+Info().
+
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!ingress\+Bytes\+Stored\+\_\+@{ingress\+Bytes\+Stored\+\_\+}}
+\index{ingress\+Bytes\+Stored\+\_\+@{ingress\+Bytes\+Stored\+\_\+}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{ingress\+Bytes\+Stored\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Compression\+Info\+::ingress\+Bytes\+Stored\+\_\+ \{0\}}\label{structproxygen_1_1CompressionInfo_afca67204c598e7b76e4c889a2fc7cd97}
+
+
+Definition at line 27 of file Compression\+Info.\+h.
+
+
+
+Referenced by operator==(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Ingress\+Compression\+Info().
+
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!ingress\+Headers\+Stored\+\_\+@{ingress\+Headers\+Stored\+\_\+}}
+\index{ingress\+Headers\+Stored\+\_\+@{ingress\+Headers\+Stored\+\_\+}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{ingress\+Headers\+Stored\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Compression\+Info\+::ingress\+Headers\+Stored\+\_\+ \{0\}}\label{structproxygen_1_1CompressionInfo_a680906edd9c2081d55c6df98db652dbb}
+
+
+Definition at line 28 of file Compression\+Info.\+h.
+
+
+
+Referenced by operator==(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Ingress\+Compression\+Info().
+
+\index{proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}!ingress\+Header\+Table\+Size\+\_\+@{ingress\+Header\+Table\+Size\+\_\+}}
+\index{ingress\+Header\+Table\+Size\+\_\+@{ingress\+Header\+Table\+Size\+\_\+}!proxygen\+::\+Compression\+Info@{proxygen\+::\+Compression\+Info}}
+\subsubsection[{ingress\+Header\+Table\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Compression\+Info\+::ingress\+Header\+Table\+Size\+\_\+ \{0\}}\label{structproxygen_1_1CompressionInfo_adbf738f1a934cdfe112a41c883bfa5e4}
+
+
+Definition at line 26 of file Compression\+Info.\+h.
+
+
+
+Referenced by operator==(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Ingress\+Compression\+Info().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Compression\+Info.\+h}\end{DoxyCompactItemize}

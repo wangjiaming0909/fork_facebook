@@ -1,0 +1,741 @@
+\section{proxygen/lib/http/codec/compress/test/\+H\+P\+A\+C\+K\+Buffer\+Tests.cpp File Reference}
+\label{HPACKBufferTests_8cpp}\index{proxygen/lib/http/codec/compress/test/\+H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{proxygen/lib/http/codec/compress/test/\+H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+{\ttfamily \#include $<$folly/io/\+Cursor.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+I\+O\+Buf.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Decode\+Buffer.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Encode\+Buffer.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf H\+P\+A\+C\+K\+Buffer\+Tests}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Encode\+Integer)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Encode\+Plain\+Literal)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Encode\+Plain\+LiteralN)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Encode\+Huffman\+Literal)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Encode\+Huffman\+LiteralN)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Single\+Byte)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Multi\+Byte)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Integer\+Error)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Literal\+Error)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Literal\+Multi\+Buffer)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Huffman\+Literal\+Multi\+Buffer)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Huffman\+LiteralN)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Plain\+Literal)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Decode\+Plain\+LiteralN)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Integer\+Encode\+Decode)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Integer\+Overflow)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Integer\+Max)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Empty\+Iobuf\+Literal)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+P\+A\+C\+K\+Buffer\+Tests}, Large\+Literal\+Error)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Encode\+Integer)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Encode\+Integer}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_aa0e5a89293937b0dde335fca4578da91}
+
+
+Definition at line 67 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+67                                         \{
+68   \textcolor{comment}{// all these fit in one byte}
+69   EXPECT\_EQ(encoder\_.encodeInteger(7, 192, 6), 1);
+70   \textcolor{comment}{// this one fits perfectly, but needs an additional 0 byte}
+71   EXPECT\_EQ(encoder\_.encodeInteger(7, 192, 3), 2);
+72   EXPECT\_EQ(encoder\_.encodeInteger(255, 0, 8), 2);
+73   releaseData();
+74   EXPECT\_EQ(buf\_->length(), 5);
+75   EXPECT\_EQ(data\_[0], 199);  \textcolor{comment}{// 11000111}
+76   EXPECT\_EQ(data\_[1], 199);  \textcolor{comment}{// 11000111}
+77   EXPECT\_EQ(data\_[2], 0);
+78   EXPECT\_EQ(data\_[3], 255);  \textcolor{comment}{// 11111111}
+79   EXPECT\_EQ(data\_[4], 0);
+80 
+81   \textcolor{comment}{// multiple byte span}
+82   EXPECT\_EQ(encoder\_.encodeInteger(7, 192, 2), 2);
+83   releaseData();
+84   EXPECT\_EQ(buf\_->length(), 2);
+85   EXPECT\_EQ(data\_[0], 195);  \textcolor{comment}{// 11000011}
+86   EXPECT\_EQ(data\_[1], 4);    \textcolor{comment}{// 00000100}
+87 
+88   \textcolor{comment}{// the one from the spec - 1337}
+89   EXPECT\_EQ(encoder\_.encodeInteger(1337, 0, 5), 3);
+90   releaseData();
+91   EXPECT\_EQ(buf\_->length(), 3);
+92   EXPECT\_EQ(data\_[0], 31);  \textcolor{comment}{// 00011111}
+93   EXPECT\_EQ(data\_[1], 154); \textcolor{comment}{// 10011010}
+94   EXPECT\_EQ(data\_[2], 10);  \textcolor{comment}{// 00001010}
+95 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Encode\+Plain\+Literal)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Encode\+Plain\+Literal}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a160b5e0275db93708cff6b81d178e0be}
+
+
+Definition at line 97 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+97                                              \{
+98   \textcolor{keywordtype}{string} literal(\textcolor{stringliteral}{"accept-encoding"});
+99   EXPECT\_EQ(encoder\_.encodeLiteral(literal), 16);
+100   releaseData();
+101   EXPECT\_EQ(buf\_->length(), 16);
+102   EXPECT\_EQ(data\_[0], 15);
+103   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < literal.size(); i++) \{
+104     EXPECT\_EQ(data\_[i + 1], literal[i]);
+105   \}
+106 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Encode\+Plain\+Literal\+N)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Encode\+Plain\+LiteralN}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a894f83f363945ef7e4a9cac751f59c98}
+
+
+Definition at line 108 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+108                                               \{
+109   \textcolor{keywordtype}{string} literal(\textcolor{stringliteral}{"accept-encodin"}); \textcolor{comment}{// len=14}
+110   \textcolor{comment}{// length must fit in 4 bits, with room for 3 bit instruction}
+111   EXPECT\_EQ(encoder\_.encodeLiteral(0xE0, 4, literal), 15);
+112   releaseData();
+113   EXPECT\_EQ(buf\_->length(), 15);
+114   EXPECT\_EQ(data\_[0], 0xE0 | 14);
+115   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < literal.size(); i++) \{
+116     EXPECT\_EQ(data\_[i + 1], literal[i]);
+117   \}
+118 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Encode\+Huffman\+Literal)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Encode\+Huffman\+Literal}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a4002ea4069bf19067e6020b45ac00486}
+
+
+Definition at line 120 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Literal().
+
+
+\begin{DoxyCode}
+120                                                \{
+121   \textcolor{keywordtype}{string} accept(\textcolor{stringliteral}{"accept-encoding"});
+122   HPACKEncodeBuffer encoder(512, \textcolor{keyword}{true});
+123   uint32\_t size = encoder.encodeLiteral(accept);
+124   EXPECT\_EQ(size, 12);
+125   releaseData(encoder);
+126   EXPECT\_EQ(buf\_->length(), 12);
+127   EXPECT\_EQ(data\_[0], 0x80 | 11); \textcolor{comment}{// 128(huffman bit) | 11(length)}
+128   EXPECT\_EQ(data\_[11], 0x7f);
+129 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Encode\+Huffman\+Literal\+N)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Encode\+Huffman\+LiteralN}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a079e1168cd1c32a5907644bfdc14cf3b}
+
+
+Definition at line 131 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Literal().
+
+
+\begin{DoxyCode}
+131                                                 \{
+132   \textcolor{keywordtype}{string} accept(\textcolor{stringliteral}{"accept-encoding"});
+133   HPACKEncodeBuffer encoder(512, \textcolor{keyword}{true});
+134   uint32\_t size = encoder.encodeLiteral(0xE0, 4, accept);
+135   EXPECT\_EQ(size, 12);
+136   releaseData(encoder);
+137   EXPECT\_EQ(buf\_->length(), 12);
+138   EXPECT\_EQ(data\_[0], 0xE0 | 0x10 | 11); \textcolor{comment}{// instruction | huffman | length}
+139   EXPECT\_EQ(data\_[11], 0x7f);
+140 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Single\+Byte)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Single\+Byte}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_aa4ccc6d1df3562f0657f9e17b6165aea}
+
+
+Definition at line 142 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+142                                            \{
+143   buf\_ = IOBuf::create(512);
+144   uint8\_t* wdata = buf\_->writableData();
+145   buf\_->append(1);
+146   \textcolor{comment}{// 6-bit prefix}
+147   *wdata = 67;
+148   resetDecoder();
+149   uint64\_t integer;
+150   CHECK\_EQ(decoder\_.decodeInteger(7, integer), DecodeError::NONE);
+151   CHECK\_EQ(integer, 67);
+152 
+153   resetDecoder();
+154 
+155   CHECK\_EQ(decoder\_.decodeInteger(6, integer), DecodeError::NONE);
+156   CHECK\_EQ(integer, 3);
+157 
+158   \textcolor{comment}{// set a bit in the prefix - it should not affect the decoded value}
+159   *wdata = 195;  \textcolor{comment}{// 195 = 128 + 67}
+160   resetDecoder();
+161   CHECK\_EQ(decoder\_.decodeInteger(7, integer), DecodeError::NONE);
+162   CHECK\_EQ(integer, 67);
+163 
+164   \textcolor{comment}{// 8-bit prefix - the entire byte}
+165   resetDecoder();
+166   CHECK\_EQ(decoder\_.decodeInteger(8, integer), DecodeError::NONE);
+167   CHECK\_EQ(integer, 195);
+168 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Multi\+Byte)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Multi\+Byte}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a8375be86c7c462dd8ec33196c5fadf74}
+
+
+Definition at line 170 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+170                                           \{
+171   buf\_ = IOBuf::create(512);
+172   uint8\_t* wdata = buf\_->writableData();
+173   \textcolor{comment}{// edge case - max value in a 2-bit space}
+174   buf\_->append(2);
+175   wdata[0] = 67;
+176   wdata[1] = 0;
+177   resetDecoder();
+178   uint64\_t integer;
+179   CHECK\_EQ(decoder\_.decodeInteger(2, integer), DecodeError::NONE);
+180   CHECK\_EQ(integer, 3);
+181   CHECK\_EQ(decoder\_.cursor().length(), 0);
+182   \textcolor{comment}{// edge case - encode 130 = 127 + 3 on 2-bit prefix}
+183   wdata[0] = 3;
+184   wdata[1] = 127;
+185   resetDecoder();
+186   CHECK\_EQ(decoder\_.decodeInteger(2, integer), DecodeError::NONE);
+187   CHECK\_EQ(integer, 130);
+188   CHECK\_EQ(decoder\_.cursor().length(), 0);
+189   \textcolor{comment}{// edge case - encode 131 = 128 + 3}
+190   buf\_->append(1);
+191   wdata[0] = 3;
+192   wdata[1] = 128;
+193   wdata[2] = 1;
+194   resetDecoder();
+195   CHECK\_EQ(decoder\_.decodeInteger(2, integer), DecodeError::NONE);
+196   CHECK\_EQ(integer, 131);
+197   CHECK\_EQ(decoder\_.cursor().length(), 0);
+198   \textcolor{comment}{// encode the value from the RFC example - 1337}
+199   wdata[0] = 31;
+200   wdata[1] = 154;
+201   wdata[2] = 10;
+202   resetDecoder();
+203   CHECK\_EQ(decoder\_.decodeInteger(5, integer), DecodeError::NONE);
+204   CHECK\_EQ(integer, 1337);
+205   CHECK\_EQ(decoder\_.cursor().length(), 0);
+206 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Integer\+Error)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Integer\+Error}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a416cef03a16afc83166b8f5fe3bfa568}
+
+
+Definition at line 208 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+208                                              \{
+209   buf\_ = IOBuf::create(128);
+210   resetDecoder();
+211   \textcolor{comment}{// empty buffer}
+212   uint64\_t integer;
+213   CHECK\_EQ(decoder\_.decodeInteger(5, integer), DecodeError::BUFFER\_UNDERFLOW);
+214 
+215   \textcolor{comment}{// incomplete buffer}
+216   buf\_->append(2);
+217   uint8\_t* wdata = buf\_->writableData();
+218   wdata[0] = 31;
+219   wdata[1] = 154;
+220   \textcolor{comment}{// wdata[2] = 10 missing}
+221   CHECK\_EQ(decoder\_.decodeInteger(5, integer), DecodeError::BUFFER\_UNDERFLOW);
+222 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Literal\+Error)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Literal\+Error}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_adcaca07711b7c4c4251166ec4b984792}
+
+
+Definition at line 224 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+224                                              \{
+225   buf\_ = IOBuf::create(128);
+226 
+227   uint8\_t* wdata = buf\_->writableData();
+228   buf\_->append(3);
+229   resetDecoder();
+230   wdata[0] = 255; \textcolor{comment}{// size}
+231   wdata[1] = \textcolor{charliteral}{'a'};
+232   wdata[2] = \textcolor{charliteral}{'b'};
+233   folly::fbstring literal;
+234   CHECK\_EQ(decoder\_.decodeLiteral(literal), DecodeError::BUFFER\_UNDERFLOW);
+235 
+236   resetDecoder();
+237   \textcolor{comment}{// error decoding the size of the literal}
+238   wdata[0] = 0xFF;
+239   wdata[1] = 0x80;
+240   wdata[2] = 0x80;
+241   EXPECT\_EQ(decoder\_.decodeLiteral(literal), DecodeError::BUFFER\_UNDERFLOW);
+242 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Literal\+Multi\+Buffer)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Literal\+Multi\+Buffer}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_ac8b095c84f9da2e439d80ea5c638235e}
+
+
+Definition at line 244 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+244                                                    \{
+245   \textcolor{keyword}{auto} buf1 = IOBuf::create(128);
+246   \textcolor{keyword}{auto} buf2 = IOBuf::create(128);
+247   \textcolor{comment}{// encode the size}
+248   \textcolor{comment}{// buf2 will not be entirely filled, to keep space for encoding the size}
+249   \textcolor{comment}{// without overflowing}
+250   uint32\_t size = buf1->capacity() + buf2->capacity() - 10;
+251   releaseData();
+252   uint32\_t sizeLen = encoder\_.encodeInteger(size, 0, 7);
+253   releaseData();
+254   \textcolor{comment}{// copy the encoding of the size at the beginning}
+255   memcpy(buf1->writableData(), buf\_->data(), sizeLen);
+256   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = sizeLen; i < buf1->capacity(); i++) \{
+257     buf1->writableData()[i] = \textcolor{charliteral}{'x'};
+258   \}
+259   buf1->append(buf1->capacity());
+260   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < buf2->capacity() - 10 + sizeLen; i++) \{
+261     buf2->writableData()[i] = \textcolor{charliteral}{'y'};
+262   \}
+263   buf2->append(buf2->capacity() - 10 + sizeLen);
+264   buf1->appendChain(std::move(buf2));
+265   \textcolor{comment}{// decode}
+266   resetDecoder(buf1.get());
+267   folly::fbstring literal;
+268   EXPECT\_EQ(decoder\_.decodeLiteral(literal), DecodeError::NONE);
+269   EXPECT\_EQ(literal.size(), size);
+270   EXPECT\_EQ(literal[0], \textcolor{charliteral}{'x'});
+271   EXPECT\_EQ(literal[literal.size() - 1], \textcolor{charliteral}{'y'});
+272 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Huffman\+Literal\+Multi\+Buffer)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Huffman\+Literal\+Multi\+Buffer}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_ab973e96ea9dd2e57c02e6bf4252abd0d}
+
+
+Definition at line 274 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+274                                                           \{
+275   \textcolor{comment}{// "gzip" fits perfectly in a 3 bytes block}
+276   std::array<uint8\_t, 3> gzip\{0x9b, 0xd9, 0xab\};
+277   \textcolor{keyword}{auto} buf1 = IOBuf::create(128);
+278   \textcolor{keyword}{auto} buf2 = IOBuf::create(128);
+279   \textcolor{comment}{// total size}
+280   uint32\_t size = buf1->capacity() + buf2->capacity() - 10;
+281   \textcolor{comment}{// it needs to fit a multiple of 3 blocks}
+282   size -= (size % 3);
+283   \textcolor{comment}{// just in case we have some bytes left encoded}
+284   releaseData();
+285   uint32\_t sizeLen = encoder\_.encodeInteger(size, 128, 7);
+286   \textcolor{comment}{// extract the encoded size}
+287   releaseData();
+288   memcpy(buf1->writableData(), buf\_->data(), sizeLen);
+289   \textcolor{comment}{// huffman index}
+290   uint32\_t hi = 0;
+291   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = sizeLen; i < buf1->capacity(); i++) \{
+292     buf1->writableData()[i] = gzip[hi];
+293     hi = (hi + 1) % 3;
+294   \}
+295   buf1->append(buf1->capacity());
+296   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < buf2->capacity() - 10 + sizeLen; i++) \{
+297     buf2->writableData()[i] = gzip[hi];
+298     hi = (hi + 1) % 3;
+299   \}
+300   buf2->append(buf2->capacity() - 10 + sizeLen);
+301   buf1->appendChain(std::move(buf2));
+302   \textcolor{comment}{// decode}
+303   resetDecoder(buf1.get());
+304   folly::fbstring literal;
+305   EXPECT\_EQ(decoder\_.decodeLiteral(literal), DecodeError::NONE);
+306   EXPECT\_EQ(literal.size(), 4 * (size / 3));
+307   EXPECT\_EQ(literal.find(\textcolor{stringliteral}{"gzip"}), 0);
+308   EXPECT\_EQ(literal.rfind(\textcolor{stringliteral}{"gzip"}), literal.size() - 4);
+309 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Huffman\+Literal\+N)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Huffman\+LiteralN}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a2975fb4392e28cf428b4a7d0c6dba6e5}
+
+
+Definition at line 311 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+311                                                 \{
+312   \textcolor{comment}{// "gzip" fits perfectly in a 3 bytes block}
+313   std::array<uint8\_t, 3> gzip\{0x9b, 0xd9, 0xab\};
+314   uint32\_t size = 3;
+315   \textcolor{comment}{// just in case we have some bytes left encoded}
+316   releaseData();
+317   encoder\_.encodeInteger(size, 0x80 | 0x10, 4);
+318   releaseData();
+319   memcpy(buf\_->writableData() + 1, gzip.data(), size);
+320   buf\_->append(size);
+321   \textcolor{comment}{// decode}
+322   resetDecoder(buf\_.get());
+323   folly::fbstring literal;
+324   EXPECT\_EQ(decoder\_.decodeLiteral(4, literal), DecodeError::NONE);
+325   EXPECT\_EQ(literal.size(), 4 * (size / 3));
+326   EXPECT\_EQ(literal.find(\textcolor{stringliteral}{"gzip"}), 0);
+327   EXPECT\_EQ(literal.rfind(\textcolor{stringliteral}{"gzip"}), literal.size() - 4);
+328 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Plain\+Literal)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Plain\+Literal}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a5be071d3954d949bd2f57280f3dc22ca}
+
+
+Definition at line 330 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+330                                              \{
+331   buf\_ = IOBuf::create(512);
+332   std::string gzip(\textcolor{stringliteral}{"gzip"});
+333   folly::fbstring literal;
+334   uint8\_t* wdata = buf\_->writableData();
+335 
+336   buf\_->append(1 + gzip.size());
+337   wdata[0] = gzip.size();
+338   memcpy(wdata + 1, gzip.c\_str(), gzip.size());
+339 
+340   resetDecoder();
+341   decoder\_.decodeLiteral(literal);
+342   CHECK\_EQ(literal, gzip);
+343 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Decode\+Plain\+Literal\+N)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Decode\+Plain\+LiteralN}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_abb23ce6b3588086114adbb87282e1d40}
+
+
+Definition at line 346 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+346                                               \{
+347   buf\_ = IOBuf::create(512);
+348   std::string gzip(\textcolor{stringliteral}{"gzip"});
+349   folly::fbstring literal;
+350   uint8\_t* wdata = buf\_->writableData();
+351 
+352   buf\_->append(1 + gzip.size());
+353   wdata[0] = 0xE0 | gzip.size(); \textcolor{comment}{// add a 3 bit instruction}
+354   memcpy(wdata + 1, gzip.c\_str(), gzip.size());
+355 
+356   resetDecoder();
+357   decoder\_.decodeLiteral(4, literal);
+358   CHECK\_EQ(literal, gzip);
+359 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Integer\+Encode\+Decode)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Integer\+Encode\+Decode}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a29d1ca8e80a58a025b42afa08bdd0fd3}
+
+
+Definition at line 361 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Integer().
+
+
+\begin{DoxyCode}
+361                                               \{
+362   HPACKEncodeBuffer encoder(512);
+363   \textcolor{comment}{// first encode}
+364   uint32\_t value = 145333;
+365   encoder.encodeInteger(value, 128, 5);
+366   releaseData(encoder);
+367   resetDecoder();
+368   EXPECT\_EQ(decoder\_.cursor().length(), 4);
+369   \textcolor{comment}{// now decode}
+370   uint64\_t integer;
+371   EXPECT\_EQ(decoder\_.decodeInteger(5, integer), DecodeError::NONE);
+372   EXPECT\_EQ(integer, value);
+373   EXPECT\_EQ(decoder\_.cursor().length(), 0);
+374 
+375   \textcolor{comment}{// corner case}
+376   value = 63;
+377   encoder.encodeInteger(value, 64, 6);
+378   releaseData(encoder);
+379   resetDecoder();
+380   EXPECT\_EQ(decoder\_.decodeInteger(6, integer), DecodeError::NONE);
+381   EXPECT\_EQ(integer, value);
+382 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Integer\+Overflow)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Integer\+Overflow}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_ae9b966b6cc2362b535964d57f87fe914}
+really large integers 
+
+Definition at line 387 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+387                                           \{
+388   uint64\_t integer;
+389   buf\_ = IOBuf::create(128);
+390   uint8\_t *wdata = buf\_->writableData();
+391 
+392   \textcolor{comment}{// enough headroom for both cases}
+393   buf\_->append(12);
+394   \textcolor{comment}{// overflow the accumulated value}
+395   wdata[0] = 0xFF;
+396   wdata[1] = 0xFF;
+397   wdata[2] = 0xFF;
+398   wdata[3] = 0xFF;
+399   wdata[4] = 0xFF;
+400   wdata[5] = 0xFF;
+401   wdata[6] = 0xFF;
+402   wdata[7] = 0xFF;
+403   wdata[8] = 0xFF;
+404   wdata[9] = 0xFF;
+405   wdata[10] = 0x0F;
+406   resetDecoder();
+407   EXPECT\_EQ(decoder\_.decodeInteger(8, integer), DecodeError::INTEGER\_OVERFLOW);
+408 
+409   \textcolor{comment}{// overflow the factorizer}
+410   wdata[0] = 0xFF;
+411   wdata[1] = 0x80;
+412   wdata[2] = 0x80;
+413   wdata[3] = 0x80;
+414   wdata[4] = 0x80;
+415   wdata[5] = 0x80;
+416   wdata[6] = 0x80;
+417   wdata[7] = 0x80;
+418   wdata[8] = 0x80;
+419   wdata[9] = 0x80;
+420   wdata[10] = 0x80;
+421   wdata[11] = 0x01;
+422   resetDecoder();
+423   EXPECT\_EQ(decoder\_.decodeInteger(8, integer), DecodeError::INTEGER\_OVERFLOW);
+424 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Integer\+Max)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Integer\+Max}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_ac88a72a98e6176ccabe8c0552a209142}
+test that we\textquotesingle{}re able to decode the max integer 
+
+Definition at line 429 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+429                                      \{
+430   releaseData();
+431   \textcolor{comment}{// encoding with all the bit prefixes}
+432   \textcolor{keywordflow}{for} (uint8\_t bitprefix = 1; bitprefix <= 8; bitprefix++) \{
+433     encoder\_.encodeInteger(std::numeric\_limits<uint64\_t>::max(), 0, bitprefix);
+434     \textcolor{comment}{// take the encoded data and shove it in the decoder}
+435     releaseData();
+436     resetDecoder();
+437     uint64\_t integer = 0;
+438     EXPECT\_EQ(decoder\_.decodeInteger(bitprefix, integer), DecodeError::NONE);
+439     EXPECT\_EQ(integer, std::numeric\_limits<uint64\_t>::max());
+440   \}
+441 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Empty\+Iobuf\+Literal)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Empty\+Iobuf\+Literal}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_a037ff22cccaca0a35ed4ec2c78101cfd}
+making sure we\textquotesingle{}re calling peek() before deferencing the first byte to figure out if it\textquotesingle{}s a huffman encoding or not 
+
+Definition at line 447 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Literal(), and proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::release().
+
+
+\begin{DoxyCode}
+447                                             \{
+448   \textcolor{comment}{// construct an IOBuf chain made of 1 empty chain and a literal}
+449   unique\_ptr<IOBuf> first = IOBuf::create(128);
+450   \textcolor{comment}{// set a trap by setting first byte to 128, which signals Huffman encoding}
+451   first->writableData()[0] = 0x80;
+452 
+453   HPACKEncodeBuffer encoder(128); \textcolor{comment}{// no huffman}
+454   folly::fbstring literal(\textcolor{stringliteral}{"randomheadervalue"});
+455   encoder.encodeLiteral(literal);
+456   first->appendChain(encoder.release());
+457 
+458   uint32\_t size = first->next()->length();
+459   Cursor cursor(first.get());
+460   HPACKDecodeBuffer decoder(cursor, size, kMaxLiteralSize);
+461   folly::fbstring decoded;
+462   decoder.decodeLiteral(decoded);
+463 
+464   EXPECT\_EQ(literal, decoded);
+465 \}
+\end{DoxyCode}
+\index{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp@{H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+P\+A\+C\+K\+Buffer\+Tests, Large\+Literal\+Error)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Buffer\+Tests}}]{, }
+\item[{Large\+Literal\+Error}]{}
+\end{DoxyParamCaption}
+)}\label{HPACKBufferTests_8cpp_ad1305b6de8aaa2636720491b708081ea}
+the that we enforce a limit on the literal size 
+
+Definition at line 470 of file H\+P\+A\+C\+K\+Buffer\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+470                                             \{
+471   uint32\_t largeSize = 10 + kMaxLiteralSize;
+472   \textcolor{comment}{// encode a large string}
+473   \textcolor{keywordtype}{string} largeLiteral;
+474   largeLiteral.append(largeSize, \textcolor{charliteral}{'x'});
+475   EXPECT\_TRUE(encoder\_.encodeLiteral(largeLiteral));
+476   releaseData();
+477   resetDecoder();
+478   folly::fbstring decoded = \textcolor{stringliteral}{""};
+479   EXPECT\_EQ(decoder\_.decodeLiteral(decoded), DecodeError::LITERAL\_TOO\_LARGE);
+480   EXPECT\_EQ(decoded.size(), 0);
+481 \}
+\end{DoxyCode}

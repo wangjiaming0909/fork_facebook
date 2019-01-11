@@ -1,0 +1,107 @@
+\section{proxygen\+:\+:Byte\+Event\+Tracker\+:\+:Callback Class Reference}
+\label{classproxygen_1_1ByteEventTracker_1_1Callback}\index{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}}
+
+
+{\ttfamily \#include $<$Byte\+Event\+Tracker.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Byte\+Event\+Tracker\+:\+:Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.382979cm]{classproxygen_1_1ByteEventTracker_1_1Callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Callback} ()
+\item 
+virtual void {\bf on\+Ping\+Reply\+Latency} (int64\+\_\+t latency) noexcept=0
+\item 
+virtual void {\bf on\+Last\+Byte\+Event} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn, uint64\+\_\+t offset, bool eom\+Tracked) noexcept=0
+\item 
+virtual void {\bf on\+Delete\+Ack\+Event} () noexcept=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 31 of file Byte\+Event\+Tracker.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}!````~Callback@{$\sim$\+Callback}}
+\index{````~Callback@{$\sim$\+Callback}!proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}}
+\subsubsection[{$\sim$\+Callback()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback\+::$\sim$\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_1_1Callback_af827eb2d41e69a09ed84ffeff245eda6}
+
+
+Definition at line 33 of file Byte\+Event\+Tracker.\+h.
+
+
+
+References on\+Delete\+Ack\+Event(), on\+Last\+Byte\+Event(), on\+Ping\+Reply\+Latency(), and proxygen\+::\+Byte\+Event\+Tracker\+::$\sim$\+Byte\+Event\+Tracker().
+
+
+\begin{DoxyCode}
+33 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}!on\+Delete\+Ack\+Event@{on\+Delete\+Ack\+Event}}
+\index{on\+Delete\+Ack\+Event@{on\+Delete\+Ack\+Event}!proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}}
+\subsubsection[{on\+Delete\+Ack\+Event() noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback\+::on\+Delete\+Ack\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ByteEventTracker_1_1Callback_a66e469488f7fc0ea0ccd333a7b90ecbe}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a3d2b7bdd5d59059cee9b566553db91f1}.
+
+
+
+Referenced by $\sim$\+Callback().
+
+\index{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}!on\+Last\+Byte\+Event@{on\+Last\+Byte\+Event}}
+\index{on\+Last\+Byte\+Event@{on\+Last\+Byte\+Event}!proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}}
+\subsubsection[{on\+Last\+Byte\+Event(\+H\+T\+T\+P\+Transaction $\ast$txn, uint64\+\_\+t offset, bool eom\+Tracked) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback\+::on\+Last\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{uint64\+\_\+t}]{offset, }
+\item[{bool}]{eom\+Tracked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ByteEventTracker_1_1Callback_a2089b3b9335dbc03598f35a007821883}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a262d04adeb8feb2c1bf6ebb5159b67d6}.
+
+
+
+Referenced by proxygen\+::\+Byte\+Event\+Tracker\+::process\+Byte\+Events(), and $\sim$\+Callback().
+
+\index{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}!on\+Ping\+Reply\+Latency@{on\+Ping\+Reply\+Latency}}
+\index{on\+Ping\+Reply\+Latency@{on\+Ping\+Reply\+Latency}!proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback@{proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback}}
+\subsubsection[{on\+Ping\+Reply\+Latency(int64\+\_\+t latency) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback\+::on\+Ping\+Reply\+Latency (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{latency}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ByteEventTracker_1_1Callback_a2dbef0abec0b00ac3a2a53eafaf19bcd}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a63363dd6eb679673b1f548176994f4c9}.
+
+
+
+Referenced by proxygen\+::\+Byte\+Event\+Tracker\+::process\+Byte\+Events(), and $\sim$\+Callback().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf Byte\+Event\+Tracker.\+h}\end{DoxyCompactItemize}

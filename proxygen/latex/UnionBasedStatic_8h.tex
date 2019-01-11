@@ -1,0 +1,329 @@
+\section{proxygen/lib/utils/\+Union\+Based\+Static.h File Reference}
+\label{UnionBasedStatic_8h}\index{proxygen/lib/utils/\+Union\+Based\+Static.\+h@{proxygen/lib/utils/\+Union\+Based\+Static.\+h}}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type,  {\bf name})
+\item 
+\#define {\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}(type,  size,  {\bf name})
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type,  {\bf name},  var)~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name}) var;
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL}(type,  {\bf name},  var)~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name}) const var;
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}(type,  size,  {\bf name},  var)~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}(type, size, {\bf name}) const var;
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+I\+M\+PL}(type,  {\bf name},  var)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+A\+R\+G\+\_\+\+I\+M\+PL}(type,  {\bf name},  var, ...)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}(type,  {\bf name},  var)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}(type,  {\bf name},  var, ...)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+N\+O\+\_\+\+I\+N\+IT}(type,  {\bf name},  var)~{\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name}, var)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+ST}(type,  {\bf name},  var)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+GS}(type,  {\bf name},  var, ...)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+N\+O\+\_\+\+I\+N\+IT}(type,  {\bf name},  var)~{\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL}(type, {\bf name}, var)
+\item 
+\#define {\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+IT}(type,  size,  {\bf name},  var)~{\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}(type, size, {\bf name}, var)
+\item 
+\#define {\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}(type,  {\bf name})~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name})
+\item 
+\#define {\bf I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}(type,  union\+Name,  {\bf name},  var)
+\item 
+\#define {\bf I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}(type,  union\+Name,  {\bf name},  var, ...)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC@{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}}
+\index{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC@{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}}
+\end{DoxyParamCaption}
+)~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name})}\label{UnionBasedStatic_8h_a03f6a1bee20de7c3b7e38a29bf269706}
+
+
+Definition at line 99 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL@{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}}
+\index{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL@{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{size, }
+\item[{}]{{\bf name}}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_afe2b5792bc9929067c8589bfdf228b4e}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{union }name##Union \{                                                           \(\backslash\)
+  type data[size];                                                            \
+  name##Union() \{\}                                                            \(\backslash\)
+  ~name##Union() \{\}                                                           \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 27 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL@{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}}
+\index{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL@{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_a236cd4b15d11c7ce95650d015da37a22}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{union }name##Union \{                                                           \(\backslash\)
+  type data;                                                                  \
+  name##Union() \{\}                                                            \(\backslash\)
+  ~name##Union() \{\}                                                           \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 20 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_afbf095985191bb295f2cb9abdef051bd}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+DEFINE_UNION_STATIC_UNION_IMPL(type, name, var)                               \
+DEFINE_UNION_STATIC_CONSTRUCTOR_IMPL(type, name, var)
+\end{DoxyCode}
+
+
+Definition at line 62 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_ad1740acce90ca626f28e42132ae0b307}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+DEFINE_UNION_STATIC_UNION_IMPL(type, name, var)                               \
+DEFINE_UNION_STATIC_CONSTRUCTOR_ARG_IMPL(type, name, var, \_\_VA\_ARGS\_\_)
+\end{DoxyCode}
+
+
+Definition at line 66 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+ST@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+ST}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+ST@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+ST}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+ST(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_a8db5b5b4e6761f6f54c89830cc17ab57}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+DEFINE_UNION_STATIC_UNION_CONST_IMPL(type, name, var)                         \
+DEFINE_UNION_STATIC_CONSTRUCTOR_IMPL(type, name, var)
+\end{DoxyCode}
+
+
+Definition at line 74 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+GS@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+GS}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+GS@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+GS}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+GS}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+GS(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_afd574a5536cd0966d1159bebf1672ff5}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+DEFINE_UNION_STATIC_UNION_CONST_IMPL(type, name, var)                         \
+DEFINE_UNION_STATIC_CONSTRUCTOR_ARG_IMPL(type, name, var, \_\_VA\_ARGS\_\_)
+\end{DoxyCode}
+
+
+Definition at line 78 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+IT@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+IT}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+IT@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+IT}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+IT}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+IT(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{size, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)~{\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}(type, size, {\bf name}, var)}\label{UnionBasedStatic_8h_a2f59b597600a936f7714dd1852ca52e3}
+
+
+Definition at line 85 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+N\+O\+\_\+\+I\+N\+IT@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+N\+O\+\_\+\+I\+N\+IT}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+N\+O\+\_\+\+I\+N\+IT@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+N\+O\+\_\+\+I\+N\+IT}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+N\+O\+\_\+\+I\+N\+IT}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+\_\+\+N\+O\+\_\+\+I\+N\+IT(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)~{\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL}(type, {\bf name}, var)}\label{UnionBasedStatic_8h_accbb8fa85c91eeaba4e10c4faa87522d}
+
+
+Definition at line 82 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+A\+R\+G\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+A\+R\+G\+\_\+\+I\+M\+PL}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+A\+R\+G\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+A\+R\+G\+\_\+\+I\+M\+PL}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+A\+R\+G\+\_\+\+I\+M\+PL}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+A\+R\+G\+\_\+\+I\+M\+PL(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_a9fce60da94a22a4c1c336a7cf0f6ee3c}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\_\_attribute\_\_((\_\_constructor\_\_))                                              \(\backslash\)
+void init##name##Union() \{                                                    \(\backslash\)
+  new (const\_cast<type*>(&var.data)) type(\_\_VA\_ARGS\_\_);                       \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 51 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+I\+M\+PL}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+I\+M\+PL}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+I\+M\+PL}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+R\+\_\+\+I\+M\+PL(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_a0c07109ff9262e42ce5798f4c562cd8e}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\_\_attribute\_\_((\_\_constructor\_\_))                                              \(\backslash\)
+void init##name##Union() \{                                                    \(\backslash\)
+  new (const\_cast<type*>(&var.data)) type();                                  \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 45 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+N\+O\+\_\+\+I\+N\+IT@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+N\+O\+\_\+\+I\+N\+IT}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+N\+O\+\_\+\+I\+N\+IT@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+N\+O\+\_\+\+I\+N\+IT}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+N\+O\+\_\+\+I\+N\+IT}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+N\+O\+\_\+\+I\+N\+IT(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)~{\bf D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name}, var)}\label{UnionBasedStatic_8h_a3d39f608d31dd50a4ad5e1913c441481}
+
+
+Definition at line 70 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{size, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+M\+PL}(type, size, {\bf name}) const var;}\label{UnionBasedStatic_8h_a8c4292d572d82b173c0391e7b13f84bb}
+
+
+Definition at line 40 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+I\+M\+PL(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name}) const var;}\label{UnionBasedStatic_8h_a2207ebc3018ad86329cd920688dc0a19}
+
+
+Definition at line 37 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}}
+\index{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL@{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)~{\bf D\+E\+C\+L\+A\+R\+E\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+U\+N\+I\+O\+N\+\_\+\+I\+M\+PL}(type, {\bf name}) var;}\label{UnionBasedStatic_8h_a4180c78b82add737738a4feab4113b91}
+
+
+Definition at line 34 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC@{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}}
+\index{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC@{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+IC(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{union\+Name, }
+\item[{}]{{\bf name}, }
+\item[{}]{var}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_a5d8425067edee9a4de19b4d4b0cbdf73}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+unionName##Union var;                                                         \
+DEFINE_UNION_STATIC_CONSTRUCTOR_ARG_IMPL(type, name, var)
+\end{DoxyCode}
+
+
+Definition at line 102 of file Union\+Based\+Static.\+h.
+
+\index{Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}!I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS@{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}}
+\index{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS@{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}!Union\+Based\+Static.\+h@{Union\+Based\+Static.\+h}}
+\subsubsection[{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+C\+L\+A\+R\+E\+D\+\_\+\+U\+N\+I\+O\+N\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+R\+GS(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{union\+Name, }
+\item[{}]{{\bf name}, }
+\item[{}]{var, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{UnionBasedStatic_8h_aa0237af05a6b58cdbd3a3790ef3497e1}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+unionName##Union var;                                                         \
+DEFINE_UNION_STATIC_CONSTRUCTOR_ARG_IMPL(type, name, var, \_\_VA\_ARGS\_\_)
+\end{DoxyCode}
+
+
+Definition at line 106 of file Union\+Based\+Static.\+h.
+

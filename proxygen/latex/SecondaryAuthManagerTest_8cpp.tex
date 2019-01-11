@@ -1,0 +1,191 @@
+\section{proxygen/lib/http/session/test/\+Secondary\+Auth\+Manager\+Test.cpp File Reference}
+\label{SecondaryAuthManagerTest_8cpp}\index{proxygen/lib/http/session/test/\+Secondary\+Auth\+Manager\+Test.\+cpp@{proxygen/lib/http/session/test/\+Secondary\+Auth\+Manager\+Test.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/session/\+Secondary\+Auth\+Manager.\+h$>$}\\*
+{\ttfamily \#include $<$fizz/crypto/test/\+Test\+Util.\+h$>$}\\*
+{\ttfamily \#include $<$fizz/protocol/test/\+Mocks.\+h$>$}\\*
+{\ttfamily \#include $<$fizz/record/\+Extensions.\+h$>$}\\*
+{\ttfamily \#include $<$fizz/record/\+Types.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Conv.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+String.\+h$>$}\\*
+{\ttfamily \#include $<$folly/ssl/\+Init.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Mock.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+ST} (Secondary\+Auth\+Manager\+Test, Authenticator\+Request)
+\item 
+{\bf T\+E\+ST} (Secondary\+Auth\+Manager\+Test, Authenticator)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+String\+Piece {\bf expected\+\_\+auth\+\_\+request}
+\item 
+String\+Piece {\bf expected\+\_\+cert}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Secondary\+Auth\+Manager\+Test, Authenticator\+Request)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Secondary\+Auth\+Manager\+Test}]{, }
+\item[{Authenticator\+Request}]{}
+\end{DoxyParamCaption}
+)}\label{SecondaryAuthManagerTest_8cpp_af8b88abe76fa076d8d7bc2cc5eb81d92}
+
+
+Definition at line 49 of file Secondary\+Auth\+Manager\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Secondary\+Auth\+Manager\+::create\+Auth\+Request(), and expected\+\_\+auth\+\_\+request.
+
+
+\begin{DoxyCode}
+49                                                      \{
+50   \textcolor{keyword}{auto} certRequestContext = folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"0123456789abcdef"});
+51   fizz::SignatureAlgorithms sigAlgs;
+52   sigAlgs.supported\_signature\_algorithms.push\_back(
+53       SignatureScheme::ecdsa\_secp256r1\_sha256);
+54   std::vector<fizz::Extension> extensions;
+55   extensions.push\_back(encodeExtension(std::move(sigAlgs)));
+56   SecondaryAuthManager authManager;
+57   \textcolor{keyword}{auto} authRequestPair = authManager.createAuthRequest(
+58       std::move(certRequestContext), std::move(extensions));
+59   \textcolor{keyword}{auto} requestId = authRequestPair.first;
+60   \textcolor{keyword}{auto} authRequest = std::move(authRequestPair.second);
+61   EXPECT\_EQ(requestId, 0);
+62   EXPECT\_EQ(expected_auth_request,
+63             StringPiece(hexlify(authRequest->coalesce())));
+64 \}
+\end{DoxyCode}
+\index{Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Secondary\+Auth\+Manager\+Test, Authenticator)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Secondary\+Auth\+Manager\+Test}]{, }
+\item[{Authenticator}]{}
+\end{DoxyParamCaption}
+)}\label{SecondaryAuthManagerTest_8cpp_afff40b623ca051450f9920e5d647cdf0}
+
+
+Definition at line 66 of file Secondary\+Auth\+Manager\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Secondary\+Auth\+Manager\+::create\+Auth\+Request(), expected\+\_\+cert, proxygen\+::\+Secondary\+Auth\+Manager\+::get\+Authenticator(), proxygen\+::\+Secondary\+Auth\+Manager\+::get\+Cert\+Id(), proxygen\+::\+Secondary\+Auth\+Manager\+::get\+Peer\+Cert(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::\+Secondary\+Auth\+Manager\+::validate\+Authenticator().
+
+
+\begin{DoxyCode}
+66                                               \{
+67   folly::ssl::init();
+68   \textcolor{comment}{// Instantiate a SecondaryAuthManager.}
+69   \textcolor{keyword}{auto} cert = fizz::test::getCert(kP256Certificate);
+70   \textcolor{keyword}{auto} key = fizz::test::getPrivateKey(kP256Key);
+71   std::vector<folly::ssl::X509UniquePtr> certs;
+72   certs.push\_back(std::move(cert));
+73   std::unique\_ptr<fizz::SelfCert> certPtr =
+74       std::make\_unique<SelfCertImpl<KeyType::P256>>(std::move(key),
+75                                                     std::move(certs));
+76   EXPECT\_NE(certPtr, \textcolor{keyword}{nullptr});
+77   SecondaryAuthManager authManager(std::move(certPtr));
+78   \textcolor{comment}{// Genearte an authenticator request.}
+79   \textcolor{keyword}{auto} certRequestContext = folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"0123456789abcdef"});
+80   fizz::SignatureAlgorithms sigAlgs;
+81   sigAlgs.supported\_signature\_algorithms.push\_back(
+82       SignatureScheme::ecdsa\_secp256r1\_sha256);
+83   std::vector<fizz::Extension> extensions;
+84   extensions.push\_back(encodeExtension(std::move(sigAlgs)));
+85   \textcolor{keyword}{auto} authRequestPair = authManager.createAuthRequest(
+86       std::move(certRequestContext), std::move(extensions));
+87   \textcolor{keyword}{auto} requestId = authRequestPair.first;
+88   \textcolor{keyword}{auto} authRequest = std::move(authRequestPair.second);
+89 
+90   \textcolor{comment}{// Generate an authenticator.}
+91   MockAsyncFizzBase fizzBase;
+92   EXPECT\_CALL(fizzBase, getCipher()).WillRepeatedly(InvokeWithoutArgs([]() \{
+93     folly::Optional<CipherSuite> cipher = CipherSuite::TLS\_AES\_128\_GCM\_SHA256;
+94     \textcolor{keywordflow}{return} cipher;
+95   \}));
+96   EXPECT\_CALL(fizzBase, getSupportedSigSchemes())
+97       .WillRepeatedly(InvokeWithoutArgs([]() \{
+98         std::vector<SignatureScheme> schemes = \{
+99             SignatureScheme::ecdsa\_secp256r1\_sha256\};
+100         \textcolor{keywordflow}{return} schemes;
+101       \}));
+102   EXPECT\_CALL(fizzBase, getEkm(\_, \_, \_)).WillRepeatedly(InvokeWithoutArgs([]() \{
+103     \textcolor{keywordflow}{return} folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"exportedmaterial"});
+104   \}));
+105   \textcolor{keyword}{auto} authenticatorPair =
+106       authManager.getAuthenticator(fizzBase,
+107                                    TransportDirection::UPSTREAM,
+108                                    requestId,
+109                                    std::move(authRequest));
+110   \textcolor{keyword}{auto} certId = authenticatorPair.first;
+111   \textcolor{keyword}{auto} authenticator = std::move(authenticatorPair.second);
+112 
+113   \textcolor{comment}{// Validate the authenticator.}
+114   \textcolor{keyword}{auto} isValid = authManager.validateAuthenticator(
+115       fizzBase, TransportDirection::UPSTREAM, certId, std::move(authenticator));
+116   \textcolor{keyword}{auto} cachedCertId = authManager.getCertId(requestId);
+117   EXPECT\_TRUE(cachedCertId.hasValue());
+118   EXPECT\_EQ(*cachedCertId, certId);
+119   \textcolor{keyword}{auto} peerCert = authManager.getPeerCert(certId);
+120   EXPECT\_TRUE(peerCert.hasValue());
+121   EXPECT\_EQ((*peerCert).size(), 1);
+122   EXPECT\_EQ(expected_cert,
+123             StringPiece(hexlify(((*peerCert)[0].cert\_data)->coalesce())));
+124   EXPECT\_TRUE(isValid);
+125 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}!expected\+\_\+auth\+\_\+request@{expected\+\_\+auth\+\_\+request}}
+\index{expected\+\_\+auth\+\_\+request@{expected\+\_\+auth\+\_\+request}!Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}}
+\subsubsection[{expected\+\_\+auth\+\_\+request}]{\setlength{\rightskip}{0pt plus 5cm}String\+Piece expected\+\_\+auth\+\_\+request}\label{SecondaryAuthManagerTest_8cpp_afa0f2728f6e495b3ecffd73e651e09d6}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    \textcolor{stringliteral}{"120000303132333435363738396162636465660008000d000400020403"}\}
+\end{DoxyCode}
+
+
+Definition at line 30 of file Secondary\+Auth\+Manager\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}!expected\+\_\+cert@{expected\+\_\+cert}}
+\index{expected\+\_\+cert@{expected\+\_\+cert}!Secondary\+Auth\+Manager\+Test.\+cpp@{Secondary\+Auth\+Manager\+Test.\+cpp}}
+\subsubsection[{expected\+\_\+cert}]{\setlength{\rightskip}{0pt plus 5cm}String\+Piece expected\+\_\+cert}\label{SecondaryAuthManagerTest_8cpp_ab4ac7ffd522bc686dd08d30fca48fd95}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    \textcolor{stringliteral}{"308201ee30820195a003020102020900c569eec901ce86d9300a06082a8648ce3d04030230"}
+    \textcolor{stringliteral}{"54310b3009060355040613025553310b300906035504080c024e59310b300906035504070c"}
+    \textcolor{stringliteral}{"024e59310d300b060355040a0c0446697a7a310d300b060355040b0c0446697a7a310d300b"}
+    \textcolor{stringliteral}{"06035504030c0446697a7a301e170d3137303430343138323930395a170d34313131323431"}
+    \textcolor{stringliteral}{"38323930395a3054310b3009060355040613025553310b300906035504080c024e59310b30"}
+    \textcolor{stringliteral}{"0906035504070c024e59310d300b060355040a0c0446697a7a310d300b060355040b0c0446"}
+    \textcolor{stringliteral}{"697a7a310d300b06035504030c0446697a7a3059301306072a8648ce3d020106082a8648ce"}
+    \textcolor{stringliteral}{"3d030107034200049d87bcaddb65d8dcf6df8b148a9679b5b710db19c95a9badfff13468cb"}
+    \textcolor{stringliteral}{"358b4e21d24a5c826112658ebb96d64e2985dfb41c1948334391a4aa81b67837e2dbf0a350"}
+    \textcolor{stringliteral}{"304e301d0603551d0e041604143c5b8ba954d9752faf3c8ad6d1a62449dccaa850301f0603"}
+    \textcolor{stringliteral}{"551d230418301680143c5b8ba954d9752faf3c8ad6d1a62449dccaa850300c0603551d1304"}
+    \textcolor{stringliteral}{"0530030101ff300a06082a8648ce3d04030203470030440220349b7d34d7132fb2756576e0"}
+    \textcolor{stringliteral}{"bfa36cbe1723337a7a6f5ef9c8d3bf1aa7efa4a5022025c50a91e0aa4272f1f52c3d5583a7"}
+    \textcolor{stringliteral}{"d7cee14b178835273a0bd814303e62d714"}\}
+\end{DoxyCode}
+
+
+Definition at line 33 of file Secondary\+Auth\+Manager\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+

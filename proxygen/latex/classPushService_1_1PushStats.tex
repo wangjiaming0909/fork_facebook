@@ -1,0 +1,118 @@
+\section{Push\+Service\+:\+:Push\+Stats Class Reference}
+\label{classPushService_1_1PushStats}\index{Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}}
+
+
+{\ttfamily \#include $<$Push\+Stats.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Push\+Stats} ()
+\item 
+virtual void {\bf record\+Request} ()
+\item 
+virtual uint64\+\_\+t {\bf get\+Request\+Count} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t {\bf req\+Count\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Just some dummy class containing request count. Since we keep one instance of this in each class, there is no need of synchronization 
+
+Definition at line 21 of file Push\+Stats.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}!````~Push\+Stats@{$\sim$\+Push\+Stats}}
+\index{````~Push\+Stats@{$\sim$\+Push\+Stats}!Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}}
+\subsubsection[{$\sim$\+Push\+Stats()}]{\setlength{\rightskip}{0pt plus 5cm}virtual Push\+Service\+::\+Push\+Stats\+::$\sim$\+Push\+Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classPushService_1_1PushStats_a26a4f2a8723957156ab98bde96e4eb55}
+
+
+Definition at line 23 of file Push\+Stats.\+h.
+
+
+\begin{DoxyCode}
+23                        \{
+24   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}!get\+Request\+Count@{get\+Request\+Count}}
+\index{get\+Request\+Count@{get\+Request\+Count}!Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}}
+\subsubsection[{get\+Request\+Count()}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint64\+\_\+t Push\+Service\+::\+Push\+Stats\+::get\+Request\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classPushService_1_1PushStats_a108138a7d86a38c8cd0e7a292e035d18}
+
+
+Definition at line 35 of file Push\+Stats.\+h.
+
+
+
+References req\+Count\+\_\+.
+
+
+
+Referenced by Push\+Service\+::\+Push\+Request\+Handler\+::on\+E\+O\+M().
+
+
+\begin{DoxyCode}
+35                                      \{
+36     \textcolor{keywordflow}{return} reqCount_;
+37   \}
+\end{DoxyCode}
+\index{Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}!record\+Request@{record\+Request}}
+\index{record\+Request@{record\+Request}!Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}}
+\subsubsection[{record\+Request()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Push\+Service\+::\+Push\+Stats\+::record\+Request (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classPushService_1_1PushStats_ae7a0ec69271d72f418821ec0ffcae3f3}
+
+
+Definition at line 31 of file Push\+Stats.\+h.
+
+
+
+References req\+Count\+\_\+.
+
+
+
+Referenced by Push\+Service\+::\+Push\+Request\+Handler\+::on\+Request().
+
+
+\begin{DoxyCode}
+31                                \{
+32     ++reqCount_;
+33   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}!req\+Count\+\_\+@{req\+Count\+\_\+}}
+\index{req\+Count\+\_\+@{req\+Count\+\_\+}!Push\+Service\+::\+Push\+Stats@{Push\+Service\+::\+Push\+Stats}}
+\subsubsection[{req\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t Push\+Service\+::\+Push\+Stats\+::req\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classPushService_1_1PushStats_a32c65151025dbe99b56ebcb5371fcfe6}
+
+
+Definition at line 40 of file Push\+Stats.\+h.
+
+
+
+Referenced by get\+Request\+Count(), and record\+Request().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/push/{\bf Push\+Stats.\+h}\end{DoxyCompactItemize}

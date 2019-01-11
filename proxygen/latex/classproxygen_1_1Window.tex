@@ -1,0 +1,337 @@
+\section{proxygen\+:\+:Window Class Reference}
+\label{classproxygen_1_1Window}\index{proxygen\+::\+Window@{proxygen\+::\+Window}}
+
+
+{\ttfamily \#include $<$Window.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Window} (uint32\+\_\+t capacity)
+\item 
+int32\+\_\+t {\bf get\+Size} () const 
+\item 
+uint32\+\_\+t {\bf get\+Non\+Negative\+Size} () const 
+\item 
+uint32\+\_\+t {\bf get\+Capacity} () const 
+\item 
+uint32\+\_\+t {\bf get\+Outstanding} () const 
+\item 
+bool {\bf reserve} (uint32\+\_\+t amount, bool strict=true)
+\item 
+bool {\bf free} (uint32\+\_\+t amount)
+\item 
+bool {\bf set\+Capacity} (uint32\+\_\+t capacity)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t {\bf outstanding\+\_\+} \{0\}
+\item 
+int32\+\_\+t {\bf capacity\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that implements S\+P\+DY \& H\+T\+T\+P/2 window management. This class should be used for both connection and stream level flow control. 
+
+Definition at line 20 of file Window.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!Window@{Window}}
+\index{Window@{Window}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{Window(uint32\+\_\+t capacity)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Window\+::\+Window (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{capacity}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1Window_aed5a064d4df4fa8420c5a755cd74d144}
+Constructs a new \doxyref{Window}{p.}{classproxygen_1_1Window}. 
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The initial capacity of this \doxyref{Window}{p.}{classproxygen_1_1Window}. The initial size will also be equal to this. This parameter must not be $>$ 2$^\wedge$31 -\/1 \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 19 of file Window.\+cpp.
+
+
+
+References set\+Capacity().
+
+
+\begin{DoxyCode}
+19                                 \{
+20   CHECK(setCapacity(capacity));
+21 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!free@{free}}
+\index{free@{free}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{free(uint32\+\_\+t amount)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Window\+::free (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{amount}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Window_ae0cfefc1b0658621476f39cba28d9505}
+Increment the window size by amount. Decrease bytes outstanding by amount. The window size could become greater than the capacity here. 
+
+Definition at line 63 of file Window.\+cpp.
+
+
+
+References capacity\+\_\+, and outstanding\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Flow\+Control\+Filter\+::ingress\+Bytes\+Processed(), proxygen\+::\+Flow\+Control\+Filter\+::on\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Window\+Update(), proxygen\+::\+Flow\+Control\+Filter\+::on\+Window\+Update(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::resume\+Ingress(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+63                                        \{
+64   \textcolor{keywordflow}{if} (amount > std::numeric\_limits<int32\_t>::max()) \{
+65     VLOG(3) << \textcolor{stringliteral}{"Cannot expand window by more than 2^31 - 1. "}
+66             << \textcolor{stringliteral}{"Attempted increment of "} << amount;
+67     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+68   \}
+69   \textcolor{keyword}{const} int32\_t limit = std::numeric\_limits<int32\_t>::min() +
+70     \textcolor{keyword}{static\_cast<}int32\_t\textcolor{keyword}{>}(amount);
+71   \textcolor{keywordflow}{if} (outstanding\_ < 0 && limit > outstanding_) \{
+72     VLOG(3) << \textcolor{stringliteral}{"Underflow detected. Window change failed."};
+73     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+74   \}
+75   \textcolor{keyword}{const} int32\_t newOutstanding = outstanding\_ - amount;
+76   \textcolor{keywordflow}{if} (newOutstanding < capacity_ - std::numeric\_limits<int32\_t>::max()) \{
+77     VLOG(3) << \textcolor{stringliteral}{"Window exceeded 2^31 - 1. Window change failed."};
+78     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+79   \}
+80   outstanding\_ = newOutstanding;
+81   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+82 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!get\+Capacity@{get\+Capacity}}
+\index{get\+Capacity@{get\+Capacity}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{get\+Capacity() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Window\+::get\+Capacity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1Window_a59e739a83cce8a0fc22c9dce48a0b193}
+Returns the size of the initial window. That is, the total number of bytes allowed to be outstanding on this window. 
+
+Definition at line 32 of file Window.\+cpp.
+
+
+
+References capacity\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::flush\+Window\+Update(), proxygen\+::\+Flow\+Control\+Filter\+::ingress\+Bytes\+Processed(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Set\+Send\+Window(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Window\+Update(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::process\+Ingress\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Body\+Now(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::set\+Receive\+Window(), proxygen\+::\+Flow\+Control\+Filter\+::set\+Receive\+Window\+Size(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+32                                    \{
+33   \textcolor{comment}{// This conversion is safe since we always ensure capacity\_ > 0}
+34   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(capacity_);
+35 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!get\+Non\+Negative\+Size@{get\+Non\+Negative\+Size}}
+\index{get\+Non\+Negative\+Size@{get\+Non\+Negative\+Size}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{get\+Non\+Negative\+Size() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Window\+::get\+Non\+Negative\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1Window_a7846e0cc5ba82302c7d120bf997ba790}
+Returns the number of bytes available to be consumed in this window. If that number went negative somehow, this function clamps the return value to zero. 
+
+Definition at line 27 of file Window.\+cpp.
+
+
+
+References get\+Size().
+
+
+
+Referenced by proxygen\+::\+Flow\+Control\+Filter\+::generate\+Body(), proxygen\+::\+Flow\+Control\+Filter\+::get\+Available\+Send(), and proxygen\+::\+Flow\+Control\+Filter\+::on\+Window\+Update().
+
+
+\begin{DoxyCode}
+27                                           \{
+28   \textcolor{keyword}{auto} size = getSize();
+29   \textcolor{keywordflow}{return} size > 0 ? size : 0;
+30 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!get\+Outstanding@{get\+Outstanding}}
+\index{get\+Outstanding@{get\+Outstanding}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{get\+Outstanding() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Window\+::get\+Outstanding (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1Window_a3262de58877c59dd8367caa96088a30e}
+Returns the number of bytes reserved in this window. If multiple calls to \doxyref{free()}{p.}{classproxygen_1_1Window_ae0cfefc1b0658621476f39cba28d9505} caused this number to go negative, this function returns 0. 
+
+Definition at line 37 of file Window.\+cpp.
+
+
+
+References outstanding\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Delayed\+Destroy(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Set\+Send\+Window(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Window\+Update(), proxygen\+::\+Flow\+Control\+Filter\+::on\+Window\+Update(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+37                                       \{
+38   \textcolor{keywordflow}{return} outstanding_ < 0 ? 0 : outstanding_;
+39 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!get\+Size@{get\+Size}}
+\index{get\+Size@{get\+Size}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{get\+Size() const }]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t proxygen\+::\+Window\+::get\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1Window_a769103af9c73585fd33b8dc686d06c65}
+Returns the number of bytes available to be consumed in this window. This could become a negative number if the initial window is set to a smaller number. 
+
+Definition at line 23 of file Window.\+cpp.
+
+
+
+References capacity\+\_\+, and outstanding\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::flush\+Window\+Update(), proxygen\+::\+Flow\+Control\+Filter\+::generate\+Body(), get\+Non\+Negative\+Size(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::is\+Expecting\+Window\+Update(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::notify\+Transport\+Pending\+Egress(), proxygen\+::\+Flow\+Control\+Filter\+::on\+Body(), proxygen\+::\+Flow\+Control\+Filter\+::on\+Window\+Update(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Body\+Now(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Deferred\+Body(), set\+Capacity(), T\+E\+S\+T(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Handler\+Pause\+State().
+
+
+\begin{DoxyCode}
+23                               \{
+24   \textcolor{keywordflow}{return} capacity_ - outstanding_;
+25 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!reserve@{reserve}}
+\index{reserve@{reserve}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{reserve(uint32\+\_\+t amount, bool strict=true)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Window\+::reserve (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{amount, }
+\item[{bool}]{strict = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Window_a22bf8e1744def54ee887b2ae894e9e45}
+
+\begin{DoxyParams}{Parameters}
+{\em amount} & The amount to reduce the window size by. Increases bytes outstanding by amount. \\
+\hline
+{\em strict} & If true, \doxyref{reserve()}{p.}{classproxygen_1_1Window_a22bf8e1744def54ee887b2ae894e9e45} will return false if there is no space remaining in the window. If false, \doxyref{reserve()}{p.}{classproxygen_1_1Window_a22bf8e1744def54ee887b2ae894e9e45} will return true until the integer overflows. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file Window.\+cpp.
+
+
+
+References capacity\+\_\+, and outstanding\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Flow\+Control\+Filter\+::generate\+Body(), proxygen\+::\+Flow\+Control\+Filter\+::on\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Body\+Now(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+41                                                        \{
+42   \textcolor{keywordflow}{if} (amount > std::numeric\_limits<int32\_t>::max()) \{
+43     VLOG(3) << \textcolor{stringliteral}{"Cannot shrink window by more than 2^31 - 1. "}
+44             << \textcolor{stringliteral}{"Attempted decrement of "} << amount;
+45     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+46   \}
+47   \textcolor{keyword}{const} int32\_t limit = std::numeric\_limits<int32\_t>::max() -
+48     \textcolor{keyword}{static\_cast<}int32\_t\textcolor{keyword}{>}(amount);
+49   \textcolor{keywordflow}{if} (outstanding_ > 0 && limit < outstanding_) \{
+50     VLOG(3) << \textcolor{stringliteral}{"Overflow detected. Window change failed."};
+51     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+52   \}
+53   \textcolor{keyword}{const} int32\_t newOutstanding = outstanding_ + amount;
+54   \textcolor{keywordflow}{if} (strict && newOutstanding > capacity_) \{
+55     VLOG(3) << \textcolor{stringliteral}{"Outstanding bytes ("} << newOutstanding << \textcolor{stringliteral}{") exceeded "}
+56             << \textcolor{stringliteral}{"window capacity ("} << capacity_ << \textcolor{stringliteral}{")"};
+57     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+58   \}
+59   outstanding_ = newOutstanding;
+60   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+61 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!set\+Capacity@{set\+Capacity}}
+\index{set\+Capacity@{set\+Capacity}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{set\+Capacity(uint32\+\_\+t capacity)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Window\+::set\+Capacity (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{capacity}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Window_a5e0843cdb55c9c3ffd1cfe3e2e1f25f2}
+Sets a new initial window size. This will also apply the delta between the current window size and the new window size. Returns false iff applying the new initial window fails. 
+
+Definition at line 84 of file Window.\+cpp.
+
+
+
+References capacity\+\_\+, and get\+Size().
+
+
+
+Referenced by proxygen\+::\+Flow\+Control\+Filter\+::\+Flow\+Control\+Filter(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Set\+Send\+Window(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::reset(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::set\+Receive\+Window(), proxygen\+::\+Flow\+Control\+Filter\+::set\+Receive\+Window\+Size(), T\+E\+S\+T(), and Window().
+
+
+\begin{DoxyCode}
+84                                                 \{
+85   \textcolor{keywordflow}{if} (capacity > std::numeric\_limits<int32\_t>::max()) \{
+86     VLOG(3) << \textcolor{stringliteral}{"Cannot set initial window > 2^31 -1."};
+87     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+88   \}
+89 
+90   \textcolor{keyword}{const} int32\_t diff = \textcolor{keyword}{static\_cast<}int32\_t\textcolor{keyword}{>}(capacity) - capacity_;
+91   \textcolor{keywordflow}{if} (diff > 0) \{
+92     \textcolor{keyword}{const} int32\_t size = getSize();
+93     \textcolor{keywordflow}{if} (size > 0 && diff > (std::numeric\_limits<int32\_t>::max() - size)) \{
+94       VLOG(3) << \textcolor{stringliteral}{"Increasing the capacity overflowed the window"};
+95       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+96     \}
+97   \}
+98 
+99   capacity_ = \textcolor{keyword}{static\_cast<}int32\_t\textcolor{keyword}{>}(capacity);
+100   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+101 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!capacity\+\_\+@{capacity\+\_\+}}
+\index{capacity\+\_\+@{capacity\+\_\+}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{capacity\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t proxygen\+::\+Window\+::capacity\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1Window_ada62cde78a6cb49e86bed459886157c2}
+
+
+Definition at line 81 of file Window.\+h.
+
+
+
+Referenced by free(), get\+Capacity(), get\+Size(), reserve(), and set\+Capacity().
+
+\index{proxygen\+::\+Window@{proxygen\+::\+Window}!outstanding\+\_\+@{outstanding\+\_\+}}
+\index{outstanding\+\_\+@{outstanding\+\_\+}!proxygen\+::\+Window@{proxygen\+::\+Window}}
+\subsubsection[{outstanding\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t proxygen\+::\+Window\+::outstanding\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1Window_a28068f23e96158c5f19ecae7a060b824}
+
+
+Definition at line 80 of file Window.\+h.
+
+
+
+Referenced by free(), get\+Outstanding(), get\+Size(), and reserve().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/{\bf Window.\+h}\item 
+proxygen/lib/http/{\bf Window.\+cpp}\end{DoxyCompactItemize}

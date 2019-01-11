@@ -1,0 +1,73 @@
+\section{proxygen/lib/http/session/test/\+Byte\+Event\+Tracker\+Test.cpp File Reference}
+\label{ByteEventTrackerTest_8cpp}\index{proxygen/lib/http/session/test/\+Byte\+Event\+Tracker\+Test.\+cpp@{proxygen/lib/http/session/test/\+Byte\+Event\+Tracker\+Test.\+cpp}}
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Mock.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/\+Byte\+Event\+Tracker.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/test/\+H\+T\+T\+P\+Transaction\+Mocks.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/test/\+H\+T\+T\+P\+Session\+Mocks.\+h$>$}\\*
+{\ttfamily \#include $<$chrono$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Mock\+Byte\+Event\+Tracker\+Callback}
+\item 
+class {\bf Byte\+Event\+Tracker\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Byte\+Event\+Tracker\+Test}, Ping)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Byte\+Event\+Tracker\+Test}, Ttlb)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Byte\+Event\+Tracker\+Test.\+cpp@{Byte\+Event\+Tracker\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Byte\+Event\+Tracker\+Test.\+cpp@{Byte\+Event\+Tracker\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Byte\+Event\+Tracker\+Test, Ping)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Byte\+Event\+Tracker\+Test}}]{, }
+\item[{Ping}]{}
+\end{DoxyParamCaption}
+)}\label{ByteEventTrackerTest_8cpp_a06dbd0dfdbfc759e123314ddda8459e0}
+
+
+Definition at line 56 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Current\+Time().
+
+
+\begin{DoxyCode}
+56                                    \{
+57   byteEventTracker\_->addPingByteEvent(10, proxygen::getCurrentTime(), 0);
+58   EXPECT\_CALL(callback\_, onPingReplyLatency(\_));
+59   byteEventTracker\_->processByteEvents(byteEventTracker\_, 10);
+60 \}
+\end{DoxyCode}
+\index{Byte\+Event\+Tracker\+Test.\+cpp@{Byte\+Event\+Tracker\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Byte\+Event\+Tracker\+Test.\+cpp@{Byte\+Event\+Tracker\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Byte\+Event\+Tracker\+Test, Ttlb)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Byte\+Event\+Tracker\+Test}}]{, }
+\item[{Ttlb}]{}
+\end{DoxyParamCaption}
+)}\label{ByteEventTrackerTest_8cpp_a2a580fac7d142d83474e3f80fb68aee6}
+
+
+Definition at line 62 of file Byte\+Event\+Tracker\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+62                                    \{
+63   byteEventTracker\_->addLastByteEvent(&txn\_, 10);
+64   EXPECT\_CALL(transportCallback\_, headerBytesGenerated(\_)); \textcolor{comment}{// sendAbort calls?}
+65   txn\_.sendAbort(); \textcolor{comment}{// put it in a state for detach}
+66   EXPECT\_CALL(transportCallback\_, lastByteFlushed());
+67   EXPECT\_CALL(callback\_, onLastByteEvent(\_, \_, \_));
+68   EXPECT\_CALL(transport\_, detach(\_));
+69   byteEventTracker\_->processByteEvents(byteEventTracker\_, 10);
+70 \}
+\end{DoxyCode}

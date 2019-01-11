@@ -1,0 +1,926 @@
+\section{proxygen/httpserver/tests/\+H\+T\+T\+P\+Server\+Test.cpp File Reference}
+\label{HTTPServerTest_8cpp}\index{proxygen/httpserver/tests/\+H\+T\+T\+P\+Server\+Test.\+cpp@{proxygen/httpserver/tests/\+H\+T\+T\+P\+Server\+Test.\+cpp}}
+{\ttfamily \#include $<$proxygen/httpserver/\+H\+T\+T\+P\+Server.\+h$>$}\\*
+{\ttfamily \#include $<$boost/thread.\+hpp$>$}\\*
+{\ttfamily \#include $<$folly/\+File\+Util.\+h$>$}\\*
+{\ttfamily \#include $<$folly/experimental/\+Test\+Util.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Async\+S\+S\+L\+Socket.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Async\+Server\+Socket.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Event\+Base\+Manager.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$folly/ssl/\+Open\+S\+S\+L\+Cert\+Utils.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpclient/samples/curl/\+Curl\+Client.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpserver/\+Response\+Builder.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpserver/\+Scoped\+H\+T\+T\+P\+Server.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Connector.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Test\+Utils.\+h$>$}\\*
+{\ttfamily \#include $<$wangle/client/ssl/\+S\+S\+L\+Session.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Server\+Thread}
+\item 
+class {\bf Cb}
+\item 
+class {\bf Dummy\+Filter\+Factory}
+\item 
+class {\bf Dummy\+Filter\+Factory\+::\+Dummy\+Filter}
+\item 
+class {\bf Test\+Handler\+Factory}
+\item 
+class {\bf Test\+Handler\+Factory\+::\+Test\+Handler}
+\item 
+class {\bf Scoped\+Server\+Test}
+\item 
+class {\bf Connection\+Filter\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+ST} (Multi\+Bind, Handles\+Listen\+Failures)
+\item 
+{\bf T\+E\+ST} (Http\+Server\+Start\+Stop, Test\+Repeat\+Stop\+Calls)
+\item 
+{\bf T\+E\+ST} (S\+SL, S\+S\+L\+Test)
+\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Server} $>$, std\+::unique\+\_\+ptr$<$ {\bf Server\+Thread} $>$ $>$ {\bf setup\+Server} (bool allow\+Insecure\+Connections\+On\+Secure\+Server=false, folly\+::\+Optional$<$ wangle\+::\+T\+L\+S\+Ticket\+Key\+Seeds $>$ seeds=folly\+::none)
+\item 
+{\bf T\+E\+ST} (S\+SL, Test\+Allow\+Insecure\+On\+Secure\+Server)
+\item 
+{\bf T\+E\+ST} (S\+SL, Disallow\+Insecure\+On\+Secure\+Server)
+\item 
+{\bf T\+E\+ST} (S\+SL, Test\+Resumption\+With\+Tickets)
+\item 
+{\bf T\+E\+ST} (S\+SL, Test\+Resumption\+After\+Update\+Fails)
+\item 
+{\bf T\+E\+ST} (S\+SL, Test\+Update\+T\+L\+S\+Credentials)
+\item 
+{\bf T\+E\+ST} (Get\+Listen\+Socket, Test\+No\+Bootstrap)
+\item 
+{\bf T\+E\+ST} (Get\+Listen\+Socket, Test\+Bootstrap\+With\+No\+Binding)
+\item 
+{\bf T\+E\+ST} (Get\+Listen\+Socket, Test\+Bootstrap\+With\+Binding)
+\item 
+{\bf T\+E\+ST} (Use\+Existing\+Socket, Test\+With\+Existing\+Async\+Server\+Socket)
+\item 
+{\bf T\+E\+ST} (Use\+Existing\+Socket, Test\+With\+Socket\+Fd)
+\item 
+{\bf T\+E\+ST} (Use\+Existing\+Socket, Test\+With\+Multiple\+Socket\+Fds)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Scoped\+Server\+Test}, Start)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Scoped\+Server\+Test}, Start\+Strict\+S\+SL)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Scoped\+Server\+Test}, Start\+Not\+Strict\+S\+SL)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Scoped\+Server\+Test}, Start\+S\+S\+L\+With\+Insecure)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Connection\+Filter\+Test}, Test)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!setup\+Server@{setup\+Server}}
+\index{setup\+Server@{setup\+Server}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{setup\+Server(bool allow\+Insecure\+Connections\+On\+Secure\+Server=false, folly\+::\+Optional$<$ wangle\+::\+T\+L\+S\+Ticket\+Key\+Seeds $>$ seeds=folly\+::none)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::pair$<$std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Server}$>$, std\+::unique\+\_\+ptr$<${\bf Server\+Thread}$>$ $>$ setup\+Server (
+\begin{DoxyParamCaption}
+\item[{bool}]{allow\+Insecure\+Connections\+On\+Secure\+Server = {\ttfamily false}, }
+\item[{folly\+::\+Optional$<$ wangle\+::\+T\+L\+S\+Ticket\+Key\+Seeds $>$}]{seeds = {\ttfamily folly\+:\+:none}}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a1fac2e937d6bddbbcbc8cc946dbd270f}
+
+
+Definition at line 241 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Handler\+Chain\+::add\+Then(), proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::handler\+Factories, proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::ssl\+Configs, and proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::threads.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+242                                                                       \{
+243   HTTPServer::IPConfig cfg\{folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, 0),
+244                            HTTPServer::Protocol::HTTP\};
+245   wangle::SSLContextConfig sslCfg;
+246   sslCfg.isDefault = \textcolor{keyword}{true};
+247   sslCfg.setCertificate(
+248       kTestDir + \textcolor{stringliteral}{"certs/test\_cert1.pem"}, kTestDir + \textcolor{stringliteral}{"certs/test\_key1.pem"}, \textcolor{stringliteral}{""});
+249   cfg.sslConfigs.push\_back(sslCfg);
+250   cfg.allowInsecureConnectionsOnSecureServer =
+251       allowInsecureConnectionsOnSecureServer;
+252   cfg.ticketSeeds = seeds;
+253 
+254   HTTPServerOptions options;
+255   options.threads = 4;
+256   options.handlerFactories =
+257       RequestHandlerChain().addThen<TestHandlerFactory>().build();
+258 
+259   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+260 
+261   std::vector<HTTPServer::IPConfig> ips\{cfg\};
+262   server->bind(ips);
+263 
+264   \textcolor{keyword}{auto} st = std::make\_unique<ServerThread>(server.get());
+265   EXPECT\_TRUE(st->start());
+266   \textcolor{keywordflow}{return} std::make\_pair(std::move(server), std::move(st));
+267 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Multi\+Bind, Handles\+Listen\+Failures)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Multi\+Bind}]{, }
+\item[{Handles\+Listen\+Failures}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a88886e5662fe178fb437c874fb970761}
+
+
+Definition at line 76 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::threads.
+
+
+\begin{DoxyCode}
+76                                        \{
+77   SocketAddress addr(\textcolor{stringliteral}{"127.0.0.1"}, 0);
+78 
+79   \textcolor{keyword}{auto} evb = EventBaseManager::get()->getEventBase();
+80   AsyncServerSocket::UniquePtr socket(\textcolor{keyword}{new} AsyncServerSocket(evb));
+81   socket->bind(addr);
+82 
+83   \textcolor{comment}{// Get the ephemeral port}
+84   socket->getAddress(&addr);
+85   \textcolor{keywordtype}{int} port = addr.getPort();
+86 
+87   std::vector<HTTPServer::IPConfig> ips = \{
+88     \{
+89       folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, port),
+90       HTTPServer::Protocol::HTTP
+91     \}
+92   \};
+93 
+94   HTTPServerOptions options;
+95   options.threads = 4;
+96 
+97   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+98 
+99   \textcolor{comment}{// We have to bind both the sockets before listening on either}
+100   server->bind(ips);
+101 
+102   \textcolor{comment}{// On kernel 2.6 trying to listen on a FD that another socket}
+103   \textcolor{comment}{// has bound to fails. While in kernel 3.2 only when one socket tries}
+104   \textcolor{comment}{// to listen on a FD that another socket is listening on fails.}
+105   \textcolor{keywordflow}{try} \{
+106     socket->listen(1024);
+107   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception& ex) \{
+108     \textcolor{keywordflow}{return};
+109   \}
+110 
+111   ServerThread st(server.get());
+112   EXPECT\_FALSE(st.start());
+113 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Http\+Server\+Start\+Stop, Test\+Repeat\+Stop\+Calls)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Http\+Server\+Start\+Stop}]{, }
+\item[{Test\+Repeat\+Stop\+Calls}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a1faa4a00d5c82be92e3cc2072c4da6ab}
+
+
+Definition at line 115 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+115                                                \{
+116   HTTPServerOptions options;
+117   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+118   \textcolor{keyword}{auto} st = std::make\_unique<ServerThread>(server.get());
+119   EXPECT\_TRUE(st->start());
+120 
+121   server->stop();
+122   \textcolor{comment}{// Calling stop again should be benign.}
+123   server->stop();
+124 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+S\+L, S\+S\+L\+Test)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+SL}]{, }
+\item[{S\+S\+L\+Test}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a8121e2ab2881fb8decc2de0e61b631d4}
+
+
+Definition at line 154 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::\+I\+P\+Config\+::ssl\+Configs, and proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::threads.
+
+
+\begin{DoxyCode}
+154                    \{
+155   HTTPServer::IPConfig cfg\{
+156     folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, 0),
+157       HTTPServer::Protocol::HTTP\};
+158   wangle::SSLContextConfig sslCfg;
+159   sslCfg.isDefault = \textcolor{keyword}{true};
+160   sslCfg.setCertificate(
+161     kTestDir + \textcolor{stringliteral}{"certs/test\_cert1.pem"},
+162     kTestDir + \textcolor{stringliteral}{"certs/test\_key1.pem"},
+163     \textcolor{stringliteral}{""});
+164   cfg.sslConfigs.push\_back(sslCfg);
+165 
+166   HTTPServerOptions options;
+167   options.threads = 4;
+168 
+169   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+170 
+171   std::vector<HTTPServer::IPConfig> ips\{cfg\};
+172   server->bind(ips);
+173 
+174   ServerThread st(server.get());
+175   EXPECT\_TRUE(st.start());
+176 
+177   folly::EventBase evb;
+178   \textcolor{keyword}{auto} ctx = std::make\_shared<SSLContext>();
+179   folly::AsyncSSLSocket::UniquePtr sock(\textcolor{keyword}{new} folly::AsyncSSLSocket(ctx, &evb));
+180   Cb cb(sock.get());
+181   sock->connect(&cb, server->addresses().front().address, 1000);
+182   evb.loop();
+183   EXPECT\_TRUE(cb.success);
+184 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+S\+L, Test\+Allow\+Insecure\+On\+Secure\+Server)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+SL}]{, }
+\item[{Test\+Allow\+Insecure\+On\+Secure\+Server}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_ab4125e752da9dc6c6a271c43c3e48da0}
+
+
+Definition at line 269 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::addresses(), proxygen\+::\+H\+T\+T\+P\+Connector\+::connect(), Curl\+Service\+::\+Curl\+Client\+::get\+Response(), Curl\+Service\+::\+Curl\+Client\+::set\+Flow\+Control\+Settings(), Curl\+Service\+::\+Curl\+Client\+::set\+Logging(), and setup\+Server().
+
+
+\begin{DoxyCode}
+269                                            \{
+270   std::unique\_ptr<HTTPServer> server;
+271   std::unique\_ptr<ServerThread> st;
+272   std::tie(server, st) = setupServer(\textcolor{keyword}{true});
+273 
+274   folly::EventBase evb;
+275   URL url(folly::to<std::string>(
+276       \textcolor{stringliteral}{"http://localhost:"}, server->addresses().front().address.getPort()));
+277   HTTPHeaders headers;
+278   CurlClient curl(&evb, HTTPMethod::GET, url, \textcolor{keyword}{nullptr}, headers, \textcolor{stringliteral}{""});
+279   curl.setFlowControlSettings(64 * 1024);
+280   curl.setLogging(\textcolor{keyword}{false});
+281   HHWheelTimer::UniquePtr timer\{\textcolor{keyword}{new} HHWheelTimer(
+282       &evb,
+283       std::chrono::milliseconds(HHWheelTimer::DEFAULT\_TICK\_INTERVAL),
+284       AsyncTimeout::InternalEnum::NORMAL,
+285       std::chrono::milliseconds(1000))\};
+286   HTTPConnector connector(&curl, timer.get());
+287   connector.connect(&evb,
+288                     server->addresses().front().address,
+289                     std::chrono::milliseconds(1000));
+290   evb.loop();
+291   \textcolor{keyword}{auto} response = curl.getResponse();
+292   EXPECT\_EQ(200, response->getStatusCode());
+293 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+S\+L, Disallow\+Insecure\+On\+Secure\+Server)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+SL}]{, }
+\item[{Disallow\+Insecure\+On\+Secure\+Server}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a1c2716fe255497b28fe67ffbc1d466a4}
+
+
+Definition at line 295 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::addresses(), proxygen\+::\+H\+T\+T\+P\+Connector\+::connect(), Curl\+Service\+::\+Curl\+Client\+::get\+Response(), Curl\+Service\+::\+Curl\+Client\+::set\+Flow\+Control\+Settings(), Curl\+Service\+::\+Curl\+Client\+::set\+Logging(), and setup\+Server().
+
+
+\begin{DoxyCode}
+295                                           \{
+296   std::unique\_ptr<HTTPServer> server;
+297   std::unique\_ptr<ServerThread> st;
+298   std::tie(server, st) = setupServer(\textcolor{keyword}{false});
+299 
+300   folly::EventBase evb;
+301   URL url(folly::to<std::string>(
+302       \textcolor{stringliteral}{"http://localhost:"}, server->addresses().front().address.getPort()));
+303   HTTPHeaders headers;
+304   CurlClient curl(&evb, HTTPMethod::GET, url, \textcolor{keyword}{nullptr}, headers, \textcolor{stringliteral}{""});
+305   curl.setFlowControlSettings(64 * 1024);
+306   curl.setLogging(\textcolor{keyword}{false});
+307   HHWheelTimer::UniquePtr timer\{\textcolor{keyword}{new} HHWheelTimer(
+308       &evb,
+309       std::chrono::milliseconds(HHWheelTimer::DEFAULT\_TICK\_INTERVAL),
+310       AsyncTimeout::InternalEnum::NORMAL,
+311       std::chrono::milliseconds(1000))\};
+312   HTTPConnector connector(&curl, timer.get());
+313   connector.connect(&evb,
+314                     server->addresses().front().address,
+315                     std::chrono::milliseconds(1000));
+316   evb.loop();
+317   \textcolor{keyword}{auto} response = curl.getResponse();
+318   EXPECT\_EQ(\textcolor{keyword}{nullptr}, response);
+319 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+S\+L, Test\+Resumption\+With\+Tickets)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+SL}]{, }
+\item[{Test\+Resumption\+With\+Tickets}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a9bbb55ad7dc392dd94d34cc435c178e6}
+
+
+Definition at line 321 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::addresses(), and setup\+Server().
+
+
+\begin{DoxyCode}
+321                                      \{
+322   std::unique\_ptr<HTTPServer> server;
+323   std::unique\_ptr<ServerThread> st;
+324   wangle::TLSTicketKeySeeds seeds;
+325   seeds.currentSeeds.push\_back(hexlify(\textcolor{stringliteral}{"hello"}));
+326   std::tie(server, st) = setupServer(\textcolor{keyword}{false}, seeds);
+327 
+328   folly::EventBase evb;
+329   \textcolor{keyword}{auto} ctx = std::make\_shared<SSLContext>();
+330   folly::AsyncSSLSocket::UniquePtr sock(\textcolor{keyword}{new} folly::AsyncSSLSocket(ctx, &evb));
+331   Cb cb(sock.get());
+332   sock->connect(&cb, server->addresses().front().address, 1000);
+333   evb.loop();
+334   ASSERT\_TRUE(cb.success);
+335   ASSERT\_NE(\textcolor{keyword}{nullptr}, cb.session.get());
+336   ASSERT\_FALSE(cb.reusedSession);
+337 
+338   folly::AsyncSSLSocket::UniquePtr sock2(\textcolor{keyword}{new} folly::AsyncSSLSocket(ctx, &evb));
+339   sock2->setSSLSession(cb.session.get());
+340   Cb cb2(sock2.get());
+341   sock2->connect(&cb2, server->addresses().front().address, 1000);
+342   evb.loop();
+343   ASSERT\_TRUE(cb2.success);
+344   ASSERT\_NE(\textcolor{keyword}{nullptr}, cb2.session.get());
+345   ASSERT\_TRUE(cb2.reusedSession);
+346 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+S\+L, Test\+Resumption\+After\+Update\+Fails)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+SL}]{, }
+\item[{Test\+Resumption\+After\+Update\+Fails}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_ae28f3583250a9fce2bb46662cce0640c}
+
+
+Definition at line 348 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::addresses(), setup\+Server(), and proxygen\+::\+H\+T\+T\+P\+Server\+::update\+Ticket\+Seeds().
+
+
+\begin{DoxyCode}
+348                                           \{
+349   std::unique\_ptr<HTTPServer> server;
+350   std::unique\_ptr<ServerThread> st;
+351   wangle::TLSTicketKeySeeds seeds;
+352   seeds.currentSeeds.push\_back(hexlify(\textcolor{stringliteral}{"hello"}));
+353   std::tie(server, st) = setupServer(\textcolor{keyword}{false}, seeds);
+354 
+355   folly::EventBase evb;
+356   \textcolor{keyword}{auto} ctx = std::make\_shared<SSLContext>();
+357   folly::AsyncSSLSocket::UniquePtr sock(\textcolor{keyword}{new} folly::AsyncSSLSocket(ctx, &evb));
+358   Cb cb(sock.get());
+359   sock->connect(&cb, server->addresses().front().address, 1000);
+360   evb.loop();
+361   ASSERT\_TRUE(cb.success);
+362   ASSERT\_NE(\textcolor{keyword}{nullptr}, cb.session.get());
+363   ASSERT\_FALSE(cb.reusedSession);
+364 
+365   wangle::TLSTicketKeySeeds newSeeds;
+366   newSeeds.currentSeeds.push\_back(hexlify(\textcolor{stringliteral}{"goodbyte"}));
+367   server->updateTicketSeeds(newSeeds);
+368 
+369   folly::AsyncSSLSocket::UniquePtr sock2(\textcolor{keyword}{new} folly::AsyncSSLSocket(ctx, &evb));
+370   sock2->setSSLSession(cb.session.get());
+371   Cb cb2(sock2.get());
+372   sock2->connect(&cb2, server->addresses().front().address, 1000);
+373   evb.loop();
+374   ASSERT\_TRUE(cb2.success);
+375   ASSERT\_NE(\textcolor{keyword}{nullptr}, cb2.session.get());
+376   ASSERT\_FALSE(cb2.reusedSession);
+377 
+378   folly::AsyncSSLSocket::UniquePtr sock3(\textcolor{keyword}{new} folly::AsyncSSLSocket(ctx, &evb));
+379   sock3->setSSLSession(cb2.session.get());
+380   Cb cb3(sock3.get());
+381   sock3->connect(&cb3, server->addresses().front().address, 1000);
+382   evb.loop();
+383   ASSERT\_TRUE(cb3.success);
+384   ASSERT\_NE(\textcolor{keyword}{nullptr}, cb3.session.get());
+385   ASSERT\_TRUE(cb3.reusedSession);
+386 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+S\+L, Test\+Update\+T\+L\+S\+Credentials)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+SL}]{, }
+\item[{Test\+Update\+T\+L\+S\+Credentials}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_ac339770fba7ecdc10fd8c491b9ade613}
+
+
+Definition at line 388 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::threads.
+
+
+\begin{DoxyCode}
+388                                     \{
+389   \textcolor{comment}{// Set up a temporary file with credentials that we will update}
+390   folly::test::TemporaryFile credFile;
+391   \textcolor{keyword}{auto} copyCreds = [path = credFile.path()](\textcolor{keyword}{const} std::string& certFile,
+392                                         \textcolor{keyword}{const} std::string& keyFile) \{
+393     std::string certData, keyData;
+394     folly::readFile(certFile.c\_str(), certData);
+395     folly::writeFile(certData, path.c\_str(), O\_WRONLY | O\_CREAT | O\_TRUNC);
+396     folly::writeFile(std::string(\textcolor{stringliteral}{"\(\backslash\)n"}), path.c\_str(), O\_WRONLY | O\_APPEND);
+397     folly::readFile(keyFile.c\_str(), keyData);
+398     folly::writeFile(keyData, path.c\_str(), O\_WRONLY | O\_APPEND);
+399   \};
+400 
+401   \textcolor{keyword}{auto} getCertDigest = [&](\textcolor{keyword}{const} X509* x) -> std::string \{
+402     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} n;
+403     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} md[EVP\_MAX\_MD\_SIZE];
+404     \textcolor{keyword}{const} EVP\_MD* dig = EVP\_sha256();
+405 
+406     \textcolor{keywordflow}{if} (!X509\_digest(x, dig, md, &n)) \{
+407       \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"Cannot calculate digest"});
+408     \}
+409     \textcolor{keywordflow}{return} std::string((\textcolor{keyword}{const} \textcolor{keywordtype}{char}*)md, n);
+410   \};
+411 
+412   HTTPServer::IPConfig cfg\{folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, 0),
+413                            HTTPServer::Protocol::HTTP\};
+414   wangle::SSLContextConfig sslCfg;
+415   sslCfg.isDefault = \textcolor{keyword}{true};
+416   copyCreds(kTestDir + \textcolor{stringliteral}{"certs/test\_cert1.pem"},
+417             kTestDir + \textcolor{stringliteral}{"certs/test\_key1.pem"});
+418   sslCfg.setCertificate(credFile.path().string(), credFile.path().string(), \textcolor{stringliteral}{""});
+419   cfg.sslConfigs.push\_back(sslCfg);
+420 
+421   HTTPServer::IPConfig insecureCfg\{folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, 0),
+422                                    HTTPServer::Protocol::HTTP\};
+423 
+424   HTTPServerOptions options;
+425   options.threads = 4;
+426 
+427   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+428 
+429   std::vector<HTTPServer::IPConfig> ips\{cfg, insecureCfg\};
+430   server->bind(ips);
+431 
+432   ServerThread st(server.get());
+433   EXPECT\_TRUE(st.start());
+434 
+435   \textcolor{comment}{// First connection which should return old cert}
+436   folly::EventBase evb;
+437   \textcolor{keyword}{auto} ctx = std::make\_shared<SSLContext>();
+438   std::string certDigest1, certDigest2;
+439 
+440   \textcolor{comment}{// Connect and store digest of server cert}
+441   \textcolor{keyword}{auto} connectAndFetchServerCert = [&]() -> std::string \{
+442     folly::AsyncSSLSocket::UniquePtr sock(\textcolor{keyword}{new} folly::AsyncSSLSocket(ctx, &evb));
+443     Cb cb(sock.get());
+444     sock->connect(&cb, server->addresses().front().address, 1000);
+445     evb.loop();
+446     EXPECT\_TRUE(cb.success);
+447 
+448     \textcolor{keyword}{auto} x509 = cb.getPeerCert();
+449     EXPECT\_NE(x509, \textcolor{keyword}{nullptr});
+450     \textcolor{keywordflow}{return} getCertDigest(x509);
+451   \};
+452 
+453   \textcolor{comment}{// Original cert}
+454   \textcolor{keyword}{auto} cert1 = connectAndFetchServerCert();
+455   EXPECT\_EQ(cert1.length(), SHA256\_DIGEST\_LENGTH);
+456 
+457   \textcolor{comment}{// Update cert/key}
+458   copyCreds(kTestDir + \textcolor{stringliteral}{"certs/test\_cert2.pem"},
+459             kTestDir + \textcolor{stringliteral}{"certs/test\_key2.pem"});
+460   server->updateTLSCredentials();
+461   evb.loop();
+462 
+463   \textcolor{comment}{// Should get new cert}
+464   \textcolor{keyword}{auto} cert2 = connectAndFetchServerCert();
+465   EXPECT\_EQ(cert2.length(), SHA256\_DIGEST\_LENGTH);
+466   EXPECT\_NE(cert1, cert2);
+467 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Get\+Listen\+Socket, Test\+No\+Bootstrap)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Get\+Listen\+Socket}]{, }
+\item[{Test\+No\+Bootstrap}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a6fec59ff7bee532451dc93224cf19461}
+
+
+Definition at line 469 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+469                                        \{
+470   HTTPServerOptions options;
+471   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+472   \textcolor{keyword}{auto} st = std::make\_unique<ServerThread>(server.get());
+473   EXPECT\_TRUE(st->start());
+474 
+475   \textcolor{keyword}{auto} socketFd = server->getListenSocket();
+476   ASSERT\_EQ(-1, socketFd);
+477 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Get\+Listen\+Socket, Test\+Bootstrap\+With\+No\+Binding)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Get\+Listen\+Socket}]{, }
+\item[{Test\+Bootstrap\+With\+No\+Binding}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a692cfa1b554505226b133901f54c5f08}
+
+
+Definition at line 479 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::get\+Listen\+Socket(), setup\+Server(), and proxygen\+::\+H\+T\+T\+P\+Server\+::stop\+Listening().
+
+
+\begin{DoxyCode}
+479                                                   \{
+480   std::unique\_ptr<HTTPServer> server;
+481   std::unique\_ptr<ServerThread> st;
+482   wangle::TLSTicketKeySeeds seeds;
+483   seeds.currentSeeds.push\_back(hexlify(\textcolor{stringliteral}{"hello"}));
+484   std::tie(server, st) = setupServer(\textcolor{keyword}{false}, seeds);
+485 
+486   \textcolor{comment}{// Stop listening on socket}
+487   server->stopListening();
+488 
+489   \textcolor{keyword}{auto} socketFd = server->getListenSocket();
+490   ASSERT\_EQ(-1, socketFd);
+491 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Get\+Listen\+Socket, Test\+Bootstrap\+With\+Binding)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Get\+Listen\+Socket}]{, }
+\item[{Test\+Bootstrap\+With\+Binding}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_aed4f57530961720c91ff261f712460bb}
+
+
+Definition at line 493 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Server\+::get\+Listen\+Socket(), and setup\+Server().
+
+
+\begin{DoxyCode}
+493                                                 \{
+494   std::unique\_ptr<HTTPServer> server;
+495   std::unique\_ptr<ServerThread> st;
+496   wangle::TLSTicketKeySeeds seeds;
+497   seeds.currentSeeds.push\_back(hexlify(\textcolor{stringliteral}{"hello"}));
+498   std::tie(server, st) = setupServer(\textcolor{keyword}{false}, seeds);
+499 
+500   \textcolor{keyword}{auto} socketFd = server->getListenSocket();
+501   ASSERT\_NE(-1, socketFd);
+502 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Use\+Existing\+Socket, Test\+With\+Existing\+Async\+Server\+Socket)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Use\+Existing\+Socket}]{, }
+\item[{Test\+With\+Existing\+Async\+Server\+Socket}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a49d3ec714598a90a20bd80dacbd70f54}
+
+
+Definition at line 504 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Handler\+Chain\+::add\+Then(), proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::handler\+Factories, and proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::use\+Existing\+Socket().
+
+
+\begin{DoxyCode}
+504                                                            \{
+505   AsyncServerSocket::UniquePtr serverSocket(\textcolor{keyword}{new} folly::AsyncServerSocket);
+506   serverSocket->bind(0);
+507 
+508   HTTPServer::IPConfig cfg\{folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, 0),
+509                            HTTPServer::Protocol::HTTP\};
+510   std::vector<HTTPServer::IPConfig> ips\{cfg\};
+511 
+512   HTTPServerOptions options;
+513   options.handlerFactories =
+514       RequestHandlerChain().addThen<TestHandlerFactory>().build();
+515   \textcolor{comment}{// Use the existing AsyncServerSocket for binding}
+516   \textcolor{keyword}{auto} existingFd = serverSocket->getSocket();
+517   options.useExistingSocket(std::move(serverSocket));
+518 
+519   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+520   \textcolor{keyword}{auto} st = std::make\_unique<ServerThread>(server.get());
+521   server->bind(ips);
+522 
+523   EXPECT\_TRUE(st->start());
+524 
+525   \textcolor{keyword}{auto} socketFd = server->getListenSocket();
+526   ASSERT\_EQ(existingFd, socketFd);
+527 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Use\+Existing\+Socket, Test\+With\+Socket\+Fd)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Use\+Existing\+Socket}]{, }
+\item[{Test\+With\+Socket\+Fd}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a871e47fafe8ecbdc89ecb17516a14ae6}
+
+
+Definition at line 529 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Handler\+Chain\+::add\+Then(), proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::handler\+Factories, and proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::use\+Existing\+Socket().
+
+
+\begin{DoxyCode}
+529                                           \{
+530   AsyncServerSocket::UniquePtr serverSocket(\textcolor{keyword}{new} folly::AsyncServerSocket);
+531   serverSocket->bind(0);
+532 
+533   HTTPServer::IPConfig cfg\{folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, 0),
+534                            HTTPServer::Protocol::HTTP\};
+535   HTTPServerOptions options;
+536   options.handlerFactories =
+537       RequestHandlerChain().addThen<TestHandlerFactory>().build();
+538   \textcolor{comment}{// Use the socket fd from the existing AsyncServerSocket for binding}
+539   \textcolor{keyword}{auto} existingFd = serverSocket->getSocket();
+540   options.useExistingSocket(existingFd);
+541 
+542   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+543   \textcolor{keyword}{auto} st = std::make\_unique<ServerThread>(server.get());
+544   std::vector<HTTPServer::IPConfig> ips\{cfg\};
+545   server->bind(ips);
+546 
+547 
+548   EXPECT\_TRUE(st->start());
+549 
+550   \textcolor{keyword}{auto} socketFd = server->getListenSocket();
+551   ASSERT\_EQ(existingFd, socketFd);
+552 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Use\+Existing\+Socket, Test\+With\+Multiple\+Socket\+Fds)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Use\+Existing\+Socket}]{, }
+\item[{Test\+With\+Multiple\+Socket\+Fds}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_ab489e0e2fc529bd80366c2565d30aa08}
+
+
+Definition at line 554 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Handler\+Chain\+::add\+Then(), proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::handler\+Factories, and proxygen\+::\+H\+T\+T\+P\+Server\+Options\+::use\+Existing\+Sockets().
+
+
+\begin{DoxyCode}
+554                                                    \{
+555   AsyncServerSocket::UniquePtr serverSocket(\textcolor{keyword}{new} folly::AsyncServerSocket);
+556   serverSocket->bind(0);
+557   \textcolor{keywordflow}{try} \{
+558     serverSocket->bind(1024);
+559   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception& ex) \{
+560     \textcolor{comment}{// This is fine because we are trying to bind to multiple ports}
+561   \}
+562 
+563   HTTPServer::IPConfig cfg\{folly::SocketAddress(\textcolor{stringliteral}{"127.0.0.1"}, 0),
+564                            HTTPServer::Protocol::HTTP\};
+565   HTTPServerOptions options;
+566   options.handlerFactories =
+567       RequestHandlerChain().addThen<TestHandlerFactory>().build();
+568   \textcolor{comment}{// Use the socket fd from the existing AsyncServerSocket for binding}
+569   \textcolor{keyword}{auto} existingFds = serverSocket->getSockets();
+570   options.useExistingSockets(existingFds);
+571 
+572   \textcolor{keyword}{auto} server = std::make\_unique<HTTPServer>(std::move(options));
+573   \textcolor{keyword}{auto} st = std::make\_unique<ServerThread>(server.get());
+574   std::vector<HTTPServer::IPConfig> ips\{cfg\};
+575   server->bind(ips);
+576 
+577 
+578   EXPECT\_TRUE(st->start());
+579 
+580   \textcolor{keyword}{auto} socketFd = server->getListenSocket();
+581   ASSERT\_EQ(existingFds[0], socketFd);
+582 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Scoped\+Server\+Test, Start)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Scoped\+Server\+Test}}]{, }
+\item[{Start}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_aa511c3dd72dc32e0a0226a4f6bce0023}
+
+
+Definition at line 658 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+658                                 \{
+659   \textcolor{keyword}{auto} server = createScopedServer();
+660   \textcolor{keyword}{auto} client = connectPlainText();
+661   \textcolor{keyword}{auto} resp = client->getResponse();
+662   EXPECT\_EQ(200, resp->getStatusCode());
+663 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Scoped\+Server\+Test, Start\+Strict\+S\+S\+L)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Scoped\+Server\+Test}}]{, }
+\item[{Start\+Strict\+S\+SL}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a34f809e58bd9ac3f18c1dd1023827462}
+
+
+Definition at line 665 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+665                                          \{
+666   wangle::SSLContextConfig sslCfg;
+667   sslCfg.isDefault = \textcolor{keyword}{true};
+668   sslCfg.setCertificate(
+669     \textcolor{stringliteral}{"/path/should/not/exist"},
+670     \textcolor{stringliteral}{"/path/should/not/exist"},
+671     \textcolor{stringliteral}{""});
+672   cfg\_.sslConfigs.push\_back(sslCfg);
+673   EXPECT\_THROW(createScopedServer(), std::exception);
+674 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Scoped\+Server\+Test, Start\+Not\+Strict\+S\+S\+L)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Scoped\+Server\+Test}}]{, }
+\item[{Start\+Not\+Strict\+S\+SL}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_af92051ad9569972db35d4c75f8069bfc}
+
+
+Definition at line 676 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+676                                             \{
+677   wangle::SSLContextConfig sslCfg;
+678   sslCfg.isDefault = \textcolor{keyword}{true};
+679   sslCfg.setCertificate(
+680     \textcolor{stringliteral}{"/path/should/not/exist"},
+681     \textcolor{stringliteral}{"/path/should/not/exist"},
+682     \textcolor{stringliteral}{""});
+683   cfg\_.strictSSL = \textcolor{keyword}{false};
+684   cfg\_.sslConfigs.push\_back(sslCfg);
+685   \textcolor{keyword}{auto} server = createScopedServer();
+686   \textcolor{keyword}{auto} client = connectPlainText();
+687   \textcolor{keyword}{auto} resp = client->getResponse();
+688   EXPECT\_EQ(200, resp->getStatusCode());
+689 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Scoped\+Server\+Test, Start\+S\+S\+L\+With\+Insecure)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Scoped\+Server\+Test}}]{, }
+\item[{Start\+S\+S\+L\+With\+Insecure}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a829adbe5ec6654fa763e749db403a9e0}
+
+
+Definition at line 691 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+691                                                \{
+692   wangle::SSLContextConfig sslCfg;
+693   sslCfg.isDefault = \textcolor{keyword}{true};
+694   sslCfg.setCertificate(
+695     kTestDir + \textcolor{stringliteral}{"certs/test\_cert1.pem"},
+696     kTestDir + \textcolor{stringliteral}{"certs/test\_key1.pem"},
+697     \textcolor{stringliteral}{""});
+698   cfg\_.sslConfigs.push\_back(sslCfg);
+699   cfg\_.allowInsecureConnectionsOnSecureServer = \textcolor{keyword}{true};
+700   \textcolor{keyword}{auto} server = createScopedServer();
+701   \textcolor{keyword}{auto} client = connectPlainText();
+702   \textcolor{keyword}{auto} resp = client->getResponse();
+703   EXPECT\_EQ(200, resp->getStatusCode());
+704 
+705   client = connectSSL();
+706   resp = client->getResponse();
+707   EXPECT\_EQ(200, resp->getStatusCode());
+708 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P\+Server\+Test.\+cpp@{H\+T\+T\+P\+Server\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Connection\+Filter\+Test, Test)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Connection\+Filter\+Test}}]{, }
+\item[{Test}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPServerTest_8cpp_a1d20b887ffa317c47ebfd2f5b706aed6}
+
+
+Definition at line 737 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+737                                    \{
+738   wangle::SSLContextConfig sslCfg;
+739   sslCfg.isDefault = \textcolor{keyword}{true};
+740   sslCfg.setCertificate(
+741       kTestDir + \textcolor{stringliteral}{"certs/test\_cert1.pem"}, kTestDir + \textcolor{stringliteral}{"certs/test\_key1.pem"}, \textcolor{stringliteral}{""});
+742   sslCfg.clientCAFile = kTestDir + \textcolor{stringliteral}{"certs/client\_ca\_cert.pem"};
+743   \textcolor{comment}{// Permissive client auth.}
+744   sslCfg.clientVerification = folly::SSLContext::SSLVerifyPeerEnum::VERIFY;
+745   cfg\_.sslConfigs.push\_back(sslCfg);
+746 
+747   \textcolor{keyword}{auto} server = createScopedServer();
+748   \textcolor{keyword}{auto} insecureClient = connectPlainText();
+749   \textcolor{keyword}{auto} certlessClient = connectSSL();
+750   \textcolor{keyword}{auto} certlessClient2 = connectSSL(kTestDir + \textcolor{stringliteral}{"certs/ca\_cert.pem"});
+751   \textcolor{keyword}{auto} secureClient = connectSSL(kTestDir + \textcolor{stringliteral}{"certs/ca\_cert.pem"},
+752                                  kTestDir + \textcolor{stringliteral}{"certs/client\_cert.pem"},
+753                                  kTestDir + \textcolor{stringliteral}{"certs/client\_key.pem"});
+754 
+755   \textcolor{comment}{// The following clients fail newConnectionFilter.}
+756   EXPECT\_EQ(\textcolor{keyword}{nullptr}, insecureClient->getResponse());
+757   EXPECT\_EQ(\textcolor{keyword}{nullptr}, certlessClient->getResponse());
+758   EXPECT\_EQ(\textcolor{keyword}{nullptr}, certlessClient2->getResponse());
+759 
+760   \textcolor{comment}{// Only secureClient passes.}
+761   \textcolor{keyword}{auto} response = secureClient->getResponse();
+762   EXPECT\_EQ(200, response->getStatusCode());
+763 
+764   \textcolor{comment}{// Check the header set by TestHandler.}
+765   \textcolor{keyword}{auto} headers = response->getHeaders();
+766   EXPECT\_EQ(\textcolor{stringliteral}{"testuser1"}, headers.getSingleOrEmpty(\textcolor{stringliteral}{"X-Client-CN"}));
+767 \}
+\end{DoxyCode}

@@ -1,0 +1,1084 @@
+\section{Proxy\+Service\+:\+:Proxy\+Handler Class Reference}
+\label{classProxyService_1_1ProxyHandler}\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+
+
+{\ttfamily \#include $<$Proxy\+Handler.\+h$>$}
+
+Inheritance diagram for Proxy\+Service\+:\+:Proxy\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.000000cm]{classProxyService_1_1ProxyHandler}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Server\+Transaction\+Handler}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Proxy\+Handler} ({\bf Proxy\+Stats} $\ast$stats, folly\+::\+H\+H\+Wheel\+Timer $\ast$timer)
+\item 
+{\bf $\sim$\+Proxy\+Handler} () override
+\item 
+void {\bf on\+Request} (std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$ headers) noexceptoverride
+\item 
+void {\bf on\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride
+\item 
+void {\bf on\+E\+OM} () noexceptoverride
+\item 
+void {\bf on\+Upgrade} ({\bf proxygen\+::\+Upgrade\+Protocol}) noexceptoverride
+\item 
+void {\bf request\+Complete} () noexceptoverride
+\item 
+void {\bf on\+Error} ({\bf proxygen\+::\+Proxygen\+Error} err) noexceptoverride
+\item 
+void {\bf on\+Egress\+Paused} () noexceptoverride
+\item 
+void {\bf on\+Egress\+Resumed} () noexceptoverride
+\item 
+void {\bf detach\+Server\+Transaction} () noexcept
+\item 
+void {\bf on\+Server\+Headers\+Complete} (std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$ msg) noexcept
+\item 
+void {\bf on\+Server\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain) noexcept
+\item 
+void {\bf on\+Server\+E\+OM} () noexcept
+\item 
+void {\bf on\+Server\+Error} (const {\bf proxygen\+::\+H\+T\+T\+P\+Exception} \&error) noexcept
+\item 
+void {\bf on\+Server\+Egress\+Paused} () noexcept
+\item 
+void {\bf on\+Server\+Egress\+Resumed} () noexcept
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf connect\+Success} ({\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} $\ast$session) override
+\item 
+void {\bf connect\+Error} (const folly\+::\+Async\+Socket\+Exception \&ex) override
+\item 
+void {\bf connect\+Success} () noexceptoverride
+\item 
+void {\bf connect\+Err} (const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride
+\item 
+void {\bf get\+Read\+Buffer} (void $\ast$$\ast$buf\+Return, size\+\_\+t $\ast$len\+Return) override
+\item 
+void {\bf read\+Data\+Available} (size\+\_\+t len) noexceptoverride
+\item 
+void {\bf read\+E\+OF} () noexceptoverride
+\item 
+void {\bf read\+Err} (const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride
+\item 
+void {\bf write\+Success} () noexceptoverride
+\item 
+void {\bf write\+Err} (size\+\_\+t bytes\+Written, const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride
+\item 
+void {\bf abort\+Downstream} ()
+\item 
+bool {\bf check\+For\+Shutdown} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Proxy\+Stats} $\ast$const {\bf stats\+\_\+} \{{\bf nullptr}\}
+\item 
+{\bf proxygen\+::\+H\+T\+T\+P\+Connector} {\bf connector\+\_\+}
+\item 
+{\bf Server\+Transaction\+Handler} {\bf server\+Handler\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf Session\+Wrapper} $>$ {\bf session\+\_\+}
+\item 
+{\bf proxygen\+::\+H\+T\+T\+P\+Transaction} $\ast$ {\bf txn\+\_\+} \{{\bf nullptr}\}
+\item 
+bool {\bf client\+Terminated\+\_\+} \{false\}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$ {\bf request\+\_\+}
+\item 
+std\+::shared\+\_\+ptr$<$ folly\+::\+Async\+Socket $>$ {\bf upstream\+Sock\+\_\+}
+\item 
+uint8\+\_\+t {\bf sock\+Status\+\_\+} \{0\}
+\item 
+folly\+::\+I\+O\+Buf\+Queue {\bf body\+\_\+} \{folly\+::\+I\+O\+Buf\+Queue\+::cache\+Chain\+Length()\}
+\item 
+bool {\bf downstream\+Ingress\+Paused\+\_\+} \{false\}
+\item 
+bool {\bf upstream\+Egress\+Paused\+\_\+} \{false\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 26 of file Proxy\+Handler.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!Proxy\+Handler@{Proxy\+Handler}}
+\index{Proxy\+Handler@{Proxy\+Handler}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{Proxy\+Handler(\+Proxy\+Stats $\ast$stats, folly\+::\+H\+H\+Wheel\+Timer $\ast$timer)}]{\setlength{\rightskip}{0pt plus 5cm}Proxy\+Service\+::\+Proxy\+Handler\+::\+Proxy\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf Proxy\+Stats} $\ast$}]{stats, }
+\item[{folly\+::\+H\+H\+Wheel\+Timer $\ast$}]{timer}
+\end{DoxyParamCaption}
+)}\label{classProxyService_1_1ProxyHandler_a3169c1eb8020fbe96ced830571f7709a}
+
+
+Definition at line 39 of file Proxy\+Handler.\+cpp.
+
+
+
+References server\+Handler\+\_\+.
+
+
+\begin{DoxyCode}
+39                                                                      :
+40     stats_(stats),
+41     connector_\{\textcolor{keyword}{this}, timer\},
+42     serverHandler_(*\textcolor{keyword}{this}) \{
+43 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!````~Proxy\+Handler@{$\sim$\+Proxy\+Handler}}
+\index{````~Proxy\+Handler@{$\sim$\+Proxy\+Handler}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{$\sim$\+Proxy\+Handler() override}]{\setlength{\rightskip}{0pt plus 5cm}Proxy\+Service\+::\+Proxy\+Handler\+::$\sim$\+Proxy\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classProxyService_1_1ProxyHandler_aa04b6d496c50a9f37452de5dd37f51c2}
+
+
+Definition at line 45 of file Proxy\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+45                             \{
+46   VLOG(4) << \textcolor{stringliteral}{"deleting ProxyHandler"};
+47 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!abort\+Downstream@{abort\+Downstream}}
+\index{abort\+Downstream@{abort\+Downstream}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{abort\+Downstream()}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::abort\+Downstream (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a9b89e029029666c49b012c7c9949c445}
+
+
+Definition at line 218 of file Proxy\+Handler.\+cpp.
+
+
+
+References client\+Terminated\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, and proxygen\+::\+Response\+Handler\+::send\+Abort().
+
+
+
+Referenced by connect\+Error(), on\+Server\+Error(), read\+Err(), and write\+Err().
+
+
+\begin{DoxyCode}
+218                                    \{
+219   \textcolor{keywordflow}{if} (!clientTerminated_) \{
+220     downstream_->sendAbort();
+221   \}
+222 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!check\+For\+Shutdown@{check\+For\+Shutdown}}
+\index{check\+For\+Shutdown@{check\+For\+Shutdown}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{check\+For\+Shutdown()}]{\setlength{\rightskip}{0pt plus 5cm}bool Proxy\+Service\+::\+Proxy\+Handler\+::check\+For\+Shutdown (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_ae8fac692623df601dade66735f62404a}
+
+
+Definition at line 224 of file Proxy\+Handler.\+cpp.
+
+
+
+References client\+Terminated\+\_\+, sock\+Status\+\_\+, txn\+\_\+, upstream\+Egress\+Paused\+\_\+, and upstream\+Sock\+\_\+.
+
+
+
+Referenced by connect\+Error(), detach\+Server\+Transaction(), on\+Error(), read\+Err(), request\+Complete(), write\+Err(), and write\+Success().
+
+
+\begin{DoxyCode}
+224                                     \{
+225   \textcolor{keywordflow}{if} (clientTerminated_ && !txn_ &&
+226       (!upstreamSock_ || (sockStatus_ == CLOSED && !upstreamEgressPaused_))) \{
+227     \textcolor{keyword}{delete} \textcolor{keyword}{this};
+228     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+229   \}
+230   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+231 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!connect\+Err@{connect\+Err}}
+\index{connect\+Err@{connect\+Err}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{connect\+Err(const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Err (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{ex}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a33f7a06f6bcfb5db07de2af222fbb440}
+
+
+Definition at line 242 of file Proxy\+Handler.\+cpp.
+
+
+
+References connect\+Error().
+
+
+\begin{DoxyCode}
+242                                                                           \{
+243   connectError(ex);
+244 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!connect\+Error@{connect\+Error}}
+\index{connect\+Error@{connect\+Error}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{connect\+Error(const folly\+::\+Async\+Socket\+Exception \&ex) override}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Error (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{ex}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classProxyService_1_1ProxyHandler_a7c14c1ee3b04187e72ea5f42cde84dff}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPConnector_1_1Callback_a4f01da41ef58437eeb47c1dee4a5bc47}.
+
+
+
+Definition at line 130 of file Proxy\+Handler.\+cpp.
+
+
+
+References abort\+Downstream(), check\+For\+Shutdown(), client\+Terminated\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+Response\+Builder\+::send\+With\+E\+O\+M(), and proxygen\+::\+Response\+Builder\+::status().
+
+
+
+Referenced by connect\+Err().
+
+
+\begin{DoxyCode}
+130                                                                    \{
+131   LOG(ERROR) << \textcolor{stringliteral}{"Failed to connect: "} << folly::exceptionStr(ex);
+132   \textcolor{keywordflow}{if} (!clientTerminated_) \{
+133     ResponseBuilder(downstream_)
+134       .status(503, \textcolor{stringliteral}{"Bad Gateway"})
+135       .sendWithEOM();
+136   \} \textcolor{keywordflow}{else} \{
+137     abortDownstream();
+138     checkForShutdown();
+139   \}
+140 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!connect\+Success@{connect\+Success}}
+\index{connect\+Success@{connect\+Success}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{connect\+Success(proxygen\+::\+H\+T\+T\+P\+Upstream\+Session $\ast$session) override}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Success (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} $\ast$}]{session}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classProxyService_1_1ProxyHandler_a0a4e260a80e44acec79c992015a7546c}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Connector\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPConnector_1_1Callback_aae878d2da74442ffc19ecb3bbbee7d9e}.
+
+
+
+Definition at line 120 of file Proxy\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Handler\+::downstream\+\_\+, proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::new\+Transaction(), request\+\_\+, proxygen\+::\+Response\+Handler\+::resume\+Ingress(), server\+Handler\+\_\+, session\+\_\+, and txn\+\_\+.
+
+
+\begin{DoxyCode}
+120                                                               \{
+121   LOG(INFO) << \textcolor{stringliteral}{"Established "} << *session;
+122   session_ = std::make\_unique<SessionWrapper>(session);
+123   txn_ = session->newTransaction(&serverHandler_);
+124   LOG(INFO) << \textcolor{stringliteral}{"Forwarding client request: "} << request_->getURL()
+125             << \textcolor{stringliteral}{" to server"};
+126   txn\_->sendHeaders(*request_);
+127   downstream_->resumeIngress();
+128 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!connect\+Success@{connect\+Success}}
+\index{connect\+Success@{connect\+Success}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{connect\+Success() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Success (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a5fabbd35328b6beec23b5bb4896cb75f}
+
+
+Definition at line 233 of file Proxy\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Handler\+::downstream\+\_\+, proxygen\+::\+Response\+Handler\+::resume\+Ingress(), proxygen\+::\+Response\+Builder\+::send(), proxygen\+::\+Response\+Builder\+::status(), and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+233                                            \{
+234   LOG(INFO) << \textcolor{stringliteral}{"Connected to upstream "} << upstreamSock_;
+235   ResponseBuilder(downstream_)
+236     .status(200, \textcolor{stringliteral}{"OK"})
+237     .send();
+238   upstreamSock_->setReadCB(\textcolor{keyword}{this});
+239   downstream_->resumeIngress();
+240 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!detach\+Server\+Transaction@{detach\+Server\+Transaction}}
+\index{detach\+Server\+Transaction@{detach\+Server\+Transaction}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{detach\+Server\+Transaction() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::detach\+Server\+Transaction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a8c292dc68a4628cef9d8cc7df5ef7860}
+
+
+Definition at line 163 of file Proxy\+Handler.\+cpp.
+
+
+
+References check\+For\+Shutdown(), and txn\+\_\+.
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::\+Server\+Transaction\+Handler\+::detach\+Transaction().
+
+
+\begin{DoxyCode}
+163                                                     \{
+164   txn_ = \textcolor{keyword}{nullptr};
+165   checkForShutdown();
+166 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!get\+Read\+Buffer@{get\+Read\+Buffer}}
+\index{get\+Read\+Buffer@{get\+Read\+Buffer}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{get\+Read\+Buffer(void $\ast$$\ast$buf\+Return, size\+\_\+t $\ast$len\+Return) override}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::get\+Read\+Buffer (
+\begin{DoxyParamCaption}
+\item[{void $\ast$$\ast$}]{buf\+Return, }
+\item[{size\+\_\+t $\ast$}]{len\+Return}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a984933caf034980463563fe6b3a80212}
+
+
+Definition at line 246 of file Proxy\+Handler.\+cpp.
+
+
+
+References body\+\_\+.
+
+
+\begin{DoxyCode}
+246                                                                     \{
+247   std::pair<void*,uint32\_t> readSpace = body_.preallocate(kMinReadSize,
+248                                                           kMaxReadSize);
+249   *bufReturn = readSpace.first;
+250   *lenReturn = readSpace.second;
+251 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a1b34aa94c562e9a56751673c702ff863}
+Invoked when we get part of body for the request. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aaf0ed3bb94384e6240e15cca63de82bb}.
+
+
+
+Definition at line 89 of file Proxy\+Handler.\+cpp.
+
+
+
+References downstream\+Ingress\+Paused\+\_\+, on\+Server\+Egress\+Paused(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Body(), txn\+\_\+, upstream\+Egress\+Paused\+\_\+, and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+89                                                                  \{
+90   \textcolor{keywordflow}{if} (txn_) \{
+91     LOG(INFO) << \textcolor{stringliteral}{"Forwarding "} <<
+92       ((body) ? body->computeChainDataLength() : 0) << \textcolor{stringliteral}{" body bytes to server"};
+93     txn_->sendBody(std::move(body));
+94   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (upstreamSock_) \{
+95     upstreamEgressPaused_ = \textcolor{keyword}{true};
+96     upstreamSock_->writeChain(\textcolor{keyword}{this}, std::move(body));
+97     \textcolor{keywordflow}{if} (upstreamEgressPaused_) \{
+98       downstreamIngressPaused_ = \textcolor{keyword}{true};
+99       onServerEgressPaused();
+100     \}
+101   \} \textcolor{keywordflow}{else} \{
+102     LOG(WARNING) << \textcolor{stringliteral}{"Dropping "} <<
+103       ((body) ? body->computeChainDataLength() : 0) << \textcolor{stringliteral}{" body bytes to server"};
+104   \}
+105 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Egress\+Paused@{on\+Egress\+Paused}}
+\index{on\+Egress\+Paused@{on\+Egress\+Paused}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Egress\+Paused() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Egress\+Paused (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a43fbd38e4133271ca7054d1726e5eed9}
+Signals from H\+T\+TP layer when client queue is full or empty. If you are sending a streaming response, consider implementing these and acting accordingly. Saves your server from running out of memory. 
+
+Reimplemented from {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a2791a2a46b57712ad177116d43fbc8e3}.
+
+
+
+Definition at line 202 of file Proxy\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Transaction\+::pause\+Ingress(), txn\+\_\+, and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+202                                            \{
+203   \textcolor{keywordflow}{if} (txn_) \{
+204     txn_->pauseIngress();
+205   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (upstreamSock_) \{
+206     upstreamSock_->setReadCB(\textcolor{keyword}{nullptr});
+207   \}
+208 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Egress\+Resumed@{on\+Egress\+Resumed}}
+\index{on\+Egress\+Resumed@{on\+Egress\+Resumed}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Egress\+Resumed() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Egress\+Resumed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_acb71228d81d43875006bfb85c02dd224}
+
+
+Reimplemented from {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a8128e8661fa526a6d10fd9c03dbe4dc3}.
+
+
+
+Definition at line 210 of file Proxy\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Transaction\+::resume\+Ingress(), txn\+\_\+, and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+210                                             \{
+211   \textcolor{keywordflow}{if} (txn_) \{
+212     txn_->resumeIngress();
+213   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (upstreamSock_) \{
+214     upstreamSock_->setReadCB(\textcolor{keyword}{this});
+215   \}
+216 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+E\+OM@{on\+E\+OM}}
+\index{on\+E\+OM@{on\+E\+OM}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+E\+O\+M() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a346b627d7f61c89e5b67dcd872c53d0e}
+Invoked when we finish receiving the body. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a24f26d2cf71effaf154ce53aeff51aab}.
+
+
+
+Definition at line 107 of file Proxy\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+E\+O\+M(), sock\+Status\+\_\+, txn\+\_\+, and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+107                                   \{
+108   \textcolor{keywordflow}{if} (txn_) \{
+109     LOG(INFO) << \textcolor{stringliteral}{"Forwarding client EOM to server"};
+110     txn_->sendEOM();
+111   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (upstreamSock_) \{
+112     LOG(INFO) << \textcolor{stringliteral}{"Closing upgraded socket"};
+113     sockStatus_ |= WRITES\_SHUTDOWN;
+114     upstreamSock_->shutdownWrite();
+115   \} \textcolor{keywordflow}{else} \{
+116     LOG(INFO) << \textcolor{stringliteral}{"Dropping client EOM to server"};
+117   \}
+118 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Error(proxygen\+::\+Proxygen\+Error err) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Proxygen\+Error}}]{err}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a2fc7656831229f569a41cef36b9fc9bb}
+Request failed. Maybe because of read/write error on socket or client not being able to send request in time.
+
+N\+O\+TE\+: Can be invoked at any time (except for before on\+Request).
+
+No more callbacks will be invoked after this. You should clean up after yourself. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_ad7e6428b925840a334adc58ff6f4f680}.
+
+
+
+Definition at line 190 of file Proxy\+Handler.\+cpp.
+
+
+
+References check\+For\+Shutdown(), client\+Terminated\+\_\+, proxygen\+::\+E\+R\+R\+OR, proxygen\+::get\+Error\+String(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Abort(), txn\+\_\+, and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+190                                                      \{
+191   LOG(ERROR) << \textcolor{stringliteral}{"Client error: "} << proxygen::getErrorString(err);
+192   clientTerminated_ = \textcolor{keyword}{true};
+193   \textcolor{keywordflow}{if} (txn_) \{
+194     LOG(ERROR) << \textcolor{stringliteral}{"Aborting server txn: "} << *txn_;
+195     txn_->sendAbort();
+196   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (upstreamSock_) \{
+197     upstreamSock_.reset();
+198   \}
+199   checkForShutdown();
+200 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Request(std\+::unique\+\_\+ptr$<$ proxygen\+::\+H\+T\+T\+P\+Message $>$ headers) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$}]{headers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a43c58b1cabde139bf4dc216abfb2b43b}
+Invoked when we have successfully fetched headers from client. This will always be the first callback invoked on your handler. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a61f59e1155f906c7b73062147164320f}.
+
+
+
+Definition at line 49 of file Proxy\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Response\+Builder\+::body(), proxygen\+::\+H\+T\+T\+P\+Connector\+::connect(), connector\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, proxygen\+::\+Response\+Handler\+::pause\+Ingress(), Proxy\+Service\+::\+Proxy\+Stats\+::record\+Request(), request\+\_\+, proxygen\+::\+Response\+Builder\+::send\+With\+E\+O\+M(), stats\+\_\+, proxygen\+::\+Response\+Builder\+::status(), and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+49                                                                         \{
+50   \textcolor{comment}{// This HTTP proxy does not obey the rules in the spec, such as stripping}
+51   \textcolor{comment}{// hop-by-hop headers.  Example only!}
+52 
+53   stats_->recordRequest();
+54   request_ = std::move(headers);
+55   proxygen::URL url(request_->getURL());
+56 
+57   folly::SocketAddress addr;
+58   \textcolor{keywordflow}{try} \{
+59     \textcolor{comment}{// Note, this does a synchronous DNS lookup which is bad in event driven}
+60     \textcolor{comment}{// code}
+61     addr.setFromHostPort(url.getHost(), url.getPort());
+62   \} \textcolor{keywordflow}{catch} (...) \{
+63     ResponseBuilder(downstream_)
+64       .status(503, \textcolor{stringliteral}{"Bad Gateway"})
+65       .body(folly::to<string>(\textcolor{stringliteral}{"Could not parse server from URL: "},
+66                               request_->getURL()))
+67       .sendWithEOM();
+68     \textcolor{keywordflow}{return};
+69   \}
+70 
+71 
+72   downstream_->pauseIngress();
+73   LOG(INFO) << \textcolor{stringliteral}{"Trying to connect to "} << addr;
+74   \textcolor{keyword}{auto} evb = folly::EventBaseManager::get()->getEventBase();
+75   \textcolor{keywordflow}{if} (request_->getMethod() == HTTPMethod::CONNECT) \{
+76     upstreamSock_ = folly::AsyncSocket::newSocket(evb);
+77     upstreamSock_->connect(\textcolor{keyword}{this}, addr, FLAGS\_proxy\_connect\_timeout);
+78   \} \textcolor{keywordflow}{else} \{
+79     \textcolor{comment}{// A more sophisticated proxy would have a connection pool here}
+80     \textcolor{keyword}{const} folly::AsyncSocket::OptionMap opts\{
+81       \{\{SOL\_SOCKET, SO\_REUSEADDR\}, 1\}\};
+82     downstream_->pauseIngress();
+83     connector_.connect(folly::EventBaseManager::get()->getEventBase(), addr,
+84                        std::chrono::milliseconds(FLAGS\_proxy\_connect\_timeout),
+85                        opts);
+86   \}
+87 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Server\+Body@{on\+Server\+Body}}
+\index{on\+Server\+Body@{on\+Server\+Body}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Server\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Server\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a6933f9a73c5b2775554424fcd5aba296}
+
+
+Definition at line 149 of file Proxy\+Handler.\+cpp.
+
+
+
+References client\+Terminated\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, and proxygen\+::\+Response\+Handler\+::send\+Body().
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::\+Server\+Transaction\+Handler\+::on\+Body().
+
+
+\begin{DoxyCode}
+149                                                                         \{
+150   CHECK(!clientTerminated_);
+151   LOG(INFO) << \textcolor{stringliteral}{"Forwarding "} <<
+152     ((chain) ? chain->computeChainDataLength() : 0) << \textcolor{stringliteral}{" body bytes to client"};
+153   downstream_->sendBody(std::move(chain));
+154 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Server\+Egress\+Paused@{on\+Server\+Egress\+Paused}}
+\index{on\+Server\+Egress\+Paused@{on\+Server\+Egress\+Paused}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Server\+Egress\+Paused() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Server\+Egress\+Paused (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_acf552fdd4e4d7d8238e1c9dc982ee426}
+
+
+Definition at line 173 of file Proxy\+Handler.\+cpp.
+
+
+
+References client\+Terminated\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, and proxygen\+::\+Response\+Handler\+::pause\+Ingress().
+
+
+
+Referenced by on\+Body(), and Proxy\+Service\+::\+Proxy\+Handler\+::\+Server\+Transaction\+Handler\+::on\+Egress\+Paused().
+
+
+\begin{DoxyCode}
+173                                                  \{
+174   \textcolor{keywordflow}{if} (!clientTerminated_) \{
+175     downstream_->pauseIngress();
+176   \}
+177 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Server\+Egress\+Resumed@{on\+Server\+Egress\+Resumed}}
+\index{on\+Server\+Egress\+Resumed@{on\+Server\+Egress\+Resumed}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Server\+Egress\+Resumed() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Server\+Egress\+Resumed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_add2f452d9179faa97d01adbfdb7ed68b}
+
+
+Definition at line 179 of file Proxy\+Handler.\+cpp.
+
+
+
+References client\+Terminated\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, and proxygen\+::\+Response\+Handler\+::resume\+Ingress().
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::\+Server\+Transaction\+Handler\+::on\+Egress\+Resumed(), and write\+Success().
+
+
+\begin{DoxyCode}
+179                                                   \{
+180   \textcolor{keywordflow}{if} (!clientTerminated_) \{
+181     downstream_->resumeIngress();
+182   \}
+183 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Server\+E\+OM@{on\+Server\+E\+OM}}
+\index{on\+Server\+E\+OM@{on\+Server\+E\+OM}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Server\+E\+O\+M() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Server\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a7cdd5a1896558608040d64b98eddd855}
+
+
+Definition at line 156 of file Proxy\+Handler.\+cpp.
+
+
+
+References client\+Terminated\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, and proxygen\+::\+Response\+Handler\+::send\+E\+O\+M().
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::\+Server\+Transaction\+Handler\+::on\+E\+O\+M(), and read\+E\+O\+F().
+
+
+\begin{DoxyCode}
+156                                         \{
+157   \textcolor{keywordflow}{if} (!clientTerminated_) \{
+158     LOG(INFO) << \textcolor{stringliteral}{"Forwarding server EOM to client"};
+159     downstream_->sendEOM();
+160   \}
+161 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Server\+Error@{on\+Server\+Error}}
+\index{on\+Server\+Error@{on\+Server\+Error}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Server\+Error(const proxygen\+::\+H\+T\+T\+P\+Exception \&error) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Server\+Error (
+\begin{DoxyParamCaption}
+\item[{const {\bf proxygen\+::\+H\+T\+T\+P\+Exception} \&}]{error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_ac4c42fd6f1562abba56eaf6e9cd99041}
+
+
+Definition at line 168 of file Proxy\+Handler.\+cpp.
+
+
+
+References abort\+Downstream(), and proxygen\+::\+E\+R\+R\+OR.
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::\+Server\+Transaction\+Handler\+::on\+Error().
+
+
+\begin{DoxyCode}
+168                                                                     \{
+169   LOG(ERROR) << \textcolor{stringliteral}{"Server error: "} << error;
+170   abortDownstream();
+171 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Server\+Headers\+Complete@{on\+Server\+Headers\+Complete}}
+\index{on\+Server\+Headers\+Complete@{on\+Server\+Headers\+Complete}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Server\+Headers\+Complete(std\+::unique\+\_\+ptr$<$ proxygen\+::\+H\+T\+T\+P\+Message $>$ msg) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Server\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_abe52a8e01dc3020d992a6401378ac883}
+
+
+Definition at line 142 of file Proxy\+Handler.\+cpp.
+
+
+
+References client\+Terminated\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, and proxygen\+::\+Response\+Handler\+::send\+Headers().
+
+
+
+Referenced by Proxy\+Service\+::\+Proxy\+Handler\+::\+Server\+Transaction\+Handler\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+143                                         \{
+144   CHECK(!clientTerminated_);
+145   LOG(INFO) << \textcolor{stringliteral}{"Forwarding "} << msg->getStatusCode() << \textcolor{stringliteral}{" response to client"};
+146   downstream_->sendHeaders(*msg);
+147 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!on\+Upgrade@{on\+Upgrade}}
+\index{on\+Upgrade@{on\+Upgrade}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{on\+Upgrade(proxygen\+::\+Upgrade\+Protocol) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::on\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Upgrade\+Protocol}}]{prot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_aa7e94a039e2697dcfe4be6e2932de7c3}
+Invoked when the session has been upgraded to a different protocol 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aefed2946bc5558baf6e36a2d11290b79}.
+
+
+
+Definition at line 43 of file Proxy\+Handler.\+h.
+
+
+\begin{DoxyCode}
+43 \{\}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!read\+Data\+Available@{read\+Data\+Available}}
+\index{read\+Data\+Available@{read\+Data\+Available}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{read\+Data\+Available(size\+\_\+t len) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::read\+Data\+Available (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a16902f68f0e88c79e9c24578129ccde8}
+
+
+Definition at line 253 of file Proxy\+Handler.\+cpp.
+
+
+
+References body\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, and proxygen\+::\+Response\+Handler\+::send\+Body().
+
+
+\begin{DoxyCode}
+253                                                         \{
+254   body_.postallocate(len);
+255   downstream_->sendBody(body_.move());
+256 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!read\+E\+OF@{read\+E\+OF}}
+\index{read\+E\+OF@{read\+E\+OF}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{read\+E\+O\+F() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::read\+E\+OF (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a848dbad33920e21ea78bcd6830ef6da2}
+
+
+Definition at line 258 of file Proxy\+Handler.\+cpp.
+
+
+
+References on\+Server\+E\+O\+M(), and sock\+Status\+\_\+.
+
+
+\begin{DoxyCode}
+258                                     \{
+259   sockStatus_ |= READS\_SHUTDOWN;
+260   onServerEOM();
+261 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!read\+Err@{read\+Err}}
+\index{read\+Err@{read\+Err}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{read\+Err(const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::read\+Err (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{ex}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a7a3514bc4a484aa765676b10a6b50984}
+
+
+Definition at line 263 of file Proxy\+Handler.\+cpp.
+
+
+
+References abort\+Downstream(), check\+For\+Shutdown(), proxygen\+::\+E\+R\+R\+OR, and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+263                                                                        \{
+264   LOG(ERROR) << \textcolor{stringliteral}{"Server read error: "} << folly::exceptionStr(ex);
+265   abortDownstream();
+266   upstreamSock_.reset();
+267   checkForShutdown();
+268 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!request\+Complete@{request\+Complete}}
+\index{request\+Complete@{request\+Complete}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{request\+Complete() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::request\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a1c2ec9b8870cb1449f992fb425654ede}
+Invoked when request processing has been completed and nothing more needs to be done. This may be a good place to log some stats and clean up resources. This is distinct from \doxyref{on\+E\+O\+M()}{p.}{classProxyService_1_1ProxyHandler_a346b627d7f61c89e5b67dcd872c53d0e} because it is invoked after the response is fully sent. Once this callback has been received, {\ttfamily downstream\+\_\+} should be considered invalid. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a0ec159751b407bcd3667994c6d8d7cfe}.
+
+
+
+Definition at line 185 of file Proxy\+Handler.\+cpp.
+
+
+
+References check\+For\+Shutdown(), and client\+Terminated\+\_\+.
+
+
+\begin{DoxyCode}
+185                                             \{
+186   clientTerminated_ = \textcolor{keyword}{true};
+187   checkForShutdown();
+188 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!write\+Err@{write\+Err}}
+\index{write\+Err@{write\+Err}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{write\+Err(size\+\_\+t bytes\+Written, const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::write\+Err (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{bytes\+Written, }
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{ex}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a57b4d53d19ec5d5cc7250d2b50f454f5}
+
+
+Definition at line 279 of file Proxy\+Handler.\+cpp.
+
+
+
+References abort\+Downstream(), check\+For\+Shutdown(), proxygen\+::\+E\+R\+R\+OR, upstream\+Egress\+Paused\+\_\+, and upstream\+Sock\+\_\+.
+
+
+\begin{DoxyCode}
+280                                                                           \{
+281   LOG(ERROR) << \textcolor{stringliteral}{"Server write error: "} << folly::exceptionStr(ex);;
+282   upstreamEgressPaused_ = \textcolor{keyword}{false};
+283   abortDownstream();
+284   upstreamSock_.reset();
+285   checkForShutdown();
+286 \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!write\+Success@{write\+Success}}
+\index{write\+Success@{write\+Success}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{write\+Success() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Proxy\+Handler\+::write\+Success (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classProxyService_1_1ProxyHandler_a10a75d862c2be01ebbeceb39ac2e47b6}
+
+
+Definition at line 270 of file Proxy\+Handler.\+cpp.
+
+
+
+References check\+For\+Shutdown(), downstream\+Ingress\+Paused\+\_\+, on\+Server\+Egress\+Resumed(), and upstream\+Egress\+Paused\+\_\+.
+
+
+\begin{DoxyCode}
+270                                          \{
+271   upstreamEgressPaused_ = \textcolor{keyword}{false};
+272   \textcolor{keywordflow}{if} (downstreamIngressPaused_) \{
+273     downstreamIngressPaused_ = \textcolor{keyword}{false};
+274     onServerEgressResumed();
+275   \}
+276   checkForShutdown();
+277 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!body\+\_\+@{body\+\_\+}}
+\index{body\+\_\+@{body\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{body\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+I\+O\+Buf\+Queue Proxy\+Service\+::\+Proxy\+Handler\+::body\+\_\+ \{folly\+::\+I\+O\+Buf\+Queue\+::cache\+Chain\+Length()\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a2a360aad50ba78ee4de69ee3c27d3eed}
+
+
+Definition at line 142 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by get\+Read\+Buffer(), and read\+Data\+Available().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!client\+Terminated\+\_\+@{client\+Terminated\+\_\+}}
+\index{client\+Terminated\+\_\+@{client\+Terminated\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{client\+Terminated\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Proxy\+Service\+::\+Proxy\+Handler\+::client\+Terminated\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_adbeda6c3ec88cf11dca62ebc67d887cc}
+
+
+Definition at line 135 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by abort\+Downstream(), check\+For\+Shutdown(), connect\+Error(), on\+Error(), on\+Server\+Body(), on\+Server\+Egress\+Paused(), on\+Server\+Egress\+Resumed(), on\+Server\+E\+O\+M(), on\+Server\+Headers\+Complete(), and request\+Complete().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!connector\+\_\+@{connector\+\_\+}}
+\index{connector\+\_\+@{connector\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{connector\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+H\+T\+T\+P\+Connector} Proxy\+Service\+::\+Proxy\+Handler\+::connector\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a3a9e68cc8871565ba177a7d9f53312d4}
+
+
+Definition at line 131 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by on\+Request().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!downstream\+Ingress\+Paused\+\_\+@{downstream\+Ingress\+Paused\+\_\+}}
+\index{downstream\+Ingress\+Paused\+\_\+@{downstream\+Ingress\+Paused\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{downstream\+Ingress\+Paused\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Proxy\+Service\+::\+Proxy\+Handler\+::downstream\+Ingress\+Paused\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_adcadde2d052fe22b027b04d5f986dcad}
+
+
+Definition at line 143 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by on\+Body(), and write\+Success().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!request\+\_\+@{request\+\_\+}}
+\index{request\+\_\+@{request\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{request\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf proxygen\+::\+H\+T\+T\+P\+Message}$>$ Proxy\+Service\+::\+Proxy\+Handler\+::request\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a3b92cd8be2e339685b7c77ca3d61137c}
+
+
+Definition at line 137 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by connect\+Success(), and on\+Request().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!server\+Handler\+\_\+@{server\+Handler\+\_\+}}
+\index{server\+Handler\+\_\+@{server\+Handler\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{server\+Handler\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Server\+Transaction\+Handler} Proxy\+Service\+::\+Proxy\+Handler\+::server\+Handler\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_adb873fcf6e7e7b775428e8e24c163097}
+
+
+Definition at line 132 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by connect\+Success(), and Proxy\+Handler().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!session\+\_\+@{session\+\_\+}}
+\index{session\+\_\+@{session\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{session\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf Session\+Wrapper}$>$ Proxy\+Service\+::\+Proxy\+Handler\+::session\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a82ca721fcfb66e6f269851464f0792f5}
+
+
+Definition at line 133 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by connect\+Success().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!sock\+Status\+\_\+@{sock\+Status\+\_\+}}
+\index{sock\+Status\+\_\+@{sock\+Status\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{sock\+Status\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Proxy\+Service\+::\+Proxy\+Handler\+::sock\+Status\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_aa6183ffd09064fd55c07e1ac12521c56}
+
+
+Definition at line 141 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by check\+For\+Shutdown(), on\+E\+O\+M(), and read\+E\+O\+F().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!stats\+\_\+@{stats\+\_\+}}
+\index{stats\+\_\+@{stats\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{stats\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Proxy\+Stats}$\ast$ const Proxy\+Service\+::\+Proxy\+Handler\+::stats\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_aae599df4eeb0388e73aafbbaa672d5ad}
+
+
+Definition at line 130 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by on\+Request().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!txn\+\_\+@{txn\+\_\+}}
+\index{txn\+\_\+@{txn\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{txn\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+H\+T\+T\+P\+Transaction}$\ast$ Proxy\+Service\+::\+Proxy\+Handler\+::txn\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a49f6959ae6184e9675c031b6b63cde61}
+
+
+Definition at line 134 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by check\+For\+Shutdown(), connect\+Success(), detach\+Server\+Transaction(), on\+Body(), on\+Egress\+Paused(), on\+Egress\+Resumed(), on\+E\+O\+M(), and on\+Error().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!upstream\+Egress\+Paused\+\_\+@{upstream\+Egress\+Paused\+\_\+}}
+\index{upstream\+Egress\+Paused\+\_\+@{upstream\+Egress\+Paused\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{upstream\+Egress\+Paused\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Proxy\+Service\+::\+Proxy\+Handler\+::upstream\+Egress\+Paused\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_aba65454866f9dcc30d6d44445b7204ba}
+
+
+Definition at line 144 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by check\+For\+Shutdown(), on\+Body(), write\+Err(), and write\+Success().
+
+\index{Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}!upstream\+Sock\+\_\+@{upstream\+Sock\+\_\+}}
+\index{upstream\+Sock\+\_\+@{upstream\+Sock\+\_\+}!Proxy\+Service\+::\+Proxy\+Handler@{Proxy\+Service\+::\+Proxy\+Handler}}
+\subsubsection[{upstream\+Sock\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<$folly\+::\+Async\+Socket$>$ Proxy\+Service\+::\+Proxy\+Handler\+::upstream\+Sock\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1ProxyHandler_a7b4acb1aafdd06c97ff7d8abd0321997}
+
+
+Definition at line 140 of file Proxy\+Handler.\+h.
+
+
+
+Referenced by check\+For\+Shutdown(), connect\+Success(), on\+Body(), on\+Egress\+Paused(), on\+Egress\+Resumed(), on\+E\+O\+M(), on\+Error(), on\+Request(), read\+Err(), and write\+Err().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/proxy/{\bf Proxy\+Handler.\+h}\item 
+proxygen/httpserver/samples/proxy/{\bf Proxy\+Handler.\+cpp}\end{DoxyCompactItemize}

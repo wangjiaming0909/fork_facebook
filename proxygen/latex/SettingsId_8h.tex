@@ -1,0 +1,67 @@
+\section{proxygen/lib/http/codec/\+Settings\+Id.h File Reference}
+\label{SettingsId_8h}\index{proxygen/lib/http/codec/\+Settings\+Id.\+h@{proxygen/lib/http/codec/\+Settings\+Id.\+h}}
+{\ttfamily \#include $<$cstdint$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf S\+P\+D\+Y\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}~(1 $<$$<$ 16)
+\item 
+\#define {\bf H\+Q\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}~(((uint64\+\_\+t)1) $<$$<$ 32)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf proxygen\+::\+Setting\+Pair} = std\+::pair$<$ Settings\+Id, uint32\+\_\+t $>$
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf proxygen\+::\+Settings\+Id} \+: uint64\+\_\+t \{ \\*
+{\bf proxygen\+::\+Settings\+Id\+::\+H\+E\+A\+D\+E\+R\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE} = 1, 
+{\bf proxygen\+::\+Settings\+Id\+::\+E\+N\+A\+B\+L\+E\+\_\+\+P\+U\+SH} = 2, 
+{\bf proxygen\+::\+Settings\+Id\+::\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS} = 3, 
+{\bf proxygen\+::\+Settings\+Id\+::\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE} = 4, 
+\\*
+{\bf proxygen\+::\+Settings\+Id\+::\+M\+A\+X\+\_\+\+F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE} = 5, 
+{\bf proxygen\+::\+Settings\+Id\+::\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+I\+S\+T\+\_\+\+S\+I\+ZE} = 6, 
+{\bf proxygen\+::\+Settings\+Id\+::\+E\+N\+A\+B\+L\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+P\+R\+O\+T\+O\+C\+OL} = 8, 
+{\bf proxygen\+::\+Settings\+Id\+::\+T\+H\+R\+I\+F\+T\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+I\+D\+\_\+\+D\+E\+P\+R\+E\+C\+A\+T\+ED} = 100, 
+\\*
+{\bf proxygen\+::\+Settings\+Id\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS} = 0xfbfb, 
+{\bf proxygen\+::\+Settings\+Id\+::\+T\+H\+R\+I\+F\+T\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+\+ID} = 0xf100, 
+{\bf proxygen\+::\+Settings\+Id\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+H\+T\+T\+P\+\_\+\+C\+E\+R\+T\+\_\+\+A\+U\+TH} = 0xff00, 
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH} = (1 $<$$<$ 16) $\vert$ 1, 
+\\*
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH} = (1 $<$$<$ 16) $\vert$ 2, 
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME} = (1 $<$$<$ 16) $\vert$ 3, 
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND} = (1 $<$$<$ 16) $\vert$ 5, 
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE} = (1 $<$$<$ 16) $\vert$ 6, 
+\\*
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE} = (1 $<$$<$ 16) $\vert$ 8, 
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+H\+Q\+\_\+\+N\+U\+M\+\_\+\+P\+L\+A\+C\+E\+H\+O\+L\+D\+E\+RS} = (((uint64\+\_\+t)1) $<$$<$ 32) $\vert$ 3, 
+{\bf proxygen\+::\+Settings\+Id\+::\+\_\+\+H\+Q\+\_\+\+Q\+P\+A\+C\+K\+\_\+\+B\+L\+O\+C\+K\+E\+D\+\_\+\+S\+T\+R\+E\+A\+MS} = (((uint64\+\_\+t)1) $<$$<$ 32) $\vert$ 7
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Settings\+Id.\+h@{Settings\+Id.\+h}!H\+Q\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK@{H\+Q\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}}
+\index{H\+Q\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK@{H\+Q\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}!Settings\+Id.\+h@{Settings\+Id.\+h}}
+\subsubsection[{H\+Q\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+Q\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK~(((uint64\+\_\+t)1) $<$$<$ 32)}\label{SettingsId_8h_aedb37ff57ee7e5b6f63bb9acaeeb8436}
+
+
+Definition at line 19 of file Settings\+Id.\+h.
+
+\index{Settings\+Id.\+h@{Settings\+Id.\+h}!S\+P\+D\+Y\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK@{S\+P\+D\+Y\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}}
+\index{S\+P\+D\+Y\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK@{S\+P\+D\+Y\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}!Settings\+Id.\+h@{Settings\+Id.\+h}}
+\subsubsection[{S\+P\+D\+Y\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+P\+D\+Y\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+SK~(1 $<$$<$ 16)}\label{SettingsId_8h_a50d8099f33a5b0430f7c80d322349549}
+
+
+Definition at line 18 of file Settings\+Id.\+h.
+

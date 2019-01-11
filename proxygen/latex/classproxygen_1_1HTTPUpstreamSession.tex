@@ -1,0 +1,827 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Upstream\+Session Class Reference}
+\label{classproxygen_1_1HTTPUpstreamSession}\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Upstream\+Session.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Upstream\+Session\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{classproxygen_1_1HTTPUpstreamSession}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Filter\+Iterator\+Fn} = std\+::function$<$ void({\bf H\+T\+T\+P\+Codec\+Filter} $\ast$)$>$
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Upstream\+Session} (const {\bf Wheel\+Timer\+Instance} \&timeout, folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr \&\&sock, const folly\+::\+Socket\+Address \&{\bf local\+Addr}, const folly\+::\+Socket\+Address \&{\bf peer\+Addr}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ codec, const wangle\+::\+Transport\+Info \&tinfo, {\bf Info\+Callback} $\ast$info\+Callback, uint8\+\_\+t max\+Virtual\+Pri=0, std\+::shared\+\_\+ptr$<$ const {\bf Priority\+Map\+Factory} $>$ priority\+Map\+Factory=std\+::shared\+\_\+ptr$<$ const {\bf Priority\+Map\+Factory} $>$())
+\item 
+{\bf H\+T\+T\+P\+Upstream\+Session} (folly\+::\+H\+H\+Wheel\+Timer $\ast$timeout, folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr \&\&sock, const folly\+::\+Socket\+Address \&{\bf local\+Addr}, const folly\+::\+Socket\+Address \&{\bf peer\+Addr}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ codec, const wangle\+::\+Transport\+Info \&tinfo, {\bf Info\+Callback} $\ast$info\+Callback, uint8\+\_\+t max\+Virtual\+Pri=0, std\+::shared\+\_\+ptr$<$ const {\bf Priority\+Map\+Factory} $>$ priority\+Map\+Factory=std\+::shared\+\_\+ptr$<$ const {\bf Priority\+Map\+Factory} $>$())
+\item 
+void {\bf detach\+Transactions} ()
+\item 
+void {\bf attach\+Thread\+Locals} (folly\+::\+Event\+Base $\ast$event\+Base, folly\+::\+S\+S\+L\+Context\+Ptr ssl\+Context, const {\bf Wheel\+Timer\+Instance} \&timeout, {\bf H\+T\+T\+P\+Session\+Stats} $\ast$stats, {\bf Filter\+Iterator\+Fn} fn, {\bf Header\+Codec\+::\+Stats} $\ast$header\+Codec\+Stats, {\bf H\+T\+T\+P\+Session\+Controller} $\ast$controller) override
+\item 
+void {\bf detach\+Thread\+Locals} (bool detach\+S\+S\+L\+Context=false) override
+\item 
+void {\bf start\+Now} () override
+\item 
+{\bf H\+T\+T\+P\+Transaction} $\ast$ {\bf new\+Transaction} ({\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$handler) override
+\item 
+bool {\bf is\+Replay\+Safe} () const override
+\item 
+bool {\bf is\+Reusable} () const override
+\item 
+bool {\bf is\+Closing} () const override
+\item 
+void {\bf drain} () override
+\item 
+virtual folly\+::\+Optional$<$ const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} $>$ {\bf get\+H\+T\+T\+P\+Priority} (uint8\+\_\+t level) override
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf $\sim$\+H\+T\+T\+P\+Upstream\+Session} () override
+\item 
+void {\bf setup\+On\+Headers\+Complete} ({\bf H\+T\+T\+P\+Transaction} $\ast$, {\bf H\+T\+T\+P\+Message} $\ast$) override
+\item 
+{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ {\bf get\+Transaction\+Timeout\+Handler} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn) override
+\item 
+bool {\bf all\+Transactions\+Started} () const override
+\item 
+bool {\bf on\+Native\+Protocol\+Upgrade} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf stream\+ID}, {\bf Codec\+Protocol} protocol, const std\+::string \&protocol\+String, {\bf H\+T\+T\+P\+Message} \&msg) override
+\item 
+void {\bf maybe\+Attach\+S\+S\+L\+Context} (folly\+::\+S\+S\+L\+Context\+Ptr ssl\+Context) const 
+\item 
+void {\bf maybe\+Detach\+S\+S\+L\+Context} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t {\bf max\+Virtual\+Priority\+Level\+\_\+} \{0\}
+\item 
+std\+::shared\+\_\+ptr$<$ const {\bf Priority\+Map\+Factory} $>$ {\bf priority\+Map\+Factory\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ Priority\+Adapter $>$ {\bf priority\+Adapter\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!Filter\+Iterator\+Fn@{Filter\+Iterator\+Fn}}
+\index{Filter\+Iterator\+Fn@{Filter\+Iterator\+Fn}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{Filter\+Iterator\+Fn}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::\+Filter\+Iterator\+Fn} =  std\+::function$<$void({\bf H\+T\+T\+P\+Codec\+Filter}$\ast$)$>$}\label{classproxygen_1_1HTTPUpstreamSession_adc24ac13ff6b6e91508b9aa33aa49cee}
+
+
+Definition at line 89 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!H\+T\+T\+P\+Upstream\+Session@{H\+T\+T\+P\+Upstream\+Session}}
+\index{H\+T\+T\+P\+Upstream\+Session@{H\+T\+T\+P\+Upstream\+Session}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{H\+T\+T\+P\+Upstream\+Session(const Wheel\+Timer\+Instance \&timeout, folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr \&\&sock, const folly\+::\+Socket\+Address \&local\+Addr, const folly\+::\+Socket\+Address \&peer\+Addr, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Codec $>$ codec, const wangle\+::\+Transport\+Info \&tinfo, Info\+Callback $\ast$info\+Callback, uint8\+\_\+t max\+Virtual\+Pri=0, std\+::shared\+\_\+ptr$<$ const Priority\+Map\+Factory $>$ priority\+Map\+Factory=std\+::shared\+\_\+ptr$<$ const Priority\+Map\+Factory $>$())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::\+H\+T\+T\+P\+Upstream\+Session (
+\begin{DoxyParamCaption}
+\item[{const {\bf Wheel\+Timer\+Instance} \&}]{timeout, }
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr \&\&}]{sock, }
+\item[{const folly\+::\+Socket\+Address \&}]{local\+Addr, }
+\item[{const folly\+::\+Socket\+Address \&}]{peer\+Addr, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$}]{codec, }
+\item[{const wangle\+::\+Transport\+Info \&}]{tinfo, }
+\item[{{\bf Info\+Callback} $\ast$}]{info\+Callback, }
+\item[{uint8\+\_\+t}]{max\+Virtual\+Pri = {\ttfamily 0}, }
+\item[{std\+::shared\+\_\+ptr$<$ const {\bf Priority\+Map\+Factory} $>$}]{priority\+Map\+Factory = {\ttfamily std\+:\+:shared\+\_\+ptr$<$const~{\bf Priority\+Map\+Factory}$>$()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPUpstreamSession_ab5b73e48aaea73a8d4f7097b2efda7c8}
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & An open socket on which any applicable T\+LS handshaking has been completed already. \\
+\hline
+{\em local\+Addr} & Address and port of the local end of the socket. \\
+\hline
+{\em peer\+Addr} & Address and port of the remote end of the socket. \\
+\hline
+{\em codec} & A codec with which to parse/generate messages in whatever H\+T\+T\+P-\/like wire format this session needs. \\
+\hline
+{\em max\+Virtual\+Pri} & Number of virtual priority nodes to represent fixed priority levels. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 34 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, proxygen\+::\+H\+T\+T\+P\+Codec\+::get\+Transport\+Direction(), proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+, and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+44                                                      :
+45     HTTPSession(
+46         timeout,
+47         std::move(sock),
+48         localAddr,
+49         peerAddr,
+50         \textcolor{keyword}{nullptr},
+51         std::move(codec),
+52         tinfo,
+53         infoCallback),
+54     maxVirtualPriorityLevel_(priorityMapFactory ? 0 : maxVirtualPri),
+55     priorityMapFactory_(priorityMapFactory) \{
+56     \textcolor{keywordflow}{if} (sock_) \{
+57       \textcolor{keyword}{auto} asyncSocket = sock_->getUnderlyingTransport<folly::AsyncSocket>();
+58       \textcolor{keywordflow}{if} (asyncSocket) \{
+59         asyncSocket->setBufferCallback(\textcolor{keyword}{this});
+60       \}
+61     \}
+62     CHECK\_EQ(codec_->getTransportDirection(), TransportDirection::UPSTREAM);
+63   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!H\+T\+T\+P\+Upstream\+Session@{H\+T\+T\+P\+Upstream\+Session}}
+\index{H\+T\+T\+P\+Upstream\+Session@{H\+T\+T\+P\+Upstream\+Session}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{H\+T\+T\+P\+Upstream\+Session(folly\+::\+H\+H\+Wheel\+Timer $\ast$timeout, folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr \&\&sock, const folly\+::\+Socket\+Address \&local\+Addr, const folly\+::\+Socket\+Address \&peer\+Addr, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Codec $>$ codec, const wangle\+::\+Transport\+Info \&tinfo, Info\+Callback $\ast$info\+Callback, uint8\+\_\+t max\+Virtual\+Pri=0, std\+::shared\+\_\+ptr$<$ const Priority\+Map\+Factory $>$ priority\+Map\+Factory=std\+::shared\+\_\+ptr$<$ const Priority\+Map\+Factory $>$())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::\+H\+T\+T\+P\+Upstream\+Session (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+H\+H\+Wheel\+Timer $\ast$}]{timeout, }
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr \&\&}]{sock, }
+\item[{const folly\+::\+Socket\+Address \&}]{local\+Addr, }
+\item[{const folly\+::\+Socket\+Address \&}]{peer\+Addr, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$}]{codec, }
+\item[{const wangle\+::\+Transport\+Info \&}]{tinfo, }
+\item[{{\bf Info\+Callback} $\ast$}]{info\+Callback, }
+\item[{uint8\+\_\+t}]{max\+Virtual\+Pri = {\ttfamily 0}, }
+\item[{std\+::shared\+\_\+ptr$<$ const {\bf Priority\+Map\+Factory} $>$}]{priority\+Map\+Factory = {\ttfamily std\+:\+:shared\+\_\+ptr$<$const~{\bf Priority\+Map\+Factory}$>$()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPUpstreamSession_afa9e809f3e29b2ed1dd8ada4cd38624d}
+
+
+Definition at line 66 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+\begin{DoxyCode}
+76                                                      :
+77     HTTPUpstreamSession(
+78         WheelTimerInstance(timeout),
+79         std::move(sock),
+80         localAddr,
+81         peerAddr,
+82         std::move(codec),
+83         tinfo,
+84         infoCallback,
+85         maxVirtualPri,
+86         priorityMapFactory) \{
+87   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!````~H\+T\+T\+P\+Upstream\+Session@{$\sim$\+H\+T\+T\+P\+Upstream\+Session}}
+\index{````~H\+T\+T\+P\+Upstream\+Session@{$\sim$\+H\+T\+T\+P\+Upstream\+Session}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Upstream\+Session() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::$\sim$\+H\+T\+T\+P\+Upstream\+Session (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}}\label{classproxygen_1_1HTTPUpstreamSession_abb957c529f7a8b8500dfec745f5e99ac}
+
+
+Definition at line 20 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+Referenced by get\+H\+T\+T\+P\+Priority().
+
+
+\begin{DoxyCode}
+20 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!all\+Transactions\+Started@{all\+Transactions\+Started}}
+\index{all\+Transactions\+Started@{all\+Transactions\+Started}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{all\+Transactions\+Started() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::all\+Transactions\+Started (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a9dcfcdc8c22e0916ee317fbcd55ec49c}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a5353997f3caf71049568ad2c460424c5}.
+
+
+
+Definition at line 119 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::transactions\+\_\+.
+
+
+
+Referenced by setup\+On\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+119                                                        \{
+120   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}& txn: transactions_) \{
+121     \textcolor{keywordflow}{if} (!txn.second.isPushed() && !txn.second.isEgressStarted()) \{
+122       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+123     \}
+124   \}
+125   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+126 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!attach\+Thread\+Locals@{attach\+Thread\+Locals}}
+\index{attach\+Thread\+Locals@{attach\+Thread\+Locals}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{attach\+Thread\+Locals(folly\+::\+Event\+Base $\ast$event\+Base, folly\+::\+S\+S\+L\+Context\+Ptr ssl\+Context, const Wheel\+Timer\+Instance \&timeout, H\+T\+T\+P\+Session\+Stats $\ast$stats, Filter\+Iterator\+Fn fn, Header\+Codec\+::\+Stats $\ast$header\+Codec\+Stats, H\+T\+T\+P\+Session\+Controller $\ast$controller) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::attach\+Thread\+Locals (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{event\+Base, }
+\item[{folly\+::\+S\+S\+L\+Context\+Ptr}]{ssl\+Context, }
+\item[{const {\bf Wheel\+Timer\+Instance} \&}]{timeout, }
+\item[{{\bf H\+T\+T\+P\+Session\+Stats} $\ast$}]{stats, }
+\item[{{\bf Filter\+Iterator\+Fn}}]{fn, }
+\item[{{\bf Header\+Codec\+::\+Stats} $\ast$}]{header\+Codec\+Stats, }
+\item[{{\bf H\+T\+T\+P\+Session\+Controller} $\ast$}]{controller}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a67c41dc1148a60527662850577ef99be}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \doxyref{}{p.}{classproxygen_1_1HTTPSessionBase_a4e810a1d803e52061964419128fc7fc5}.
+
+
+
+Definition at line 166 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::attach\+Thread\+Locals(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, proxygen\+::\+Filter\+Chain$<$ T1, T2, Filter\+Type, set\+\_\+callback, Take\+Ownership $>$\+::foreach(), maybe\+Attach\+S\+S\+L\+Context(), proxygen\+::\+H\+T\+T\+P\+Session\+::reschedule\+Loop\+Callbacks(), proxygen\+::\+H\+T\+T\+P\+Session\+::resume\+Reads\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Controller(), proxygen\+::\+H\+T\+T\+P\+Codec\+::set\+Header\+Codec\+Stats(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Session\+Stats(), proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::timeout\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+::txn\+Egress\+Queue\+\_\+.
+
+
+\begin{DoxyCode}
+172                                      \{
+173   txnEgressQueue_.attachThreadLocals(timeout);
+174   timeout_ = timeout;
+175   setController(controller);
+176   setSessionStats(stats);
+177   \textcolor{keywordflow}{if} (sock_) \{
+178     sock_->attachEventBase(eventBase);
+179     maybeAttachSSLContext(sslContext);
+180   \}
+181   codec_.foreach(fn);
+182   codec_->setHeaderCodecStats(headerCodecStats);
+183   resumeReadsImpl();
+184   rescheduleLoopCallbacks();
+185 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!detach\+Thread\+Locals@{detach\+Thread\+Locals}}
+\index{detach\+Thread\+Locals@{detach\+Thread\+Locals}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{detach\+Thread\+Locals(bool detach\+S\+S\+L\+Context=false) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::detach\+Thread\+Locals (
+\begin{DoxyParamCaption}
+\item[{bool}]{detach\+S\+S\+L\+Context = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_aece0cdfc3930be2d1f1035bfdf4b8cf4}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \doxyref{}{p.}{classproxygen_1_1HTTPSessionBase_a6c0ea565697840e3cceab93c8eb28462}.
+
+
+
+Definition at line 198 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::cancel\+Loop\+Callbacks(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::detach\+Thread\+Locals(), maybe\+Detach\+S\+S\+L\+Context(), proxygen\+::\+H\+T\+T\+P\+Session\+::pause\+Reads\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Controller(), proxygen\+::\+H\+T\+T\+P\+Codec\+::set\+Header\+Codec\+Stats(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Session\+Stats(), proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::transactions\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+::txn\+Egress\+Queue\+\_\+.
+
+
+\begin{DoxyCode}
+198                                                              \{
+199   CHECK(transactions_.empty());
+200   cancelLoopCallbacks();
+201   pauseReadsImpl();
+202   \textcolor{keywordflow}{if} (sock_) \{
+203     \textcolor{keywordflow}{if} (detachSSLContext) \{
+204       maybeDetachSSLContext();
+205     \}
+206     sock_->detachEventBase();
+207   \}
+208   txnEgressQueue_.detachThreadLocals();
+209   setController(\textcolor{keyword}{nullptr});
+210   setSessionStats(\textcolor{keyword}{nullptr});
+211   \textcolor{comment}{// The codec filters *shouldn't* be accessible while the socket is detached,}
+212   \textcolor{comment}{// I hope}
+213   codec_->setHeaderCodecStats(\textcolor{keyword}{nullptr});
+214   \textcolor{keyword}{auto} cm = getConnectionManager();
+215   \textcolor{keywordflow}{if} (cm) \{
+216     cm->removeConnection(\textcolor{keyword}{this});
+217   \}
+218 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!detach\+Transactions@{detach\+Transactions}}
+\index{detach\+Transactions@{detach\+Transactions}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{detach\+Transactions()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::detach\+Transactions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPUpstreamSession_a6462bc7c500c882ae121c8fdd147d8cd}
+
+
+Definition at line 158 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::detach(), and proxygen\+::\+H\+T\+T\+P\+Session\+::transactions\+\_\+.
+
+
+\begin{DoxyCode}
+158                                              \{
+159   \textcolor{keywordflow}{while} (!transactions_.empty()) \{
+160     \textcolor{keyword}{auto} txn = transactions_.begin();
+161     detach(&txn->second);
+162   \}
+163 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!drain@{drain}}
+\index{drain@{drain}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{drain() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::drain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a3fb9c14db09f1ddae0e6b30ad783516b}
+Drains the current transactions and prevents new transactions from being created on this session. When the number of transactions reaches zero, this session will shutdown the transport and delete itself. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a7cf098767599f9b93dced643dd996efb}.
+
+
+
+Definition at line 135 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::drain().
+
+
+
+Referenced by Proxy\+Service\+::\+Session\+Wrapper\+::$\sim$\+Session\+Wrapper().
+
+
+\begin{DoxyCode}
+135                         \{
+136     HTTPSession::drain();
+137   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!get\+H\+T\+T\+P\+Priority@{get\+H\+T\+T\+P\+Priority}}
+\index{get\+H\+T\+T\+P\+Priority@{get\+H\+T\+T\+P\+Priority}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{get\+H\+T\+T\+P\+Priority(uint8\+\_\+t level) override}]{\setlength{\rightskip}{0pt plus 5cm}virtual folly\+::\+Optional$<$const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority}$>$ proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::get\+H\+T\+T\+P\+Priority (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_af70db0ee27cd989936d7421e6f667b65}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a53c7e76d73a80296ffab4461dd0dbb0b}.
+
+
+
+Definition at line 139 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::get\+H\+T\+T\+P\+Priority(), priority\+Adapter\+\_\+, and $\sim$\+H\+T\+T\+P\+Upstream\+Session().
+
+
+\begin{DoxyCode}
+140                              \{
+141    \textcolor{keywordflow}{if} (!priorityAdapter_) \{
+142      \textcolor{keywordflow}{return} HTTPSession::getHTTPPriority(level);
+143    \}
+144    \textcolor{keywordflow}{return} priorityAdapter_->getHTTPPriority(level);
+145  \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!get\+Transaction\+Timeout\+Handler@{get\+Transaction\+Timeout\+Handler}}
+\index{get\+Transaction\+Timeout\+Handler@{get\+Transaction\+Timeout\+Handler}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{get\+Transaction\+Timeout\+Handler(\+H\+T\+T\+P\+Transaction $\ast$txn) override}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::get\+Transaction\+Timeout\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a04d4ebfc2ba33f1c0dcc52221b68ea03}
+Called by \doxyref{transaction\+Timeout()}{p.}{classproxygen_1_1HTTPSession_a27a75b63b2d5d2e397fbf482209e6188} if the transaction has no handler. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_af9a8e7884bf77f9c5831f652ff803616}.
+
+
+
+Definition at line 113 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+Referenced by setup\+On\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+114                         \{
+115   \textcolor{comment}{// No special handler for upstream requests that time out}
+116   \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+117 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!is\+Closing@{is\+Closing}}
+\index{is\+Closing@{is\+Closing}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{is\+Closing() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::is\+Closing (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a31d7350ff9c9443df8da33bf2830ba14}
+Returns true if the session is shutting down 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \doxyref{}{p.}{classproxygen_1_1HTTPSessionBase_af525d1c596f37b737bfa80603ce0c22d}.
+
+
+
+Definition at line 52 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::draining\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::reads\+Shutdown(), proxygen\+::\+H\+T\+T\+P\+Session\+::reset\+After\+Draining\+Writes\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::writes\+Draining\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+::writes\+Shutdown().
+
+
+
+Referenced by is\+Reusable().
+
+
+\begin{DoxyCode}
+52                                           \{
+53   VLOG(5) << \textcolor{stringliteral}{"isClosing: "} << *\textcolor{keyword}{this}
+54     << \textcolor{stringliteral}{", sock\_->good()="} << sock_->good()
+55     << \textcolor{stringliteral}{", draining\_="} << draining_
+56     << \textcolor{stringliteral}{", readsShutdown()="} << readsShutdown()
+57     << \textcolor{stringliteral}{", writesShutdown()="} << writesShutdown()
+58     << \textcolor{stringliteral}{", writesDraining\_="} << writesDraining_
+59     << \textcolor{stringliteral}{", resetAfterDrainingWrites\_="} << resetAfterDrainingWrites_;
+60   \textcolor{keywordflow}{return}
+61     !sock_->good() ||
+62     draining_ ||
+63     readsShutdown() ||
+64     writesShutdown() ||
+65     writesDraining_ ||
+66     resetAfterDrainingWrites_;
+67 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!is\+Replay\+Safe@{is\+Replay\+Safe}}
+\index{is\+Replay\+Safe@{is\+Replay\+Safe}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{is\+Replay\+Safe() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::is\+Replay\+Safe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a1516fd5d36ab46d9048d886c1cdfbb2a}
+Returns true if the underlying transport has completed full handshake. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \doxyref{}{p.}{classproxygen_1_1HTTPSessionBase_aef267ab2932aab69bf25e86c1cfb72ca}.
+
+
+
+Definition at line 22 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+.
+
+
+\begin{DoxyCode}
+22                                              \{
+23   \textcolor{keywordflow}{return} sock_ ? sock_->isReplaySafe() : \textcolor{keyword}{false};
+24 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!is\+Reusable@{is\+Reusable}}
+\index{is\+Reusable@{is\+Reusable}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{is\+Reusable() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::is\+Reusable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a0eee19177ebfcce289a79a25dfa13efa}
+Returns true if this session has no open transactions and the underlying transport can be used again in a new request. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \doxyref{}{p.}{classproxygen_1_1HTTPSessionBase_a0569fef3ef7600b314ae7598164c38a9}.
+
+
+
+Definition at line 26 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::has\+More\+Writes(), proxygen\+::\+H\+T\+T\+P\+Session\+::ingress\+Error\+\_\+, proxygen\+::\+H\+T\+T\+P\+Codec\+::is\+Busy(), is\+Closing(), proxygen\+::\+H\+T\+T\+P\+Codec\+::is\+Reusable(), proxygen\+::\+H\+T\+T\+P\+Session\+::live\+Transactions\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::num\+Active\+Writes\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+, proxygen\+::\+H\+T\+T\+P\+Codec\+::supports\+Parallel\+Requests(), and proxygen\+::\+H\+T\+T\+P\+Session\+::write\+Timeout\+\_\+.
+
+
+\begin{DoxyCode}
+26                                            \{
+27   VLOG(4) << \textcolor{stringliteral}{"isReusable: "} << *\textcolor{keyword}{this}
+28     << \textcolor{stringliteral}{", liveTransactions\_="} << liveTransactions_
+29     << \textcolor{stringliteral}{", isClosing()="} << isClosing()
+30     << \textcolor{stringliteral}{", sock\_->connecting()="} << sock_->connecting()
+31     << \textcolor{stringliteral}{", codec\_->isReusable()="} << codec_->isReusable()
+32     << \textcolor{stringliteral}{", codec\_->isBusy()="} << codec_->isBusy()
+33     << \textcolor{stringliteral}{", numActiveWrites\_="} << numActiveWrites_
+34     << \textcolor{stringliteral}{", writeTimeout\_.isScheduled()="} << writeTimeout_.isScheduled()
+35     << \textcolor{stringliteral}{", ingressError\_="} << ingressError_
+36     << \textcolor{stringliteral}{", hasMoreWrites()="} << hasMoreWrites()
+37     << \textcolor{stringliteral}{", codec\_->supportsParallelRequests()="}
+38          << codec_->supportsParallelRequests();
+39   \textcolor{keywordflow}{return}
+40     !isClosing() &&
+41     !sock_->connecting() &&
+42     codec_->isReusable() &&
+43     !codec_->isBusy() &&
+44     !ingressError_ &&
+45     (codec_->supportsParallelRequests() || (
+46       \textcolor{comment}{// These conditions only apply to serial codec sessions}
+47       !hasMoreWrites() &&
+48       liveTransactions_ == 0 &&
+49       !writeTimeout_.isScheduled()));
+50 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!maybe\+Attach\+S\+S\+L\+Context@{maybe\+Attach\+S\+S\+L\+Context}}
+\index{maybe\+Attach\+S\+S\+L\+Context@{maybe\+Attach\+S\+S\+L\+Context}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{maybe\+Attach\+S\+S\+L\+Context(folly\+::\+S\+S\+L\+Context\+Ptr ssl\+Context) const }]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::maybe\+Attach\+S\+S\+L\+Context (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+S\+S\+L\+Context\+Ptr}]{ssl\+Context}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPUpstreamSession_a2b02b7aaef1648973e8f43640b52d27e}
+
+
+Definition at line 187 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+.
+
+
+
+Referenced by attach\+Thread\+Locals(), and setup\+On\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+188                                          \{
+189 \textcolor{preprocessor}{#ifndef NO\_ASYNCSSLSOCKET}
+190   \textcolor{keyword}{auto} sslSocket = sock_->getUnderlyingTransport<folly::AsyncSSLSocket>();
+191   \textcolor{keywordflow}{if} (sslSocket && sslContext) \{
+192     sslSocket->attachSSLContext(sslContext);
+193   \}
+194 \textcolor{preprocessor}{#endif}
+195 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!maybe\+Detach\+S\+S\+L\+Context@{maybe\+Detach\+S\+S\+L\+Context}}
+\index{maybe\+Detach\+S\+S\+L\+Context@{maybe\+Detach\+S\+S\+L\+Context}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{maybe\+Detach\+S\+S\+L\+Context() const }]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::maybe\+Detach\+S\+S\+L\+Context (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPUpstreamSession_a28f81b6f02436e474addd8370e4c3ef1}
+
+
+Definition at line 220 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+.
+
+
+
+Referenced by detach\+Thread\+Locals(), and setup\+On\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+220                                                       \{
+221 \textcolor{preprocessor}{#ifndef NO\_ASYNCSSLSOCKET}
+222   \textcolor{keyword}{auto} sslSocket = sock_->getUnderlyingTransport<folly::AsyncSSLSocket>();
+223   \textcolor{keywordflow}{if} (sslSocket) \{
+224     sslSocket->detachSSLContext();
+225   \}
+226 \textcolor{preprocessor}{#endif}
+227 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!new\+Transaction@{new\+Transaction}}
+\index{new\+Transaction@{new\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{new\+Transaction(\+H\+T\+T\+P\+Transaction\+::\+Handler $\ast$handler) override}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction} $\ast$ proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::new\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a904bd6327f6abaaefbcde493907004c5}
+Creates a new transaction on this upstream session. Invoking this function also has the side-\/affect of starting reads after this event loop completes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The request handler to attach to this transaction. It must not be null. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \doxyref{}{p.}{classproxygen_1_1HTTPSessionBase_a1cd2bf610fd13e24dd2698329730ef61}.
+
+
+
+Definition at line 91 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, proxygen\+::\+H\+T\+T\+P\+Codec\+::create\+Stream(), proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Session\+::draining\+\_\+, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Ex\+Attributes, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Stream, proxygen\+::\+H\+T\+T\+P\+Session\+::set\+New\+Transaction\+Pause\+State(), proxygen\+::\+H\+T\+T\+P\+Session\+::started\+\_\+, start\+Now(), and proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::supports\+More\+Transactions().
+
+
+
+Referenced by Curl\+Service\+::\+Curl\+Client\+::connect\+Success(), and Proxy\+Service\+::\+Proxy\+Handler\+::connect\+Success().
+
+
+\begin{DoxyCode}
+91                                                                    \{
+92   \textcolor{keywordflow}{if} (!supportsMoreTransactions() || draining_) \{
+93     \textcolor{comment}{// This session doesn't support any more parallel transactions}
+94     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+95   \}
+96 
+97   \textcolor{keywordflow}{if} (!started_) \{
+98     startNow();
+99   \}
+100 
+101   \textcolor{keyword}{auto} txn = createTransaction(codec_->createStream(), HTTPCodec::NoStream,
+102                                HTTPCodec::NoExAttributes);
+103 
+104   \textcolor{keywordflow}{if} (txn) \{
+105     DestructorGuard dg(\textcolor{keyword}{this});
+106     \textcolor{keyword}{auto} txnID = txn->getID();
+107     txn->setHandler(CHECK\_NOTNULL(handler));
+108     setNewTransactionPauseState(txnID);
+109   \}
+110   \textcolor{keywordflow}{return} txn;
+111 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!on\+Native\+Protocol\+Upgrade@{on\+Native\+Protocol\+Upgrade}}
+\index{on\+Native\+Protocol\+Upgrade@{on\+Native\+Protocol\+Upgrade}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{on\+Native\+Protocol\+Upgrade(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D stream\+I\+D, Codec\+Protocol protocol, const std\+::string \&protocol\+String, H\+T\+T\+P\+Message \&msg) override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::on\+Native\+Protocol\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{, }
+\item[{{\bf Codec\+Protocol}}]{, }
+\item[{const std\+::string \&}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a8b2225a822624032bbdd5985b8fef035}
+Called upon receipt of a valid protocol switch. Return false if protocol switch could not be completed. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a862f51146984af8fbb64d32d1d27f094}.
+
+
+
+Definition at line 128 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Codec\+::add\+Priority\+Nodes(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, proxygen\+::\+H\+T\+T\+P\+\_\+2, max\+Virtual\+Priority\+Level\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Native\+Protocol\+Upgrade\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::schedule\+Write(), proxygen\+::\+H\+T\+T\+P\+Session\+::txn\+Egress\+Queue\+\_\+, proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::\+H\+T\+T\+P\+Session\+::write\+Buf\+\_\+.
+
+
+
+Referenced by setup\+On\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+131                 \{
+132 
+133   VLOG(4) << *\textcolor{keyword}{this} << \textcolor{stringliteral}{" onNativeProtocolUpgrade streamID="} << streamID <<
+134     \textcolor{stringliteral}{" protocol="} << protocolString;
+135 
+136   \textcolor{keywordflow}{if} (protocol != CodecProtocol::HTTP_2) \{
+137     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+138   \}
+139 
+140   \textcolor{comment}{// Create the new Codec}
+141   std::unique\_ptr<HTTPCodec> codec =
+142       std::make\_unique<HTTP2Codec>(TransportDirection::UPSTREAM);
+143 
+144   \textcolor{keywordtype}{bool} ret = onNativeProtocolUpgradeImpl(streamID, std::move(codec),
+145                                          protocolString);
+146   \textcolor{keywordflow}{if} (ret) \{
+147     \textcolor{keyword}{auto} bytes = codec_->addPriorityNodes(
+148       txnEgressQueue_,
+149       writeBuf_,
+150       maxVirtualPriorityLevel_);
+151     \textcolor{keywordflow}{if} (bytes) \{
+152       scheduleWrite();
+153     \}
+154   \}
+155   \textcolor{keywordflow}{return} ret;
+156 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!setup\+On\+Headers\+Complete@{setup\+On\+Headers\+Complete}}
+\index{setup\+On\+Headers\+Complete@{setup\+On\+Headers\+Complete}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{setup\+On\+Headers\+Complete(\+H\+T\+T\+P\+Transaction $\ast$, H\+T\+T\+P\+Message $\ast$) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::setup\+On\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a0bba6b0115f517de0fce6cd64a5cdfbb}
+Called by \doxyref{on\+Headers\+Complete()}{p.}{classproxygen_1_1HTTPSession_a01cf2e4876e0d44c1b7974833bef3272}. Currently a no-\/op for upstream. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ae180c928b2d55c4e227a1629d8b8a511}.
+
+
+
+Definition at line 153 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+References all\+Transactions\+Started(), get\+Transaction\+Timeout\+Handler(), maybe\+Attach\+S\+S\+L\+Context(), maybe\+Detach\+S\+S\+L\+Context(), on\+Native\+Protocol\+Upgrade(), and stream\+ID.
+
+
+\begin{DoxyCode}
+154                                                    \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!start\+Now@{start\+Now}}
+\index{start\+Now@{start\+Now}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{start\+Now() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::start\+Now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPUpstreamSession_a242b4223b8ff63d7dd7407cc8e312365}
+Start reading from the transport and send any introductory messages to the remote side. This function must be called once per session to begin reads. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a9a89f7a8498e8afae9ee48c61f1c8bdc}.
+
+
+
+Definition at line 69 of file H\+T\+T\+P\+Upstream\+Session.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Codec\+::add\+Priority\+Nodes(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, max\+Virtual\+Priority\+Level\+\_\+, priority\+Adapter\+\_\+, priority\+Map\+Factory\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::schedule\+Write(), proxygen\+::\+H\+T\+T\+P\+Session\+::start\+Now(), proxygen\+::\+H\+T\+T\+P\+Session\+::txn\+Egress\+Queue\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+::write\+Buf\+\_\+.
+
+
+
+Referenced by new\+Transaction().
+
+
+\begin{DoxyCode}
+69                                    \{
+70   \textcolor{comment}{// startNow in base class CHECKs this session has not started.}
+71   HTTPSession::startNow();
+72   \textcolor{comment}{// Upstream specific:}
+73   \textcolor{comment}{// create virtual priority nodes and send Priority frames to peer if necessary}
+74   \textcolor{keywordflow}{if} (priorityMapFactory_) \{
+75     priorityAdapter_ = priorityMapFactory_->createVirtualStreams(\textcolor{keyword}{this});
+76     scheduleWrite();
+77   \} \textcolor{keywordflow}{else} \{
+78     \textcolor{comment}{// TODO/T17420249 Move this to the PriorityAdapter and remove it from the}
+79     \textcolor{comment}{// codec.}
+80     \textcolor{keyword}{auto} bytes = codec_->addPriorityNodes(
+81         txnEgressQueue_,
+82         writeBuf_,
+83         maxVirtualPriorityLevel_);
+84     \textcolor{keywordflow}{if} (bytes) \{
+85       scheduleWrite();
+86     \}
+87   \}
+88 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!max\+Virtual\+Priority\+Level\+\_\+@{max\+Virtual\+Priority\+Level\+\_\+}}
+\index{max\+Virtual\+Priority\+Level\+\_\+@{max\+Virtual\+Priority\+Level\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{max\+Virtual\+Priority\+Level\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::max\+Virtual\+Priority\+Level\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPUpstreamSession_a7a1b43597b7e45abd133666004d6efc3}
+
+
+Definition at line 172 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+Referenced by on\+Native\+Protocol\+Upgrade(), and start\+Now().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!priority\+Adapter\+\_\+@{priority\+Adapter\+\_\+}}
+\index{priority\+Adapter\+\_\+@{priority\+Adapter\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{priority\+Adapter\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$Priority\+Adapter$>$ proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::priority\+Adapter\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPUpstreamSession_a016d3c02feb75c4d0b969add4928ddec}
+
+
+Definition at line 175 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+Referenced by get\+H\+T\+T\+P\+Priority(), and start\+Now().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}!priority\+Map\+Factory\+\_\+@{priority\+Map\+Factory\+\_\+}}
+\index{priority\+Map\+Factory\+\_\+@{priority\+Map\+Factory\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Upstream\+Session@{proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}}
+\subsubsection[{priority\+Map\+Factory\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<$const {\bf Priority\+Map\+Factory}$>$ proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::priority\+Map\+Factory\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPUpstreamSession_afd765f682388f16890e38b5220ccdb1f}
+
+
+Definition at line 174 of file H\+T\+T\+P\+Upstream\+Session.\+h.
+
+
+
+Referenced by start\+Now().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Upstream\+Session.\+h}\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Upstream\+Session.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,264 @@
+\section{proxygen\+:\+:I\+O\+Buf\+Printer Class Reference}
+\label{classproxygen_1_1IOBufPrinter}\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+
+
+{\ttfamily \#include $<$Logging.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:I\+O\+Buf\+Printer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.637427cm]{classproxygen_1_1IOBufPrinter}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Format} \+: uint8\+\_\+t \{ {\bf Format\+::\+H\+E\+X\+\_\+\+F\+O\+L\+LY} = 0, 
+{\bf Format\+::\+H\+E\+X\+\_\+16} = 1, 
+{\bf Format\+::\+C\+H\+A\+I\+N\+\_\+\+I\+N\+FO} = 2, 
+{\bf Format\+::\+B\+IN} = 3
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf I\+O\+Buf\+Printer} ()
+\item 
+virtual {\bf $\sim$\+I\+O\+Buf\+Printer} ()
+\item 
+virtual std\+::string {\bf print} (const folly\+::\+I\+O\+Buf $\ast$buf)=0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string {\bf print\+Chain} (const folly\+::\+I\+O\+Buf $\ast$buf, {\bf Format} format, bool coalesce)
+\item 
+static std\+::string {\bf print\+Hex\+Folly} (const folly\+::\+I\+O\+Buf $\ast$buf, bool coalesce=false)
+\item 
+static std\+::string {\bf print\+Hex16} (const folly\+::\+I\+O\+Buf $\ast$buf, bool coalesce=false)
+\item 
+static std\+::string {\bf print\+Chain\+Info} (const folly\+::\+I\+O\+Buf $\ast$buf)
+\item 
+static std\+::string {\bf print\+Bin} (const folly\+::\+I\+O\+Buf $\ast$buf, bool coalesce=false)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 114 of file Logging.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!Format@{Format}}
+\index{Format@{Format}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{Format}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+I\+O\+Buf\+Printer\+::\+Format} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\label{classproxygen_1_1IOBufPrinter_a1ff4e89ecf5ac1d08a8131bc00089172}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{H\+E\+X\+\_\+\+F\+O\+L\+LY@{H\+E\+X\+\_\+\+F\+O\+L\+LY}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!H\+E\+X\+\_\+\+F\+O\+L\+LY@{H\+E\+X\+\_\+\+F\+O\+L\+LY}}\item[{\em 
+H\+E\+X\+\_\+\+F\+O\+L\+LY\label{classproxygen_1_1IOBufPrinter_a1ff4e89ecf5ac1d08a8131bc00089172ab1476df7c9a6581adea7ef5848426d36}
+}]\index{H\+E\+X\+\_\+16@{H\+E\+X\+\_\+16}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!H\+E\+X\+\_\+16@{H\+E\+X\+\_\+16}}\item[{\em 
+H\+E\+X\+\_\+16\label{classproxygen_1_1IOBufPrinter_a1ff4e89ecf5ac1d08a8131bc00089172a897723eb24807abf1bc6c8b2aa27baa2}
+}]\index{C\+H\+A\+I\+N\+\_\+\+I\+N\+FO@{C\+H\+A\+I\+N\+\_\+\+I\+N\+FO}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!C\+H\+A\+I\+N\+\_\+\+I\+N\+FO@{C\+H\+A\+I\+N\+\_\+\+I\+N\+FO}}\item[{\em 
+C\+H\+A\+I\+N\+\_\+\+I\+N\+FO\label{classproxygen_1_1IOBufPrinter_a1ff4e89ecf5ac1d08a8131bc00089172a28547b3599ade6e24b86baf8f5bca737}
+}]\index{B\+IN@{B\+IN}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!B\+IN@{B\+IN}}\item[{\em 
+B\+IN\label{classproxygen_1_1IOBufPrinter_a1ff4e89ecf5ac1d08a8131bc00089172a35d3245a21b0942070419ef6602d239e}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 116 of file Logging.\+h.
+
+
+\begin{DoxyCode}
+116                     : uint8\_t \{
+117     HEX\_FOLLY = 0,
+118     HEX\_16 = 1,
+119     CHAIN\_INFO = 2,
+120     BIN = 3,
+121   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!I\+O\+Buf\+Printer@{I\+O\+Buf\+Printer}}
+\index{I\+O\+Buf\+Printer@{I\+O\+Buf\+Printer}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{I\+O\+Buf\+Printer()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+I\+O\+Buf\+Printer\+::\+I\+O\+Buf\+Printer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1IOBufPrinter_a43369cd73b370123781b324d76bc9c10}
+
+
+Definition at line 144 of file Logging.\+h.
+
+
+\begin{DoxyCode}
+144 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!````~I\+O\+Buf\+Printer@{$\sim$\+I\+O\+Buf\+Printer}}
+\index{````~I\+O\+Buf\+Printer@{$\sim$\+I\+O\+Buf\+Printer}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{$\sim$\+I\+O\+Buf\+Printer()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+I\+O\+Buf\+Printer\+::$\sim$\+I\+O\+Buf\+Printer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1IOBufPrinter_aba87314852aa611ad0dfc985620d97ac}
+
+
+Definition at line 145 of file Logging.\+h.
+
+
+\begin{DoxyCode}
+145 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!print@{print}}
+\index{print@{print}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{print(const folly\+::\+I\+O\+Buf $\ast$buf)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string proxygen\+::\+I\+O\+Buf\+Printer\+::print (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1IOBufPrinter_a317ea00fb51d7d42c37a440488f42664}
+
+
+Implemented in {\bf proxygen\+::\+Bin\+Printer} \doxyref{}{p.}{classproxygen_1_1BinPrinter_a466c1ecf4967a9bf06db76f9a44a34f7}, {\bf proxygen\+::\+Chain\+Info\+Printer} \doxyref{}{p.}{classproxygen_1_1ChainInfoPrinter_afaf2d5e6eece776c60e478431580d63c}, {\bf proxygen\+::\+Hex\+Folly\+Printer} \doxyref{}{p.}{classproxygen_1_1HexFollyPrinter_a7bcd6a0f671f8f46ed8542e8fffd3d71}, and {\bf proxygen\+::\+Hex16\+Printer} \doxyref{}{p.}{classproxygen_1_1Hex16Printer_ad506ebdf33e19a422cbafdf04323ae64}.
+
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!print\+Bin@{print\+Bin}}
+\index{print\+Bin@{print\+Bin}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{print\+Bin(const folly\+::\+I\+O\+Buf $\ast$buf, bool coalesce=false)}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string proxygen\+::\+I\+O\+Buf\+Printer\+::print\+Bin (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf, }
+\item[{bool}]{coalesce = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1IOBufPrinter_a7a44d406e6c75040cca0bc88e6d0c6c6}
+
+
+Definition at line 140 of file Logging.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::to\+Bin().
+
+
+\begin{DoxyCode}
+140                                                                         \{
+141     \textcolor{keywordflow}{return} printChain(buf, Format::BIN, coalesce);
+142   \}
+\end{DoxyCode}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!print\+Chain@{print\+Chain}}
+\index{print\+Chain@{print\+Chain}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{print\+Chain(const folly\+::\+I\+O\+Buf $\ast$buf, Format format, bool coalesce)}]{\setlength{\rightskip}{0pt plus 5cm}string proxygen\+::\+I\+O\+Buf\+Printer\+::print\+Chain (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf, }
+\item[{{\bf Format}}]{format, }
+\item[{bool}]{coalesce}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1IOBufPrinter_ae4a486099447d8647189388022c460f0}
+
+
+Definition at line 104 of file Logging.\+cpp.
+
+
+
+References proxygen\+::\+E\+R\+R\+OR.
+
+
+\begin{DoxyCode}
+106                                                \{
+107   uint8\_t index = (uint8\_t) format;
+108   \textcolor{keywordflow}{if} (printers.size() <= index) \{
+109     LOG(ERROR) << \textcolor{stringliteral}{"invalid format: "} << index;
+110     \textcolor{keywordflow}{return} \textcolor{stringliteral}{""};
+111   \}
+112   \textcolor{keyword}{auto} printer = printers[index];
+113   \textcolor{comment}{// empty chain}
+114   \textcolor{keywordflow}{if} (!buf) \{
+115     \textcolor{keywordflow}{return} \textcolor{stringliteral}{""};
+116   \}
+117 
+118   unique\_ptr<IOBuf> cbuf = \textcolor{keyword}{nullptr};
+119   \textcolor{keywordflow}{if} (coalesce) \{
+120     cbuf = buf->clone();
+121     cbuf->coalesce();
+122     buf = cbuf.get();
+123   \}
+124   \textcolor{keyword}{auto} b = buf;
+125   \textcolor{keywordtype}{string} res;
+126   \textcolor{keywordflow}{do} \{
+127     res += printer->print(b);
+128     b = b->next();
+129   \} \textcolor{keywordflow}{while} (b != buf);
+130   \textcolor{keywordflow}{return} res;
+131 \}
+\end{DoxyCode}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!print\+Chain\+Info@{print\+Chain\+Info}}
+\index{print\+Chain\+Info@{print\+Chain\+Info}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{print\+Chain\+Info(const folly\+::\+I\+O\+Buf $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string proxygen\+::\+I\+O\+Buf\+Printer\+::print\+Chain\+Info (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1IOBufPrinter_a16083dab7a0e334ea6a443a89e503ca7}
+
+
+Definition at line 136 of file Logging.\+h.
+
+
+
+Referenced by proxygen\+::dump\+Bin\+To\+File().
+
+
+\begin{DoxyCode}
+136                                                          \{
+137     \textcolor{keywordflow}{return} printChain(buf, Format::CHAIN_INFO, \textcolor{keyword}{false});
+138   \}
+\end{DoxyCode}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!print\+Hex16@{print\+Hex16}}
+\index{print\+Hex16@{print\+Hex16}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{print\+Hex16(const folly\+::\+I\+O\+Buf $\ast$buf, bool coalesce=false)}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string proxygen\+::\+I\+O\+Buf\+Printer\+::print\+Hex16 (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf, }
+\item[{bool}]{coalesce = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1IOBufPrinter_a6f534ff04106b9bb2d6366686430b993}
+
+
+Definition at line 132 of file Logging.\+h.
+
+
+\begin{DoxyCode}
+132                                                                           \{
+133     \textcolor{keywordflow}{return} printChain(buf, Format::HEX_16, coalesce);
+134   \}
+\end{DoxyCode}
+\index{proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}!print\+Hex\+Folly@{print\+Hex\+Folly}}
+\index{print\+Hex\+Folly@{print\+Hex\+Folly}!proxygen\+::\+I\+O\+Buf\+Printer@{proxygen\+::\+I\+O\+Buf\+Printer}}
+\subsubsection[{print\+Hex\+Folly(const folly\+::\+I\+O\+Buf $\ast$buf, bool coalesce=false)}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string proxygen\+::\+I\+O\+Buf\+Printer\+::print\+Hex\+Folly (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf, }
+\item[{bool}]{coalesce = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1IOBufPrinter_aa0f521bccbd58049575b3127c959ec47}
+
+
+Definition at line 127 of file Logging.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::check\+Connection\+Error(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames(), and proxygen\+::\+Gzip\+Header\+Codec\+::parse\+Name\+Values().
+
+
+\begin{DoxyCode}
+128                                                         \{
+129     \textcolor{keywordflow}{return} printChain(buf, Format::HEX_FOLLY, coalesce);
+130   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Logging.\+h}\item 
+proxygen/lib/utils/{\bf Logging.\+cpp}\end{DoxyCompactItemize}

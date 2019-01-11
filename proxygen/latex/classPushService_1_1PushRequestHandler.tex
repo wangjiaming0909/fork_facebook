@@ -1,0 +1,302 @@
+\section{Push\+Service\+:\+:Push\+Request\+Handler Class Reference}
+\label{classPushService_1_1PushRequestHandler}\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+
+
+{\ttfamily \#include $<$Push\+Request\+Handler.\+h$>$}
+
+Inheritance diagram for Push\+Service\+:\+:Push\+Request\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPushService_1_1PushRequestHandler}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Push\+Request\+Handler} ({\bf Push\+Stats} $\ast$stats)
+\item 
+void {\bf on\+Request} (std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$ headers) noexceptoverride
+\item 
+void {\bf on\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride
+\item 
+void {\bf on\+E\+OM} () noexceptoverride
+\item 
+void {\bf on\+Upgrade} ({\bf proxygen\+::\+Upgrade\+Protocol} proto) noexceptoverride
+\item 
+void {\bf request\+Complete} () noexceptoverride
+\item 
+void {\bf on\+Error} ({\bf proxygen\+::\+Proxygen\+Error} err) noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Push\+Stats} $\ast$const {\bf stats\+\_\+} \{{\bf nullptr}\}
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf body\+\_\+}
+\item 
+{\bf proxygen\+::\+Response\+Handler} $\ast$ {\bf downstream\+Push\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 23 of file Push\+Request\+Handler.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!Push\+Request\+Handler@{Push\+Request\+Handler}}
+\index{Push\+Request\+Handler@{Push\+Request\+Handler}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{Push\+Request\+Handler(\+Push\+Stats $\ast$stats)}]{\setlength{\rightskip}{0pt plus 5cm}Push\+Service\+::\+Push\+Request\+Handler\+::\+Push\+Request\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf Push\+Stats} $\ast$}]{stats}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classPushService_1_1PushRequestHandler_ab5c384862e31c589ef86c5a4953a2a7e}
+
+
+Definition at line 40 of file Push\+Request\+Handler.\+cpp.
+
+
+
+References Push\+Service\+::g\+Push\+Body, and Push\+Service\+::k\+Push\+File\+Name().
+
+
+\begin{DoxyCode}
+40                                                        : stats_(stats) \{
+41   \textcolor{keywordflow}{if} (gPushBody.empty()) \{
+42     CHECK(folly::readFile(kPushFileName.c\_str(), gPushBody))
+43       << \textcolor{stringliteral}{"Failed to read push file="} << kPushFileName;
+44   \}
+45 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{on\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Push\+Service\+::\+Push\+Request\+Handler\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classPushService_1_1PushRequestHandler_a28303cf93a0edb7170daa06abc94f44e}
+Invoked when we get part of body for the request. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aaf0ed3bb94384e6240e15cca63de82bb}.
+
+
+
+Definition at line 85 of file Push\+Request\+Handler.\+cpp.
+
+
+
+References body\+\_\+.
+
+
+\begin{DoxyCode}
+85                                                                        \{
+86   \textcolor{keywordflow}{if} (body_) \{
+87     body_->prependChain(std::move(body));
+88   \} \textcolor{keywordflow}{else} \{
+89     body_ = std::move(body);
+90   \}
+91 \}
+\end{DoxyCode}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!on\+E\+OM@{on\+E\+OM}}
+\index{on\+E\+OM@{on\+E\+OM}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{on\+E\+O\+M() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Push\+Service\+::\+Push\+Request\+Handler\+::on\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classPushService_1_1PushRequestHandler_ade859915e40bdc21e0ee95c0baa4c3d2}
+Invoked when we finish receiving the body. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a24f26d2cf71effaf154ce53aeff51aab}.
+
+
+
+Definition at line 93 of file Push\+Request\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Response\+Builder\+::body(), body\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, Push\+Service\+::\+Push\+Stats\+::get\+Request\+Count(), proxygen\+::\+Response\+Builder\+::header(), proxygen\+::\+Response\+Builder\+::send\+With\+E\+O\+M(), stats\+\_\+, and proxygen\+::\+Response\+Builder\+::status().
+
+
+\begin{DoxyCode}
+93                                         \{
+94   ResponseBuilder(downstream_)
+95     .status(200, \textcolor{stringliteral}{"OK"})
+96     .header(\textcolor{stringliteral}{"Request-Number"},
+97             folly::to<std::string>(stats_->getRequestCount()))
+98     .body(std::move(body_))
+99     .sendWithEOM();
+100 \}
+\end{DoxyCode}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{on\+Error(proxygen\+::\+Proxygen\+Error err) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Push\+Service\+::\+Push\+Request\+Handler\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Proxygen\+Error}}]{err}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classPushService_1_1PushRequestHandler_ad9a56ed533be9cdbccb394e337b69fca}
+Request failed. Maybe because of read/write error on socket or client not being able to send request in time.
+
+N\+O\+TE\+: Can be invoked at any time (except for before on\+Request).
+
+No more callbacks will be invoked after this. You should clean up after yourself. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_ad7e6428b925840a334adc58ff6f4f680}.
+
+
+
+Definition at line 110 of file Push\+Request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+110                                                          \{
+111   \textcolor{keyword}{delete} \textcolor{keyword}{this};
+112 \}
+\end{DoxyCode}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{on\+Request(std\+::unique\+\_\+ptr$<$ proxygen\+::\+H\+T\+T\+P\+Message $>$ headers) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Push\+Service\+::\+Push\+Request\+Handler\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$}]{headers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classPushService_1_1PushRequestHandler_a3963d9ed1fd2c68ca549cb5d5d6658b6}
+Invoked when we have successfully fetched headers from client. This will always be the first callback invoked on your handler. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a61f59e1155f906c7b73062147164320f}.
+
+
+
+Definition at line 47 of file Push\+Request\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Response\+Builder\+::body(), Push\+Service\+::create\+Large\+Body(), proxygen\+::\+Request\+Handler\+::downstream\+\_\+, downstream\+Push\+\_\+, Push\+Service\+::generate\+Url(), proxygen\+::\+Response\+Handler\+::new\+Pushed\+Response(), proxygen\+::\+Response\+Builder\+::promise(), Push\+Service\+::\+Push\+Stats\+::record\+Request(), proxygen\+::\+Response\+Builder\+::send\+With\+E\+O\+M(), stats\+\_\+, and proxygen\+::\+Response\+Builder\+::status().
+
+
+\begin{DoxyCode}
+48                                                \{
+49   stats_->recordRequest();
+50   \textcolor{keywordflow}{if} (!headers->getHeaders().getSingleOrEmpty(\textcolor{stringliteral}{"X-PushIt"}).empty()) \{
+51     downstreamPush_ = downstream_->newPushedResponse(\textcolor{keyword}{new} PushHandler);
+52     \textcolor{keywordflow}{if} (!downstreamPush_) \{
+53       \textcolor{comment}{// can't push}
+54       \textcolor{keywordflow}{return};
+55     \}
+56 
+57     \textcolor{keywordflow}{if}(headers->getPath() == \textcolor{stringliteral}{"/requestLargePush"}) \{
+58       LOG(INFO) << \textcolor{stringliteral}{"sending large push "};
+59 
+60       ResponseBuilder(downstreamPush_)
+61         .promise(generateUrl(*headers, \textcolor{stringliteral}{"/largePush"}),
+62                  headers->getHeaders().getSingleOrEmpty(HTTP\_HEADER\_HOST))
+63         .send();
+64 
+65       ResponseBuilder(downstreamPush_)
+66         .status(200, \textcolor{stringliteral}{"OK"})
+67         .body(createLargeBody())
+68         .sendWithEOM();
+69     \} \textcolor{keywordflow}{else} \{
+70       LOG(INFO) << \textcolor{stringliteral}{"sending small push "};
+71 
+72       ResponseBuilder(downstreamPush_)
+73         .promise(generateUrl(*headers, \textcolor{stringliteral}{"/pusheen"}),
+74                  headers->getHeaders().getSingleOrEmpty(HTTP\_HEADER\_HOST))
+75         .send();
+76 
+77       ResponseBuilder(downstreamPush_)
+78         .status(200, \textcolor{stringliteral}{"OK"})
+79         .body(gPushBody)
+80         .sendWithEOM();
+81     \}
+82   \}
+83 \}
+\end{DoxyCode}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!on\+Upgrade@{on\+Upgrade}}
+\index{on\+Upgrade@{on\+Upgrade}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{on\+Upgrade(proxygen\+::\+Upgrade\+Protocol proto) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Push\+Service\+::\+Push\+Request\+Handler\+::on\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Upgrade\+Protocol}}]{prot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classPushService_1_1PushRequestHandler_afcc46815d8ab783a9f354827f54cd67c}
+Invoked when the session has been upgraded to a different protocol 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aefed2946bc5558baf6e36a2d11290b79}.
+
+
+
+Definition at line 102 of file Push\+Request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+102                                                              \{
+103   \textcolor{comment}{// handler doesn't support upgrades}
+104 \}
+\end{DoxyCode}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!request\+Complete@{request\+Complete}}
+\index{request\+Complete@{request\+Complete}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{request\+Complete() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Push\+Service\+::\+Push\+Request\+Handler\+::request\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classPushService_1_1PushRequestHandler_ad7a53fd50af5f6eb0fb4246a8f1b84ac}
+Invoked when request processing has been completed and nothing more needs to be done. This may be a good place to log some stats and clean up resources. This is distinct from \doxyref{on\+E\+O\+M()}{p.}{classPushService_1_1PushRequestHandler_ade859915e40bdc21e0ee95c0baa4c3d2} because it is invoked after the response is fully sent. Once this callback has been received, {\ttfamily downstream\+\_\+} should be considered invalid. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a0ec159751b407bcd3667994c6d8d7cfe}.
+
+
+
+Definition at line 106 of file Push\+Request\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+106                                                   \{
+107   \textcolor{keyword}{delete} \textcolor{keyword}{this};
+108 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!body\+\_\+@{body\+\_\+}}
+\index{body\+\_\+@{body\+\_\+}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{body\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ Push\+Service\+::\+Push\+Request\+Handler\+::body\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classPushService_1_1PushRequestHandler_a736ef26d4b8266427affd3cb42d62ded}
+
+
+Definition at line 43 of file Push\+Request\+Handler.\+h.
+
+
+
+Referenced by on\+Body(), and on\+E\+O\+M().
+
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!downstream\+Push\+\_\+@{downstream\+Push\+\_\+}}
+\index{downstream\+Push\+\_\+@{downstream\+Push\+\_\+}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{downstream\+Push\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+Response\+Handler}$\ast$ Push\+Service\+::\+Push\+Request\+Handler\+::downstream\+Push\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classPushService_1_1PushRequestHandler_a36bbf4a265c2cc2881a8af02c0e0d1de}
+
+
+Definition at line 45 of file Push\+Request\+Handler.\+h.
+
+
+
+Referenced by on\+Request().
+
+\index{Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}!stats\+\_\+@{stats\+\_\+}}
+\index{stats\+\_\+@{stats\+\_\+}!Push\+Service\+::\+Push\+Request\+Handler@{Push\+Service\+::\+Push\+Request\+Handler}}
+\subsubsection[{stats\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Push\+Stats}$\ast$ const Push\+Service\+::\+Push\+Request\+Handler\+::stats\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classPushService_1_1PushRequestHandler_a765e327a0fc7513560b2779155651673}
+
+
+Definition at line 41 of file Push\+Request\+Handler.\+h.
+
+
+
+Referenced by on\+E\+O\+M(), and on\+Request().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/push/{\bf Push\+Request\+Handler.\+h}\item 
+proxygen/httpserver/samples/push/{\bf Push\+Request\+Handler.\+cpp}\end{DoxyCompactItemize}

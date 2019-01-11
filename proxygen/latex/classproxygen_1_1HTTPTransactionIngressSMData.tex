@@ -1,0 +1,273 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data Class Reference}
+\label{classproxygen_1_1HTTPTransactionIngressSMData}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf State} \+: uint8\+\_\+t \{ \\*
+{\bf State\+::\+Start}, 
+{\bf State\+::\+Headers\+Received}, 
+{\bf State\+::\+Regular\+Body\+Received}, 
+{\bf State\+::\+Chunk\+Header\+Received}, 
+\\*
+{\bf State\+::\+Chunk\+Body\+Received}, 
+{\bf State\+::\+Chunk\+Completed}, 
+{\bf State\+::\+Trailers\+Received}, 
+{\bf State\+::\+Upgrade\+Complete}, 
+\\*
+{\bf State\+::\+E\+O\+M\+Queued}, 
+{\bf State\+::\+Receiving\+Done}
+ \}
+\item 
+enum {\bf Event} \+: uint8\+\_\+t \{ \\*
+{\bf Event\+::on\+Headers}, 
+{\bf Event\+::on\+Body}, 
+{\bf Event\+::on\+Chunk\+Header}, 
+{\bf Event\+::on\+Chunk\+Complete}, 
+\\*
+{\bf Event\+::on\+Trailers}, 
+{\bf Event\+::on\+Upgrade}, 
+{\bf Event\+::on\+E\+OM}, 
+{\bf Event\+::eom\+Flushed}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf State} {\bf get\+Initial\+State} ()
+\item 
+static std\+::pair$<$ {\bf State}, bool $>$ {\bf find} ({\bf State} s, {\bf Event} e)
+\item 
+static const std\+::string {\bf get\+Name} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Event@{Event}}
+\index{Event@{Event}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}
+\subsubsection[{Event}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::\+Event} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{on\+Headers@{on\+Headers}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!on\+Headers@{on\+Headers}}\item[{\em 
+on\+Headers\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8abc58a8b17a8d5ef94abf2cf2e3550998}
+}]\index{on\+Body@{on\+Body}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!on\+Body@{on\+Body}}\item[{\em 
+on\+Body\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8ab228d4c9f9d81e0e6124ac5431af17b4}
+}]\index{on\+Chunk\+Header@{on\+Chunk\+Header}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!on\+Chunk\+Header@{on\+Chunk\+Header}}\item[{\em 
+on\+Chunk\+Header\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8ae2506b462e2cd3e9fa93b978e40ebf8c}
+}]\index{on\+Chunk\+Complete@{on\+Chunk\+Complete}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!on\+Chunk\+Complete@{on\+Chunk\+Complete}}\item[{\em 
+on\+Chunk\+Complete\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8afe4aa16da31522f7370bcec96e6f3bc0}
+}]\index{on\+Trailers@{on\+Trailers}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!on\+Trailers@{on\+Trailers}}\item[{\em 
+on\+Trailers\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8a7aedeaec333553efa724b5294a80059c}
+}]\index{on\+Upgrade@{on\+Upgrade}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!on\+Upgrade@{on\+Upgrade}}\item[{\em 
+on\+Upgrade\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8a17475e53dd301d116aa2721c4a07bb61}
+}]\index{on\+E\+OM@{on\+E\+OM}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!on\+E\+OM@{on\+E\+OM}}\item[{\em 
+on\+E\+OM\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8ad63572201fe1ea534a630f0a65334c1d}
+}]\index{eom\+Flushed@{eom\+Flushed}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!eom\+Flushed@{eom\+Flushed}}\item[{\em 
+eom\+Flushed\label{classproxygen_1_1HTTPTransactionIngressSMData_a640421dd7f24ea5945e9c4492b2fbbd8a4cc52d6a2666fb786418bd675a6350ca}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 34 of file H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h.
+
+
+\begin{DoxyCode}
+34                   : uint8\_t \{
+35     \textcolor{comment}{// API accessible transitions}
+36     onHeaders,
+37     onBody,
+38     onChunkHeader,
+39     onChunkComplete,
+40     onTrailers,
+41     onUpgrade,
+42     onEOM,
+43     \textcolor{comment}{// Internal state transitions}
+44     eomFlushed,
+45   \};
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!State@{State}}
+\index{State@{State}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}
+\subsubsection[{State}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::\+State} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Start@{Start}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Start@{Start}}\item[{\em 
+Start\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184aa6122a65eaa676f700ae68d393054a37}
+}]\index{Headers\+Received@{Headers\+Received}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Headers\+Received@{Headers\+Received}}\item[{\em 
+Headers\+Received\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184ab7ea56d702e0ca439989566905c325ab}
+}]\index{Regular\+Body\+Received@{Regular\+Body\+Received}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Regular\+Body\+Received@{Regular\+Body\+Received}}\item[{\em 
+Regular\+Body\+Received\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184a1efa0680c66e8220f000509a4f57f097}
+}]\index{Chunk\+Header\+Received@{Chunk\+Header\+Received}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Chunk\+Header\+Received@{Chunk\+Header\+Received}}\item[{\em 
+Chunk\+Header\+Received\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184a01c8d95690164c25d8625e5a0eb0a7a3}
+}]\index{Chunk\+Body\+Received@{Chunk\+Body\+Received}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Chunk\+Body\+Received@{Chunk\+Body\+Received}}\item[{\em 
+Chunk\+Body\+Received\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184aa7b7b8faa44b043c25d64b0dec0c6077}
+}]\index{Chunk\+Completed@{Chunk\+Completed}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Chunk\+Completed@{Chunk\+Completed}}\item[{\em 
+Chunk\+Completed\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184a1889afaa2d361464b10c44059fd23d0c}
+}]\index{Trailers\+Received@{Trailers\+Received}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Trailers\+Received@{Trailers\+Received}}\item[{\em 
+Trailers\+Received\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184a8213c798872422f4f573a6165c4b632f}
+}]\index{Upgrade\+Complete@{Upgrade\+Complete}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Upgrade\+Complete@{Upgrade\+Complete}}\item[{\em 
+Upgrade\+Complete\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184a2ad0d95ef2e52f80a091dc53fdfe4c79}
+}]\index{E\+O\+M\+Queued@{E\+O\+M\+Queued}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!E\+O\+M\+Queued@{E\+O\+M\+Queued}}\item[{\em 
+E\+O\+M\+Queued\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184aeb25d42f0037a2bf201d96cda6e4d0ac}
+}]\index{Receiving\+Done@{Receiving\+Done}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!Receiving\+Done@{Receiving\+Done}}\item[{\em 
+Receiving\+Done\label{classproxygen_1_1HTTPTransactionIngressSMData_a1bbbba175bd21172cc66690fbfb72184ab5d8af0d52dcc9423a244cb1e11851f3}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 21 of file H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h.
+
+
+\begin{DoxyCode}
+21                   : uint8\_t \{
+22     Start,
+23     HeadersReceived,
+24     RegularBodyReceived,
+25     ChunkHeaderReceived,
+26     ChunkBodyReceived,
+27     ChunkCompleted,
+28     TrailersReceived,
+29     UpgradeComplete,
+30     EOMQueued,
+31     ReceivingDone,
+32   \};
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!find@{find}}
+\index{find@{find}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}
+\subsubsection[{find(\+State s, Event e)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::pair$<$ {\bf H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::\+State}, bool $>$ proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::find (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::\+State}}]{s, }
+\item[{{\bf H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::\+Event}}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPTransactionIngressSMData_a73a7fec3efe4fa385b24b13e53ed10c9}
+
+
+Definition at line 28 of file H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+cpp.
+
+
+
+References Chunk\+Body\+Received, Chunk\+Completed, Chunk\+Header\+Received, eom\+Flushed, E\+O\+M\+Queued, Headers\+Received, on\+Body, on\+Chunk\+Complete, on\+Chunk\+Header, on\+E\+OM, on\+Headers, on\+Trailers, on\+Upgrade, Receiving\+Done, Regular\+Body\+Received, Start, Trailers\+Received, and Upgrade\+Complete.
+
+
+
+Referenced by get\+Initial\+State().
+
+
+\begin{DoxyCode}
+29                                                                         \{
+30   \textcolor{keyword}{using} State = HTTPTransactionIngressSMData::State;
+31   \textcolor{keyword}{using} Event = HTTPTransactionIngressSMData::Event;
+32   \textcolor{keyword}{using} TransitionTable = std::map<std::pair<State, Event>, State>;
+33 
+34   \textcolor{keyword}{static} \textcolor{keyword}{const} folly::Indestructible<TransitionTable> transitions\{
+35     TransitionTable\{
+36     \{\{State::Start, Event::onHeaders\}, State::HeadersReceived\},
+37 
+38     \textcolor{comment}{// For HTTP receiving 100 response, then a regular response}
+39     \{\{State::HeadersReceived, Event::onHeaders\}, State::HeadersReceived\},
+40 
+41     \{\{State::HeadersReceived, Event::onBody\}, State::RegularBodyReceived\},
+42     \{\{State::HeadersReceived, Event::onChunkHeader\},
+43      State::ChunkHeaderReceived\},
+44     \textcolor{comment}{// special case - 0 byte body with trailers}
+45     \{\{State::HeadersReceived, Event::onTrailers\}, State::TrailersReceived\},
+46     \{\{State::HeadersReceived, Event::onUpgrade\}, State::UpgradeComplete\},
+47     \{\{State::HeadersReceived, Event::onEOM\}, State::EOMQueued\},
+48 
+49     \{\{State::RegularBodyReceived, Event::onBody\}, State::RegularBodyReceived\},
+50     \textcolor{comment}{// HTTP2 supports trailers and doesn't handle body as chunked events}
+51     \{\{State::RegularBodyReceived, Event::onTrailers\}, State::TrailersReceived\},
+52     \{\{State::RegularBodyReceived, Event::onEOM\}, State::EOMQueued\},
+53 
+54     \{\{State::ChunkHeaderReceived, Event::onBody\}, State::ChunkBodyReceived\},
+55 
+56     \{\{State::ChunkBodyReceived, Event::onBody\}, State::ChunkBodyReceived\},
+57     \{\{State::ChunkBodyReceived, Event::onChunkComplete\}, State::ChunkCompleted\},
+58 
+59     \{\{State::ChunkCompleted, Event::onChunkHeader\}, State::ChunkHeaderReceived\},
+60     \textcolor{comment}{// TODO: "trailers" may be received at any time due to the SPDY HEADERS}
+61     \textcolor{comment}{// frame coming at any time. We might want to have a}
+62     \textcolor{comment}{// TransactionStateMachineFactory that takes a codec and generates the}
+63     \textcolor{comment}{// appropriate transaction state machine from that.}
+64     \{\{State::ChunkCompleted, Event::onTrailers\}, State::TrailersReceived\},
+65     \{\{State::ChunkCompleted, Event::onEOM\}, State::EOMQueued\},
+66 
+67     \{\{State::TrailersReceived, Event::onEOM\}, State::EOMQueued\},
+68 
+69     \{\{State::UpgradeComplete, Event::onBody\}, State::UpgradeComplete\},
+70     \{\{State::UpgradeComplete, Event::onEOM\}, State::EOMQueued\},
+71 
+72     \{\{State::EOMQueued, Event::eomFlushed\}, State::ReceivingDone\},
+73     \}
+74   \};
+75 
+76   \textcolor{keyword}{auto} \textcolor{keyword}{const} &it = transitions->find(std::make\_pair(s, e));
+77   \textcolor{keywordflow}{if} (it == transitions->end()) \{
+78     \textcolor{keywordflow}{return} std::make\_pair(s, \textcolor{keyword}{false});
+79   \}
+80 
+81   \textcolor{keywordflow}{return} std::make\_pair(it->second, \textcolor{keyword}{true});
+82 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!get\+Initial\+State@{get\+Initial\+State}}
+\index{get\+Initial\+State@{get\+Initial\+State}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}
+\subsubsection[{get\+Initial\+State()}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf State} proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::get\+Initial\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1HTTPTransactionIngressSMData_ab798df95617f4c89f5a8726a9eca2e5c}
+
+
+Definition at line 47 of file H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h.
+
+
+
+References find(), and Start.
+
+
+\begin{DoxyCode}
+47                                  \{
+48     \textcolor{keywordflow}{return} State::Start;
+49   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data}}
+\subsubsection[{get\+Name()}]{\setlength{\rightskip}{0pt plus 5cm}static const std\+::string proxygen\+::\+H\+T\+T\+P\+Transaction\+Ingress\+S\+M\+Data\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1HTTPTransactionIngressSMData_a32037ea2addeba399a0e65368043a387}
+
+
+Definition at line 53 of file H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h.
+
+
+
+References proxygen\+::operator$<$$<$().
+
+
+\begin{DoxyCode}
+53                                    \{
+54     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"HTTPTransactionIngress"};
+55   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+h}\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Transaction\+Ingress\+S\+M.\+cpp}\end{DoxyCompactItemize}

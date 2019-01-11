@@ -1,0 +1,287 @@
+\section{proxygen\+:\+:Queue\+Test Class Reference}
+\label{classproxygen_1_1QueueTest}\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+Inheritance diagram for proxygen\+:\+:Queue\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1QueueTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Queue\+Test} (H\+H\+Wheel\+Timer $\ast$timer={\bf nullptr})
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf add\+Transaction} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, {\bf http2\+::\+Priority\+Update} pri, bool pnode=false, uint64\+\_\+t $\ast$depth={\bf nullptr})
+\item 
+void {\bf remove\+Transaction} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id)
+\item 
+void {\bf update\+Priority} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, {\bf http2\+::\+Priority\+Update} pri, uint64\+\_\+t $\ast$depth={\bf nullptr})
+\item 
+void {\bf signal\+Egress} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, bool mark)
+\item 
+void {\bf build\+Simple\+Tree} ()
+\item 
+bool {\bf visit\+Node} ({\bf H\+T\+T\+P2\+Priority\+Queue} \&, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, {\bf H\+T\+T\+P\+Transaction} $\ast$, double r)
+\item 
+void {\bf dump} ()
+\item 
+void {\bf dump\+B\+FS} (const std\+::function$<$ bool()$>$ \&stop\+Fn)
+\item 
+void {\bf next\+Egress} (bool spdy\+Mode=false)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P2\+Priority\+Queue} {\bf q\+\_\+}
+\item 
+std\+::map$<$ {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P2\+Priority\+Queue\+::\+Handle} $>$ {\bf handles\+\_\+}
+\item 
+{\bf I\+D\+List} {\bf nodes\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 55 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!Queue\+Test@{Queue\+Test}}
+\index{Queue\+Test@{Queue\+Test}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{Queue\+Test(\+H\+H\+Wheel\+Timer $\ast$timer=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Queue\+Test\+::\+Queue\+Test (
+\begin{DoxyParamCaption}
+\item[{H\+H\+Wheel\+Timer $\ast$}]{timer = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1QueueTest_a3277fa0af0ce7a64c353eb96b1dd120c}
+
+
+Definition at line 57 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+58       : q_(WheelTimerInstance(timer), kRootNodeId) \{
+59   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!add\+Transaction@{add\+Transaction}}
+\index{add\+Transaction@{add\+Transaction}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{add\+Transaction(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, http2\+::\+Priority\+Update pri, bool pnode=false, uint64\+\_\+t $\ast$depth=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::add\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{{\bf http2\+::\+Priority\+Update}}]{pri, }
+\item[{bool}]{pnode = {\ttfamily false}, }
+\item[{uint64\+\_\+t $\ast$}]{depth = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a81e4dd3f29586472ef8eb8c467b1f587}
+
+
+Definition at line 62 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+63                                                                   \{
+64     HTTP2PriorityQueue::Handle h =
+65       q_.addTransaction(
+66         \textcolor{keywordtype}{id}, pri, pnode ? \textcolor{keyword}{nullptr} : makeFakeTxn(\textcolor{keywordtype}{id}), \textcolor{keyword}{false}, depth);
+67     handles_.insert(std::make\_pair(\textcolor{keywordtype}{id}, h));
+68     \textcolor{keywordflow}{if} (!pnode) \{
+69       signalEgress(\textcolor{keywordtype}{id}, 1);
+70     \}
+71   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!build\+Simple\+Tree@{build\+Simple\+Tree}}
+\index{build\+Simple\+Tree@{build\+Simple\+Tree}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{build\+Simple\+Tree()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::build\+Simple\+Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a9554567564790d0641353e799e37b35a}
+
+
+Definition at line 90 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+90                          \{
+91     addTransaction(0, \{kRootNodeId, \textcolor{keyword}{false}, 15\});
+92     addTransaction(3, \{0, \textcolor{keyword}{false}, 3\});
+93     addTransaction(5, \{0, \textcolor{keyword}{false}, 3\});
+94     addTransaction(7, \{0, \textcolor{keyword}{false}, 7\});
+95     addTransaction(9, \{5, \textcolor{keyword}{false}, 7\});
+96   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!dump@{dump}}
+\index{dump@{dump}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{dump()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::dump (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a2944c6bb449f4cfbc01e12238eaf6914}
+
+
+Definition at line 104 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+104               \{
+105     nodes_.clear();
+106     q_.iterate(std::bind(&QueueTest::visitNode, \textcolor{keyword}{this}, std::ref(q_), \_1, \_2, \_3),
+107                [] \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}, \textcolor{keyword}{true});
+108   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!dump\+B\+FS@{dump\+B\+FS}}
+\index{dump\+B\+FS@{dump\+B\+FS}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{dump\+B\+F\+S(const std\+::function$<$ bool()$>$ \&stop\+Fn)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::dump\+B\+FS (
+\begin{DoxyParamCaption}
+\item[{const std\+::function$<$ bool()$>$ \&}]{stop\+Fn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_ae641145fbdcabcc58adfce12b4c9e9c8}
+
+
+Definition at line 110 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+110                                                   \{
+111     nodes_.clear();
+112     q_.iterateBFS(std::bind(&QueueTest::visitNode, \textcolor{keyword}{this}, \_1, \_2, \_3, \_4),
+113                   stopFn, \textcolor{keyword}{true});
+114   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!next\+Egress@{next\+Egress}}
+\index{next\+Egress@{next\+Egress}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{next\+Egress(bool spdy\+Mode=false)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::next\+Egress (
+\begin{DoxyParamCaption}
+\item[{bool}]{spdy\+Mode = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a7f4b03b0e1f5c22364fb69f7c96451f9}
+
+
+Definition at line 116 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+116                                        \{
+117     HTTP2PriorityQueue::NextEgressResult nextEgressResults;
+118     q_.nextEgress(nextEgressResults, spdyMode);
+119     nodes_.clear();
+120     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} p: nextEgressResults) \{
+121       nodes_.push\_back(std::make\_pair(getTxnID(p.first), p.second * 100));
+122     \}
+123   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!remove\+Transaction@{remove\+Transaction}}
+\index{remove\+Transaction@{remove\+Transaction}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{remove\+Transaction(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::remove\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a88c866fc869a90837bd530ed6930c9ea}
+
+
+Definition at line 73 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+73                                                \{
+74     q_.removeTransaction(handles_[\textcolor{keywordtype}{id}]);
+75   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!signal\+Egress@{signal\+Egress}}
+\index{signal\+Egress@{signal\+Egress}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{signal\+Egress(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, bool mark)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::signal\+Egress (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{bool}]{mark}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a3a47ab96fe7ce5a8217a15689b7eb096}
+
+
+Definition at line 82 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+82                                                      \{
+83     \textcolor{keywordflow}{if} (mark) \{
+84       q_.signalPendingEgress(handles_[\textcolor{keywordtype}{id}]);
+85     \} \textcolor{keywordflow}{else} \{
+86       q_.clearPendingEgress(handles_[\textcolor{keywordtype}{id}]);
+87     \}
+88   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!update\+Priority@{update\+Priority}}
+\index{update\+Priority@{update\+Priority}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{update\+Priority(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, http2\+::\+Priority\+Update pri, uint64\+\_\+t $\ast$depth=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Queue\+Test\+::update\+Priority (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{{\bf http2\+::\+Priority\+Update}}]{pri, }
+\item[{uint64\+\_\+t $\ast$}]{depth = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a8d6477af317f332ee1afd5ca7c551061}
+
+
+Definition at line 77 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+78                                                  \{
+79     handles_[id] = q_.updatePriority(handles_[\textcolor{keywordtype}{id}], pri, depth);
+80   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!visit\+Node@{visit\+Node}}
+\index{visit\+Node@{visit\+Node}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{visit\+Node(\+H\+T\+T\+P2\+Priority\+Queue \&, H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, H\+T\+T\+P\+Transaction $\ast$, double r)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Queue\+Test\+::visit\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Priority\+Queue} \&}]{, }
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{, }
+\item[{double}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a8e0d1e1e46b63246fe56c936c8f52c27}
+
+
+Definition at line 98 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+99                                              \{
+100     nodes_.push\_back(std::make\_pair(\textcolor{keywordtype}{id}, r * 100));
+101     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+102   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!handles\+\_\+@{handles\+\_\+}}
+\index{handles\+\_\+@{handles\+\_\+}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{handles\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P2\+Priority\+Queue\+::\+Handle}$>$ proxygen\+::\+Queue\+Test\+::handles\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a97d015b84c90cdd67cd93f66af2eb6ea}
+
+
+Definition at line 126 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!nodes\+\_\+@{nodes\+\_\+}}
+\index{nodes\+\_\+@{nodes\+\_\+}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{nodes\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+D\+List} proxygen\+::\+Queue\+Test\+::nodes\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_a099c4952d286ed210d19e97d3d00fa90}
+
+
+Definition at line 127 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+\index{proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}!q\+\_\+@{q\+\_\+}}
+\index{q\+\_\+@{q\+\_\+}!proxygen\+::\+Queue\+Test@{proxygen\+::\+Queue\+Test}}
+\subsubsection[{q\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P2\+Priority\+Queue} proxygen\+::\+Queue\+Test\+::q\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1QueueTest_ab35e84135af6564566d36de78f67b1a3}
+
+
+Definition at line 125 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp}\end{DoxyCompactItemize}

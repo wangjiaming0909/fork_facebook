@@ -1,0 +1,788 @@
+\section{proxygen\+:\+:Pass\+Through\+Transport\+Filter Class Reference}
+\label{classproxygen_1_1PassThroughTransportFilter}\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+
+
+{\ttfamily \#include $<$Transport\+Filter.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Pass\+Through\+Transport\+Filter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.024096cm]{classproxygen_1_1PassThroughTransportFilter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Pass\+Through\+Transport\+Filter} (bool calls=true, bool callbacks=true)
+\item 
+void {\bf get\+Read\+Buffer} (void $\ast$$\ast$buf\+Return, size\+\_\+t $\ast$len\+Return) override
+\item 
+void {\bf read\+Data\+Available} (size\+\_\+t len) noexceptoverride
+\item 
+void {\bf read\+E\+OF} () noexceptoverride
+\item 
+void {\bf read\+Err} (const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride
+\item 
+void {\bf set\+Read\+CB} (folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$callback) override
+\item 
+folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$ {\bf get\+Read\+Callback} () const override
+\item 
+void {\bf write} (folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const void $\ast$buf, size\+\_\+t bytes, folly\+::\+Write\+Flags {\bf flags}) override
+\item 
+void {\bf writev} (folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const iovec $\ast$vec, size\+\_\+t count, folly\+::\+Write\+Flags {\bf flags}) override
+\item 
+void {\bf write\+Chain} (folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ \&\&iob, folly\+::\+Write\+Flags {\bf flags}) override
+\item 
+void {\bf close} () override
+\item 
+void {\bf close\+Now} () override
+\item 
+void {\bf close\+With\+Reset} () override
+\item 
+void {\bf shutdown\+Write} () override
+\item 
+void {\bf shutdown\+Write\+Now} () override
+\item 
+bool {\bf good} () const override
+\item 
+bool {\bf readable} () const override
+\item 
+bool {\bf connecting} () const override
+\item 
+bool {\bf error} () const override
+\item 
+void {\bf attach\+Event\+Base} (folly\+::\+Event\+Base $\ast$event\+Base) override
+\item 
+void {\bf detach\+Event\+Base} () override
+\item 
+bool {\bf is\+Detachable} () const override
+\item 
+folly\+::\+Event\+Base $\ast$ {\bf get\+Event\+Base} () const override
+\item 
+void {\bf set\+Send\+Timeout} (uint32\+\_\+t milliseconds) override
+\item 
+uint32\+\_\+t {\bf get\+Send\+Timeout} () const override
+\item 
+void {\bf get\+Local\+Address} (folly\+::\+Socket\+Address $\ast$address) const override
+\item 
+void {\bf get\+Peer\+Address} (folly\+::\+Socket\+Address $\ast$address) const override
+\item 
+void {\bf set\+Eor\+Tracking} (bool track) override
+\item 
+size\+\_\+t {\bf get\+App\+Bytes\+Written} () const override
+\item 
+size\+\_\+t {\bf get\+Raw\+Bytes\+Written} () const override
+\item 
+size\+\_\+t {\bf get\+App\+Bytes\+Received} () const override
+\item 
+size\+\_\+t {\bf get\+Raw\+Bytes\+Received} () const override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of Transport that passes through all calls and also properly calls set\+Callback(). This is useful to subclass if you aren\textquotesingle{}t interested in intercepting every function. See Async\+Transport.\+h for documentation on these methods 
+
+Definition at line 31 of file Transport\+Filter.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!Pass\+Through\+Transport\+Filter@{Pass\+Through\+Transport\+Filter}}
+\index{Pass\+Through\+Transport\+Filter@{Pass\+Through\+Transport\+Filter}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{Pass\+Through\+Transport\+Filter(bool calls=true, bool callbacks=true)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Pass\+Through\+Transport\+Filter\+::\+Pass\+Through\+Transport\+Filter (
+\begin{DoxyParamCaption}
+\item[{bool}]{calls = {\ttfamily true}, }
+\item[{bool}]{callbacks = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1PassThroughTransportFilter_a1cfd0fde1d3ade3696479605bb6c042f}
+By default, the filter gets both calls and callbacks 
+
+Definition at line 36 of file Transport\+Filter.\+h.
+
+
+
+References attach\+Event\+Base(), close(), close\+Now(), close\+With\+Reset(), connecting(), detach\+Event\+Base(), error(), get\+App\+Bytes\+Received(), get\+App\+Bytes\+Written(), get\+Event\+Base(), get\+Local\+Address(), get\+Peer\+Address(), get\+Raw\+Bytes\+Received(), get\+Raw\+Bytes\+Written(), get\+Read\+Buffer(), get\+Read\+Callback(), get\+Send\+Timeout(), good(), is\+Detachable(), readable(), read\+Data\+Available(), read\+E\+O\+F(), read\+Err(), set\+Eor\+Tracking(), set\+Read\+C\+B(), set\+Send\+Timeout(), shutdown\+Write(), shutdown\+Write\+Now(), write(), write\+Chain(), and writev().
+
+
+\begin{DoxyCode}
+37                                                             :
+38       TransportFilter(calls, callbacks) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!attach\+Event\+Base@{attach\+Event\+Base}}
+\index{attach\+Event\+Base@{attach\+Event\+Base}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{attach\+Event\+Base(folly\+::\+Event\+Base $\ast$event\+Base) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::attach\+Event\+Base (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{event\+Base}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_acd2b1d64552a1e93cd64e3aa69bb75a5}
+
+
+Definition at line 110 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+110                                                                      \{
+111   call_->attachEventBase(eventBase);
+112 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!close@{close}}
+\index{close@{close}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{close() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a1617eb82e8c070a43071a2d32518f99d}
+
+
+Definition at line 71 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+71                                        \{
+72   call_->close();
+73   \textcolor{comment}{// wait for readEOF() to call destroy()}
+74 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!close\+Now@{close\+Now}}
+\index{close\+Now@{close\+Now}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{close\+Now() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::close\+Now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_abe6db0b91ef3934622a412e3023bd8a0}
+
+
+Definition at line 76 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+76                                           \{
+77   call_->closeNow();
+78   \textcolor{comment}{// wait for readEOF() to call destroy()}
+79 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!close\+With\+Reset@{close\+With\+Reset}}
+\index{close\+With\+Reset@{close\+With\+Reset}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{close\+With\+Reset() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::close\+With\+Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a2f77622de6cee58e40891b453870bafe}
+
+
+Definition at line 81 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+81                                                 \{
+82   call_->closeWithReset();
+83   \textcolor{comment}{// wait for readEOF() to call destroy()}
+84 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!connecting@{connecting}}
+\index{connecting@{connecting}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{connecting() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Pass\+Through\+Transport\+Filter\+::connecting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a1cd8ca7f3efcce1ca30410bfb9d89ac7}
+
+
+Definition at line 102 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+102                                                   \{
+103   \textcolor{keywordflow}{return} call_->connecting();
+104 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!detach\+Event\+Base@{detach\+Event\+Base}}
+\index{detach\+Event\+Base@{detach\+Event\+Base}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{detach\+Event\+Base() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::detach\+Event\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_aa116020ab4b17e38d8bd23e28cdda4b3}
+
+
+Definition at line 114 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+114                                                  \{
+115   call_->detachEventBase();
+116 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!error@{error}}
+\index{error@{error}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{error() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Pass\+Through\+Transport\+Filter\+::error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a3f1004e49fa4c3bc198a21f01feedae8}
+
+
+Definition at line 106 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+106                                              \{
+107   \textcolor{keywordflow}{return} call_->error();
+108 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+App\+Bytes\+Received@{get\+App\+Bytes\+Received}}
+\index{get\+App\+Bytes\+Received@{get\+App\+Bytes\+Received}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+App\+Bytes\+Received() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+App\+Bytes\+Received (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a143af309e879b4064cb3a3a72cce08be}
+
+
+Definition at line 154 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+154                                                              \{
+155   \textcolor{keywordflow}{return} call_->getAppBytesReceived();
+156 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+App\+Bytes\+Written@{get\+App\+Bytes\+Written}}
+\index{get\+App\+Bytes\+Written@{get\+App\+Bytes\+Written}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+App\+Bytes\+Written() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+App\+Bytes\+Written (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a09ed8f72441174449e89664ba895abb9}
+
+
+Definition at line 148 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+148                                                             \{
+149   \textcolor{keywordflow}{return} call_->getAppBytesWritten();
+150 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Event\+Base@{get\+Event\+Base}}
+\index{get\+Event\+Base@{get\+Event\+Base}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Event\+Base() const override}]{\setlength{\rightskip}{0pt plus 5cm}Event\+Base $\ast$ proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Event\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_aa2412a2b7c431848ca1d83b4ce69afc6}
+
+
+Definition at line 122 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+122                                                           \{
+123   \textcolor{keywordflow}{return} call_->getEventBase();
+124 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Local\+Address@{get\+Local\+Address}}
+\index{get\+Local\+Address@{get\+Local\+Address}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Local\+Address(folly\+::\+Socket\+Address $\ast$address) const override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Local\+Address (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Socket\+Address $\ast$}]{address}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a0919e98941bbc75f2b60c995a8d4b7ca}
+
+
+Definition at line 134 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+135                                        \{
+136   call_->getLocalAddress(address);
+137 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Peer\+Address@{get\+Peer\+Address}}
+\index{get\+Peer\+Address@{get\+Peer\+Address}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Peer\+Address(folly\+::\+Socket\+Address $\ast$address) const override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Peer\+Address (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Socket\+Address $\ast$}]{address}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_aa131b519fcac7b9eabc4ec45d3782e54}
+
+
+Definition at line 139 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+140                                        \{
+141   call_->getPeerAddress(address);
+142 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Raw\+Bytes\+Received@{get\+Raw\+Bytes\+Received}}
+\index{get\+Raw\+Bytes\+Received@{get\+Raw\+Bytes\+Received}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Raw\+Bytes\+Received() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Raw\+Bytes\+Received (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a26e278f31529a95f444d180301547643}
+
+
+Definition at line 157 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+157                                                              \{
+158   \textcolor{comment}{//new PassThroughTransportFilter();}
+159   \textcolor{keywordflow}{return} call_->getRawBytesReceived();
+160 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Raw\+Bytes\+Written@{get\+Raw\+Bytes\+Written}}
+\index{get\+Raw\+Bytes\+Written@{get\+Raw\+Bytes\+Written}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Raw\+Bytes\+Written() const override}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Raw\+Bytes\+Written (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_ab99679e491b0352288e74e0677d472d9}
+
+
+Definition at line 151 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+151                                                             \{
+152   \textcolor{keywordflow}{return} call_->getRawBytesWritten();
+153 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Read\+Buffer@{get\+Read\+Buffer}}
+\index{get\+Read\+Buffer@{get\+Read\+Buffer}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Read\+Buffer(void $\ast$$\ast$buf\+Return, size\+\_\+t $\ast$len\+Return) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Read\+Buffer (
+\begin{DoxyParamCaption}
+\item[{void $\ast$$\ast$}]{buf\+Return, }
+\item[{size\+\_\+t $\ast$}]{len\+Return}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a05ec99cde0ca70079b6a24ad1d698e8a}
+
+
+Definition at line 19 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+20                                                                   \{
+21   callback_->getReadBuffer(bufReturn, lenReturn);
+22 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Read\+Callback@{get\+Read\+Callback}}
+\index{get\+Read\+Callback@{get\+Read\+Callback}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Read\+Callback() const override}]{\setlength{\rightskip}{0pt plus 5cm}Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$ proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Read\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a2e4bb12fc3e192719072b9ae3a61b05e}
+
+
+Definition at line 49 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+49                                                   \{
+50   \textcolor{keywordflow}{return} call_->getReadCallback();
+51 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!get\+Send\+Timeout@{get\+Send\+Timeout}}
+\index{get\+Send\+Timeout@{get\+Send\+Timeout}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{get\+Send\+Timeout() const override}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Pass\+Through\+Transport\+Filter\+::get\+Send\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_ae0fc183cc4c2b08f67dfdb18c65f737b}
+
+
+Definition at line 130 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+130                                                           \{
+131   \textcolor{keywordflow}{return} call_->getSendTimeout();
+132 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!good@{good}}
+\index{good@{good}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{good() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Pass\+Through\+Transport\+Filter\+::good (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a816e8e80882d6e88f6e049de8fbb944f}
+
+
+Definition at line 94 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+94                                             \{
+95   \textcolor{keywordflow}{return} call_->good();
+96 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!is\+Detachable@{is\+Detachable}}
+\index{is\+Detachable@{is\+Detachable}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{is\+Detachable() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Pass\+Through\+Transport\+Filter\+::is\+Detachable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a1070af24b4efb0d2fdb6dcd008b95ab8}
+
+
+Definition at line 118 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+118                                                     \{
+119   \textcolor{keywordflow}{return} call_->isDetachable();
+120 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!readable@{readable}}
+\index{readable@{readable}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{readable() const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Pass\+Through\+Transport\+Filter\+::readable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a6e47861ad83aa02affefe07a01afbe7e}
+
+
+Definition at line 98 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+98                                                 \{
+99   \textcolor{keywordflow}{return} call_->readable();
+100 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!read\+Data\+Available@{read\+Data\+Available}}
+\index{read\+Data\+Available@{read\+Data\+Available}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{read\+Data\+Available(size\+\_\+t len) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::read\+Data\+Available (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PassThroughTransportFilter_a384531be323f891bc91ad48062f2c6df}
+
+
+Definition at line 24 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+24                                                                       \{
+25   callback_->readDataAvailable(len);
+26 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!read\+E\+OF@{read\+E\+OF}}
+\index{read\+E\+OF@{read\+E\+OF}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{read\+E\+O\+F() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::read\+E\+OF (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PassThroughTransportFilter_ae10be25068461c771d0eae649ec2c8a1}
+
+
+Definition at line 28 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+28                                                   \{
+29   callback_->readEOF();
+30   destroy();
+31 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!read\+Err@{read\+Err}}
+\index{read\+Err@{read\+Err}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{read\+Err(const folly\+::\+Async\+Socket\+Exception \&ex) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::read\+Err (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{ex}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1PassThroughTransportFilter_aa47050fa26ce5dce0f3ca52be4cd2c01}
+
+
+Definition at line 33 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+34                                              \{
+35   callback_->readErr(ex);
+36   destroy();
+37 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!set\+Eor\+Tracking@{set\+Eor\+Tracking}}
+\index{set\+Eor\+Tracking@{set\+Eor\+Tracking}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{set\+Eor\+Tracking(bool track) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::set\+Eor\+Tracking (
+\begin{DoxyParamCaption}
+\item[{bool}]{track}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_afa6b89fbeef9da43b122c9285e89e82d}
+
+
+Definition at line 144 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+144                                                           \{
+145   call_->setEorTracking(track);
+146 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!set\+Read\+CB@{set\+Read\+CB}}
+\index{set\+Read\+CB@{set\+Read\+CB}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{set\+Read\+C\+B(folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$callback) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::set\+Read\+CB (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$}]{callback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_af4769786b76778de46f2f3f39ddb50a1}
+
+
+Definition at line 41 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+42                                                  \{
+43   \textcolor{comment}{// Important! The filter must call setCallbackInternal in its base class and}
+44   \textcolor{comment}{// it must not forward the call.}
+45   setCallbackInternal(callback);
+46 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!set\+Send\+Timeout@{set\+Send\+Timeout}}
+\index{set\+Send\+Timeout@{set\+Send\+Timeout}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{set\+Send\+Timeout(uint32\+\_\+t milliseconds) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::set\+Send\+Timeout (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{milliseconds}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a99700035670eeccab2f122ea7fb8cc3b}
+
+
+Definition at line 126 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+126                                                                      \{
+127   call_->setSendTimeout(milliseconds);
+128 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!shutdown\+Write@{shutdown\+Write}}
+\index{shutdown\+Write@{shutdown\+Write}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{shutdown\+Write() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::shutdown\+Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_aa58c65ff5b37dbbdfe87a11aad0c2a89}
+
+
+Definition at line 86 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+86                                                \{
+87   call_->shutdownWrite();
+88 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!shutdown\+Write\+Now@{shutdown\+Write\+Now}}
+\index{shutdown\+Write\+Now@{shutdown\+Write\+Now}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{shutdown\+Write\+Now() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::shutdown\+Write\+Now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_ac6d3ab232f2d756e4e1f21947646547c}
+
+
+Definition at line 90 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+90                                                   \{
+91   call_->shutdownWriteNow();
+92 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!write@{write}}
+\index{write@{write}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{write(folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const void $\ast$buf, size\+\_\+t bytes, folly\+::\+Write\+Flags flags) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::write (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{const void $\ast$}]{buf, }
+\item[{size\+\_\+t}]{bytes, }
+\item[{folly\+::\+Write\+Flags}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a47909e844f7a784411a9a8a31334d82a}
+
+
+Definition at line 53 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+55                                                      \{
+56   call_->write(callback, buf, bytes, flags);
+57 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!write\+Chain@{write\+Chain}}
+\index{write\+Chain@{write\+Chain}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{write\+Chain(folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ \&\&iob, folly\+::\+Write\+Flags flags) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::write\+Chain (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ \&\&}]{iob, }
+\item[{folly\+::\+Write\+Flags}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_af0e33d1e92269f09d6bf6e31e1dc6906}
+
+
+Definition at line 65 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+67                                                        \{
+68   call_->writeChain(callback, std::move(iob), flags);
+69 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}!writev@{writev}}
+\index{writev@{writev}!proxygen\+::\+Pass\+Through\+Transport\+Filter@{proxygen\+::\+Pass\+Through\+Transport\+Filter}}
+\subsubsection[{writev(folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, const iovec $\ast$vec, size\+\_\+t count, folly\+::\+Write\+Flags flags) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Pass\+Through\+Transport\+Filter\+::writev (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{const iovec $\ast$}]{vec, }
+\item[{size\+\_\+t}]{count, }
+\item[{folly\+::\+Write\+Flags}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1PassThroughTransportFilter_a9863fe57ae4900cec8faca2ace48f390}
+
+
+Definition at line 59 of file Transport\+Filter.\+cpp.
+
+
+
+Referenced by Pass\+Through\+Transport\+Filter().
+
+
+\begin{DoxyCode}
+61                       \{
+62   call_->writev(callback, vec, count, flags);
+63 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf Transport\+Filter.\+h}\item 
+proxygen/lib/http/session/{\bf Transport\+Filter.\+cpp}\end{DoxyCompactItemize}

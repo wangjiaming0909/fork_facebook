@@ -1,0 +1,74 @@
+\section{Test\+Context Class Reference}
+\label{classTestContext}\index{Test\+Context@{Test\+Context}}
+Inheritance diagram for Test\+Context\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestContext}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Test\+Context} (uint32\+\_\+t table\+Size)
+\item 
+void {\bf add} (const {\bf H\+P\+A\+C\+K\+Header} \&header)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 30 of file H\+P\+A\+C\+K\+Context\+Tests.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Context@{Test\+Context}!Test\+Context@{Test\+Context}}
+\index{Test\+Context@{Test\+Context}!Test\+Context@{Test\+Context}}
+\subsubsection[{Test\+Context(uint32\+\_\+t table\+Size)}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Context\+::\+Test\+Context (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{table\+Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classTestContext_a060537649604591282d3f703dce4ca15}
+
+
+Definition at line 33 of file H\+P\+A\+C\+K\+Context\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+33 : HPACKContext(tableSize) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Context@{Test\+Context}!add@{add}}
+\index{add@{add}!Test\+Context@{Test\+Context}}
+\subsubsection[{add(const H\+P\+A\+C\+K\+Header \&header)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Context\+::add (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header} \&}]{header}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestContext_a9452a64aeab4a8eb35bc8e2112517516}
+
+
+Definition at line 35 of file H\+P\+A\+C\+K\+Context\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Header\+::copy().
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+35                                       \{
+36     table_.add(header.copy());
+37   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf H\+P\+A\+C\+K\+Context\+Tests.\+cpp}\end{DoxyCompactItemize}

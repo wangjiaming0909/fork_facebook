@@ -1,0 +1,591 @@
+\section{proxygen\+:\+:Gzip\+Header\+Codec Class Reference}
+\label{classproxygen_1_1GzipHeaderCodec}\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+
+
+{\ttfamily \#include $<$Gzip\+Header\+Codec.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Gzip\+Header\+Codec\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1GzipHeaderCodec}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Gzip\+Header\+Codec} (int compression\+Level, const {\bf S\+P\+D\+Y\+Version\+Settings} \&version\+Settings)
+\item 
+{\bf Gzip\+Header\+Codec} (int compression\+Level, {\bf S\+P\+D\+Y\+Version} version={\bf S\+P\+D\+Y\+Version\+::\+S\+P\+D\+Y3\+\_\+1})
+\item 
+{\bf $\sim$\+Gzip\+Header\+Codec} () override
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf encode} (std\+::vector$<$ {\bf compress\+::\+Header} $>$ \&headers) noexcept
+\item 
+folly\+::\+Expected$<$ {\bf Header\+Decode\+Result}, {\bf Gzip\+Decode\+Error} $>$ {\bf decode} (folly\+::io\+::\+Cursor \&cursor, uint32\+\_\+t length) noexcept
+\item 
+const {\bf H\+T\+T\+P\+Header\+Size} \& {\bf get\+Decoded\+Size} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+I\+O\+Buf \& {\bf get\+Header\+Buf} ()
+\item 
+folly\+::\+Expected$<$ size\+\_\+t, {\bf Gzip\+Decode\+Error} $>$ {\bf parse\+Name\+Values} (const folly\+::\+I\+O\+Buf \&uncompressed, uint32\+\_\+t uncompressed\+Length) noexcept
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf S\+P\+D\+Y\+Version\+Settings} \& {\bf version\+Settings\+\_\+}
+\item 
+z\+\_\+stream {\bf deflater\+\_\+}
+\item 
+z\+\_\+stream {\bf inflater\+\_\+}
+\item 
+{\bf compress\+::\+Header\+Piece\+List} {\bf out\+Headers\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Header\+Size} {\bf decoded\+Size\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 34 of file Gzip\+Header\+Codec.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!Gzip\+Header\+Codec@{Gzip\+Header\+Codec}}
+\index{Gzip\+Header\+Codec@{Gzip\+Header\+Codec}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{Gzip\+Header\+Codec(int compression\+Level, const S\+P\+D\+Y\+Version\+Settings \&version\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Gzip\+Header\+Codec\+::\+Gzip\+Header\+Codec (
+\begin{DoxyParamCaption}
+\item[{int}]{compression\+Level, }
+\item[{const {\bf S\+P\+D\+Y\+Version\+Settings} \&}]{version\+Settings}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1GzipHeaderCodec_afa967d9444f351a064fd62b5121a1f80}
+
+
+Definition at line 156 of file Gzip\+Header\+Codec.\+cpp.
+
+
+
+References deflater\+\_\+, and inflater\+\_\+.
+
+
+\begin{DoxyCode}
+158     : versionSettings_(versionSettings) \{
+159   \textcolor{comment}{// Create compression and decompression contexts by cloning thread-local}
+160   \textcolor{comment}{// copies of the initial SPDY compression state}
+161   \textcolor{keyword}{auto} context = getZlibContext(versionSettings, compressionLevel);
+162   deflateCopy(&deflater_, const\_cast<z\_stream*>(&(context->deflater)));
+163   inflateCopy(&inflater_, const\_cast<z\_stream*>(&(context->inflater)));
+164 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!Gzip\+Header\+Codec@{Gzip\+Header\+Codec}}
+\index{Gzip\+Header\+Codec@{Gzip\+Header\+Codec}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{Gzip\+Header\+Codec(int compression\+Level, S\+P\+D\+Y\+Version version=\+S\+P\+D\+Y\+Version\+::\+S\+P\+D\+Y3\+\_\+1)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Gzip\+Header\+Codec\+::\+Gzip\+Header\+Codec (
+\begin{DoxyParamCaption}
+\item[{int}]{compression\+Level, }
+\item[{{\bf S\+P\+D\+Y\+Version}}]{version = {\ttfamily {\bf S\+P\+D\+Y\+Version\+::\+S\+P\+D\+Y3\+\_\+1}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1GzipHeaderCodec_a85d025f89121ccc6dbb63a4b2d908af8}
+
+
+Definition at line 166 of file Gzip\+Header\+Codec.\+cpp.
+
+
+\begin{DoxyCode}
+168     : GzipHeaderCodec(
+169         compressionLevel,
+170         SPDYCodec::getVersionSettings(version)) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!````~Gzip\+Header\+Codec@{$\sim$\+Gzip\+Header\+Codec}}
+\index{````~Gzip\+Header\+Codec@{$\sim$\+Gzip\+Header\+Codec}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{$\sim$\+Gzip\+Header\+Codec() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Gzip\+Header\+Codec\+::$\sim$\+Gzip\+Header\+Codec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1GzipHeaderCodec_a50a3e2f2c013a5ee1b4daa272522df75}
+
+
+Definition at line 172 of file Gzip\+Header\+Codec.\+cpp.
+
+
+
+References deflater\+\_\+, and inflater\+\_\+.
+
+
+\begin{DoxyCode}
+172                                   \{
+173   deflateEnd(&deflater_);
+174   inflateEnd(&inflater_);
+175 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!decode@{decode}}
+\index{decode@{decode}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{decode(folly\+::io\+::\+Cursor \&cursor, uint32\+\_\+t length) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Expected$<$ {\bf Header\+Decode\+Result}, {\bf Gzip\+Decode\+Error} $>$ proxygen\+::\+Gzip\+Header\+Codec\+::decode (
+\begin{DoxyParamCaption}
+\item[{folly\+::io\+::\+Cursor \&}]{cursor, }
+\item[{uint32\+\_\+t}]{length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classproxygen_1_1GzipHeaderCodec_a8370959771b56a302cdc6eccb74455f4}
+
+
+Definition at line 291 of file Gzip\+Header\+Codec.\+cpp.
+
+
+
+References proxygen\+::\+B\+A\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG, decoded\+Size\+\_\+, proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::dict, proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::dict\+Size, proxygen\+::\+E\+R\+R\+OR, get\+Header\+Buf(), proxygen\+::\+Header\+Codec\+::\+G\+Z\+IP, proxygen\+::\+H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE, proxygen\+::\+I\+N\+F\+L\+A\+T\+E\+\_\+\+D\+I\+C\+T\+I\+O\+N\+A\+RY, inflater\+\_\+, proxygen\+::\+Header\+Codec\+::max\+Uncompressed\+\_\+, out\+Headers\+\_\+, parse\+Name\+Values(), proxygen\+::\+Header\+Codec\+::\+Stats\+::record\+Decode(), proxygen\+::\+Header\+Codec\+::stats\+\_\+, and version\+Settings\+\_\+.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::decode\+Headers().
+
+
+\begin{DoxyCode}
+291                                                                 \{
+292   outHeaders_.clear();
+293 
+294   \textcolor{comment}{// empty header block}
+295   \textcolor{keywordflow}{if} (length == 0) \{
+296     \textcolor{keywordflow}{return} HeaderDecodeResult\{outHeaders_, 0\};
+297   \}
+298 
+299   \textcolor{comment}{// Get the thread local buffer space to use}
+300   \textcolor{keyword}{auto}& uncompressed = getHeaderBuf();
+301   uint32\_t consumed = 0;
+302   \textcolor{comment}{// Decompress the headers}
+303   \textcolor{keywordflow}{while} (length > 0) \{
+304     \textcolor{keyword}{auto} next = cursor.peek();
+305     uint32\_t chunkLen = std::min((uint32\_t)next.second, length);
+306     inflater_.avail\_in = chunkLen;
+307     inflater_.next\_in = (uint8\_t *)next.first;
+308     \textcolor{keywordflow}{do} \{
+309       if (uncompressed.tailroom() == 0) \{
+310         \textcolor{comment}{// This code should not execute, since we throw an error if the}
+311         \textcolor{comment}{// decompressed size of the headers is too large and we initialize}
+312         \textcolor{comment}{// the buffer to that size.}
+313         LOG(ERROR) << \textcolor{stringliteral}{"Doubling capacity of SPDY headers buffer"};
+314         uncompressed.reserve(0, uncompressed.capacity());
+315       \}
+316 
+317       inflater_.next\_out = uncompressed.writableTail();
+318       inflater_.avail\_out = uncompressed.tailroom();
+319       \textcolor{keywordtype}{int} r = inflate(&inflater_, Z\_NO\_FLUSH);
+320       \textcolor{keywordflow}{if} (r == Z\_NEED\_DICT) \{
+321         \textcolor{comment}{// we cannot initialize the inflater dictionary before calling inflate()}
+322         \textcolor{comment}{// as it checks the adler-32 checksum of the supplied dictionary}
+323         r = inflateSetDictionary(&inflater_, versionSettings_.dict,
+324                                  versionSettings_.dictSize);
+325         \textcolor{keywordflow}{if} (r != Z\_OK) \{
+326           LOG(ERROR) << \textcolor{stringliteral}{"inflate set dictionary failed with error="} << r;
+327           \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::INFLATE_DICTIONARY);
+328         \}
+329         inflater_.avail\_out = 0;
+330         \textcolor{keywordflow}{continue};
+331       \}
+332       \textcolor{keywordflow}{if} (r != 0) \{
+333         \textcolor{comment}{// probably bad encoding}
+334         LOG(ERROR) << \textcolor{stringliteral}{"inflate failed with error="} << r;
+335         \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::BAD_ENCODING);
+336       \}
+337       uncompressed.append(uncompressed.tailroom() - inflater_.avail\_out);
+338       \textcolor{keywordflow}{if} (uncompressed.length() > maxUncompressed_) \{
+339         LOG(ERROR) << \textcolor{stringliteral}{"Decompressed headers too large"};
+340         \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::HEADERS_TOO_LARGE);
+341       \}
+342     \} \textcolor{keywordflow}{while} (inflater_.avail\_in > 0 && inflater_.avail\_out == 0);
+343     length -= chunkLen;
+344     consumed += chunkLen;
+345     cursor.skip(chunkLen);
+346   \}
+347 
+348   decodedSize_.compressed = consumed;
+349   decodedSize_.uncompressed = uncompressed.computeChainDataLength();
+350   \textcolor{keywordflow}{if} (stats_) \{
+351     stats_->recordDecode(Type::GZIP, decodedSize_);
+352   \}
+353 
+354   \textcolor{keywordtype}{size\_t} expandedHeaderLineBytes = 0;
+355   \textcolor{keyword}{auto} result = parseNameValues(uncompressed, decodedSize_.uncompressed);
+356   \textcolor{keywordflow}{if} (result.hasError()) \{
+357     \textcolor{keywordflow}{return} folly::makeUnexpected(result.error());
+358   \}
+359   expandedHeaderLineBytes = *result;
+360 
+361   \textcolor{keywordflow}{if} (UNLIKELY(expandedHeaderLineBytes > kMaxExpandedHeaderLineBytes)) \{
+362     LOG(ERROR) << \textcolor{stringliteral}{"expanded headers too large"};
+363     \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::HEADERS_TOO_LARGE);
+364   \}
+365 
+366   \textcolor{keywordflow}{return} HeaderDecodeResult\{outHeaders_, consumed\};
+367 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!encode@{encode}}
+\index{encode@{encode}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{encode(std\+::vector$<$ compress\+::\+Header $>$ \&headers) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<$ I\+O\+Buf $>$ proxygen\+::\+Gzip\+Header\+Codec\+::encode (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf compress\+::\+Header} $>$ \&}]{headers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classproxygen_1_1GzipHeaderCodec_ade8df298143e71bc34881b0ee1db41f0}
+
+
+Definition at line 181 of file Gzip\+Header\+Codec.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::append\+Size\+Fun, deflater\+\_\+, proxygen\+::empty\+\_\+string, proxygen\+::\+Header\+Codec\+::encoded\+Size\+\_\+, proxygen\+::\+Header\+Codec\+::encode\+Headroom\+\_\+, get\+Header\+Buf(), proxygen\+::\+Header\+Codec\+::\+G\+Z\+IP, proxygen\+::\+H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::name\+Value\+Size, proxygen\+::\+Header\+Codec\+::\+Stats\+::record\+Encode(), proxygen\+::\+Header\+Codec\+::stats\+\_\+, and version\+Settings\+\_\+.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::encode\+Headers().
+
+
+\begin{DoxyCode}
+181                                                                           \{
+182   \textcolor{comment}{// Build a sequence of the header names and values, sorted by name.}
+183   \textcolor{comment}{// The purpose of the sort is to make it easier to combine the}
+184   \textcolor{comment}{// values of multiple headers with the same name.  The SPDY spec}
+185   \textcolor{comment}{// prohibits any header name from appearing more than once in the}
+186   \textcolor{comment}{// Name/Value list, so we must combine values when serializing.}
+187   std::sort(headers.begin(), headers.end());
+188 
+189   \textcolor{keyword}{auto}& uncompressed = getHeaderBuf();
+190   \textcolor{comment}{// Compute the amount of space needed to hold the uncompressed}
+191   \textcolor{comment}{// representation of the headers.  This is an upper bound on the}
+192   \textcolor{comment}{// amount of space we'll actually need, because if we end up}
+193   \textcolor{comment}{// combining any headers with the same name, the combined}
+194   \textcolor{comment}{// representation will be smaller than the original.}
+195   \textcolor{keywordtype}{size\_t} maxUncompressedSize = versionSettings_.nameValueSize;
+196   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} Header& header : headers) \{
+197     maxUncompressedSize += versionSettings_.nameValueSize;
+198     maxUncompressedSize += header.name->length();
+199     maxUncompressedSize += versionSettings_.nameValueSize;
+200     maxUncompressedSize += header.value->length();
+201   \}
+202 
+203   \textcolor{comment}{// TODO: give on 'onError()' callback if the space in uncompressed buf}
+204   \textcolor{comment}{// cannot fit the headers and then skip the "reserve" code below. We}
+205   \textcolor{comment}{// have already reserved the maximum legal amount of space for}
+206   \textcolor{comment}{// uncompressed headers.}
+207 
+208   VLOG(5) << \textcolor{stringliteral}{"reserving "} << maxUncompressedSize
+209           << \textcolor{stringliteral}{" bytes for uncompressed headers"};
+210   uncompressed.reserve(0, maxUncompressedSize);
+211 
+212   \textcolor{comment}{// Serialize the uncompressed representation of the headers.}
+213   uint8\_t* dst = uncompressed.writableData();
+214   dst += versionSettings_.nameValueSize; \textcolor{comment}{// Leave space for count of headers.}
+215   HTTPHeaderCode lastCode = HTTP_HEADER_OTHER;
+216   \textcolor{keyword}{const} \textcolor{keywordtype}{string}* lastName = &empty_string;
+217   uint8\_t* lastValueLenPtr = \textcolor{keyword}{nullptr};
+218   \textcolor{keywordtype}{size\_t} lastValueLen = 0;
+219   \textcolor{keywordtype}{unsigned} numHeaders = 0;
+220   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} Header& header : headers) \{
+221     \textcolor{keywordflow}{if} ((header.code != lastCode) || (*header.name != *lastName)) \{
+222       \textcolor{comment}{// Simple case: this header name is different from the previous}
+223       \textcolor{comment}{// one, so we don't need to combine values.}
+224       numHeaders++;
+225       versionSettings_.appendSizeFun(dst, header.name->length());
+226 
+227       \textcolor{comment}{// lowercasing the header name inline}
+228       \textcolor{keywordtype}{char}* nameBegin = (\textcolor{keywordtype}{char} *)dst;
+229       appendString(dst, *header.name);
+230       folly::toLowerAscii((\textcolor{keywordtype}{char} *)nameBegin, header.name->size());
+231 
+232       lastValueLenPtr = dst;
+233       lastValueLen = header.value->length();
+234       versionSettings_.appendSizeFun(dst, header.value->length());
+235       appendString(dst, *header.value);
+236       lastCode = header.code;
+237       lastName = header.name;
+238     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (header.value->length() > 0) \{
+239       \textcolor{comment}{// More complicated case: we do need to combine values.}
+240       \textcolor{keywordflow}{if} (lastValueLen > 0) \{
+241         \textcolor{comment}{// Only nul terminate if previous value was non-empty}
+242         *dst++ = 0;  \textcolor{comment}{// SPDY uses a null byte as a separator}
+243         lastValueLen++;
+244       \}
+245       appendString(dst, *header.value);
+246       \textcolor{comment}{// Go back and rewrite the length field in front of the value}
+247       lastValueLen += header.value->length();
+248       uint8\_t* tmp = lastValueLenPtr;
+249       versionSettings_.appendSizeFun(tmp, lastValueLen);
+250     \}
+251   \}
+252 
+253   \textcolor{comment}{// Compute the uncompressed length; if we combined any header values,}
+254   \textcolor{comment}{// we will have used less space than originally estimated.}
+255   \textcolor{keywordtype}{size\_t} uncompressedLen = dst - uncompressed.writableData();
+256 
+257   \textcolor{comment}{// Go back and write the count of unique header names at the start.}
+258   dst = uncompressed.writableData();
+259   versionSettings_.appendSizeFun(dst, numHeaders);
+260 
+261   \textcolor{comment}{// Allocate a contiguous space big enough to hold the compressed headers,}
+262   \textcolor{comment}{// plus any headroom requested by the caller.}
+263   \textcolor{keywordtype}{size\_t} maxDeflatedSize = deflateBound(&deflater_, uncompressedLen);
+264   unique\_ptr<IOBuf> out(IOBuf::create(maxDeflatedSize + encodeHeadroom_));
+265   out->advance(encodeHeadroom_);
+266 
+267   \textcolor{comment}{// Compress}
+268   deflater_.next\_in = uncompressed.writableData();
+269   deflater_.avail\_in = uncompressedLen;
+270   deflater_.next\_out = out->writableData();
+271   deflater_.avail\_out = maxDeflatedSize;
+272   \textcolor{keywordtype}{int} r = deflate(&deflater_, Z\_SYNC\_FLUSH);
+273   CHECK\_EQ(r, Z\_OK);
+274   CHECK\_EQ(deflater_.avail\_in, 0);
+275   out->append(maxDeflatedSize - deflater_.avail\_out);
+276 
+277   VLOG(4) << \textcolor{stringliteral}{"header size orig="} << uncompressedLen
+278           << \textcolor{stringliteral}{", max deflated="} << maxDeflatedSize
+279           << \textcolor{stringliteral}{", actual deflated="} << out->length();
+280 
+281   encodedSize_.compressed = out->length();
+282   encodedSize_.uncompressed = uncompressedLen;
+283   \textcolor{keywordflow}{if} (stats_) \{
+284     stats_->recordEncode(Type::GZIP, encodedSize_);
+285   \}
+286 
+287   \textcolor{keywordflow}{return} out;
+288 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!get\+Decoded\+Size@{get\+Decoded\+Size}}
+\index{get\+Decoded\+Size@{get\+Decoded\+Size}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{get\+Decoded\+Size()}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+T\+T\+P\+Header\+Size}\& proxygen\+::\+Gzip\+Header\+Codec\+::get\+Decoded\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1GzipHeaderCodec_a846f1fb2270b31373f8cda4f2c750363}
+same as above, but for decode 
+
+Definition at line 52 of file Gzip\+Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame().
+
+
+\begin{DoxyCode}
+52                                          \{
+53     \textcolor{keywordflow}{return} decodedSize_;
+54   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!get\+Header\+Buf@{get\+Header\+Buf}}
+\index{get\+Header\+Buf@{get\+Header\+Buf}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{get\+Header\+Buf()}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+I\+O\+Buf \& proxygen\+::\+Gzip\+Header\+Codec\+::get\+Header\+Buf (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GzipHeaderCodec_ad7455e0a88444a3e426a7a5c1f50034a}
+
+
+Definition at line 177 of file Gzip\+Header\+Codec.\+cpp.
+
+
+
+References proxygen\+::\+Header\+Codec\+::max\+Uncompressed\+\_\+.
+
+
+
+Referenced by decode(), and encode().
+
+
+\begin{DoxyCode}
+177                                           \{
+178   \textcolor{keywordflow}{return} getStaticHeaderBufSpace(maxUncompressed_);
+179 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!parse\+Name\+Values@{parse\+Name\+Values}}
+\index{parse\+Name\+Values@{parse\+Name\+Values}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{parse\+Name\+Values(const folly\+::\+I\+O\+Buf \&uncompressed, uint32\+\_\+t uncompressed\+Length) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Expected$<$ size\+\_\+t, {\bf Gzip\+Decode\+Error} $>$ proxygen\+::\+Gzip\+Header\+Codec\+::parse\+Name\+Values (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf \&}]{uncompressed, }
+\item[{uint32\+\_\+t}]{uncompressed\+Length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1GzipHeaderCodec_aedefb90c6bee8fdcd037e80addc3386d}
+Parse the decompressed name/value header block. 
+
+Definition at line 370 of file Gzip\+Header\+Codec.\+cpp.
+
+
+
+References proxygen\+::\+B\+A\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG, proxygen\+::\+E\+M\+P\+T\+Y\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+A\+ME, proxygen\+::\+E\+M\+P\+T\+Y\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+V\+A\+L\+UE, proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+V\+A\+L\+UE, proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::name\+Value\+Size, out\+Headers\+\_\+, proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::parse\+Size\+Fun, proxygen\+::\+I\+O\+Buf\+Printer\+::print\+Hex\+Folly(), proxygen\+::compress\+::\+Header\+Piece\+::str, and version\+Settings\+\_\+.
+
+
+
+Referenced by decode().
+
+
+\begin{DoxyCode}
+371                                                                        \{
+372 
+373   \textcolor{keywordtype}{size\_t} expandedHeaderLineBytes = 0;
+374   Cursor headerCursor(&uncompressed);
+375   uint32\_t numNV = 0;
+376   \textcolor{keyword}{const} HeaderPiece* headerName = \textcolor{keyword}{nullptr};
+377 
+378   \textcolor{keywordflow}{try} \{
+379     numNV = versionSettings_.parseSizeFun(&headerCursor);
+380   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::out\_of\_range& ex) \{
+381     \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::BAD_ENCODING);
+382   \}
+383 
+384   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < numNV * 2; i++) \{
+385     uint32\_t len = 0;
+386     \textcolor{keywordflow}{try} \{
+387       len = versionSettings_.parseSizeFun(&headerCursor);
+388       uncompressedLength -= versionSettings_.nameValueSize;
+389     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::out\_of\_range& ex) \{
+390       \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::BAD_ENCODING);
+391     \}
+392 
+393     \textcolor{keywordflow}{if} (len == 0 && !headerName) \{
+394       LOG(ERROR) << \textcolor{stringliteral}{"empty header name"};
+395       \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::EMPTY_HEADER_NAME);
+396     \}
+397     \textcolor{keyword}{auto} next = headerCursor.peek();
+398     \textcolor{keywordflow}{try} \{
+399       \textcolor{keywordflow}{if} (len > uncompressedLength) \{
+400         \textcolor{keywordflow}{throw} std::out\_of\_range(
+401           folly::to<string>(\textcolor{stringliteral}{"bad length="}, len, \textcolor{stringliteral}{" uncompressedLength="},
+402                             uncompressedLength));
+403       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (next.second >= len) \{
+404         \textcolor{comment}{// string is contiguous, just put a pointer into the headers structure}
+405         outHeaders_.emplace\_back((\textcolor{keywordtype}{char} *)next.first, len, \textcolor{keyword}{false}, \textcolor{keyword}{false});
+406         headerCursor.skip(len);
+407       \} \textcolor{keywordflow}{else} \{
+408         \textcolor{comment}{// string is not contiguous, allocate a buffer and pull into it}
+409         unique\_ptr<char[]> data (\textcolor{keyword}{new} \textcolor{keywordtype}{char}[len]);
+410         headerCursor.pull(data.get(), len);
+411         outHeaders_.emplace\_back(data.release(), len, \textcolor{keyword}{true}, \textcolor{keyword}{false});
+412       \}
+413       uncompressedLength -= len;
+414     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::out\_of\_range& ex) \{
+415       LOG(ERROR) << \textcolor{stringliteral}{"bad encoding for nv="} << i << \textcolor{stringliteral}{": "}
+416                  << folly::exceptionStr(ex);
+417       VLOG(3) << IOBufPrinter::printHexFolly(&uncompressed, \textcolor{keyword}{true});
+418       \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::BAD_ENCODING);
+419     \}
+420     \textcolor{keywordflow}{if} (i % 2 == 0) \{
+421       headerName = &outHeaders_.back();
+422       \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keywordtype}{char} c: headerName->str) \{
+423         \textcolor{keywordflow}{if} (c < 0x20 || c > 0x7e || (\textcolor{charliteral}{'A'} <= c && c <= \textcolor{charliteral}{'Z'})) \{
+424           LOG(ERROR) << \textcolor{stringliteral}{"invalid header value"};
+425           \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::INVALID_HEADER_VALUE);
+426         \}
+427       \}
+428     \} \textcolor{keywordflow}{else} \{
+429       HeaderPiece& headerValue = outHeaders_.back();
+430       \textcolor{keywordtype}{bool} first = \textcolor{keyword}{true};
+431       \textcolor{keyword}{const} \textcolor{keywordtype}{char}* valueStart = headerValue.str.data();
+432       \textcolor{keyword}{const} \textcolor{keywordtype}{char}* pos = valueStart;
+433       \textcolor{keyword}{const} \textcolor{keywordtype}{char}* stop = valueStart + headerValue.str.size();
+434       \textcolor{keywordflow}{while}(pos < stop) \{
+435         \textcolor{keywordflow}{if} (*pos == \textcolor{charliteral}{'\(\backslash\)0'}) \{
+436           \textcolor{keywordflow}{if} (pos - valueStart == 0) \{
+437             LOG(ERROR) << \textcolor{stringliteral}{"empty header value for header="} << headerName;
+438             \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::EMPTY_HEADER_VALUE);
+439           \}
+440           \textcolor{keywordflow}{if} (first) \{
+441             headerValue.str.reset(valueStart, pos - valueStart);
+442             first = \textcolor{keyword}{false};
+443           \} \textcolor{keywordflow}{else} \{
+444             outHeaders_.emplace\_back(headerName->str.data(),
+445                                      headerName->str.size(),
+446                                      \textcolor{keyword}{false}, \textcolor{keyword}{true});
+447             outHeaders_.emplace\_back(valueStart, pos - valueStart, \textcolor{keyword}{false}, \textcolor{keyword}{true});
+448             expandedHeaderLineBytes += ((pos - valueStart) +
+449                                         headerName->str.size());
+450           \}
+451           valueStart = pos + 1;
+452         \}
+453         pos++;
+454       \}
+455       \textcolor{keywordflow}{if} (!first) \{
+456         \textcolor{comment}{// value contained at least one \(\backslash\)0, add the last value}
+457         \textcolor{keywordflow}{if} (pos - valueStart == 0) \{
+458           LOG(ERROR) << \textcolor{stringliteral}{"empty header value for header="} << headerName;
+459           \textcolor{keywordflow}{return} folly::makeUnexpected(GzipDecodeError::EMPTY_HEADER_VALUE);
+460         \}
+461         outHeaders_.emplace\_back(headerName->str.data(),
+462                                  headerName->str.size(),
+463                                  \textcolor{keyword}{false}, \textcolor{keyword}{true});
+464         outHeaders_.emplace\_back(valueStart, pos - valueStart, \textcolor{keyword}{false}, \textcolor{keyword}{true});
+465         expandedHeaderLineBytes += (pos - valueStart) + headerName->str.size();
+466       \}
+467       headerName = \textcolor{keyword}{nullptr};
+468     \}
+469   \}
+470   \textcolor{keywordflow}{return} expandedHeaderLineBytes;
+471 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!decoded\+Size\+\_\+@{decoded\+Size\+\_\+}}
+\index{decoded\+Size\+\_\+@{decoded\+Size\+\_\+}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{decoded\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Header\+Size} proxygen\+::\+Gzip\+Header\+Codec\+::decoded\+Size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GzipHeaderCodec_a2a1535ad0e5a01241cb5869c1c48af82}
+
+
+Definition at line 70 of file Gzip\+Header\+Codec.\+h.
+
+
+
+Referenced by decode().
+
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!deflater\+\_\+@{deflater\+\_\+}}
+\index{deflater\+\_\+@{deflater\+\_\+}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{deflater\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}z\+\_\+stream proxygen\+::\+Gzip\+Header\+Codec\+::deflater\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GzipHeaderCodec_a86c3fd17d4adafd880e0a86de59c4780}
+
+
+Definition at line 67 of file Gzip\+Header\+Codec.\+h.
+
+
+
+Referenced by encode(), Gzip\+Header\+Codec(), and $\sim$\+Gzip\+Header\+Codec().
+
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!inflater\+\_\+@{inflater\+\_\+}}
+\index{inflater\+\_\+@{inflater\+\_\+}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{inflater\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}z\+\_\+stream proxygen\+::\+Gzip\+Header\+Codec\+::inflater\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GzipHeaderCodec_ab7be5cf6ac428f223714b701813693dd}
+
+
+Definition at line 68 of file Gzip\+Header\+Codec.\+h.
+
+
+
+Referenced by decode(), Gzip\+Header\+Codec(), and $\sim$\+Gzip\+Header\+Codec().
+
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!out\+Headers\+\_\+@{out\+Headers\+\_\+}}
+\index{out\+Headers\+\_\+@{out\+Headers\+\_\+}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{out\+Headers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf compress\+::\+Header\+Piece\+List} proxygen\+::\+Gzip\+Header\+Codec\+::out\+Headers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GzipHeaderCodec_a7df782fe5f62c44b61a8f5e8da935ff5}
+
+
+Definition at line 69 of file Gzip\+Header\+Codec.\+h.
+
+
+
+Referenced by decode(), and parse\+Name\+Values().
+
+\index{proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}!version\+Settings\+\_\+@{version\+Settings\+\_\+}}
+\index{version\+Settings\+\_\+@{version\+Settings\+\_\+}!proxygen\+::\+Gzip\+Header\+Codec@{proxygen\+::\+Gzip\+Header\+Codec}}
+\subsubsection[{version\+Settings\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf S\+P\+D\+Y\+Version\+Settings}\& proxygen\+::\+Gzip\+Header\+Codec\+::version\+Settings\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1GzipHeaderCodec_ac4d8507560a3163c4f17632805a13e3c}
+
+
+Definition at line 66 of file Gzip\+Header\+Codec.\+h.
+
+
+
+Referenced by decode(), encode(), and parse\+Name\+Values().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Gzip\+Header\+Codec.\+h}\item 
+proxygen/lib/http/codec/compress/{\bf Gzip\+Header\+Codec.\+cpp}\end{DoxyCompactItemize}

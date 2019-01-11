@@ -1,0 +1,1435 @@
+\section{proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Framer\+Test.cpp File Reference}
+\label{HTTP2FramerTest_8cpp}\index{proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Framer\+Test.\+cpp@{proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Framer\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Random.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Message.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Test\+Utils.\+h$>$}\\*
+{\ttfamily \#include $<$random$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P2\+Framer.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf H\+T\+T\+P2\+Framer\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf write\+Frame\+Header\+Manual} (I\+O\+Buf\+Queue \&queue, uint32\+\_\+t length, uint8\+\_\+t type, uint8\+\_\+t {\bf flags}, uint32\+\_\+t {\bf stream})
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Write\+And\+Parse\+Small\+Data\+No\+Pad)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Write\+And\+Parse\+Small\+Data\+Zero\+Pad)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Write\+And\+Parse\+Small\+Data\+Small\+Pad)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Many\+Data\+Frame\+Sizes)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Bad\+Stream\+Data)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Bad\+Stream\+Settings)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Bad\+Pad)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, No\+Headroom\+Optimization)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Use\+Headroom\+Optimization)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Bad\+Stream\+Id)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Rst\+Stream)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Goaway)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Goaway\+Debug\+Data)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Goaway\+Double\+Read)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Priority)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Headers\+With\+Padding\+And\+Priority)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Ping)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Window\+Update)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Certificate\+Request)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Empty\+Certificate\+Request)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Short\+Certificate\+Request)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Certificate\+Request\+On\+Nonzero\+Stream)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Ending\+Certificate)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Certificate)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Empty\+Certificate)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Short\+Certificate)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Certificate\+On\+Nonzero\+Stream)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Short\+Window\+Update)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Uint32\+Max\+Window\+Update)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Alt\+Svc)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Settings)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Settings\+Ack)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Bad\+Settings\+Ack)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Unknown\+Setting)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Push\+Promise)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Ex\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Framer\+Test}, Ex\+Headers\+With\+Flags\+Set)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Write\+And\+Parse\+Small\+Data\+No\+Pad)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Write\+And\+Parse\+Small\+Data\+No\+Pad}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a1dc5bd884d46dc40c2d158445b94a642}
+
+
+Definition at line 86 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+No\+Padding.
+
+
+\begin{DoxyCode}
+86                                                      \{
+87   dataFrameTest(20, kNoPadding);
+88 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Write\+And\+Parse\+Small\+Data\+Zero\+Pad)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Write\+And\+Parse\+Small\+Data\+Zero\+Pad}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a148aafdf46f251348ad43cfe49ece725}
+
+
+Definition at line 90 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+90                                                        \{
+91   dataFrameTest(20, Padding(0));
+92 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Write\+And\+Parse\+Small\+Data\+Small\+Pad)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Write\+And\+Parse\+Small\+Data\+Small\+Pad}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a19bb668f2afc27f239461e11df44eff4}
+
+
+Definition at line 94 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+94                                                         \{
+95   dataFrameTest(20, Padding(20));
+96 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Many\+Data\+Frame\+Sizes)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Many\+Data\+Frame\+Sizes}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_ab7ce70e765c431d2605bcf590c606ef8}
+
+
+Definition at line 98 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Max\+Frame\+Payload\+Length, proxygen\+::http2\+::k\+No\+Padding, and make\+Buf().
+
+
+\begin{DoxyCode}
+98                                             \{
+99   dataFrameTest(0, kNoPadding);
+100   \textcolor{keywordflow}{for} (uint32\_t dataLen = 1; dataLen < kMaxFramePayloadLength; dataLen <<= 1) \{
+101     \textcolor{keyword}{auto} body = makeBuf(dataLen);
+102     dataFrameTest(body.get(), dataLen, Padding(0));
+103     dataFrameTest(0, Padding(dataLen));
+104     \textcolor{keywordflow}{for} (uint8\_t padding = 1; padding != 0; padding <<= 1) \{
+105       dataFrameTest(body.get(), dataLen, Padding(padding));
+106     \}
+107   \}
+108 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Bad\+Stream\+Data)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Bad\+Stream\+Data}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a0b3fc2f3cf3bca6dbc7755b60436fec4}
+
+
+Definition at line 110 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::parse\+Data(), proxygen\+::http2\+::parse\+Frame\+Header(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+110                                        \{
+111   writeFrameHeaderManual(queue\_, 0,
+112                          static\_cast<uint8\_t>(FrameType::DATA),
+113                          0, 0);
+114   FrameHeader outHeader;
+115   std::unique\_ptr<IOBuf> outBuf;
+116   uint16\_t padding = 0;
+117   Cursor cursor(queue\_.front());
+118   EXPECT\_EQ(parseFrameHeader(cursor, outHeader), ErrorCode::NO\_ERROR);
+119   EXPECT\_EQ(parseData(cursor, outHeader, outBuf, padding),
+120             ErrorCode::PROTOCOL\_ERROR);
+121 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Bad\+Stream\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Bad\+Stream\+Settings}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a22d1e41c4e02eb5a4f8f1bbc414f8d6d}
+
+
+Definition at line 123 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+A\+CK, proxygen\+::http2\+::parse\+Frame\+Header(), proxygen\+::http2\+::parse\+Settings(), proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+GS, and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+123                                            \{
+124   writeFrameHeaderManual(queue\_, 0,
+125                          static\_cast<uint8\_t>(FrameType::SETTINGS),
+126                          ACK, 1);
+127   FrameHeader outHeader;
+128   std::deque<SettingPair> outSettings;
+129   Cursor cursor(queue\_.front());
+130   EXPECT\_EQ(parseFrameHeader(cursor, outHeader), ErrorCode::NO\_ERROR);
+131   EXPECT\_EQ(parseSettings(cursor, outHeader, outSettings),
+132             ErrorCode::PROTOCOL\_ERROR);
+133 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Bad\+Pad)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Bad\+Pad}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_ad93fe8d3d2d77331e6596f722585fc27}
+
+
+Definition at line 135 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References make\+Buf(), proxygen\+::http2\+::parse\+Data(), proxygen\+::http2\+::parse\+Frame\+Header(), and proxygen\+::http2\+::write\+Data().
+
+
+\begin{DoxyCode}
+135                                 \{
+136   \textcolor{keyword}{auto} body = makeBuf(5);
+137   writeData(queue\_, body->clone(), 1, Padding(5), \textcolor{keyword}{false}, \textcolor{keyword}{true});
+138   queue\_.trimEnd(5);
+139   queue\_.append(\textcolor{keywordtype}{string}(\textcolor{stringliteral}{"abcde"}));
+140 
+141   FrameHeader outHeader;
+142   std::unique\_ptr<IOBuf> outBuf;
+143   uint16\_t padding = 0;
+144   Cursor cursor(queue\_.front());
+145   EXPECT\_EQ(parseFrameHeader(cursor, outHeader), ErrorCode::NO\_ERROR);
+146   EXPECT\_EQ(parseData(cursor, outHeader, outBuf, padding),
+147             ErrorCode::PROTOCOL\_ERROR);
+148 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, No\+Headroom\+Optimization)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{No\+Headroom\+Optimization}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a7c5013dba0e0fc42fd32f551ee870cd5}
+
+
+Definition at line 150 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::http2\+::k\+Frame\+Priority\+Size, and proxygen\+::http2\+::write\+Data().
+
+
+\begin{DoxyCode}
+150                                                 \{
+151   queue\_.move();
+152   \textcolor{keyword}{auto} buf = folly::IOBuf::create(200);
+153   \textcolor{comment}{// This should make enough headroom so we will apply the optimization:}
+154   \textcolor{keyword}{auto} headRoomSize = kFrameHeaderSize + kFramePrioritySize * 2 + 10;
+155   buf->advance(headRoomSize);
+156   buf->append(20); \textcolor{comment}{// make a positive length}
+157   writeData(queue\_, std::move(buf), 1, Padding(0), \textcolor{keyword}{false},
+158             \textcolor{keyword}{false} \textcolor{comment}{/* reuseIOBufHeadroom */});
+159   \textcolor{keyword}{auto} queueHead = queue\_.front();
+160   EXPECT\_TRUE(queueHead->isChained());
+161   \textcolor{comment}{// This is our original iobuf:}
+162   \textcolor{keyword}{auto} queueNode = queueHead->prev();
+163   EXPECT\_TRUE(queueNode != \textcolor{keyword}{nullptr});
+164   \textcolor{comment}{// And its headroom or length is untouched:}
+165   EXPECT\_EQ(headRoomSize, queueNode->headroom());
+166   EXPECT\_EQ(20, queueNode->length());
+167 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Use\+Headroom\+Optimization)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Use\+Headroom\+Optimization}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_aceca92cbc2647a6668d4127ca66a5475}
+
+
+Definition at line 169 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::http2\+::k\+Frame\+Priority\+Size, and proxygen\+::http2\+::write\+Data().
+
+
+\begin{DoxyCode}
+169                                                  \{
+170   queue\_.move();
+171   \textcolor{keyword}{auto} buf = folly::IOBuf::create(200);
+172   \textcolor{comment}{// This should make enough headroom so we will apply the optimization:}
+173   \textcolor{keyword}{auto} headRoomSize = kFrameHeaderSize + kFramePrioritySize * 2 + 10;
+174   buf->advance(headRoomSize);
+175   buf->append(20); \textcolor{comment}{// make a positive length}
+176   writeData(queue\_, std::move(buf), 1, Padding(0), \textcolor{keyword}{false},
+177             \textcolor{keyword}{true} \textcolor{comment}{/* reuseIOBufHeadroom */});
+178   \textcolor{comment}{// There won't be a chain, frame header is written in-place into our IOBuf:}
+179   \textcolor{keyword}{auto} queueNode = queue\_.front();
+180   EXPECT\_FALSE(queueNode->isChained());
+181   \textcolor{comment}{// And its headroom has been shrinked:}
+182   EXPECT\_LT(queueNode->headroom(), headRoomSize);
+183 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Bad\+Stream\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Bad\+Stream\+Id}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_aa27b9afa0f35739912fa4bbe6714ac64}
+
+
+Definition at line 185 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE, and proxygen\+::http2\+::write\+Rst\+Stream().
+
+
+\begin{DoxyCode}
+185                                      \{
+186   \textcolor{comment}{// We should crash on DBG builds if the stream id > 2^31 - 1}
+187   EXPECT_DEATH_NO_CORE(writeRstStream(queue\_,
+188                                       static\_cast<uint32\_t>(-1),
+189                                       ErrorCode::PROTOCOL\_ERROR), \textcolor{stringliteral}{".*"});
+190 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Rst\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Rst\+Stream}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a6973f2f8c410c33bd9249a993cb2ec7f}
+
+
+Definition at line 192 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::k\+Frame\+Rst\+Stream\+Size, proxygen\+::http2\+::\+Frame\+Header\+::length, parse(), proxygen\+::http2\+::parse\+Rst\+Stream(), proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+S\+T\+R\+E\+AM, proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Rst\+Stream().
+
+
+\begin{DoxyCode}
+192                                    \{
+193   writeRstStream(queue\_, 1, ErrorCode::CANCEL);
+194 
+195   FrameHeader header;
+196   ErrorCode outCode;
+197   parse(&parseRstStream, header, outCode);
+198 
+199   ASSERT\_EQ(FrameType::RST_STREAM, header.type);
+200   ASSERT\_EQ(1, header.stream);
+201   ASSERT\_EQ(0, header.flags);
+202   ASSERT\_EQ(kFrameRstStreamSize, header.length);
+203   ASSERT\_EQ(ErrorCode::CANCEL, outCode);
+204 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Goaway)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Goaway}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a15665f4d1981f82be21e5346be93d2b5}
+
+
+Definition at line 206 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::spdy\+::\+G\+O\+A\+W\+AY, proxygen\+::http2\+::k\+Frame\+Goaway\+Size, proxygen\+::http2\+::\+Frame\+Header\+::length, parse(), proxygen\+::http2\+::parse\+Goaway(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Goaway().
+
+
+\begin{DoxyCode}
+206                                 \{
+207   writeGoaway(queue\_, 0, ErrorCode::FLOW\_CONTROL\_ERROR);
+208 
+209   FrameHeader header;
+210   uint32\_t lastStreamID;
+211   ErrorCode outCode;
+212   std::unique\_ptr<IOBuf> outDebugData;
+213   parse(&parseGoaway, header, lastStreamID, outCode, outDebugData);
+214 
+215   ASSERT\_EQ(FrameType::GOAWAY, header.type);
+216   ASSERT\_EQ(0, header.stream);
+217   ASSERT\_EQ(0, header.flags);
+218   ASSERT\_EQ(kFrameGoawaySize, header.length);
+219   ASSERT\_EQ(ErrorCode::FLOW\_CONTROL\_ERROR, outCode);
+220   ASSERT\_EQ(0, lastStreamID);
+221   ASSERT\_FALSE(outDebugData);
+222 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Goaway\+Debug\+Data)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Goaway\+Debug\+Data}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_acbc8878e95da50ec1d1162d168aad97e}
+
+
+Definition at line 224 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::spdy\+::\+G\+O\+A\+W\+AY, proxygen\+::http2\+::k\+Frame\+Goaway\+Size, proxygen\+::http2\+::\+Frame\+Header\+::length, make\+Buf(), parse(), proxygen\+::http2\+::parse\+Goaway(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Goaway().
+
+
+\begin{DoxyCode}
+224                                          \{
+225   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcde"});
+226   \textcolor{keyword}{auto} debugData = makeBuf(5);
+227   memcpy(debugData->writableData(), data.data(), data.length());
+228   writeGoaway(queue\_, 0, ErrorCode::FLOW\_CONTROL\_ERROR, std::move(debugData));
+229 
+230   FrameHeader header;
+231   uint32\_t lastStreamID;
+232   ErrorCode outCode;
+233   std::unique\_ptr<IOBuf> outDebugData;
+234   parse(&parseGoaway, header, lastStreamID, outCode, outDebugData);
+235 
+236   ASSERT\_EQ(FrameType::GOAWAY, header.type);
+237   ASSERT\_EQ(0, header.stream);
+238   ASSERT\_EQ(0, header.flags);
+239   ASSERT\_EQ(kFrameGoawaySize + data.length(), header.length);
+240   ASSERT\_EQ(ErrorCode::FLOW\_CONTROL\_ERROR, outCode);
+241   ASSERT\_EQ(0, lastStreamID);
+242   ASSERT\_EQ(outDebugData->computeChainDataLength(), data.length());
+243   EXPECT\_EQ(outDebugData->moveToFbString(), data);
+244 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Goaway\+Double\+Read)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Goaway\+Double\+Read}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a432662ef4aa96a82e4c62112a5b1ffc0}
+
+
+Definition at line 248 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::spdy\+::\+G\+O\+A\+W\+AY, proxygen\+::http2\+::k\+Frame\+Goaway\+Size, proxygen\+::http2\+::parse\+Frame\+Header(), proxygen\+::http2\+::parse\+Goaway(), proxygen\+::http2\+::\+Frame\+Header\+::type, and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+248                                           \{
+249     writeFrameHeaderManual(
+250       queue\_,
+251       kFrameGoawaySize,
+252       static\_cast<uint8\_t>(FrameType::GOAWAY),
+253       0,
+254       0);
+255 
+256     QueueAppender appender(&queue\_, kFrameGoawaySize);
+257     appender.writeBE<uint32\_t>(0);
+258     \textcolor{comment}{// Here's the invalid value:}
+259     appender.writeBE<uint32\_t>(\textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(0xffffffff));
+260 
+261     uint32\_t outLastStreamID;
+262     ErrorCode outCode;
+263     std::unique\_ptr<IOBuf> outDebugData;
+264     FrameHeader outHeader;
+265     Cursor cursor(queue\_.front());
+266 
+267     \textcolor{keyword}{auto} ret1 = parseFrameHeader(cursor, outHeader);
+268     ASSERT\_EQ(ErrorCode::NO\_ERROR, ret1);
+269     ASSERT\_EQ(FrameType::GOAWAY, outHeader.type);
+270     \textcolor{keyword}{auto} ret2 = parseGoaway(cursor, outHeader, outLastStreamID,
+271                             outCode, outDebugData);
+272     ASSERT\_EQ(ErrorCode::PROTOCOL\_ERROR, ret2);
+273 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Priority)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Priority}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a839ebd1de8fa3ec373885dcbe5b0218a}
+
+
+Definition at line 275 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Priority\+Update\+::exclusive, parse(), proxygen\+::http2\+::parse\+Priority(), proxygen\+::http2\+::\+P\+R\+I\+O\+R\+I\+TY, proxygen\+::http2\+::\+Priority\+Update\+::stream\+Dependency, proxygen\+::http2\+::\+Priority\+Update\+::weight, and proxygen\+::http2\+::write\+Priority().
+
+
+\begin{DoxyCode}
+275                                   \{
+276   writePriority(queue\_, 102, \{0, \textcolor{keyword}{false}, 30\});
+277 
+278   FrameHeader header;
+279   PriorityUpdate priority;
+280   parse(&parsePriority, header, priority);
+281 
+282   ASSERT\_EQ(FrameType::PRIORITY, header.type);
+283   ASSERT\_EQ(102, header.stream);
+284   ASSERT\_EQ(0, header.flags);
+285   ASSERT\_EQ(0, priority.streamDependency);
+286   ASSERT\_FALSE(priority.exclusive);
+287   ASSERT\_EQ(30, priority.weight);
+288 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Headers\+With\+Padding\+And\+Priority)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Headers\+With\+Padding\+And\+Priority}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a5cb0e1d99cd32d8c9b77810d40ffaff3}
+
+
+Definition at line 290 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+E\+N\+D\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::http2\+::\+E\+N\+D\+\_\+\+S\+T\+R\+E\+AM, proxygen\+::spdy\+::\+H\+E\+A\+D\+E\+RS, make\+Buf(), parse(), proxygen\+::http2\+::parse\+Headers(), proxygen\+::http2\+::\+P\+R\+I\+O\+R\+I\+TY, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+290                                                        \{
+291   \textcolor{keyword}{auto} body = makeBuf(500);
+292   writeHeaders(queue\_, body->clone(), 1, \{\{0, \textcolor{keyword}{true}, 12\}\}, 200,
+293                \textcolor{keyword}{false}, \textcolor{keyword}{false});
+294 
+295   FrameHeader header;
+296   folly::Optional<PriorityUpdate> priority;
+297   std::unique\_ptr<IOBuf> outBuf;
+298   parse(&parseHeaders, header, priority, outBuf);
+299 
+300   ASSERT\_EQ(FrameType::HEADERS, header.type);
+301   ASSERT\_EQ(1, header.stream);
+302   ASSERT\_TRUE(PRIORITY & header.flags);
+303   ASSERT\_FALSE(END_STREAM & header.flags);
+304   ASSERT\_FALSE(END_HEADERS & header.flags);
+305   ASSERT\_EQ(0, priority->streamDependency);
+306   ASSERT\_TRUE(priority->exclusive);
+307   ASSERT\_EQ(12, priority->weight);
+308   EXPECT\_EQ(outBuf->moveToFbString(), body->moveToFbString());
+309 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Ping)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Ping}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a478fdfb95ea0f9f7861c125c9ef9bbd1}
+
+
+Definition at line 311 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, parse(), proxygen\+::http2\+::parse\+Ping(), proxygen\+::spdy\+::\+P\+I\+NG, proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Ping().
+
+
+\begin{DoxyCode}
+311                               \{
+312   uint64\_t data = folly::Random::rand64();
+313   writePing(queue\_, data, \textcolor{keyword}{false});
+314 
+315   FrameHeader header;
+316   uint64\_t outData;
+317   parse(&parsePing, header, outData);
+318 
+319   ASSERT\_EQ(FrameType::PING, header.type);
+320   ASSERT\_EQ(0, header.stream);
+321   ASSERT\_EQ(0, header.flags);
+322   EXPECT\_EQ(data, outData);
+323 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Window\+Update)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Window\+Update}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a4ebb4e3c901e23a6f0171703d6684556}
+
+
+Definition at line 325 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, parse(), proxygen\+::http2\+::parse\+Window\+Update(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, proxygen\+::spdy\+::\+W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE, and proxygen\+::http2\+::write\+Window\+Update().
+
+
+\begin{DoxyCode}
+325                                       \{
+326   writeWindowUpdate(queue\_, 33, 120);
+327 
+328   FrameHeader header;
+329   uint32\_t amount;
+330   parse(&parseWindowUpdate, header, amount);
+331 
+332   ASSERT\_EQ(FrameType::WINDOW_UPDATE, header.type);
+333   ASSERT\_EQ(33, header.stream);
+334   ASSERT\_EQ(0, header.flags);
+335   EXPECT\_EQ(120, amount);
+336 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Certificate\+Request)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Certificate\+Request}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a028b999fab7c6f8e505a6715d5c5ace3}
+
+
+Definition at line 338 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::k\+Frame\+Certificate\+Request\+Size\+Base, proxygen\+::http2\+::\+Frame\+Header\+::length, make\+Buf(), parse(), proxygen\+::http2\+::parse\+Certificate\+Request(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Certificate\+Request().
+
+
+\begin{DoxyCode}
+338                                             \{
+339   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcdef"});
+340   \textcolor{keyword}{auto} authRequest = makeBuf(6);
+341   memcpy(authRequest->writableData(), data.data(), data.length());
+342   uint16\_t requestId = 120;
+343   writeCertificateRequest(queue\_, requestId, std::move(authRequest));
+344 
+345   FrameHeader header;
+346   uint16\_t outRequestId;
+347   std::unique\_ptr<IOBuf> outAuthRequest;
+348   parse(&parseCertificateRequest, header, outRequestId, outAuthRequest);
+349 
+350   ASSERT\_EQ(FrameType::CERTIFICATE\_REQUEST, header.type);
+351   ASSERT\_EQ(0, header.stream);
+352   ASSERT\_EQ(0, header.flags);
+353   ASSERT\_EQ(kFrameCertificateRequestSizeBase + data.length(), header.length);
+354   ASSERT\_EQ(outRequestId, requestId);
+355   ASSERT\_EQ(outAuthRequest->computeChainDataLength(), data.length());
+356   EXPECT\_EQ(outAuthRequest->moveToFbString(), data);
+357 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Empty\+Certificate\+Request)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Empty\+Certificate\+Request}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a9b24ace6df0b42b7c25def99c953a806}
+
+
+Definition at line 359 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::k\+Frame\+Certificate\+Request\+Size\+Base, proxygen\+::http2\+::\+Frame\+Header\+::length, parse(), proxygen\+::http2\+::parse\+Certificate\+Request(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Certificate\+Request().
+
+
+\begin{DoxyCode}
+359                                                  \{
+360   uint16\_t requestId = 120;
+361   writeCertificateRequest(queue\_, requestId, \textcolor{keyword}{nullptr});
+362 
+363   FrameHeader header;
+364   uint16\_t outRequestId;
+365   std::unique\_ptr<IOBuf> outAuthRequest;
+366   parse(&parseCertificateRequest, header, outRequestId, outAuthRequest);
+367 
+368   ASSERT\_EQ(FrameType::CERTIFICATE\_REQUEST, header.type);
+369   ASSERT\_EQ(0, header.stream);
+370   ASSERT\_EQ(0, header.flags);
+371   ASSERT\_EQ(kFrameCertificateRequestSizeBase, header.length);
+372   ASSERT\_EQ(outRequestId, requestId);
+373   ASSERT\_FALSE(outAuthRequest);
+374 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Short\+Certificate\+Request)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Short\+Certificate\+Request}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a54283cef0897825cf6dac46644c73baa}
+
+
+Definition at line 376 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::parse\+Certificate\+Request(), proxygen\+::http2\+::parse\+Frame\+Header(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+376                                                  \{
+377   \textcolor{comment}{// length field is too short for frame type}
+378   writeFrameHeaderManual(
+379       queue\_, 1, static\_cast<uint8\_t>(FrameType::CERTIFICATE\_REQUEST), 0, 0);
+380   QueueAppender appender(&queue\_, 1);
+381   appender.writeBE<uint8\_t>(1);
+382 
+383   Cursor cursor(queue\_.front());
+384   FrameHeader header;
+385   uint16\_t outRequestId;
+386   std::unique\_ptr<IOBuf> outAuthRequest;
+387   parseFrameHeader(cursor, header);
+388   \textcolor{keyword}{auto} ret =
+389       parseCertificateRequest(cursor, header, outRequestId, outAuthRequest);
+390   ASSERT\_EQ(ErrorCode::FRAME\_SIZE\_ERROR, ret);
+391 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Certificate\+Request\+On\+Nonzero\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Certificate\+Request\+On\+Nonzero\+Stream}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a86cd4c6e99e20e59ac28f61a2f348b26}
+
+
+Definition at line 393 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::parse\+Certificate\+Request(), proxygen\+::http2\+::parse\+Frame\+Header(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+393                                                            \{
+394   \textcolor{comment}{// received CERTIFICATE\_REQUEST frame on nonzero stream}
+395   writeFrameHeaderManual(
+396       queue\_, 2, static\_cast<uint8\_t>(FrameType::CERTIFICATE\_REQUEST), 0, 1);
+397   QueueAppender appender(&queue\_, 1);
+398   appender.writeBE<uint16\_t>(1);
+399 
+400   Cursor cursor(queue\_.front());
+401   FrameHeader header;
+402   uint16\_t outRequestId;
+403   std::unique\_ptr<IOBuf> outAuthRequest;
+404   parseFrameHeader(cursor, header);
+405   \textcolor{keyword}{auto} ret =
+406       parseCertificateRequest(cursor, header, outRequestId, outAuthRequest);
+407   ASSERT\_EQ(ErrorCode::PROTOCOL\_ERROR, ret);
+408 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Ending\+Certificate)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Ending\+Certificate}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_aeaf348d864b5c0975e8ae3289adf4b22}
+
+
+Definition at line 410 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::k\+Frame\+Certificate\+Size\+Base, proxygen\+::http2\+::\+Frame\+Header\+::length, make\+Buf(), parse(), proxygen\+::http2\+::parse\+Certificate(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Certificate().
+
+
+\begin{DoxyCode}
+410                                            \{
+411   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcdef"});
+412   \textcolor{keyword}{auto} authenticator = makeBuf(6);
+413   memcpy(authenticator->writableData(), data.data(), data.length());
+414   uint16\_t certId = 120;
+415   \textcolor{comment}{// The last CERTIFICATE frame containing authenticator fragment.}
+416   writeCertificate(queue\_, certId, std::move(authenticator), \textcolor{keyword}{false});
+417 
+418   FrameHeader header;
+419   uint16\_t outCertId;
+420   std::unique\_ptr<IOBuf> outAuthenticator;
+421   parse(&parseCertificate, header, outCertId, outAuthenticator);
+422 
+423   ASSERT\_EQ(FrameType::CERTIFICATE, header.type);
+424   ASSERT\_EQ(0, header.stream);
+425   ASSERT\_EQ(0, header.flags);
+426   ASSERT\_EQ(kFrameCertificateSizeBase + data.length(), header.length);
+427   ASSERT\_EQ(outCertId, certId);
+428   ASSERT\_EQ(outAuthenticator->computeChainDataLength(), data.length());
+429   EXPECT\_EQ(outAuthenticator->moveToFbString(), data);
+430 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Certificate)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Certificate}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a39831ffcf432da09f60dbd9897e2bd6f}
+
+
+Definition at line 432 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::k\+Frame\+Certificate\+Size\+Base, proxygen\+::http2\+::\+Frame\+Header\+::length, make\+Buf(), parse(), proxygen\+::http2\+::parse\+Certificate(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+T\+O\+\_\+\+B\+E\+\_\+\+C\+O\+N\+T\+I\+N\+U\+ED, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Certificate().
+
+
+\begin{DoxyCode}
+432                                      \{
+433   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcdef"});
+434   \textcolor{keyword}{auto} authenticator = makeBuf(6);
+435   memcpy(authenticator->writableData(), data.data(), data.length());
+436   uint16\_t certId = 120;
+437   \textcolor{comment}{// CERTIFICATE frame containing an authenticator fragment but not the last}
+438   \textcolor{comment}{// fragment.}
+439   writeCertificate(queue\_, certId, std::move(authenticator), \textcolor{keyword}{true});
+440 
+441   FrameHeader header;
+442   uint16\_t outCertId;
+443   std::unique\_ptr<IOBuf> outAuthenticator;
+444   parse(&parseCertificate, header, outCertId, outAuthenticator);
+445 
+446   ASSERT\_EQ(FrameType::CERTIFICATE, header.type);
+447   ASSERT\_EQ(0, header.stream);
+448   ASSERT\_TRUE(TO_BE_CONTINUED & header.flags);
+449   ASSERT\_EQ(kFrameCertificateSizeBase + data.length(), header.length);
+450   ASSERT\_EQ(outCertId, certId);
+451   ASSERT\_EQ(outAuthenticator->computeChainDataLength(), data.length());
+452   EXPECT\_EQ(outAuthenticator->moveToFbString(), data);
+453 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Empty\+Certificate)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Empty\+Certificate}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a9b1300b2df8df38245deb0daf0bd658f}
+
+
+Definition at line 455 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::k\+Frame\+Certificate\+Size\+Base, proxygen\+::http2\+::\+Frame\+Header\+::length, parse(), proxygen\+::http2\+::parse\+Certificate(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+T\+O\+\_\+\+B\+E\+\_\+\+C\+O\+N\+T\+I\+N\+U\+ED, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Certificate().
+
+
+\begin{DoxyCode}
+455                                           \{
+456   uint16\_t certId = 120;
+457   writeCertificate(queue\_, certId, \textcolor{keyword}{nullptr}, \textcolor{keyword}{true});
+458 
+459   FrameHeader header;
+460   uint16\_t outCertId;
+461   std::unique\_ptr<IOBuf> outAuthenticator;
+462   parse(&parseCertificate, header, outCertId, outAuthenticator);
+463 
+464   ASSERT\_EQ(FrameType::CERTIFICATE, header.type);
+465   ASSERT\_EQ(0, header.stream);
+466   ASSERT\_TRUE(TO_BE_CONTINUED & header.flags);
+467   ASSERT\_EQ(kFrameCertificateSizeBase, header.length);
+468   ASSERT\_EQ(outCertId, certId);
+469   ASSERT\_FALSE(outAuthenticator);
+470 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Short\+Certificate)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Short\+Certificate}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a536fbf480fb478ffdd71a1d9c04dc9da}
+
+
+Definition at line 472 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::parse\+Certificate(), proxygen\+::http2\+::parse\+Frame\+Header(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+472                                           \{
+473   \textcolor{comment}{// length field is too short for frame type}
+474   writeFrameHeaderManual(
+475       queue\_, 1, static\_cast<uint8\_t>(FrameType::CERTIFICATE), 0, 0);
+476   QueueAppender appender(&queue\_, 1);
+477   appender.writeBE<uint8\_t>(1);
+478 
+479   Cursor cursor(queue\_.front());
+480   FrameHeader header;
+481   uint16\_t outCertId;
+482   std::unique\_ptr<IOBuf> outAuthenticator;
+483   parseFrameHeader(cursor, header);
+484   \textcolor{keyword}{auto} ret = parseCertificate(cursor, header, outCertId, outAuthenticator);
+485   ASSERT\_EQ(ErrorCode::FRAME\_SIZE\_ERROR, ret);
+486 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Certificate\+On\+Nonzero\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Certificate\+On\+Nonzero\+Stream}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a6bcc6e25b53526a19d1dafc3897c5913}
+
+
+Definition at line 488 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::parse\+Certificate(), proxygen\+::http2\+::parse\+Frame\+Header(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+488                                                     \{
+489   \textcolor{comment}{// received CERTIFICATE frame on nonzero stream}
+490   writeFrameHeaderManual(
+491       queue\_, 2, static\_cast<uint8\_t>(FrameType::CERTIFICATE), 0, 1);
+492   QueueAppender appender(&queue\_, 1);
+493   appender.writeBE<uint16\_t>(1);
+494 
+495   Cursor cursor(queue\_.front());
+496   FrameHeader header;
+497   uint16\_t outCertId;
+498   std::unique\_ptr<IOBuf> outAuthenticator;
+499   parseFrameHeader(cursor, header);
+500   \textcolor{keyword}{auto} ret = parseCertificate(cursor, header, outCertId, outAuthenticator);
+501   ASSERT\_EQ(ErrorCode::PROTOCOL\_ERROR, ret);
+502 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Short\+Window\+Update)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Short\+Window\+Update}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a34e52173e2d74482ef6b9638462634a7}
+
+
+Definition at line 505 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::parse\+Frame\+Header(), proxygen\+::http2\+::parse\+Window\+Update(), proxygen\+::spdy\+::\+W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE, and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+505                                            \{
+506   \textcolor{comment}{// length field is too short for frame type}
+507   writeFrameHeaderManual(queue\_, 0,
+508                          static\_cast<uint8\_t>(FrameType::WINDOW_UPDATE),
+509                          0, 0);
+510 
+511   Cursor cursor(queue\_.front());
+512   FrameHeader header;
+513   uint32\_t amount;
+514   parseFrameHeader(cursor, header);
+515   \textcolor{keyword}{auto} ret2 = parseWindowUpdate(cursor, header, amount);
+516   ASSERT\_EQ(ErrorCode::FRAME\_SIZE\_ERROR, ret2);
+517 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Uint32\+Max\+Window\+Update)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Uint32\+Max\+Window\+Update}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_ab436dd08e5d9683e35e10e228ec55e45}
+
+
+Definition at line 519 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Frame\+Header\+Size, parse(), proxygen\+::http2\+::parse\+Window\+Update(), proxygen\+::spdy\+::\+W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE, and proxygen\+::http2\+::write\+Window\+Update().
+
+
+\begin{DoxyCode}
+519                                                \{
+520   \textcolor{keyword}{const} uint32\_t uint31Max = 0x7fffffff;
+521   writeWindowUpdate(queue\_, 33, 1); \textcolor{comment}{// we will overwrite the update size}
+522   \textcolor{keyword}{auto} buf = queue\_.move();
+523   buf->coalesce();
+524   \textcolor{comment}{// Set update size to unit32\_t max}
+525   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 4; ++i) \{
+526     buf->writableData()[kFrameHeaderSize + i] = 0xff;
+527   \}
+528 
+529   FrameHeader header;
+530   uint32\_t amount;
+531   parse(buf.get(), &parseWindowUpdate, header, amount);
+532 
+533   ASSERT\_EQ(FrameType::WINDOW_UPDATE, header.type);
+534   ASSERT\_EQ(33, header.stream);
+535   ASSERT\_EQ(0, header.flags);
+536   \textcolor{comment}{// We should ignore the top bit}
+537   EXPECT\_EQ(uint31Max, amount);
+538 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Alt\+Svc)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Alt\+Svc}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a80c1de8ec4f64548ae020fd8d2f3c0cf}
+
+
+Definition at line 540 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, parse(), proxygen\+::http2\+::parse\+Alt\+Svc(), proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Alt\+Svc().
+
+
+\begin{DoxyCode}
+540                                 \{
+541   \textcolor{keywordtype}{string} protocol = \textcolor{stringliteral}{"special-proto"};
+542   \textcolor{keywordtype}{string} host = \textcolor{stringliteral}{"special-host"};
+543   \textcolor{keywordtype}{string} origin = \textcolor{stringliteral}{"special-origin"};
+544   writeAltSvc(queue\_, 2, 150, 8080, protocol, host, origin);
+545 
+546   FrameHeader header;
+547   uint32\_t outMaxAge;
+548   uint32\_t outPort;
+549   \textcolor{keywordtype}{string} outProtocol;
+550   \textcolor{keywordtype}{string} outHost;
+551   \textcolor{keywordtype}{string} outOrigin;
+552   parse(&parseAltSvc, header, outMaxAge, outPort, outProtocol,
+553         outHost, outOrigin);
+554 
+555   ASSERT\_EQ(FrameType::ALTSVC, header.type);
+556   ASSERT\_EQ(2, header.stream);
+557   ASSERT\_EQ(0, header.flags);
+558   EXPECT\_EQ(150, outMaxAge);
+559   EXPECT\_EQ(8080, outPort);
+560   EXPECT\_EQ(protocol, outProtocol);
+561   EXPECT\_EQ(host, outHost);
+562   EXPECT\_EQ(origin, outOrigin);
+563 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Settings}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a688feccfb23d88fcdebfd54a48758af0}
+
+
+Definition at line 565 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::\+Frame\+Header\+::length, parse(), proxygen\+::http2\+::parse\+Settings(), proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+GS, settings, proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+565                                   \{
+566   \textcolor{keyword}{const} deque<SettingPair> settings = \{\{SettingsId::HEADER\_TABLE\_SIZE, 3\},
+567                                        \{SettingsId::MAX\_CONCURRENT\_STREAMS, 4\}\};
+568   writeSettings(queue\_, settings);
+569 
+570   FrameHeader header;
+571   std::deque<SettingPair> outSettings;
+572   parse(&parseSettings, header, outSettings);
+573 
+574   ASSERT\_EQ(settings.size() * 6, header.length);
+575   ASSERT\_EQ(FrameType::SETTINGS, header.type);
+576   ASSERT\_EQ(0, header.stream);
+577   ASSERT\_EQ(0, header.flags);
+578   ASSERT\_EQ(settings, outSettings);
+579 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Settings\+Ack)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Settings\+Ack}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a0649d1151df46a083ad3adcf33c96dd6}
+
+
+Definition at line 581 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+A\+CK, proxygen\+::http2\+::parse\+Frame\+Header(), proxygen\+::http2\+::parse\+Settings(), proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+GS, and proxygen\+::http2\+::write\+Settings\+Ack().
+
+
+\begin{DoxyCode}
+581                                      \{
+582   writeSettingsAck(queue\_);
+583 
+584   Cursor cursor(queue\_.front());
+585   FrameHeader header;
+586   \textcolor{keyword}{auto} ret = parseFrameHeader(cursor, header);
+587   ASSERT\_EQ(ErrorCode::NO\_ERROR, ret);
+588 
+589   ASSERT\_EQ(0, header.length);
+590   ASSERT\_EQ(FrameType::SETTINGS, header.type);
+591   ASSERT\_EQ(0, header.stream);
+592   ASSERT\_EQ(ACK, header.flags);
+593   std::deque<SettingPair> outSettings;
+594   EXPECT\_EQ(parseSettings(cursor, header, outSettings), ErrorCode::NO\_ERROR);
+595 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Bad\+Settings\+Ack)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Bad\+Settings\+Ack}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_aa42f8c76843b97804ea1235a92f82882}
+
+
+Definition at line 597 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+A\+CK, proxygen\+::http2\+::parse\+Frame\+Header(), proxygen\+::http2\+::parse\+Settings(), proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+GS, and proxygen\+::http2\+::write\+Settings\+Ack().
+
+
+\begin{DoxyCode}
+597                                         \{
+598   writeSettingsAck(queue\_);
+599   \textcolor{comment}{// Add an extra byte to the frame}
+600   uint32\_t lengthAndType = htonl(1 << 8 | uint8\_t(FrameType::SETTINGS));
+601   memcpy(((IOBuf*)queue\_.front())->writableData(), &lengthAndType, 4);
+602   queue\_.append(\textcolor{stringliteral}{"o"});
+603 
+604   Cursor cursor(queue\_.front());
+605   FrameHeader header;
+606   \textcolor{keyword}{auto} ret = parseFrameHeader(cursor, header);
+607   ASSERT\_EQ(ErrorCode::NO\_ERROR, ret);
+608 
+609   ASSERT\_EQ(FrameType::SETTINGS, header.type);
+610   ASSERT\_EQ(0, header.stream);
+611   ASSERT\_EQ(ACK, header.flags);
+612   std::deque<SettingPair> outSettings;
+613   EXPECT\_EQ(parseSettings(cursor, header, outSettings),
+614             ErrorCode::FRAME\_SIZE\_ERROR);
+615 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Unknown\+Setting)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Unknown\+Setting}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a4a4f91187e8b338ad95194d2f70327c7}
+
+
+Definition at line 617 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+Frame\+Header\+::flags, proxygen\+::http2\+::\+Frame\+Header\+::length, parse(), proxygen\+::http2\+::parse\+Settings(), proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+GS, settings, proxygen\+::http2\+::\+Frame\+Header\+::stream, proxygen\+::http2\+::\+Frame\+Header\+::type, and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+617                                         \{
+618   \textcolor{keyword}{const} deque<SettingPair> settings = \{\{(proxygen::SettingsId)31337, 3\},
+619                                        \{(proxygen::SettingsId)0, 4\}\};
+620   writeSettings(queue\_, settings);
+621 
+622   FrameHeader header;
+623   std::deque<SettingPair> outSettings;
+624   parse(&parseSettings, header, outSettings);
+625 
+626   ASSERT\_EQ(settings.size() * 6, header.length);
+627   ASSERT\_EQ(FrameType::SETTINGS, header.type);
+628   ASSERT\_EQ(0, header.stream);
+629   ASSERT\_EQ(0, header.flags);
+630   ASSERT\_EQ(settings, outSettings);
+631 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Push\+Promise)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Push\+Promise}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a65488772579e238da89f062bcc176314}
+
+
+Definition at line 633 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References make\+Buf(), parse(), proxygen\+::http2\+::parse\+Push\+Promise(), and proxygen\+::http2\+::write\+Push\+Promise().
+
+
+\begin{DoxyCode}
+633                                      \{
+634   \textcolor{keyword}{auto} body = makeBuf(500);
+635   writePushPromise(queue\_, 21, 22, body->clone(), 255, \textcolor{keyword}{true});
+636 
+637   FrameHeader header;
+638   uint32\_t promisedStream;
+639   std::unique\_ptr<IOBuf> outBuf;
+640   parse(&parsePushPromise, header, promisedStream, outBuf);
+641 
+642   ASSERT\_EQ(FrameType::PUSH\_PROMISE, header.type);
+643   ASSERT\_EQ(21, header.stream);
+644   ASSERT\_EQ(22, promisedStream);
+645   EXPECT\_EQ(outBuf->moveToFbString(), body->moveToFbString());
+646 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a59768c7dd1d3e0608beee25882cd5de9}
+
+
+Definition at line 648 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+E\+N\+D\+\_\+\+H\+E\+A\+D\+E\+RS, make\+Buf(), proxygen\+::http2\+::\+P\+A\+D\+D\+ED, parse(), proxygen\+::http2\+::parse\+Continuation(), and proxygen\+::http2\+::write\+Continuation().
+
+
+\begin{DoxyCode}
+648                                       \{
+649   \textcolor{keyword}{auto} body = makeBuf(800);
+650   writeContinuation(queue\_, 1, \textcolor{keyword}{true}, body->clone());
+651 
+652   FrameHeader header;
+653   std::unique\_ptr<IOBuf> outBuf;
+654   parse(&parseContinuation, header, outBuf);
+655 
+656   ASSERT\_EQ(FrameType::CONTINUATION, header.type);
+657   ASSERT\_TRUE(END_HEADERS & header.flags);
+658   ASSERT\_FALSE(PADDED & header.flags);
+659   ASSERT\_EQ(1, header.stream);
+660   EXPECT\_EQ(outBuf->moveToFbString(), body->moveToFbString());
+661 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Ex\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Ex\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a936ba5cb0f766a6029c40099a26467c2}
+
+
+Definition at line 663 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Ex\+Attributes\+::control\+Stream, proxygen\+::http2\+::\+E\+N\+D\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::http2\+::\+E\+N\+D\+\_\+\+S\+T\+R\+E\+AM, make\+Buf(), parse(), proxygen\+::http2\+::parse\+Ex\+Headers(), proxygen\+::http2\+::\+P\+R\+I\+O\+R\+I\+TY, stream\+ID, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Ex\+Attributes\+::unidirectional, proxygen\+::http2\+::\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL, and proxygen\+::http2\+::write\+Ex\+Headers().
+
+
+\begin{DoxyCode}
+663                                    \{
+664   \textcolor{keyword}{auto} body = makeBuf(500);
+665   uint32\_t streamID = folly::Random::rand32(10, 1024) * 2 + 1;
+666   uint32\_t controlStream = streamID - 2;
+667   writeExHeaders(queue\_, body->clone(), streamID,
+668                  HTTPCodec::ExAttributes(controlStream, \textcolor{keyword}{false}),
+669                  \{\{0, \textcolor{keyword}{true}, 12\}\}, 200, \textcolor{keyword}{false}, \textcolor{keyword}{false});
+670 
+671   FrameHeader header;
+672   HTTPCodec::ExAttributes outExAttributes;
+673   folly::Optional<PriorityUpdate> priority;
+674   std::unique\_ptr<IOBuf> outBuf;
+675   parse(&parseExHeaders, header, outExAttributes, priority, outBuf);
+676 
+677   ASSERT\_EQ(FrameType::EX\_HEADERS, header.type);
+678   ASSERT\_EQ(streamID, header.stream);
+679   ASSERT\_EQ(controlStream, outExAttributes.controlStream);
+680   ASSERT\_TRUE(PRIORITY & header.flags);
+681   ASSERT\_FALSE(END_STREAM & header.flags);
+682   ASSERT\_FALSE(END_HEADERS & header.flags);
+683   ASSERT\_FALSE(UNIDIRECTIONAL & header.flags);
+684   ASSERT\_FALSE(outExAttributes.unidirectional);
+685   ASSERT\_EQ(0, priority->streamDependency);
+686   ASSERT\_TRUE(priority->exclusive);
+687   ASSERT\_EQ(12, priority->weight);
+688   EXPECT\_EQ(outBuf->moveToFbString(), body->moveToFbString());
+689 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Framer\+Test, Ex\+Headers\+With\+Flags\+Set)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Framer\+Test}}]{, }
+\item[{Ex\+Headers\+With\+Flags\+Set}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_a0d50c245d7a3d516d3f3b41dd28b83ed}
+
+
+Definition at line 691 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Ex\+Attributes\+::control\+Stream, proxygen\+::http2\+::\+E\+N\+D\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::http2\+::\+E\+N\+D\+\_\+\+S\+T\+R\+E\+AM, make\+Buf(), parse(), proxygen\+::http2\+::parse\+Ex\+Headers(), proxygen\+::http2\+::\+P\+R\+I\+O\+R\+I\+TY, stream\+ID, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Ex\+Attributes\+::unidirectional, proxygen\+::http2\+::\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL, and proxygen\+::http2\+::write\+Ex\+Headers().
+
+
+\begin{DoxyCode}
+691                                                \{
+692   \textcolor{keyword}{auto} body = makeBuf(500);
+693   uint32\_t streamID = folly::Random::rand32(10, 1024) * 2 + 1;
+694   uint32\_t controlStream = streamID - 2;
+695   writeExHeaders(queue\_, body->clone(), streamID,
+696                  HTTPCodec::ExAttributes(controlStream, \textcolor{keyword}{true}),
+697                  folly::none, 0, \textcolor{keyword}{true}, \textcolor{keyword}{true});
+698 
+699   FrameHeader header;
+700   HTTPCodec::ExAttributes outExAttributes;
+701   folly::Optional<PriorityUpdate> priority;
+702   std::unique\_ptr<IOBuf> outBuf;
+703   parse(&parseExHeaders, header, outExAttributes, priority, outBuf);
+704 
+705   ASSERT\_EQ(FrameType::EX\_HEADERS, header.type);
+706   ASSERT\_EQ(streamID, header.stream);
+707   ASSERT\_EQ(controlStream, outExAttributes.controlStream);
+708   ASSERT\_FALSE(PRIORITY & header.flags);
+709   ASSERT\_TRUE(END_STREAM & header.flags);
+710   ASSERT\_TRUE(END_HEADERS & header.flags);
+711   ASSERT\_TRUE(UNIDIRECTIONAL & header.flags);
+712   ASSERT\_TRUE(outExAttributes.unidirectional);
+713   EXPECT\_EQ(outBuf->moveToFbString(), body->moveToFbString());
+714 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}!write\+Frame\+Header\+Manual@{write\+Frame\+Header\+Manual}}
+\index{write\+Frame\+Header\+Manual@{write\+Frame\+Header\+Manual}!H\+T\+T\+P2\+Framer\+Test.\+cpp@{H\+T\+T\+P2\+Framer\+Test.\+cpp}}
+\subsubsection[{write\+Frame\+Header\+Manual(\+I\+O\+Buf\+Queue \&queue, uint32\+\_\+t length, uint8\+\_\+t type, uint8\+\_\+t flags, uint32\+\_\+t stream)}]{\setlength{\rightskip}{0pt plus 5cm}void write\+Frame\+Header\+Manual (
+\begin{DoxyParamCaption}
+\item[{I\+O\+Buf\+Queue \&}]{queue, }
+\item[{uint32\+\_\+t}]{length, }
+\item[{uint8\+\_\+t}]{type, }
+\item[{uint8\+\_\+t}]{flags, }
+\item[{uint32\+\_\+t}]{stream}
+\end{DoxyParamCaption}
+)}\label{HTTP2FramerTest_8cpp_aaa7923520a00d66ceca8ca0a4cd80751}
+
+
+Definition at line 27 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Frame\+Header\+Size.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+28                                                             \{
+29   QueueAppender appender(&queue, kFrameHeaderSize);
+30   uint32\_t lengthAndType = length << 8 | type;
+31   appender.writeBE<uint32\_t>(lengthAndType);
+32   appender.writeBE<uint8\_t>(flags);
+33   appender.writeBE<uint32\_t>(stream);
+34 \}
+\end{DoxyCode}

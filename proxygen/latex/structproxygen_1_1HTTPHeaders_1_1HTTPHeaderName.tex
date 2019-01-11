@@ -1,0 +1,143 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Headers\+:\+:H\+T\+T\+P\+Header\+Name Struct Reference}
+\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName}\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Headers.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Type} \{ {\bf C\+O\+DE}, 
+{\bf S\+T\+R\+I\+NG}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Header\+Name} ({\bf H\+T\+T\+P\+Header\+Code} code)
+\item 
+{\bf H\+T\+T\+P\+Header\+Name} (const char $\ast${\bf name})
+\item 
+{\bf H\+T\+T\+P\+Header\+Name} (folly\+::\+String\+Piece {\bf name})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>folly::StringPiece {\bf name\_}\\
+\>{\bf HTTPHeaderCode} {\bf code\_}\\
+\}; \\
+
+\end{tabbing}\item 
+{\bf Type} {\bf type\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 70 of file H\+T\+T\+P\+Headers.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!Type@{Type}}
+\index{Type@{Type}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+\subsubsection[{Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name\+::\+Type}}\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_af36afb4fc6c7d17590d926aa63c42ca6}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{C\+O\+DE@{C\+O\+DE}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!C\+O\+DE@{C\+O\+DE}}\item[{\em 
+C\+O\+DE\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_af36afb4fc6c7d17590d926aa63c42ca6af787017d86648b9d0b96b7c9f71f39e5}
+}]\index{S\+T\+R\+I\+NG@{S\+T\+R\+I\+NG}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!S\+T\+R\+I\+NG@{S\+T\+R\+I\+NG}}\item[{\em 
+S\+T\+R\+I\+NG\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_af36afb4fc6c7d17590d926aa63c42ca6abe2e0e1886e0cd62481711223e0204a6}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 71 of file H\+T\+T\+P\+Headers.\+h.
+
+
+\begin{DoxyCode}
+71 \{ CODE, STRING \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!H\+T\+T\+P\+Header\+Name@{H\+T\+T\+P\+Header\+Name}}
+\index{H\+T\+T\+P\+Header\+Name@{H\+T\+T\+P\+Header\+Name}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+\subsubsection[{H\+T\+T\+P\+Header\+Name(\+H\+T\+T\+P\+Header\+Code code)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name\+::\+H\+T\+T\+P\+Header\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Header\+Code}}]{code}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_ac66f92ca001141243b49ac374a7dbe93}
+
+
+Definition at line 77 of file H\+T\+T\+P\+Headers.\+h.
+
+
+\begin{DoxyCode}
+78       : code_(code), type_(CODE) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!H\+T\+T\+P\+Header\+Name@{H\+T\+T\+P\+Header\+Name}}
+\index{H\+T\+T\+P\+Header\+Name@{H\+T\+T\+P\+Header\+Name}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+\subsubsection[{H\+T\+T\+P\+Header\+Name(const char $\ast$name)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name\+::\+H\+T\+T\+P\+Header\+Name (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_a2ef5efcc03341c078fc9cdc901fb4ca4}
+
+
+Definition at line 79 of file H\+T\+T\+P\+Headers.\+h.
+
+
+\begin{DoxyCode}
+80       : name_(name), type_(STRING) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!H\+T\+T\+P\+Header\+Name@{H\+T\+T\+P\+Header\+Name}}
+\index{H\+T\+T\+P\+Header\+Name@{H\+T\+T\+P\+Header\+Name}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+\subsubsection[{H\+T\+T\+P\+Header\+Name(folly\+::\+String\+Piece name)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name\+::\+H\+T\+T\+P\+Header\+Name (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+String\+Piece}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_a9b85bc9d2387680ba322412f0792fe72}
+
+
+Definition at line 81 of file H\+T\+T\+P\+Headers.\+h.
+
+
+\begin{DoxyCode}
+82       : name_(name), type_(STRING) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\subsubsection[{"@13}]{\setlength{\rightskip}{0pt plus 5cm}union \{ ... \} }\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_a36e811cc5fad1bd998643c9e31c148be}
+\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!code\+\_\+@{code\+\_\+}}
+\index{code\+\_\+@{code\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+\subsubsection[{code\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Header\+Code} proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name\+::code\+\_\+}\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_ac0a20ad266a286805836dd25b7d3f85c}
+
+
+Definition at line 74 of file H\+T\+T\+P\+Headers.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!name\+\_\+@{name\+\_\+}}
+\index{name\+\_\+@{name\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+\subsubsection[{name\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name\+::name\+\_\+}\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_a304048ffca77c06a79154fc08efb32cb}
+
+
+Definition at line 73 of file H\+T\+T\+P\+Headers.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}!type\+\_\+@{type\+\_\+}}
+\index{type\+\_\+@{type\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name@{proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name}}
+\subsubsection[{type\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} proxygen\+::\+H\+T\+T\+P\+Headers\+::\+H\+T\+T\+P\+Header\+Name\+::type\+\_\+}\label{structproxygen_1_1HTTPHeaders_1_1HTTPHeaderName_a66163dbd4597ab3f6a0fb00406a98a13}
+
+
+Definition at line 76 of file H\+T\+T\+P\+Headers.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/{\bf H\+T\+T\+P\+Headers.\+h}\end{DoxyCompactItemize}

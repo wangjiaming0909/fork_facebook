@@ -1,0 +1,825 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Codec\+:\+:Callback Class Reference}
+\label{classproxygen_1_1HTTPCodec_1_1Callback}\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Codec.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Codec\+:\+:Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.480176cm]{classproxygen_1_1HTTPCodec_1_1Callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf on\+Message\+Begin} ({\bf Stream\+ID} {\bf stream}, {\bf H\+T\+T\+P\+Message} $\ast$msg)=0
+\item 
+virtual void {\bf on\+Push\+Message\+Begin} ({\bf Stream\+ID}, {\bf Stream\+ID}, {\bf H\+T\+T\+P\+Message} $\ast$)
+\item 
+virtual void {\bf on\+Ex\+Message\+Begin} ({\bf Stream\+ID}, {\bf Stream\+ID}, bool, {\bf H\+T\+T\+P\+Message} $\ast$)
+\item 
+virtual void {\bf on\+Headers\+Complete} ({\bf Stream\+ID} {\bf stream}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg)=0
+\item 
+virtual void {\bf on\+Body} ({\bf Stream\+ID} {\bf stream}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t padding)=0
+\item 
+virtual void {\bf on\+Chunk\+Header} ({\bf Stream\+ID}, size\+\_\+t)
+\item 
+virtual void {\bf on\+Chunk\+Complete} ({\bf Stream\+ID})
+\item 
+virtual void {\bf on\+Trailers\+Complete} ({\bf Stream\+ID} {\bf stream}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$ trailers)=0
+\item 
+virtual void {\bf on\+Message\+Complete} ({\bf Stream\+ID} {\bf stream}, bool upgrade)=0
+\item 
+virtual void {\bf on\+Error} ({\bf Stream\+ID} {\bf stream}, const {\bf H\+T\+T\+P\+Exception} \&error, bool new\+Txn=false)=0
+\item 
+virtual void {\bf on\+Abort} ({\bf Stream\+ID}, {\bf Error\+Code})
+\item 
+virtual void {\bf on\+Frame\+Header} ({\bf Stream\+ID}, uint8\+\_\+t, uint64\+\_\+t, uint8\+\_\+t, uint16\+\_\+t=0)
+\item 
+virtual void {\bf on\+Goaway} (uint64\+\_\+t, {\bf Error\+Code}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$={\bf nullptr})
+\item 
+virtual void {\bf on\+Ping\+Request} (uint64\+\_\+t)
+\item 
+virtual void {\bf on\+Ping\+Reply} (uint64\+\_\+t)
+\item 
+virtual void {\bf on\+Window\+Update} ({\bf Stream\+ID}, uint32\+\_\+t)
+\item 
+virtual void {\bf on\+Settings} (const {\bf Settings\+List} \&)
+\item 
+virtual void {\bf on\+Settings\+Ack} ()
+\item 
+virtual void {\bf on\+Priority} ({\bf Stream\+ID}, const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} \&)
+\item 
+virtual bool {\bf on\+Native\+Protocol\+Upgrade} ({\bf Stream\+ID}, {\bf Codec\+Protocol}, const std\+::string \&, {\bf H\+T\+T\+P\+Message} \&)
+\item 
+virtual void {\bf on\+Generate\+Frame\+Header} ({\bf Stream\+ID}, uint8\+\_\+t, uint64\+\_\+t, uint16\+\_\+t=0)
+\item 
+virtual void {\bf on\+Certificate\+Request} (uint16\+\_\+t, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)
+\item 
+virtual void {\bf on\+Certificate} (uint16\+\_\+t, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)
+\item 
+virtual uint32\+\_\+t {\bf num\+Outgoing\+Streams} () const 
+\item 
+virtual uint32\+\_\+t {\bf num\+Incoming\+Streams} () const 
+\item 
+virtual {\bf $\sim$\+Callback} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\doxyref{Callback}{p.}{classproxygen_1_1HTTPCodec_1_1Callback} interface that users of \doxyref{H\+T\+T\+P\+Codec}{p.}{classproxygen_1_1HTTPCodec} must implement 
+
+Definition at line 78 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!````~Callback@{$\sim$\+Callback}}
+\index{````~Callback@{$\sim$\+Callback}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{$\sim$\+Callback()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::$\sim$\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a05e9e9907d24e577604f7941da8123bd}
+
+
+Definition at line 329 of file H\+T\+T\+P\+Codec.\+h.
+
+
+\begin{DoxyCode}
+329 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!num\+Incoming\+Streams@{num\+Incoming\+Streams}}
+\index{num\+Incoming\+Streams@{num\+Incoming\+Streams}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{num\+Incoming\+Streams() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::num\+Incoming\+Streams (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_aad2decb51a53dc21448547ba34b0409a}
+Return the number of open streams started by the remote side. Parallel codecs with a maximum number of streams will invoke this to determine if a new stream exceeds the limit. 
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a32ded5f1b237ce4aac4dacb8d8844b6f}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a1aa4525d399761ddc2f08b839cc266b1}.
+
+
+
+Definition at line 327 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Syn\+Stream(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Check\+Concurrent\+Streams().
+
+
+\begin{DoxyCode}
+327 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!num\+Outgoing\+Streams@{num\+Outgoing\+Streams}}
+\index{num\+Outgoing\+Streams@{num\+Outgoing\+Streams}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{num\+Outgoing\+Streams() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::num\+Outgoing\+Streams (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a65779e4b1763aa1daa424f02a5ca3f05}
+Return the number of open streams started by this codec callback. Parallel codecs with a maximum number of streams will invoke this to determine if a new stream exceeds the limit. 
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ac9f475ec074ab357ffeeb614cfe3f83d}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a03af9af000004c543ee9999debf25390}.
+
+
+
+Definition at line 320 of file H\+T\+T\+P\+Codec.\+h.
+
+
+\begin{DoxyCode}
+320 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Abort@{on\+Abort}}
+\index{on\+Abort@{on\+Abort}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Abort(\+Stream\+I\+D, Error\+Code)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Abort (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{{\bf Error\+Code}}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a110afc4d5324a47b9b2f6356afc70bbf}
+Called when the peer has asked to shut down a stream immediately. 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em code} & The code the stream was aborted with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not applicable to all protocols. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ac3183c78b441791ee835660ffb91ed9f}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a3f66d4797b2c12c5485986f90fa1b331}.
+
+
+
+Definition at line 192 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Rst\+Stream(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Rst\+Stream().
+
+
+\begin{DoxyCode}
+194                      \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Body(\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t padding)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain, }
+\item[{uint16\+\_\+t}]{padding}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_af6661786cb419aa6b0138ed1d8085d52}
+Called for each block of message body data 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em chain} & One or more buffers of body data. The codec will remove any protocol framing, such as H\+T\+T\+P/1.\+1 chunk headers, from the buffers before calling this function. \\
+\hline
+{\em padding} & Number of pad bytes that came with the data segment \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a4ef5f45a171469eadd34144f3a00802c}, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1MockHTTPCodecCallback_ac4e58e068ff76da169802b8668befd73}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a43e0a21206fd5d3b34959818ecb5a5c1}, {\bf proxygen\+::\+R\+F\+C1867\+Codec} \doxyref{}{p.}{classproxygen_1_1RFC1867Codec_a4a6f31403b32e593888d89274023614a}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_a45c3eac90864197e1ec5334016629431}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Body(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+All\+Data(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Data\+Frame\+Data(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Certificate@{on\+Certificate}}
+\index{on\+Certificate@{on\+Certificate}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Certificate(uint16\+\_\+t, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Certificate (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a39962dfe4038936e8042e725e50c2d45}
+Called upon receipt of an authenticator, for protocols that support secondary certificate authentication. 
+\begin{DoxyParams}{Parameters}
+{\em cert\+Id} & The Cert-\/\+ID identifying this authenticator \\
+\hline
+{\em authenticator} & The authenticator request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols support secondary certificate authentication. H\+T\+T\+P/2 does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a4bdeeff83639f5b0afdec5b2d92ea48d}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_af2175032d60674dc99e7ddc7859f2a02}, and {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1MockHTTPCodecCallback_aef5b399bf8a0191cb96354611ff945fc}.
+
+
+
+Definition at line 310 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Certificate().
+
+
+\begin{DoxyCode}
+312                                      \{
+313     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Certificate\+Request@{on\+Certificate\+Request}}
+\index{on\+Certificate\+Request@{on\+Certificate\+Request}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Certificate\+Request(uint16\+\_\+t, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Certificate\+Request (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a982896bcd896ea45a10b03a294ded590}
+Called upon receipt of a certificate request frame, for protocols that support secondary certificate authentication. 
+\begin{DoxyParams}{Parameters}
+{\em request\+Id} & The Request-\/\+ID identifying the certificate request \\
+\hline
+{\em auth\+Request} & The authenticator request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols support secondary certificate authentication. H\+T\+T\+P/2 does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ae98209dbf84dc096fb2ace705407fd47}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a404bde70243206b37309b8df0dd5f717}, and {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1MockHTTPCodecCallback_a6890b812cc7565952643b5cec3f131c6}.
+
+
+
+Definition at line 297 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Certificate\+Request().
+
+
+\begin{DoxyCode}
+299                                      \{
+300     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Chunk\+Complete@{on\+Chunk\+Complete}}
+\index{on\+Chunk\+Complete@{on\+Chunk\+Complete}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Chunk\+Complete(\+Stream\+I\+D)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Chunk\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_aad1fa297ee8929ea5032b7037956198b}
+Called when the terminating C\+R\+LF is received to end a chunk of H\+T\+TP body data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a201f8d42c3a6754e2743b5e5661b901e}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a5e8de5c57251fe0c3e28ca30573ae291}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_ab9f5539148d7b2f8ba195a56aefc13b0}.
+
+
+
+Definition at line 156 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Chunk\+Complete().
+
+
+\begin{DoxyCode}
+156 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Chunk\+Header@{on\+Chunk\+Header}}
+\index{on\+Chunk\+Header@{on\+Chunk\+Header}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Chunk\+Header(\+Stream\+I\+D, size\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Chunk\+Header (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{size\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_ae106b662c7e855b4677ec55d4235e66d}
+Called for each H\+T\+TP chunk header.
+
+\doxyref{on\+Chunk\+Header()}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_ae106b662c7e855b4677ec55d4235e66d} will be called when the chunk header is received. As the chunk data arrives, it will be passed to the callback normally with \doxyref{on\+Body()}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_af6661786cb419aa6b0138ed1d8085d52} calls. Note that the chunk data may arrive in multiple \doxyref{on\+Body()}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_af6661786cb419aa6b0138ed1d8085d52} calls\+: it is not guaranteed to arrive in a single \doxyref{on\+Body()}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_af6661786cb419aa6b0138ed1d8085d52} call.
+
+After the chunk data has been received and the terminating C\+R\+LF has been received, \doxyref{on\+Chunk\+Complete()}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_aad1fa297ee8929ea5032b7037956198b} will be called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em length} & The chunk length. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a3137afb711666467861a8d61d9f15824}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_adb95188db25583e64a9ff905513f4072}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_a37b309b40fb28e30cf01c25e737801b7}.
+
+
+
+Definition at line 148 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Chunk\+Header().
+
+
+\begin{DoxyCode}
+148 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Error(\+Stream\+I\+D stream, const H\+T\+T\+P\+Exception \&error, bool new\+Txn=false)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{stream, }
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{error, }
+\item[{bool}]{new\+Txn = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a39e04260da7dd1a074393fe473d6ac34}
+Called when a parsing or protocol error has occurred 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em error} & Description of the error \\
+\hline
+{\em new\+Txn} & true if on\+Message\+Begin has not been called for txn \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ab44f22d1c1900f583f4e8584fb2f0105}, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1MockHTTPCodecCallback_accda1fe4c5523b1fed69b013a3ed63e5}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a83e8a0e41d47d585814fe8316ff919d3}, {\bf proxygen\+::\+R\+F\+C1867\+Codec} \doxyref{}{p.}{classproxygen_1_1RFC1867Codec_a072b62abe677260b50cf8b2b5b93f9c2}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_ade76ef6d005c0b44518982f4c743f50c}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::check\+Connection\+Error(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::fail\+Session(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::fail\+Stream(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Parser\+Error(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::stream\+Error(), and T\+E\+S\+T().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Ex\+Message\+Begin@{on\+Ex\+Message\+Begin}}
+\index{on\+Ex\+Message\+Begin@{on\+Ex\+Message\+Begin}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Ex\+Message\+Begin(\+Stream\+I\+D, Stream\+I\+D, bool, H\+T\+T\+P\+Message $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Ex\+Message\+Begin (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{{\bf Stream\+ID}}]{, }
+\item[{bool}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_abe873557040a9184715f7f5a47c863a1}
+Called when a new extended message is seen while parsing the ingress.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em control\+Stream} & The stream ID of the associated stream, which can never be 0 \\
+\hline
+{\em msg} & A newly allocated \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a597d69aedaebffdb4c442ca9d1d6408b}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a4b5bd19125263aa65637b2f5aff8b415}.
+
+
+
+Definition at line 107 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl().
+
+
+\begin{DoxyCode}
+110                                                   \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Frame\+Header@{on\+Frame\+Header}}
+\index{on\+Frame\+Header@{on\+Frame\+Header}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Frame\+Header(\+Stream\+I\+D, uint8\+\_\+t, uint64\+\_\+t, uint8\+\_\+t, uint16\+\_\+t=0)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Frame\+Header (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{uint8\+\_\+t}]{, }
+\item[{uint64\+\_\+t}]{, }
+\item[{uint8\+\_\+t}]{, }
+\item[{uint16\+\_\+t}]{ = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a43441f24ed1f9680a2909d1617822b61}
+Called upon receipt of a frame header. 
+\begin{DoxyParams}{Parameters}
+{\em stream\+\_\+id} & The stream ID \\
+\hline
+{\em flags} & The flags field of frame header \\
+\hline
+{\em length} & The length field of frame header \\
+\hline
+{\em type} & The type field of frame header \\
+\hline
+{\em version} & The version of frame (S\+P\+DY only) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols have frames. S\+P\+DY and H\+T\+T\+P/2 do, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a722c3094de807039d40675071c028f43}.
+
+
+
+Definition at line 206 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Ingress(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+
+\begin{DoxyCode}
+211                         \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Generate\+Frame\+Header@{on\+Generate\+Frame\+Header}}
+\index{on\+Generate\+Frame\+Header@{on\+Generate\+Frame\+Header}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Generate\+Frame\+Header(\+Stream\+I\+D, uint8\+\_\+t, uint64\+\_\+t, uint16\+\_\+t=0)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Generate\+Frame\+Header (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{uint8\+\_\+t}]{, }
+\item[{uint64\+\_\+t}]{, }
+\item[{uint16\+\_\+t}]{ = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_acdc27546d6ace641570c28299d83898b}
+Called after a header frame is generated. This only applies to framed codecs. 
+
+Definition at line 283 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::generate\+Header\+Callback\+Wrapper().
+
+
+\begin{DoxyCode}
+287                         \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Goaway@{on\+Goaway}}
+\index{on\+Goaway@{on\+Goaway}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Goaway(uint64\+\_\+t, Error\+Code, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Goaway (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{, }
+\item[{{\bf Error\+Code}}]{, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{ = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a782493dc0d063e7f5c626db2617d042b}
+Called upon receipt of a goaway. 
+\begin{DoxyParams}{Parameters}
+{\em last\+Good\+Stream\+ID} & Last successful stream created by the receiver \\
+\hline
+{\em code} & The code the connection was aborted with \\
+\hline
+{\em debug\+Data} & The additional debug data for diagnostic purpose \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols have goaways. S\+P\+DY does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a22d185dd9d6777d445ae30269345c942}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_af0c6ee01c15862bc87e5938019426591}, and {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1MockHTTPCodecCallback_ab9c7e41e4d0aeed9b01a64ea468492f3}.
+
+
+
+Definition at line 220 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Goaway(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Goaway().
+
+
+\begin{DoxyCode}
+223                                                \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Headers\+Complete(\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a7c462d2b3485d0d1077a9ba775f90ebc}
+Called when all the headers of an ingress message have been parsed 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em msg} & The message \\
+\hline
+{\em size} & Size of the ingress header \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a01cf2e4876e0d44c1b7974833bef3272}, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1MockHTTPCodecCallback_a1844c9fda354a134d1d665b73037af6e}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a3f55acceddc05d771c992c3a04a51f2f}, {\bf proxygen\+::\+R\+F\+C1867\+Codec} \doxyref{}{p.}{classproxygen_1_1RFC1867Codec_a9e01714bafae9a4c2c5aaa7df2182974}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_a931173aed9988e11ed2222cf1545189e}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Headers\+Complete(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Syn\+Common(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Message\+Begin@{on\+Message\+Begin}}
+\index{on\+Message\+Begin@{on\+Message\+Begin}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Message\+Begin(\+Stream\+I\+D stream, H\+T\+T\+P\+Message $\ast$msg)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Message\+Begin (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{stream, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a7bcd0c639fd05f92b31806cee4f4b1aa}
+Called when a new message is seen while parsing the ingress 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em msg} & A newly allocated \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a0a4087a0c6fbfbb6a419dff46c0d3517}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_ab67a7d12ac1032f91c90630bbbca2198}, {\bf proxygen\+::\+R\+F\+C1867\+Codec} \doxyref{}{p.}{classproxygen_1_1RFC1867Codec_a68fcd8fdcd4cf0701b738580998c0973}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_a39aea280119e87229685df6b4b18dcbb}.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::deliver\+On\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Message\+Begin(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Message\+Complete@{on\+Message\+Complete}}
+\index{on\+Message\+Complete@{on\+Message\+Complete}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Message\+Complete(\+Stream\+I\+D stream, bool upgrade)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Message\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{stream, }
+\item[{bool}]{upgrade}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a8b42c169cc7f48b42be7f97b463db08e}
+Called at end of a message (including body and trailers, if applicable) 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em upgrade} & Whether the connection has been upgraded to another protocol. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a564c10e0a4a6fbf287eed792501337f8}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_af9282cb39daeaa5c68c7138fb4b6b788}, {\bf proxygen\+::\+R\+F\+C1867\+Codec} \doxyref{}{p.}{classproxygen_1_1RFC1867Codec_ae24ab3cb16d38f484a3c659949c250b3}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_a7a8ad6d532d80bf525f344e24114fd00}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+End\+Stream(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress\+E\+O\+F(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Message\+Complete(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Native\+Protocol\+Upgrade@{on\+Native\+Protocol\+Upgrade}}
+\index{on\+Native\+Protocol\+Upgrade@{on\+Native\+Protocol\+Upgrade}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Native\+Protocol\+Upgrade(\+Stream\+I\+D, Codec\+Protocol, const std\+::string \&, H\+T\+T\+P\+Message \&)}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Native\+Protocol\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{{\bf Codec\+Protocol}}]{, }
+\item[{const std\+::string \&}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a862f51146984af8fbb64d32d1d27f094}
+Called upon receipt of a valid protocol switch. Return false if protocol switch could not be completed. 
+
+Reimplemented in {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a21710f2e103aba11c680e9369059013b}, {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a8b2225a822624032bbdd5985b8fef035}, and {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_a1c526ad7c5af7bc309bfb4f1a9a4ea9b}.
+
+
+
+Definition at line 271 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Headers\+Complete(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Message\+Complete().
+
+
+\begin{DoxyCode}
+275                         \{
+276       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+277     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Ping\+Reply@{on\+Ping\+Reply}}
+\index{on\+Ping\+Reply@{on\+Ping\+Reply}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Ping\+Reply(uint64\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Ping\+Reply (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a6ebe6de42080d9b8834f48add6f63553}
+Called upon receipt of a ping reply 
+\begin{DoxyParams}{Parameters}
+{\em unique\+ID} & Unique identifier for the ping \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols have pings. S\+P\+DY does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a1ce7c717bb5a5e5410a3f7f2506cd8a9}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a260f3b8e79817c12256b865d27d54e65}.
+
+
+
+Definition at line 237 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ping(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ping().
+
+
+\begin{DoxyCode}
+237 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Ping\+Request@{on\+Ping\+Request}}
+\index{on\+Ping\+Request@{on\+Ping\+Request}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Ping\+Request(uint64\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Ping\+Request (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a1740eddb4466d8d9a411f558d37c7d39}
+Called upon receipt of a ping request 
+\begin{DoxyParams}{Parameters}
+{\em unique\+ID} & Unique identifier for the ping \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols have pings. S\+P\+DY does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ab5e3ba18cca07e6e6bfff73e1d549c21}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_ac85d4d70ee22320b8e853d546ce9b593}.
+
+
+
+Definition at line 230 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ping(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ping().
+
+
+\begin{DoxyCode}
+230 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Priority@{on\+Priority}}
+\index{on\+Priority@{on\+Priority}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Priority(\+Stream\+I\+D, const H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority \&)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Priority (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_aa3960bf891965283f9a99797af9e99b3}
+Called upon receipt of a priority frame, for protocols that support dynamic priority 
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a1da743cba2417a010d2d1fa7a7333f79}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_aa61996c525eee96c7bb27eb3653da527}.
+
+
+
+Definition at line 263 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Priority().
+
+
+\begin{DoxyCode}
+265                                           \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Push\+Message\+Begin@{on\+Push\+Message\+Begin}}
+\index{on\+Push\+Message\+Begin@{on\+Push\+Message\+Begin}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Push\+Message\+Begin(\+Stream\+I\+D, Stream\+I\+D, H\+T\+T\+P\+Message $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Push\+Message\+Begin (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{{\bf Stream\+ID}}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a2a54bb421215a2929e2c8ee0d2112032}
+Called when a new push message is seen while parsing the ingress.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em assoc\+Stream} & The stream ID of the associated stream, which can never be 0 \\
+\hline
+{\em msg} & A newly allocated \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage} \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ac22c3f0f0f6c3162a805150faeae3577}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a12590d00a1fdfec638b6f736d7af8991}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_adcbd6ed2fa495238b09bf35a778e4900}.
+
+
+
+Definition at line 95 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::deliver\+On\+Message\+Begin(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl().
+
+
+\begin{DoxyCode}
+97                                                     \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Settings@{on\+Settings}}
+\index{on\+Settings@{on\+Settings}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Settings(const Settings\+List \&)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Settings (
+\begin{DoxyParamCaption}
+\item[{const {\bf Settings\+List} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a74342e68c4a6845289a3385f947d1b65}
+Called upon receipt of a settings frame, for protocols that support settings.
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & a list of settings that were sent in the settings frame \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a51b54c75597c9ead6142aa8c26689b09}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a05e83f25b2763f0916b71d59018b42ac}.
+
+
+
+Definition at line 251 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+Settings(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Settings().
+
+
+\begin{DoxyCode}
+251 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Settings\+Ack@{on\+Settings\+Ack}}
+\index{on\+Settings\+Ack@{on\+Settings\+Ack}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Settings\+Ack()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Settings\+Ack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a9ec9c7daad56b25852e4d7b31ffc1ae7}
+Called upon receipt of a settings frame with A\+CK set, for protocols that support settings ack. 
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a2761f5d6f21da00af36fe73385339e9a}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a5ad84649535a96761f540af001f38439}.
+
+
+
+Definition at line 257 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+Settings\+Ack().
+
+
+\begin{DoxyCode}
+257 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Trailers\+Complete@{on\+Trailers\+Complete}}
+\index{on\+Trailers\+Complete@{on\+Trailers\+Complete}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Trailers\+Complete(\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Headers $>$ trailers)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Trailers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$}]{trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_aa3ecee42ce8c09840aa67ee824c5cfe3}
+Called when all the trailers of an ingress message have been parsed, but only if the number of trailers is nonzero. 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em trailers} & The message trailers \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a78452f9b06f73e48e2397923fb71d0dd}, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1MockHTTPCodecCallback_a9d4e0dded6c6f755ff821f73826c8944}, {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a351269d6163acd4ebe7fc53427d37c30}, {\bf proxygen\+::\+R\+F\+C1867\+Codec} \doxyref{}{p.}{classproxygen_1_1RFC1867Codec_a7fd36951ef46b15fdc75149fa3976d72}, and {\bf H\+T\+T\+P1x\+Codec\+Callback} \doxyref{}{p.}{classHTTP1xCodecCallback_a90d3f9b28edbed340ce02d2eb83bbd16}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Message\+Complete(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}!on\+Window\+Update@{on\+Window\+Update}}
+\index{on\+Window\+Update@{on\+Window\+Update}!proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback@{proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback}}
+\subsubsection[{on\+Window\+Update(\+Stream\+I\+D, uint32\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback\+::on\+Window\+Update (
+\begin{DoxyParamCaption}
+\item[{{\bf Stream\+ID}}]{, }
+\item[{uint32\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodec_1_1Callback_a2e07b2b70565c4f2782d8767abf0e780}
+Called upon receipt of a window update, for protocols that support flow control. For instance spdy/3 and higher. 
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_aa0fb58504e91e4f38601e2fdd0cebb42}, and {\bf proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback} \doxyref{}{p.}{classproxygen_1_1FakeHTTPCodecCallback_a5093f7de3631c3d81df1253e484d228b}.
+
+
+
+Definition at line 243 of file H\+T\+T\+P\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Window\+Update(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Window\+Update().
+
+
+\begin{DoxyCode}
+243 \{\}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P\+Codec.\+h}\end{DoxyCompactItemize}

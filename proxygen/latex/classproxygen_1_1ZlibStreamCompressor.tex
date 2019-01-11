@@ -1,0 +1,335 @@
+\section{proxygen\+:\+:Zlib\+Stream\+Compressor Class Reference}
+\label{classproxygen_1_1ZlibStreamCompressor}\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+
+
+{\ttfamily \#include $<$Zlib\+Stream\+Compressor.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Zlib\+Stream\+Compressor} ({\bf Zlib\+Compression\+Type} type, int level)
+\item 
+{\bf $\sim$\+Zlib\+Stream\+Compressor} ()
+\item 
+void {\bf init} ({\bf Zlib\+Compression\+Type} type, int level)
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf compress} (const folly\+::\+I\+O\+Buf $\ast$in, bool trailer=true)
+\item 
+int {\bf get\+Status} ()
+\item 
+bool {\bf has\+Error} ()
+\item 
+bool {\bf finished} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Zlib\+Compression\+Type} {\bf type\+\_\+} \{{\bf Zlib\+Compression\+Type\+::\+N\+O\+NE}\}
+\item 
+int {\bf level\+\_\+} \{Z\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+ON\}
+\item 
+z\+\_\+stream {\bf zlib\+Stream\+\_\+}
+\item 
+int {\bf status\+\_\+} \{-\/1\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 25 of file Zlib\+Stream\+Compressor.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!Zlib\+Stream\+Compressor@{Zlib\+Stream\+Compressor}}
+\index{Zlib\+Stream\+Compressor@{Zlib\+Stream\+Compressor}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{Zlib\+Stream\+Compressor(\+Zlib\+Compression\+Type type, int level)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Zlib\+Stream\+Compressor\+::\+Zlib\+Stream\+Compressor (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Compression\+Type}}]{type, }
+\item[{int}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1ZlibStreamCompressor_a79f6775e97f14d2902c9f331cbbf59c0}
+
+
+Definition at line 95 of file Zlib\+Stream\+Compressor.\+cpp.
+
+
+
+References init().
+
+
+\begin{DoxyCode}
+96     : status_(Z\_OK) \{
+97   init(type, level);
+98 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!````~Zlib\+Stream\+Compressor@{$\sim$\+Zlib\+Stream\+Compressor}}
+\index{````~Zlib\+Stream\+Compressor@{$\sim$\+Zlib\+Stream\+Compressor}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{$\sim$\+Zlib\+Stream\+Compressor()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Zlib\+Stream\+Compressor\+::$\sim$\+Zlib\+Stream\+Compressor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1ZlibStreamCompressor_a5ade27ecb0654b8d7ac549b3be9e78e0}
+
+
+Definition at line 100 of file Zlib\+Stream\+Compressor.\+cpp.
+
+
+
+References proxygen\+::\+N\+O\+NE, status\+\_\+, type\+\_\+, and zlib\+Stream\+\_\+.
+
+
+\begin{DoxyCode}
+100                                             \{
+101   \textcolor{keywordflow}{if} (type_ != ZlibCompressionType::NONE) \{
+102     status_ = deflateEnd(&zlibStream_);
+103   \}
+104 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!compress@{compress}}
+\index{compress@{compress}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{compress(const folly\+::\+I\+O\+Buf $\ast$in, bool trailer=true)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ I\+O\+Buf $>$ proxygen\+::\+Zlib\+Stream\+Compressor\+::compress (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{in, }
+\item[{bool}]{trailer = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1ZlibStreamCompressor_a16be3cc51f704ec212ac17ec7652234a}
+
+
+Definition at line 109 of file Zlib\+Stream\+Compressor.\+cpp.
+
+
+
+References status\+\_\+, and zlib\+Stream\+\_\+.
+
+
+
+Referenced by compress\+Then\+Decompress().
+
+
+\begin{DoxyCode}
+110                                                                     \{
+111   \textcolor{keyword}{auto} bufferLength = FLAGS\_zlib\_compressor\_buffer\_growth;
+112 
+113   \textcolor{keyword}{auto} out = addOutputBuffer(&zlibStream_, bufferLength);
+114 
+115   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& range : *in) \{
+116     uint64\_t remaining = range.size();
+117     uint64\_t written = 0;
+118     \textcolor{keywordflow}{while} (remaining) \{
+119       uint32\_t step = remaining;
+120       zlibStream_.next\_in = \textcolor{keyword}{const\_cast<}uint8\_t*\textcolor{keyword}{>}(range.data() + written);
+121       zlibStream_.avail\_in = step;
+122       remaining -= step;
+123       written += step;
+124 
+125       \textcolor{keywordflow}{while} (zlibStream_.avail\_in != 0) \{
+126         status_ = deflateHelper(&zlibStream_, out.get(), Z\_NO\_FLUSH);
+127         \textcolor{keywordflow}{if} (status_ != Z\_OK) \{
+128           DLOG(FATAL) << \textcolor{stringliteral}{"Deflate failed: "} << zlibStream_.msg;
+129           \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+130         \}
+131       \}
+132     \}
+133   \}
+134 
+135   \textcolor{keywordflow}{if} (trailer) \{
+136     \textcolor{keywordflow}{do} \{
+137       status_ = deflateHelper(&zlibStream_, out.get(), Z\_FINISH);
+138     \} \textcolor{keywordflow}{while} (status_ == Z\_OK);
+139 
+140     \textcolor{keywordflow}{if} (status_ != Z\_STREAM\_END) \{
+141       DLOG(FATAL) << \textcolor{stringliteral}{"Deflate failed: "} << zlibStream_.msg;
+142       \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+143     \}
+144   \} \textcolor{keywordflow}{else} \{
+145     \textcolor{keywordflow}{do} \{
+146       status_ = deflateHelper(&zlibStream_, out.get(), Z\_SYNC\_FLUSH);
+147     \} \textcolor{keywordflow}{while} (zlibStream_.avail\_out == 0);
+148 
+149     \textcolor{keywordflow}{if} (status_ != Z\_OK) \{
+150       DLOG(FATAL) << \textcolor{stringliteral}{"Deflate failed: "} << zlibStream_.msg;
+151       \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+152     \}
+153   \}
+154 
+155   out->prev()->trimEnd(zlibStream_.avail\_out);
+156 
+157   zlibStream_.next\_out = Z\_NULL;
+158   zlibStream_.avail\_out = 0;
+159 
+160   \textcolor{keywordflow}{return} out;
+161 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!finished@{finished}}
+\index{finished@{finished}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{finished()}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Zlib\+Stream\+Compressor\+::finished (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ZlibStreamCompressor_a1d5fa71b4f5825b6494181094835c433}
+
+
+Definition at line 40 of file Zlib\+Stream\+Compressor.\+h.
+
+
+\begin{DoxyCode}
+40 \{ \textcolor{keywordflow}{return} status_ == Z\_STREAM\_END; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!get\+Status@{get\+Status}}
+\index{get\+Status@{get\+Status}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{get\+Status()}]{\setlength{\rightskip}{0pt plus 5cm}int proxygen\+::\+Zlib\+Stream\+Compressor\+::get\+Status (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ZlibStreamCompressor_a3731c911459bac0177970ff005dedc03}
+
+
+Definition at line 36 of file Zlib\+Stream\+Compressor.\+h.
+
+
+
+Referenced by compress\+Then\+Decompress().
+
+
+\begin{DoxyCode}
+36 \{ \textcolor{keywordflow}{return} status_; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!has\+Error@{has\+Error}}
+\index{has\+Error@{has\+Error}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{has\+Error()}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Zlib\+Stream\+Compressor\+::has\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ZlibStreamCompressor_a8d42ec576d46572a467a80bc92623232}
+
+
+Definition at line 38 of file Zlib\+Stream\+Compressor.\+h.
+
+
+
+Referenced by compress\+Then\+Decompress().
+
+
+\begin{DoxyCode}
+38 \{ \textcolor{keywordflow}{return} status_ != Z\_OK && status_ != Z\_STREAM\_END; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!init@{init}}
+\index{init@{init}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{init(\+Zlib\+Compression\+Type type, int level)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Zlib\+Stream\+Compressor\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Compression\+Type}}]{type, }
+\item[{int}]{level}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1ZlibStreamCompressor_aeca4c4e25fe58e807ec3b48e28a8d303}
+
+
+Definition at line 51 of file Zlib\+Stream\+Compressor.\+cpp.
+
+
+
+References proxygen\+::\+E\+R\+R\+OR.
+
+
+
+Referenced by Zlib\+Stream\+Compressor().
+
+
+\begin{DoxyCode}
+51                                                                        \{
+52 
+53   DCHECK(type_ == ZlibCompressionType::NONE)
+54       << \textcolor{stringliteral}{"Attempt to re-initialize compression stream"};
+55 
+56   type_ = type;
+57   level_ = level;
+58   status_ = Z\_OK;
+59 
+60   zlibStream_.zalloc = Z\_NULL;
+61   zlibStream_.zfree = Z\_NULL;
+62   zlibStream_.opaque = Z\_NULL;
+63   zlibStream_.total\_in = 0;
+64   zlibStream_.next\_in = Z\_NULL;
+65   zlibStream_.avail\_in = 0;
+66   zlibStream_.avail\_out = 0;
+67   zlibStream_.next\_out = Z\_NULL;
+68 
+69   DCHECK(level_ == Z\_DEFAULT\_COMPRESSION ||
+70          (level_ >= Z\_NO\_COMPRESSION && level_ <= Z\_BEST\_COMPRESSION))
+71       << \textcolor{stringliteral}{"Invalid Zlib compression level. level="} << level_;
+72 
+73   \textcolor{keywordflow}{switch} (type_) \{
+74   \textcolor{keywordflow}{case} ZlibCompressionType::GZIP:
+75     status_ = deflateInit2(&zlibStream_,
+76                            level_,
+77                            Z\_DEFLATED,
+78                            static\_cast<int32\_t>(type),
+79                            MAX\_MEM\_LEVEL,
+80                            Z\_DEFAULT\_STRATEGY);
+81     \textcolor{keywordflow}{break};
+82   \textcolor{keywordflow}{case} ZlibCompressionType::DEFLATE:
+83     status_ = deflateInit(&zlibStream_, level);
+84     \textcolor{keywordflow}{break};
+85   \textcolor{keywordflow}{default}:
+86     DCHECK(\textcolor{keyword}{false}) << \textcolor{stringliteral}{"Unsupported zlib compression type."};
+87     \textcolor{keywordflow}{break};
+88   \}
+89 
+90   \textcolor{keywordflow}{if} (status_ != Z\_OK) \{
+91     LOG(ERROR) << \textcolor{stringliteral}{"error initializing zlib stream. r="} << status_;
+92   \}
+93 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!level\+\_\+@{level\+\_\+}}
+\index{level\+\_\+@{level\+\_\+}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{level\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}int proxygen\+::\+Zlib\+Stream\+Compressor\+::level\+\_\+ \{Z\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+R\+E\+S\+S\+I\+ON\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ZlibStreamCompressor_a7cd77aca8f3ac4252ee652bb5206196a}
+
+
+Definition at line 44 of file Zlib\+Stream\+Compressor.\+h.
+
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!status\+\_\+@{status\+\_\+}}
+\index{status\+\_\+@{status\+\_\+}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{status\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}int proxygen\+::\+Zlib\+Stream\+Compressor\+::status\+\_\+ \{-\/1\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ZlibStreamCompressor_af557b55463a81b3c17ea6331a3568bbb}
+
+
+Definition at line 46 of file Zlib\+Stream\+Compressor.\+h.
+
+
+
+Referenced by compress(), and $\sim$\+Zlib\+Stream\+Compressor().
+
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!type\+\_\+@{type\+\_\+}}
+\index{type\+\_\+@{type\+\_\+}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{type\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Zlib\+Compression\+Type} proxygen\+::\+Zlib\+Stream\+Compressor\+::type\+\_\+ \{{\bf Zlib\+Compression\+Type\+::\+N\+O\+NE}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ZlibStreamCompressor_a569e026a2200836599ef93ad1aab9414}
+
+
+Definition at line 43 of file Zlib\+Stream\+Compressor.\+h.
+
+
+
+Referenced by $\sim$\+Zlib\+Stream\+Compressor().
+
+\index{proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}!zlib\+Stream\+\_\+@{zlib\+Stream\+\_\+}}
+\index{zlib\+Stream\+\_\+@{zlib\+Stream\+\_\+}!proxygen\+::\+Zlib\+Stream\+Compressor@{proxygen\+::\+Zlib\+Stream\+Compressor}}
+\subsubsection[{zlib\+Stream\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}z\+\_\+stream proxygen\+::\+Zlib\+Stream\+Compressor\+::zlib\+Stream\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ZlibStreamCompressor_a940cf7fb9b38dd96641e47d17eb514e2}
+
+
+Definition at line 45 of file Zlib\+Stream\+Compressor.\+h.
+
+
+
+Referenced by compress(), and $\sim$\+Zlib\+Stream\+Compressor().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Zlib\+Stream\+Compressor.\+h}\item 
+proxygen/lib/utils/{\bf Zlib\+Stream\+Compressor.\+cpp}\end{DoxyCompactItemize}

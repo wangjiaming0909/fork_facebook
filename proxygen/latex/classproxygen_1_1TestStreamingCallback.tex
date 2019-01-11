@@ -1,0 +1,305 @@
+\section{proxygen\+:\+:Test\+Streaming\+Callback Class Reference}
+\label{classproxygen_1_1TestStreamingCallback}\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+
+
+{\ttfamily \#include $<$Test\+Streaming\+Callback.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Test\+Streaming\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1TestStreamingCallback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf on\+Header} (const folly\+::fbstring \&{\bf name}, const folly\+::fbstring \&value) override
+\item 
+void {\bf on\+Headers\+Complete} ({\bf H\+T\+T\+P\+Header\+Size}, bool) override
+\item 
+void {\bf on\+Decode\+Error} ({\bf H\+P\+A\+C\+K\+::\+Decode\+Error} decode\+Error) override
+\item 
+void {\bf reset} ()
+\item 
+folly\+::\+Expected$<$ {\bf Header\+Decode\+Result}, {\bf H\+P\+A\+C\+K\+::\+Decode\+Error} $>$ {\bf get\+Result} ()
+\item 
+bool {\bf has\+Error} () const 
+\item 
+std\+::unique\+\_\+ptr$<$ std\+::vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ $>$ {\bf hpack\+Headers} () const 
+\item 
+char $\ast$ {\bf duplicate} (const folly\+::fbstring \&str)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf compress\+::\+Header\+Piece\+List} {\bf headers}
+\item 
+{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} {\bf error} \{{\bf H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+N\+O\+NE}\}
+\item 
+folly\+::\+Function$<$ void()$>$ {\bf headers\+Complete\+Cb}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file Test\+Streaming\+Callback.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!duplicate@{duplicate}}
+\index{duplicate@{duplicate}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{duplicate(const folly\+::fbstring \&str)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ proxygen\+::\+Test\+Streaming\+Callback\+::duplicate (
+\begin{DoxyParamCaption}
+\item[{const folly\+::fbstring \&}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TestStreamingCallback_a6365cad33ca3d5d27402d2638666ccc0}
+
+
+Definition at line 67 of file Test\+Streaming\+Callback.\+h.
+
+
+
+Referenced by on\+Header().
+
+
+\begin{DoxyCode}
+67                                             \{
+68     \textcolor{keywordtype}{char}* res = CHECK\_NOTNULL(\textcolor{keyword}{new} \textcolor{keywordtype}{char}[str.length() + 1]);
+69     memcpy(res, str.data(), str.length() + 1);
+70     \textcolor{keywordflow}{return} res;
+71   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!get\+Result@{get\+Result}}
+\index{get\+Result@{get\+Result}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{get\+Result()}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Expected$<${\bf Header\+Decode\+Result}, {\bf H\+P\+A\+C\+K\+::\+Decode\+Error}$>$ proxygen\+::\+Test\+Streaming\+Callback\+::get\+Result (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TestStreamingCallback_aa5257752c295326eed72cedbeb17946b}
+
+
+Definition at line 42 of file Test\+Streaming\+Callback.\+h.
+
+
+
+References error, headers, and proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE.
+
+
+
+Referenced by is\+Lowercase(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+42                                                                   \{
+43     \textcolor{keywordflow}{if} (error == HPACK::DecodeError::NONE) \{
+44       \textcolor{keywordflow}{return} HeaderDecodeResult\{headers, 0\};
+45     \} \textcolor{keywordflow}{else} \{
+46       \textcolor{keywordflow}{return} folly::makeUnexpected(error);
+47     \}
+48   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!has\+Error@{has\+Error}}
+\index{has\+Error@{has\+Error}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{has\+Error() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Test\+Streaming\+Callback\+::has\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TestStreamingCallback_a7569fd136a34c27431f23cbdde2a0637}
+
+
+Definition at line 50 of file Test\+Streaming\+Callback.\+h.
+
+
+
+References error, and proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE.
+
+
+
+Referenced by proxygen\+::hpack\+::decode(), encode\+Decode(), proxygen\+::hpack\+::encode\+Decode(), hpack\+Headers(), is\+Lowercase(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+50                         \{
+51     \textcolor{keywordflow}{return} error != HPACK::DecodeError::NONE;
+52   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!hpack\+Headers@{hpack\+Headers}}
+\index{hpack\+Headers@{hpack\+Headers}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{hpack\+Headers() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$std\+::vector$<${\bf H\+P\+A\+C\+K\+Header}$>$ $>$ proxygen\+::\+Test\+Streaming\+Callback\+::hpack\+Headers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TestStreamingCallback_aae80446d939b7ba9298e45a65649d6cd}
+
+
+Definition at line 54 of file Test\+Streaming\+Callback.\+h.
+
+
+
+References has\+Error(), and headers.
+
+
+
+Referenced by proxygen\+::hpack\+::decode(), and proxygen\+::hpack\+::encode\+Decode().
+
+
+\begin{DoxyCode}
+54                                                              \{
+55     CHECK(!hasError());
+56     \textcolor{keyword}{auto} result = std::make\_unique<std::vector<HPACKHeader>>();
+57     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < headers.size(); i += 2) \{
+58       result->emplace\_back(headers[i].str, headers[i + 1].str);
+59     \}
+60 
+61     \textcolor{keywordflow}{return} result;
+62   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!on\+Decode\+Error@{on\+Decode\+Error}}
+\index{on\+Decode\+Error@{on\+Decode\+Error}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{on\+Decode\+Error(\+H\+P\+A\+C\+K\+::\+Decode\+Error decode\+Error) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Test\+Streaming\+Callback\+::on\+Decode\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+::\+Decode\+Error}}]{decode\+Error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1TestStreamingCallback_ab6a3d6628be7862659cdbd7ba31bbc43}
+
+
+Implements {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1HPACK_1_1StreamingCallback_a4ae06a3524ba64174bc6b9fb5dc4f09f}.
+
+
+
+Definition at line 33 of file Test\+Streaming\+Callback.\+h.
+
+
+
+References error.
+
+
+\begin{DoxyCode}
+33                                                             \{
+34     error = decodeError;
+35   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!on\+Header@{on\+Header}}
+\index{on\+Header@{on\+Header}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{on\+Header(const folly\+::fbstring \&name, const folly\+::fbstring \&value) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Test\+Streaming\+Callback\+::on\+Header (
+\begin{DoxyParamCaption}
+\item[{const folly\+::fbstring \&}]{name, }
+\item[{const folly\+::fbstring \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1TestStreamingCallback_aecd91e1bcf5d998220a8aed3f1432bab}
+
+
+Implements {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1HPACK_1_1StreamingCallback_a4e98f0e581dbb03435a818b92350da89}.
+
+
+
+Definition at line 22 of file Test\+Streaming\+Callback.\+h.
+
+
+
+References duplicate(), and headers.
+
+
+\begin{DoxyCode}
+23                                                      \{
+24     headers.emplace\_back(duplicate(name), name.size(), \textcolor{keyword}{true}, \textcolor{keyword}{false});
+25     headers.emplace\_back(duplicate(value), value.size(), \textcolor{keyword}{true}, \textcolor{keyword}{false});
+26   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{on\+Headers\+Complete(\+H\+T\+T\+P\+Header\+Size, bool) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Test\+Streaming\+Callback\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Header\+Size}}]{, }
+\item[{bool}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1TestStreamingCallback_adf259f0c76f1a8d13c6d0d70ca2ea39a}
+
+
+Implements {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1HPACK_1_1StreamingCallback_a597eeb4d7fbe2013339317459f2520ed}.
+
+
+
+Definition at line 27 of file Test\+Streaming\+Callback.\+h.
+
+
+
+References headers\+Complete\+Cb.
+
+
+\begin{DoxyCode}
+28                                           \{
+29     \textcolor{keywordflow}{if} (headersCompleteCb) \{
+30       headersCompleteCb();
+31     \}
+32   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!reset@{reset}}
+\index{reset@{reset}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{reset()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Test\+Streaming\+Callback\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1TestStreamingCallback_aeda88920fe7ee6909f223ab44ad4c77e}
+
+
+Definition at line 37 of file Test\+Streaming\+Callback.\+h.
+
+
+
+References error, headers, and proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+37                \{
+38     headers.clear();
+39     error = HPACK::DecodeError::NONE;
+40   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!error@{error}}
+\index{error@{error}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{error}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} proxygen\+::\+Test\+Streaming\+Callback\+::error \{{\bf H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+N\+O\+NE}\}}\label{classproxygen_1_1TestStreamingCallback_aeb616e39f6c414cdfdfe2eed10bbd041}
+
+
+Definition at line 66 of file Test\+Streaming\+Callback.\+h.
+
+
+
+Referenced by get\+Result(), has\+Error(), is\+Lowercase(), on\+Decode\+Error(), and reset().
+
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!headers@{headers}}
+\index{headers@{headers}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{headers}]{\setlength{\rightskip}{0pt plus 5cm}{\bf compress\+::\+Header\+Piece\+List} proxygen\+::\+Test\+Streaming\+Callback\+::headers}\label{classproxygen_1_1TestStreamingCallback_a594fa72e2c508a62a968e263198f8f2b}
+
+
+Definition at line 65 of file Test\+Streaming\+Callback.\+h.
+
+
+
+Referenced by get\+Result(), hpack\+Headers(), on\+Header(), and reset().
+
+\index{proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}!headers\+Complete\+Cb@{headers\+Complete\+Cb}}
+\index{headers\+Complete\+Cb@{headers\+Complete\+Cb}!proxygen\+::\+Test\+Streaming\+Callback@{proxygen\+::\+Test\+Streaming\+Callback}}
+\subsubsection[{headers\+Complete\+Cb}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Function$<$void()$>$ proxygen\+::\+Test\+Streaming\+Callback\+::headers\+Complete\+Cb}\label{classproxygen_1_1TestStreamingCallback_ae222d424339d5a45a309fda5fbcd3fdf}
+
+
+Definition at line 73 of file Test\+Streaming\+Callback.\+h.
+
+
+
+Referenced by on\+Headers\+Complete(), and T\+E\+S\+T().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf Test\+Streaming\+Callback.\+h}\end{DoxyCompactItemize}

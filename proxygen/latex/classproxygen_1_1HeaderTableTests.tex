@@ -1,0 +1,133 @@
+\section{proxygen\+:\+:Header\+Table\+Tests Class Reference}
+\label{classproxygen_1_1HeaderTableTests}\index{proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}}
+Inheritance diagram for proxygen\+:\+:Header\+Table\+Tests\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HeaderTableTests}
+\end{center}
+\end{figure}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf xcheck} (uint32\+\_\+t internal, uint32\+\_\+t external)
+\item 
+void {\bf resize\+Table} ({\bf Header\+Table} \&table, uint32\+\_\+t new\+Capacity, uint32\+\_\+t new\+Max)
+\item 
+void {\bf resize\+And\+Fill\+Table} ({\bf Header\+Table} \&table, {\bf H\+P\+A\+C\+K\+Header} \&header, uint32\+\_\+t new\+Max, uint32\+\_\+t fill\+Count)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf head\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf length\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file Header\+Table\+Tests.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}!resize\+And\+Fill\+Table@{resize\+And\+Fill\+Table}}
+\index{resize\+And\+Fill\+Table@{resize\+And\+Fill\+Table}!proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}}
+\subsubsection[{resize\+And\+Fill\+Table(\+Header\+Table \&table, H\+P\+A\+C\+K\+Header \&header, uint32\+\_\+t new\+Max, uint32\+\_\+t fill\+Count)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Header\+Table\+Tests\+::resize\+And\+Fill\+Table (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Table} \&}]{table, }
+\item[{{\bf H\+P\+A\+C\+K\+Header} \&}]{header, }
+\item[{uint32\+\_\+t}]{new\+Max, }
+\item[{uint32\+\_\+t}]{fill\+Count}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HeaderTableTests_a315888eb2dda400f38875cce6a3d7360}
+
+
+Definition at line 36 of file Header\+Table\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+Header\+Table\+::add(), proxygen\+::\+H\+P\+A\+C\+K\+Header\+::bytes(), proxygen\+::\+Header\+Table\+::bytes(), proxygen\+::\+H\+P\+A\+C\+K\+Header\+::copy(), and proxygen\+::\+Header\+Table\+::size().
+
+
+\begin{DoxyCode}
+38                           \{
+39     uint32\_t newCapacity = header.bytes() * newMax;
+40     resizeTable(table, newCapacity, newMax);
+41     \textcolor{comment}{// Fill the table (with one extra) and make sure we haven't violated our}
+42     \textcolor{comment}{// size (bytes) limits (expected one entry to be evicted)}
+43     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i <= fillCount; ++i) \{
+44       EXPECT\_EQ(table.add(header.copy()), \textcolor{keyword}{true});
+45     \}
+46     EXPECT\_EQ(table.size(), newMax);
+47     EXPECT\_EQ(table.bytes(), newCapacity);
+48   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}!resize\+Table@{resize\+Table}}
+\index{resize\+Table@{resize\+Table}!proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}}
+\subsubsection[{resize\+Table(\+Header\+Table \&table, uint32\+\_\+t new\+Capacity, uint32\+\_\+t new\+Max)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Header\+Table\+Tests\+::resize\+Table (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Table} \&}]{table, }
+\item[{uint32\+\_\+t}]{new\+Capacity, }
+\item[{uint32\+\_\+t}]{new\+Max}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HeaderTableTests_af4fbfa65507247002229ebfd74171e8e}
+
+
+Definition at line 29 of file Header\+Table\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+Header\+Table\+::set\+Capacity(), and proxygen\+::\+Header\+Table\+::size().
+
+
+\begin{DoxyCode}
+29                                                                               \{
+30     table.setCapacity(newCapacity);
+31     \textcolor{comment}{// On resizing the table size (count of headers) remains the same or sizes}
+32     \textcolor{comment}{// down; can not size up}
+33     EXPECT\_LE(table.size(), newMax);
+34   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}!xcheck@{xcheck}}
+\index{xcheck@{xcheck}!proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}}
+\subsubsection[{xcheck(uint32\+\_\+t internal, uint32\+\_\+t external)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Header\+Table\+Tests\+::xcheck (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{internal, }
+\item[{uint32\+\_\+t}]{external}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HeaderTableTests_acfe756c35589d9abd8ab20f84d70bcf5}
+
+
+Definition at line 24 of file Header\+Table\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+24                                                     \{
+25     EXPECT\_EQ(HeaderTable::toExternal(head_, length_, \textcolor{keyword}{internal}), external);
+26     EXPECT\_EQ(HeaderTable::toInternal(head_, length_, external), \textcolor{keyword}{internal});
+27   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}!head\+\_\+@{head\+\_\+}}
+\index{head\+\_\+@{head\+\_\+}!proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}}
+\subsubsection[{head\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Header\+Table\+Tests\+::head\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HeaderTableTests_a6f36a3eaa8cf4f8e59e3e2b56de63440}
+
+
+Definition at line 50 of file Header\+Table\+Tests.\+cpp.
+
+\index{proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}!length\+\_\+@{length\+\_\+}}
+\index{length\+\_\+@{length\+\_\+}!proxygen\+::\+Header\+Table\+Tests@{proxygen\+::\+Header\+Table\+Tests}}
+\subsubsection[{length\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Header\+Table\+Tests\+::length\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HeaderTableTests_a5c757f633e18e73931656e7e341f85c3}
+
+
+Definition at line 51 of file Header\+Table\+Tests.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf Header\+Table\+Tests.\+cpp}\end{DoxyCompactItemize}

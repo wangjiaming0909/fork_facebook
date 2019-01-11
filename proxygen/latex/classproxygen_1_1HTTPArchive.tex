@@ -1,0 +1,219 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Archive Class Reference}
+\label{classproxygen_1_1HTTPArchive}\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Archive.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ std\+::vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ $>$ {\bf convert\+To\+H\+P\+A\+CK} (const std\+::vector$<$ {\bf H\+T\+T\+P\+Message} $>$ \&msgs)
+\item 
+static std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Archive} $>$ {\bf from\+File} (const std\+::string \&filename)
+\item 
+static std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Archive} $>$ {\bf from\+Public\+File} (const std\+::string \&fname)
+\item 
+static uint32\+\_\+t {\bf get\+Size} (const {\bf H\+T\+T\+P\+Message} \&msg)
+\item 
+static uint32\+\_\+t {\bf get\+Size} (const std\+::vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&headers)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ {\bf H\+T\+T\+P\+Message} $>$ {\bf requests}
+\item 
+std\+::vector$<$ {\bf H\+T\+T\+P\+Message} $>$ {\bf responses}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file H\+T\+T\+P\+Archive.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}!convert\+To\+H\+P\+A\+CK@{convert\+To\+H\+P\+A\+CK}}
+\index{convert\+To\+H\+P\+A\+CK@{convert\+To\+H\+P\+A\+CK}!proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+\subsubsection[{convert\+To\+H\+P\+A\+C\+K(const std\+::vector$<$ H\+T\+T\+P\+Message $>$ \&msgs)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ $>$ proxygen\+::\+H\+T\+T\+P\+Archive\+::convert\+To\+H\+P\+A\+CK (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ {\bf H\+T\+T\+P\+Message} $>$ \&}]{msgs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPArchive_aa29660cca7bb603854c96c71c2fda6bc}
+
+
+Definition at line 210 of file H\+T\+T\+P\+Archive.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::for\+Each(), and proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers().
+
+
+\begin{DoxyCode}
+211                                       \{
+212   std::vector<std::vector<HPACKHeader>> result;
+213   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} HTTPMessage& msg: msgs) \{
+214     std::vector<HPACKHeader> headers;
+215     msg.getHeaders().forEach(
+216       [&headers] (\textcolor{keyword}{const} \textcolor{keywordtype}{string}& name, \textcolor{keyword}{const} \textcolor{keywordtype}{string}& value) \{
+217         headers.emplace\_back(name, value);
+218       \});
+219     result.emplace\_back(std::move(headers));
+220   \}
+221   \textcolor{keywordflow}{return} result;
+222 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}!from\+File@{from\+File}}
+\index{from\+File@{from\+File}!proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+\subsubsection[{from\+File(const std\+::string \&filename)}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Archive} $>$ proxygen\+::\+H\+T\+T\+P\+Archive\+::from\+File (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPArchive_ade6002df68c6f60ec8a96d24262cf248}
+
+
+Definition at line 148 of file H\+T\+T\+P\+Archive.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::read\+File\+To\+I\+O\+Buf(), and proxygen\+::\+H\+T\+T\+P\+Headers\+::size().
+
+
+\begin{DoxyCode}
+148                                                                     \{
+149   unique\_ptr<HTTPArchive> har = std::make\_unique<HTTPArchive>();
+150   \textcolor{keyword}{auto} buffer = readFileToIOBuf(filename);
+151   \textcolor{keywordflow}{if} (!buffer) \{
+152     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+153   \}
+154   folly::dynamic jsonObj = folly::parseJson((\textcolor{keyword}{const} \textcolor{keywordtype}{char} *)buffer->data());
+155   \textcolor{keyword}{auto} entries = jsonObj[\textcolor{stringliteral}{"log"}][\textcolor{stringliteral}{"entries"}];
+156   \textcolor{comment}{// go over all the transactions}
+157   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < entries.size(); i++) \{
+158     HTTPMessage msg = extractMessage(entries[i][\textcolor{stringliteral}{"request"}],
+159                                      entries[i][\textcolor{stringliteral}{"startedDateTime"}].asString(),
+160                                      \textcolor{keyword}{true});
+161     \textcolor{keywordflow}{if} (msg.getHeaders().size() != 0) \{
+162       har->requests.push\_back(msg);
+163     \}
+164     msg = extractMessage(entries[i][\textcolor{stringliteral}{"response"}], \textcolor{stringliteral}{""}, \textcolor{keyword}{false});
+165     \textcolor{keywordflow}{if} (msg.getHeaders().size() != 0) \{
+166       har->responses.push\_back(msg);
+167     \}
+168   \}
+169 
+170   \textcolor{keywordflow}{return} har;
+171 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}!from\+Public\+File@{from\+Public\+File}}
+\index{from\+Public\+File@{from\+Public\+File}!proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+\subsubsection[{from\+Public\+File(const std\+::string \&fname)}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Archive} $>$ proxygen\+::\+H\+T\+T\+P\+Archive\+::from\+Public\+File (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{fname}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPArchive_abfb51cd38b00f712f82ca4b6b996f8ca}
+
+
+Definition at line 191 of file H\+T\+T\+P\+Archive.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::read\+File\+To\+I\+O\+Buf(), and proxygen\+::\+H\+T\+T\+P\+Headers\+::size().
+
+
+\begin{DoxyCode}
+191                                                                           \{
+192   unique\_ptr<HTTPArchive> har = std::make\_unique<HTTPArchive>();
+193   \textcolor{keyword}{auto} buffer = readFileToIOBuf(filename);
+194   \textcolor{keywordflow}{if} (!buffer) \{
+195     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+196   \}
+197   folly::dynamic jsonObj = folly::parseJson((\textcolor{keyword}{const} \textcolor{keywordtype}{char} *)buffer->data());
+198   \textcolor{keyword}{auto} entries = jsonObj[\textcolor{stringliteral}{"cases"}];
+199   \textcolor{comment}{// go over all the transactions}
+200   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < entries.size(); i++) \{
+201     HTTPMessage msg = extractMessageFromPublic(entries[i]);
+202     \textcolor{keywordflow}{if} (msg.getHeaders().size() != 0) \{
+203       har->requests.emplace\_back(msg);
+204     \}
+205   \}
+206 
+207   \textcolor{keywordflow}{return} har;
+208 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}!get\+Size@{get\+Size}}
+\index{get\+Size@{get\+Size}!proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+\subsubsection[{get\+Size(const H\+T\+T\+P\+Message \&msg)}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Archive\+::get\+Size (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Message} \&}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPArchive_ac1add491ead394fdb3f560e259920984}
+
+
+Definition at line 173 of file H\+T\+T\+P\+Archive.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::for\+Each(), and proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers().
+
+
+\begin{DoxyCode}
+173                                                     \{
+174   uint32\_t size = 0;
+175 
+176   msg.getHeaders().forEach([&size] (\textcolor{keyword}{const} \textcolor{keywordtype}{string}& name, \textcolor{keyword}{const} \textcolor{keywordtype}{string}& value) \{
+177       size += name.size() + value.size() + 2;
+178     \});
+179   \textcolor{keywordflow}{return} size;
+180 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}!get\+Size@{get\+Size}}
+\index{get\+Size@{get\+Size}!proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+\subsubsection[{get\+Size(const std\+::vector$<$ H\+P\+A\+C\+K\+Header $>$ \&headers)}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Archive\+::get\+Size (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&}]{headers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPArchive_ab682da712a9ff4ef5c9c15594a26d693}
+
+
+Definition at line 182 of file H\+T\+T\+P\+Archive.\+cpp.
+
+
+\begin{DoxyCode}
+182                                                                 \{
+183   uint32\_t size = 0;
+184 
+185   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}& header : headers) \{
+186     size += header.name.size() + header.value.size() + 2;
+187   \}
+188   \textcolor{keywordflow}{return} size;
+189 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}!requests@{requests}}
+\index{requests@{requests}!proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+\subsubsection[{requests}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf H\+T\+T\+P\+Message}$>$ proxygen\+::\+H\+T\+T\+P\+Archive\+::requests}\label{classproxygen_1_1HTTPArchive_a3b0e159ff83d50caf77b1dd29dd3c868}
+
+
+Definition at line 24 of file H\+T\+T\+P\+Archive.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Compression\+Simulator\+::read\+Input\+From\+File\+And\+Schedule().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}!responses@{responses}}
+\index{responses@{responses}!proxygen\+::\+H\+T\+T\+P\+Archive@{proxygen\+::\+H\+T\+T\+P\+Archive}}
+\subsubsection[{responses}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf H\+T\+T\+P\+Message}$>$ proxygen\+::\+H\+T\+T\+P\+Archive\+::responses}\label{classproxygen_1_1HTTPArchive_a1c188d9d4b0980f48f5d981538f38aa3}
+
+
+Definition at line 25 of file H\+T\+T\+P\+Archive.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf H\+T\+T\+P\+Archive.\+h}\item 
+proxygen/lib/http/codec/compress/test/{\bf H\+T\+T\+P\+Archive.\+cpp}\end{DoxyCompactItemize}

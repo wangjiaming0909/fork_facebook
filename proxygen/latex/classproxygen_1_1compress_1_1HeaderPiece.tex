@@ -1,0 +1,171 @@
+\section{proxygen\+:\+:compress\+:\+:Header\+Piece Class Reference}
+\label{classproxygen_1_1compress_1_1HeaderPiece}\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+
+
+{\ttfamily \#include $<$Header\+Piece.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Header\+Piece} (const char $\ast$in\+Data, uint32\+\_\+t in\+Len, bool in\+Owner, bool in\+Multi\+Valued)
+\item 
+{\bf Header\+Piece} ({\bf Header\+Piece} \&\&goner) noexcept
+\item 
+{\bf $\sim$\+Header\+Piece} ()
+\item 
+bool {\bf is\+Multi\+Valued} () const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+String\+Piece {\bf str}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf owner}
+\item 
+bool {\bf multi\+Valued}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+in-\/place representation of a header name or value 
+
+Definition at line 20 of file Header\+Piece.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}!Header\+Piece@{Header\+Piece}}
+\index{Header\+Piece@{Header\+Piece}!proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+\subsubsection[{Header\+Piece(const char $\ast$in\+Data, uint32\+\_\+t in\+Len, bool in\+Owner, bool in\+Multi\+Valued)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::compress\+::\+Header\+Piece\+::\+Header\+Piece (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{in\+Data, }
+\item[{uint32\+\_\+t}]{in\+Len, }
+\item[{bool}]{in\+Owner, }
+\item[{bool}]{in\+Multi\+Valued}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1compress_1_1HeaderPiece_a6a909a767b6d671bc580015c7fc5600a}
+Construct a view around the data 
+
+Definition at line 25 of file Header\+Piece.\+h.
+
+
+\begin{DoxyCode}
+29       : str(inData, inLen),
+30         owner(inOwner),
+31         multiValued(inMultiValued) \{\}
+\end{DoxyCode}
+\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}!Header\+Piece@{Header\+Piece}}
+\index{Header\+Piece@{Header\+Piece}!proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+\subsubsection[{Header\+Piece(\+Header\+Piece \&\&goner) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::compress\+::\+Header\+Piece\+::\+Header\+Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Piece} \&\&}]{goner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1compress_1_1HeaderPiece_ae517e0a4bdf433a797a3b68728d76350}
+
+
+Definition at line 33 of file Header\+Piece.\+h.
+
+
+\begin{DoxyCode}
+34       : str(goner.str),
+35         owner(goner.owner),
+36         multiValued(goner.multiValued)\{
+37     goner.owner = \textcolor{keyword}{false};
+38   \}
+\end{DoxyCode}
+\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}!````~Header\+Piece@{$\sim$\+Header\+Piece}}
+\index{````~Header\+Piece@{$\sim$\+Header\+Piece}!proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+\subsubsection[{$\sim$\+Header\+Piece()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::compress\+::\+Header\+Piece\+::$\sim$\+Header\+Piece (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1compress_1_1HeaderPiece_a6b643ff2845bcdb0ca3a2cddb1b3c12b}
+
+
+Definition at line 40 of file Header\+Piece.\+h.
+
+
+
+References owner, and str.
+
+
+\begin{DoxyCode}
+40                  \{
+41     \textcolor{keywordflow}{if} (owner) \{
+42       CHECK\_NOTNULL(str.data());
+43       \textcolor{keyword}{delete}[] str.data();
+44     \}
+45   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}!is\+Multi\+Valued@{is\+Multi\+Valued}}
+\index{is\+Multi\+Valued@{is\+Multi\+Valued}!proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+\subsubsection[{is\+Multi\+Valued() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::compress\+::\+Header\+Piece\+::is\+Multi\+Valued (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1compress_1_1HeaderPiece_abaec9295157815b61a9000029bcbcd24}
+
+
+Definition at line 47 of file Header\+Piece.\+h.
+
+
+
+References multi\+Valued.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+47                              \{
+48     \textcolor{keywordflow}{return} multiValued;
+49   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}!multi\+Valued@{multi\+Valued}}
+\index{multi\+Valued@{multi\+Valued}!proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+\subsubsection[{multi\+Valued}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::compress\+::\+Header\+Piece\+::multi\+Valued\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1compress_1_1HeaderPiece_ad730012ddb65a95b3e716cd0b2bd7141}
+
+
+Definition at line 56 of file Header\+Piece.\+h.
+
+
+
+Referenced by is\+Multi\+Valued().
+
+\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}!owner@{owner}}
+\index{owner@{owner}!proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+\subsubsection[{owner}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::compress\+::\+Header\+Piece\+::owner\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1compress_1_1HeaderPiece_a8192242ab552fc1523ec96489d01f365}
+
+
+Definition at line 55 of file Header\+Piece.\+h.
+
+
+
+Referenced by $\sim$\+Header\+Piece().
+
+\index{proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}!str@{str}}
+\index{str@{str}!proxygen\+::compress\+::\+Header\+Piece@{proxygen\+::compress\+::\+Header\+Piece}}
+\subsubsection[{str}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::compress\+::\+Header\+Piece\+::str}\label{classproxygen_1_1compress_1_1HeaderPiece_ae87c7ba9578f12b151a0d24a8b6e3601}
+
+
+Definition at line 52 of file Header\+Piece.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::parse\+Name\+Values(), and $\sim$\+Header\+Piece().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Header\+Piece.\+h}\end{DoxyCompactItemize}

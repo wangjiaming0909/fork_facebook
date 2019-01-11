@@ -1,0 +1,22 @@
+\section{proxygen/lib/http/session/\+Transport\+Filter.h File Reference}
+\label{TransportFilter_8h}\index{proxygen/lib/http/session/\+Transport\+Filter.\+h@{proxygen/lib/http/session/\+Transport\+Filter.\+h}}
+{\ttfamily \#include $<$folly/io/async/\+Event\+Base.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Filter\+Chain.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Async\+Transport.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf proxygen\+::\+Pass\+Through\+Transport\+Filter}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Generic\+Filter$<$ folly\+::\+Async\+Transport\+Wrapper, folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback,\&folly\+::\+Async\+Transport\+Wrapper\+::set\+Read\+CB, true, folly\+::\+Async\+Transport\+Wrapper\+::\+Destructor $>$ {\bf proxygen\+::\+Transport\+Filter}
+\item 
+typedef Filter\+Chain$<$ folly\+::\+Async\+Transport\+Wrapper, folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback, Pass\+Through\+Transport\+Filter,\&folly\+::\+Async\+Transport\+Wrapper\+::set\+Read\+CB, false $>$ {\bf proxygen\+::\+Transport\+Filter\+Chain}
+\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\section{std\+:\+:hash$<$ proxygen\+:\+:H\+P\+A\+C\+K\+Header\+Name $>$ Struct Template Reference}
+\label{structstd_1_1hash_3_01proxygen_1_1HPACKHeaderName_01_4}\index{std\+::hash$<$ proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name $>$@{std\+::hash$<$ proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name $>$}}
+
+
+{\ttfamily \#include $<$H\+P\+A\+C\+K\+Header\+Name.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t {\bf operator()} (const {\bf proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name} \&header\+Name) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$$>$\\*
+struct std\+::hash$<$ proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name $>$}
+
+
+
+Definition at line 213 of file H\+P\+A\+C\+K\+Header\+Name.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{std\+::hash$<$ proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name $>$@{std\+::hash$<$ proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!std\+::hash$<$ proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name $>$@{std\+::hash$<$ proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name $>$}}
+\subsubsection[{operator()(const proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name \&header\+Name) const }]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t std\+::hash$<$ {\bf proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name} $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name} \&}]{header\+Name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structstd_1_1hash_3_01proxygen_1_1HPACKHeaderName_01_4_ad38bf96b02d7b0a3b74e3a9a0d5d9ae0}
+
+
+Definition at line 214 of file H\+P\+A\+C\+K\+Header\+Name.\+h.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name\+::get().
+
+
+\begin{DoxyCode}
+214                                                                      \{
+215     \textcolor{keywordflow}{return} std::hash<std::string>()(headerName.get());
+216   \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf H\+P\+A\+C\+K\+Header\+Name.\+h}\end{DoxyCompactItemize}

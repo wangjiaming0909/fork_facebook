@@ -1,0 +1,204 @@
+\section{Test\+Filter$<$ Owned $>$ Class Template Reference}
+\label{classTestFilter}\index{Test\+Filter$<$ Owned $>$@{Test\+Filter$<$ Owned $>$}}
+Inheritance diagram for Test\+Filter$<$ Owned $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.890302cm]{classTestFilter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Test\+Filter} ()
+\item 
+{\bf Test\+Filter} (bool calls, bool callbacks)
+\item 
+void {\bf set\+Callback} ({\bf Tester\+Interface\+::\+Callback} $\ast$cb) override
+\item 
+void {\bf doA} () override
+\item 
+void {\bf onA} () override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf do\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf on\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf id\+\_\+} \{{\bf id\+Counter\+\_\+}++\}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t {\bf id\+Counter\+\_\+} = 0
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$bool Owned$>$\\*
+class Test\+Filter$<$ Owned $>$}
+
+
+
+Definition at line 67 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Filter@{Test\+Filter}!Test\+Filter@{Test\+Filter}}
+\index{Test\+Filter@{Test\+Filter}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{Test\+Filter()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ {\bf Test\+Filter}$<$ Owned $>$\+::{\bf Test\+Filter} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestFilter_a37454f7d6ba759a4bafd50eb3b054e8d}
+
+
+Definition at line 72 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+72               :
+73       GenericFilter<TesterInterface,
+74                     TesterInterface::Callback,
+75                     &TesterInterface::setCallback,
+76                     Owned>(\textcolor{keyword}{true}, \textcolor{keyword}{true}) \{\}
+\end{DoxyCode}
+\index{Test\+Filter@{Test\+Filter}!Test\+Filter@{Test\+Filter}}
+\index{Test\+Filter@{Test\+Filter}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{Test\+Filter(bool calls, bool callbacks)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ {\bf Test\+Filter}$<$ Owned $>$\+::{\bf Test\+Filter} (
+\begin{DoxyParamCaption}
+\item[{bool}]{calls, }
+\item[{bool}]{callbacks}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestFilter_a897a3aa7059d2b0f7e0b489d302f1f7a}
+
+
+Definition at line 78 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+78                                         :
+79       GenericFilter<TesterInterface,
+80                     TesterInterface::Callback,
+81                     &TesterInterface::setCallback,
+82                     Owned>(calls, callbacks) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Filter@{Test\+Filter}!doA@{doA}}
+\index{doA@{doA}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{do\+A() override}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ void {\bf Test\+Filter}$<$ Owned $>$\+::doA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classTestFilter_a5931067b028febb1c2c27868fddba1b9}
+
+
+Implements {\bf Tester\+Interface} \doxyref{}{p.}{classTesterInterface_a0f7b44363f02a1d9edf8de02ea8b8fea}.
+
+
+
+Definition at line 87 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+87                       \{
+88     do_++;
+89     this->call_->doA();
+90   \}
+\end{DoxyCode}
+\index{Test\+Filter@{Test\+Filter}!onA@{onA}}
+\index{onA@{onA}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{on\+A() override}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ void {\bf Test\+Filter}$<$ Owned $>$\+::onA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classTestFilter_a63cb90aa885b4ad1fe27f73cad737397}
+
+
+Implements {\bf Tester\+Interface\+::\+Callback} \doxyref{}{p.}{classTesterInterface_1_1Callback_a27b141e4f64f782fa8c7f3b028fbf652}.
+
+
+
+Reimplemented in {\bf Test\+Filter\+Odd\+Delete\+On$<$ Owned $>$} \doxyref{}{p.}{classTestFilterOddDeleteOn_a8ebd823d3a980756b8afb808b72cbcd5}.
+
+
+
+Definition at line 91 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+91                       \{
+92     on_++;
+93     this->callback_->onA();
+94   \}
+\end{DoxyCode}
+\index{Test\+Filter@{Test\+Filter}!set\+Callback@{set\+Callback}}
+\index{set\+Callback@{set\+Callback}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{set\+Callback(\+Tester\+Interface\+::\+Callback $\ast$cb) override}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ void {\bf Test\+Filter}$<$ Owned $>$\+::set\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Tester\+Interface\+::\+Callback} $\ast$}]{cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classTestFilter_affa7465c058dc103c82bfd46dfe037f5}
+
+
+Implements {\bf Tester\+Interface} \doxyref{}{p.}{classTesterInterface_a6e02551dc1541c224ef6895a524be8e6}.
+
+
+
+Definition at line 84 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+84                                                          \{
+85     this->setCallbackInternal(cb);
+86   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Test\+Filter@{Test\+Filter}!do\+\_\+@{do\+\_\+}}
+\index{do\+\_\+@{do\+\_\+}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{do\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ uint32\+\_\+t {\bf Test\+Filter}$<$ Owned $>$\+::do\+\_\+ \{0\}}\label{classTestFilter_adcfadcae35fe4d7af0284eaf207a1582}
+
+
+Definition at line 95 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+\index{Test\+Filter@{Test\+Filter}!id\+\_\+@{id\+\_\+}}
+\index{id\+\_\+@{id\+\_\+}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{id\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ uint32\+\_\+t {\bf Test\+Filter}$<$ Owned $>$\+::id\+\_\+ \{{\bf id\+Counter\+\_\+}++\}}\label{classTestFilter_a7afd5c3671e63b47d86188c323cfc84b}
+
+
+Definition at line 97 of file Generic\+Filter\+Test.\+cpp.
+
+\index{Test\+Filter@{Test\+Filter}!id\+Counter\+\_\+@{id\+Counter\+\_\+}}
+\index{id\+Counter\+\_\+@{id\+Counter\+\_\+}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{id\+Counter\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ uint32\+\_\+t {\bf Test\+Filter}$<$ Owned $>$\+::id\+Counter\+\_\+ = 0\hspace{0.3cm}{\ttfamily [static]}}\label{classTestFilter_a98e15a5dab0f5f75927d838b96049c07}
+
+
+Definition at line 98 of file Generic\+Filter\+Test.\+cpp.
+
+\index{Test\+Filter@{Test\+Filter}!on\+\_\+@{on\+\_\+}}
+\index{on\+\_\+@{on\+\_\+}!Test\+Filter@{Test\+Filter}}
+\subsubsection[{on\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ uint32\+\_\+t {\bf Test\+Filter}$<$ Owned $>$\+::on\+\_\+ \{0\}}\label{classTestFilter_adf50828cef2bb5a3ef5fa62788b01b24}
+
+
+Definition at line 96 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/test/{\bf Generic\+Filter\+Test.\+cpp}\end{DoxyCompactItemize}

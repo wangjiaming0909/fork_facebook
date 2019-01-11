@@ -1,0 +1,101 @@
+\section{Testing\+Huff\+Tree Class Reference}
+\label{classTestingHuffTree}\index{Testing\+Huff\+Tree@{Testing\+Huff\+Tree}}
+Inheritance diagram for Testing\+Huff\+Tree\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestingHuffTree}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Testing\+Huff\+Tree} (const {\bf Huff\+Tree} \&tree)
+\item 
+const {\bf Super\+Huff\+Node} $\ast$ {\bf get\+Internal\+Table} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf Testing\+Huff\+Tree} {\bf get\+Huff\+Tree} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class used in testing to expose the internal tables for requests and responses 
+
+Definition at line 264 of file Huffman\+Tests.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Testing\+Huff\+Tree@{Testing\+Huff\+Tree}!Testing\+Huff\+Tree@{Testing\+Huff\+Tree}}
+\index{Testing\+Huff\+Tree@{Testing\+Huff\+Tree}!Testing\+Huff\+Tree@{Testing\+Huff\+Tree}}
+\subsubsection[{Testing\+Huff\+Tree(const Huff\+Tree \&tree)}]{\setlength{\rightskip}{0pt plus 5cm}Testing\+Huff\+Tree\+::\+Testing\+Huff\+Tree (
+\begin{DoxyParamCaption}
+\item[{const {\bf Huff\+Tree} \&}]{tree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classTestingHuffTree_a920cd4850e300a5b1c5fadd300776f3c}
+
+
+Definition at line 267 of file Huffman\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+267 : HuffTree(tree) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Testing\+Huff\+Tree@{Testing\+Huff\+Tree}!get\+Huff\+Tree@{get\+Huff\+Tree}}
+\index{get\+Huff\+Tree@{get\+Huff\+Tree}!Testing\+Huff\+Tree@{Testing\+Huff\+Tree}}
+\subsubsection[{get\+Huff\+Tree()}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Testing\+Huff\+Tree} Testing\+Huff\+Tree\+::get\+Huff\+Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classTestingHuffTree_a4ba36b0795aa0f7477b2a0ce8073ab6a}
+
+
+Definition at line 273 of file Huffman\+Tests.\+cpp.
+
+
+
+References proxygen\+::huffman\+::huff\+Tree().
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+273                                        \{
+274     TestingHuffTree reqTree(huffTree());
+275     \textcolor{keywordflow}{return} reqTree;
+276   \}
+\end{DoxyCode}
+\index{Testing\+Huff\+Tree@{Testing\+Huff\+Tree}!get\+Internal\+Table@{get\+Internal\+Table}}
+\index{get\+Internal\+Table@{get\+Internal\+Table}!Testing\+Huff\+Tree@{Testing\+Huff\+Tree}}
+\subsubsection[{get\+Internal\+Table()}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Super\+Huff\+Node}$\ast$ Testing\+Huff\+Tree\+::get\+Internal\+Table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestingHuffTree_aecfad551958b975dfd47b70c59347b35}
+
+
+Definition at line 269 of file Huffman\+Tests.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+269                                           \{
+270     \textcolor{keywordflow}{return} table_;
+271   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf Huffman\+Tests.\+cpp}\end{DoxyCompactItemize}

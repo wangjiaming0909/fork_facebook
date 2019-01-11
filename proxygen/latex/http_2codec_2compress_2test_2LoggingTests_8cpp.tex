@@ -1,0 +1,144 @@
+\section{proxygen/lib/http/codec/compress/test/\+Logging\+Tests.cpp File Reference}
+\label{http_2codec_2compress_2test_2LoggingTests_8cpp}\index{proxygen/lib/http/codec/compress/test/\+Logging\+Tests.\+cpp@{proxygen/lib/http/codec/compress/test/\+Logging\+Tests.\+cpp}}
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Encode\+Buffer.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Header.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+Logging.\+h$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Logging\+Tests}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Logging\+Tests}, Refset)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Logging\+Tests}, Dump\+Header\+Vector)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Logging\+Tests}, Print\+Delta)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Logging\+Tests}, Dump\+Bin)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Logging\+Tests, Refset)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Logging\+Tests}}]{, }
+\item[{Refset}]{}
+\end{DoxyParamCaption}
+)}\label{http_2codec_2compress_2test_2LoggingTests_8cpp_a9381bc2a4b668c266f58ee648a6f2cf1}
+
+
+Definition at line 25 of file Logging\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+25                              \{
+26   list<uint32\_t> refset;
+27   refset.push\_back(3);
+28   refset.push\_back(5);
+29   stringstream out;
+30   out << &refset;
+31   EXPECT\_EQ(out.str(), \textcolor{stringliteral}{"\(\backslash\)n[3 5 ]\(\backslash\)n"});
+32 \}
+\end{DoxyCode}
+\index{http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Logging\+Tests, Dump\+Header\+Vector)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Logging\+Tests}}]{, }
+\item[{Dump\+Header\+Vector}]{}
+\end{DoxyParamCaption}
+)}\label{http_2codec_2compress_2test_2LoggingTests_8cpp_aa242457be18f9ddb527f46cf7db62418}
+
+
+Definition at line 34 of file Logging\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+34                                        \{
+35   vector<HPACKHeader> headers;
+36   headers.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"index.html"}));
+37   headers.push\_back(HPACKHeader(\textcolor{stringliteral}{"content-type"}, \textcolor{stringliteral}{"gzip"}));
+38   stringstream out;
+39   out << headers;
+40   EXPECT\_EQ(out.str(), \textcolor{stringliteral}{":path: index.html\(\backslash\)ncontent-type: gzip\(\backslash\)n\(\backslash\)n"});
+41 \}
+\end{DoxyCode}
+\index{http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Logging\+Tests, Print\+Delta)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Logging\+Tests}}]{, }
+\item[{Print\+Delta}]{}
+\end{DoxyParamCaption}
+)}\label{http_2codec_2compress_2test_2LoggingTests_8cpp_a3808bd73f535c6c54f6b19a1a12e5c37}
+
+
+Definition at line 43 of file Logging\+Tests.\+cpp.
+
+
+
+References proxygen\+::print\+Delta().
+
+
+\begin{DoxyCode}
+43                                  \{
+44   vector<HPACKHeader> v1;
+45   v1.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/"}));
+46   v1.push\_back(HPACKHeader(\textcolor{stringliteral}{":host"}, \textcolor{stringliteral}{"www.facebook.com"}));
+47   vector<HPACKHeader> v2;
+48 
+49   \textcolor{comment}{// empty v1 or v2}
+50   EXPECT\_EQ(printDelta(v1, v2), \textcolor{stringliteral}{"\(\backslash\)n + :path: /\(\backslash\)n + :host: www.facebook.com\(\backslash\)n"});
+51   EXPECT\_EQ(printDelta(v2, v1), \textcolor{stringliteral}{"\(\backslash\)n - :path: /\(\backslash\)n - :host: www.facebook.com\(\backslash\)n"});
+52 
+53   \textcolor{comment}{// skip first header from v1}
+54   v2.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/"}));
+55   EXPECT\_EQ(printDelta(v1, v2), \textcolor{stringliteral}{"\(\backslash\)n + :host: www.facebook.com\(\backslash\)n"});
+56 
+57   v2.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/"}));
+58   EXPECT\_EQ(printDelta(v2, v1),
+59             \textcolor{stringliteral}{"\(\backslash\)n - :host: www.facebook.com\(\backslash\)n + :path: / (duplicate)\(\backslash\)n"});
+60 
+61   v2.pop\_back();
+62   v1.clear();
+63   v1.push\_back(HPACKHeader(\textcolor{stringliteral}{":a"}, \textcolor{stringliteral}{"b"}));
+64   v1.push\_back(HPACKHeader(\textcolor{stringliteral}{":a"}, \textcolor{stringliteral}{"b"}));
+65   v1.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/"}));
+66   EXPECT\_EQ(printDelta(v1, v2), \textcolor{stringliteral}{"\(\backslash\)n + :a: b\(\backslash\)n duplicate :a: b\(\backslash\)n"});
+67 \}
+\end{DoxyCode}
+\index{http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!http/codec/compress/test/\+Logging\+Tests.\+cpp@{http/codec/compress/test/\+Logging\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Logging\+Tests, Dump\+Bin)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Logging\+Tests}}]{, }
+\item[{Dump\+Bin}]{}
+\end{DoxyParamCaption}
+)}\label{http_2codec_2compress_2test_2LoggingTests_8cpp_a380495458d9a4627a1766cecd2c8c41e}
+
+
+Definition at line 69 of file Logging\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Literal(), and proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::to\+Bin().
+
+
+\begin{DoxyCode}
+69                               \{
+70   \textcolor{comment}{// test with an HPACKEncodeBuffer}
+71   HPACKEncodeBuffer buf(128);
+72   buf.encodeLiteral(\textcolor{stringliteral}{"test"});
+73   EXPECT\_EQ(buf.toBin(),
+74             \textcolor{stringliteral}{"00000100   01110100 t 01100101 e 01110011 s 01110100 t \(\backslash\)n"});
+75 \}
+\end{DoxyCode}

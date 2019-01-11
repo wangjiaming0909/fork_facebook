@@ -1,0 +1,479 @@
+\section{proxygen/lib/utils/test/\+Rendezvous\+Hash\+Test.cpp File Reference}
+\label{RendezvousHashTest_8cpp}\index{proxygen/lib/utils/test/\+Rendezvous\+Hash\+Test.\+cpp@{proxygen/lib/utils/test/\+Rendezvous\+Hash\+Test.\+cpp}}
+{\ttfamily \#include $<$folly/\+Conv.\+h$>$}\\*
+{\ttfamily \#include $<$folly/container/\+Foreach.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Rendezvous\+Hash.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, Consistency)
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, Consistency\+With\+New\+Node)
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, Consistency\+With\+Increased\+Weight)
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, Consistent\+Flow\+To\+Increased\+Weight\+Node)
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, Consistent\+Flow\+To\+Decreased\+Weight\+Nodes)
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, Consistent\+Flow\+To\+Decreased\+Weight\+Node)
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, Consistency\+With\+Decreased\+Weight)
+\item 
+{\bf T\+E\+ST} (Consistent\+Hash\+Ring, Distribution\+Accuracy)
+\item 
+{\bf T\+E\+ST} ({\bf Rendezvous\+Hash}, select\+N\+Unweighted)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, Consistency)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{Consistency}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_aaece892719d6407fd3e8b63599f095f5}
+
+
+Definition at line 20 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+20                                   \{
+21   RendezvousHash hashes;
+22   std::vector<std::pair<std::string, uint64\_t> > nodes;
+23   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; ++i) \{
+24     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), 1);
+25   \}
+26   hashes.build(nodes);
+27 
+28   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} rank = 0; rank < nodes.size() + 2; rank++) \{
+29     std::map<uint64\_t, size\_t> mapping;
+30     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10000; ++i) \{
+31       mapping[i] = hashes.get(i, rank);
+32     \}
+33 
+34     FOR\_EACH\_KV(key, expected, mapping) \{
+35       EXPECT\_EQ(expected, hashes.get(key, rank));
+36     \}
+37   \}
+38 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, Consistency\+With\+New\+Node)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{Consistency\+With\+New\+Node}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_a5af189c6aa3f6c07abdb78b7d0bf18fc}
+
+
+Definition at line 40 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+40                                              \{
+41   RendezvousHash hashes;
+42   \textcolor{keywordtype}{int} numNodes = 10;
+43   std::vector<std::pair<std::string, uint64\_t> > nodes;
+44   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+45     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), 1);
+46   \}
+47   hashes.build(nodes);
+48   std::map<uint64\_t, size\_t> mapping;
+49   \textcolor{keywordflow}{for} (uint64\_t i = 0; i < 10000; ++i) \{
+50     mapping[i] = hashes.get(i);
+51   \}
+52   hashes = RendezvousHash();
+53   \textcolor{comment}{// Adding a new node and rebuild the hash}
+54   nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, numNodes), 1);
+55   hashes.build(nodes);
+56   \textcolor{comment}{// traffic should only flow to the new node}
+57   FOR\_EACH\_KV (key, expected, mapping) \{
+58     \textcolor{keywordtype}{size\_t} \textcolor{keywordtype}{id} = hashes.get(key);
+59     EXPECT\_TRUE(expected == \textcolor{keywordtype}{id} || numNodes == \textcolor{keywordtype}{int}(\textcolor{keywordtype}{id}));
+60   \}
+61 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, Consistency\+With\+Increased\+Weight)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{Consistency\+With\+Increased\+Weight}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_aa639cf007aa04f50a1ad9e7943baeb23}
+
+
+Definition at line 63 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+63                                                      \{
+64   RendezvousHash hashes;
+65   \textcolor{keywordtype}{int} numNodes = 10;
+66   std::vector<std::pair<std::string, uint64\_t> > nodes;
+67   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+68     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i);
+69   \}
+70   hashes.build(nodes);
+71 
+72   std::map<uint64\_t, size\_t> mapping;
+73   \textcolor{keywordflow}{for} (uint64\_t i = 0; i < 10000; ++i) \{
+74     mapping[i] = hashes.get(i);
+75   \}
+76 
+77   \textcolor{comment}{// Increase the weight by 2}
+78   nodes.clear();
+79   hashes = RendezvousHash();
+80   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+81     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i*2);
+82   \}
+83   hashes.build(nodes);
+84 
+85   \textcolor{comment}{// traffic shouldn't flow at all}
+86   FOR\_EACH\_KV (key, expected, mapping) \{
+87     EXPECT\_EQ(expected, hashes.get(key));
+88   \}
+89 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, Consistent\+Flow\+To\+Increased\+Weight\+Node)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{Consistent\+Flow\+To\+Increased\+Weight\+Node}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_a4c85a85a4c893e7993411ef8014422ee}
+
+
+Definition at line 91 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+91                                                           \{
+92   RendezvousHash hashes;
+93   \textcolor{keywordtype}{int} numNodes = 10;
+94   std::vector<std::pair<std::string, uint64\_t> > nodes;
+95   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+96     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i);
+97   \}
+98   hashes.build(nodes);
+99 
+100   std::map<uint64\_t, size\_t> mapping;
+101   \textcolor{keywordflow}{for} (uint64\_t i = 0; i < 10000; ++i) \{
+102     mapping[i] = hashes.get(i);
+103   \}
+104 
+105   nodes.clear();
+106   \textcolor{comment}{// Increase the weight for a single node}
+107   hashes = RendezvousHash();
+108 
+109   nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, 0), 10);
+110 
+111   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < numNodes; ++i) \{
+112     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i);
+113   \}
+114   hashes.build(nodes);
+115   \textcolor{comment}{// traffic should only flow to the first node}
+116   FOR\_EACH\_KV (key, expected, mapping) \{
+117     \textcolor{keywordtype}{size\_t} \textcolor{keywordtype}{id} = hashes.get(key);
+118     EXPECT\_TRUE(expected == \textcolor{keywordtype}{id} || 0 == \textcolor{keywordtype}{int}(\textcolor{keywordtype}{id}));
+119   \}
+120 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, Consistent\+Flow\+To\+Decreased\+Weight\+Nodes)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{Consistent\+Flow\+To\+Decreased\+Weight\+Nodes}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_a9600468d416763745a25b6beee2625c7}
+
+
+Definition at line 122 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+122                                                            \{
+123   RendezvousHash hashes;
+124   \textcolor{keywordtype}{int} numNodes = 18;
+125   std::vector<std::pair<std::string, uint64\_t> > nodes;
+126   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+127     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), 100);
+128   \}
+129   hashes.build(nodes);
+130   std::map<uint64\_t, size\_t> mapping;
+131   \textcolor{keywordflow}{for} (uint64\_t i = 0; i < 10000; ++i) \{
+132     mapping[i] = hashes.get(i);
+133   \}
+134 
+135   nodes.clear();
+136   hashes = RendezvousHash();
+137 
+138   \textcolor{comment}{// decrease the weights for 5 nodes}
+139   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 5; ++i) \{
+140     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), 50);
+141   \}
+142 
+143   \textcolor{comment}{// keep the weights for the rest unchanged}
+144   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 5; i < numNodes; ++i) \{
+145     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), 100);
+146   \}
+147 
+148   hashes.build(nodes);
+149   FOR\_EACH\_KV (key, expected, mapping) \{
+150     \textcolor{comment}{// traffic should only flow to nodes with decreased nodes}
+151     \textcolor{keywordtype}{size\_t} \textcolor{keywordtype}{id} = hashes.get(key);
+152     EXPECT\_TRUE(expected == \textcolor{keywordtype}{id} || \textcolor{keywordtype}{id} >= 5);
+153   \}
+154 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, Consistent\+Flow\+To\+Decreased\+Weight\+Node)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{Consistent\+Flow\+To\+Decreased\+Weight\+Node}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_afdfbc5e051563831cf3fe35f27de433c}
+
+
+Definition at line 156 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+156                                                           \{
+157   RendezvousHash hashes;
+158   \textcolor{keywordtype}{int} numNodes = 10;
+159   std::vector<std::pair<std::string, uint64\_t> > nodes;
+160   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+161     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i);
+162   \}
+163   hashes.build(nodes);
+164   std::map<uint64\_t, size\_t> mapping;
+165   \textcolor{keywordflow}{for} (uint64\_t i = 0; i < 10000; ++i) \{
+166     mapping[i] = hashes.get(i);
+167   \}
+168 
+169   \textcolor{comment}{// Increase the weight for a single node}
+170   nodes.clear();
+171   hashes = RendezvousHash();
+172 
+173   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes - 1; ++i) \{
+174     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i);
+175   \}
+176 
+177   \textcolor{comment}{// zero the weight of the last node}
+178   nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, numNodes-1), 0);
+179   hashes.build(nodes);
+180   FOR\_EACH\_KV (key, expected, mapping) \{
+181     \textcolor{comment}{// traffic should only flow from the zero weight cluster to others}
+182     \textcolor{keywordtype}{size\_t} \textcolor{keywordtype}{id} = hashes.get(key);
+183     \textcolor{keywordflow}{if} (expected == (uint64\_t)numNodes-1) \{
+184        EXPECT\_TRUE(expected != \textcolor{keywordtype}{id});
+185     \} \textcolor{keywordflow}{else} \{
+186        EXPECT\_TRUE(expected == \textcolor{keywordtype}{id});
+187     \}
+188   \}
+189 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, Consistency\+With\+Decreased\+Weight)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{Consistency\+With\+Decreased\+Weight}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_af587011bd81b375d30b56109c7f5b978}
+
+
+Definition at line 191 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+191                                                      \{
+192   RendezvousHash hashes;
+193   \textcolor{keywordtype}{int} numNodes = 10;
+194   std::vector<std::pair<std::string, uint64\_t> > nodes;
+195   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+196     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i*2);
+197   \}
+198   hashes.build(nodes);
+199   std::map<uint64\_t, size\_t> mapping;
+200   \textcolor{keywordflow}{for} (uint64\_t i = 0; i < 10000; ++i) \{
+201     mapping[i] = hashes.get(i);
+202   \}
+203 
+204   \textcolor{comment}{// Decrease the weight by 2}
+205   nodes.clear();
+206   hashes = RendezvousHash();
+207 
+208   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numNodes; ++i) \{
+209     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), i);
+210   \}
+211   hashes.build(nodes);
+212 
+213   \textcolor{comment}{// traffic shouldn't flow at all}
+214   FOR\_EACH\_KV (key, expected, mapping) \{
+215     EXPECT\_EQ(expected, hashes.get(key));
+216   \}
+217 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Consistent\+Hash\+Ring, Distribution\+Accuracy)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Consistent\+Hash\+Ring}]{, }
+\item[{Distribution\+Accuracy}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_afe150a1083b56e28a162d28788ce096a}
+
+
+Definition at line 219 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::get().
+
+
+\begin{DoxyCode}
+219                                                \{
+220   std::vector<std::string> keys =
+221     \{\textcolor{stringliteral}{"ash\_proxy"}, \textcolor{stringliteral}{"prn\_proxy"}, \textcolor{stringliteral}{"snc\_proxy"}, \textcolor{stringliteral}{"frc\_proxy"}\};
+222 
+223   std::vector<std::vector<uint64\_t>> weights = \{
+224     \{248, 342, 2, 384\},
+225     \{10, 10, 10, 10\},
+226     \{25, 25, 10, 10\},
+227     \{100, 10, 10, 1\},
+228     \{100, 5, 5, 5\},
+229     \{922337203685, 12395828300, 50192385101, 59293845010\}
+230   \};
+231 
+232   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& weight: weights) \{
+233     RendezvousHash hashes;
+234     std::vector<std::pair<std::string, uint64\_t> > nodes;
+235     FOR\_EACH\_RANGE (i, 0, keys.size()) \{
+236       nodes.emplace\_back(keys[i], weight[i]);
+237     \}
+238     hashes.build(nodes);
+239 
+240     std::vector<uint64\_t> distribution(keys.size());
+241 
+242     \textcolor{keywordflow}{for} (uint64\_t i = 0; i < 21000; ++i) \{
+243       distribution[hashes.get(i)]++;
+244     \}
+245 
+246     uint64\_t totalWeight = 0;
+247 
+248     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& w: weight) \{
+249       totalWeight += w;
+250     \}
+251 
+252     \textcolor{keywordtype}{double} maxError = 0.0;
+253     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < keys.size(); ++i) \{
+254       \textcolor{keywordtype}{double} expected = 100.0 * weight[i] / totalWeight;
+255       \textcolor{keywordtype}{double} actual = 100.0 * distribution[i] / 21000;
+256 
+257       maxError = std::max(maxError, fabs(expected - actual));
+258     \}
+259     \textcolor{comment}{// make sure the error rate is less than 1.0%}
+260     EXPECT\_LE(maxError, 1.0);
+261   \}
+262 \}
+\end{DoxyCode}
+\index{Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Rendezvous\+Hash\+Test.\+cpp@{Rendezvous\+Hash\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Rendezvous\+Hash, select\+N\+Unweighted)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{{\bf Rendezvous\+Hash}}]{, }
+\item[{select\+N\+Unweighted}]{}
+\end{DoxyParamCaption}
+)}\label{RendezvousHashTest_8cpp_a8344512b252fd46681dd573f1b28dc3d}
+
+
+Definition at line 264 of file Rendezvous\+Hash\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Rendezvous\+Hash\+::build(), and proxygen\+::\+Rendezvous\+Hash\+::select\+N\+Unweighted().
+
+
+\begin{DoxyCode}
+264                                         \{
+265   RendezvousHash hashes;
+266   std::vector<std::pair<std::string, uint64\_t>> nodes;
+267   \textcolor{keywordtype}{int} size = 100;
+268   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; ++i) \{
+269     nodes.emplace\_back(folly::to<std::string>(\textcolor{stringliteral}{"key"}, i), 1);
+270   \}
+271   hashes.build(nodes);
+272   \textcolor{keyword}{auto} seed = 91484253;
+273 
+274   \textcolor{comment}{// rank > size}
+275   \textcolor{keyword}{auto} select = hashes.selectNUnweighted(seed, size + 10);
+276   EXPECT\_EQ(select.size(), size);
+277   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++) \{
+278     EXPECT\_EQ(select[i], i);
+279   \}
+280 
+281   \textcolor{comment}{// check valid index in selection}
+282   \textcolor{keywordtype}{int} rank = size / 4;
+283   select = hashes.selectNUnweighted(seed, rank);
+284   EXPECT\_EQ(select.size(), rank);
+285   std::set<size\_t> uniqueIndex;
+286   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} index : select) \{
+287     EXPECT\_EQ(uniqueIndex.count(index), 0);
+288     uniqueIndex.insert(index);
+289     EXPECT\_LT(index, size);
+290   \}
+291 
+292   \textcolor{comment}{// change seed, check different selection}
+293   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < 100; i++) \{
+294     select = hashes.selectNUnweighted(seed + i, rank);
+295     \textcolor{keywordtype}{int} different = 0;
+296     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} index : select) \{
+297       \textcolor{keywordflow}{if} (uniqueIndex.count(index) == 0) \{
+298         different++;
+299       \}
+300     \}
+301     EXPECT\_GT(different, 0);
+302   \}
+303 \}
+\end{DoxyCode}

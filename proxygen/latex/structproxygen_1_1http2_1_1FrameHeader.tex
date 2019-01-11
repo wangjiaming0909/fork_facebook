@@ -1,0 +1,85 @@
+\section{proxygen\+:\+:http2\+:\+:Frame\+Header Struct Reference}
+\label{structproxygen_1_1http2_1_1FrameHeader}\index{proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P2\+Framer.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf length}
+\item 
+uint32\+\_\+t {\bf stream}
+\item 
+{\bf Frame\+Type} {\bf type}
+\item 
+uint8\+\_\+t {\bf flags}
+\item 
+uint16\+\_\+t {\bf unused}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 73 of file H\+T\+T\+P2\+Framer.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}!flags@{flags}}
+\index{flags@{flags}!proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t proxygen\+::http2\+::\+Frame\+Header\+::flags}\label{structproxygen_1_1http2_1_1FrameHeader_a27a246396f3d5db4f563d9dfe310224d}
+
+
+Definition at line 77 of file H\+T\+T\+P2\+Framer.\+h.
+
+
+
+Referenced by proxygen\+::http2\+::frame\+Has\+Padding(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::generate\+Rst\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+End\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Certificate(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Frame(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Check\+Concurrent\+Streams(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ping(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Settings(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}!length@{length}}
+\index{length@{length}!proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::http2\+::\+Frame\+Header\+::length}\label{structproxygen_1_1http2_1_1FrameHeader_a009ad761137f421b35a49f551bc52e57}
+
+
+Definition at line 74 of file H\+T\+T\+P2\+Framer.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+All\+Data(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Certificate(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Certificate\+Request(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Continuation(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Data\+Frame\+Data(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ex\+Headers(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Frame(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Goaway(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ping(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Priority(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Push\+Promise(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Rst\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Settings(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Window\+Update(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}!stream@{stream}}
+\index{stream@{stream}!proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}}
+\subsubsection[{stream}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::http2\+::\+Frame\+Header\+::stream}\label{structproxygen_1_1http2_1_1FrameHeader_ab92cd576f2a3c6622039a6aa7e3a0653}
+
+
+Definition at line 75 of file H\+T\+T\+P2\+Framer.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::generate\+Rst\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+End\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+Settings(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+All\+Data(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Continuation(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Data\+Frame\+Data(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ex\+Headers(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Frame(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Priority(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Push\+Promise(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Rst\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Settings(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Window\+Update(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::stream\+Error(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}!type@{type}}
+\index{type@{type}!proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Frame\+Type} proxygen\+::http2\+::\+Frame\+Header\+::type}\label{structproxygen_1_1http2_1_1FrameHeader_a608bcd42466ce5f95b36e939c479fb38}
+
+
+Definition at line 76 of file H\+T\+T\+P2\+Framer.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+End\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Frame(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Check\+Concurrent\+Streams(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Impl(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parsing\+Trailers(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}!unused@{unused}}
+\index{unused@{unused}!proxygen\+::http2\+::\+Frame\+Header@{proxygen\+::http2\+::\+Frame\+Header}}
+\subsubsection[{unused}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::http2\+::\+Frame\+Header\+::unused}\label{structproxygen_1_1http2_1_1FrameHeader_aeaebfec487f59f3f4f8489c1c4a8fed5}
+
+
+Definition at line 78 of file H\+T\+T\+P2\+Framer.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P2\+Framer.\+h}\end{DoxyCompactItemize}

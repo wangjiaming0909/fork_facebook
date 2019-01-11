@@ -1,0 +1,373 @@
+\section{proxygen\+:\+:Wheel\+Timer\+Instance Class Reference}
+\label{classproxygen_1_1WheelTimerInstance}\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+
+
+{\ttfamily \#include $<$Wheel\+Timer\+Instance.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Wheel\+Timer\+Instance} ()
+\item 
+{\bf Wheel\+Timer\+Instance} (std\+::chrono\+::milliseconds default\+Timeout\+MS, folly\+::\+Event\+Base $\ast$event\+Base={\bf nullptr})
+\item 
+{\bf Wheel\+Timer\+Instance} (const {\bf Wheel\+Timer\+Instance} \&timer\+Instance)
+\item 
+{\bf Wheel\+Timer\+Instance} ({\bf Wheel\+Timer\+Instance} \&\&timer\+Instance) noexcept
+\item 
+{\bf Wheel\+Timer\+Instance} (folly\+::\+H\+H\+Wheel\+Timer $\ast$timer)
+\item 
+std\+::chrono\+::milliseconds {\bf get\+Default\+Timeout} () const 
+\item 
+void {\bf set\+Default\+Timeout} (std\+::chrono\+::milliseconds timeout)
+\item 
+void {\bf schedule\+Timeout} (folly\+::\+H\+H\+Wheel\+Timer\+::\+Callback $\ast$callback, std\+::chrono\+::milliseconds timeout)
+\item 
+void {\bf schedule\+Timeout} (folly\+::\+H\+H\+Wheel\+Timer\+::\+Callback $\ast$callback)
+\item 
+{\bf Wheel\+Timer\+Instance} \& {\bf operator=} (const {\bf Wheel\+Timer\+Instance} \&timer)
+\item 
+{\bf Wheel\+Timer\+Instance} \& {\bf operator=} (const {\bf Wheel\+Timer\+Instance} \&\&timer)
+\item 
+{\bf operator bool} () const 
+\item 
+folly\+::\+H\+H\+Wheel\+Timer $\ast$ {\bf get\+Wheel\+Timer} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+H\+H\+Wheel\+Timer $\ast$ {\bf wheel\+Timer\+Ptr\+\_\+} \{{\bf nullptr}\}
+\item 
+std\+::chrono\+::milliseconds {\bf default\+Timeout\+M\+S\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 29 of file Wheel\+Timer\+Instance.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}}
+\index{Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{Wheel\+Timer\+Instance()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Wheel\+Timer\+Instance\+::\+Wheel\+Timer\+Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1WheelTimerInstance_a66470dd5defea0f6e1a3de523242375b}
+
+
+Definition at line 19 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+\begin{DoxyCode}
+19                                        \{
+20 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}}
+\index{Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{Wheel\+Timer\+Instance(std\+::chrono\+::milliseconds default\+Timeout\+M\+S, folly\+::\+Event\+Base $\ast$event\+Base=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Wheel\+Timer\+Instance\+::\+Wheel\+Timer\+Instance (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::milliseconds}]{default\+Timeout\+MS, }
+\item[{folly\+::\+Event\+Base $\ast$}]{event\+Base = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1WheelTimerInstance_a3a89f56516cce39bb1b743aea9efe662}
+
+
+Definition at line 31 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References wheel\+Timer\+Ptr\+\_\+.
+
+
+\begin{DoxyCode}
+33                                : defaultTimeoutMS_(defaultTimeoutMS) \{
+34   \textcolor{keywordflow}{if} (!eventBase) \{
+35     eventBase = folly::EventBaseManager::get()->getEventBase();
+36   \}
+37   wheelTimerPtr_ = &eventBase->timer();
+38 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}}
+\index{Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{Wheel\+Timer\+Instance(const Wheel\+Timer\+Instance \&timer\+Instance)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Wheel\+Timer\+Instance\+::\+Wheel\+Timer\+Instance (
+\begin{DoxyParamCaption}
+\item[{const {\bf Wheel\+Timer\+Instance} \&}]{timer\+Instance}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1WheelTimerInstance_ab746807c6b18308e88b0bf831bd30331}
+
+
+Definition at line 40 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+\begin{DoxyCode}
+41   : wheelTimerPtr_(timerInstance.wheelTimerPtr\_),
+42     defaultTimeoutMS_(timerInstance.defaultTimeoutMS\_) \{
+43 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}}
+\index{Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{Wheel\+Timer\+Instance(\+Wheel\+Timer\+Instance \&\&timer\+Instance) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Wheel\+Timer\+Instance\+::\+Wheel\+Timer\+Instance (
+\begin{DoxyParamCaption}
+\item[{{\bf Wheel\+Timer\+Instance} \&\&}]{timer\+Instance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classproxygen_1_1WheelTimerInstance_a59a008ee69fe871752ebb462ed5e6c25}
+
+
+Definition at line 45 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+\begin{DoxyCode}
+47   : wheelTimerPtr_(std::move(timerInstance.wheelTimerPtr\_)),
+48     defaultTimeoutMS_(std::move(timerInstance.defaultTimeoutMS\_)) \{
+49 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}}
+\index{Wheel\+Timer\+Instance@{Wheel\+Timer\+Instance}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{Wheel\+Timer\+Instance(folly\+::\+H\+H\+Wheel\+Timer $\ast$timer)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Wheel\+Timer\+Instance\+::\+Wheel\+Timer\+Instance (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+H\+H\+Wheel\+Timer $\ast$}]{timer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1WheelTimerInstance_ae314e3aa22f0ded92331eac906b57040}
+
+
+Definition at line 22 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References default\+Timeout\+M\+S\+\_\+.
+
+
+\begin{DoxyCode}
+22                                                                :
+23   wheelTimerPtr_(timer) \{
+24   \textcolor{keywordflow}{if} (timer) \{
+25     \textcolor{comment}{// If you use an external timer with no default timeout set, you will get}
+26     \textcolor{comment}{// a check failed if you attempt to schedule a default timeout.}
+27     defaultTimeoutMS_ = timer->getDefaultTimeout();
+28   \}
+29 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!get\+Default\+Timeout@{get\+Default\+Timeout}}
+\index{get\+Default\+Timeout@{get\+Default\+Timeout}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{get\+Default\+Timeout() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+Wheel\+Timer\+Instance\+::get\+Default\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1WheelTimerInstance_ae08df9f0a4e494abb60bc0665e43e605}
+
+
+Definition at line 51 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References default\+Timeout\+M\+S\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction().
+
+
+\begin{DoxyCode}
+51                                                                   \{
+52   \textcolor{keywordflow}{return} defaultTimeoutMS_;
+53 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!get\+Wheel\+Timer@{get\+Wheel\+Timer}}
+\index{get\+Wheel\+Timer@{get\+Wheel\+Timer}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{get\+Wheel\+Timer() const }]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+H\+H\+Wheel\+Timer$\ast$ proxygen\+::\+Wheel\+Timer\+Instance\+::get\+Wheel\+Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1WheelTimerInstance_aa30f4dad548ef0cd581063068fa60966}
+
+
+Definition at line 61 of file Wheel\+Timer\+Instance.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction().
+
+
+\begin{DoxyCode}
+61                                            \{
+62     \textcolor{keywordflow}{return} wheelTimerPtr_;
+63   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{operator bool() const }]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Wheel\+Timer\+Instance\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1WheelTimerInstance_a0508f60930aa7b695d2c404abcc57c1e}
+
+
+Definition at line 88 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References wheel\+Timer\+Ptr\+\_\+.
+
+
+\begin{DoxyCode}
+88                                         \{
+89   \textcolor{keywordflow}{return} (wheelTimerPtr_ != \textcolor{keyword}{nullptr});
+90 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!operator=@{operator=}}
+\index{operator=@{operator=}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{operator=(const Wheel\+Timer\+Instance \&timer)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Wheel\+Timer\+Instance} \& proxygen\+::\+Wheel\+Timer\+Instance\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Wheel\+Timer\+Instance} \&}]{timer}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1WheelTimerInstance_aba778b13ed5f78500469a43911b71af8}
+
+
+Definition at line 75 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References default\+Timeout\+M\+S\+\_\+, and wheel\+Timer\+Ptr\+\_\+.
+
+
+\begin{DoxyCode}
+75                                                                              \{
+76   wheelTimerPtr_ = t.wheelTimerPtr\_;
+77   defaultTimeoutMS_ = t.defaultTimeoutMS\_;
+78   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+79 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!operator=@{operator=}}
+\index{operator=@{operator=}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{operator=(const Wheel\+Timer\+Instance \&\&timer)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Wheel\+Timer\+Instance} \& proxygen\+::\+Wheel\+Timer\+Instance\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Wheel\+Timer\+Instance} \&\&}]{timer}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1WheelTimerInstance_aba5aa80045d5b4896c36123102b12a58}
+
+
+Definition at line 82 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References default\+Timeout\+M\+S\+\_\+, and wheel\+Timer\+Ptr\+\_\+.
+
+
+\begin{DoxyCode}
+82                                                 \{
+83   wheelTimerPtr_ = std::move(timer.wheelTimerPtr\_);
+84   defaultTimeoutMS_ = std::move(timer.defaultTimeoutMS\_);
+85   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+86 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!schedule\+Timeout@{schedule\+Timeout}}
+\index{schedule\+Timeout@{schedule\+Timeout}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{schedule\+Timeout(folly\+::\+H\+H\+Wheel\+Timer\+::\+Callback $\ast$callback, std\+::chrono\+::milliseconds timeout)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Wheel\+Timer\+Instance\+::schedule\+Timeout (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+H\+H\+Wheel\+Timer\+::\+Callback $\ast$}]{callback, }
+\item[{std\+::chrono\+::milliseconds}]{timeout}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1WheelTimerInstance_a9c1db79a186f24aee623e9d46b91e898}
+
+
+Definition at line 59 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References wheel\+Timer\+Ptr\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Connection\+Send\+Window\+Closed(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Success(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Timeout\+Expired(), proxygen\+::\+H\+T\+T\+P\+Session\+::run\+Loop\+Callback(), and schedule\+Timeout().
+
+
+\begin{DoxyCode}
+61                                    \{
+62   \textcolor{keywordflow}{if} (wheelTimerPtr_) \{
+63     wheelTimerPtr_->scheduleTimeout(callback, timeout);
+64   \} \textcolor{keywordflow}{else} \{
+65     VLOG(2) << \textcolor{stringliteral}{"Ingoring scheduleTimeout on an empty WheelTimerInstance"};
+66   \}
+67 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!schedule\+Timeout@{schedule\+Timeout}}
+\index{schedule\+Timeout@{schedule\+Timeout}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{schedule\+Timeout(folly\+::\+H\+H\+Wheel\+Timer\+::\+Callback $\ast$callback)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Wheel\+Timer\+Instance\+::schedule\+Timeout (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+H\+H\+Wheel\+Timer\+::\+Callback $\ast$}]{callback}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1WheelTimerInstance_a6f5e7eb4876e51eb25edbe460a23fb91}
+
+
+Definition at line 69 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References default\+Timeout\+M\+S\+\_\+, and schedule\+Timeout().
+
+
+\begin{DoxyCode}
+70                                          \{
+71   CHECK\_GE(defaultTimeoutMS_.count(), 0);
+72   scheduleTimeout(callback, defaultTimeoutMS_);
+73 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!set\+Default\+Timeout@{set\+Default\+Timeout}}
+\index{set\+Default\+Timeout@{set\+Default\+Timeout}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{set\+Default\+Timeout(std\+::chrono\+::milliseconds timeout)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Wheel\+Timer\+Instance\+::set\+Default\+Timeout (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::milliseconds}]{timeout}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1WheelTimerInstance_a67bf4a496dfd85601c6a4b7b1b0744fc}
+
+
+Definition at line 55 of file Wheel\+Timer\+Instance.\+cpp.
+
+
+
+References default\+Timeout\+M\+S\+\_\+.
+
+
+\begin{DoxyCode}
+55                                                                         \{
+56   defaultTimeoutMS_ = timeout;
+57 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!default\+Timeout\+M\+S\+\_\+@{default\+Timeout\+M\+S\+\_\+}}
+\index{default\+Timeout\+M\+S\+\_\+@{default\+Timeout\+M\+S\+\_\+}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{default\+Timeout\+M\+S\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+Wheel\+Timer\+Instance\+::default\+Timeout\+M\+S\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1WheelTimerInstance_a31de0f848b57b2bb520b9163cc9847de}
+
+
+Definition at line 71 of file Wheel\+Timer\+Instance.\+h.
+
+
+
+Referenced by get\+Default\+Timeout(), operator=(), schedule\+Timeout(), set\+Default\+Timeout(), and Wheel\+Timer\+Instance().
+
+\index{proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}!wheel\+Timer\+Ptr\+\_\+@{wheel\+Timer\+Ptr\+\_\+}}
+\index{wheel\+Timer\+Ptr\+\_\+@{wheel\+Timer\+Ptr\+\_\+}!proxygen\+::\+Wheel\+Timer\+Instance@{proxygen\+::\+Wheel\+Timer\+Instance}}
+\subsubsection[{wheel\+Timer\+Ptr\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+H\+H\+Wheel\+Timer$\ast$ proxygen\+::\+Wheel\+Timer\+Instance\+::wheel\+Timer\+Ptr\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1WheelTimerInstance_a73fdb540f0b08c082ae5f9639419d172}
+
+
+Definition at line 67 of file Wheel\+Timer\+Instance.\+h.
+
+
+
+Referenced by operator bool(), operator=(), schedule\+Timeout(), and Wheel\+Timer\+Instance().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Wheel\+Timer\+Instance.\+h}\item 
+proxygen/lib/utils/{\bf Wheel\+Timer\+Instance.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,236 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Push\+Transaction\+Handler Class Reference}
+\label{classproxygen_1_1HTTPPushTransactionHandler}\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Transaction.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Push\+Transaction\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1HTTPPushTransactionHandler}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf $\sim$\+H\+T\+T\+P\+Push\+Transaction\+Handler} () override
+\item 
+void {\bf on\+Headers\+Complete} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$) noexceptfinal
+\item 
+void {\bf on\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$) noexceptfinal
+\item 
+void {\bf on\+Chunk\+Header} (size\+\_\+t) noexceptfinal
+\item 
+void {\bf on\+Chunk\+Complete} () noexceptfinal
+\item 
+void {\bf on\+Trailers} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$) noexceptfinal
+\item 
+void {\bf on\+E\+OM} () noexceptfinal
+\item 
+void {\bf on\+Upgrade} ({\bf Upgrade\+Protocol}) noexceptfinal
+\item 
+void {\bf on\+Pushed\+Transaction} ({\bf H\+T\+T\+P\+Transaction} $\ast$) noexceptfinal
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 261 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!````~H\+T\+T\+P\+Push\+Transaction\+Handler@{$\sim$\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\index{````~H\+T\+T\+P\+Push\+Transaction\+Handler@{$\sim$\+H\+T\+T\+P\+Push\+Transaction\+Handler}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Push\+Transaction\+Handler() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::$\sim$\+H\+T\+T\+P\+Push\+Transaction\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classproxygen_1_1HTTPPushTransactionHandler_a3c35ddebbc850ac7f11b304062ba4fde}
+
+
+Definition at line 263 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+263 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_a7b1a3456854a5243d2fe951ad5f88b31}
+Can be called multiple times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a56a25d7fb8ac5ddf1ed5b16eaca3c5df}.
+
+
+
+Definition at line 269 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+269                                                         \{
+270     LOG(FATAL) << \textcolor{stringliteral}{"push txn received body"};
+271   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+Chunk\+Complete@{on\+Chunk\+Complete}}
+\index{on\+Chunk\+Complete@{on\+Chunk\+Complete}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+Chunk\+Complete() noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+Chunk\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_a02db8a33eb84cecb89a9b591f20770b0}
+Can be called multiple times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). This signifies the end of a chunk. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_ad4befff61cff93d6e2c9459e39556419}.
+
+
+
+Definition at line 277 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+277                                         \{
+278     LOG(FATAL) << \textcolor{stringliteral}{"push txn received chunk complete"};
+279   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+Chunk\+Header@{on\+Chunk\+Header}}
+\index{on\+Chunk\+Header@{on\+Chunk\+Header}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+Chunk\+Header(size\+\_\+t) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+Chunk\+Header (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_a4b64ee5a1e2fd9882d74020071b1f665}
+Can be called multiple times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). This signifies the beginning of a chunk of length \textquotesingle{}length\textquotesingle{}. You will receive \doxyref{on\+Body()}{p.}{classproxygen_1_1HTTPPushTransactionHandler_a7b1a3456854a5243d2fe951ad5f88b31} after this. Also, the length will be greater than zero. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_aa760cd4a327aaa62293b1d09c5811298}.
+
+
+
+Definition at line 273 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+273                                               \{
+274     LOG(FATAL) << \textcolor{stringliteral}{"push txn received chunk header"};
+275   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+E\+OM@{on\+E\+OM}}
+\index{on\+E\+OM@{on\+E\+OM}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+E\+O\+M() noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_afc714e461a1ab5a38e4d697c5613075a}
+Can be called once per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). After this callback is received, there will be no more normal ingress callbacks received (on\+Egress$\ast$() and \doxyref{on\+Error()}{p.}{classproxygen_1_1HTTPTransactionHandler_a585c21327eb30ab85ebdb84f663dab3b} may still be invoked). The Handler should consider ingress complete after receiving this message. This Transaction is still valid, and work may still occur on it until detach\+Transaction is called. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_afdc4d4dec715841ba0c5bb5e58b1d53c}.
+
+
+
+Definition at line 285 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+285                               \{
+286     LOG(FATAL) << \textcolor{stringliteral}{"push txn received EOM"};
+287   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+Headers\+Complete(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_abba4468f876968221a030ee0f0aaef8c}
+Called at most once per transaction. This is usually the first ingress callback. It is possible to get a read error before this however. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a5e431cbb4c065285c5ad65acaceb0b22}.
+
+
+
+Definition at line 265 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+265                                                                     \{
+266     LOG(FATAL) << \textcolor{stringliteral}{"push txn received headers"};
+267   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+Pushed\+Transaction@{on\+Pushed\+Transaction}}
+\index{on\+Pushed\+Transaction@{on\+Pushed\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+Pushed\+Transaction(\+H\+T\+T\+P\+Transaction $\ast$) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+Pushed\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_aefddbdf79b892a9c8c8217e51fb5015e}
+Ask the handler to construct a handler for a pushed transaction associated with its transaction.
+
+T\+O\+DO\+: Reconsider default implementation here. If the handler does not implement, better set max initiated to 0 in a settings frame? 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a9d65c4524f5e38f10d42e0290d51fea6}.
+
+
+
+Definition at line 293 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+293                                                             \{
+294     LOG(FATAL) << \textcolor{stringliteral}{"push txn received push txn"};
+295   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+Trailers@{on\+Trailers}}
+\index{on\+Trailers@{on\+Trailers}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+Trailers(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Headers $>$) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+Trailers (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$}]{trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_a3ef08caffef20fa7e02f66f68eb7ac7a}
+Can be called any number of times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). Trailers can be received once right before the E\+OM of a chunked H\+T\+T\+P/1.\+1 reponse or multiple times per transaction from S\+P\+DY and H\+T\+T\+P/2.\+0 H\+E\+A\+D\+E\+RS frames. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a219de67110f915deda30d18327f26393}.
+
+
+
+Definition at line 281 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+281                                                              \{
+282     LOG(FATAL) << \textcolor{stringliteral}{"push txn received trailers"};
+283   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}!on\+Upgrade@{on\+Upgrade}}
+\index{on\+Upgrade@{on\+Upgrade}!proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler@{proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler}}
+\subsubsection[{on\+Upgrade(\+Upgrade\+Protocol) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Push\+Transaction\+Handler\+::on\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf Upgrade\+Protocol}}]{protocol}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPPushTransactionHandler_ae2af3eeea0e94e4220fbb31d7303624f}
+Can be called once per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). After this callback is invoked, further data will be forwarded using the \doxyref{on\+Body()}{p.}{classproxygen_1_1HTTPPushTransactionHandler_a7b1a3456854a5243d2fe951ad5f88b31} callback. Once the data transfer is completed (E\+OF recevied in case of C\+O\+N\+N\+E\+CT), \doxyref{on\+E\+O\+M()}{p.}{classproxygen_1_1HTTPPushTransactionHandler_afc714e461a1ab5a38e4d697c5613075a} callback will be invoked. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_acda954bf78c4d2aad951698e78c40a0f}.
+
+
+
+Definition at line 289 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+289                                                  \{
+290     LOG(FATAL) << \textcolor{stringliteral}{"push txn received upgrade"};
+291   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Transaction.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,119 @@
+\section{Test\+Priority\+Map\+Builder Class Reference}
+\label{classTestPriorityMapBuilder}\index{Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}}
+Inheritance diagram for Test\+Priority\+Map\+Builder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestPriorityMapBuilder}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Upstream\+Session\+::\+Priority\+Adapter $>$ {\bf create\+Virtual\+Streams} ({\bf H\+T\+T\+P\+Priority\+Map\+Factory\+Provider} $\ast$session) const override
+\item 
+virtual {\bf $\sim$\+Test\+Priority\+Map\+Builder} ()=default
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t {\bf hi\+Pri\+Weight\+\_\+} \{18\}
+\item 
+uint8\+\_\+t {\bf hi\+Pri\+Level\+\_\+} \{0\}
+\item 
+uint8\+\_\+t {\bf lo\+Pri\+Weight\+\_\+} \{2\}
+\item 
+uint8\+\_\+t {\bf lo\+Pri\+Level\+\_\+} \{2\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 38 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}!````~Test\+Priority\+Map\+Builder@{$\sim$\+Test\+Priority\+Map\+Builder}}
+\index{````~Test\+Priority\+Map\+Builder@{$\sim$\+Test\+Priority\+Map\+Builder}!Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}}
+\subsubsection[{$\sim$\+Test\+Priority\+Map\+Builder()=default}]{\setlength{\rightskip}{0pt plus 5cm}virtual Test\+Priority\+Map\+Builder\+::$\sim$\+Test\+Priority\+Map\+Builder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\label{classTestPriorityMapBuilder_a677188392f11fd82421fc3a9c53ca8e6}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}!create\+Virtual\+Streams@{create\+Virtual\+Streams}}
+\index{create\+Virtual\+Streams@{create\+Virtual\+Streams}!Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}}
+\subsubsection[{create\+Virtual\+Streams(\+H\+T\+T\+P\+Priority\+Map\+Factory\+Provider $\ast$session) const override}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Upstream\+Session\+::\+Priority\+Adapter $>$ Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Priority\+Map\+Factory\+Provider} $\ast$}]{session}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classTestPriorityMapBuilder_a38a80a2e0fd5e2450a6dfce72ecbbc14}
+
+
+Definition at line 77 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::get\+Post\+Request(), proxygen\+::get\+Response(), Test\+Priority\+Adapter\+::hi\+Pri\+\_\+, Test\+Priority\+Adapter\+::hi\+Pri\+Id\+\_\+, Test\+Priority\+Adapter\+::lo\+Pri\+\_\+, Test\+Priority\+Adapter\+::lo\+Pri\+Id\+\_\+, make\+Buf(), Test\+Priority\+Adapter\+::min\+Priority\+\_\+, Test\+Priority\+Adapter\+::parent\+Id\+\_\+, Test\+Priority\+Adapter\+::priority\+Map\+\_\+, proxygen\+::\+H\+T\+T\+P\+Priority\+Map\+Factory\+Provider\+::send\+Priority(), proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message().
+
+
+\begin{DoxyCode}
+78                                                        \{
+79   std::unique\_ptr<TestPriorityAdapter>  a =
+80       std::make\_unique<TestPriorityAdapter>();
+81   a->parentId_ = session->sendPriority(\{0, \textcolor{keyword}{false}, 1\});
+82 
+83   std::get<0>(a->hiPri_) = a->parentId_;
+84   std::get<2>(a->hiPri_) = hiPriWeight_;
+85   a->hiPriId_ = session->sendPriority(\{a->parentId_, \textcolor{keyword}{false}, hiPriWeight_\});
+86   a->priorityMap_[hiPriLevel_] = a->hiPri_;
+87 
+88   std::get<0>(a->loPri_) = a->parentId_;
+89   std::get<2>(a->loPri_) = loPriWeight_;
+90   a->loPriId_ = session->sendPriority(\{a->parentId_, \textcolor{keyword}{false}, loPriWeight_\});
+91   a->priorityMap_[loPriLevel_] = a->loPri_;
+92 
+93   a->minPriority_ = a->loPri_;
+94 
+95   \textcolor{keywordflow}{return} std::move(a);
+96 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}!hi\+Pri\+Level\+\_\+@{hi\+Pri\+Level\+\_\+}}
+\index{hi\+Pri\+Level\+\_\+@{hi\+Pri\+Level\+\_\+}!Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}}
+\subsubsection[{hi\+Pri\+Level\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Test\+Priority\+Map\+Builder\+::hi\+Pri\+Level\+\_\+ \{0\}}\label{classTestPriorityMapBuilder_a6660984818676e2a02636888084c6e2c}
+
+
+Definition at line 46 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+\index{Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}!hi\+Pri\+Weight\+\_\+@{hi\+Pri\+Weight\+\_\+}}
+\index{hi\+Pri\+Weight\+\_\+@{hi\+Pri\+Weight\+\_\+}!Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}}
+\subsubsection[{hi\+Pri\+Weight\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Test\+Priority\+Map\+Builder\+::hi\+Pri\+Weight\+\_\+ \{18\}}\label{classTestPriorityMapBuilder_a092a861b14c64e23efb86be5d99ac3d9}
+
+
+Definition at line 45 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+\index{Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}!lo\+Pri\+Level\+\_\+@{lo\+Pri\+Level\+\_\+}}
+\index{lo\+Pri\+Level\+\_\+@{lo\+Pri\+Level\+\_\+}!Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}}
+\subsubsection[{lo\+Pri\+Level\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Test\+Priority\+Map\+Builder\+::lo\+Pri\+Level\+\_\+ \{2\}}\label{classTestPriorityMapBuilder_a2092de22ec7070bbd8d207722dbb2460}
+
+
+Definition at line 48 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+\index{Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}!lo\+Pri\+Weight\+\_\+@{lo\+Pri\+Weight\+\_\+}}
+\index{lo\+Pri\+Weight\+\_\+@{lo\+Pri\+Weight\+\_\+}!Test\+Priority\+Map\+Builder@{Test\+Priority\+Map\+Builder}}
+\subsubsection[{lo\+Pri\+Weight\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Test\+Priority\+Map\+Builder\+::lo\+Pri\+Weight\+\_\+ \{2\}}\label{classTestPriorityMapBuilder_a7f6953b57c7ea6b85a9cfcb0bc89f764}
+
+
+Definition at line 47 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp}\end{DoxyCompactItemize}

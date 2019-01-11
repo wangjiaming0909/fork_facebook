@@ -1,0 +1,836 @@
+\section{proxygen\+:\+:Parse\+U\+RL Class Reference}
+\label{classproxygen_1_1ParseURL}\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+
+
+{\ttfamily \#include $<$Parse\+U\+R\+L.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Parse\+U\+RL} ()
+\item 
+{\bf Parse\+U\+RL} (folly\+::\+String\+Piece url\+Val) noexcept
+\item 
+void {\bf init} (folly\+::\+String\+Piece url\+Val)
+\item 
+folly\+::\+String\+Piece {\bf url} () const 
+\item 
+folly\+::\+String\+Piece {\bf scheme} () const 
+\item 
+std\+::string {\bf authority} () const 
+\item 
+bool {\bf has\+Host} () const 
+\item 
+folly\+::\+String\+Piece {\bf host} () const 
+\item 
+uint16\+\_\+t {\bf port} () const 
+\item 
+std\+::string {\bf host\+And\+Port} () const 
+\item 
+folly\+::\+String\+Piece {\bf path} () const 
+\item 
+folly\+::\+String\+Piece {\bf query} () const 
+\item 
+folly\+::\+String\+Piece {\bf fragment} () const 
+\item 
+bool {\bf valid} () const 
+\item 
+folly\+::\+String\+Piece {\bf host\+No\+Brackets} ()
+\item 
+bool {\bf host\+Is\+I\+P\+Address} ()
+\item 
+{\bf F\+B\+\_\+\+E\+X\+P\+O\+RT} void {\bf strip\+Brackets} () noexcept
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf F\+B\+\_\+\+E\+X\+P\+O\+RT} void {\bf parse} () noexcept
+\item 
+void {\bf parse\+Non\+Fully} () noexcept
+\item 
+bool {\bf parse\+Authority} () noexcept
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+String\+Piece {\bf url\+\_\+}
+\item 
+folly\+::\+String\+Piece {\bf scheme\+\_\+}
+\item 
+std\+::string {\bf authority\+\_\+}
+\item 
+folly\+::\+String\+Piece {\bf host\+\_\+}
+\item 
+folly\+::\+String\+Piece {\bf host\+No\+Brackets\+\_\+}
+\item 
+folly\+::\+String\+Piece {\bf path\+\_\+}
+\item 
+folly\+::\+String\+Piece {\bf query\+\_\+}
+\item 
+folly\+::\+String\+Piece {\bf fragment\+\_\+}
+\item 
+uint16\+\_\+t {\bf port\+\_\+} \{0\}
+\item 
+bool {\bf valid\+\_\+} \{false\}
+\item 
+bool {\bf initialized\+\_\+} \{false\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file Parse\+U\+R\+L.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!Parse\+U\+RL@{Parse\+U\+RL}}
+\index{Parse\+U\+RL@{Parse\+U\+RL}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{Parse\+U\+R\+L()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Parse\+U\+R\+L\+::\+Parse\+U\+RL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_acaa29ee693cbeaa74a97f65af82f5fe2}
+
+
+Definition at line 24 of file Parse\+U\+R\+L.\+h.
+
+
+\begin{DoxyCode}
+24 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!Parse\+U\+RL@{Parse\+U\+RL}}
+\index{Parse\+U\+RL@{Parse\+U\+RL}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{Parse\+U\+R\+L(folly\+::\+String\+Piece url\+Val) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Parse\+U\+R\+L\+::\+Parse\+U\+RL (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+String\+Piece}]{url\+Val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ParseURL_aa8134edee78ecbae1ce51bb19c0970ca}
+
+
+Definition at line 25 of file Parse\+U\+R\+L.\+h.
+
+
+
+References init().
+
+
+\begin{DoxyCode}
+25                                                       \{
+26     init(urlVal);
+27   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!authority@{authority}}
+\index{authority@{authority}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{authority() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Parse\+U\+R\+L\+::authority (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a6846b332615ba56b26ec2aca08352272}
+
+
+Definition at line 44 of file Parse\+U\+R\+L.\+h.
+
+
+
+References authority\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Query\+String(), and test\+Parse\+U\+R\+L().
+
+
+\begin{DoxyCode}
+44                               \{
+45     \textcolor{keywordflow}{return} authority_;
+46   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!fragment@{fragment}}
+\index{fragment@{fragment}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{fragment() const }]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::fragment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a1e3d65b32809f38c3ac5d40346de0ab7}
+
+
+Definition at line 76 of file Parse\+U\+R\+L.\+h.
+
+
+
+References fragment\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Query\+String(), and proxygen\+::\+U\+R\+L\+::\+U\+R\+L().
+
+
+\begin{DoxyCode}
+76                                     \{
+77     \textcolor{keywordflow}{return} fragment_;
+78   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!has\+Host@{has\+Host}}
+\index{has\+Host@{has\+Host}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{has\+Host() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Parse\+U\+R\+L\+::has\+Host (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a15b438044204175452ff106d151e9b92}
+
+
+Definition at line 48 of file Parse\+U\+R\+L.\+h.
+
+
+
+References host\+\_\+, and valid().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+48                        \{
+49     \textcolor{keywordflow}{return} valid() && !host_.empty();
+50   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!host@{host}}
+\index{host@{host}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{host() const }]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::host (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a44de12397671ee93d7917c473df01998}
+
+
+Definition at line 52 of file Parse\+U\+R\+L.\+h.
+
+
+
+References host\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T(), and test\+Parse\+U\+R\+L().
+
+
+\begin{DoxyCode}
+52                                 \{
+53     \textcolor{keywordflow}{return} host_;
+54   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!host\+And\+Port@{host\+And\+Port}}
+\index{host\+And\+Port@{host\+And\+Port}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{host\+And\+Port() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Parse\+U\+R\+L\+::host\+And\+Port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_af6a5dc23252b8eeaf1801a15e4404057}
+
+
+Definition at line 60 of file Parse\+U\+R\+L.\+h.
+
+
+
+References host\+\_\+, and port\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+60                                 \{
+61     std::string rc = host_.str();
+62     \textcolor{keywordflow}{if} (port_ != 0) \{
+63       folly::toAppend(\textcolor{stringliteral}{":"}, port_, &rc);
+64     \}
+65     \textcolor{keywordflow}{return} rc;
+66   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!host\+Is\+I\+P\+Address@{host\+Is\+I\+P\+Address}}
+\index{host\+Is\+I\+P\+Address@{host\+Is\+I\+P\+Address}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{host\+Is\+I\+P\+Address()}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Parse\+U\+R\+L\+::host\+Is\+I\+P\+Address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1ParseURL_a9f66e16a09e9b3e3abd335b44111e488}
+
+
+Definition at line 177 of file Parse\+U\+R\+L.\+cpp.
+
+
+
+References host\+No\+Brackets\+\_\+, strip\+Brackets(), and valid\+\_\+.
+
+
+
+Referenced by host\+No\+Brackets(), and test\+Host\+Is\+Ip\+Address().
+
+
+\begin{DoxyCode}
+177                                \{
+178   \textcolor{keywordflow}{if} (!valid_) \{
+179     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+180   \}
+181 
+182   stripBrackets();
+183   \textcolor{keywordtype}{int} af = hostNoBrackets_.find(\textcolor{charliteral}{':'}) == std::string::npos ? AF\_INET : AF\_INET6;
+184   \textcolor{keywordtype}{char} buf4[\textcolor{keyword}{sizeof}(in\_addr)];
+185   \textcolor{keywordtype}{char} buf6[\textcolor{keyword}{sizeof}(in6\_addr)];
+186   \textcolor{comment}{// we have to make a copy of hostNoBrackets\_ since the string piece is not}
+187   \textcolor{comment}{// null-terminated}
+188   \textcolor{keywordflow}{return} inet\_pton(af, hostNoBrackets_.str().c\_str(),
+189                    af == AF\_INET ? buf4 : buf6) == 1;
+190 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!host\+No\+Brackets@{host\+No\+Brackets}}
+\index{host\+No\+Brackets@{host\+No\+Brackets}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{host\+No\+Brackets()}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::host\+No\+Brackets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a8a97341782d762131807194e2b98767b}
+
+
+Definition at line 84 of file Parse\+U\+R\+L.\+h.
+
+
+
+References F\+B\+\_\+\+E\+X\+P\+O\+RT, host\+Is\+I\+P\+Address(), host\+No\+Brackets\+\_\+, parse(), parse\+Authority(), parse\+Non\+Fully(), and strip\+Brackets().
+
+
+
+Referenced by T\+E\+S\+T(), and proxygen\+::\+U\+R\+L\+::\+U\+R\+L().
+
+
+\begin{DoxyCode}
+84                                     \{
+85     stripBrackets();
+86     \textcolor{keywordflow}{return} hostNoBrackets_;
+87   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!init@{init}}
+\index{init@{init}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{init(folly\+::\+String\+Piece url\+Val)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Parse\+U\+R\+L\+::init (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+String\+Piece}]{url\+Val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a60f906023ba27f994e963b505c27f41d}
+
+
+Definition at line 29 of file Parse\+U\+R\+L.\+h.
+
+
+
+References initialized\+\_\+, parse(), and url\+\_\+.
+
+
+
+Referenced by Parse\+U\+R\+L().
+
+
+\begin{DoxyCode}
+29                                      \{
+30     CHECK(!initialized_);
+31     url_ = urlVal;
+32     parse();
+33     initialized_ = \textcolor{keyword}{true};
+34   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!parse@{parse}}
+\index{parse@{parse}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{parse() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Parse\+U\+R\+L\+::parse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ParseURL_af8e0af01714f9ebe871169620a906b28}
+
+
+Definition at line 60 of file Parse\+U\+R\+L.\+cpp.
+
+
+
+References authority\+\_\+, http\+\_\+parser\+\_\+url\+::field\+\_\+data, fragment\+\_\+, host\+\_\+, http\+\_\+parser\+\_\+parse\+\_\+url(), http\+\_\+parser\+\_\+url\+::len, http\+\_\+parser\+\_\+url\+::off, parse\+Non\+Fully(), path\+\_\+, http\+\_\+parser\+\_\+url\+::port, port\+\_\+, query\+\_\+, scheme\+\_\+, U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT, U\+F\+\_\+\+H\+O\+ST, U\+F\+\_\+\+P\+A\+TH, U\+F\+\_\+\+Q\+U\+E\+RY, U\+F\+\_\+\+S\+C\+H\+E\+MA, url\+\_\+, valid\+\_\+, and proxygen\+::validate\+Scheme().
+
+
+
+Referenced by host\+No\+Brackets(), and init().
+
+
+\begin{DoxyCode}
+60                               \{
+61   \textcolor{keywordflow}{if} (validateScheme(url_)) \{
+62     \textcolor{keyword}{struct }http_parser_url u;
+63     memset(&u, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} http_parser_url)); \textcolor{comment}{// init before used}
+64     valid_ = !(http_parser_parse_url(url_.data(), url_.size(), 0, &u));
+65 
+66     \textcolor{keywordflow}{if}(valid_) \{
+67       \textcolor{comment}{// Since we init the http\_parser\_url with all fields to 0, if the field}
+68       \textcolor{comment}{// not present in url, it would be [0, 0], means that this field starts at}
+69       \textcolor{comment}{// 0 and len = 0, we will get "" from this.  So no need to check field\_set}
+70       \textcolor{comment}{// before get field.}
+71 
+72       scheme_ = url_.subpiece(u.field\_data[UF_SCHEMA].off,
+73                               u.field\_data[UF_SCHEMA].len);
+74 
+75       \textcolor{keywordflow}{if}(u.field\_data[UF_HOST].off != 0 &&
+76          url_[u.field\_data[UF_HOST].off - 1] == \textcolor{charliteral}{'['}) \{
+77         \textcolor{comment}{// special case: host: [::1]}
+78         host_ = url_.subpiece(u.field\_data[UF_HOST].off - 1,
+79                               u.field\_data[UF_HOST].len + 2);
+80       \} \textcolor{keywordflow}{else} \{
+81         host_ = url_.subpiece(u.field\_data[UF_HOST].off,
+82                               u.field\_data[UF_HOST].len);
+83       \}
+84 
+85       port_ = u.port;
+86 
+87       path_ = url_.subpiece(u.field\_data[UF_PATH].off,
+88                             u.field\_data[UF_PATH].len);
+89       query_ = url_.subpiece(u.field\_data[UF_QUERY].off,
+90                              u.field\_data[UF_QUERY].len);
+91       fragment_ = url_.subpiece(u.field\_data[UF_FRAGMENT].off,
+92                                 u.field\_data[UF_FRAGMENT].len);
+93 
+94       authority_ = (port_) ? folly::to<std::string>(host_, \textcolor{stringliteral}{":"}, port_)
+95                            : host_.str();
+96     \}
+97   \} \textcolor{keywordflow}{else} \{
+98     parseNonFully();
+99   \}
+100 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!parse\+Authority@{parse\+Authority}}
+\index{parse\+Authority@{parse\+Authority}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{parse\+Authority() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Parse\+U\+R\+L\+::parse\+Authority (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ParseURL_aa02f872b218f4c7e53e9d1d5a575ea05}
+
+
+Definition at line 150 of file Parse\+U\+R\+L.\+cpp.
+
+
+
+References authority\+\_\+, host\+\_\+, and port\+\_\+.
+
+
+
+Referenced by host\+No\+Brackets(), and parse\+Non\+Fully().
+
+
+\begin{DoxyCode}
+150                                        \{
+151   \textcolor{keyword}{auto} left = authority_.find(\textcolor{stringliteral}{"["});
+152   \textcolor{keyword}{auto} right = authority_.find(\textcolor{stringliteral}{"]"});
+153 
+154   \textcolor{keyword}{auto} pos = authority_.find(\textcolor{stringliteral}{":"}, right != std::string::npos ? right : 0);
+155   \textcolor{keywordflow}{if} (pos != std::string::npos) \{
+156     \textcolor{keywordflow}{try} \{
+157       port_ = folly::to<uint16\_t>(
+158         folly::StringPiece(authority_, pos+1, std::string::npos));
+159     \} \textcolor{keywordflow}{catch} (...) \{
+160       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+161     \}
+162   \}
+163 
+164   \textcolor{keywordflow}{if} (left == std::string::npos && right == std::string::npos) \{
+165     \textcolor{comment}{// not a ipv6 literal}
+166     host_ = folly::StringPiece(authority_, 0, pos);
+167     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+168   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (left < right && right != std::string::npos) \{
+169     \textcolor{comment}{// a ipv6 literal}
+170     host_ = folly::StringPiece(authority_, left, right - left + 1);
+171     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+172   \} \textcolor{keywordflow}{else} \{
+173     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+174   \}
+175 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!parse\+Non\+Fully@{parse\+Non\+Fully}}
+\index{parse\+Non\+Fully@{parse\+Non\+Fully}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{parse\+Non\+Fully() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Parse\+U\+R\+L\+::parse\+Non\+Fully (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ParseURL_a40cb279dce4a8dac1efd4b466cb1139b}
+
+
+Definition at line 102 of file Parse\+U\+R\+L.\+cpp.
+
+
+
+References authority\+\_\+, fragment\+\_\+, parse\+Authority(), path\+\_\+, query\+\_\+, url\+\_\+, valid\+\_\+, and proxygen\+::validate\+U\+R\+L().
+
+
+
+Referenced by host\+No\+Brackets(), and parse().
+
+
+\begin{DoxyCode}
+102                                       \{
+103   \textcolor{keywordflow}{if} (url_.empty()) \{
+104     valid_ = \textcolor{keyword}{false};
+105     \textcolor{keywordflow}{return};
+106   \}
+107 
+108   \textcolor{comment}{// Check if the URL has only printable characters and no control character.}
+109   \textcolor{keywordflow}{if} (!validateURL(url_)) \{
+110     valid_ = \textcolor{keyword}{false};
+111     \textcolor{keywordflow}{return};
+112   \}
+113 
+114   \textcolor{keyword}{auto} pathStart = url_.find(\textcolor{charliteral}{'/'});
+115   \textcolor{keyword}{auto} queryStart = url_.find(\textcolor{charliteral}{'?'});
+116   \textcolor{keyword}{auto} hashStart = url_.find(\textcolor{charliteral}{'#'});
+117 
+118   \textcolor{keyword}{auto} queryEnd = std::min(hashStart, std::string::npos);
+119   \textcolor{keyword}{auto} pathEnd = std::min(queryStart, hashStart);
+120   \textcolor{keyword}{auto} authorityEnd = std::min(pathStart, pathEnd);
+121 
+122   authority_ = url_.subpiece(0, authorityEnd).str();
+123 
+124   \textcolor{keywordflow}{if} (pathStart < pathEnd) \{
+125     path_ = url_.subpiece(pathStart, pathEnd - pathStart);
+126   \} \textcolor{keywordflow}{else} \{
+127     \textcolor{comment}{// missing the '/', e.g. '?query=3'}
+128     path_ = \textcolor{stringliteral}{""};
+129   \}
+130 
+131   \textcolor{keywordflow}{if} (queryStart < queryEnd) \{
+132     query_ = url_.subpiece(queryStart + 1, queryEnd - queryStart - 1);
+133   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (queryStart != std::string::npos && hashStart < queryStart) \{
+134     valid_ = \textcolor{keyword}{false};
+135     \textcolor{keywordflow}{return};
+136   \}
+137 
+138   \textcolor{keywordflow}{if} (hashStart != std::string::npos) \{
+139     fragment_ = url_.subpiece(hashStart + 1, std::string::npos);
+140   \}
+141 
+142   \textcolor{keywordflow}{if} (!parseAuthority()) \{
+143     valid_ = \textcolor{keyword}{false};
+144     \textcolor{keywordflow}{return};
+145   \}
+146 
+147   valid_ = \textcolor{keyword}{true};
+148 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!path@{path}}
+\index{path@{path}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{path() const }]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a69d6f4b9062f4a49ed782452153317c7}
+
+
+Definition at line 68 of file Parse\+U\+R\+L.\+h.
+
+
+
+References path\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Query\+String(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), test\+Parse\+U\+R\+L(), and proxygen\+::\+U\+R\+L\+::\+U\+R\+L().
+
+
+\begin{DoxyCode}
+68                                 \{
+69     \textcolor{keywordflow}{return} path_;
+70   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!port@{port}}
+\index{port@{port}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{port() const }]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::\+Parse\+U\+R\+L\+::port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a39e71587a1941e441ebadf5efec3a7cf}
+
+
+Definition at line 56 of file Parse\+U\+R\+L.\+h.
+
+
+
+References port\+\_\+.
+
+
+
+Referenced by test\+Parse\+U\+R\+L(), and proxygen\+::\+U\+R\+L\+::\+U\+R\+L().
+
+
+\begin{DoxyCode}
+56                         \{
+57     \textcolor{keywordflow}{return} port_;
+58   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!query@{query}}
+\index{query@{query}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{query() const }]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::query (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_ab75e05ef794ab274218e0d22b7b57924}
+
+
+Definition at line 72 of file Parse\+U\+R\+L.\+h.
+
+
+
+References query\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), test\+Parse\+U\+R\+L(), and proxygen\+::\+U\+R\+L\+::\+U\+R\+L().
+
+
+\begin{DoxyCode}
+72                                  \{
+73     \textcolor{keywordflow}{return} query_;
+74   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!scheme@{scheme}}
+\index{scheme@{scheme}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{scheme() const }]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::scheme (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a1247390203e7d98b403fef681957f053}
+
+
+Definition at line 40 of file Parse\+U\+R\+L.\+h.
+
+
+
+References scheme\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Query\+String(), test\+Parse\+U\+R\+L(), and proxygen\+::\+U\+R\+L\+::\+U\+R\+L().
+
+
+\begin{DoxyCode}
+40                                   \{
+41     \textcolor{keywordflow}{return} scheme_;
+42   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!strip\+Brackets@{strip\+Brackets}}
+\index{strip\+Brackets@{strip\+Brackets}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{strip\+Brackets() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Parse\+U\+R\+L\+::strip\+Brackets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classproxygen_1_1ParseURL_a73b8f7d523134ff93009fcca42908129}
+
+
+Definition at line 192 of file Parse\+U\+R\+L.\+cpp.
+
+
+
+References host\+\_\+, and host\+No\+Brackets\+\_\+.
+
+
+
+Referenced by host\+Is\+I\+P\+Address(), and host\+No\+Brackets().
+
+
+\begin{DoxyCode}
+192                                       \{
+193   \textcolor{keywordflow}{if} (hostNoBrackets_.empty()) \{
+194     \textcolor{keywordflow}{if} (!host_.empty() && host_.front() == \textcolor{charliteral}{'['} && host_.back() == \textcolor{charliteral}{']'}) \{
+195       hostNoBrackets_ = host_.subpiece(1, host_.size() - 2);
+196     \} \textcolor{keywordflow}{else} \{
+197       hostNoBrackets_ = host_;
+198     \}
+199   \}
+200 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!url@{url}}
+\index{url@{url}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{url() const }]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::url (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a39c2138c951dd1553acb4b7e9fa55685}
+
+
+Definition at line 36 of file Parse\+U\+R\+L.\+h.
+
+
+
+References url\+\_\+.
+
+
+
+Referenced by test\+Parse\+U\+R\+L(), and proxygen\+::\+U\+R\+L\+::\+U\+R\+L().
+
+
+\begin{DoxyCode}
+36                                \{
+37     \textcolor{keywordflow}{return} url_;
+38   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!valid@{valid}}
+\index{valid@{valid}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{valid() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Parse\+U\+R\+L\+::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ParseURL_a8f9bf4afc9a40ac3fb1f677122ca546a}
+
+
+Definition at line 80 of file Parse\+U\+R\+L.\+h.
+
+
+
+References valid\+\_\+.
+
+
+
+Referenced by has\+Host(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Query\+String(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and test\+Parse\+U\+R\+L().
+
+
+\begin{DoxyCode}
+80                      \{
+81     \textcolor{keywordflow}{return} valid_;
+82   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!authority\+\_\+@{authority\+\_\+}}
+\index{authority\+\_\+@{authority\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{authority\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Parse\+U\+R\+L\+::authority\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a5037aadc5cd7d1b1b645e02e1a0101a9}
+
+
+Definition at line 102 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by authority(), parse(), parse\+Authority(), and parse\+Non\+Fully().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!fragment\+\_\+@{fragment\+\_\+}}
+\index{fragment\+\_\+@{fragment\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{fragment\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::fragment\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a96121c158a5a7b3b46fe207352ed4db1}
+
+
+Definition at line 107 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by fragment(), parse(), and parse\+Non\+Fully().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!host\+\_\+@{host\+\_\+}}
+\index{host\+\_\+@{host\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{host\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::host\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a6a6fbf4bf17d0b8750f6427913b643db}
+
+
+Definition at line 103 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by has\+Host(), host(), host\+And\+Port(), parse(), parse\+Authority(), and strip\+Brackets().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!host\+No\+Brackets\+\_\+@{host\+No\+Brackets\+\_\+}}
+\index{host\+No\+Brackets\+\_\+@{host\+No\+Brackets\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{host\+No\+Brackets\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::host\+No\+Brackets\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_ad26b8b96f00945590e5f7b273394df9c}
+
+
+Definition at line 104 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by host\+Is\+I\+P\+Address(), host\+No\+Brackets(), and strip\+Brackets().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!initialized\+\_\+@{initialized\+\_\+}}
+\index{initialized\+\_\+@{initialized\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{initialized\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Parse\+U\+R\+L\+::initialized\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a440a134c2b959e5629c95e0f8037626a}
+
+
+Definition at line 110 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by init().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!path\+\_\+@{path\+\_\+}}
+\index{path\+\_\+@{path\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{path\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a6f73dfe733a0860842ea2bfce1656a21}
+
+
+Definition at line 105 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by parse(), parse\+Non\+Fully(), and path().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!port\+\_\+@{port\+\_\+}}
+\index{port\+\_\+@{port\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{port\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::\+Parse\+U\+R\+L\+::port\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_af70c23d56ebd22eda0455b229673c705}
+
+
+Definition at line 108 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by host\+And\+Port(), parse(), parse\+Authority(), and port().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!query\+\_\+@{query\+\_\+}}
+\index{query\+\_\+@{query\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{query\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::query\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a0903ad1ee3354e465733bdb2ddd53d67}
+
+
+Definition at line 106 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by parse(), parse\+Non\+Fully(), and query().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!scheme\+\_\+@{scheme\+\_\+}}
+\index{scheme\+\_\+@{scheme\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{scheme\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::scheme\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_ad1b80314936c29bdb644aa0fe3fb97c3}
+
+
+Definition at line 101 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by parse(), and scheme().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!url\+\_\+@{url\+\_\+}}
+\index{url\+\_\+@{url\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{url\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece proxygen\+::\+Parse\+U\+R\+L\+::url\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a57a4a1b9155e7bcc3cde2bb825a5b075}
+
+
+Definition at line 100 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by init(), parse(), parse\+Non\+Fully(), and url().
+
+\index{proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}!valid\+\_\+@{valid\+\_\+}}
+\index{valid\+\_\+@{valid\+\_\+}!proxygen\+::\+Parse\+U\+RL@{proxygen\+::\+Parse\+U\+RL}}
+\subsubsection[{valid\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Parse\+U\+R\+L\+::valid\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ParseURL_a451f41cbb61ad4c365dcd4213247eba2}
+
+
+Definition at line 109 of file Parse\+U\+R\+L.\+h.
+
+
+
+Referenced by host\+Is\+I\+P\+Address(), parse(), parse\+Non\+Fully(), and valid().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Parse\+U\+R\+L.\+h}\item 
+proxygen/lib/utils/{\bf Parse\+U\+R\+L.\+cpp}\end{DoxyCompactItemize}

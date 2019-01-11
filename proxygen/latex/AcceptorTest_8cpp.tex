@@ -1,0 +1,70 @@
+\section{proxygen/lib/services/test/\+Acceptor\+Test.cpp File Reference}
+\label{AcceptorTest_8cpp}\index{proxygen/lib/services/test/\+Acceptor\+Test.\+cpp@{proxygen/lib/services/test/\+Acceptor\+Test.\+cpp}}
+{\ttfamily \#include $<$wangle/acceptor/\+Acceptor.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Event\+Base.\+h$>$}\\*
+{\ttfamily \#include $<$glog/logging.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Test\+Connection}
+\item 
+class {\bf Test\+Acceptor}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+ST} (Acceptor\+Test, Basic)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Acceptor\+Test.\+cpp@{Acceptor\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!Acceptor\+Test.\+cpp@{Acceptor\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+Acceptor\+Test, Basic)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{Acceptor\+Test}]{, }
+\item[{Basic}]{}
+\end{DoxyParamCaption}
+)}\label{AcceptorTest_8cpp_a6b8102dd12c41a4417d5609cb1c4ea71}
+
+
+Definition at line 47 of file Acceptor\+Test.\+cpp.
+
+
+
+References fbcode\+\_\+builder\+\_\+config\+::config.
+
+
+\begin{DoxyCode}
+47                           \{
+48 
+49   EventBase base;
+50   \textcolor{keyword}{auto} socket = AsyncServerSocket::newSocket(&base);
+51   ServerSocketConfig config;
+52 
+53   TestAcceptor acceptor(config);
+54   socket->addAcceptCallback(&acceptor, &base);
+55 
+56   acceptor.init(socket.get(), &base);
+57   socket->bind(0);
+58   socket->listen(100);
+59 
+60   SocketAddress addy;
+61   socket->getAddress(&addy);
+62 
+63   socket->startAccepting();
+64 
+65   \textcolor{keyword}{auto} client\_socket = AsyncSocket::newSocket(
+66     &base, addy);
+67 
+68   base.loopForever();
+69 
+70   CHECK\_EQ(acceptor.getNumConnections(), 1);
+71 
+72   CHECK(acceptor.getState() == Acceptor::State::kRunning);
+73   acceptor.forceStop();
+74   socket->stopAccepting();
+75   base.loop();
+76 \}
+\end{DoxyCode}

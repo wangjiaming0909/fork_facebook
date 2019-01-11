@@ -1,0 +1,408 @@
+\section{docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder Class Reference}
+\label{classdocker__builder_1_1DockerFBCodeBuilder}\index{docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder}}
+Inheritance diagram for docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdocker__builder_1_1DockerFBCodeBuilder}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf setup} (self)
+\item 
+def {\bf step} (self, {\bf name}, actions)
+\item 
+def {\bf run} (self, shell\+\_\+cmd)
+\item 
+def {\bf workdir} (self, dir)
+\item 
+def {\bf comment} (self, comment)
+\item 
+def {\bf copy\+\_\+local\+\_\+repo} (self, repo\+\_\+dir, dest\+\_\+name)
+\item 
+def {\bf debian\+\_\+ccache\+\_\+setup\+\_\+steps} (self)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \+\_\+user} (self)
+\item 
+def {\bf \+\_\+change\+\_\+user} (self)
+\item 
+def {\bf \+\_\+render\+\_\+impl} (self, steps)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 31 of file docker\+\_\+builder.\+py.
+
+
+
+\subsection{Member Function Documentation}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!\+\_\+change\+\_\+user@{\+\_\+change\+\_\+user}}
+\index{\+\_\+change\+\_\+user@{\+\_\+change\+\_\+user}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{\+\_\+change\+\_\+user(self)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+change\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classdocker__builder_1_1DockerFBCodeBuilder_ae9a8254850be534c23318817c2346425}
+
+
+Definition at line 36 of file docker\+\_\+builder.\+py.
+
+
+
+References docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+user().
+
+
+
+Referenced by docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+copy\+\_\+local\+\_\+repo(), docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+setup(), and docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+workdir().
+
+
+\begin{DoxyCode}
+36     \textcolor{keyword}{def }_change_user(self):
+37         \textcolor{keywordflow}{return} ShellQuoted(\textcolor{stringliteral}{'USER \{u\}'}).format(u=self._user())
+38 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!\+\_\+render\+\_\+impl@{\+\_\+render\+\_\+impl}}
+\index{\+\_\+render\+\_\+impl@{\+\_\+render\+\_\+impl}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{\+\_\+render\+\_\+impl(self, steps)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+render\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{steps}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classdocker__builder_1_1DockerFBCodeBuilder_a28411db2584ad62e8440443ea7533d04}
+
+
+Definition at line 99 of file docker\+\_\+builder.\+py.
+
+
+
+References shell\+\_\+quoting.\+raw\+\_\+shell(), utils.\+recursively\+\_\+flatten\+\_\+list(), and shell\+\_\+quoting.\+shell\+\_\+join().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+render().
+
+
+\begin{DoxyCode}
+99     \textcolor{keyword}{def }_render_impl(self, steps):
+100         \textcolor{keywordflow}{return} raw_shell(shell_join(\textcolor{stringliteral}{'\(\backslash\)n'}, recursively_flatten_list(steps)))
+101 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!\+\_\+user@{\+\_\+user}}
+\index{\+\_\+user@{\+\_\+user}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{\+\_\+user(self)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+user (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classdocker__builder_1_1DockerFBCodeBuilder_a8c350592f660a5ad3dbcad6fb83b55b2}
+
+
+Definition at line 33 of file docker\+\_\+builder.\+py.
+
+
+
+References fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+option().
+
+
+
+Referenced by docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+change\+\_\+user(), docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+copy\+\_\+local\+\_\+repo(), and docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+workdir().
+
+
+\begin{DoxyCode}
+33     \textcolor{keyword}{def }_user(self):
+34         \textcolor{keywordflow}{return} self.option(\textcolor{stringliteral}{'user'}, \textcolor{stringliteral}{'root'})
+35 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!comment@{comment}}
+\index{comment@{comment}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{comment(self, comment)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+comment (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{comment}
+\end{DoxyParamCaption}
+)}\label{classdocker__builder_1_1DockerFBCodeBuilder_a435e2725f7aef068b637c39533e0f8fa}
+
+
+Definition at line 74 of file docker\+\_\+builder.\+py.
+
+
+
+References shell\+\_\+quoting.\+shell\+\_\+comment().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+diagnostics().
+
+
+\begin{DoxyCode}
+74     \textcolor{keyword}{def }comment(self, comment):
+75         \textcolor{comment}{# This should not be a command since we don't want comment changes}
+76         \textcolor{comment}{# to invalidate the Docker build cache.}
+77         \textcolor{keywordflow}{return} shell_comment(comment)
+78 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!copy\+\_\+local\+\_\+repo@{copy\+\_\+local\+\_\+repo}}
+\index{copy\+\_\+local\+\_\+repo@{copy\+\_\+local\+\_\+repo}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{copy\+\_\+local\+\_\+repo(self, repo\+\_\+dir, dest\+\_\+name)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+copy\+\_\+local\+\_\+repo (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{repo\+\_\+dir, }
+\item[{}]{dest\+\_\+name}
+\end{DoxyParamCaption}
+)}\label{classdocker__builder_1_1DockerFBCodeBuilder_ab848cddfad2aee07a95b9ff0d6bb701a}
+
+
+Definition at line 79 of file docker\+\_\+builder.\+py.
+
+
+
+References docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+change\+\_\+user(), docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+user(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+option(), and utils.\+run\+\_\+command().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+github\+\_\+project\+\_\+workdir().
+
+
+\begin{DoxyCode}
+79     \textcolor{keyword}{def }copy_local_repo(self, repo\_dir, dest\_name):
+80         fd, archive\_path = tempfile.mkstemp(
+81             prefix=\textcolor{stringliteral}{'local\_repo\_\{0\}\_'}.format(dest\_name),
+82             suffix=\textcolor{stringliteral}{'.tgz'},
+83             dir=os.path.abspath(self.option(\textcolor{stringliteral}{'docker\_context\_dir'})),
+84         )
+85         os.close(fd)
+86         run_command(\textcolor{stringliteral}{'tar'}, \textcolor{stringliteral}{'czf'}, archive\_path, \textcolor{stringliteral}{'.'}, cwd=repo\_dir)
+87         \textcolor{keywordflow}{return} [
+88             ShellQuoted(\textcolor{stringliteral}{'ADD \{archive\} \{dest\_name\}'}).format(
+89                 archive=os.path.basename(archive\_path), dest\_name=dest\_name
+90             ),
+91             \textcolor{comment}{# Docker permissions make very little sense... see also workdir()}
+92             ShellQuoted(\textcolor{stringliteral}{'USER root'}),
+93             ShellQuoted(\textcolor{stringliteral}{'RUN chown -R \{u\} \{d\}'}).format(
+94                 d=dest\_name, u=self._user()
+95             ),
+96             self._change_user(),
+97         ]
+98 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!debian\+\_\+ccache\+\_\+setup\+\_\+steps@{debian\+\_\+ccache\+\_\+setup\+\_\+steps}}
+\index{debian\+\_\+ccache\+\_\+setup\+\_\+steps@{debian\+\_\+ccache\+\_\+setup\+\_\+steps}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{debian\+\_\+ccache\+\_\+setup\+\_\+steps(self)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+debian\+\_\+ccache\+\_\+setup\+\_\+steps (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classdocker__builder_1_1DockerFBCodeBuilder_aba03d7ab2cdae48eea95e83fedf03e54}
+
+
+Definition at line 102 of file docker\+\_\+builder.\+py.
+
+
+
+References fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+option(), and docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+run().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+install\+\_\+debian\+\_\+deps().
+
+
+\begin{DoxyCode}
+102     \textcolor{keyword}{def }debian_ccache_setup_steps(self):
+103         source\_ccache\_tgz = self.option(\textcolor{stringliteral}{'ccache\_tgz'}, \textcolor{stringliteral}{''})
+104         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} source\_ccache\_tgz:
+105             logging.info(\textcolor{stringliteral}{'Docker ccache not enabled'})
+106             \textcolor{keywordflow}{return} []
+107 
+108         dest\_ccache\_tgz = os.path.join(
+109             self.option(\textcolor{stringliteral}{'docker\_context\_dir'}), \textcolor{stringliteral}{'ccache.tgz'}
+110         )
+111 
+112         \textcolor{keywordflow}{try}:
+113             \textcolor{keywordflow}{try}:
+114                 os.link(source\_ccache\_tgz, dest\_ccache\_tgz)
+115             \textcolor{keywordflow}{except} OSError:
+116                 logging.exception(
+117                     \textcolor{stringliteral}{'Hard-linking \{s\} to \{d\} failed, falling back to copy'}
+118                     .format(s=source\_ccache\_tgz, d=dest\_ccache\_tgz)
+119                 )
+120                 shutil.copyfile(source\_ccache\_tgz, dest\_ccache\_tgz)
+121         \textcolor{keywordflow}{except} Exception:
+122             logging.exception(
+123                 \textcolor{stringliteral}{'Failed to copy or link \{s\} to \{d\}, aborting'}
+124                 .format(s=source\_ccache\_tgz, d=dest\_ccache\_tgz)
+125             )
+126             \textcolor{keywordflow}{raise}
+127 
+128         \textcolor{keywordflow}{return} [
+129             \textcolor{comment}{# Separate layer so that in development we avoid re-downloads.}
+130             self.run(ShellQuoted(\textcolor{stringliteral}{'apt-get install -yq ccache'})),
+131             ShellQuoted(\textcolor{stringliteral}{'ADD ccache.tgz /'}),
+132             ShellQuoted(
+133                 \textcolor{comment}{# Set CCACHE\_DIR before the `ccache` invocations below.}
+134                 \textcolor{stringliteral}{'ENV CCACHE\_DIR=/ccache '}
+135                 \textcolor{comment}{# No clang support for now, so it's easiest to hardcode gcc.}
+136                 \textcolor{stringliteral}{'CC="ccache gcc" CXX="ccache g++" '}
+137                 \textcolor{comment}{# Always log for ease of debugging. For real FB projects,}
+138                 \textcolor{comment}{# this log is several megabytes, so dumping it to stdout}
+139                 \textcolor{comment}{# would likely exceed the Travis log limit of 4MB.}
+140                 \textcolor{comment}{#}
+141                 \textcolor{comment}{# On a local machine, `docker cp` will get you the data.  To}
+142                 \textcolor{comment}{# get the data out from Travis, I would compress and dump}
+143                 \textcolor{comment}{# uuencoded bytes to the log -- for Bistro this was about}
+144                 \textcolor{comment}{# 600kb or 8000 lines:}
+145                 \textcolor{comment}{#}
+146                 \textcolor{comment}{#   apt-get install sharutils}
+147                 \textcolor{comment}{#   bzip2 -9 < /tmp/ccache.log | uuencode -m ccache.log.bz2}
+148                 \textcolor{stringliteral}{'CCACHE\_LOGFILE=/tmp/ccache.log'}
+149             ),
+150             self.run(ShellQuoted(
+151                 \textcolor{comment}{# Future: Skipping this part made this Docker step instant,}
+152                 \textcolor{comment}{# saving ~1min of build time.  It's unclear if it is the}
+153                 \textcolor{comment}{# chown or the du, but probably the chown -- since a large}
+154                 \textcolor{comment}{# part of the cost is incurred at image save time.}
+155                 \textcolor{comment}{#}
+156                 \textcolor{comment}{# ccache.tgz may be empty, or may have the wrong}
+157                 \textcolor{comment}{# permissions.}
+158                 \textcolor{stringliteral}{'mkdir -p /ccache && time chown -R nobody /ccache && '}
+159                 \textcolor{stringliteral}{'time du -sh /ccache && '}
+160                 \textcolor{comment}{# Reset stats so `docker\_build\_with\_ccache.sh` can print}
+161                 \textcolor{comment}{# useful values at the end of the run.}
+162                 \textcolor{stringliteral}{'echo === Prev run stats === && ccache -s && ccache -z && '}
+163                 \textcolor{comment}{# Record the current time to let travis\_build.sh figure out}
+164                 \textcolor{comment}{# the number of bytes in the cache that are actually used --}
+165                 \textcolor{comment}{# this is crucial for tuning the maximum cache size.}
+166                 \textcolor{stringliteral}{'date +%s > /FBCODE\_BUILDER\_CCACHE\_START\_TIME && '}
+167                 \textcolor{comment}{# The build running as `nobody` should be able to write here}
+168                 \textcolor{stringliteral}{'chown nobody /tmp/ccache.log'}
+169             )),
+170         ]
+171 \end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!run@{run}}
+\index{run@{run}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{run(self, shell\+\_\+cmd)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+run (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{shell\+\_\+cmd}
+\end{DoxyParamCaption}
+)}\label{classdocker__builder_1_1DockerFBCodeBuilder_a4cb362d14c6f7a48189877a0007a805e}
+
+
+Definition at line 57 of file docker\+\_\+builder.\+py.
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+autoconf\+\_\+install(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+cmake\+\_\+configure(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+configure(), docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+debian\+\_\+ccache\+\_\+setup\+\_\+steps(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+diagnostics(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+github\+\_\+project\+\_\+workdir(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+install\+\_\+debian\+\_\+deps(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+make\+\_\+and\+\_\+install(), and fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+parallel\+\_\+make().
+
+
+\begin{DoxyCode}
+57     \textcolor{keyword}{def }run(self, shell\_cmd):
+58         \textcolor{keywordflow}{return} ShellQuoted(\textcolor{stringliteral}{'RUN \{cmd\}'}).format(cmd=shell\_cmd)
+59 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!setup@{setup}}
+\index{setup@{setup}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{setup(self)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+setup (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classdocker__builder_1_1DockerFBCodeBuilder_a4bbf39b30647b3ca6249d3ad8201d5d8}
+
+
+Definition at line 39 of file docker\+\_\+builder.\+py.
+
+
+
+References docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+change\+\_\+user(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+install\+\_\+debian\+\_\+deps(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+option(), and docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+step().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+build().
+
+
+\begin{DoxyCode}
+39     \textcolor{keyword}{def }setup(self):
+40         \textcolor{comment}{# Please add RPM-based OSes here as appropriate.}
+41         \textcolor{comment}{#}
+42         \textcolor{comment}{# To allow exercising non-root installs -- we change users after the}
+43         \textcolor{comment}{# system packages are installed.  TODO: For users not defined in the}
+44         \textcolor{comment}{# image, we should probably `useradd`.}
+45         \textcolor{keywordflow}{return} self.step(\textcolor{stringliteral}{'Setup'}, [
+46             \textcolor{comment}{# Docker's FROM does not understand shell quoting.}
+47             ShellQuoted(\textcolor{stringliteral}{'FROM \{\}'}.format(self.option(\textcolor{stringliteral}{'os\_image'}))),
+48             \textcolor{comment}{# /bin/sh syntax is a pain}
+49             ShellQuoted(\textcolor{stringliteral}{'SHELL ["/bin/bash", "-c"]'}),
+50         ] + self.install_debian_deps() + [self._change_user()])
+51 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!step@{step}}
+\index{step@{step}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{step(self, name, actions)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+step (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{name, }
+\item[{}]{actions}
+\end{DoxyParamCaption}
+)}\label{classdocker__builder_1_1DockerFBCodeBuilder_a5e21223ffa5b25bcf348892c5455ead7}
+
+
+Definition at line 52 of file docker\+\_\+builder.\+py.
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+autoconf\+\_\+install(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+cmake\+\_\+install(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+diagnostics(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+github\+\_\+project\+\_\+workdir(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+install\+\_\+debian\+\_\+deps(), and docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+setup().
+
+
+\begin{DoxyCode}
+52     \textcolor{keyword}{def }step(self, name, actions):
+53         \textcolor{keyword}{assert} \textcolor{stringliteral}{'\(\backslash\)n'} \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} name, \textcolor{stringliteral}{'Name \{0\} would span > 1 line'}.format(name)
+54         b = ShellQuoted(\textcolor{stringliteral}{''})
+55         \textcolor{keywordflow}{return} [ShellQuoted(\textcolor{stringliteral}{'### \{0\} ###'}.format(name)), b] + actions + [b]
+56 
+\end{DoxyCode}
+\index{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}!workdir@{workdir}}
+\index{workdir@{workdir}!docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder@{docker\+\_\+builder\+::\+Docker\+F\+B\+Code\+Builder}}
+\subsubsection[{workdir(self, dir)}]{\setlength{\rightskip}{0pt plus 5cm}def docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+workdir (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{dir}
+\end{DoxyParamCaption}
+)}\label{classdocker__builder_1_1DockerFBCodeBuilder_ab720a23f8b1bc0eb12a953b9de2348a8}
+
+
+Definition at line 60 of file docker\+\_\+builder.\+py.
+
+
+
+References docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+change\+\_\+user(), and docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+user().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+github\+\_\+project\+\_\+workdir().
+
+
+\begin{DoxyCode}
+60     \textcolor{keyword}{def }workdir(self, dir):
+61         \textcolor{keywordflow}{return} [
+62             \textcolor{comment}{# As late as Docker 1.12.5, this results in `build` being owned}
+63             \textcolor{comment}{# by root:root -- the explicit `mkdir` works around the bug:}
+64             \textcolor{comment}{#   USER nobody}
+65             \textcolor{comment}{#   WORKDIR build}
+66             ShellQuoted(\textcolor{stringliteral}{'USER root'}),
+67             ShellQuoted(\textcolor{stringliteral}{'RUN mkdir -p \{d\} && chown \{u\} \{d\}'}).format(
+68                 d=dir, u=self._user()
+69             ),
+70             self._change_user(),
+71             ShellQuoted(\textcolor{stringliteral}{'WORKDIR \{dir\}'}).format(dir=dir),
+72         ]
+73 
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/fbcode\+\_\+builder/{\bf docker\+\_\+builder.\+py}\end{DoxyCompactItemize}

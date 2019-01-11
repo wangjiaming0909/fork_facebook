@@ -1,0 +1,92 @@
+\section{Q\+P\+A\+C\+K\+Tests Class Reference}
+\label{classQPACKTests}\index{Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}}
+Inheritance diagram for Q\+P\+A\+C\+K\+Tests\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQPACKTests}
+\end{center}
+\end{figure}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf control\+Ack} ()
+\item 
+void {\bf header\+Ack} (uint64\+\_\+t stream\+Id)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Q\+P\+A\+C\+K\+Codec} {\bf client}
+\item 
+{\bf Q\+P\+A\+C\+K\+Codec} {\bf server}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 44 of file Q\+P\+A\+C\+K\+Codec\+Tests.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}!control\+Ack@{control\+Ack}}
+\index{control\+Ack@{control\+Ack}!Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}}
+\subsubsection[{control\+Ack()}]{\setlength{\rightskip}{0pt plus 5cm}void Q\+P\+A\+C\+K\+Tests\+::control\+Ack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classQPACKTests_aff09513dcc41e9da8ccb1df8b2a304ae}
+
+
+Definition at line 48 of file Q\+P\+A\+C\+K\+Codec\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+48                     \{
+49     \textcolor{keyword}{auto} ack = server.encodeTableStateSync();
+50     EXPECT\_EQ(client.decodeDecoderStream(std::move(ack)),
+51               HPACK::DecodeError::NONE);
+52   \}
+\end{DoxyCode}
+\index{Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}!header\+Ack@{header\+Ack}}
+\index{header\+Ack@{header\+Ack}!Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}}
+\subsubsection[{header\+Ack(uint64\+\_\+t stream\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void Q\+P\+A\+C\+K\+Tests\+::header\+Ack (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classQPACKTests_a13b1ff0f411264dc131bc7ac62bd3392}
+
+
+Definition at line 54 of file Q\+P\+A\+C\+K\+Codec\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+54                                     \{
+55     \textcolor{keyword}{auto} ack = server.encodeHeaderAck(streamId);
+56     EXPECT\_EQ(client.decodeDecoderStream(std::move(ack)),
+57               HPACK::DecodeError::NONE);
+58   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}!client@{client}}
+\index{client@{client}!Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}}
+\subsubsection[{client}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Codec} Q\+P\+A\+C\+K\+Tests\+::client\hspace{0.3cm}{\ttfamily [protected]}}\label{classQPACKTests_a7ff04fc429426367e826d4286638aa09}
+
+
+Definition at line 60 of file Q\+P\+A\+C\+K\+Codec\+Tests.\+cpp.
+
+\index{Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}!server@{server}}
+\index{server@{server}!Q\+P\+A\+C\+K\+Tests@{Q\+P\+A\+C\+K\+Tests}}
+\subsubsection[{server}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Codec} Q\+P\+A\+C\+K\+Tests\+::server\hspace{0.3cm}{\ttfamily [protected]}}\label{classQPACKTests_a6812bb926c33a19de765584bce9e2d6a}
+
+
+Definition at line 61 of file Q\+P\+A\+C\+K\+Codec\+Tests.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf Q\+P\+A\+C\+K\+Codec\+Tests.\+cpp}\end{DoxyCompactItemize}

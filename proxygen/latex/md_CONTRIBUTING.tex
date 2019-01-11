@@ -1,0 +1,60 @@
+Here\textquotesingle{}s a quick rundown of how to contribute to this project.
+
+\subsection*{Code of Conduct}
+
+The code of conduct is described in \doxyref{`\+C\+O\+D\+E\+\_\+\+O\+F\+\_\+\+C\+O\+N\+D\+U\+CT.md`}{p.}{md_CODE_OF_CONDUCT}
+
+\subsection*{Our Development Process}
+
+We develop on a private branch internally at Facebook. We regularly update this github project with the changes from the internal repo. External pull requests are cherry-\/picked into our repo and then pushed back out.
+
+\subsection*{Pull Requests}
+
+We actively welcome your pull requests.
+
+
+\begin{DoxyEnumerate}
+\item Fork the repo and create your branch from {\ttfamily master}.
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item If you\textquotesingle{}ve added code that should be tested, add tests
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item If you\textquotesingle{}ve changed A\+P\+Is, update the documentation.
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Ensure the test suite passes.
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Make sure your code lints.
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item If you haven\textquotesingle{}t already, complete the Contributor License Agreement (\char`\"{}\+C\+L\+A\char`\"{}).
+\end{DoxyEnumerate}
+
+\subsection*{Contributor License Agreement (\char`\"{}\+C\+L\+A\char`\"{})}
+
+In order to accept your pull request, we need you to submit a C\+LA. You only need to do this once to work on any of Facebook\textquotesingle{}s open source projects.
+
+Complete your C\+LA here\+: {\tt https\+://code.\+facebook.\+com/cla}
+
+\subsection*{Issues}
+
+We use Git\+Hub issues to track public bugs. Please ensure your description is clear and has sufficient instructions to be able to reproduce the issue.
+
+Facebook has a {\tt bounty program} for the safe disclosure of security bugs. In those cases, please go through the process outlined on that page and do not file a public issue.
+
+\subsection*{Coding Style}
+
+
+\begin{DoxyItemize}
+\item 2 spaces for indentation rather than tabs
+\item 80 character line length
+\item Use {\ttfamily Type$\ast$ foo} not {\ttfamily Type $\ast$foo}.
+\item Align parameters passed to functions.
+\item Prefer {\ttfamily folly\+::make\+\_\+unique$<$Foo$>$} to {\ttfamily new Foo}. In general, we discourage use of raw {\ttfamily new} or {\ttfamily delete}.
+\end{DoxyItemize}
+
+\subsection*{License}
+
+By contributing to Proxygen, you agree that your contributions will be licensed under its B\+SD license. 

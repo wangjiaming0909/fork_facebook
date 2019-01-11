@@ -1,0 +1,1002 @@
+\section{proxygen\+:\+:Q\+P\+A\+C\+K\+Decoder Class Reference}
+\label{classproxygen_1_1QPACKDecoder}\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+
+
+{\ttfamily \#include $<$Q\+P\+A\+C\+K\+Decoder.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Q\+P\+A\+C\+K\+Decoder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.876047cm]{classproxygen_1_1QPACKDecoder}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Partial}
+\item 
+struct {\bf Pending\+Block}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Q\+P\+A\+C\+K\+Decoder} (uint32\+\_\+t table\+Size={\bf H\+P\+A\+C\+K\+::k\+Table\+Size}, uint32\+\_\+t max\+Uncompressed={\bf Header\+Codec\+::k\+Max\+Uncompressed})
+\item 
+void {\bf decode\+Streaming} (uint64\+\_\+t stream\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ block, uint32\+\_\+t total\+Bytes, {\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$streaming\+Cb)
+\item 
+{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} {\bf decode\+Encoder\+Stream} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ buf)
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf encode\+Table\+State\+Sync} ()
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf encode\+Header\+Ack} (uint64\+\_\+t stream\+Id) const 
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf encode\+Cancel\+Stream} (uint64\+\_\+t stream\+Id)
+\item 
+uint64\+\_\+t {\bf get\+Hol\+Block\+Count} () const 
+\item 
+uint64\+\_\+t {\bf get\+Queued\+Bytes} () const 
+\item 
+void {\bf set\+Max\+Blocking} (uint32\+\_\+t max\+Blocking)
+\item 
+void {\bf set\+Header\+Table\+Max\+Size} (uint32\+\_\+t max\+Size)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf is\+Valid} (bool is\+Static, uint32\+\_\+t index, bool above\+Base)
+\item 
+uint32\+\_\+t {\bf handle\+Base\+Index} ({\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&dbuf)
+\item 
+void {\bf decode\+Streaming\+Impl} (uint32\+\_\+t largest\+Reference, uint32\+\_\+t consumed, {\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&dbuf, {\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$streaming\+Cb)
+\item 
+uint32\+\_\+t {\bf decode\+HeaderQ} ({\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&dbuf, {\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$streaming\+Cb)
+\item 
+uint32\+\_\+t {\bf decode\+Indexed\+HeaderQ} ({\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&dbuf, uint32\+\_\+t prefix\+Length, bool above\+Base, {\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$streaming\+Cb, {\bf headers\+\_\+t} $\ast$emitted)
+\item 
+uint32\+\_\+t {\bf decode\+Literal\+HeaderQ} ({\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&dbuf, bool indexing, bool name\+Indexed, uint8\+\_\+t prefix\+Length, bool above\+Base, {\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$streaming\+Cb)
+\item 
+void {\bf decode\+Encoder\+Stream\+Instruction} ({\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&dbuf)
+\item 
+void {\bf enqueue\+Header\+Block} (uint64\+\_\+t stream\+Id, uint32\+\_\+t largest\+Reference, uint32\+\_\+t base\+Index, uint32\+\_\+t consumed, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ block, size\+\_\+t length, {\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$streaming\+Cb)
+\item 
+bool {\bf decode\+Block} (uint32\+\_\+t largest\+Reference, const {\bf Pending\+Block} \&pending)
+\item 
+void {\bf drain\+Queue} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf max\+Blocking\+\_\+} \{{\bf H\+P\+A\+C\+K\+::k\+Default\+Blocking}\}
+\item 
+uint32\+\_\+t {\bf base\+Index\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf last\+Acked\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf hol\+Block\+Count\+\_\+} \{0\}
+\item 
+uint64\+\_\+t {\bf queued\+Bytes\+\_\+} \{0\}
+\item 
+std\+::multimap$<$ uint32\+\_\+t, {\bf Pending\+Block} $>$ {\bf queue\+\_\+}
+\item 
+{\bf Partial} {\bf partial\+\_\+}
+\item 
+folly\+::\+I\+O\+Buf\+Queue {\bf ingress\+\_\+} \{folly\+::\+I\+O\+Buf\+Queue\+::cache\+Chain\+Length()\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!Q\+P\+A\+C\+K\+Decoder@{Q\+P\+A\+C\+K\+Decoder}}
+\index{Q\+P\+A\+C\+K\+Decoder@{Q\+P\+A\+C\+K\+Decoder}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{Q\+P\+A\+C\+K\+Decoder(uint32\+\_\+t table\+Size=\+H\+P\+A\+C\+K\+::k\+Table\+Size, uint32\+\_\+t max\+Uncompressed=\+Header\+Codec\+::k\+Max\+Uncompressed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Q\+P\+A\+C\+K\+Decoder (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{table\+Size = {\ttfamily {\bf H\+P\+A\+C\+K\+::k\+Table\+Size}}, }
+\item[{uint32\+\_\+t}]{max\+Uncompressed = {\ttfamily {\bf Header\+Codec\+::k\+Max\+Uncompressed}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1QPACKDecoder_a706b94af2d537289cc1d265bc1f4ecce}
+
+
+Definition at line 26 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+References decode\+Encoder\+Stream(), decode\+Streaming(), encode\+Cancel\+Stream(), encode\+Header\+Ack(), and encode\+Table\+State\+Sync().
+
+
+\begin{DoxyCode}
+29       : HPACKDecoderBase(tableSize, maxUncompressed),
+30         QPACKContext(tableSize, \textcolor{keyword}{false} \textcolor{comment}{/* don't track references */}) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+Block@{decode\+Block}}
+\index{decode\+Block@{decode\+Block}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Block(uint32\+\_\+t largest\+Reference, const Pending\+Block \&pending)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Block (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{largest\+Reference, }
+\item[{const {\bf Pending\+Block} \&}]{pending}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a97d7530efe51c86c6479c6428155b7c1}
+
+
+Definition at line 377 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Pending\+Block\+::base\+Index, base\+Index\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Pending\+Block\+::block, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Pending\+Block\+::cb, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Pending\+Block\+::consumed, decode\+Streaming\+Impl(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Pending\+Block\+::length, proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::max\+Uncompressed\+\_\+, and queued\+Bytes\+\_\+.
+
+
+
+Referenced by drain\+Queue().
+
+
+\begin{DoxyCode}
+378                                                             \{
+379   \textcolor{keywordflow}{if} (pending.length > 0) \{
+380     VLOG(5) << \textcolor{stringliteral}{"decodeBlock len="} << pending.length;
+381     folly::io::Cursor cursor(pending.block.get());
+382     HPACKDecodeBuffer dbuf(cursor, pending.length, maxUncompressed_);
+383     DCHECK\_LE(pending.length, queuedBytes_);
+384     queuedBytes_ -= pending.length;
+385     baseIndex_ = pending.baseIndex;
+386     folly::DestructorCheck::Safety safety(*\textcolor{keyword}{this});
+387     decodeStreamingImpl(largestReference, pending.consumed, dbuf, pending.cb);
+388     \textcolor{comment}{// The callback way destroy this, if so stop queue processing}
+389     \textcolor{keywordflow}{if} (safety.destroyed()) \{
+390       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+391     \}
+392   \}
+393   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+394 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+Encoder\+Stream@{decode\+Encoder\+Stream}}
+\index{decode\+Encoder\+Stream@{decode\+Encoder\+Stream}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Encoder\+Stream(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ buf)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{buf}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKDecoder_a78cba7af60c6ba41122cd2da1a775627}
+
+
+Definition at line 163 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References base\+Index\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+::\+B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Partial\+::consumed, decode\+Encoder\+Stream\+Instruction(), drain\+Queue(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::err\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::has\+Error(), ingress\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::max\+Uncompressed\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, and partial\+\_\+.
+
+
+
+Referenced by proxygen\+::hpack\+::encode\+Decode(), Q\+P\+A\+C\+K\+Decoder(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+164                                    \{
+165   ingress_.append(std::move(buf));
+166   Cursor cursor(ingress_.front());
+167   HPACKDecodeBuffer dbuf(cursor, ingress_.chainLength(), maxUncompressed_);
+168   VLOG(6) << \textcolor{stringliteral}{"Decoding control block"};
+169   baseIndex_ = 0;
+170   err_ = HPACK::DecodeError::NONE;
+171   \textcolor{keywordflow}{while} (!hasError() && !dbuf.empty()) \{
+172     decodeEncoderStreamInstruction(dbuf);
+173     \textcolor{keywordflow}{if} (err_ == HPACK::DecodeError::BUFFER_UNDERFLOW) \{
+174       ingress_.trimStart(partial_.consumed);
+175       drainQueue();
+176       \textcolor{keywordflow}{return} HPACK::DecodeError::NONE;
+177     \}
+178   \}
+179   ingress_.trimStart(dbuf.consumedBytes());
+180   \textcolor{keywordflow}{if} (hasError()) \{
+181     \textcolor{keywordflow}{return} err_;
+182   \} \textcolor{keywordflow}{else} \{
+183     drainQueue();
+184     \textcolor{keywordflow}{return} HPACK::DecodeError::NONE;
+185   \}
+186 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+Encoder\+Stream\+Instruction@{decode\+Encoder\+Stream\+Instruction}}
+\index{decode\+Encoder\+Stream\+Instruction@{decode\+Encoder\+Stream\+Instruction}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Encoder\+Stream\+Instruction(\+H\+P\+A\+C\+K\+Decode\+Buffer \&dbuf)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream\+Instruction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&}]{dbuf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a12642a5a4b3c84bf312fbbd9611d4381}
+
+
+Definition at line 188 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::add(), proxygen\+::\+H\+P\+A\+C\+K\+::\+Instruction\+::code, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Partial\+::consumed, proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::consumed\+Bytes(), decode\+Indexed\+Header\+Q(), decode\+Literal\+Header\+Q(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::handle\+Table\+Size\+Update(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::has\+Error(), partial\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::peek(), proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE, proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+, and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Partial\+::\+V\+A\+L\+UE.
+
+
+
+Referenced by decode\+Encoder\+Stream(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+188                                                                          \{
+189   uint8\_t byte = dbuf.peek();
+190   partial_.consumed = dbuf.consumedBytes();
+191   \textcolor{keywordflow}{if} (partial_.state == Partial::VALUE ||
+192       byte & HPACK::Q_INSERT_NAME_REF.code) \{
+193     \textcolor{comment}{// If partial state is VALUE, it might have been a NO\_NAME\_REF instruction,}
+194     \textcolor{comment}{// but we've already parsed the name, so it doesn't matter}
+195     decodeLiteralHeaderQ(
+196         dbuf, \textcolor{keyword}{true}, \textcolor{keyword}{true}, HPACK::Q\_INSERT\_NAME\_REF.prefixLength, \textcolor{keyword}{false},
+197         \textcolor{keyword}{nullptr});
+198   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (byte & HPACK::Q_INSERT_NO_NAME_REF.code) \{
+199     decodeLiteralHeaderQ(
+200         dbuf, \textcolor{keyword}{true}, \textcolor{keyword}{false}, HPACK::Q_INSERT_NO_NAME_REF.prefixLength, \textcolor{keyword}{false},
+201         \textcolor{keyword}{nullptr});
+202   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (byte & HPACK::Q_TABLE_SIZE_UPDATE.code) \{
+203     handleTableSizeUpdate(dbuf, table_);
+204   \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{// must be Q\_DUPLICATE=000}
+205     headers_t emitted;
+206     decodeIndexedHeaderQ(
+207         dbuf, HPACK::Q_DUPLICATE.prefixLength, \textcolor{keyword}{false}, \textcolor{keyword}{nullptr}, &emitted);
+208     \textcolor{keywordflow}{if} (!hasError()) \{
+209       CHECK(!emitted.empty());
+210       table_.add(std::move(emitted[0]));
+211     \}
+212   \}
+213 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+HeaderQ@{decode\+HeaderQ}}
+\index{decode\+HeaderQ@{decode\+HeaderQ}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Header\+Q(\+H\+P\+A\+C\+K\+Decode\+Buffer \&dbuf, H\+P\+A\+C\+K\+::\+Streaming\+Callback $\ast$streaming\+Cb)}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+HeaderQ (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&}]{dbuf, }
+\item[{{\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$}]{streaming\+Cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a43a7692226e302755f688d5824ec315d}
+
+
+Definition at line 139 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References decode\+Indexed\+Header\+Q(), decode\+Literal\+Header\+Q(), proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::peek(), proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+ED, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+AL, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF, and proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST.
+
+
+
+Referenced by decode\+Streaming\+Impl(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+141                                          \{
+142   uint8\_t byte = dbuf.peek();
+143   \textcolor{keywordflow}{if} (byte & HPACK::Q_INDEXED.code) \{
+144     \textcolor{keywordflow}{return} decodeIndexedHeaderQ(
+145         dbuf, HPACK::Q_INDEXED.prefixLength, \textcolor{keyword}{false}, streamingCb, \textcolor{keyword}{nullptr});
+146   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (byte & HPACK::Q_LITERAL_NAME_REF.code) \{
+147     \textcolor{keywordflow}{return} decodeLiteralHeaderQ(
+148         dbuf, \textcolor{keyword}{false}, \textcolor{keyword}{true}, HPACK::Q_LITERAL_NAME_REF.prefixLength, \textcolor{keyword}{false},
+149         streamingCb);
+150   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (byte & HPACK::Q_LITERAL.code) \{
+151     \textcolor{keywordflow}{return} decodeLiteralHeaderQ(
+152         dbuf, \textcolor{keyword}{false}, \textcolor{keyword}{false}, HPACK::Q_LITERAL.prefixLength, \textcolor{keyword}{false}, streamingCb);
+153   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (byte & HPACK::Q_INDEXED_POST.code) \{
+154     \textcolor{keywordflow}{return} decodeIndexedHeaderQ(
+155         dbuf, HPACK::Q_INDEXED_POST.prefixLength, \textcolor{keyword}{true}, streamingCb, \textcolor{keyword}{nullptr});
+156   \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{// Q\_LITERAL\_NAME\_REF\_POST}
+157     \textcolor{keywordflow}{return} decodeLiteralHeaderQ(
+158         dbuf, \textcolor{keyword}{false}, \textcolor{keyword}{true}, HPACK::Q_LITERAL_NAME_REF_POST.prefixLength, \textcolor{keyword}{true},
+159         streamingCb);
+160   \}
+161 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+Indexed\+HeaderQ@{decode\+Indexed\+HeaderQ}}
+\index{decode\+Indexed\+HeaderQ@{decode\+Indexed\+HeaderQ}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Indexed\+Header\+Q(\+H\+P\+A\+C\+K\+Decode\+Buffer \&dbuf, uint32\+\_\+t prefix\+Length, bool above\+Base, H\+P\+A\+C\+K\+::\+Streaming\+Callback $\ast$streaming\+Cb, headers\+\_\+t $\ast$emitted)}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Indexed\+HeaderQ (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&}]{dbuf, }
+\item[{uint32\+\_\+t}]{prefix\+Length, }
+\item[{bool}]{above\+Base, }
+\item[{{\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$}]{streaming\+Cb, }
+\item[{{\bf headers\+\_\+t} $\ast$}]{emitted}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_ac1d48576758fff1c07653ad417cae66c}
+
+
+Definition at line 282 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References base\+Index\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::decode\+Integer(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::emit(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::err\+\_\+, proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::get\+Header(), proxygen\+::\+H\+P\+A\+C\+K\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX, is\+Valid(), proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, and proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::peek().
+
+
+
+Referenced by decode\+Encoder\+Stream\+Instruction(), decode\+Header\+Q(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+287                         \{
+288   uint64\_t index;
+289   \textcolor{keywordtype}{bool} isStatic = !aboveBase && (dbuf.peek() & (1 << prefixLength));
+290   err_ = dbuf.decodeInteger(prefixLength, index);
+291   \textcolor{keywordflow}{if} (err_ != HPACK::DecodeError::NONE) \{
+292     LOG(ERROR) << \textcolor{stringliteral}{"Decode error decoding index err\_="} << err_;
+293     \textcolor{keywordflow}{return} 0;
+294   \}
+295   index++;
+296   \textcolor{comment}{// validate the index}
+297   \textcolor{keywordflow}{if} (index == 0 || !isValid(isStatic, index, aboveBase)) \{
+298     LOG(ERROR) << \textcolor{stringliteral}{"received invalid index: "} << index;
+299     err_ = HPACK::DecodeError::INVALID_INDEX;
+300     \textcolor{keywordflow}{return} 0;
+301   \}
+302 
+303   \textcolor{keyword}{auto}& header = getHeader(isStatic, index, baseIndex_, aboveBase);
+304   \textcolor{keywordflow}{return} emit(header, streamingCb, emitted);
+305 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+Literal\+HeaderQ@{decode\+Literal\+HeaderQ}}
+\index{decode\+Literal\+HeaderQ@{decode\+Literal\+HeaderQ}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Literal\+Header\+Q(\+H\+P\+A\+C\+K\+Decode\+Buffer \&dbuf, bool indexing, bool name\+Indexed, uint8\+\_\+t prefix\+Length, bool above\+Base, H\+P\+A\+C\+K\+::\+Streaming\+Callback $\ast$streaming\+Cb)}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+HeaderQ (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&}]{dbuf, }
+\item[{bool}]{indexing, }
+\item[{bool}]{name\+Indexed, }
+\item[{uint8\+\_\+t}]{prefix\+Length, }
+\item[{bool}]{above\+Base, }
+\item[{{\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$}]{streaming\+Cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_aea6873f547d9af585a9f0e0362f0e754}
+
+
+Definition at line 215 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::add(), base\+Index\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+::\+B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Partial\+::consumed, proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::consumed\+Bytes(), proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::decode\+Integer(), proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::decode\+Literal(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::emit(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::err\+\_\+, proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::get\+Header(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Partial\+::header, proxygen\+::\+H\+P\+A\+C\+K\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX, is\+Valid(), proxygen\+::\+H\+P\+A\+C\+K\+Header\+::name, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Partial\+::\+N\+A\+ME, proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, partial\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::peek(), proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Header\+::value, and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::\+Partial\+::\+V\+A\+L\+UE.
+
+
+
+Referenced by decode\+Encoder\+Stream\+Instruction(), decode\+Header\+Q(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+221                                          \{
+222   \textcolor{keywordtype}{bool} allowPartial = (streamingCb == \textcolor{keyword}{nullptr});
+223   Partial localPartial;
+224   Partial* partial = (allowPartial) ? &partial_ : &localPartial;
+225   \textcolor{keywordflow}{if} (partial->state == Partial::NAME) \{
+226     \textcolor{keywordflow}{if} (nameIndexed) \{
+227       uint64\_t nameIndex = 0;
+228       \textcolor{keywordtype}{bool} isStaticName = !aboveBase && (dbuf.peek() & (1 << prefixLength));
+229       err_ = dbuf.decodeInteger(prefixLength, nameIndex);
+230       \textcolor{keywordflow}{if} (allowPartial && err_ == HPACK::DecodeError::BUFFER_UNDERFLOW) \{
+231         \textcolor{keywordflow}{return} 0;
+232       \}
+233       \textcolor{keywordflow}{if} (err_ != HPACK::DecodeError::NONE) \{
+234         LOG(ERROR) << \textcolor{stringliteral}{"Decode error decoding index err\_="} << err_;
+235         \textcolor{keywordflow}{return} 0;
+236       \}
+237       nameIndex++;
+238       \textcolor{comment}{// validate the index}
+239       \textcolor{keywordflow}{if} (!isValid(isStaticName, nameIndex, aboveBase)) \{
+240         LOG(ERROR) << \textcolor{stringliteral}{"received invalid index: "} << nameIndex;
+241         err_ = HPACK::DecodeError::INVALID_INDEX;
+242         \textcolor{keywordflow}{return} 0;
+243       \}
+244       partial->header.name = getHeader(
+245           isStaticName, nameIndex, baseIndex_, aboveBase).name;
+246     \} \textcolor{keywordflow}{else} \{
+247       folly::fbstring headerName;
+248       err_ = dbuf.decodeLiteral(prefixLength, headerName);
+249       \textcolor{keywordflow}{if} (allowPartial && err_ == HPACK::DecodeError::BUFFER_UNDERFLOW) \{
+250         \textcolor{keywordflow}{return} 0;
+251       \}
+252       \textcolor{keywordflow}{if} (err_ != HPACK::DecodeError::NONE) \{
+253         LOG(ERROR) << \textcolor{stringliteral}{"Error decoding header name err\_="} << err_;
+254         \textcolor{keywordflow}{return} 0;
+255       \}
+256       partial->header.name = headerName;
+257     \}
+258     partial->state = Partial::VALUE;
+259     partial->consumed = dbuf.consumedBytes();
+260   \}
+261   \textcolor{comment}{// value}
+262   err_ = dbuf.decodeLiteral(partial->header.value);
+263   \textcolor{keywordflow}{if} (allowPartial && err_ == HPACK::DecodeError::BUFFER_UNDERFLOW) \{
+264     \textcolor{keywordflow}{return} 0;
+265   \}
+266   \textcolor{keywordflow}{if} (err_ != HPACK::DecodeError::NONE) \{
+267     LOG(ERROR) << \textcolor{stringliteral}{"Error decoding header value name="} << partial->header.name
+268                << \textcolor{stringliteral}{" err\_="} << err_;
+269     \textcolor{keywordflow}{return} 0;
+270   \}
+271   partial->state = Partial::NAME;
+272 
+273   uint32\_t emittedSize = emit(partial->header, streamingCb, \textcolor{keyword}{nullptr});
+274 
+275   \textcolor{keywordflow}{if} (indexing) \{
+276     table_.add(std::move(partial->header));
+277   \}
+278 
+279   \textcolor{keywordflow}{return} emittedSize;
+280 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+Streaming@{decode\+Streaming}}
+\index{decode\+Streaming@{decode\+Streaming}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Streaming(uint64\+\_\+t stream\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ block, uint32\+\_\+t total\+Bytes, H\+P\+A\+C\+K\+::\+Streaming\+Callback $\ast$streaming\+Cb)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Streaming (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{block, }
+\item[{uint32\+\_\+t}]{total\+Bytes, }
+\item[{{\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$}]{streaming\+Cb}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKDecoder_a18590a77b6be860d353992cfb16de26c}
+
+
+Definition at line 25 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References base\+Index\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode(), decode\+Streaming\+Impl(), enqueue\+Header\+Block(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::err\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Base\+Index(), handle\+Base\+Index(), max\+Blocking\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::max\+Uncompressed\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, proxygen\+::\+Header\+Codec\+::\+Q\+P\+A\+CK, queue\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+, and proxygen\+::\+H\+P\+A\+C\+K\+::\+T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG.
+
+
+
+Referenced by check\+Q\+Error(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Streaming(), proxygen\+::hpack\+::encode\+Decode(), Q\+P\+A\+C\+K\+Decoder(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+29                                          \{
+30   Cursor cursor(block.get());
+31   HPACKDecodeBuffer dbuf(cursor, totalBytes, maxUncompressed_);
+32   err_ = HPACK::DecodeError::NONE;
+33   uint32\_t largestReference = handleBaseIndex(dbuf);
+34   \textcolor{keywordflow}{if} (largestReference > table_.getBaseIndex()) \{
+35     VLOG(5) << \textcolor{stringliteral}{"largestReference="} << largestReference << \textcolor{stringliteral}{" > baseIndex="} <<
+36       table_.getBaseIndex() << \textcolor{stringliteral}{", queuing"};
+37     \textcolor{keywordflow}{if} (queue_.size() >= maxBlocking_) \{
+38       VLOG(2) << \textcolor{stringliteral}{"QPACK queue is full size="} << queue_.size()
+39               << \textcolor{stringliteral}{" maxBlocking\_="} << maxBlocking_;
+40       err_ = HPACK::DecodeError::TOO_MANY_BLOCKING;
+41       completeDecode(HeaderCodec::Type::QPACK, streamingCb, 0, 0, \textcolor{keyword}{false});
+42     \} \textcolor{keywordflow}{else} \{
+43       folly::IOBufQueue q;
+44       q.append(std::move(block));
+45       q.trimStart(dbuf.consumedBytes());
+46       enqueueHeaderBlock(streamID, largestReference, baseIndex_,
+47                          dbuf.consumedBytes(), q.move(),
+48                          totalBytes - dbuf.consumedBytes(), streamingCb);
+49     \}
+50   \} \textcolor{keywordflow}{else} \{
+51     decodeStreamingImpl(largestReference, 0, dbuf, streamingCb);
+52   \}
+53 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!decode\+Streaming\+Impl@{decode\+Streaming\+Impl}}
+\index{decode\+Streaming\+Impl@{decode\+Streaming\+Impl}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{decode\+Streaming\+Impl(uint32\+\_\+t largest\+Reference, uint32\+\_\+t consumed, H\+P\+A\+C\+K\+Decode\+Buffer \&dbuf, H\+P\+A\+C\+K\+::\+Streaming\+Callback $\ast$streaming\+Cb)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Streaming\+Impl (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{largest\+Reference, }
+\item[{uint32\+\_\+t}]{consumed, }
+\item[{{\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&}]{dbuf, }
+\item[{{\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$}]{streaming\+Cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a264da9d03c80932b204a7b8d0d49210e}
+
+
+Definition at line 112 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode(), proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::consumed\+Bytes(), decode\+Header\+Q(), proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::empty(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::err\+\_\+, proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::has\+Error(), proxygen\+::\+H\+P\+A\+C\+K\+::\+H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE, last\+Acked\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::max\+Uncompressed\+\_\+, and proxygen\+::\+Header\+Codec\+::\+Q\+P\+A\+CK.
+
+
+
+Referenced by decode\+Block(), decode\+Streaming(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+115                                          \{
+116   uint32\_t emittedSize = 0;
+117 
+118   \textcolor{keywordflow}{while} (!hasError() && !dbuf.empty()) \{
+119     emittedSize += decodeHeaderQ(dbuf, streamingCb);
+120     \textcolor{keywordflow}{if} (emittedSize > maxUncompressed_) \{
+121       LOG(ERROR) << \textcolor{stringliteral}{"exceeded uncompressed size limit of "}
+122                  << maxUncompressed_ << \textcolor{stringliteral}{" bytes"};
+123       err_ = HPACK::DecodeError::HEADERS_TOO_LARGE;
+124       \textcolor{keywordflow}{break};
+125     \}
+126     emittedSize += 2;
+127   \}
+128 
+129   \textcolor{keywordtype}{bool} acknowledge = largestReference != 0;
+130   \textcolor{keywordflow}{if} (!hasError()) \{
+131     \textcolor{comment}{// lastAcked\_ is only read in encodeTableStateSync, so all completed header}
+132     \textcolor{comment}{// blocks must be call encodeHeaderAck BEFORE calling encodeTableStateSync.}
+133     lastAcked_ = std::max(lastAcked_, largestReference);
+134   \}
+135   completeDecode(HeaderCodec::Type::QPACK, streamingCb,
+136                  consumed + dbuf.consumedBytes(), emittedSize, acknowledge);
+137 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!drain\+Queue@{drain\+Queue}}
+\index{drain\+Queue@{drain\+Queue}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{drain\+Queue()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::drain\+Queue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a1447d98019c1c2d07761ebf969bea6c8}
+
+
+Definition at line 396 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References decode\+Block(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Base\+Index(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::has\+Error(), queue\+\_\+, and proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+.
+
+
+
+Referenced by decode\+Encoder\+Stream().
+
+
+\begin{DoxyCode}
+396                               \{
+397   \textcolor{keyword}{auto} it = queue_.begin();
+398   \textcolor{keywordflow}{while} (!queue_.empty() && it->first <= table_.getBaseIndex() &&
+399          !hasError()) \{
+400     \textcolor{keyword}{auto} \textcolor{keywordtype}{id} = it->first;
+401     PendingBlock block = std::move(it->second);
+402     queue_.erase(it);
+403     \textcolor{keywordflow}{if} (decodeBlock(\textcolor{keywordtype}{id}, block)) \{
+404       \textcolor{keywordflow}{return};
+405     \}
+406     it = queue_.begin();
+407   \}
+408 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!encode\+Cancel\+Stream@{encode\+Cancel\+Stream}}
+\index{encode\+Cancel\+Stream@{encode\+Cancel\+Stream}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{encode\+Cancel\+Stream(uint64\+\_\+t stream\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Cancel\+Stream (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKDecoder_abfd5cbfda67ba0383a5c18a0fbce5255}
+
+
+Definition at line 341 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Integer(), proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM, queue\+\_\+, and proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::release().
+
+
+
+Referenced by Q\+P\+A\+C\+K\+Decoder(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+342                        \{
+343   \textcolor{comment}{// Remove this stream from the queue}
+344   \textcolor{keyword}{auto} it = queue_.begin();
+345   \textcolor{keywordflow}{while} (it != queue_.end()) \{
+346     \textcolor{keywordflow}{if} (it->second.streamID == streamId) \{
+347       it = queue_.erase(it);
+348     \} \textcolor{keywordflow}{else} \{
+349       it++;
+350     \}
+351   \}
+352   HPACKEncodeBuffer ackEncoder(kGrowth, \textcolor{keyword}{false});
+353   ackEncoder.encodeInteger(streamId, HPACK::Q_CANCEL_STREAM);
+354   \textcolor{keywordflow}{return} ackEncoder.release();
+355 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!encode\+Header\+Ack@{encode\+Header\+Ack}}
+\index{encode\+Header\+Ack@{encode\+Header\+Ack}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{encode\+Header\+Ack(uint64\+\_\+t stream\+Id) const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Header\+Ack (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1QPACKDecoder_a0a3914856501499a9dd04d11fb7e55e9}
+
+
+Definition at line 333 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Integer(), proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK, and proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::release().
+
+
+
+Referenced by proxygen\+::hpack\+::encode\+Decode(), Q\+P\+A\+C\+K\+Decoder(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+334                              \{
+335   HPACKEncodeBuffer ackEncoder(kGrowth, \textcolor{keyword}{false});
+336   VLOG(6) << \textcolor{stringliteral}{"encodeHeaderAck id="} << streamId;
+337   ackEncoder.encodeInteger(streamId, HPACK::Q_HEADER_ACK);
+338   \textcolor{keywordflow}{return} ackEncoder.release();
+339 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!encode\+Table\+State\+Sync@{encode\+Table\+State\+Sync}}
+\index{encode\+Table\+State\+Sync@{encode\+Table\+State\+Sync}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{encode\+Table\+State\+Sync()}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Table\+State\+Sync (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKDecoder_a14291275312e95093b8eb64bfbec7793}
+
+
+Definition at line 320 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Integer(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Base\+Index(), last\+Acked\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC, proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::release(), and proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+.
+
+
+
+Referenced by proxygen\+::hpack\+::encode\+Decode(), Q\+P\+A\+C\+K\+Decoder(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+320                                                              \{
+321   uint32\_t toAck = table_.getBaseIndex() - lastAcked_;
+322   \textcolor{keywordflow}{if} (toAck > 0) \{
+323     VLOG(6) << \textcolor{stringliteral}{"encodeTableStateSync toAck="} << toAck;
+324     HPACKEncodeBuffer ackEncoder(kGrowth, \textcolor{keyword}{false});
+325     ackEncoder.encodeInteger(toAck, HPACK::Q_TABLE_STATE_SYNC);
+326     lastAcked_ = table_.getBaseIndex();
+327     \textcolor{keywordflow}{return} ackEncoder.release();
+328   \} \textcolor{keywordflow}{else} \{
+329     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+330   \}
+331 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!enqueue\+Header\+Block@{enqueue\+Header\+Block}}
+\index{enqueue\+Header\+Block@{enqueue\+Header\+Block}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{enqueue\+Header\+Block(uint64\+\_\+t stream\+Id, uint32\+\_\+t largest\+Reference, uint32\+\_\+t base\+Index, uint32\+\_\+t consumed, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ block, size\+\_\+t length, H\+P\+A\+C\+K\+::\+Streaming\+Callback $\ast$streaming\+Cb)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::enqueue\+Header\+Block (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id, }
+\item[{uint32\+\_\+t}]{largest\+Reference, }
+\item[{uint32\+\_\+t}]{base\+Index, }
+\item[{uint32\+\_\+t}]{consumed, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{block, }
+\item[{size\+\_\+t}]{length, }
+\item[{{\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$}]{streaming\+Cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_af72bcf1f47362633fb76e3786bbfde5f}
+
+
+Definition at line 357 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Base\+Index(), hol\+Block\+Count\+\_\+, queue\+\_\+, queued\+Bytes\+\_\+, and proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+.
+
+
+
+Referenced by decode\+Streaming(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+364                                        \{
+365   \textcolor{comment}{// TDOO: this queue is currently unbounded and has no timeouts}
+366   CHECK\_GT(largestReference, table_.getBaseIndex());
+367   queue_.emplace(
+368     std::piecewise\_construct,
+369     std::forward\_as\_tuple(largestReference),
+370     std::forward\_as\_tuple(streamID, baseIndex, length, consumed,
+371                           std::move(block), streamingCb));
+372   holBlockCount_++;
+373   VLOG(5) << \textcolor{stringliteral}{"queued block="} << largestReference << \textcolor{stringliteral}{" len="} << length;
+374   queuedBytes_ += length;
+375 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!get\+Hol\+Block\+Count@{get\+Hol\+Block\+Count}}
+\index{get\+Hol\+Block\+Count@{get\+Hol\+Block\+Count}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{get\+Hol\+Block\+Count() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::get\+Hol\+Block\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKDecoder_a6daf04c29452931f3384b9b3ae9de060}
+
+
+Definition at line 46 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+References hol\+Block\+Count\+\_\+.
+
+
+\begin{DoxyCode}
+46                                     \{
+47     \textcolor{keywordflow}{return} holBlockCount_;
+48   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!get\+Queued\+Bytes@{get\+Queued\+Bytes}}
+\index{get\+Queued\+Bytes@{get\+Queued\+Bytes}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{get\+Queued\+Bytes() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::get\+Queued\+Bytes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKDecoder_a4feddeee019c65c3c920fe740ad14b36}
+
+
+Definition at line 50 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+References queued\+Bytes\+\_\+.
+
+
+\begin{DoxyCode}
+50                                   \{
+51     \textcolor{keywordflow}{return} queuedBytes_;
+52   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!handle\+Base\+Index@{handle\+Base\+Index}}
+\index{handle\+Base\+Index@{handle\+Base\+Index}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{handle\+Base\+Index(\+H\+P\+A\+C\+K\+Decode\+Buffer \&dbuf)}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::handle\+Base\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Decode\+Buffer} \&}]{dbuf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a6c3a430446ce62e69fd79d81456cd837}
+
+
+Definition at line 55 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References base\+Index\+\_\+, proxygen\+::\+H\+P\+A\+C\+K\+::\+B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW, proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::decode\+Integer(), proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::empty(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::err\+\_\+, proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Base\+Index(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Max\+Entries(), proxygen\+::\+H\+P\+A\+C\+K\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX, proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::peek(), proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE, proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG, and proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+.
+
+
+
+Referenced by decode\+Streaming(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+55                                                               \{
+56   uint64\_t largestReference;
+57   uint64\_t wireLR;
+58   uint64\_t maxEntries = table_.getMaxEntries();
+59   uint64\_t modulus = 2 * maxEntries;
+60   err_ = dbuf.decodeInteger(wireLR);
+61   \textcolor{keywordflow}{if} (err_ != HPACK::DecodeError::NONE) \{
+62     LOG(ERROR) << \textcolor{stringliteral}{"Decode error decoding largest reference err\_="} << err_;
+63     \textcolor{keywordflow}{return} 0;
+64   \}
+65   \textcolor{keywordflow}{if} (wireLR == 0) \{
+66     largestReference = 0;
+67   \} \textcolor{keywordflow}{else} \{
+68     wireLR--;
+69     \textcolor{keywordflow}{if} (wireLR >= modulus) \{
+70       LOG(ERROR) << \textcolor{stringliteral}{"Decode error LR out of range="} << wireLR;
+71       err_ = HPACK::DecodeError::INVALID_INDEX;
+72       \textcolor{keywordflow}{return} 0;
+73     \}
+74     \textcolor{keyword}{auto} now = table_.getBaseIndex() % modulus;
+75     \textcolor{keywordflow}{if} (now >= wireLR + maxEntries) \{
+76       \textcolor{comment}{// LR wrapped on more time than now}
+77       wireLR += modulus;
+78     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (now + maxEntries < wireLR) \{
+79       \textcolor{comment}{// now wrapped one more time than LR}
+80       now += modulus;
+81     \}
+82     largestReference = wireLR + (table_.getBaseIndex() - now);
+83   \}
+84   VLOG(5) << \textcolor{stringliteral}{"Decoded largestReference="} << largestReference;
+85   uint64\_t delta = 0;
+86   \textcolor{keywordflow}{if} (dbuf.empty()) \{
+87     LOG(ERROR) << \textcolor{stringliteral}{"Invalid prefix, no delta-base"};
+88     err_ = HPACK::DecodeError::BUFFER_UNDERFLOW;
+89     \textcolor{keywordflow}{return} 0;
+90   \}
+91   \textcolor{keywordtype}{bool} neg = dbuf.peek() & HPACK::Q_DELTA_BASE_NEG;
+92   err_ = dbuf.decodeInteger(HPACK::Q_DELTA_BASE.prefixLength, delta);
+93   \textcolor{keywordflow}{if} (err_ != HPACK::DecodeError::NONE) \{
+94     LOG(ERROR) << \textcolor{stringliteral}{"Decode error decoding delta base="} << err_;
+95     \textcolor{keywordflow}{return} 0;
+96   \}
+97   \textcolor{keywordflow}{if} (neg) \{
+98     \textcolor{keywordflow}{if} (delta > largestReference) \{
+99       LOG(ERROR) << \textcolor{stringliteral}{"Invalid delta="} << delta << \textcolor{stringliteral}{" largestReference="}
+100                  << largestReference;
+101       err_ = HPACK::DecodeError::INVALID_INDEX;
+102       \textcolor{keywordflow}{return} 0;
+103     \}
+104     baseIndex_ = largestReference - delta;
+105   \} \textcolor{keywordflow}{else} \{
+106     baseIndex_ = largestReference + delta;
+107   \}
+108   VLOG(5) << \textcolor{stringliteral}{"Decoded baseIndex\_="} << baseIndex_;
+109   \textcolor{keywordflow}{return} largestReference;
+110 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!is\+Valid@{is\+Valid}}
+\index{is\+Valid@{is\+Valid}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{is\+Valid(bool is\+Static, uint32\+\_\+t index, bool above\+Base)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::is\+Valid (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\+Static, }
+\item[{uint32\+\_\+t}]{index, }
+\item[{bool}]{above\+Base}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a47f0472565b87bc7ac89a676f1514e30}
+
+
+Definition at line 307 of file Q\+P\+A\+C\+K\+Decoder.\+cpp.
+
+
+
+References base\+Index\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::get\+Static\+Table(), proxygen\+::\+Header\+Table\+::is\+Valid(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::is\+Valid(), and proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+.
+
+
+
+Referenced by decode\+Indexed\+Header\+Q(), decode\+Literal\+Header\+Q(), and set\+Header\+Table\+Max\+Size().
+
+
+\begin{DoxyCode}
+307                                                                         \{
+308   \textcolor{keywordflow}{if} (isStatic) \{
+309     \textcolor{keywordflow}{return} getStaticTable().isValid(index);
+310   \} \textcolor{keywordflow}{else} \{
+311     uint32\_t baseIndex = baseIndex_;
+312     \textcolor{keywordflow}{if} (aboveBase) \{
+313       baseIndex = baseIndex + index;
+314       index = 1;
+315     \}
+316     \textcolor{keywordflow}{return} table_.isValid(index, baseIndex);
+317   \}
+318 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!set\+Header\+Table\+Max\+Size@{set\+Header\+Table\+Max\+Size}}
+\index{set\+Header\+Table\+Max\+Size@{set\+Header\+Table\+Max\+Size}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{set\+Header\+Table\+Max\+Size(uint32\+\_\+t max\+Size)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::set\+Header\+Table\+Max\+Size (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{max\+Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKDecoder_aaa37a68eaf65d3c683a08126f3b0c5ac}
+
+
+Definition at line 58 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+References decode\+Encoder\+Stream\+Instruction(), decode\+Header\+Q(), decode\+Indexed\+Header\+Q(), decode\+Literal\+Header\+Q(), decode\+Streaming\+Impl(), enqueue\+Header\+Block(), handle\+Base\+Index(), is\+Valid(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::set\+Header\+Table\+Max\+Size(), and proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::table\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+58                                                \{
+59     HPACKDecoderBase::setHeaderTableMaxSize(table_, maxSize);
+60   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!set\+Max\+Blocking@{set\+Max\+Blocking}}
+\index{set\+Max\+Blocking@{set\+Max\+Blocking}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{set\+Max\+Blocking(uint32\+\_\+t max\+Blocking)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::set\+Max\+Blocking (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{max\+Blocking}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKDecoder_ad203af7268f03b69d15646d9c814ecd8}
+
+
+Definition at line 54 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+References max\+Blocking\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+54                                             \{
+55     maxBlocking_ = maxBlocking;
+56   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!base\+Index\+\_\+@{base\+Index\+\_\+}}
+\index{base\+Index\+\_\+@{base\+Index\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{base\+Index\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::base\+Index\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a2dd920b6ef71a75e648d7f52b781ba9e}
+
+
+Definition at line 126 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by decode\+Block(), decode\+Encoder\+Stream(), decode\+Indexed\+Header\+Q(), decode\+Literal\+Header\+Q(), decode\+Streaming(), handle\+Base\+Index(), and is\+Valid().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!hol\+Block\+Count\+\_\+@{hol\+Block\+Count\+\_\+}}
+\index{hol\+Block\+Count\+\_\+@{hol\+Block\+Count\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{hol\+Block\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::hol\+Block\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a8bbd8390203a36dfc9d1ed344b9bfede}
+
+
+Definition at line 128 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by enqueue\+Header\+Block(), and get\+Hol\+Block\+Count().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!ingress\+\_\+@{ingress\+\_\+}}
+\index{ingress\+\_\+@{ingress\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{ingress\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+I\+O\+Buf\+Queue proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::ingress\+\_\+ \{folly\+::\+I\+O\+Buf\+Queue\+::cache\+Chain\+Length()\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a1ffd15ada78d450a7943d34fe947d465}
+
+
+Definition at line 140 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by decode\+Encoder\+Stream().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!last\+Acked\+\_\+@{last\+Acked\+\_\+}}
+\index{last\+Acked\+\_\+@{last\+Acked\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{last\+Acked\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::last\+Acked\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a353cd7482bdecc0f0939139822218ed4}
+
+
+Definition at line 127 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by decode\+Streaming\+Impl(), and encode\+Table\+State\+Sync().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!max\+Blocking\+\_\+@{max\+Blocking\+\_\+}}
+\index{max\+Blocking\+\_\+@{max\+Blocking\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{max\+Blocking\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::max\+Blocking\+\_\+ \{{\bf H\+P\+A\+C\+K\+::k\+Default\+Blocking}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a497a79ebe3005ead366f635c35b86dfb}
+
+
+Definition at line 125 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by decode\+Streaming(), and set\+Max\+Blocking().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!partial\+\_\+@{partial\+\_\+}}
+\index{partial\+\_\+@{partial\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{partial\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Partial} proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::partial\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_a17006ad10da24b4379d4a253aa6cd7de}
+
+
+Definition at line 139 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by decode\+Encoder\+Stream(), decode\+Encoder\+Stream\+Instruction(), and decode\+Literal\+Header\+Q().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!queue\+\_\+@{queue\+\_\+}}
+\index{queue\+\_\+@{queue\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{queue\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::multimap$<$uint32\+\_\+t, {\bf Pending\+Block}$>$ proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::queue\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_afbdfc960c632176783664308fcebbb8e}
+
+
+Definition at line 130 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by decode\+Streaming(), drain\+Queue(), encode\+Cancel\+Stream(), and enqueue\+Header\+Block().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}!queued\+Bytes\+\_\+@{queued\+Bytes\+\_\+}}
+\index{queued\+Bytes\+\_\+@{queued\+Bytes\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Decoder@{proxygen\+::\+Q\+P\+A\+C\+K\+Decoder}}
+\subsubsection[{queued\+Bytes\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::queued\+Bytes\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKDecoder_af51417abeba336c484a14c9d2783bd67}
+
+
+Definition at line 129 of file Q\+P\+A\+C\+K\+Decoder.\+h.
+
+
+
+Referenced by decode\+Block(), enqueue\+Header\+Block(), and get\+Queued\+Bytes().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Decoder.\+h}\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Decoder.\+cpp}\end{DoxyCompactItemize}

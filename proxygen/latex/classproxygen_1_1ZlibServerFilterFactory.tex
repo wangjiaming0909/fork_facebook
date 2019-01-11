@@ -1,0 +1,214 @@
+\section{proxygen\+:\+:Zlib\+Server\+Filter\+Factory Class Reference}
+\label{classproxygen_1_1ZlibServerFilterFactory}\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+
+
+{\ttfamily \#include $<$Zlib\+Server\+Filter.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Zlib\+Server\+Filter\+Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1ZlibServerFilterFactory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Zlib\+Server\+Filter\+Factory} (int32\+\_\+t compression\+Level, uint32\+\_\+t minimum\+Compression\+Size, const std\+::set$<$ std\+::string $>$ compressible\+Content\+Types)
+\item 
+void {\bf on\+Server\+Start} (folly\+::\+Event\+Base $\ast$) noexceptoverride
+\item 
+void {\bf on\+Server\+Stop} () noexceptoverride
+\item 
+{\bf Request\+Handler} $\ast$ {\bf on\+Request} ({\bf Request\+Handler} $\ast$h, {\bf H\+T\+T\+P\+Message} $\ast$msg) noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf accepts\+Supported\+Compression\+Type} ({\bf H\+T\+T\+P\+Message} $\ast$msg) noexcept
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t {\bf compression\+Level\+\_\+}
+\item 
+uint32\+\_\+t {\bf minimum\+Compression\+Size\+\_\+}
+\item 
+const std\+::shared\+\_\+ptr$<$ std\+::set$<$ std\+::string $>$ $>$ {\bf compressible\+Content\+Types\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 196 of file Zlib\+Server\+Filter.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!Zlib\+Server\+Filter\+Factory@{Zlib\+Server\+Filter\+Factory}}
+\index{Zlib\+Server\+Filter\+Factory@{Zlib\+Server\+Filter\+Factory}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{Zlib\+Server\+Filter\+Factory(int32\+\_\+t compression\+Level, uint32\+\_\+t minimum\+Compression\+Size, const std\+::set$<$ std\+::string $>$ compressible\+Content\+Types)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::\+Zlib\+Server\+Filter\+Factory (
+\begin{DoxyParamCaption}
+\item[{int32\+\_\+t}]{compression\+Level, }
+\item[{uint32\+\_\+t}]{minimum\+Compression\+Size, }
+\item[{const std\+::set$<$ std\+::string $>$}]{compressible\+Content\+Types}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1ZlibServerFilterFactory_aae204e99071a2944292885b8d87f33d6}
+
+
+Definition at line 198 of file Zlib\+Server\+Filter.\+h.
+
+
+\begin{DoxyCode}
+202       : compressionLevel_(compressionLevel),
+203         minimumCompressionSize_(minimumCompressionSize),
+204         compressibleContentTypes_(
+205             std::make\_shared<std::set<std::string>>(compressibleContentTypes)) \{
+206   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!accepts\+Supported\+Compression\+Type@{accepts\+Supported\+Compression\+Type}}
+\index{accepts\+Supported\+Compression\+Type@{accepts\+Supported\+Compression\+Type}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{accepts\+Supported\+Compression\+Type(\+H\+T\+T\+P\+Message $\ast$msg) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::accepts\+Supported\+Compression\+Type (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ZlibServerFilterFactory_a1a889813aa831bf19ffcfe5b1744601b}
+
+
+Definition at line 231 of file Zlib\+Server\+Filter.\+h.
+
+
+
+References proxygen\+::\+R\+F\+C2616\+::parse\+Qvalues().
+
+
+\begin{DoxyCode}
+231                                                                   \{
+232 
+233     std::vector<RFC2616::TokenQPair> output;
+234 
+235     \textcolor{comment}{//Accept encoding header could have qvalues (gzip; q=5.0)}
+236     \textcolor{keyword}{auto} acceptEncodingHeader =
+237         msg->getHeaders().getSingleOrEmpty(HTTP\_HEADER\_ACCEPT\_ENCODING);
+238 
+239     \textcolor{keywordflow}{if} (RFC2616::parseQvalues(acceptEncodingHeader, output)) \{
+240       std::vector<RFC2616::TokenQPair>::iterator it = std::find\_if(
+241           output.begin(), output.end(), [](RFC2616::TokenQPair elem) \{
+242             \textcolor{keywordflow}{return} elem.first.compare(folly::StringPiece(\textcolor{stringliteral}{"gzip"})) == 0;
+243           \});
+244 
+245       \textcolor{keywordflow}{return} (it != output.end());
+246     \}
+247 
+248     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+249   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{on\+Request(\+Request\+Handler $\ast$h, H\+T\+T\+P\+Message $\ast$msg) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Request\+Handler}$\ast$ proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{{\bf Request\+Handler} $\ast$}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ZlibServerFilterFactory_a0f8a7acc4b46b452123ec5bbfda4bc5c}
+Invoked for each new request server handles. \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage} is provided so that user can potentially choose among several implementation of handler based on \doxyref{U\+RL}{p.}{classproxygen_1_1URL} or something. No need to save/copy this \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage}. \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler} will be given the \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage} in a separate callback.
+
+Some request handlers don\textquotesingle{}t handle the request themselves (think filters). They do take some actions based on request/response but otherwise they just hand-\/off request to some other \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler}. This upstream \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler} is given as first parameter. For the terminal \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler} this will by nullptr. 
+
+Implements {\bf proxygen\+::\+Request\+Handler\+Factory} \doxyref{}{p.}{classproxygen_1_1RequestHandlerFactory_a9c2cbbc96d006244ea28cea44a3e6a60}.
+
+
+
+Definition at line 212 of file Zlib\+Server\+Filter.\+h.
+
+
+
+References proxygen\+::\+Zlib\+Server\+Filter\+::compressible\+Content\+Types\+\_\+, proxygen\+::\+Zlib\+Server\+Filter\+::compression\+Level\+\_\+, proxygen\+::\+Zlib\+Server\+Filter\+::minimum\+Compression\+Size\+\_\+, and proxygen\+::\+Zlib\+Server\+Filter\+::\+Zlib\+Server\+Filter().
+
+
+\begin{DoxyCode}
+213                                                                 \{
+214 
+215     \textcolor{keywordflow}{if} (acceptsSupportedCompressionType(msg)) \{
+216       \textcolor{keyword}{auto} zlibServerFilter =
+217           \textcolor{keyword}{new} ZlibServerFilter(h,
+218               compressionLevel_,
+219               minimumCompressionSize_,
+220               compressibleContentTypes_);
+221       \textcolor{keywordflow}{return} zlibServerFilter;
+222     \}
+223 
+224     \textcolor{comment}{// No compression}
+225     \textcolor{keywordflow}{return} h;
+226   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!on\+Server\+Start@{on\+Server\+Start}}
+\index{on\+Server\+Start@{on\+Server\+Start}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{on\+Server\+Start(folly\+::\+Event\+Base $\ast$) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::on\+Server\+Start (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{evb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ZlibServerFilterFactory_afd16e05cecf09a23de577b6082c1a51b}
+Invoked in each thread server is going to handle requests before we start handling requests. Can be used to setup thread-\/local setup for each thread (stats and such). 
+
+Implements {\bf proxygen\+::\+Request\+Handler\+Factory} \doxyref{}{p.}{classproxygen_1_1RequestHandlerFactory_af76091b8a51a8d069fcc1aec3007a1cc}.
+
+
+
+Definition at line 208 of file Zlib\+Server\+Filter.\+h.
+
+
+\begin{DoxyCode}
+208 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!on\+Server\+Stop@{on\+Server\+Stop}}
+\index{on\+Server\+Stop@{on\+Server\+Stop}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{on\+Server\+Stop() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::on\+Server\+Stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ZlibServerFilterFactory_a1b4e4b39ed0b92b0bb7123143d0fd26b}
+Invoked in each handler thread after all the connections are drained from that thread. Can be used to tear down thread-\/local setup. 
+
+Implements {\bf proxygen\+::\+Request\+Handler\+Factory} \doxyref{}{p.}{classproxygen_1_1RequestHandlerFactory_a0791d6b33c13513ed6f550bbbd7bca85}.
+
+
+
+Definition at line 210 of file Zlib\+Server\+Filter.\+h.
+
+
+\begin{DoxyCode}
+210 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!compressible\+Content\+Types\+\_\+@{compressible\+Content\+Types\+\_\+}}
+\index{compressible\+Content\+Types\+\_\+@{compressible\+Content\+Types\+\_\+}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{compressible\+Content\+Types\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::shared\+\_\+ptr$<$std\+::set$<$std\+::string$>$ $>$ proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::compressible\+Content\+Types\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1ZlibServerFilterFactory_a40df45f0d40382c6b086454fe32ccc6c}
+
+
+Definition at line 253 of file Zlib\+Server\+Filter.\+h.
+
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!compression\+Level\+\_\+@{compression\+Level\+\_\+}}
+\index{compression\+Level\+\_\+@{compression\+Level\+\_\+}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{compression\+Level\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::compression\+Level\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1ZlibServerFilterFactory_ab5568bea1653014f544dc7168a12e3f1}
+
+
+Definition at line 251 of file Zlib\+Server\+Filter.\+h.
+
+\index{proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}!minimum\+Compression\+Size\+\_\+@{minimum\+Compression\+Size\+\_\+}}
+\index{minimum\+Compression\+Size\+\_\+@{minimum\+Compression\+Size\+\_\+}!proxygen\+::\+Zlib\+Server\+Filter\+Factory@{proxygen\+::\+Zlib\+Server\+Filter\+Factory}}
+\subsubsection[{minimum\+Compression\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Zlib\+Server\+Filter\+Factory\+::minimum\+Compression\+Size\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1ZlibServerFilterFactory_abac25c797965d90d42e99ab2a8781f78}
+
+
+Definition at line 252 of file Zlib\+Server\+Filter.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/filters/{\bf Zlib\+Server\+Filter.\+h}\end{DoxyCompactItemize}

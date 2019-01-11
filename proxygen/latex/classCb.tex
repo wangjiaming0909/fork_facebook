@@ -1,0 +1,159 @@
+\section{Cb Class Reference}
+\label{classCb}\index{Cb@{Cb}}
+Inheritance diagram for Cb\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCb}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Cb} (folly\+::\+Async\+S\+S\+L\+Socket $\ast$sock)
+\item 
+void {\bf connect\+Success} () noexceptoverride
+\item 
+void {\bf connect\+Err} (const folly\+::\+Async\+Socket\+Exception \&) noexceptoverride
+\item 
+const X509 $\ast$ {\bf get\+Peer\+Cert} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf success} \{false\}
+\item 
+bool {\bf reused\+Session} \{false\}
+\item 
+wangle\+::\+S\+S\+L\+Session\+Ptr {\bf session}
+\item 
+folly\+::\+Async\+S\+S\+L\+Socket $\ast$ {\bf sock\+\_\+} \{{\bf nullptr}\}
+\item 
+folly\+::ssl\+::\+X509\+Unique\+Ptr {\bf peer\+Cert\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 127 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Cb@{Cb}!Cb@{Cb}}
+\index{Cb@{Cb}!Cb@{Cb}}
+\subsubsection[{Cb(folly\+::\+Async\+S\+S\+L\+Socket $\ast$sock)}]{\setlength{\rightskip}{0pt plus 5cm}Cb\+::\+Cb (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+S\+S\+L\+Socket $\ast$}]{sock}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classCb_aec3df3b289507f952c718117e82ef48d}
+
+
+Definition at line 129 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+129 : sock_(sock) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Cb@{Cb}!connect\+Err@{connect\+Err}}
+\index{connect\+Err@{connect\+Err}!Cb@{Cb}}
+\subsubsection[{connect\+Err(const folly\+::\+Async\+Socket\+Exception \&) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Cb\+::connect\+Err (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classCb_a89f40919f2a9c33284b3aff1cfa5918d}
+
+
+Definition at line 141 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+141                                                                       \{
+142     success = \textcolor{keyword}{false};
+143   \}
+\end{DoxyCode}
+\index{Cb@{Cb}!connect\+Success@{connect\+Success}}
+\index{connect\+Success@{connect\+Success}!Cb@{Cb}}
+\subsubsection[{connect\+Success() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Cb\+::connect\+Success (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classCb_a6a80543111df63b25cea314f3f5c03f1}
+
+
+Definition at line 130 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+130                                           \{
+131     success = \textcolor{keyword}{true};
+132     reusedSession = sock_->getSSLSessionReused();
+133     session.reset(sock_->getSSLSession());
+134     \textcolor{keywordflow}{if} (sock_->getPeerCert()) \{
+135       \textcolor{comment}{// keeps this alive until Cb is destroyed, even if sock is closed}
+136       peerCert_ = sock_->getPeerCert();
+137     \}
+138     sock_->close();
+139   \}
+\end{DoxyCode}
+\index{Cb@{Cb}!get\+Peer\+Cert@{get\+Peer\+Cert}}
+\index{get\+Peer\+Cert@{get\+Peer\+Cert}!Cb@{Cb}}
+\subsubsection[{get\+Peer\+Cert()}]{\setlength{\rightskip}{0pt plus 5cm}const X509$\ast$ Cb\+::get\+Peer\+Cert (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classCb_a13ccf5f1b4d6b63b97f8daef90466101}
+
+
+Definition at line 145 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+145 \{ \textcolor{keywordflow}{return} peerCert_.get(); \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Cb@{Cb}!peer\+Cert\+\_\+@{peer\+Cert\+\_\+}}
+\index{peer\+Cert\+\_\+@{peer\+Cert\+\_\+}!Cb@{Cb}}
+\subsubsection[{peer\+Cert\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::ssl\+::\+X509\+Unique\+Ptr Cb\+::peer\+Cert\+\_\+ \{{\bf nullptr}\}}\label{classCb_a1517924c770639c8649425cbf3229fd4}
+
+
+Definition at line 151 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+\index{Cb@{Cb}!reused\+Session@{reused\+Session}}
+\index{reused\+Session@{reused\+Session}!Cb@{Cb}}
+\subsubsection[{reused\+Session}]{\setlength{\rightskip}{0pt plus 5cm}bool Cb\+::reused\+Session \{false\}}\label{classCb_a078f1d64998766c1d1738178e874e286}
+
+
+Definition at line 148 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+\index{Cb@{Cb}!session@{session}}
+\index{session@{session}!Cb@{Cb}}
+\subsubsection[{session}]{\setlength{\rightskip}{0pt plus 5cm}wangle\+::\+S\+S\+L\+Session\+Ptr Cb\+::session}\label{classCb_a5033dda06c9fc459caa35973a60a7364}
+
+
+Definition at line 149 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+\index{Cb@{Cb}!sock\+\_\+@{sock\+\_\+}}
+\index{sock\+\_\+@{sock\+\_\+}!Cb@{Cb}}
+\subsubsection[{sock\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Async\+S\+S\+L\+Socket$\ast$ Cb\+::sock\+\_\+ \{{\bf nullptr}\}}\label{classCb_a6704c20a449a287ab6fdcc90e9327569}
+
+
+Definition at line 150 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+\index{Cb@{Cb}!success@{success}}
+\index{success@{success}!Cb@{Cb}}
+\subsubsection[{success}]{\setlength{\rightskip}{0pt plus 5cm}bool Cb\+::success \{false\}}\label{classCb_abfc5a7346c80efa80e729eacc856cee0}
+
+
+Definition at line 147 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/tests/{\bf H\+T\+T\+P\+Server\+Test.\+cpp}\end{DoxyCompactItemize}

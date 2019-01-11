@@ -1,0 +1,355 @@
+\section{message Struct Reference}
+\label{structmessage}\index{message@{message}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ {\bf N\+O\+NE} =0, 
+{\bf F\+I\+E\+LD}, 
+{\bf V\+A\+L\+UE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bf name}
+\item 
+const char $\ast$ {\bf raw}
+\item 
+enum {\bf http\+\_\+parser\+\_\+type} {\bf type}
+\item 
+enum {\bf http\+\_\+method} {\bf method}
+\item 
+int {\bf status\+\_\+code}
+\item 
+char {\bf request\+\_\+url} [500]
+\item 
+char {\bf response\+\_\+reason} [500]
+\item 
+size\+\_\+t {\bf response\+\_\+reason\+\_\+size}
+\item 
+char {\bf body} [500]
+\item 
+size\+\_\+t {\bf body\+\_\+size}
+\item 
+int {\bf num\+\_\+headers}
+\item 
+enum message\+:: \{ ... \}  {\bf last\+\_\+header\+\_\+element}
+\item 
+char {\bf headers} [13][2][500]
+\item 
+int {\bf should\+\_\+keep\+\_\+alive}
+\item 
+int {\bf num\+\_\+chunks}
+\item 
+int {\bf num\+\_\+chunks\+\_\+complete}
+\item 
+int {\bf chunk\+\_\+lengths} [16]
+\item 
+const char $\ast$ {\bf upgrade}
+\item 
+unsigned short {\bf http\+\_\+major}
+\item 
+unsigned short {\bf http\+\_\+minor}
+\item 
+int {\bf message\+\_\+begin\+\_\+cb\+\_\+called}
+\item 
+int {\bf headers\+\_\+complete\+\_\+cb\+\_\+called}
+\item 
+int {\bf message\+\_\+complete\+\_\+cb\+\_\+called}
+\item 
+int {\bf message\+\_\+complete\+\_\+on\+\_\+eof}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 42 of file test.\+c.
+
+
+
+\subsection{Member Enumeration Documentation}
+\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}\label{structmessage_a6d615760db2c7fe2a2cdb8b02228c1f5}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+O\+NE@{N\+O\+NE}!message@{message}}\index{message@{message}!N\+O\+NE@{N\+O\+NE}}\item[{\em 
+N\+O\+NE\label{structmessage_a6d615760db2c7fe2a2cdb8b02228c1f5a40651af2dd86e510b9c140b7bd31962f}
+}]\index{F\+I\+E\+LD@{F\+I\+E\+LD}!message@{message}}\index{message@{message}!F\+I\+E\+LD@{F\+I\+E\+LD}}\item[{\em 
+F\+I\+E\+LD\label{structmessage_a6d615760db2c7fe2a2cdb8b02228c1f5a7043641df320f601c81d13c895ec4e78}
+}]\index{V\+A\+L\+UE@{V\+A\+L\+UE}!message@{message}}\index{message@{message}!V\+A\+L\+UE@{V\+A\+L\+UE}}\item[{\em 
+V\+A\+L\+UE\label{structmessage_a6d615760db2c7fe2a2cdb8b02228c1f5a4eb76db28128a0078d8246246295a225}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 54 of file test.\+c.
+
+
+\begin{DoxyCode}
+54 \{ NONE=0, FIELD, VALUE \} last_header_element;
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{message@{message}!body@{body}}
+\index{body@{body}!message@{message}}
+\subsubsection[{body}]{\setlength{\rightskip}{0pt plus 5cm}char message\+::body[500]}\label{structmessage_ae2d1439bb4740d36249f4e5e69daa5b1}
+
+
+Definition at line 51 of file test.\+c.
+
+
+
+Referenced by body\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!body\+\_\+size@{body\+\_\+size}}
+\index{body\+\_\+size@{body\+\_\+size}!message@{message}}
+\subsubsection[{body\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t message\+::body\+\_\+size}\label{structmessage_a76280f10b162e2690411c706a0900271}
+
+
+Definition at line 52 of file test.\+c.
+
+
+
+Referenced by body\+\_\+cb(), count\+\_\+body\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!chunk\+\_\+lengths@{chunk\+\_\+lengths}}
+\index{chunk\+\_\+lengths@{chunk\+\_\+lengths}!message@{message}}
+\subsubsection[{chunk\+\_\+lengths}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::chunk\+\_\+lengths[16]}\label{structmessage_a6300614675d1bb2afc3e52fe054f809b}
+
+
+Definition at line 60 of file test.\+c.
+
+
+
+Referenced by chunk\+\_\+header\+\_\+cb(), main(), and message\+\_\+eq().
+
+\index{message@{message}!headers@{headers}}
+\index{headers@{headers}!message@{message}}
+\subsubsection[{headers}]{\setlength{\rightskip}{0pt plus 5cm}char message\+::headers[13][2][500]}\label{structmessage_a16791247313276e8c4b62120d2694b60}
+
+
+Definition at line 55 of file test.\+c.
+
+
+
+Referenced by header\+\_\+field\+\_\+cb(), header\+\_\+value\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!headers\+\_\+complete\+\_\+cb\+\_\+called@{headers\+\_\+complete\+\_\+cb\+\_\+called}}
+\index{headers\+\_\+complete\+\_\+cb\+\_\+called@{headers\+\_\+complete\+\_\+cb\+\_\+called}!message@{message}}
+\subsubsection[{headers\+\_\+complete\+\_\+cb\+\_\+called}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::headers\+\_\+complete\+\_\+cb\+\_\+called}\label{structmessage_a2bc03590b604eb21c6cfb25a00d07ce1}
+
+
+Definition at line 68 of file test.\+c.
+
+
+
+Referenced by headers\+\_\+complete\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!http\+\_\+major@{http\+\_\+major}}
+\index{http\+\_\+major@{http\+\_\+major}!message@{message}}
+\subsubsection[{http\+\_\+major}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short message\+::http\+\_\+major}\label{structmessage_aa671065d5218209150105b1198c28356}
+
+
+Definition at line 64 of file test.\+c.
+
+
+
+Referenced by headers\+\_\+complete\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!http\+\_\+minor@{http\+\_\+minor}}
+\index{http\+\_\+minor@{http\+\_\+minor}!message@{message}}
+\subsubsection[{http\+\_\+minor}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short message\+::http\+\_\+minor}\label{structmessage_a45ab019e4c8ab0aa6721e46889df09eb}
+
+
+Definition at line 65 of file test.\+c.
+
+
+
+Referenced by headers\+\_\+complete\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!last\+\_\+header\+\_\+element@{last\+\_\+header\+\_\+element}}
+\index{last\+\_\+header\+\_\+element@{last\+\_\+header\+\_\+element}!message@{message}}
+\subsubsection[{last\+\_\+header\+\_\+element}]{\setlength{\rightskip}{0pt plus 5cm}enum \{ ... \}   message\+::last\+\_\+header\+\_\+element}\label{structmessage_a8efddec3a432612d5ef8a820e80a6c34}
+
+
+Referenced by header\+\_\+field\+\_\+cb(), and header\+\_\+value\+\_\+cb().
+
+\index{message@{message}!message\+\_\+begin\+\_\+cb\+\_\+called@{message\+\_\+begin\+\_\+cb\+\_\+called}}
+\index{message\+\_\+begin\+\_\+cb\+\_\+called@{message\+\_\+begin\+\_\+cb\+\_\+called}!message@{message}}
+\subsubsection[{message\+\_\+begin\+\_\+cb\+\_\+called}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::message\+\_\+begin\+\_\+cb\+\_\+called}\label{structmessage_a674d3ea423035ae13baf795c826559ac}
+
+
+Definition at line 67 of file test.\+c.
+
+
+
+Referenced by message\+\_\+begin\+\_\+cb(), message\+\_\+eq(), and test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb().
+
+\index{message@{message}!message\+\_\+complete\+\_\+cb\+\_\+called@{message\+\_\+complete\+\_\+cb\+\_\+called}}
+\index{message\+\_\+complete\+\_\+cb\+\_\+called@{message\+\_\+complete\+\_\+cb\+\_\+called}!message@{message}}
+\subsubsection[{message\+\_\+complete\+\_\+cb\+\_\+called}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::message\+\_\+complete\+\_\+cb\+\_\+called}\label{structmessage_af6db066c2b49a00c2884a89afefad2b6}
+
+
+Definition at line 69 of file test.\+c.
+
+
+
+Referenced by message\+\_\+complete\+\_\+cb(), message\+\_\+eq(), and test\+\_\+message\+\_\+pause().
+
+\index{message@{message}!message\+\_\+complete\+\_\+on\+\_\+eof@{message\+\_\+complete\+\_\+on\+\_\+eof}}
+\index{message\+\_\+complete\+\_\+on\+\_\+eof@{message\+\_\+complete\+\_\+on\+\_\+eof}!message@{message}}
+\subsubsection[{message\+\_\+complete\+\_\+on\+\_\+eof}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::message\+\_\+complete\+\_\+on\+\_\+eof}\label{structmessage_af193342fc62bb8cfbd6c951138b96341}
+
+
+Definition at line 70 of file test.\+c.
+
+
+
+Referenced by message\+\_\+complete\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!method@{method}}
+\index{method@{method}!message@{message}}
+\subsubsection[{method}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf http\+\_\+method} message\+::method}\label{structmessage_a9707fdb13e3f05606b4fad35b404c5e8}
+
+
+Definition at line 46 of file test.\+c.
+
+
+
+Referenced by headers\+\_\+complete\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!name@{name}}
+\index{name@{name}!message@{message}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ message\+::name}\label{structmessage_a46a17bdb897a45bb7311769fd35821fb}
+
+
+Definition at line 43 of file test.\+c.
+
+
+
+Referenced by check\+\_\+num\+\_\+eq(), check\+\_\+str\+\_\+eq(), main(), test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), and test\+\_\+message\+\_\+pause().
+
+\index{message@{message}!num\+\_\+chunks@{num\+\_\+chunks}}
+\index{num\+\_\+chunks@{num\+\_\+chunks}!message@{message}}
+\subsubsection[{num\+\_\+chunks}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::num\+\_\+chunks}\label{structmessage_a245821c4468193ef14eb651b7f3d3d38}
+
+
+Definition at line 58 of file test.\+c.
+
+
+
+Referenced by chunk\+\_\+header\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!num\+\_\+chunks\+\_\+complete@{num\+\_\+chunks\+\_\+complete}}
+\index{num\+\_\+chunks\+\_\+complete@{num\+\_\+chunks\+\_\+complete}!message@{message}}
+\subsubsection[{num\+\_\+chunks\+\_\+complete}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::num\+\_\+chunks\+\_\+complete}\label{structmessage_a5cce7fc185d36bdf6f70b173a1ca1502}
+
+
+Definition at line 59 of file test.\+c.
+
+
+
+Referenced by chunk\+\_\+complete\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!num\+\_\+headers@{num\+\_\+headers}}
+\index{num\+\_\+headers@{num\+\_\+headers}!message@{message}}
+\subsubsection[{num\+\_\+headers}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::num\+\_\+headers}\label{structmessage_aa7f22e44d0ea24ebe66b7e7a51c39463}
+
+
+Definition at line 53 of file test.\+c.
+
+
+
+Referenced by header\+\_\+field\+\_\+cb(), header\+\_\+value\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!raw@{raw}}
+\index{raw@{raw}!message@{message}}
+\subsubsection[{raw}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ message\+::raw}\label{structmessage_a7a9793f14df49d81233bdf5bb1004a65}
+
+
+Definition at line 44 of file test.\+c.
+
+
+
+Referenced by test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+message\+\_\+pause(), test\+\_\+multiple3(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), test\+\_\+scan(), and upgrade\+\_\+message\+\_\+fix().
+
+\index{message@{message}!request\+\_\+url@{request\+\_\+url}}
+\index{request\+\_\+url@{request\+\_\+url}!message@{message}}
+\subsubsection[{request\+\_\+url}]{\setlength{\rightskip}{0pt plus 5cm}char message\+::request\+\_\+url[500]}\label{structmessage_aba795b8f4ad34457214936a1979d9c85}
+
+
+Definition at line 48 of file test.\+c.
+
+
+
+Referenced by message\+\_\+eq(), and request\+\_\+url\+\_\+cb().
+
+\index{message@{message}!response\+\_\+reason@{response\+\_\+reason}}
+\index{response\+\_\+reason@{response\+\_\+reason}!message@{message}}
+\subsubsection[{response\+\_\+reason}]{\setlength{\rightskip}{0pt plus 5cm}char message\+::response\+\_\+reason[500]}\label{structmessage_a5e1f7c4f89b4f1be724da27dae96cf67}
+
+
+Definition at line 49 of file test.\+c.
+
+
+
+Referenced by message\+\_\+eq(), and response\+\_\+reason\+\_\+cb().
+
+\index{message@{message}!response\+\_\+reason\+\_\+size@{response\+\_\+reason\+\_\+size}}
+\index{response\+\_\+reason\+\_\+size@{response\+\_\+reason\+\_\+size}!message@{message}}
+\subsubsection[{response\+\_\+reason\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t message\+::response\+\_\+reason\+\_\+size}\label{structmessage_a890e5c360d7bc365cfbd962da290c332}
+
+
+Definition at line 50 of file test.\+c.
+
+\index{message@{message}!should\+\_\+keep\+\_\+alive@{should\+\_\+keep\+\_\+alive}}
+\index{should\+\_\+keep\+\_\+alive@{should\+\_\+keep\+\_\+alive}!message@{message}}
+\subsubsection[{should\+\_\+keep\+\_\+alive}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::should\+\_\+keep\+\_\+alive}\label{structmessage_a9fa2fe019b9b15109632ba49448125b2}
+
+
+Definition at line 56 of file test.\+c.
+
+
+
+Referenced by main().
+
+\index{message@{message}!status\+\_\+code@{status\+\_\+code}}
+\index{status\+\_\+code@{status\+\_\+code}!message@{message}}
+\subsubsection[{status\+\_\+code}]{\setlength{\rightskip}{0pt plus 5cm}int message\+::status\+\_\+code}\label{structmessage_a99bc02df92f50d348a9b64a3b64ddd12}
+
+
+Definition at line 47 of file test.\+c.
+
+
+
+Referenced by headers\+\_\+complete\+\_\+cb(), and message\+\_\+eq().
+
+\index{message@{message}!type@{type}}
+\index{type@{type}!message@{message}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf http\+\_\+parser\+\_\+type} message\+::type}\label{structmessage_ab7b02b29b5c98045401538b759839aaa}
+
+
+Definition at line 45 of file test.\+c.
+
+
+
+Referenced by message\+\_\+eq(), test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+message\+\_\+pause(), test\+\_\+multiple3(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), and test\+\_\+scan().
+
+\index{message@{message}!upgrade@{upgrade}}
+\index{upgrade@{upgrade}!message@{message}}
+\subsubsection[{upgrade}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ message\+::upgrade}\label{structmessage_ab8fe94f026da047e8bda379ea6f49538}
+
+
+Definition at line 62 of file test.\+c.
+
+
+
+Referenced by count\+\_\+parsed\+\_\+messages(), message\+\_\+eq(), test\+\_\+message(), test\+\_\+message\+\_\+pause(), and upgrade\+\_\+message\+\_\+fix().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/external/http\+\_\+parser/{\bf test.\+c}\end{DoxyCompactItemize}

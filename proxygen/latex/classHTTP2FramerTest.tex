@@ -1,0 +1,184 @@
+\section{H\+T\+T\+P2\+Framer\+Test Class Reference}
+\label{classHTTP2FramerTest}\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+Inheritance diagram for H\+T\+T\+P2\+Framer\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHTTP2FramerTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P2\+Framer\+Test} ()
+\item 
+{\footnotesize template$<$typename Parse\+Func , typename... Args$>$ }\\void {\bf parse} (Parse\+Func \&\&parse\+Fn, {\bf Frame\+Header} \&out\+Header, Args \&\&...out\+Args)
+\item 
+{\footnotesize template$<$typename Parse\+Func , typename... Args$>$ }\\void {\bf parse} (const I\+O\+Buf $\ast$data, Parse\+Func \&\&parse\+Fn, {\bf Frame\+Header} \&out\+Header, Args \&\&...out\+Args)
+\item 
+void {\bf data\+Frame\+Test} (uint32\+\_\+t data\+Len, folly\+::\+Optional$<$ uint8\+\_\+t $>$ pad\+Len)
+\item 
+void {\bf data\+Frame\+Test} (I\+O\+Buf $\ast$body, uint32\+\_\+t data\+Len, folly\+::\+Optional$<$ uint8\+\_\+t $>$ pad\+Len)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+I\+O\+Buf\+Queue {\bf queue\+\_\+} \{I\+O\+Buf\+Queue\+::cache\+Chain\+Length()\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 36 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}!H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}!H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+\subsubsection[{H\+T\+T\+P2\+Framer\+Test()}]{\setlength{\rightskip}{0pt plus 5cm}H\+T\+T\+P2\+Framer\+Test\+::\+H\+T\+T\+P2\+Framer\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classHTTP2FramerTest_abf7c751ee0bc52c9267a0b1adf81fa16}
+
+
+Definition at line 38 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+38 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}!data\+Frame\+Test@{data\+Frame\+Test}}
+\index{data\+Frame\+Test@{data\+Frame\+Test}!H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+\subsubsection[{data\+Frame\+Test(uint32\+\_\+t data\+Len, folly\+::\+Optional$<$ uint8\+\_\+t $>$ pad\+Len)}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P2\+Framer\+Test\+::data\+Frame\+Test (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{data\+Len, }
+\item[{folly\+::\+Optional$<$ uint8\+\_\+t $>$}]{pad\+Len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classHTTP2FramerTest_a29d5f88f632205bb617a19ef83e2a192}
+
+
+Definition at line 55 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References make\+Buf().
+
+
+\begin{DoxyCode}
+55                                                                       \{
+56     \textcolor{keyword}{auto} body = makeBuf(dataLen);
+57     dataFrameTest(body.get(), dataLen, padLen);
+58   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}!data\+Frame\+Test@{data\+Frame\+Test}}
+\index{data\+Frame\+Test@{data\+Frame\+Test}!H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+\subsubsection[{data\+Frame\+Test(\+I\+O\+Buf $\ast$body, uint32\+\_\+t data\+Len, folly\+::\+Optional$<$ uint8\+\_\+t $>$ pad\+Len)}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P2\+Framer\+Test\+::data\+Frame\+Test (
+\begin{DoxyParamCaption}
+\item[{I\+O\+Buf $\ast$}]{body, }
+\item[{uint32\+\_\+t}]{data\+Len, }
+\item[{folly\+::\+Optional$<$ uint8\+\_\+t $>$}]{pad\+Len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classHTTP2FramerTest_ad5bbc465ee06740956eaeef104ef6f80}
+
+
+Definition at line 60 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE, proxygen\+::http2\+::k\+Max\+Frame\+Payload\+Length, parse(), proxygen\+::http2\+::parse\+Data(), and proxygen\+::http2\+::write\+Data().
+
+
+\begin{DoxyCode}
+61                                                     \{
+62     uint32\_t frameLen = uint32\_t(dataLen);
+63     \textcolor{keywordflow}{if} (padLen) \{
+64       frameLen += 1 + *padLen;
+65     \}
+66     \textcolor{keywordflow}{if} (frameLen > kMaxFramePayloadLength) \{
+67       EXPECT_DEATH_NO_CORE(writeData(queue_, body->clone(), 1, padLen,
+68                                      \textcolor{keyword}{false}, \textcolor{keyword}{true}), \textcolor{stringliteral}{".*"});
+69     \} \textcolor{keywordflow}{else} \{
+70       writeData(queue_, body->clone(), 1, padLen, \textcolor{keyword}{false}, \textcolor{keyword}{true});
+71 
+72       FrameHeader outHeader;
+73       std::unique\_ptr<IOBuf> outBuf;
+74       uint16\_t padding = 0;
+75       parse(&parseData, outHeader, outBuf, padding);
+76 
+77       EXPECT\_EQ(outBuf->moveToFbString(), body->moveToFbString());
+78       EXPECT\_EQ(padding, padLen ? (*padLen + 1) : 0);
+79     \}
+80     queue_.move(); \textcolor{comment}{// reset everything}
+81   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}!parse@{parse}}
+\index{parse@{parse}!H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+\subsubsection[{parse(\+Parse\+Func \&\&parse\+Fn, Frame\+Header \&out\+Header, Args \&\&...\+out\+Args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Parse\+Func , typename... Args$>$ void H\+T\+T\+P2\+Framer\+Test\+::parse (
+\begin{DoxyParamCaption}
+\item[{Parse\+Func \&\&}]{parse\+Fn, }
+\item[{{\bf Frame\+Header} \&}]{out\+Header, }
+\item[{Args \&\&...}]{out\+Args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classHTTP2FramerTest_a2a1e8f31bc2dbb1a16ef7d19e4c934d0}
+
+
+Definition at line 41 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References parse().
+
+
+\begin{DoxyCode}
+41                                                                              \{
+42     parse(queue_.front(), parseFn, outHeader, std::forward<Args>(outArgs)...);
+43   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}!parse@{parse}}
+\index{parse@{parse}!H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+\subsubsection[{parse(const I\+O\+Buf $\ast$data, Parse\+Func \&\&parse\+Fn, Frame\+Header \&out\+Header, Args \&\&...\+out\+Args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Parse\+Func , typename... Args$>$ void H\+T\+T\+P2\+Framer\+Test\+::parse (
+\begin{DoxyParamCaption}
+\item[{const I\+O\+Buf $\ast$}]{data, }
+\item[{Parse\+Func \&\&}]{parse\+Fn, }
+\item[{{\bf Frame\+Header} \&}]{out\+Header, }
+\item[{Args \&\&...}]{out\+Args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classHTTP2FramerTest_aab97440325617c6e0bc65b256ba470c2}
+
+
+Definition at line 46 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::parse\+Frame\+Header().
+
+
+\begin{DoxyCode}
+47                                                         \{
+48     Cursor cursor(data);
+49     \textcolor{keyword}{auto} ret1 = parseFrameHeader(cursor, outHeader);
+50     ASSERT\_EQ(ret1, ErrorCode::NO\_ERROR);
+51     \textcolor{keyword}{auto} ret2 = (*parseFn)(cursor, outHeader, std::forward<Args>(outArgs)...);
+52     ASSERT\_EQ(ret2, ErrorCode::NO\_ERROR);
+53   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}!queue\+\_\+@{queue\+\_\+}}
+\index{queue\+\_\+@{queue\+\_\+}!H\+T\+T\+P2\+Framer\+Test@{H\+T\+T\+P2\+Framer\+Test}}
+\subsubsection[{queue\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}I\+O\+Buf\+Queue H\+T\+T\+P2\+Framer\+Test\+::queue\+\_\+ \{I\+O\+Buf\+Queue\+::cache\+Chain\+Length()\}}\label{classHTTP2FramerTest_ab801fe28561b98fc644fdf910969a944}
+
+
+Definition at line 83 of file H\+T\+T\+P2\+Framer\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/test/{\bf H\+T\+T\+P2\+Framer\+Test.\+cpp}\end{DoxyCompactItemize}

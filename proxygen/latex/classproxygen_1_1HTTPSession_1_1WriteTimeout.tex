@@ -1,0 +1,107 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Session\+:\+:Write\+Timeout Class Reference}
+\label{classproxygen_1_1HTTPSession_1_1WriteTimeout}\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Session.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Session\+:\+:Write\+Timeout\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPSession_1_1WriteTimeout}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Write\+Timeout} ({\bf H\+T\+T\+P\+Session} $\ast$session)
+\item 
+{\bf $\sim$\+Write\+Timeout} () override
+\item 
+void {\bf timeout\+Expired} () noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session} $\ast$ {\bf session\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 673 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}!Write\+Timeout@{Write\+Timeout}}
+\index{Write\+Timeout@{Write\+Timeout}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}}
+\subsubsection[{Write\+Timeout(\+H\+T\+T\+P\+Session $\ast$session)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout\+::\+Write\+Timeout (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session} $\ast$}]{session}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1HTTPSession_1_1WriteTimeout_a1f692da5fc061c7999520285bc802f30}
+
+
+Definition at line 676 of file H\+T\+T\+P\+Session.\+h.
+
+
+\begin{DoxyCode}
+676 : session_(session) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}!````~Write\+Timeout@{$\sim$\+Write\+Timeout}}
+\index{````~Write\+Timeout@{$\sim$\+Write\+Timeout}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}}
+\subsubsection[{$\sim$\+Write\+Timeout() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout\+::$\sim$\+Write\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classproxygen_1_1HTTPSession_1_1WriteTimeout_a33431e8a6ec5f4215f24955ca6eb632a}
+
+
+Definition at line 677 of file H\+T\+T\+P\+Session.\+h.
+
+
+\begin{DoxyCode}
+677 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}!timeout\+Expired@{timeout\+Expired}}
+\index{timeout\+Expired@{timeout\+Expired}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}}
+\subsubsection[{timeout\+Expired() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout\+::timeout\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSession_1_1WriteTimeout_a8c590f15fba10a6247c24ca1d5b63dbd}
+
+
+Definition at line 679 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+References session\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+::write\+Timeout\+Expired().
+
+
+\begin{DoxyCode}
+679 \{ session_->writeTimeoutExpired(); \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}!session\+\_\+@{session\+\_\+}}
+\index{session\+\_\+@{session\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout}}
+\subsubsection[{session\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout\+::session\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSession_1_1WriteTimeout_a5564e479bf1e33c0e1703833d747a6ef}
+
+
+Definition at line 681 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::\+Shutdown\+Transport\+Callback\+::run\+Loop\+Callback(), timeout\+Expired(), proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::timeout\+Expired(), and proxygen\+::\+H\+T\+T\+P\+Session\+::\+Drain\+Timeout\+::timeout\+Expired().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session.\+h}\end{DoxyCompactItemize}

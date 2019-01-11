@@ -1,0 +1,67 @@
+\section{proxygen/lib/http/codec/\+Error\+Code.h File Reference}
+\label{ErrorCode_8h}\index{proxygen/lib/http/codec/\+Error\+Code.\+h@{proxygen/lib/http/codec/\+Error\+Code.\+h}}
+{\ttfamily \#include $<$cstdint$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf R\+E\+T\+U\+R\+N\+\_\+\+I\+F\+\_\+\+E\+R\+R\+OR}(err)
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf proxygen\+::\+Error\+Code} \+: uint8\+\_\+t \{ \\*
+{\bf proxygen\+::\+Error\+Code\+::\+N\+O\+\_\+\+E\+R\+R\+OR} = 0, 
+{\bf proxygen\+::\+Error\+Code\+::\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR} = 1, 
+{\bf proxygen\+::\+Error\+Code\+::\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR} = 2, 
+{\bf proxygen\+::\+Error\+Code\+::\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR} = 3, 
+\\*
+{\bf proxygen\+::\+Error\+Code\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+T\+I\+M\+E\+O\+UT} = 4, 
+{\bf proxygen\+::\+Error\+Code\+::\+S\+T\+R\+E\+A\+M\+\_\+\+C\+L\+O\+S\+ED} = 5, 
+{\bf proxygen\+::\+Error\+Code\+::\+F\+R\+A\+M\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+E\+R\+R\+OR} = 6, 
+{\bf proxygen\+::\+Error\+Code\+::\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM} = 7, 
+\\*
+{\bf proxygen\+::\+Error\+Code\+::\+C\+A\+N\+C\+EL} = 8, 
+{\bf proxygen\+::\+Error\+Code\+::\+C\+O\+M\+P\+R\+E\+S\+S\+I\+O\+N\+\_\+\+E\+R\+R\+OR} = 9, 
+{\bf proxygen\+::\+Error\+Code\+::\+C\+O\+N\+N\+E\+C\+T\+\_\+\+E\+R\+R\+OR} = 10, 
+{\bf proxygen\+::\+Error\+Code\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM} = 11, 
+\\*
+{\bf proxygen\+::\+Error\+Code\+::\+I\+N\+A\+D\+E\+Q\+U\+A\+T\+E\+\_\+\+S\+E\+C\+U\+R\+I\+TY} = 12, 
+{\bf proxygen\+::\+Error\+Code\+::\+H\+T\+T\+P\+\_\+1\+\_\+1\+\_\+\+R\+E\+Q\+U\+I\+R\+ED} = 13, 
+{\bf proxygen\+::\+Error\+Code\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM} = 100
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bf proxygen\+::get\+Error\+Code\+String} (Error\+Code error)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Error\+Code.\+h@{Error\+Code.\+h}!R\+E\+T\+U\+R\+N\+\_\+\+I\+F\+\_\+\+E\+R\+R\+OR@{R\+E\+T\+U\+R\+N\+\_\+\+I\+F\+\_\+\+E\+R\+R\+OR}}
+\index{R\+E\+T\+U\+R\+N\+\_\+\+I\+F\+\_\+\+E\+R\+R\+OR@{R\+E\+T\+U\+R\+N\+\_\+\+I\+F\+\_\+\+E\+R\+R\+OR}!Error\+Code.\+h@{Error\+Code.\+h}}
+\subsubsection[{R\+E\+T\+U\+R\+N\+\_\+\+I\+F\+\_\+\+E\+R\+R\+OR}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+T\+U\+R\+N\+\_\+\+I\+F\+\_\+\+E\+R\+R\+OR(
+\begin{DoxyParamCaption}
+\item[{}]{err}
+\end{DoxyParamCaption}
+)}\label{ErrorCode_8h_aabfb124a22e2b796a7c64854394db76d}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (err != ErrorCode::NO\_ERROR) \{                                \(\backslash\)
+    VLOG(4) << \textcolor{stringliteral}{"Returning with error="} << getErrorCodeString(err); \(\backslash\)
+    return err;                                                    \(\backslash\)
+  \}
+\end{DoxyCode}
+
+
+Definition at line 14 of file Error\+Code.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+All\+Data(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Certificate(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Certificate\+Request(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Continuation(), proxygen\+::http2\+::parse\+Data(), proxygen\+::http2\+::parse\+Data\+Begin(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Data\+Frame\+Data(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ex\+Headers(), proxygen\+::http2\+::parse\+Ex\+Headers(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Goaway(), proxygen\+::http2\+::parse\+Goaway(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers(), proxygen\+::http2\+::parse\+Headers(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Ping(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Priority(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Push\+Promise(), proxygen\+::http2\+::parse\+Push\+Promise(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Rst\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Settings(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Window\+Update().
+

@@ -1,0 +1,104 @@
+\section{proxygen\+:\+:Consistent\+Hash Class Reference}
+\label{classproxygen_1_1ConsistentHash}\index{proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}}
+
+
+{\ttfamily \#include $<$Consistent\+Hash.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Consistent\+Hash\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1ConsistentHash}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Consistent\+Hash} ()
+\item 
+virtual void {\bf build} (std\+::vector$<$ std\+::pair$<$ std\+::string, uint64\+\_\+t $>$ $>$ \&)=0
+\item 
+virtual size\+\_\+t {\bf get} (const uint64\+\_\+t key, const size\+\_\+t rank=0) const =0
+\item 
+virtual double {\bf get\+Max\+Error\+Rate} () const =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file Consistent\+Hash.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}!````~Consistent\+Hash@{$\sim$\+Consistent\+Hash}}
+\index{````~Consistent\+Hash@{$\sim$\+Consistent\+Hash}!proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}}
+\subsubsection[{$\sim$\+Consistent\+Hash()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Consistent\+Hash\+::$\sim$\+Consistent\+Hash (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ConsistentHash_a2d06f933aaab405fad765cabec504006}
+
+
+Definition at line 20 of file Consistent\+Hash.\+h.
+
+
+
+References build(), and get\+Max\+Error\+Rate().
+
+
+\begin{DoxyCode}
+20 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}!build@{build}}
+\index{build@{build}!proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}}
+\subsubsection[{build(std\+::vector$<$ std\+::pair$<$ std\+::string, uint64\+\_\+t $>$ $>$ \&)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Consistent\+Hash\+::build (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::pair$<$ std\+::string, uint64\+\_\+t $>$ $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1ConsistentHash_a8fd265b589f488ef87e4b18035566380}
+\doxyref{build()}{p.}{classproxygen_1_1ConsistentHash_a8fd265b589f488ef87e4b18035566380} builds the hashing pool based on a vector of nodes with their keys and weights.
+
+The bevahior of calling build multiple times is undefined.
+
+\doxyref{build()}{p.}{classproxygen_1_1ConsistentHash_a8fd265b589f488ef87e4b18035566380} is not thread safe with \doxyref{get()}{p.}{classproxygen_1_1ConsistentHash_aff314a6a770935974172e5579be928e3}, documented below. 
+
+Referenced by $\sim$\+Consistent\+Hash().
+
+\index{proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}!get@{get}}
+\index{get@{get}!proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}}
+\subsubsection[{get(const uint64\+\_\+t key, const size\+\_\+t rank=0) const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual size\+\_\+t proxygen\+::\+Consistent\+Hash\+::get (
+\begin{DoxyParamCaption}
+\item[{const uint64\+\_\+t}]{key, }
+\item[{const size\+\_\+t}]{rank = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1ConsistentHash_aff314a6a770935974172e5579be928e3}
+get(key, N) finds the node ranked N in the consistent hashing space for the given key.
+
+The returning value is the node\textquotesingle{}s index in the input vector of \doxyref{build()}{p.}{classproxygen_1_1ConsistentHash_a8fd265b589f488ef87e4b18035566380}. 
+
+Implemented in {\bf proxygen\+::\+Rendezvous\+Hash} \doxyref{}{p.}{classproxygen_1_1RendezvousHash_abf63d7fce1a3b5e85b6f13047054e8bb}.
+
+\index{proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}!get\+Max\+Error\+Rate@{get\+Max\+Error\+Rate}}
+\index{get\+Max\+Error\+Rate@{get\+Max\+Error\+Rate}!proxygen\+::\+Consistent\+Hash@{proxygen\+::\+Consistent\+Hash}}
+\subsubsection[{get\+Max\+Error\+Rate() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual double proxygen\+::\+Consistent\+Hash\+::get\+Max\+Error\+Rate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1ConsistentHash_a979601c4ebab25cbab4d72cf3ed8988f}
+get max error rate the current hashing space 
+
+Implemented in {\bf proxygen\+::\+Rendezvous\+Hash} \doxyref{}{p.}{classproxygen_1_1RendezvousHash_a2453618b03612ba068c2cef6964e818e}.
+
+
+
+Referenced by $\sim$\+Consistent\+Hash().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Consistent\+Hash.\+h}\end{DoxyCompactItemize}

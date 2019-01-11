@@ -1,0 +1,229 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Session\+Controller Class Reference}
+\label{classproxygen_1_1HTTPSessionController}\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Session\+Controller.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Session\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.137405cm]{classproxygen_1_1HTTPSessionController}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+H\+T\+T\+P\+Session\+Controller} ()
+\item 
+virtual {\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$ {\bf get\+Request\+Handler} ({\bf H\+T\+T\+P\+Transaction} \&txn, {\bf H\+T\+T\+P\+Message} $\ast$msg)=0
+\item 
+virtual {\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$ {\bf get\+Parse\+Error\+Handler} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn, const {\bf H\+T\+T\+P\+Exception} \&error, const folly\+::\+Socket\+Address \&local\+Address)=0
+\item 
+virtual {\bf H\+T\+T\+P\+Transaction\+Handler} $\ast$ {\bf get\+Transaction\+Timeout\+Handler} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn, const folly\+::\+Socket\+Address \&local\+Address)=0
+\item 
+virtual void {\bf attach\+Session} ({\bf H\+T\+T\+P\+Session\+Base} $\ast$session)=0
+\item 
+virtual void {\bf detach\+Session} (const {\bf H\+T\+T\+P\+Session\+Base} $\ast$session)=0
+\item 
+virtual void {\bf on\+Session\+Codec\+Change} ({\bf H\+T\+T\+P\+Session\+Base} $\ast$)
+\item 
+virtual std\+::chrono\+::milliseconds {\bf get\+Graceful\+Shutdown\+Timeout} () const 
+\item 
+virtual std\+::chrono\+::milliseconds {\bf get\+Session\+Flow\+Control\+Timeout} () const 
+\item 
+virtual const {\bf Header\+Indexing\+Strategy} $\ast$ {\bf get\+Header\+Indexing\+Strategy} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 28 of file H\+T\+T\+P\+Session\+Controller.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!````~H\+T\+T\+P\+Session\+Controller@{$\sim$\+H\+T\+T\+P\+Session\+Controller}}
+\index{````~H\+T\+T\+P\+Session\+Controller@{$\sim$\+H\+T\+T\+P\+Session\+Controller}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Session\+Controller()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::$\sim$\+H\+T\+T\+P\+Session\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionController_adcad2c31754556083fbee485e90e8c32}
+
+
+Definition at line 30 of file H\+T\+T\+P\+Session\+Controller.\+h.
+
+
+\begin{DoxyCode}
+30 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!attach\+Session@{attach\+Session}}
+\index{attach\+Session@{attach\+Session}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{attach\+Session(\+H\+T\+T\+P\+Session\+Base $\ast$session)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::attach\+Session (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session\+Base} $\ast$}]{session}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionController_adaa55a029817a9a28f14bcc33f87e07e}
+Inform the controller it is associated with this particular session. 
+
+Implemented in {\bf proxygen\+::\+Simple\+Controller} \doxyref{}{p.}{classproxygen_1_1SimpleController_a0c08f6a6ae3563ff1bc2b075182d5d96}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!detach\+Session@{detach\+Session}}
+\index{detach\+Session@{detach\+Session}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{detach\+Session(const H\+T\+T\+P\+Session\+Base $\ast$session)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::detach\+Session (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Session\+Base} $\ast$}]{session}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionController_ad7f0f00fe0e5431cc181c40afb86c098}
+Informed at the end when the given \doxyref{H\+T\+T\+P\+Session}{p.}{classproxygen_1_1HTTPSession} is going away. 
+
+Implemented in {\bf proxygen\+::\+Simple\+Controller} \doxyref{}{p.}{classproxygen_1_1SimpleController_a2d62097eebaf17086d906534caafab1d}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::run\+Destroy\+Callbacks().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!get\+Graceful\+Shutdown\+Timeout@{get\+Graceful\+Shutdown\+Timeout}}
+\index{get\+Graceful\+Shutdown\+Timeout@{get\+Graceful\+Shutdown\+Timeout}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{get\+Graceful\+Shutdown\+Timeout() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::chrono\+::milliseconds proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Graceful\+Shutdown\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionController_a6d486b39b48d7f5283b0e300704fdee3}
+Optionally allow the session to query custom graceful shutdown timeout. 
+
+Reimplemented in {\bf proxygen\+::\+Simple\+Controller} \doxyref{}{p.}{classproxygen_1_1SimpleController_ac7ffe3d4273fe114e76a73be794daaa6}.
+
+
+
+Definition at line 82 of file H\+T\+T\+P\+Session\+Controller.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Timeout\+Expired().
+
+
+\begin{DoxyCode}
+82                                                                    \{
+83     \textcolor{keywordflow}{return} std::chrono::milliseconds(0);
+84   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!get\+Header\+Indexing\+Strategy@{get\+Header\+Indexing\+Strategy}}
+\index{get\+Header\+Indexing\+Strategy@{get\+Header\+Indexing\+Strategy}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{get\+Header\+Indexing\+Strategy() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual const {\bf Header\+Indexing\+Strategy}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Header\+Indexing\+Strategy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionController_a3e667de3322683114ccfd64b30898ab8}
+Returns the H2 header indexing strategy to be employed by the session 
+
+Definition at line 96 of file H\+T\+T\+P\+Session\+Controller.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::init\+Codec\+Header\+Indexing\+Strategy().
+
+
+\begin{DoxyCode}
+96                                                                           \{
+97     \textcolor{keywordflow}{return} HeaderIndexingStrategy::getDefaultInstance();
+98   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!get\+Parse\+Error\+Handler@{get\+Parse\+Error\+Handler}}
+\index{get\+Parse\+Error\+Handler@{get\+Parse\+Error\+Handler}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{get\+Parse\+Error\+Handler(\+H\+T\+T\+P\+Transaction $\ast$txn, const H\+T\+T\+P\+Exception \&error, const folly\+::\+Socket\+Address \&local\+Address)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Transaction\+Handler}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Parse\+Error\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{error, }
+\item[{const folly\+::\+Socket\+Address \&}]{local\+Address}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionController_a110ccb9aef7bd4dfc39feef90f108a05}
+Will be invoked when \doxyref{H\+T\+T\+P\+Session}{p.}{classproxygen_1_1HTTPSession} is unable to parse a new request on the connection because of bad input.
+
+error contains specific information about what went wrong 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+Controller} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSessionController_a8a4b99720c55174715c45296d88092f5}, and {\bf proxygen\+::\+Simple\+Controller} \doxyref{}{p.}{classproxygen_1_1SimpleController_a6c678f0c0dcb767b1c296b85121b6054}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Parse\+Error\+Handler().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!get\+Request\+Handler@{get\+Request\+Handler}}
+\index{get\+Request\+Handler@{get\+Request\+Handler}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{get\+Request\+Handler(\+H\+T\+T\+P\+Transaction \&txn, H\+T\+T\+P\+Message $\ast$msg)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Transaction\+Handler}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Request\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} \&}]{txn, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionController_a307377c955969970f3abbe561e986e27}
+Will be invoked whenever \doxyref{H\+T\+T\+P\+Session}{p.}{classproxygen_1_1HTTPSession} successfully parses a request
+
+The controller creates a Handler for a new transaction. The transaction and H\+T\+TP message (request) are passed so the implementation can construct different handlers based on these. The transaction will be explicitly set on the handler later via set\+Transaction. The request message will be passed in on\+Headers\+Complete. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+Controller} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSessionController_ac90daaed306b4a03b611eb2a725215c2}, and {\bf proxygen\+::\+Simple\+Controller} \doxyref{}{p.}{classproxygen_1_1SimpleController_ab1fb98ec49bd69ae2add243b8040ac66}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::setup\+On\+Headers\+Complete().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!get\+Session\+Flow\+Control\+Timeout@{get\+Session\+Flow\+Control\+Timeout}}
+\index{get\+Session\+Flow\+Control\+Timeout@{get\+Session\+Flow\+Control\+Timeout}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{get\+Session\+Flow\+Control\+Timeout() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::chrono\+::milliseconds proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Session\+Flow\+Control\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionController_a68e13415d1f0f70313a0dceaccb37fe9}
+Optionally allow the session to query custom flow control timeout. 
+
+Definition at line 89 of file H\+T\+T\+P\+Session\+Controller.\+h.
+
+
+\begin{DoxyCode}
+89                                                                      \{
+90     \textcolor{keywordflow}{return} std::chrono::milliseconds(0);
+91   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!get\+Transaction\+Timeout\+Handler@{get\+Transaction\+Timeout\+Handler}}
+\index{get\+Transaction\+Timeout\+Handler@{get\+Transaction\+Timeout\+Handler}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{get\+Transaction\+Timeout\+Handler(\+H\+T\+T\+P\+Transaction $\ast$txn, const folly\+::\+Socket\+Address \&local\+Address)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Transaction\+Handler}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Transaction\+Timeout\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{const folly\+::\+Socket\+Address \&}]{local\+Address}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionController_a3b8c71afdff43e1ece41d12ccd833409}
+Will be invoked when \doxyref{H\+T\+T\+P\+Session}{p.}{classproxygen_1_1HTTPSession} times out parsing a new request. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+Controller} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSessionController_a8c368accd370ff3a6b3a8492a0912e21}, and {\bf proxygen\+::\+Simple\+Controller} \doxyref{}{p.}{classproxygen_1_1SimpleController_ab125724a144eb5e02245d2870b89c288}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::get\+Transaction\+Timeout\+Handler().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}!on\+Session\+Codec\+Change@{on\+Session\+Codec\+Change}}
+\index{on\+Session\+Codec\+Change@{on\+Session\+Codec\+Change}!proxygen\+::\+H\+T\+T\+P\+Session\+Controller@{proxygen\+::\+H\+T\+T\+P\+Session\+Controller}}
+\subsubsection[{on\+Session\+Codec\+Change(\+H\+T\+T\+P\+Session\+Base $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::on\+Session\+Codec\+Change (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session\+Base} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionController_aa526f00760a6331ad5aed4c02d553a79}
+Inform the controller that the session\textquotesingle{}s codec changed 
+
+Definition at line 77 of file H\+T\+T\+P\+Session\+Controller.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::on\+Codec\+Changed().
+
+
+\begin{DoxyCode}
+77 \{\}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session\+Controller.\+h}\end{DoxyCompactItemize}

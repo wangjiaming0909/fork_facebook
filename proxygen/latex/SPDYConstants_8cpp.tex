@@ -1,0 +1,68 @@
+\section{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.cpp File Reference}
+\label{SPDYConstants_8cpp}\index{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.\+cpp@{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.\+h$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\item 
+ {\bf proxygen\+::spdy}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Goaway\+Status\+Code {\bf proxygen\+::spdy\+::error\+Code\+To\+Goaway} (Error\+Code code)
+\item 
+Reset\+Status\+Code {\bf proxygen\+::spdy\+::error\+Code\+To\+Reset} (Error\+Code code)
+\item 
+Error\+Code {\bf proxygen\+::spdy\+::goaway\+To\+Error\+Code} (Goaway\+Status\+Code code)
+\item 
+Error\+Code {\bf proxygen\+::spdy\+::rst\+To\+Error\+Code} (uint32\+\_\+t code)
+\item 
+folly\+::\+Optional$<$ {\bf proxygen\+::spdy\+::\+Settings\+Id} $>$ {\bf proxygen\+::spdy\+::http\+To\+Spdy\+Settings\+Id} ({\bf proxygen\+::\+Settings\+Id} id)
+\item 
+folly\+::\+Optional$<$ {\bf proxygen\+::\+Settings\+Id} $>$ {\bf proxygen\+::spdy\+::spdy\+To\+Http\+Settings\+Id} ({\bf proxygen\+::spdy\+::\+Settings\+Id} id)
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Session\+Proto\+Name\+S\+P\+D\+Y3} (\char`\"{}spdy/3\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::http\+Version} (\char`\"{}H\+T\+TP/1.\+1\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Versionv2} (\char`\"{}version\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Versionv3} (\char`\"{}\+:version\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Statusv2} (\char`\"{}status\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Statusv3} (\char`\"{}\+:status\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Methodv2} (\char`\"{}method\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Methodv3} (\char`\"{}\+:method\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Pathv2} (\char`\"{}url\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Pathv3} (\char`\"{}\+:path\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Schemev2} (\char`\"{}scheme\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Schemev3} (\char`\"{}\+:scheme\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Hostv3} (\char`\"{}\+:host\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Version\+Strv2} (\char`\"{}spdy/2\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Version\+Strv3} (\char`\"{}spdy/3\char`\"{})
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Version\+Strv31} (\char`\"{}spdy/3.\+1\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t {\bf proxygen\+::spdy\+::k\+Initial\+Window} = 65536
+\item 
+const uint32\+\_\+t {\bf proxygen\+::spdy\+::k\+Max\+Concurrent\+Streams} = 100
+\item 
+const uint32\+\_\+t {\bf proxygen\+::spdy\+::k\+Max\+Frame\+Length} = (1 $<$$<$ 24) -\/ 1
+\item 
+const size\+\_\+t {\bf proxygen\+::spdy\+::\+S\+P\+D\+Y\+\_\+\+P\+R\+I\+O\+\_\+\+S\+H\+I\+F\+T\+\_\+\+F\+A\+C\+T\+OR} = 2
+\end{DoxyCompactItemize}

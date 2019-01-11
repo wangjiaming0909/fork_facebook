@@ -1,0 +1,57 @@
+\section{Mock\+H\+T\+T\+P2\+Upstream\+Test Class Reference}
+\label{classMockHTTP2UpstreamTest}\index{Mock\+H\+T\+T\+P2\+Upstream\+Test@{Mock\+H\+T\+T\+P2\+Upstream\+Test}}
+Inheritance diagram for Mock\+H\+T\+T\+P2\+Upstream\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classMockHTTP2UpstreamTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Set\+Up} () override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 1872 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Mock\+H\+T\+T\+P2\+Upstream\+Test@{Mock\+H\+T\+T\+P2\+Upstream\+Test}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!Mock\+H\+T\+T\+P2\+Upstream\+Test@{Mock\+H\+T\+T\+P2\+Upstream\+Test}}
+\subsubsection[{Set\+Up() override}]{\setlength{\rightskip}{0pt plus 5cm}void Mock\+H\+T\+T\+P2\+Upstream\+Test\+::\+Set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classMockHTTP2UpstreamTest_ab672c258d577faeb9498f444c8ffd3ba}
+
+
+Definition at line 1874 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+References Mock\+H\+T\+T\+P\+Upstream\+Test\+::\+Set\+Up().
+
+
+\begin{DoxyCode}
+1874                         \{
+1875     MockHTTPUpstreamTest::SetUp();
+1876 
+1877     \textcolor{comment}{// This class assumes we are doing a test for SPDY or HTTP/2+ where}
+1878     \textcolor{comment}{// this function is *not* a no-op. Indicate this via a positive number}
+1879     \textcolor{comment}{// of bytes being generated for writing RST\_STREAM.}
+1880 
+1881     ON\_CALL(*codecPtr_, generateRstStream(\_, \_, \_))
+1882       .WillByDefault(Return(1));
+1883   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp}\end{DoxyCompactItemize}

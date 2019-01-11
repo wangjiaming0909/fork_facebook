@@ -1,0 +1,520 @@
+\section{proxygen\+:\+:Async\+Timeout\+Set Class Reference}
+\label{classproxygen_1_1AsyncTimeoutSet}\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+
+
+{\ttfamily \#include $<$Async\+Timeout\+Set.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Async\+Timeout\+Set\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1AsyncTimeoutSet}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Callback}
+\item 
+class {\bf Timeout\+Clock}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Unique\+Ptr} = std\+::unique\+\_\+ptr$<$ {\bf Async\+Timeout\+Set}, Destructor $>$
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Async\+Timeout\+Set} (folly\+::\+Timeout\+Manager $\ast$timeout\+Manager, std\+::chrono\+::milliseconds interval\+MS, std\+::chrono\+::milliseconds at\+Most\+EveryN=std\+::chrono\+::milliseconds(0), {\bf Timeout\+Clock} $\ast$timeout\+Clock={\bf nullptr})
+\item 
+{\bf Async\+Timeout\+Set} (folly\+::\+Timeout\+Manager $\ast$timeout\+Manager, Internal\+Enum internal, std\+::chrono\+::milliseconds interval\+MS, std\+::chrono\+::milliseconds at\+Most\+EveryN=std\+::chrono\+::milliseconds(0))
+\item 
+void {\bf destroy} () override
+\item 
+std\+::chrono\+::milliseconds {\bf get\+Interval} () const 
+\item 
+void {\bf schedule\+Timeout} ({\bf Callback} $\ast$callback)
+\item 
+void {\bf fire\+At\+Most\+Every} (const std\+::chrono\+::milliseconds \&ms)
+\item 
+{\bf Callback} $\ast$ {\bf front} ()
+\item 
+const {\bf Callback} $\ast$ {\bf front} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf $\sim$\+Async\+Timeout\+Set} () override
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Async\+Timeout\+Set} ({\bf Async\+Timeout\+Set} const \&)=delete
+\item 
+{\bf Async\+Timeout\+Set} \& {\bf operator=} ({\bf Async\+Timeout\+Set} const \&)=delete
+\item 
+void {\bf head\+Changed} ()
+\item 
+void {\bf timeout\+Expired} () noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Timeout\+Clock} \& {\bf timeout\+Clock\+\_\+}
+\item 
+{\bf Callback} $\ast$ {\bf head\+\_\+}
+\item 
+{\bf Callback} $\ast$ {\bf tail\+\_\+}
+\item 
+std\+::chrono\+::milliseconds {\bf interval\+\_\+}
+\item 
+std\+::chrono\+::milliseconds {\bf at\+Most\+Every\+N\+\_\+}
+\item 
+bool {\bf in\+Timeout\+Expired\+\_\+} \{false\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} exists for efficiently managing a group of timeouts events that always have the same timeout interval.
+
+\doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} takes advantage of the fact that the timeouts are always scheduled in sorted order. (Since each timeout has the same interval, when a new timeout is scheduled it will always be the last timeout in the set.) This avoids the need to perform any additional sorting of the timeouts within a single \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet}.
+
+\doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} is useful whenever you have a large group of objects that each need their own timeout, but with the same interval for each object. For example, managing idle timeouts for thousands of connection, or scheduling health checks for a large group of servers.
+
+Note, this class may not be needed given libevent\textquotesingle{}s event\+\_\+base\+\_\+init\+\_\+common\+\_\+timeout(). We should look into using that. 
+
+Definition at line 40 of file Async\+Timeout\+Set.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!Unique\+Ptr@{Unique\+Ptr}}
+\index{Unique\+Ptr@{Unique\+Ptr}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{Unique\+Ptr}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf proxygen\+::\+Async\+Timeout\+Set\+::\+Unique\+Ptr} =  std\+::unique\+\_\+ptr$<${\bf Async\+Timeout\+Set}, Destructor$>$}\label{classproxygen_1_1AsyncTimeoutSet_a6504975452bb527d5ca5ab8d83fef9d6}
+
+
+Definition at line 43 of file Async\+Timeout\+Set.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!Async\+Timeout\+Set@{Async\+Timeout\+Set}}
+\index{Async\+Timeout\+Set@{Async\+Timeout\+Set}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{Async\+Timeout\+Set(folly\+::\+Timeout\+Manager $\ast$timeout\+Manager, std\+::chrono\+::milliseconds interval\+M\+S, std\+::chrono\+::milliseconds at\+Most\+Every\+N=std\+::chrono\+::milliseconds(0), Timeout\+Clock $\ast$timeout\+Clock=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Async\+Timeout\+Set\+::\+Async\+Timeout\+Set (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Timeout\+Manager $\ast$}]{timeout\+Manager, }
+\item[{std\+::chrono\+::milliseconds}]{interval\+MS, }
+\item[{std\+::chrono\+::milliseconds}]{at\+Most\+EveryN = {\ttfamily std\+:\+:chrono\+:\+:milliseconds(0)}, }
+\item[{{\bf Timeout\+Clock} $\ast$}]{timeout\+Clock = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1AsyncTimeoutSet_a0962cba7f086fb70b178b6b5348d423d}
+Create a new \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} with the specified interval.
+
+If timeout clock is unspecified, it will use the default (system clock) 
+
+Referenced by proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::cancel\+Timeout\+Impl().
+
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!Async\+Timeout\+Set@{Async\+Timeout\+Set}}
+\index{Async\+Timeout\+Set@{Async\+Timeout\+Set}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{Async\+Timeout\+Set(folly\+::\+Timeout\+Manager $\ast$timeout\+Manager, Internal\+Enum internal, std\+::chrono\+::milliseconds interval\+M\+S, std\+::chrono\+::milliseconds at\+Most\+Every\+N=std\+::chrono\+::milliseconds(0))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Async\+Timeout\+Set\+::\+Async\+Timeout\+Set (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Timeout\+Manager $\ast$}]{timeout\+Manager, }
+\item[{Internal\+Enum}]{internal, }
+\item[{std\+::chrono\+::milliseconds}]{interval\+MS, }
+\item[{std\+::chrono\+::milliseconds}]{at\+Most\+EveryN = {\ttfamily std\+:\+:chrono\+:\+:milliseconds(0)}}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1AsyncTimeoutSet_ad6cc34f3e0b95e45a6adad5647758835}
+Create a new \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} with the given \textquotesingle{}internal\textquotesingle{} settting. For details on what the Internal\+Enum specifies, see the documentation in Async\+Timeout.\+h \index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!````~Async\+Timeout\+Set@{$\sim$\+Async\+Timeout\+Set}}
+\index{````~Async\+Timeout\+Set@{$\sim$\+Async\+Timeout\+Set}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{$\sim$\+Async\+Timeout\+Set() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Async\+Timeout\+Set\+::$\sim$\+Async\+Timeout\+Set (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}\label{classproxygen_1_1AsyncTimeoutSet_aedb30a91d3cafa5cdd64721a69b2da53}
+Protected destructor.
+
+Use \doxyref{destroy()}{p.}{classproxygen_1_1AsyncTimeoutSet_a7d73639d69b63ae20941cf85366e64b4} instead. See the comments in Delayed\+Destruction for more details. 
+
+Definition at line 100 of file Async\+Timeout\+Set.\+cpp.
+
+
+
+Referenced by front().
+
+
+\begin{DoxyCode}
+100                                   \{
+101   \textcolor{comment}{// DelayedDestruction should ensure that we are never destroyed while inside}
+102   \textcolor{comment}{// a call to timeoutExpired().}
+103   assert(!inTimeoutExpired_);
+104 
+105   \textcolor{comment}{// destroy() should have already cleared out the timeout list.}
+106   \textcolor{comment}{// It's a bug if anyone tries to keep using the AsyncTimeoutSet after}
+107   \textcolor{comment}{// calling destroy, so no new timeouts may have been scheduled since then.}
+108   assert(head_ == \textcolor{keyword}{nullptr});
+109   assert(tail_ == \textcolor{keyword}{nullptr});
+110 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!Async\+Timeout\+Set@{Async\+Timeout\+Set}}
+\index{Async\+Timeout\+Set@{Async\+Timeout\+Set}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{Async\+Timeout\+Set(\+Async\+Timeout\+Set const \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Async\+Timeout\+Set\+::\+Async\+Timeout\+Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Async\+Timeout\+Set} const \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}\label{classproxygen_1_1AsyncTimeoutSet_a92a08e535442ea2a5ee946c1865aa225}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!destroy@{destroy}}
+\index{destroy@{destroy}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{destroy() override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Async\+Timeout\+Set\+::destroy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1AsyncTimeoutSet_a7d73639d69b63ae20941cf85366e64b4}
+Destroy the \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet}.
+
+Normally a \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} should only be destroyed when there are no more callbacks pending in the set. If there are timeout callbacks pending for this set, destroying the \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} will automatically cancel them. If you destroy a \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} with callbacks pending, your callback code needs to be aware that the callbacks will never be invoked. 
+
+Definition at line 112 of file Async\+Timeout\+Set.\+cpp.
+
+
+
+Referenced by proxygen\+::\+Async\+Timeout\+Set\+::\+Timeout\+Clock\+::$\sim$\+Timeout\+Clock().
+
+
+\begin{DoxyCode}
+112                               \{
+113   \textcolor{comment}{// If there are any timeout callbacks pending, get rid of them without ever}
+114   \textcolor{comment}{// invoking them.  This is somewhat undesirable from the callback's}
+115   \textcolor{comment}{// perspective (how is it supposed to know that it will never get invoked?).}
+116   \textcolor{comment}{// Most users probably only want to destroy a AsyncTimeoutSet when it has no}
+117   \textcolor{comment}{// callbacks remaining.  Otherwise they need to implement their own code to}
+118   \textcolor{comment}{// take care of cleaning up the callbacks that will never be invoked.}
+119 
+120   \textcolor{comment}{// cancel from tail to head, to avoid extra calls to headChanged}
+121   \textcolor{keywordflow}{while} (tail_ != \textcolor{keyword}{nullptr}) \{
+122     tail_->cancelTimeout();
+123   \}
+124 
+125   DelayedDestruction::destroy();
+126 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!fire\+At\+Most\+Every@{fire\+At\+Most\+Every}}
+\index{fire\+At\+Most\+Every@{fire\+At\+Most\+Every}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{fire\+At\+Most\+Every(const std\+::chrono\+::milliseconds \&ms)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Async\+Timeout\+Set\+::fire\+At\+Most\+Every (
+\begin{DoxyParamCaption}
+\item[{const std\+::chrono\+::milliseconds \&}]{ms}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1AsyncTimeoutSet_a50d05bfe30768a44f49a961994e08b54}
+Limit how frequently this \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet} will fire. 
+
+Definition at line 179 of file Async\+Timeout\+Set.\+h.
+
+
+
+References at\+Most\+Every\+N\+\_\+.
+
+
+\begin{DoxyCode}
+179                                                         \{
+180     atMostEveryN_ = ms;
+181   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!front@{front}}
+\index{front@{front}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{front()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Callback}$\ast$ proxygen\+::\+Async\+Timeout\+Set\+::front (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1AsyncTimeoutSet_a545e118edc2b8d391efebe285299890d}
+Get a pointer to the next \doxyref{Callback}{p.}{classproxygen_1_1AsyncTimeoutSet_1_1Callback} scheduled to be invoked (may be null). 
+
+Definition at line 186 of file Async\+Timeout\+Set.\+h.
+
+
+
+References head\+\_\+.
+
+
+
+Referenced by Test\+Timeout\+::\+\_\+schedule\+Next().
+
+
+\begin{DoxyCode}
+186 \{ \textcolor{keywordflow}{return} head_; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!front@{front}}
+\index{front@{front}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{front() const }]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Callback}$\ast$ proxygen\+::\+Async\+Timeout\+Set\+::front (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1AsyncTimeoutSet_a07cbf841b5ac1414b2c34c0ca0572821}
+
+
+Definition at line 187 of file Async\+Timeout\+Set.\+h.
+
+
+
+References proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::\+Async\+Timeout\+Set, head\+\_\+, head\+Changed(), operator=(), proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::timeout\+Expired(), and $\sim$\+Async\+Timeout\+Set().
+
+
+\begin{DoxyCode}
+187 \{ \textcolor{keywordflow}{return} head_; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!get\+Interval@{get\+Interval}}
+\index{get\+Interval@{get\+Interval}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{get\+Interval() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+Async\+Timeout\+Set\+::get\+Interval (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1AsyncTimeoutSet_a2691cb17e6e97a681d9ed87b0214968b}
+Get the interval for this \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet}.
+
+Returns the timeout interval in milliseconds. All callbacks scheduled with \doxyref{schedule\+Timeout()}{p.}{classproxygen_1_1AsyncTimeoutSet_a47263dc8248a017034999fee182c7f0b} will be invoked after this amount of time has passed since the call to \doxyref{schedule\+Timeout()}{p.}{classproxygen_1_1AsyncTimeoutSet_a47263dc8248a017034999fee182c7f0b}. 
+
+Definition at line 163 of file Async\+Timeout\+Set.\+h.
+
+
+
+References interval\+\_\+, and schedule\+Timeout().
+
+
+\begin{DoxyCode}
+163                                             \{
+164     \textcolor{keywordflow}{return} interval_;
+165   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!head\+Changed@{head\+Changed}}
+\index{head\+Changed@{head\+Changed}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{head\+Changed()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Async\+Timeout\+Set\+::head\+Changed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1AsyncTimeoutSet_ac3dfc2b108061d8525f3f25f360424e2}
+
+
+Definition at line 158 of file Async\+Timeout\+Set.\+cpp.
+
+
+
+Referenced by front().
+
+
+\begin{DoxyCode}
+158                                   \{
+159   \textcolor{keywordflow}{if} (inTimeoutExpired_) \{
+160     \textcolor{comment}{// timeoutExpired() will always update the scheduling correctly before it}
+161     \textcolor{comment}{// returns.  No need to change the state now, since we are just going to}
+162     \textcolor{comment}{// change it again later.}
+163     \textcolor{keywordflow}{return};
+164   \}
+165 
+166   \textcolor{keywordflow}{if} (!head_) \{
+167     this->folly::AsyncTimeout::cancelTimeout();
+168   \} \textcolor{keywordflow}{else} \{
+169     milliseconds delta =
+170       head_->getTimeRemaining(timeoutClock_.millisecondsSinceEpoch());
+171     this->folly::AsyncTimeout::scheduleTimeout(delta.count());
+172   \}
+173 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!operator=@{operator=}}
+\index{operator=@{operator=}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{operator=(\+Async\+Timeout\+Set const \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Async\+Timeout\+Set}\& proxygen\+::\+Async\+Timeout\+Set\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Async\+Timeout\+Set} const \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}\label{classproxygen_1_1AsyncTimeoutSet_a0fab352ad4f67effd55362cb9d9767e9}
+
+
+Referenced by front().
+
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!schedule\+Timeout@{schedule\+Timeout}}
+\index{schedule\+Timeout@{schedule\+Timeout}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{schedule\+Timeout(\+Callback $\ast$callback)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Async\+Timeout\+Set\+::schedule\+Timeout (
+\begin{DoxyParamCaption}
+\item[{{\bf Callback} $\ast$}]{callback}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1AsyncTimeoutSet_a47263dc8248a017034999fee182c7f0b}
+Schedule the specified \doxyref{Callback}{p.}{classproxygen_1_1AsyncTimeoutSet_1_1Callback} to be invoked after the \doxyref{Async\+Timeout\+Set}{p.}{classproxygen_1_1AsyncTimeoutSet}\textquotesingle{}s specified timeout interval.
+
+If the callback is already scheduled, this cancels the existing timeout before scheduling the new timeout. 
+
+Definition at line 128 of file Async\+Timeout\+Set.\+cpp.
+
+
+
+References proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::cancel\+Timeout(), proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::context\+\_\+, proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::next\+\_\+, proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::prev\+\_\+, and proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::set\+Scheduled().
+
+
+
+Referenced by Test\+Timeout\+::\+\_\+schedule\+Next(), and get\+Interval().
+
+
+\begin{DoxyCode}
+128                                                         \{
+129   \textcolor{comment}{// Cancel the callback if it happens to be scheduled already.}
+130   callback->cancelTimeout();
+131   assert(callback->prev\_ == \textcolor{keyword}{nullptr});
+132   assert(callback->next\_ == \textcolor{keyword}{nullptr});
+133 
+134   callback->context\_ = folly::RequestContext::saveContext();
+135 
+136   Callback* old\_tail = tail_;
+137   \textcolor{keywordflow}{if} (head_ == \textcolor{keyword}{nullptr}) \{
+138     \textcolor{comment}{// We don't have any timeouts scheduled already.  We have to schedule}
+139     \textcolor{comment}{// ourself.}
+140     assert(tail_ == \textcolor{keyword}{nullptr});
+141     assert(!isScheduled());
+142     \textcolor{keywordflow}{if} (!inTimeoutExpired_) \{
+143       this->folly::AsyncTimeout::scheduleTimeout(interval_.count());
+144     \}
+145     head_ = callback;
+146     tail_ = callback;
+147   \} \textcolor{keywordflow}{else} \{
+148     assert(inTimeoutExpired_ || isScheduled());
+149     assert(tail_->next_ == \textcolor{keyword}{nullptr});
+150     tail_->next_ = callback;
+151     tail_ = callback;
+152   \}
+153 
+154   \textcolor{comment}{// callback->prev\_ = tail\_;}
+155   callback->setScheduled(\textcolor{keyword}{this}, old\_tail);
+156 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!timeout\+Expired@{timeout\+Expired}}
+\index{timeout\+Expired@{timeout\+Expired}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{timeout\+Expired() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Async\+Timeout\+Set\+::timeout\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1AsyncTimeoutSet_ae3886b99e43d265f8bf9747e5da2dd75}
+
+
+Definition at line 175 of file Async\+Timeout\+Set.\+cpp.
+
+
+
+References proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::cancel\+Timeout(), proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::context\+\_\+, and proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::timeout\+Expired().
+
+
+\begin{DoxyCode}
+175                                               \{
+176   \textcolor{comment}{// If destroy() is called inside timeoutExpired(), delay actual destruction}
+177   \textcolor{comment}{// until timeoutExpired() returns}
+178   DestructorGuard dg(\textcolor{keyword}{this});
+179 
+180   \textcolor{comment}{// timeoutExpired() can only be invoked directly from the event base loop.}
+181   \textcolor{comment}{// It should never be invoked recursively.}
+182   \textcolor{comment}{//}
+183   \textcolor{comment}{// Set inTimeoutExpired\_ to true, so that we won't bother rescheduling the}
+184   \textcolor{comment}{// main AsyncTimeout inside timeoutExpired().  We'll always make sure this}
+185   \textcolor{comment}{// is up-to-date before we return.  This simply prevents us from}
+186   \textcolor{comment}{// unnecessarily modifying the main timeout heap multiple times before we}
+187   \textcolor{comment}{// return.}
+188   assert(!inTimeoutExpired_);
+189   inTimeoutExpired_ = \textcolor{keyword}{true};
+190   SCOPE\_EXIT \{ inTimeoutExpired_ = \textcolor{keyword}{false}; \};
+191 
+192   \textcolor{comment}{// Get the current time.}
+193   \textcolor{comment}{// For now we only compute the current time at the start of the loop.}
+194   \textcolor{comment}{// If a callback takes a very long time to execute its timeoutExpired()}
+195   \textcolor{comment}{// method, this value could potentially get stale.}
+196   \textcolor{comment}{//}
+197   \textcolor{comment}{// However, this should be rare, and it doesn't seem worth the overhead of}
+198   \textcolor{comment}{// recomputing the current time each time around the loop.  If the value does}
+199   \textcolor{comment}{// go stale, we won't invoke as many callbacks as we could.  They will have}
+200   \textcolor{comment}{// to wait until the next call to timeoutExpired().  However, we could also}
+201   \textcolor{comment}{// end up rescheduling the next timeoutExpired() call a bit late if now gets}
+202   \textcolor{comment}{// stale.  If we find that this becomes a problem in practice we could be}
+203   \textcolor{comment}{// more smart about when we recompute the current time.}
+204   \textcolor{keyword}{auto} now = timeoutClock_.millisecondsSinceEpoch();
+205 
+206   \textcolor{keywordflow}{while} (head_ != \textcolor{keyword}{nullptr}) \{
+207     milliseconds delta = head_->getTimeRemaining(now);
+208     \textcolor{keywordflow}{if} (delta > milliseconds(0)) \{
+209       \textcolor{keywordflow}{if} (delta < atMostEveryN_) \{
+210         delta = atMostEveryN_;
+211       \}
+212       this->folly::AsyncTimeout::scheduleTimeout(delta.count());
+213       \textcolor{keywordflow}{break};
+214     \}
+215 
+216     \textcolor{comment}{// Remember the callback to invoke, since calling cancelTimeout()}
+217     \textcolor{comment}{// on it will modify head\_.}
+218     Callback* cb = head_;
+219     head_->cancelTimeout();
+220     folly::RequestContextScopeGuard rctxScopeGuard(cb->context\_);
+221     cb->timeoutExpired();
+222   \}
+223 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!at\+Most\+Every\+N\+\_\+@{at\+Most\+Every\+N\+\_\+}}
+\index{at\+Most\+Every\+N\+\_\+@{at\+Most\+Every\+N\+\_\+}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{at\+Most\+Every\+N\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+Async\+Timeout\+Set\+::at\+Most\+Every\+N\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1AsyncTimeoutSet_afe127bd607f5e9333e98fa6e85d1829d}
+
+
+Definition at line 213 of file Async\+Timeout\+Set.\+h.
+
+
+
+Referenced by fire\+At\+Most\+Every().
+
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!head\+\_\+@{head\+\_\+}}
+\index{head\+\_\+@{head\+\_\+}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{head\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Callback}$\ast$ proxygen\+::\+Async\+Timeout\+Set\+::head\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1AsyncTimeoutSet_a8c9669e4c4e0829c867708cc95de2941}
+
+
+Definition at line 210 of file Async\+Timeout\+Set.\+h.
+
+
+
+Referenced by front().
+
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!interval\+\_\+@{interval\+\_\+}}
+\index{interval\+\_\+@{interval\+\_\+}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{interval\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+Async\+Timeout\+Set\+::interval\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1AsyncTimeoutSet_aa1a9da62448a39b9f478b5e675a5893b}
+
+
+Definition at line 212 of file Async\+Timeout\+Set.\+h.
+
+
+
+Referenced by get\+Interval().
+
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!in\+Timeout\+Expired\+\_\+@{in\+Timeout\+Expired\+\_\+}}
+\index{in\+Timeout\+Expired\+\_\+@{in\+Timeout\+Expired\+\_\+}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{in\+Timeout\+Expired\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Async\+Timeout\+Set\+::in\+Timeout\+Expired\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1AsyncTimeoutSet_a9d5268d9fbc05770dc95530f1a0b5d8a}
+
+
+Definition at line 214 of file Async\+Timeout\+Set.\+h.
+
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!tail\+\_\+@{tail\+\_\+}}
+\index{tail\+\_\+@{tail\+\_\+}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{tail\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Callback}$\ast$ proxygen\+::\+Async\+Timeout\+Set\+::tail\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1AsyncTimeoutSet_ac4ec32ea911001768191964bd822a5f1}
+
+
+Definition at line 211 of file Async\+Timeout\+Set.\+h.
+
+\index{proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}!timeout\+Clock\+\_\+@{timeout\+Clock\+\_\+}}
+\index{timeout\+Clock\+\_\+@{timeout\+Clock\+\_\+}!proxygen\+::\+Async\+Timeout\+Set@{proxygen\+::\+Async\+Timeout\+Set}}
+\subsubsection[{timeout\+Clock\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Timeout\+Clock}\& proxygen\+::\+Async\+Timeout\+Set\+::timeout\+Clock\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1AsyncTimeoutSet_a06c3f0dd7e387a0fb58dcd77f74a6ec3}
+
+
+Definition at line 209 of file Async\+Timeout\+Set.\+h.
+
+
+
+Referenced by proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::set\+Scheduled().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Async\+Timeout\+Set.\+h}\item 
+proxygen/lib/utils/{\bf Async\+Timeout\+Set.\+cpp}\end{DoxyCompactItemize}

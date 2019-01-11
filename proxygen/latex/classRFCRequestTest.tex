@@ -1,0 +1,93 @@
+\section{R\+F\+C\+Request\+Test Class Reference}
+\label{classRFCRequestTest}\index{R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}}
+Inheritance diagram for R\+F\+C\+Request\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRFCRequestTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf R\+F\+C\+Request\+Test} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ {\bf req1}
+\item 
+vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ {\bf req2}
+\item 
+vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ {\bf req3}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 28 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}!R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}}
+\index{R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}!R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}}
+\subsubsection[{R\+F\+C\+Request\+Test()}]{\setlength{\rightskip}{0pt plus 5cm}R\+F\+C\+Request\+Test\+::\+R\+F\+C\+Request\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classRFCRequestTest_a4aeb420440b61f2aafee97c58ede6a0d}
+
+
+Definition at line 30 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+
+\begin{DoxyCode}
+30                    \{
+31     req1.push\_back(HPACKHeader(\textcolor{stringliteral}{":method"}, \textcolor{stringliteral}{"GET"}));
+32     req1.push\_back(HPACKHeader(\textcolor{stringliteral}{":scheme"}, \textcolor{stringliteral}{"http"}));
+33     req1.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/"}));
+34     req1.push\_back(HPACKHeader(\textcolor{stringliteral}{":authority"}, \textcolor{stringliteral}{"www.example.com"}));
+35 
+36     req2.push\_back(HPACKHeader(\textcolor{stringliteral}{":method"}, \textcolor{stringliteral}{"GET"}));
+37     req2.push\_back(HPACKHeader(\textcolor{stringliteral}{":scheme"}, \textcolor{stringliteral}{"http"}));
+38     req2.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/"}));
+39     req2.push\_back(HPACKHeader(\textcolor{stringliteral}{":authority"}, \textcolor{stringliteral}{"www.example.com"}));
+40     req2.push\_back(HPACKHeader(\textcolor{stringliteral}{"cache-control"}, \textcolor{stringliteral}{"no-cache"}));
+41 
+42     req3.push\_back(HPACKHeader(\textcolor{stringliteral}{":method"}, \textcolor{stringliteral}{"GET"}));
+43     req3.push\_back(HPACKHeader(\textcolor{stringliteral}{":scheme"}, \textcolor{stringliteral}{"https"}));
+44     req3.push\_back(HPACKHeader(\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/index.html"}));
+45     req3.push\_back(HPACKHeader(\textcolor{stringliteral}{":authority"}, \textcolor{stringliteral}{"www.example.com"}));
+46     req3.push\_back(HPACKHeader(\textcolor{stringliteral}{"custom-key"}, \textcolor{stringliteral}{"custom-value"}));
+47   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}!req1@{req1}}
+\index{req1@{req1}!R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}}
+\subsubsection[{req1}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf H\+P\+A\+C\+K\+Header}$>$ R\+F\+C\+Request\+Test\+::req1\hspace{0.3cm}{\ttfamily [protected]}}\label{classRFCRequestTest_ad2263137f6130a73eeac808a0d8ff9ca}
+
+
+Definition at line 50 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+\index{R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}!req2@{req2}}
+\index{req2@{req2}!R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}}
+\subsubsection[{req2}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf H\+P\+A\+C\+K\+Header}$>$ R\+F\+C\+Request\+Test\+::req2\hspace{0.3cm}{\ttfamily [protected]}}\label{classRFCRequestTest_a8c664beed3ddfb15addafbdc6d153caf}
+
+
+Definition at line 51 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+\index{R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}!req3@{req3}}
+\index{req3@{req3}!R\+F\+C\+Request\+Test@{R\+F\+C\+Request\+Test}}
+\subsubsection[{req3}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf H\+P\+A\+C\+K\+Header}$>$ R\+F\+C\+Request\+Test\+::req3\hspace{0.3cm}{\ttfamily [protected]}}\label{classRFCRequestTest_a67228faaa78ffd15c530ac7db3f3943e}
+
+
+Definition at line 52 of file R\+F\+C\+Examples\+Tests.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/test/{\bf R\+F\+C\+Examples\+Tests.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,99 @@
+\section{Test\+Handler\+Factory Class Reference}
+\label{classTestHandlerFactory}\index{Test\+Handler\+Factory@{Test\+Handler\+Factory}}
+Inheritance diagram for Test\+Handler\+Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestHandlerFactory}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Test\+Handler}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Request\+Handler} $\ast$ {\bf on\+Request} ({\bf Request\+Handler} $\ast$, {\bf H\+T\+T\+P\+Message} $\ast$) noexceptoverride
+\item 
+void {\bf on\+Server\+Start} (folly\+::\+Event\+Base $\ast$) noexceptoverride
+\item 
+void {\bf on\+Server\+Stop} () noexceptoverride
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 204 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Handler\+Factory@{Test\+Handler\+Factory}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!Test\+Handler\+Factory@{Test\+Handler\+Factory}}
+\subsubsection[{on\+Request(\+Request\+Handler $\ast$, H\+T\+T\+P\+Message $\ast$) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Request\+Handler}$\ast$ Test\+Handler\+Factory\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{{\bf Request\+Handler} $\ast$}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classTestHandlerFactory_ae2ce41f2f726ee62497d9979148836ed}
+Invoked for each new request server handles. H\+T\+T\+P\+Message is provided so that user can potentially choose among several implementation of handler based on U\+RL or something. No need to save/copy this H\+T\+T\+P\+Message. Request\+Handler will be given the H\+T\+T\+P\+Message in a separate callback.
+
+Some request handlers don\textquotesingle{}t handle the request themselves (think filters). They do take some actions based on request/response but otherwise they just hand-\/off request to some other Request\+Handler. This upstream Request\+Handler is given as first parameter. For the terminal Request\+Handler this will by nullptr. 
+
+Implements {\bf proxygen\+::\+Request\+Handler\+Factory} \doxyref{}{p.}{classproxygen_1_1RequestHandlerFactory_a9c2cbbc96d006244ea28cea44a3e6a60}.
+
+
+
+Definition at line 232 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+232                                                                              \{
+233     \textcolor{keywordflow}{return} \textcolor{keyword}{new} TestHandler();
+234   \}
+\end{DoxyCode}
+\index{Test\+Handler\+Factory@{Test\+Handler\+Factory}!on\+Server\+Start@{on\+Server\+Start}}
+\index{on\+Server\+Start@{on\+Server\+Start}!Test\+Handler\+Factory@{Test\+Handler\+Factory}}
+\subsubsection[{on\+Server\+Start(folly\+::\+Event\+Base $\ast$) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Handler\+Factory\+::on\+Server\+Start (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{evb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classTestHandlerFactory_a5ddc2633f4c6cbcc6940e983036b9951}
+Invoked in each thread server is going to handle requests before we start handling requests. Can be used to setup thread-\/local setup for each thread (stats and such). 
+
+Implements {\bf proxygen\+::\+Request\+Handler\+Factory} \doxyref{}{p.}{classproxygen_1_1RequestHandlerFactory_af76091b8a51a8d069fcc1aec3007a1cc}.
+
+
+
+Definition at line 236 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+236 \{\}
+\end{DoxyCode}
+\index{Test\+Handler\+Factory@{Test\+Handler\+Factory}!on\+Server\+Stop@{on\+Server\+Stop}}
+\index{on\+Server\+Stop@{on\+Server\+Stop}!Test\+Handler\+Factory@{Test\+Handler\+Factory}}
+\subsubsection[{on\+Server\+Stop() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Handler\+Factory\+::on\+Server\+Stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classTestHandlerFactory_a8e15796810745fef9e782715a23e6c16}
+Invoked in each handler thread after all the connections are drained from that thread. Can be used to tear down thread-\/local setup. 
+
+Implements {\bf proxygen\+::\+Request\+Handler\+Factory} \doxyref{}{p.}{classproxygen_1_1RequestHandlerFactory_a0791d6b33c13513ed6f550bbbd7bca85}.
+
+
+
+Definition at line 237 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+237 \{\}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/tests/{\bf H\+T\+T\+P\+Server\+Test.\+cpp}\end{DoxyCompactItemize}

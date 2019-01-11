@@ -1,0 +1,36 @@
+\section{specs.\+folly Namespace Reference}
+\label{namespacespecs_1_1folly}\index{specs.\+folly@{specs.\+folly}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf fbcode\+\_\+builder\+\_\+spec} (builder)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{specs\+::folly@{specs\+::folly}!fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}}
+\index{fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}!specs\+::folly@{specs\+::folly}}
+\subsubsection[{fbcode\+\_\+builder\+\_\+spec(builder)}]{\setlength{\rightskip}{0pt plus 5cm}def specs.\+folly.\+fbcode\+\_\+builder\+\_\+spec (
+\begin{DoxyParamCaption}
+\item[{}]{builder}
+\end{DoxyParamCaption}
+)}\label{namespacespecs_1_1folly_a6656d2a61b8d3798a259529bde27d7b6}
+
+
+Definition at line 9 of file folly.\+py.
+
+
+\begin{DoxyCode}
+9 \textcolor{keyword}{def }fbcode_builder_spec(builder):
+10     \textcolor{keywordflow}{return} \{
+11         \textcolor{stringliteral}{'steps'}: [
+12             \textcolor{comment}{# on macOS the filesystem is typically case insensitive.}
+13             \textcolor{comment}{# We need to ensure that the CWD is not the folly source}
+14             \textcolor{comment}{# dir when we build, otherwise the system will decide}
+15             \textcolor{comment}{# that `folly/String.h` is the file it wants when including}
+16             \textcolor{comment}{# `string.h` and the build will fail.}
+17             builder.github\_project\_workdir(\textcolor{stringliteral}{'facebook/folly'}, \textcolor{stringliteral}{'\_build'}),
+18             builder.cmake\_install(\textcolor{stringliteral}{'facebook/folly'}),
+19         ],
+20     \}
+21 \end{DoxyCode}

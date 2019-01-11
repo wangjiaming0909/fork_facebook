@@ -1,0 +1,183 @@
+\section{proxygen\+:\+:Structured\+Headers\+Standard\+Test Class Reference}
+\label{classproxygen_1_1StructuredHeadersStandardTest}\index{proxygen\+::\+Structured\+Headers\+Standard\+Test@{proxygen\+::\+Structured\+Headers\+Standard\+Test}}
+Inheritance diagram for proxygen\+:\+:Structured\+Headers\+Standard\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.076923cm]{classproxygen_1_1StructuredHeadersStandardTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf decode32} (std\+::string input, std\+::string \&output)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bf convert\+Base32\+To\+Binary} (const std\+::string \&input)
+\item 
+bool {\bf decode32\+Block} (std\+::string input, uint32\+\_\+t block\+Num, std\+::string \&output\+Buffer)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 86 of file Structured\+Headers\+Standard\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Structured\+Headers\+Standard\+Test@{proxygen\+::\+Structured\+Headers\+Standard\+Test}!convert\+Base32\+To\+Binary@{convert\+Base32\+To\+Binary}}
+\index{convert\+Base32\+To\+Binary@{convert\+Base32\+To\+Binary}!proxygen\+::\+Structured\+Headers\+Standard\+Test@{proxygen\+::\+Structured\+Headers\+Standard\+Test}}
+\subsubsection[{convert\+Base32\+To\+Binary(const std\+::string \&input)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Structured\+Headers\+Standard\+Test\+::convert\+Base32\+To\+Binary (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classproxygen_1_1StructuredHeadersStandardTest_aaec2fcae0e67103ded2a045ca96445cc}
+
+
+Definition at line 130 of file Structured\+Headers\+Standard\+Test.\+cpp.
+
+
+
+Referenced by decode32\+Block().
+
+
+\begin{DoxyCode}
+130                                                           \{
+131     std::string base32CharSet(\textcolor{stringliteral}{"ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"});
+132     std::string output;
+133 
+134     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} c : input) \{
+135       \textcolor{keyword}{auto} it = base32CharSet.find(c);
+136       \textcolor{keywordflow}{if} (it == std::string::npos) \{
+137         \textcolor{keywordflow}{return} \textcolor{stringliteral}{""};
+138       \} \textcolor{keywordflow}{else} \{
+139         \textcolor{comment}{// foundCharacter is the position within the base32CharSet where c}
+140         \textcolor{comment}{// was found}
+141         \textcolor{keywordtype}{char} foundCharacter = char(it);
+142         output.push\_back(foundCharacter);
+143       \}
+144     \}
+145 
+146     \textcolor{keywordflow}{return} output;
+147   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers\+Standard\+Test@{proxygen\+::\+Structured\+Headers\+Standard\+Test}!decode32@{decode32}}
+\index{decode32@{decode32}!proxygen\+::\+Structured\+Headers\+Standard\+Test@{proxygen\+::\+Structured\+Headers\+Standard\+Test}}
+\subsubsection[{decode32(std\+::string input, std\+::string \&output)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+Standard\+Test\+::decode32 (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{input, }
+\item[{std\+::string \&}]{output}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1StructuredHeadersStandardTest_a2bf9a701a5d3eae16734099c1491ea2d}
+
+
+Definition at line 89 of file Structured\+Headers\+Standard\+Test.\+cpp.
+
+
+
+References decode32\+Block().
+
+
+
+Referenced by proxygen\+::\+T\+E\+S\+T\+\_\+\+P().
+
+
+\begin{DoxyCode}
+89                                                     \{
+90 
+91     uint32\_t numBlocks = input.length() / 8;
+92     uint32\_t blockRemainder = input.length() % 8;
+93 
+94     std::string outputBuffer(5, \textcolor{charliteral}{'\(\backslash\)0'});
+95 
+96     \textcolor{comment}{// decode each whole block of the input}
+97     \textcolor{keywordflow}{for} (uint32\_t j = 0; j < numBlocks; j++) \{
+98       \textcolor{keywordflow}{if} (!decode32Block(input, j, outputBuffer)) \{
+99         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+100       \}
+101       output += outputBuffer;
+102     \}
+103 
+104     std::string padding(8, \textcolor{charliteral}{'\(\backslash\)0'});
+105     \textcolor{comment}{// set the initial bytes of the padding to be the trailing bytes of the}
+106     \textcolor{comment}{// input string that have been left over}
+107     \textcolor{keywordflow}{for} (uint32\_t i = 0; i < blockRemainder; i++) \{
+108       padding[i] = input[input.size() - blockRemainder + i];
+109     \}
+110 
+111     \textcolor{keywordflow}{if} (!decode32Block(padding, 0, outputBuffer)) \{
+112       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+113     \}
+114 
+115     \textcolor{comment}{// The second argument to the function is the size of the decoded content,}
+116     \textcolor{comment}{// where the encoded content is of size (blockRemainder * 5) / 8}
+117     outputBuffer = outputBuffer.substr(0, (blockRemainder * 5) / 8);
+118     output += outputBuffer;
+119 
+120     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+121   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers\+Standard\+Test@{proxygen\+::\+Structured\+Headers\+Standard\+Test}!decode32\+Block@{decode32\+Block}}
+\index{decode32\+Block@{decode32\+Block}!proxygen\+::\+Structured\+Headers\+Standard\+Test@{proxygen\+::\+Structured\+Headers\+Standard\+Test}}
+\subsubsection[{decode32\+Block(std\+::string input, uint32\+\_\+t block\+Num, std\+::string \&output\+Buffer)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+Standard\+Test\+::decode32\+Block (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{input, }
+\item[{uint32\+\_\+t}]{block\+Num, }
+\item[{std\+::string \&}]{output\+Buffer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classproxygen_1_1StructuredHeadersStandardTest_a6ef8f99b74e27d08bd3ad41cc0298a8e}
+
+
+Definition at line 156 of file Structured\+Headers\+Standard\+Test.\+cpp.
+
+
+
+References convert\+Base32\+To\+Binary().
+
+
+
+Referenced by decode32().
+
+
+\begin{DoxyCode}
+158                                               \{
+159 
+160     \textcolor{comment}{// Remove any padding and make each character of the input represent the}
+161     \textcolor{comment}{// byte value of that character, as per the rfc4648 encoding}
+162     boost::trim\_right\_if(input, [](\textcolor{keywordtype}{char} c)\{\textcolor{keywordflow}{return} c == \textcolor{charliteral}{'='};\});
+163     input = convertBase32ToBinary(input);
+164 
+165     \textcolor{comment}{// 8 byte buffer}
+166     int64\_t buffer = 0;
+167 
+168     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < 8; i++) \{
+169 
+170       \textcolor{keywordflow}{if}(input[i + blockNum * 8] >= 32) \{
+171         \textcolor{comment}{// a base32 value cannot be greater than or equal to 32}
+172         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+173       \}
+174 
+175       buffer = (buffer << 5);
+176       buffer = buffer | input[i + blockNum * 8];
+177     \}
+178 
+179     \textcolor{comment}{// set the contents of outputBuffer to contain the contents of buffer}
+180     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 5; i++) \{
+181       outputBuffer[i] = char(buffer & 0xFF);
+182       buffer = buffer >> 8;
+183     \}
+184     \textcolor{comment}{// we perform a reversal because outputBuffer has the contents of buffer}
+185     \textcolor{comment}{// but in reverse order}
+186     std::reverse(outputBuffer.begin(), outputBuffer.end());
+187 
+188     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+189   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/structuredheaders/test/{\bf Structured\+Headers\+Standard\+Test.\+cpp}\end{DoxyCompactItemize}

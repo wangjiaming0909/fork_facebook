@@ -1,0 +1,535 @@
+\section{proxygen\+:\+:Byte\+Event\+Tracker Class Reference}
+\label{classproxygen_1_1ByteEventTracker}\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+
+
+{\ttfamily \#include $<$Byte\+Event\+Tracker.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Byte\+Event\+Tracker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1ByteEventTracker}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Callback}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Byte\+Event\+Tracker} ()
+\item 
+{\bf Byte\+Event\+Tracker} ({\bf Callback} $\ast$callback)
+\item 
+virtual void {\bf absorb} ({\bf Byte\+Event\+Tracker} \&\&other)
+\item 
+void {\bf set\+Callback} ({\bf Callback} $\ast$callback)
+\item 
+virtual size\+\_\+t {\bf drain\+Byte\+Events} ()
+\item 
+virtual bool {\bf process\+Byte\+Events} (std\+::shared\+\_\+ptr$<$ {\bf Byte\+Event\+Tracker} $>$ self, uint64\+\_\+t bytes\+Written)
+\item 
+void {\bf add\+Ping\+Byte\+Event} (size\+\_\+t ping\+Size, {\bf Time\+Point} timestamp, uint64\+\_\+t bytes\+Scheduled)
+\item 
+void {\bf add\+First\+Body\+Byte\+Event} (uint64\+\_\+t offset, {\bf H\+T\+T\+P\+Transaction} $\ast$txn)
+\item 
+virtual void {\bf add\+First\+Header\+Byte\+Event} (uint64\+\_\+t offset, {\bf H\+T\+T\+P\+Transaction} $\ast$txn)
+\item 
+virtual void {\bf add\+Last\+Byte\+Event} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn, uint64\+\_\+t byte\+No) noexcept
+\item 
+virtual void {\bf add\+Tracked\+Byte\+Event} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn, uint64\+\_\+t byte\+No) noexcept
+\item 
+virtual void {\bf add\+Ack\+Byte\+Event} (uint64\+\_\+t, {\bf H\+T\+T\+P\+Transaction} $\ast$)
+\item 
+virtual uint64\+\_\+t {\bf pre\+Send} (bool $\ast$, bool $\ast$, uint64\+\_\+t)
+\item 
+virtual void {\bf set\+T\+T\+L\+B\+A\+Stats} ({\bf T\+T\+L\+B\+A\+Stats} $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf eom\+Event\+Processed} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+Intrusive\+List$<$ {\bf Byte\+Event},\&{\bf Byte\+Event\+::list\+Hook} $>$ {\bf byte\+Events\+\_\+}
+\item 
+{\bf Callback} $\ast$ {\bf callback\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\doxyref{Byte\+Event\+Tracker}{p.}{classproxygen_1_1ByteEventTracker} can be used to fire application callbacks when a given byte of a transport stream has been processed. The primary usage is to fire the callbacks when the byte is accepted by the transport, not when the byte has been written on the wire, or acknowledged.
+
+Subclasses may implement handling of acknowledgement timing. 
+
+Definition at line 29 of file Byte\+Event\+Tracker.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!````~Byte\+Event\+Tracker@{$\sim$\+Byte\+Event\+Tracker}}
+\index{````~Byte\+Event\+Tracker@{$\sim$\+Byte\+Event\+Tracker}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{$\sim$\+Byte\+Event\+Tracker()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Byte\+Event\+Tracker\+::$\sim$\+Byte\+Event\+Tracker (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_ae5f28ee6585f57fd6d91b87d11a32393}
+
+
+Definition at line 20 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References drain\+Byte\+Events().
+
+
+
+Referenced by proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback\+::$\sim$\+Callback().
+
+
+\begin{DoxyCode}
+20                                     \{
+21   drainByteEvents();
+22 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!Byte\+Event\+Tracker@{Byte\+Event\+Tracker}}
+\index{Byte\+Event\+Tracker@{Byte\+Event\+Tracker}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{Byte\+Event\+Tracker(\+Callback $\ast$callback)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Byte\+Event\+Tracker\+::\+Byte\+Event\+Tracker (
+\begin{DoxyParamCaption}
+\item[{{\bf Callback} $\ast$}]{callback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1ByteEventTracker_a279fe2e59fddfa415102d7618d5694e2}
+
+
+Definition at line 41 of file Byte\+Event\+Tracker.\+h.
+
+
+
+References absorb().
+
+
+\begin{DoxyCode}
+41 : callback_(callback) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!absorb@{absorb}}
+\index{absorb@{absorb}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{absorb(\+Byte\+Event\+Tracker \&\&other)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Byte\+Event\+Tracker\+::absorb (
+\begin{DoxyParamCaption}
+\item[{{\bf Byte\+Event\+Tracker} \&\&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_abe16042d313ab05c3853560893dc94ae}
+Assumes the byte events of another \doxyref{Byte\+Event\+Tracker}{p.}{classproxygen_1_1ByteEventTracker} that this object is replacing. 
+
+Definition at line 24 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+.
+
+
+
+Referenced by Byte\+Event\+Tracker().
+
+
+\begin{DoxyCode}
+24                                                       \{
+25   byteEvents_ = std::move(other.byteEvents\_);
+26 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!add\+Ack\+Byte\+Event@{add\+Ack\+Byte\+Event}}
+\index{add\+Ack\+Byte\+Event@{add\+Ack\+Byte\+Event}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{add\+Ack\+Byte\+Event(uint64\+\_\+t, H\+T\+T\+P\+Transaction $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Byte\+Event\+Tracker\+::add\+Ack\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_a288902a7901d57baceb764a566291c06}
+The base \doxyref{Byte\+Event\+Tracker}{p.}{classproxygen_1_1ByteEventTracker} cannot track acks. 
+
+Definition at line 81 of file Byte\+Event\+Tracker.\+h.
+
+
+\begin{DoxyCode}
+81 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!add\+First\+Body\+Byte\+Event@{add\+First\+Body\+Byte\+Event}}
+\index{add\+First\+Body\+Byte\+Event@{add\+First\+Body\+Byte\+Event}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{add\+First\+Body\+Byte\+Event(uint64\+\_\+t offset, H\+T\+T\+P\+Transaction $\ast$txn)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Byte\+Event\+Tracker\+::add\+First\+Body\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{offset, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1ByteEventTracker_ac84342294ec2723886cf830d143a7dcf}
+
+
+Definition at line 136 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+, and proxygen\+::\+Byte\+Event\+::\+F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE.
+
+
+
+Referenced by proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker(), and set\+Callback().
+
+
+\begin{DoxyCode}
+137                                                                    \{
+138   byteEvents_.push\_back(
+139       *\textcolor{keyword}{new} TransactionByteEvent(
+140           offset, ByteEvent::FIRST_BYTE,
+141           txn));
+142 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!add\+First\+Header\+Byte\+Event@{add\+First\+Header\+Byte\+Event}}
+\index{add\+First\+Header\+Byte\+Event@{add\+First\+Header\+Byte\+Event}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{add\+First\+Header\+Byte\+Event(uint64\+\_\+t offset, H\+T\+T\+P\+Transaction $\ast$txn)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Byte\+Event\+Tracker\+::add\+First\+Header\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{offset, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_a404ee5910e19a3e1e11750c26f30976a}
+
+
+Definition at line 144 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+, and proxygen\+::\+Byte\+Event\+::\+F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE.
+
+
+
+Referenced by proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker(), and set\+Callback().
+
+
+\begin{DoxyCode}
+145                                                                      \{
+146   \textcolor{comment}{// onWriteSuccess() is called after the entire header has been written.}
+147   \textcolor{comment}{// It does not catch partial write case.}
+148   byteEvents_.push\_back(
+149       *\textcolor{keyword}{new} TransactionByteEvent(offset,
+150                                 ByteEvent::FIRST_HEADER_BYTE,
+151                                 txn));
+152 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!add\+Last\+Byte\+Event@{add\+Last\+Byte\+Event}}
+\index{add\+Last\+Byte\+Event@{add\+Last\+Byte\+Event}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{add\+Last\+Byte\+Event(\+H\+T\+T\+P\+Transaction $\ast$txn, uint64\+\_\+t byte\+No) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Byte\+Event\+Tracker\+::add\+Last\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{uint64\+\_\+t}]{byte\+No}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ByteEventTracker_a025cc627ea747c2c65d912abe4534626}
+
+
+Definition at line 89 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+, and proxygen\+::\+Byte\+Event\+::\+L\+A\+S\+T\+\_\+\+B\+Y\+TE.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::handle\+Last\+Byte\+Events(), proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker(), and set\+Callback().
+
+
+\begin{DoxyCode}
+91                               \{
+92   VLOG(5) << \textcolor{stringliteral}{" adding last byte event for "} << byteNo;
+93   TransactionByteEvent* \textcolor{keyword}{event} = \textcolor{keyword}{new} TransactionByteEvent(
+94       byteNo, ByteEvent::LAST_BYTE, txn);
+95   byteEvents_.push\_back(*event);
+96 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!add\+Ping\+Byte\+Event@{add\+Ping\+Byte\+Event}}
+\index{add\+Ping\+Byte\+Event@{add\+Ping\+Byte\+Event}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{add\+Ping\+Byte\+Event(size\+\_\+t ping\+Size, Time\+Point timestamp, uint64\+\_\+t bytes\+Scheduled)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Byte\+Event\+Tracker\+::add\+Ping\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{ping\+Size, }
+\item[{{\bf Time\+Point}}]{timestamp, }
+\item[{uint64\+\_\+t}]{bytes\+Scheduled}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1ByteEventTracker_a2deb75d0a0e42a3e6dd603c09d620f86}
+The following methods add byte events for tracking 
+
+Definition at line 107 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker(), and set\+Callback().
+
+
+\begin{DoxyCode}
+109                                                                  \{
+110   \textcolor{comment}{// register a byte event on ping reply sent, and adjust the byteOffset\_}
+111   \textcolor{comment}{// for others by one ping size}
+112   uint64\_t offset = bytesScheduled + pingSize;
+113   \textcolor{keyword}{auto} i = byteEvents_.rbegin();
+114   \textcolor{keywordflow}{for} (; i != byteEvents_.rend(); ++i) \{
+115     \textcolor{keywordflow}{if} (i->byteOffset\_ > bytesScheduled) \{
+116       VLOG(5) << \textcolor{stringliteral}{"pushing back ByteEvent from "} << *i << \textcolor{stringliteral}{" to "}
+117               << ByteEvent(i->byteOffset\_ + pingSize, i->eventType\_);
+118       i->byteOffset\_ += pingSize;
+119     \} \textcolor{keywordflow}{else} \{
+120       \textcolor{keywordflow}{break}; \textcolor{comment}{// the rest of the events are already scheduled}
+121     \}
+122   \}
+123 
+124   ByteEvent* be = \textcolor{keyword}{new} PingByteEvent(offset, timestamp);
+125   \textcolor{keywordflow}{if} (i == byteEvents_.rend()) \{
+126     byteEvents_.push\_front(*be);
+127   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (i == byteEvents_.rbegin()) \{
+128     byteEvents_.push\_back(*be);
+129   \} \textcolor{keywordflow}{else} \{
+130     --i;
+131     CHECK\_GT(i->byteOffset\_, bytesScheduled);
+132     byteEvents_.insert(i.base(), *be);
+133   \}
+134 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!add\+Tracked\+Byte\+Event@{add\+Tracked\+Byte\+Event}}
+\index{add\+Tracked\+Byte\+Event@{add\+Tracked\+Byte\+Event}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{add\+Tracked\+Byte\+Event(\+H\+T\+T\+P\+Transaction $\ast$txn, uint64\+\_\+t byte\+No) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Byte\+Event\+Tracker\+::add\+Tracked\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{uint64\+\_\+t}]{byte\+No}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1ByteEventTracker_a0acc3270c2d17b8785ae22cff07cd73e}
+
+
+Definition at line 98 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+, and proxygen\+::\+Byte\+Event\+::\+T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE.
+
+
+
+Referenced by proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker(), and set\+Callback().
+
+
+\begin{DoxyCode}
+100                               \{
+101   VLOG(5) << \textcolor{stringliteral}{" adding tracked byte event for "} << byteNo;
+102   TransactionByteEvent* \textcolor{keyword}{event} = \textcolor{keyword}{new} TransactionByteEvent(
+103       byteNo, ByteEvent::TRACKED_BYTE, txn);
+104   byteEvents_.push\_back(*event);
+105 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!drain\+Byte\+Events@{drain\+Byte\+Events}}
+\index{drain\+Byte\+Events@{drain\+Byte\+Events}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{drain\+Byte\+Events()}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Byte\+Event\+Tracker\+::drain\+Byte\+Events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_a6ef3f0ec3fb68834241621a1caf92076}
+drain\+Byte\+Events should be called to clear out any pending events holding transactions when process\+Byte\+Events will no longer be called 
+
+Definition at line 79 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker(), set\+Callback(), and $\sim$\+Byte\+Event\+Tracker().
+
+
+\begin{DoxyCode}
+79                                          \{
+80   \textcolor{keywordtype}{size\_t} numEvents = 0;
+81   \textcolor{comment}{// everything is dead from here on, let's just drop all extra refs to txns}
+82   \textcolor{keywordflow}{while} (!byteEvents_.empty()) \{
+83     \textcolor{keyword}{delete} &byteEvents_.front();
+84     ++numEvents;
+85   \}
+86   \textcolor{keywordflow}{return} numEvents;
+87 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!eom\+Event\+Processed@{eom\+Event\+Processed}}
+\index{eom\+Event\+Processed@{eom\+Event\+Processed}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{eom\+Event\+Processed()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Byte\+Event\+Tracker\+::eom\+Event\+Processed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_a539a7046579036c2acd18a238787a892}
+
+
+Definition at line 102 of file Byte\+Event\+Tracker.\+h.
+
+
+
+Referenced by process\+Byte\+Events().
+
+
+\begin{DoxyCode}
+102 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!pre\+Send@{pre\+Send}}
+\index{pre\+Send@{pre\+Send}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{pre\+Send(bool $\ast$, bool $\ast$, uint64\+\_\+t)}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint64\+\_\+t proxygen\+::\+Byte\+Event\+Tracker\+::pre\+Send (
+\begin{DoxyParamCaption}
+\item[{bool $\ast$}]{, }
+\item[{bool $\ast$}]{, }
+\item[{uint64\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_ade1d712b6855de6a40cc3128a8d447c1}
+\doxyref{H\+T\+T\+P\+Session}{p.}{classproxygen_1_1HTTPSession} uses pre\+Send to truncate writes on an eom boundary. In Ack-\/tracking \doxyref{Byte\+Event\+Tracker}{p.}{classproxygen_1_1ByteEventTracker}\textquotesingle{}s, this should exmaine pending byte events and return the number of bytes until the next last byte event, or 0 if none are pending. If non-\/zero is returned then eom may be set to indicate ack tracking is requested. 
+
+Definition at line 91 of file Byte\+Event\+Tracker.\+h.
+
+
+
+Referenced by proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker().
+
+
+\begin{DoxyCode}
+92                                        \{
+93     \textcolor{keywordflow}{return} 0;
+94   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!process\+Byte\+Events@{process\+Byte\+Events}}
+\index{process\+Byte\+Events@{process\+Byte\+Events}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{process\+Byte\+Events(std\+::shared\+\_\+ptr$<$ Byte\+Event\+Tracker $>$ self, uint64\+\_\+t bytes\+Written)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Byte\+Event\+Tracker\+::process\+Byte\+Events (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Byte\+Event\+Tracker} $>$}]{self, }
+\item[{uint64\+\_\+t}]{bytes\+Written}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_af5d1ab24926efe8567546c720370f4dd}
+process\+Byte\+Events is called whenever the transport has accepted more bytes. bytes\+Written is the number of bytes written to the transport over its lifetime. 
+
+Definition at line 31 of file Byte\+Event\+Tracker.\+cpp.
+
+
+
+References byte\+Events\+\_\+, callback\+\_\+, eom\+Event\+Processed(), proxygen\+::\+Byte\+Event\+::\+F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE, proxygen\+::\+Byte\+Event\+::\+F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE, proxygen\+::\+Byte\+Event\+::\+L\+A\+S\+T\+\_\+\+B\+Y\+TE, proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback\+::on\+Last\+Byte\+Event(), proxygen\+::\+Byte\+Event\+Tracker\+::\+Callback\+::on\+Ping\+Reply\+Latency(), proxygen\+::\+Byte\+Event\+::\+P\+I\+N\+G\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+S\+E\+NT, and proxygen\+::\+Byte\+Event\+::\+T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE.
+
+
+
+Referenced by proxygen\+::\+Mock\+Byte\+Event\+Tracker\+::\+Mock\+Byte\+Event\+Tracker(), and set\+Callback().
+
+
+\begin{DoxyCode}
+32                                                                 \{
+33   \textcolor{keywordtype}{bool} advanceEOM = \textcolor{keyword}{false};
+34 
+35   \textcolor{keywordflow}{while} (!byteEvents_.empty() &&
+36          (byteEvents_.front().byteOffset\_ <= bytesWritten)) \{
+37     ByteEvent& \textcolor{keyword}{event} = byteEvents_.front();
+38     int64\_t latency;
+39     \textcolor{keyword}{auto} txn = \textcolor{keyword}{event}.getTransaction();
+40 
+41     \textcolor{keywordflow}{switch} (event.eventType\_) \{
+42     \textcolor{keywordflow}{case} ByteEvent::FIRST_HEADER_BYTE:
+43       txn->onEgressHeaderFirstByte();
+44       \textcolor{keywordflow}{break};
+45     \textcolor{keywordflow}{case} ByteEvent::FIRST_BYTE:
+46       txn->onEgressBodyFirstByte();
+47       \textcolor{keywordflow}{break};
+48     \textcolor{keywordflow}{case} ByteEvent::LAST_BYTE:
+49       txn->onEgressBodyLastByte();
+50       \textcolor{keywordflow}{if} (callback_) \{
+51         callback_->onLastByteEvent(txn, event.byteOffset\_, event.eomTracked\_);
+52       \}
+53       advanceEOM = \textcolor{keyword}{true};
+54       \textcolor{keywordflow}{break};
+55     \textcolor{keywordflow}{case} ByteEvent::TRACKED_BYTE:
+56       txn->onEgressTrackedByte();
+57       \textcolor{keywordflow}{break};
+58     \textcolor{keywordflow}{case} ByteEvent::PING_REPLY_SENT:
+59       latency = \textcolor{keyword}{event}.getLatency();
+60       \textcolor{keywordflow}{if} (callback_) \{
+61         callback_->onPingReplyLatency(latency);
+62       \}
+63       \textcolor{keywordflow}{break};
+64     \}
+65 
+66     VLOG(5) << \textcolor{stringliteral}{" removing ByteEvent "} << event;
+67     \textcolor{comment}{// explicitly remove from the list, in case delete event triggers a}
+68     \textcolor{comment}{// callback that would absorb this ByteEventTracker.}
+69     \textcolor{keyword}{event}.listHook.unlink();
+70     \textcolor{keyword}{delete} &event;
+71   \}
+72 
+73   \textcolor{keywordflow}{if} (advanceEOM) \{
+74     eomEventProcessed();
+75   \}
+76   \textcolor{keywordflow}{return} \textcolor{keyword}{self}.use\_count() == 1;
+77 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!set\+Callback@{set\+Callback}}
+\index{set\+Callback@{set\+Callback}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{set\+Callback(\+Callback $\ast$callback)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Byte\+Event\+Tracker\+::set\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Callback} $\ast$}]{callback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ByteEventTracker_ad63604621dfa10fb196dc9df7f7a2ecf}
+
+
+Definition at line 48 of file Byte\+Event\+Tracker.\+h.
+
+
+
+References add\+First\+Body\+Byte\+Event(), add\+First\+Header\+Byte\+Event(), add\+Last\+Byte\+Event(), add\+Ping\+Byte\+Event(), add\+Tracked\+Byte\+Event(), callback\+\_\+, drain\+Byte\+Events(), and process\+Byte\+Events().
+
+
+\begin{DoxyCode}
+48 \{ callback_ = callback; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!set\+T\+T\+L\+B\+A\+Stats@{set\+T\+T\+L\+B\+A\+Stats}}
+\index{set\+T\+T\+L\+B\+A\+Stats@{set\+T\+T\+L\+B\+A\+Stats}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{set\+T\+T\+L\+B\+A\+Stats(\+T\+T\+L\+B\+A\+Stats $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Byte\+Event\+Tracker\+::set\+T\+T\+L\+B\+A\+Stats (
+\begin{DoxyParamCaption}
+\item[{{\bf T\+T\+L\+B\+A\+Stats} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEventTracker_accba773d0885d1af7a880524649c2fc5}
+
+
+Definition at line 96 of file Byte\+Event\+Tracker.\+h.
+
+
+\begin{DoxyCode}
+96 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!byte\+Events\+\_\+@{byte\+Events\+\_\+}}
+\index{byte\+Events\+\_\+@{byte\+Events\+\_\+}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{byte\+Events\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Intrusive\+List$<${\bf Byte\+Event}, \&{\bf Byte\+Event\+::list\+Hook}$>$ proxygen\+::\+Byte\+Event\+Tracker\+::byte\+Events\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1ByteEventTracker_a83721a92dce1dc202dc187758b97c797}
+
+
+Definition at line 100 of file Byte\+Event\+Tracker.\+h.
+
+
+
+Referenced by absorb(), add\+First\+Body\+Byte\+Event(), add\+First\+Header\+Byte\+Event(), add\+Last\+Byte\+Event(), add\+Ping\+Byte\+Event(), add\+Tracked\+Byte\+Event(), drain\+Byte\+Events(), and process\+Byte\+Events().
+
+\index{proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}!callback\+\_\+@{callback\+\_\+}}
+\index{callback\+\_\+@{callback\+\_\+}!proxygen\+::\+Byte\+Event\+Tracker@{proxygen\+::\+Byte\+Event\+Tracker}}
+\subsubsection[{callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Callback}$\ast$ proxygen\+::\+Byte\+Event\+Tracker\+::callback\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1ByteEventTracker_aebed6fd1a728b8829f86647123f171eb}
+
+
+Definition at line 104 of file Byte\+Event\+Tracker.\+h.
+
+
+
+Referenced by process\+Byte\+Events(), and set\+Callback().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf Byte\+Event\+Tracker.\+h}\item 
+proxygen/lib/http/session/{\bf Byte\+Event\+Tracker.\+cpp}\end{DoxyCompactItemize}

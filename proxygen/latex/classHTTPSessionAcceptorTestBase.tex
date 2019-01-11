@@ -1,0 +1,146 @@
+\section{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base Class Reference}
+\label{classHTTPSessionAcceptorTestBase}\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+Inheritance diagram for H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.304527cm]{classHTTPSessionAcceptorTestBase}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf setup\+S\+SL} ()
+\item 
+void {\bf Set\+Up} () override
+\item 
+void {\bf new\+Acceptor} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf Acceptor\+Configuration} $>$ {\bf config\+\_\+}
+\item 
+wangle\+::\+S\+S\+L\+Context\+Config {\bf ssl\+Ctx\+Config\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Target\+Session\+Acceptor} $>$ {\bf acceptor\+\_\+}
+\item 
+folly\+::\+Event\+Base {\bf event\+Base\+\_\+}
+\item 
+folly\+::test\+::\+Mock\+Async\+Server\+Socket {\bf mock\+Server\+Socket\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 70 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!new\+Acceptor@{new\+Acceptor}}
+\index{new\+Acceptor@{new\+Acceptor}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{new\+Acceptor()}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::new\+Acceptor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classHTTPSessionAcceptorTestBase_a0e5d2815d485e2e2d5efad92aa7abc43}
+
+
+Definition at line 92 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+92                      \{
+93     acceptor_ = std::make\_unique<HTTPTargetSessionAcceptor>(*config\_);
+94     EXPECT\_CALL(mockServerSocket_, addAcceptCallback(\_, \_, \_));
+95     acceptor_->init(&mockServerSocket_, &eventBase_);
+96   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{Set\+Up() override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::\+Set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classHTTPSessionAcceptorTestBase_adf16a2dea456ff329ea3b1e0dee2fd8b}
+
+
+Definition at line 84 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+84                         \{
+85     config_ = std::make\_unique<AcceptorConfiguration>();
+86     SocketAddress address(\textcolor{stringliteral}{"127.0.0.1"}, 0);
+87     config_->bindAddress = address;
+88     setupSSL();
+89     newAcceptor();
+90   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!setup\+S\+SL@{setup\+S\+SL}}
+\index{setup\+S\+SL@{setup\+S\+SL}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{setup\+S\+S\+L()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::setup\+S\+SL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classHTTPSessionAcceptorTestBase_ae834f77b9822c4fae11a9483eb5eed53}
+
+
+Definition at line 74 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+74                           \{
+75     sslCtxConfig_.setCertificate(
+76       kTestDir + \textcolor{stringliteral}{"test\_cert1.pem"},
+77       kTestDir + \textcolor{stringliteral}{"test\_cert1.key"},
+78       \textcolor{stringliteral}{""});
+79 
+80     sslCtxConfig_.isDefault = \textcolor{keyword}{true};
+81     config_->sslContextConfigs.emplace\_back(sslCtxConfig_);
+82   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!acceptor\+\_\+@{acceptor\+\_\+}}
+\index{acceptor\+\_\+@{acceptor\+\_\+}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{acceptor\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Target\+Session\+Acceptor}$>$ H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::acceptor\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classHTTPSessionAcceptorTestBase_a4a6a9580b22d059d0ace18522241e1c6}
+
+
+Definition at line 101 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!config\+\_\+@{config\+\_\+}}
+\index{config\+\_\+@{config\+\_\+}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{config\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf Acceptor\+Configuration}$>$ H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::config\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classHTTPSessionAcceptorTestBase_a15157888a730a077c89ccebeb8d2ec43}
+
+
+Definition at line 99 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!event\+Base\+\_\+@{event\+Base\+\_\+}}
+\index{event\+Base\+\_\+@{event\+Base\+\_\+}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{event\+Base\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Event\+Base H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::event\+Base\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classHTTPSessionAcceptorTestBase_a7b0006d5c00420284827492c46f69623}
+
+
+Definition at line 102 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!mock\+Server\+Socket\+\_\+@{mock\+Server\+Socket\+\_\+}}
+\index{mock\+Server\+Socket\+\_\+@{mock\+Server\+Socket\+\_\+}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{mock\+Server\+Socket\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::test\+::\+Mock\+Async\+Server\+Socket H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::mock\+Server\+Socket\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classHTTPSessionAcceptorTestBase_adf1854e91756d423835fa3f463f03276}
+
+
+Definition at line 103 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+\index{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}!ssl\+Ctx\+Config\+\_\+@{ssl\+Ctx\+Config\+\_\+}}
+\index{ssl\+Ctx\+Config\+\_\+@{ssl\+Ctx\+Config\+\_\+}!H\+T\+T\+P\+Session\+Acceptor\+Test\+Base@{H\+T\+T\+P\+Session\+Acceptor\+Test\+Base}}
+\subsubsection[{ssl\+Ctx\+Config\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}wangle\+::\+S\+S\+L\+Context\+Config H\+T\+T\+P\+Session\+Acceptor\+Test\+Base\+::ssl\+Ctx\+Config\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classHTTPSessionAcceptorTestBase_ab311f7850c8f9742b64a9893c6e8de6a}
+
+
+Definition at line 100 of file H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P\+Session\+Acceptor\+Test.\+cpp}\end{DoxyCompactItemize}

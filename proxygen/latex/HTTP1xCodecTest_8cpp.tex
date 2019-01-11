@@ -1,0 +1,1245 @@
+\section{proxygen/lib/http/codec/test/\+H\+T\+T\+P1x\+Codec\+Test.cpp File Reference}
+\label{HTTP1xCodecTest_8cpp}\index{proxygen/lib/http/codec/test/\+H\+T\+T\+P1x\+Codec\+Test.\+cpp@{proxygen/lib/http/codec/test/\+H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Message.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Mock\+H\+T\+T\+P\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Test\+Utils.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Base64.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf H\+T\+T\+P1x\+Codec\+Callback}
+\item 
+class {\bf Connection\+Header\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf get\+Simple\+Request\+Data} ()
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Simple\+Headers)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test09\+Req)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test09\+Req\+Vers)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test09\+Resp)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Bad\+Headers)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Head\+Request\+Chunked\+Response)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Get\+Request\+Chunked\+Response)
+\item 
+unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf get\+Chunked\+Request1st} ()
+\item 
+unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf get\+Chunked\+Request2nd} ()
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Chunked\+Headers)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Chunked\+Upstream)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Bad\+Post100)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Multiple\+Identical\+Content\+Length\+Headers)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Multiple\+Distinct\+Content\+Length\+Headers)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Correct\+Transfer\+Encoding\+Header)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Folded\+Transfer\+Encoding\+Header)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Bad\+Transfer\+Encoding\+Header)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test1xx\+Connection\+Header)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Chained\+Body)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Ignore\+Upstream\+Upgrade)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Websocket\+Upgrade)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Websocket\+Upgrade\+Key\+Error)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Websocket\+Upgrade\+Header\+Set)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Websocket\+Connection\+Header)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Trailers\+And\+Eom\+Are\+Not\+Generated\+When\+Non\+Chunked)
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P1x\+Codec\+Test, Test\+Chunk\+Response\+Serialization)
+\item 
+{\bf T\+E\+S\+T\+\_\+P} ({\bf Connection\+Header\+Test}, Test\+Connection\+Headers)
+\item 
+{\bf I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P} ({\bf H\+T\+T\+P1x\+Codec}, {\bf Connection\+Header\+Test},\+::testing\+::\+Values({\bf Connection\+Header\+Test\+::\+Param\+Type}(\{\char`\"{}foo\char`\"{},\char`\"{}bar\char`\"{},\char`\"{}close\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, bar, baz, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}bar, close\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, bar, baz, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{} foo\char`\"{},\char`\"{}bar, close \char`\"{},\char`\"{} baz \char`\"{}\},\char`\"{}foo, bar, baz, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}bar, boo\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, bar, boo, baz, keep-\/alive\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}keep-\/alive, boo\char`\"{},\char`\"{}close\char`\"{}\},\char`\"{}foo, boo, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}upgrade, boo\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, upgrade, boo, baz, keep-\/alive\char`\"{})))
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!get\+Chunked\+Request1st@{get\+Chunked\+Request1st}}
+\index{get\+Chunked\+Request1st@{get\+Chunked\+Request1st}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{get\+Chunked\+Request1st()}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ get\+Chunked\+Request1st (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_aeb88d55ef64144cb42db2672b7809195}
+
+
+Definition at line 219 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+219                                               \{
+220   \textcolor{keywordtype}{string} req(\textcolor{stringliteral}{"GET /aha HTTP/1.1\(\backslash\)n"});
+221   \textcolor{keywordflow}{return} folly::IOBuf::copyBuffer(req);
+222 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!get\+Chunked\+Request2nd@{get\+Chunked\+Request2nd}}
+\index{get\+Chunked\+Request2nd@{get\+Chunked\+Request2nd}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{get\+Chunked\+Request2nd()}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ get\+Chunked\+Request2nd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a3cf7b422951b33a425bd37866e10598a}
+
+
+Definition at line 224 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+224                                               \{
+225   \textcolor{keywordtype}{string} req(\textcolor{stringliteral}{"Host: m.facebook.com\(\backslash\)nAccept-Encoding: meflate\(\backslash\)n\(\backslash\)n"});
+226   \textcolor{keywordflow}{return} folly::IOBuf::copyBuffer(req);
+227 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!get\+Simple\+Request\+Data@{get\+Simple\+Request\+Data}}
+\index{get\+Simple\+Request\+Data@{get\+Simple\+Request\+Data}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{get\+Simple\+Request\+Data()}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ get\+Simple\+Request\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_ad3ae79520de8d4c2e94cdb6a52c32004}
+
+
+Definition at line 71 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+71                                               \{
+72   \textcolor{keywordtype}{string} req(\textcolor{stringliteral}{"GET /yeah HTTP/1.1\(\backslash\)nHost: www.facebook.com\(\backslash\)n\(\backslash\)n"});
+73   \textcolor{keywordflow}{return} folly::IOBuf::copyBuffer(req);
+74 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P@{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}}
+\index{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P@{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+\+P(\+H\+T\+T\+P1x\+Codec, Connection\+Header\+Test,\+::testing\+::\+Values(\+Connection\+Header\+Test\+::\+Param\+Type(\lcurly{}""foo"",""bar"",""close"",""baz""\rcurly{},""foo, bar, baz, close""), Connection\+Header\+Test\+::\+Param\+Type(\lcurly{}""foo"",""bar, close"",""baz""\rcurly{},""foo, bar, baz, close""), Connection\+Header\+Test\+::\+Param\+Type(\lcurly{}"" foo"",""bar, close "","" baz ""\rcurly{},""foo, bar, baz, close""), Connection\+Header\+Test\+::\+Param\+Type(\lcurly{}""foo"",""bar, boo"",""baz""\rcurly{},""foo, bar, boo, baz, keep-\/alive""), Connection\+Header\+Test\+::\+Param\+Type(\lcurly{}""foo"",""keep-\/alive, boo"",""close""\rcurly{},""foo, boo, close""), Connection\+Header\+Test\+::\+Param\+Type(\lcurly{}""foo"",""upgrade, boo"",""baz""\rcurly{},""foo, upgrade, boo, baz, keep-\/alive"")))}]{\setlength{\rightskip}{0pt plus 5cm}I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+P (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P1x\+Codec}}]{, }
+\item[{{\bf Connection\+Header\+Test}}]{, }
+\item[{\+::testing\+::\+Values({\bf Connection\+Header\+Test\+::\+Param\+Type}(\{\char`\"{}foo\char`\"{},\char`\"{}bar\char`\"{},\char`\"{}close\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, bar, baz, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}bar, close\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, bar, baz, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{} foo\char`\"{},\char`\"{}bar, close \char`\"{},\char`\"{} baz \char`\"{}\},\char`\"{}foo, bar, baz, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}bar, boo\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, bar, boo, baz, keep-\/alive\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}keep-\/alive, boo\char`\"{},\char`\"{}close\char`\"{}\},\char`\"{}foo, boo, close\char`\"{}), Connection\+Header\+Test\+::\+Param\+Type(\{\char`\"{}foo\char`\"{},\char`\"{}upgrade, boo\char`\"{},\char`\"{}baz\char`\"{}\},\char`\"{}foo, upgrade, boo, baz, keep-\/alive\char`\"{}))}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a0479b9d4bd5a5ca464395ac818b73c5e}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Simple\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Simple\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a7894405bc9940f707c3db5ccd7922ce0}
+
+
+Definition at line 76 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, get\+Simple\+Request\+Data(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::header\+Size, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+76                                          \{
+77   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+78   HTTP1xCodecCallback callbacks;
+79   codec.setCallback(&callbacks);
+80   \textcolor{keyword}{auto} buffer = getSimpleRequestData();
+81   codec.onIngress(*buffer);
+82   EXPECT\_EQ(callbacks.headersComplete, 1);
+83   EXPECT\_EQ(buffer->length(), callbacks.headerSize.uncompressed);
+84   EXPECT\_EQ(callbacks.headerSize.compressed, 0);
+85 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test09\+Req)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test09\+Req}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a39e487c4f1c11b1631d9818e9345b9c1}
+
+
+Definition at line 87 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::header\+Size, H\+T\+T\+P1x\+Codec\+Callback\+::message\+Complete, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+87                                  \{
+88   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+89   HTTP1xCodecCallback callbacks;
+90   codec.setCallback(&callbacks);
+91   \textcolor{keyword}{auto} buffer = folly::IOBuf::copyBuffer(\textcolor{keywordtype}{string}(\textcolor{stringliteral}{"GET /yeah\(\backslash\)r\(\backslash\)n"}));
+92   codec.onIngress(*buffer);
+93   EXPECT\_EQ(callbacks.headersComplete, 1);
+94   EXPECT\_EQ(callbacks.messageComplete, 1);
+95   EXPECT\_EQ(buffer->length(), callbacks.headerSize.uncompressed);
+96   EXPECT\_EQ(callbacks.headerSize.compressed, 0);
+97   buffer = folly::IOBuf::copyBuffer(\textcolor{keywordtype}{string}(\textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}));
+98   codec.onIngress(*buffer);
+99   EXPECT\_EQ(callbacks.headersComplete, 1);
+100   EXPECT\_EQ(callbacks.messageComplete, 1);
+101 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test09\+Req\+Vers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test09\+Req\+Vers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a451eecadce63525c9236cd27f8be2c5b}
+
+
+Definition at line 103 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::header\+Size, H\+T\+T\+P1x\+Codec\+Callback\+::message\+Complete, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+103                                      \{
+104   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+105   HTTP1xCodecCallback callbacks;
+106   codec.setCallback(&callbacks);
+107   \textcolor{keyword}{auto} buffer = folly::IOBuf::copyBuffer(\textcolor{keywordtype}{string}(\textcolor{stringliteral}{"GET /yeah HTTP/0.9\(\backslash\)r\(\backslash\)n"}));
+108   codec.onIngress(*buffer);
+109   EXPECT\_EQ(callbacks.headersComplete, 1);
+110   EXPECT\_EQ(callbacks.messageComplete, 1);
+111   EXPECT\_EQ(buffer->length(), callbacks.headerSize.uncompressed);
+112   EXPECT\_EQ(callbacks.headerSize.compressed, 0);
+113 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test09\+Resp)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test09\+Resp}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_abcdf678b55493c47523a567c08edb632}
+
+
+Definition at line 115 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References H\+T\+T\+P1x\+Codec\+Callback\+::body\+Len, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+G\+ET, H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::message\+Complete, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress\+E\+O\+F(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+115                                   \{
+116   HTTP1xCodec codec(TransportDirection::UPSTREAM);
+117   HTTP1xCodecCallback callbacks;
+118   HTTPMessage req;
+119   \textcolor{keyword}{auto} \textcolor{keywordtype}{id} = codec.createStream();
+120   req.setHTTPVersion(0, 9);
+121   req.setMethod(HTTPMethod::GET);
+122   req.setURL(\textcolor{stringliteral}{"/"});
+123   codec.setCallback(&callbacks);
+124   folly::IOBufQueue buf;
+125   codec.generateHeader(buf, \textcolor{keywordtype}{id}, req, \textcolor{keyword}{true});
+126   \textcolor{keyword}{auto} buffer = folly::IOBuf::copyBuffer(
+127     \textcolor{keywordtype}{string}(\textcolor{stringliteral}{"iamtheverymodelofamodernmajorgeneral"}));
+128   codec.onIngress(*buffer);
+129   EXPECT\_EQ(callbacks.headersComplete, 1);
+130   EXPECT\_EQ(callbacks.bodyLen, buffer->computeChainDataLength());
+131   EXPECT\_EQ(callbacks.messageComplete, 0);
+132   codec.onIngressEOF();
+133   EXPECT\_EQ(callbacks.messageComplete, 1);
+134 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Bad\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Bad\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a6a594142edcffd32b10bcda1da258f65}
+
+
+Definition at line 136 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+136                                       \{
+137   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+138   MockHTTPCodecCallback callbacks;
+139   codec.setCallback(&callbacks);
+140   \textcolor{keyword}{auto} buffer = folly::IOBuf::copyBuffer(
+141     \textcolor{keywordtype}{string}(\textcolor{stringliteral}{"GET /yeah HTTP/1.1\(\backslash\)nUser-Agent: Mozilla/5.0 Version/4.0 "}
+142            \textcolor{stringliteral}{"\(\backslash\)x10i\(\backslash\)xC7n tho\(\backslash\)xA1iSafari/534.30]"}));
+143   EXPECT\_CALL(callbacks, onMessageBegin(1, \_));
+144   EXPECT\_CALL(callbacks, onError(1, \_, \_))
+145     .WillOnce(Invoke([&] (HTTPCodec::StreamID,
+146                           std::shared\_ptr<HTTPException> error,
+147                           \textcolor{keywordtype}{bool}) \{
+148                        EXPECT\_EQ(error->getHttpStatusCode(), 400);
+149         \}));
+150   codec.onIngress(*buffer);
+151 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Head\+Request\+Chunked\+Response)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Head\+Request\+Chunked\+Response}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a96cdfa10e2449040581da1426c53a4a5}
+
+
+Definition at line 153 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Is\+Chunked(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code().
+
+
+\begin{DoxyCode}
+153                                                       \{
+154   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+155   HTTP1xCodecCallback callbacks;
+156   codec.setCallback(&callbacks);
+157   \textcolor{keyword}{auto} txnID = codec.createStream();
+158 
+159   \textcolor{comment}{// Generate a HEAD request}
+160   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+161       \textcolor{stringliteral}{"HEAD /www.facebook.com HTTP/1.1\(\backslash\)nHost: www.facebook.com\(\backslash\)n\(\backslash\)n"});
+162   codec.onIngress(*reqBuf);
+163   EXPECT\_EQ(callbacks.headersComplete, 1);
+164 
+165   \textcolor{comment}{// Generate chunked response with no body}
+166   HTTPMessage resp;
+167   resp.setHTTPVersion(1, 1);
+168   resp.setStatusCode(200);
+169   resp.setIsChunked(\textcolor{keyword}{true});
+170   resp.getHeaders().set(HTTP\_HEADER\_TRANSFER\_ENCODING, \textcolor{stringliteral}{"chunked"});
+171   folly::IOBufQueue respBuf(folly::IOBufQueue::cacheChainLength());
+172   codec.generateHeader(respBuf, txnID, resp, \textcolor{keyword}{true});
+173   \textcolor{keyword}{auto} respStr = respBuf.move()->moveToFbString();
+174   EXPECT\_TRUE(respStr.find(\textcolor{stringliteral}{"0\(\backslash\)r\(\backslash\)n"}) == string::npos);
+175 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Get\+Request\+Chunked\+Response)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Get\+Request\+Chunked\+Response}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a41603761cbcfdcb2a845dec3eed9be5a}
+
+
+Definition at line 177 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Body(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Is\+Chunked(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code().
+
+
+\begin{DoxyCode}
+177                                                      \{
+178   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+179   HTTP1xCodecCallback callbacks;
+180   codec.setCallback(&callbacks);
+181   \textcolor{keyword}{auto} txnID = codec.createStream();
+182 
+183   \textcolor{comment}{// Generate a GET request}
+184   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+185       \textcolor{stringliteral}{"GET /www.facebook.com HTTP/1.1\(\backslash\)nHost: www.facebook.com\(\backslash\)n\(\backslash\)n"});
+186   codec.onIngress(*reqBuf);
+187   EXPECT\_EQ(callbacks.headersComplete, 1);
+188 
+189   \textcolor{comment}{// Generate chunked response with body}
+190   HTTPMessage resp;
+191   resp.setHTTPVersion(1, 1);
+192   resp.setStatusCode(200);
+193   resp.setIsChunked(\textcolor{keyword}{true});
+194   resp.getHeaders().set(HTTP\_HEADER\_TRANSFER\_ENCODING, \textcolor{stringliteral}{"chunked"});
+195   folly::IOBufQueue respBuf(folly::IOBufQueue::cacheChainLength());
+196   codec.generateHeader(respBuf, txnID, resp, \textcolor{keyword}{false});
+197 
+198   \textcolor{keyword}{auto} headerFromBuf = respBuf.split(respBuf.chainLength());
+199 
+200   \textcolor{keywordtype}{string} resp1(\textcolor{stringliteral}{"Hello"});
+201   \textcolor{keyword}{auto} body1 = folly::IOBuf::copyBuffer(resp1);
+202 
+203   \textcolor{keywordtype}{string} resp2(\textcolor{stringliteral}{""});
+204   \textcolor{keyword}{auto} body2 = folly::IOBuf::copyBuffer(resp2);
+205 
+206   codec.generateBody(respBuf, txnID, std::move(body1), HTTPCodec::NoPadding,
+207                      \textcolor{keyword}{false});
+208 
+209   \textcolor{keyword}{auto} bodyFromBuf = respBuf.split(respBuf.chainLength());
+210   ASSERT\_EQ(\textcolor{stringliteral}{"5\(\backslash\)r\(\backslash\)nHello\(\backslash\)r\(\backslash\)n"}, bodyFromBuf->moveToFbString());
+211 
+212   codec.generateBody(respBuf, txnID, std::move(body2), HTTPCodec::NoPadding,
+213                      \textcolor{keyword}{true});
+214 
+215   bodyFromBuf = respBuf.split(respBuf.chainLength());
+216   ASSERT\_EQ(\textcolor{stringliteral}{"0\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, bodyFromBuf->moveToFbString());
+217 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Chunked\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Chunked\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a58715e7050b3596dac6fbfab70be18b7}
+
+
+Definition at line 229 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, get\+Chunked\+Request1st(), get\+Chunked\+Request2nd(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::header\+Size, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+229                                           \{
+230   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+231   HTTP1xCodecCallback callbacks;
+232   codec.setCallback(&callbacks);
+233   \textcolor{comment}{// test a sequence of requests to make sure we're resetting the size counter}
+234   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; i++) \{
+235     callbacks.headersComplete = 0;
+236     \textcolor{keyword}{auto} buffer1 = getChunkedRequest1st();
+237     codec.onIngress(*buffer1);
+238     EXPECT\_EQ(callbacks.headersComplete, 0);
+239 
+240     \textcolor{keyword}{auto} buffer2 = getChunkedRequest2nd();
+241     codec.onIngress(*buffer2);
+242     EXPECT\_EQ(callbacks.headersComplete, 1);
+243     EXPECT\_EQ(callbacks.headerSize.uncompressed,
+244               buffer1->length() + buffer2->length());
+245   \}
+246 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Chunked\+Upstream)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Chunked\+Upstream}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a08fff9b787a25bae8e51d1df3cfc5769}
+
+
+Definition at line 248 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Body(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Is\+Chunked(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+248                                            \{
+249   HTTP1xCodec codec(TransportDirection::UPSTREAM);
+250 
+251   \textcolor{keyword}{auto} txnID = codec.createStream();
+252 
+253   HTTPMessage msg;
+254   msg.setHTTPVersion(1, 1);
+255   msg.setURL(\textcolor{stringliteral}{"https://www.facebook.com/"});
+256   msg.getHeaders().set(HTTP\_HEADER\_HOST, \textcolor{stringliteral}{"www.facebook.com"});
+257   msg.getHeaders().set(HTTP\_HEADER\_TRANSFER\_ENCODING, \textcolor{stringliteral}{"chunked"});
+258   msg.setIsChunked(\textcolor{keyword}{true});
+259 
+260   HTTPHeaderSize size;
+261 
+262   folly::IOBufQueue buf(folly::IOBufQueue::cacheChainLength());
+263   codec.generateHeader(buf, txnID, msg, \textcolor{keyword}{false}, &size);
+264   \textcolor{keyword}{auto} headerFromBuf = buf.split(buf.chainLength());
+265 
+266   \textcolor{keywordtype}{string} req1(\textcolor{stringliteral}{"Hello"});
+267   \textcolor{keyword}{auto} body1 = folly::IOBuf::copyBuffer(req1);
+268 
+269   \textcolor{keywordtype}{string} req2(\textcolor{stringliteral}{"World"});
+270   \textcolor{keyword}{auto} body2 = folly::IOBuf::copyBuffer(req2);
+271 
+272   codec.generateBody(buf, txnID, std::move(body1), HTTPCodec::NoPadding,
+273                      \textcolor{keyword}{false});
+274 
+275   \textcolor{keyword}{auto} bodyFromBuf = buf.split(buf.chainLength());
+276   ASSERT\_EQ(\textcolor{stringliteral}{"5\(\backslash\)r\(\backslash\)nHello\(\backslash\)r\(\backslash\)n"}, bodyFromBuf->moveToFbString());
+277 
+278   codec.generateBody(buf, txnID, std::move(body2), HTTPCodec::NoPadding,
+279                      \textcolor{keyword}{true});
+280   LOG(WARNING) << \textcolor{stringliteral}{"len chain"} << buf.chainLength();
+281 
+282   \textcolor{keyword}{auto} eomFromBuf = buf.split(buf.chainLength());
+283   ASSERT\_EQ(\textcolor{stringliteral}{"5\(\backslash\)r\(\backslash\)nWorld\(\backslash\)r\(\backslash\)n0\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, eomFromBuf->moveToFbString());
+284 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Bad\+Post100)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Bad\+Post100}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a6066f5815926e2fa01f044c76073686e}
+
+
+Definition at line 286 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+E\+O\+M(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Parser\+Paused(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message().
+
+
+\begin{DoxyCode}
+286                                       \{
+287   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+288   MockHTTPCodecCallback callbacks;
+289   codec.setCallback(&callbacks);
+290   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+291 
+292   InSequence enforceOrder;
+293   EXPECT\_CALL(callbacks, onMessageBegin(1, \_));
+294   EXPECT\_CALL(callbacks, onHeadersComplete(1, \_))
+295     .WillOnce(InvokeWithoutArgs([&] \{
+296           HTTPMessage cont;
+297           cont.setStatusCode(100);
+298           cont.setStatusMessage(\textcolor{stringliteral}{"Continue"});
+299           codec.generateHeader(writeBuf, 1, cont);
+300         \}));
+301 
+302   EXPECT\_CALL(callbacks, onBody(1, \_, \_));
+303   EXPECT\_CALL(callbacks, onMessageComplete(1, \_));
+304   EXPECT\_CALL(callbacks, onMessageBegin(2, \_))
+305     .WillOnce(InvokeWithoutArgs([&] \{
+306           \textcolor{comment}{// simulate HTTPSession's aversion to pipelining}
+307           codec.setParserPaused(\textcolor{keyword}{true});
+308 
+309           \textcolor{comment}{// Trigger the response to the POST}
+310           HTTPMessage resp;
+311           resp.setStatusCode(200);
+312           resp.setStatusMessage(\textcolor{stringliteral}{"OK"});
+313           codec.generateHeader(writeBuf, 1, resp);
+314           codec.generateEOM(writeBuf, 1);
+315           codec.setParserPaused(\textcolor{keyword}{false});
+316         \}));
+317   EXPECT\_CALL(callbacks, onError(2, \_, \_))
+318     .WillOnce(InvokeWithoutArgs([&] \{
+319           HTTPMessage resp;
+320           resp.setStatusCode(400);
+321           resp.setStatusMessage(\textcolor{stringliteral}{"Bad"});
+322           codec.generateHeader(writeBuf, 2, resp);
+323           codec.generateEOM(writeBuf, 2);
+324         \}));
+325   \textcolor{comment}{// Generate a POST request with a bad content-length}
+326   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+327       \textcolor{stringliteral}{"POST /www.facebook.com HTTP/1.1\(\backslash\)r\(\backslash\)nHost: www.facebook.com\(\backslash\)r\(\backslash\)n"}
+328       \textcolor{stringliteral}{"Expect: 100-Continue\(\backslash\)r\(\backslash\)nContent-Length: 5\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)nabcdefghij"});
+329   codec.onIngress(*reqBuf);
+330 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Multiple\+Identical\+Content\+Length\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Multiple\+Identical\+Content\+Length\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_acb29f23dd36c30d5a2c52f30b2c255f1}
+
+
+Definition at line 332 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+332                                                                  \{
+333   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+334   FakeHTTPCodecCallback callbacks;
+335   codec.setCallback(&callbacks);
+336   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+337 
+338   \textcolor{comment}{// Generate a POST request with two identical Content-Length headers}
+339   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+340       \textcolor{stringliteral}{"POST /www.facebook.com HTTP/1.1\(\backslash\)r\(\backslash\)nHost: www.facebook.com\(\backslash\)r\(\backslash\)n"}
+341       \textcolor{stringliteral}{"Content-Length: 5\(\backslash\)r\(\backslash\)nContent-Length: 5\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"});
+342   codec.onIngress(*reqBuf);
+343 
+344   \textcolor{comment}{// Check that the request is accepted}
+345   EXPECT\_EQ(callbacks.streamErrors, 0);
+346   EXPECT\_EQ(callbacks.messageBegin, 1);
+347   EXPECT\_EQ(callbacks.headersComplete, 1);
+348 
+349 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Multiple\+Distinct\+Content\+Length\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Multiple\+Distinct\+Content\+Length\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_aab9d18945f9dc4598995c04954c844eb}
+
+
+Definition at line 351 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::last\+Parse\+Error, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+351                                                                 \{
+352   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+353   FakeHTTPCodecCallback callbacks;
+354   codec.setCallback(&callbacks);
+355   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+356 
+357   \textcolor{comment}{// Generate a POST request with two distinct Content-Length headers}
+358   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+359       \textcolor{stringliteral}{"POST /www.facebook.com HTTP/1.1\(\backslash\)r\(\backslash\)nHost: www.facebook.com\(\backslash\)r\(\backslash\)n"}
+360       \textcolor{stringliteral}{"Content-Length: 5\(\backslash\)r\(\backslash\)nContent-Length: 6\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"});
+361   codec.onIngress(*reqBuf);
+362 
+363   \textcolor{comment}{// Check that the request fails before the codec finishes parsing the headers}
+364   EXPECT\_EQ(callbacks.streamErrors, 1);
+365   EXPECT\_EQ(callbacks.messageBegin, 1);
+366   EXPECT\_EQ(callbacks.headersComplete, 0);
+367   EXPECT\_EQ(callbacks.lastParseError->getHttpStatusCode(), 400);
+368 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Correct\+Transfer\+Encoding\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Correct\+Transfer\+Encoding\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a58901666092ab6b82d735aa28bb51beb}
+
+
+Definition at line 370 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+370                                                          \{
+371   HTTP1xCodec downstream(TransportDirection::DOWNSTREAM);
+372   FakeHTTPCodecCallback callbacks;
+373   downstream.setCallback(&callbacks);
+374   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+375 
+376   \textcolor{comment}{// Generate a POST request with folded}
+377   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+378       \textcolor{stringliteral}{"POST /www.facebook.com HTTP/1.1\(\backslash\)r\(\backslash\)nHost: www.facebook.com\(\backslash\)r\(\backslash\)n"}
+379       \textcolor{stringliteral}{"Transfer-Encoding: chunked\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"});
+380   downstream.onIngress(*reqBuf);
+381 
+382   \textcolor{comment}{// Check that the request fails before the codec finishes parsing the headers}
+383   EXPECT\_EQ(callbacks.streamErrors, 0);
+384   EXPECT\_EQ(callbacks.messageBegin, 1);
+385   EXPECT\_EQ(callbacks.headersComplete, 1);
+386 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Folded\+Transfer\+Encoding\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Folded\+Transfer\+Encoding\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a5fa75e571a1d627d836cd4c54ea0b324}
+
+
+Definition at line 388 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::last\+Parse\+Error, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+388                                                         \{
+389   HTTP1xCodec downstream(TransportDirection::DOWNSTREAM);
+390   FakeHTTPCodecCallback callbacks;
+391   downstream.setCallback(&callbacks);
+392   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+393 
+394   \textcolor{comment}{// Generate a POST request with folded}
+395   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+396       \textcolor{stringliteral}{"POST /www.facebook.com HTTP/1.1\(\backslash\)r\(\backslash\)nHost: www.facebook.com\(\backslash\)r\(\backslash\)n"}
+397       \textcolor{stringliteral}{"Transfer-Encoding: \(\backslash\)r\(\backslash\)n chunked\(\backslash\)r\(\backslash\)nContent-Length: 8\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"});
+398   downstream.onIngress(*reqBuf);
+399 
+400   \textcolor{comment}{// Check that the request fails before the codec finishes parsing the headers}
+401   EXPECT\_EQ(callbacks.streamErrors, 1);
+402   EXPECT\_EQ(callbacks.messageBegin, 1);
+403   EXPECT\_EQ(callbacks.headersComplete, 0);
+404   EXPECT\_EQ(callbacks.lastParseError->getHttpStatusCode(), 400);
+405 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Bad\+Transfer\+Encoding\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Bad\+Transfer\+Encoding\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a63a8f767796d6b7413adb86cb27f5c86}
+
+
+Definition at line 407 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::last\+Parse\+Error, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+407                                                      \{
+408   HTTP1xCodec downstream(TransportDirection::DOWNSTREAM);
+409   FakeHTTPCodecCallback callbacks;
+410   downstream.setCallback(&callbacks);
+411   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+412 
+413   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+414       \textcolor{stringliteral}{"POST /www.facebook.com HTTP/1.1\(\backslash\)r\(\backslash\)nHost: www.facebook.com\(\backslash\)r\(\backslash\)n"}
+415       \textcolor{stringliteral}{"Transfer-Encoding: chunked, zorg\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"});
+416   downstream.onIngress(*reqBuf);
+417 
+418   \textcolor{comment}{// Check that the request fails before the codec finishes parsing the headers}
+419   EXPECT\_EQ(callbacks.streamErrors, 1);
+420   EXPECT\_EQ(callbacks.messageBegin, 1);
+421   EXPECT\_EQ(callbacks.headersComplete, 0);
+422   EXPECT\_EQ(callbacks.lastParseError->getHttpStatusCode(), 400);
+423 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test1xx\+Connection\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test1xx\+Connection\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_ae51e6ed0bdb1f19a888ab0aa54a0a5bb}
+
+
+Definition at line 425 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::msg\+\_\+, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P\+Headers\+::remove(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), stream\+ID, and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+425                                                \{
+426   HTTP1xCodec upstream(TransportDirection::UPSTREAM);
+427   HTTP1xCodec downstream(TransportDirection::DOWNSTREAM);
+428   HTTP1xCodecCallback callbacks;
+429   upstream.setCallback(&callbacks);
+430   HTTPMessage resp;
+431   resp.setStatusCode(100);
+432   resp.setHTTPVersion(1, 1);
+433   resp.getHeaders().add(HTTP\_HEADER\_CONNECTION, \textcolor{stringliteral}{"Upgrade"});
+434   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+435   \textcolor{keyword}{auto} streamID = downstream.createStream();
+436   downstream.generateHeader(writeBuf, streamID, resp);
+437   upstream.onIngress(*writeBuf.front());
+438   EXPECT\_EQ(callbacks.headersComplete, 1);
+439   EXPECT\_EQ(
+440     callbacks.msg_->getHeaders().getSingleOrEmpty(HTTP\_HEADER\_CONNECTION),
+441     \textcolor{stringliteral}{"Upgrade"});
+442   resp.setStatusCode(200);
+443   resp.getHeaders().remove(HTTP\_HEADER\_CONNECTION);
+444   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_LENGTH, \textcolor{stringliteral}{"0"});
+445   writeBuf.move();
+446   downstream.generateHeader(writeBuf, streamID, resp);
+447   upstream.onIngress(*writeBuf.front());
+448   EXPECT\_EQ(callbacks.headersComplete, 2);
+449   EXPECT\_EQ(
+450     callbacks.msg_->getHeaders().getSingleOrEmpty(HTTP\_HEADER\_CONNECTION),
+451     \textcolor{stringliteral}{"keep-alive"});
+452 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Chained\+Body)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Chained\+Body}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_ac9b24b8e468339b08b6854dfd6558987}
+
+
+Definition at line 454 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+454                                        \{
+455   HTTP1xCodec codec(TransportDirection::DOWNSTREAM);
+456   MockHTTPCodecCallback callbacks;
+457   codec.setCallback(&callbacks);
+458 
+459   folly::IOBufQueue bodyQueue;
+460   ON\_CALL(callbacks, onBody(1, \_, \_))
+461       .WillByDefault(Invoke(
+462           [&bodyQueue](HTTPCodec::StreamID, std::shared\_ptr<folly::IOBuf> buf,
+463                        uint16\_t) \{ bodyQueue.append(buf->clone()); \}));
+464 
+465   folly::IOBufQueue reqQueue;
+466   reqQueue.append(folly::IOBuf::copyBuffer(
+467       \textcolor{stringliteral}{"POST /test.php HTTP/1.1\(\backslash\)r\(\backslash\)nHost: www.test.com\(\backslash\)r\(\backslash\)n"}
+468       \textcolor{stringliteral}{"Content-Length: 10\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)nabcde"}));
+469   reqQueue.append(folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"fghij"}));
+470 
+471   \textcolor{keywordflow}{while} (!reqQueue.empty()) \{
+472     \textcolor{keyword}{auto} processed = codec.onIngress(*reqQueue.front());
+473     \textcolor{keywordflow}{if} (processed == 0) \{
+474       \textcolor{keywordflow}{break};
+475     \}
+476     reqQueue.trimStart(processed);
+477   \}
+478 
+479   EXPECT\_TRUE(folly::IOBufEqualTo()(*bodyQueue.front(),
+480                                   *folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"abcdefghij"})));
+481 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Ignore\+Upstream\+Upgrade)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Ignore\+Upstream\+Upgrade}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a918cf7b1b3518dfc07b54955dbf0fb10}
+
+
+Definition at line 483 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::body\+Length, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors, and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+483                                                  \{
+484   HTTP1xCodec codec(TransportDirection::UPSTREAM);
+485   FakeHTTPCodecCallback callbacks;
+486   codec.setCallback(&callbacks);
+487   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+488 
+489   \textcolor{keyword}{auto} reqBuf = folly::IOBuf::copyBuffer(
+490       \textcolor{stringliteral}{"HTTP/1.1 200 OK\(\backslash\)r\(\backslash\)n"}
+491       \textcolor{stringliteral}{"Connection: close\(\backslash\)r\(\backslash\)n"}
+492       \textcolor{stringliteral}{"Upgrade: h2,h2c\(\backslash\)r\(\backslash\)n"}
+493       \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}
+494       \textcolor{stringliteral}{"<!DOCTYPE html>"});
+495   codec.onIngress(*reqBuf);
+496 
+497   EXPECT\_EQ(callbacks.streamErrors, 0);
+498   EXPECT\_EQ(callbacks.messageBegin, 1);
+499   EXPECT\_EQ(callbacks.headersComplete, 1);
+500   EXPECT\_EQ(callbacks.bodyLength, 15);
+501 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Websocket\+Upgrade)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Websocket\+Upgrade}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a76ea228894090e98391cd9782776b79c}
+
+
+Definition at line 503 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::empty\+\_\+string, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::msg\+\_\+, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Egress\+Websocket\+Upgrade(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), stream\+ID, and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+503                                         \{
+504   HTTP1xCodec upstreamCodec(TransportDirection::UPSTREAM);
+505   HTTP1xCodec downstreamCodec(TransportDirection::DOWNSTREAM);
+506   HTTP1xCodecCallback downStreamCallbacks;
+507   HTTP1xCodecCallback upstreamCallbacks;
+508   downstreamCodec.setCallback(&downStreamCallbacks);
+509   upstreamCodec.setCallback(&upstreamCallbacks);
+510 
+511   HTTPMessage req;
+512   req.setHTTPVersion(1, 1);
+513   req.setURL(\textcolor{stringliteral}{"/websocket"});
+514   req.setEgressWebsocketUpgrade();
+515   folly::IOBufQueue buf;
+516   \textcolor{keyword}{auto} streamID = upstreamCodec.createStream();
+517   upstreamCodec.generateHeader(buf, streamID, req);
+518 
+519   downstreamCodec.onIngress(*buf.front());
+520   EXPECT\_EQ(downStreamCallbacks.headersComplete, 1);
+521   EXPECT\_TRUE(downStreamCallbacks.msg_->isIngressWebsocketUpgrade());
+522   \textcolor{keyword}{auto}& headers = downStreamCallbacks.msg_->getHeaders();
+523   \textcolor{keyword}{auto} ws\_key\_header = headers.getSingleOrEmpty(HTTP\_HEADER\_SEC\_WEBSOCKET\_KEY);
+524   EXPECT\_NE(ws\_key\_header, empty_string);
+525 
+526   HTTPMessage resp;
+527   resp.setHTTPVersion(1, 1);
+528   resp.setStatusCode(101);
+529   resp.setEgressWebsocketUpgrade();
+530   buf.clear();
+531   downstreamCodec.generateHeader(buf, streamID, resp);
+532   upstreamCodec.onIngress(*buf.front());
+533   EXPECT\_EQ(upstreamCallbacks.headersComplete, 1);
+534   headers = upstreamCallbacks.msg_->getHeaders();
+535   \textcolor{keyword}{auto} ws\_accept\_header =
+536     headers.getSingleOrEmpty(HTTP\_HEADER\_SEC\_WEBSOCKET\_ACCEPT);
+537   EXPECT\_NE(ws\_accept\_header, empty_string);
+538 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Websocket\+Upgrade\+Key\+Error)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Websocket\+Upgrade\+Key\+Error}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_aedf9f0fdd4df8b7a1a114dd808bcc8b7}
+
+
+Definition at line 540 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), H\+T\+T\+P1x\+Codec\+Callback\+::errors, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Egress\+Websocket\+Upgrade(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), stream\+ID, and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+540                                                 \{
+541   HTTP1xCodec codec(TransportDirection::UPSTREAM);
+542   HTTP1xCodecCallback callbacks;
+543   codec.setCallback(&callbacks);
+544 
+545   HTTPMessage req;
+546   req.setHTTPVersion(1, 1);
+547   req.setURL(\textcolor{stringliteral}{"/websocket"});
+548   req.setEgressWebsocketUpgrade();
+549   folly::IOBufQueue buf;
+550   \textcolor{keyword}{auto} streamID = codec.createStream();
+551   codec.generateHeader(buf, streamID, req);
+552 
+553   \textcolor{keyword}{auto} resp = folly::IOBuf::copyBuffer(
+554       \textcolor{stringliteral}{"HTTP/1.1 200 OK\(\backslash\)r\(\backslash\)n"}
+555       \textcolor{stringliteral}{"Connection: upgrade\(\backslash\)r\(\backslash\)n"}
+556       \textcolor{stringliteral}{"Upgrade: websocket\(\backslash\)r\(\backslash\)n"}
+557       \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"});
+558   codec.onIngress(*resp);
+559   EXPECT\_EQ(callbacks.headersComplete, 0);
+560   EXPECT\_EQ(callbacks.errors, 1);
+561 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Websocket\+Upgrade\+Header\+Set)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Websocket\+Upgrade\+Header\+Set}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a0df113e6013118f9159785a48f1f8116}
+
+
+Definition at line 563 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::empty\+\_\+string, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+G\+ET, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), H\+T\+T\+P1x\+Codec\+Callback\+::msg\+\_\+, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Egress\+Websocket\+Upgrade(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+563                                                  \{
+564   HTTP1xCodec upstreamCodec(TransportDirection::UPSTREAM);
+565   HTTPMessage req;
+566   req.setMethod(HTTPMethod::GET);
+567   req.setURL(\textcolor{stringliteral}{"/websocket"});
+568   req.setEgressWebsocketUpgrade();
+569   req.getHeaders().add(proxygen::HTTP\_HEADER\_UPGRADE, \textcolor{stringliteral}{"Websocket"});
+570 
+571   folly::IOBufQueue buf;
+572   upstreamCodec.generateHeader(buf, upstreamCodec.createStream(), req);
+573 
+574   HTTP1xCodec downstreamCodec(TransportDirection::DOWNSTREAM);
+575   HTTP1xCodecCallback callbacks;
+576   downstreamCodec.setCallback(&callbacks);
+577   downstreamCodec.onIngress(*buf.front());
+578   \textcolor{keyword}{auto} headers = callbacks.msg_->getHeaders();
+579   EXPECT\_EQ(headers.getSingleOrEmpty(HTTP\_HEADER\_SEC\_WEBSOCKET\_KEY),
+580       empty_string);
+581 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Websocket\+Connection\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Websocket\+Connection\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a40f8920c1e6d47f5b198afa08969a7b5}
+
+
+Definition at line 583 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+Base64\+::decode(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::empty\+\_\+string, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+G\+ET, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), H\+T\+T\+P1x\+Codec\+Callback\+::msg\+\_\+, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Egress\+Websocket\+Upgrade(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+583                                                  \{
+584   HTTP1xCodec upstreamCodec(TransportDirection::UPSTREAM);
+585   HTTPMessage req;
+586   req.setMethod(HTTPMethod::GET);
+587   req.setURL(\textcolor{stringliteral}{"/websocket"});
+588   req.setEgressWebsocketUpgrade();
+589   req.getHeaders().add(proxygen::HTTP\_HEADER\_CONNECTION, \textcolor{stringliteral}{"upgrade, keep-alive"});
+590   req.getHeaders().add(proxygen::HTTP\_HEADER\_SEC\_WEBSOCKET\_KEY,
+591       \textcolor{stringliteral}{"key should change"});
+592   req.getHeaders().add(proxygen::HTTP\_HEADER\_SEC\_WEBSOCKET\_ACCEPT,
+593       \textcolor{stringliteral}{"this should not be found"});
+594 
+595   folly::IOBufQueue buf;
+596   upstreamCodec.generateHeader(buf, upstreamCodec.createStream(), req);
+597   HTTP1xCodec downstreamCodec(TransportDirection::DOWNSTREAM);
+598   HTTP1xCodecCallback callbacks;
+599   downstreamCodec.setCallback(&callbacks);
+600   downstreamCodec.onIngress(*buf.front());
+601   \textcolor{keyword}{auto} headers = callbacks.msg_->getHeaders();
+602   \textcolor{keyword}{auto} ws\_sec\_key = headers.getSingleOrEmpty(HTTP\_HEADER\_SEC\_WEBSOCKET\_KEY);
+603   EXPECT\_NE(ws\_sec\_key, empty_string);
+604   EXPECT\_NE(ws\_sec\_key, \textcolor{stringliteral}{"key should change"});
+605 
+606   \textcolor{comment}{// We know the key is length 16}
+607   \textcolor{comment}{// https://tools.ietf.org/html/rfc6455#section-4.2.1.5}
+608   \textcolor{comment}{// for base64 % 3 leaves 1 byte so we expect padding of '=='}
+609   \textcolor{comment}{// hence this offset of 2 explicitly}
+610   EXPECT\_NO\_THROW(Base64::decode(ws\_sec\_key, 2));
+611   EXPECT\_EQ(16, Base64::decode(ws\_sec\_key, 2).length());
+612 
+613   EXPECT\_EQ(headers.getSingleOrEmpty(HTTP\_HEADER\_SEC\_WEBSOCKET\_ACCEPT),
+614       empty_string);
+615   EXPECT\_EQ(headers.getSingleOrEmpty(HTTP\_HEADER\_CONNECTION),
+616       \textcolor{stringliteral}{"upgrade, keep-alive"});
+617 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Trailers\+And\+Eom\+Are\+Not\+Generated\+When\+Non\+Chunked)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Trailers\+And\+Eom\+Are\+Not\+Generated\+When\+Non\+Chunked}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a4b47cef6608c5f296484cfeb251687d4}
+
+
+Definition at line 619 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+E\+O\+M(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Trailers(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Is\+Chunked(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+619                                                                    \{
+620   \textcolor{comment}{// Verify that generateTrailes and generateEom result in 0 bytes}
+621   \textcolor{comment}{// generated when message is not chunked.}
+622   \textcolor{comment}{// HTTP2 codec handles all BODY as regular non-chunked body, thus}
+623   \textcolor{comment}{// HTTPTransation SM transitions allow trailers after regular body. Which}
+624   \textcolor{comment}{// is not allowed in HTTP1.}
+625   HTTP1xCodec codec(TransportDirection::UPSTREAM);
+626 
+627   \textcolor{keyword}{auto} txnID = codec.createStream();
+628 
+629   HTTPMessage msg;
+630   msg.setHTTPVersion(1, 1);
+631   msg.setURL(\textcolor{stringliteral}{"https://www.facebook.com/"});
+632   msg.getHeaders().set(HTTP\_HEADER\_HOST, \textcolor{stringliteral}{"www.facebook.com"});
+633   msg.setIsChunked(\textcolor{keyword}{false});
+634 
+635   folly::IOBufQueue buf;
+636   codec.generateHeader(buf, txnID, msg);
+637 
+638   HTTPHeaders trailers;
+639   trailers.add(\textcolor{stringliteral}{"X-Test-Trailer"}, \textcolor{stringliteral}{"test"});
+640   EXPECT\_EQ(0, codec.generateTrailers(buf, txnID, trailers));
+641   EXPECT\_EQ(0, codec.generateEOM(buf, txnID));
+642 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P1x\+Codec\+Test, Test\+Chunk\+Response\+Serialization)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P1x\+Codec\+Test}]{, }
+\item[{Test\+Chunk\+Response\+Serialization}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_ae3a81378cd0d1426242f5725981b28ad}
+
+
+Definition at line 644 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), H\+T\+T\+P1x\+Codec\+Callback\+::errors, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Body(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+E\+O\+M(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Trailers(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Status\+Code(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::make\+Response\+Codec(), H\+T\+T\+P1x\+Codec\+Callback\+::message\+Complete, H\+T\+T\+P1x\+Codec\+Callback\+::msg\+\_\+, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress\+E\+O\+F(), proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P\+Version(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Is\+Chunked(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), H\+T\+T\+P1x\+Codec\+Callback\+::trailers\+\_\+, H\+T\+T\+P1x\+Codec\+Callback\+::trailers\+Complete, and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+644                                                       \{
+645   \textcolor{comment}{// When codec is used for response serialization, it never gets}
+646   \textcolor{comment}{// to process request. Verify we can still serialize chunked response}
+647   \textcolor{comment}{// when mayChunkEgress=true.}
+648   folly::IOBufQueue blob;
+649 
+650   HTTPMessage resp;
+651   resp.setHTTPVersion(1, 1);
+652   resp.setStatusCode(200);
+653   resp.setIsChunked(\textcolor{keyword}{true});
+654   resp.getHeaders().set(HTTP\_HEADER\_TRANSFER\_ENCODING, \textcolor{stringliteral}{"chunked"});
+655   resp.getHeaders().set(\textcolor{stringliteral}{"X-Custom-Header"}, \textcolor{stringliteral}{"mac&cheese"});
+656 
+657   \textcolor{keywordtype}{string} bodyStr(\textcolor{stringliteral}{"pizza"});
+658   \textcolor{keyword}{auto} body = folly::IOBuf::copyBuffer(bodyStr);
+659 
+660   HTTPHeaders trailers;
+661   trailers.add(\textcolor{stringliteral}{"X-Test-Trailer"}, \textcolor{stringliteral}{"chicken kyiv"});
+662 
+663   \textcolor{comment}{// serialize}
+664   HTTP1xCodec downCodec = HTTP1xCodec::makeResponseCodec(
+665       \textcolor{comment}{/*mayChunkEgress=*/}\textcolor{keyword}{true});
+666   HTTP1xCodecCallback downCallbacks;
+667   downCodec.setCallback(&downCallbacks);
+668   \textcolor{keyword}{auto} downStream = downCodec.createStream();
+669 
+670   downCodec.generateHeader(blob, downStream, resp);
+671   downCodec.generateBody(
+672       blob, downStream, body->clone(), HTTPCodec::NoPadding, \textcolor{keyword}{false});
+673   downCodec.generateTrailers(blob, downStream, trailers);
+674   downCodec.generateEOM(blob, downStream);
+675 
+676   std::string tmp;
+677   blob.appendToString(tmp);
+678   VLOG(2) << \textcolor{stringliteral}{"serializeMessage blob: "} << tmp;
+679 
+680   \textcolor{comment}{// deserialize}
+681   HTTP1xCodec upCodec(TransportDirection::UPSTREAM);
+682   HTTP1xCodecCallback upCallbacks;
+683   upCodec.setCallback(&upCallbacks);
+684 
+685   \textcolor{keyword}{auto} tmpBuf = blob.front()->clone();
+686   \textcolor{keywordflow}{while} (tmpBuf) \{
+687     \textcolor{keyword}{auto} next = tmpBuf->pop();
+688     upCodec.onIngress(*tmpBuf);
+689     tmpBuf = std::move(next);
+690   \}
+691   upCodec.onIngressEOF();
+692 
+693   EXPECT\_EQ(upCallbacks.headersComplete, 1);
+694   EXPECT\_EQ(upCallbacks.trailersComplete, 1);
+695   EXPECT\_EQ(upCallbacks.messageComplete, 1);
+696   EXPECT\_EQ(upCallbacks.errors, 0);
+697 
+698   EXPECT\_EQ(resp.getStatusCode(), upCallbacks.msg_->getStatusCode());
+699   EXPECT\_TRUE(
+700       upCallbacks.msg_->getHeaders().exists(HTTP\_HEADER\_TRANSFER\_ENCODING));
+701   EXPECT\_TRUE(upCallbacks.msg_->getHeaders().exists(\textcolor{stringliteral}{"X-Custom-Header"}));
+702   EXPECT\_TRUE(upCallbacks.trailers_->exists(\textcolor{stringliteral}{"X-Test-Trailer"}));
+703 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+P@{T\+E\+S\+T\+\_\+P}}
+\index{T\+E\+S\+T\+\_\+P@{T\+E\+S\+T\+\_\+P}!H\+T\+T\+P1x\+Codec\+Test.\+cpp@{H\+T\+T\+P1x\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+P(\+Connection\+Header\+Test, Test\+Connection\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+P (
+\begin{DoxyParamCaption}
+\item[{{\bf Connection\+Header\+Test}}]{, }
+\item[{Test\+Connection\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP1xCodecTest_8cpp_a3b73d68a85c1ec0ab9c958dfe2bd99c7}
+
+
+Definition at line 711 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::create\+Stream(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+G\+ET, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+I\+N\+S\+T\+A\+N\+T\+I\+A\+T\+E\+\_\+\+T\+E\+S\+T\+\_\+\+C\+A\+S\+E\+\_\+\+P(), H\+T\+T\+P1x\+Codec\+Callback\+::msg\+\_\+, proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+711                                                     \{
+712   HTTP1xCodec upstream(TransportDirection::UPSTREAM);
+713   HTTP1xCodec downstream(TransportDirection::DOWNSTREAM);
+714   HTTP1xCodecCallback callbacks;
+715   downstream.setCallback(&callbacks);
+716   HTTPMessage req;
+717   req.setMethod(HTTPMethod::GET);
+718   req.setURL(\textcolor{stringliteral}{"/"});
+719   \textcolor{keyword}{auto} val = GetParam();
+720   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} header: val.first) \{
+721     req.getHeaders().add(HTTP\_HEADER\_CONNECTION, header);
+722   \}
+723   folly::IOBufQueue writeBuf(folly::IOBufQueue::cacheChainLength());
+724   upstream.generateHeader(writeBuf, upstream.createStream(), req);
+725   downstream.onIngress(*writeBuf.front());
+726   EXPECT\_EQ(callbacks.headersComplete, 1);
+727   \textcolor{keyword}{auto}& headers = callbacks.msg_->getHeaders();
+728   EXPECT\_EQ(headers.getSingleOrEmpty(HTTP\_HEADER\_CONNECTION),
+729             val.second);
+730 \}
+\end{DoxyCode}

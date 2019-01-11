@@ -1,0 +1,146 @@
+\section{proxygen\+:\+:Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$ Class Template Reference}
+\label{classproxygen_1_1MockTimeUtilGeneric}\index{proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$@{proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$}}
+
+
+{\ttfamily \#include $<$Mock\+Time.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1MockTimeUtilGeneric}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf advance} (std\+::chrono\+::milliseconds ms)
+\item 
+void {\bf set\+Current\+Time} (std\+::chrono\+::time\+\_\+point$<$ Clock\+Type $>$ t)
+\item 
+void {\bf verify\+And\+Clear} ()
+\item 
+std\+::chrono\+::time\+\_\+point$<$ Clock\+Type $>$ {\bf now} () const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::chrono\+::time\+\_\+point$<$ Clock\+Type $>$ {\bf t\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Clock\+Type = std\+::chrono\+::steady\+\_\+clock$>$\\*
+class proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$}
+
+
+
+Definition at line 18 of file Mock\+Time.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}!advance@{advance}}
+\index{advance@{advance}!proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}}
+\subsubsection[{advance(std\+::chrono\+::milliseconds ms)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = std\+::chrono\+::steady\+\_\+clock$>$ void {\bf proxygen\+::\+Mock\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::advance (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::milliseconds}]{ms}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockTimeUtilGeneric_ac6a22c8f73735c27f4519f8ea64051ad}
+
+
+Definition at line 21 of file Mock\+Time.\+h.
+
+
+
+References proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$\+::t\+\_\+.
+
+
+\begin{DoxyCode}
+21                                          \{
+22     t_ += ms;
+23   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}!now@{now}}
+\index{now@{now}!proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}}
+\subsubsection[{now() const override}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = std\+::chrono\+::steady\+\_\+clock$>$ std\+::chrono\+::time\+\_\+point$<$Clock\+Type$>$ {\bf proxygen\+::\+Mock\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockTimeUtilGeneric_a74bfc54ce08e35f0a9282ba7d3ca5d28}
+
+
+Reimplemented from {\bf proxygen\+::\+Time\+Util\+Generic$<$ Clock\+Type $>$} \doxyref{}{p.}{classproxygen_1_1TimeUtilGeneric_ab6ff63ee7c90a00f3c95983605cdf0f2}.
+
+
+
+Definition at line 34 of file Mock\+Time.\+h.
+
+
+
+References proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$\+::t\+\_\+.
+
+
+\begin{DoxyCode}
+34                                                       \{
+35     \textcolor{keywordflow}{return} t_;
+36   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}!set\+Current\+Time@{set\+Current\+Time}}
+\index{set\+Current\+Time@{set\+Current\+Time}!proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}}
+\subsubsection[{set\+Current\+Time(std\+::chrono\+::time\+\_\+point$<$ Clock\+Type $>$ t)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = std\+::chrono\+::steady\+\_\+clock$>$ void {\bf proxygen\+::\+Mock\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::set\+Current\+Time (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::time\+\_\+point$<$ Clock\+Type $>$}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockTimeUtilGeneric_a6eae532b5f41434710a0754b73ab4865}
+
+
+Definition at line 25 of file Mock\+Time.\+h.
+
+
+
+References proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$\+::t\+\_\+.
+
+
+\begin{DoxyCode}
+25                                                         \{
+26     CHECK(t.time\_since\_epoch() > t_.time\_since\_epoch())
+27       << \textcolor{stringliteral}{"Time can not move backwards"};
+28     t_ = t;
+29   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}!verify\+And\+Clear@{verify\+And\+Clear}}
+\index{verify\+And\+Clear@{verify\+And\+Clear}!proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}}
+\subsubsection[{verify\+And\+Clear()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = std\+::chrono\+::steady\+\_\+clock$>$ void {\bf proxygen\+::\+Mock\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::verify\+And\+Clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1MockTimeUtilGeneric_a7ac9d1a76e8bc7f9b341a0a37cf32b6b}
+
+
+Definition at line 31 of file Mock\+Time.\+h.
+
+
+\begin{DoxyCode}
+31                         \{
+32   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}!t\+\_\+@{t\+\_\+}}
+\index{t\+\_\+@{t\+\_\+}!proxygen\+::\+Mock\+Time\+Util\+Generic@{proxygen\+::\+Mock\+Time\+Util\+Generic}}
+\subsubsection[{t\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = std\+::chrono\+::steady\+\_\+clock$>$ std\+::chrono\+::time\+\_\+point$<$Clock\+Type$>$ {\bf proxygen\+::\+Mock\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::t\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1MockTimeUtilGeneric_a53416df54f5f9a1ad06c33fbf0c077a2}
+
+
+Definition at line 39 of file Mock\+Time.\+h.
+
+
+
+Referenced by proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$\+::advance(), proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$\+::now(), and proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$\+::set\+Current\+Time().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/test/{\bf Mock\+Time.\+h}\end{DoxyCompactItemize}

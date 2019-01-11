@@ -1,0 +1,126 @@
+\section{proxygen\+:\+:H\+P\+A\+CK\+:\+:Streaming\+Callback Class Reference}
+\label{classproxygen_1_1HPACK_1_1StreamingCallback}\index{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}}
+
+
+{\ttfamily \#include $<$H\+P\+A\+C\+K\+Streaming\+Callback.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+P\+A\+CK\+:\+:Streaming\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.414141cm]{classproxygen_1_1HPACK_1_1StreamingCallback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Streaming\+Callback} ()
+\item 
+virtual void {\bf on\+Header} (const folly\+::fbstring \&{\bf name}, const folly\+::fbstring \&value)=0
+\item 
+virtual void {\bf on\+Headers\+Complete} ({\bf H\+T\+T\+P\+Header\+Size} decoded\+Size, bool acknowledge)=0
+\item 
+virtual void {\bf on\+Decode\+Error} ({\bf H\+P\+A\+C\+K\+::\+Decode\+Error} decode\+Error)=0
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Header\+Codec\+::\+Stats} $\ast$ {\bf stats} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 16 of file H\+P\+A\+C\+K\+Streaming\+Callback.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}!````~Streaming\+Callback@{$\sim$\+Streaming\+Callback}}
+\index{````~Streaming\+Callback@{$\sim$\+Streaming\+Callback}!proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}}
+\subsubsection[{$\sim$\+Streaming\+Callback()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback\+::$\sim$\+Streaming\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HPACK_1_1StreamingCallback_ac704ebc5699f2fc0c153f836dd4b150a}
+
+
+Definition at line 18 of file H\+P\+A\+C\+K\+Streaming\+Callback.\+h.
+
+
+
+References name, on\+Decode\+Error(), on\+Header(), and on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+18 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}!on\+Decode\+Error@{on\+Decode\+Error}}
+\index{on\+Decode\+Error@{on\+Decode\+Error}!proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}}
+\subsubsection[{on\+Decode\+Error(\+H\+P\+A\+C\+K\+::\+Decode\+Error decode\+Error)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback\+::on\+Decode\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+::\+Decode\+Error}}]{decode\+Error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HPACK_1_1StreamingCallback_a4ae06a3524ba64174bc6b9fb5dc4f09f}
+
+
+Implemented in {\bf proxygen\+::compress\+::\+Sim\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1compress_1_1SimStreamingCallback_aa57f1683c12dcdb542bbe28c6ff66c00}, {\bf proxygen\+::\+H\+T\+T\+P2\+Codec} \doxyref{}{p.}{classproxygen_1_1HTTP2Codec_a4a88a40aa078ed14676fb88e855beee2}, and {\bf proxygen\+::\+Test\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1TestStreamingCallback_ab6a3d6628be7862659cdbd7ba31bbc43}.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode(), proxygen\+::\+H\+P\+A\+C\+K\+Queue\+::enqueue\+Header\+Block(), and $\sim$\+Streaming\+Callback().
+
+\index{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}!on\+Header@{on\+Header}}
+\index{on\+Header@{on\+Header}!proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}}
+\subsubsection[{on\+Header(const folly\+::fbstring \&name, const folly\+::fbstring \&value)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback\+::on\+Header (
+\begin{DoxyParamCaption}
+\item[{const folly\+::fbstring \&}]{name, }
+\item[{const folly\+::fbstring \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HPACK_1_1StreamingCallback_a4e98f0e581dbb03435a818b92350da89}
+
+
+Implemented in {\bf proxygen\+::compress\+::\+Sim\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1compress_1_1SimStreamingCallback_ab325b69248f11f7e937daaca3a707711}, {\bf proxygen\+::\+H\+T\+T\+P2\+Codec} \doxyref{}{p.}{classproxygen_1_1HTTP2Codec_aa9c0130a08f0a30fcd8bc6061d1b396b}, and {\bf proxygen\+::\+Test\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1TestStreamingCallback_aecd91e1bcf5d998220a8aed3f1432bab}.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::emit(), and $\sim$\+Streaming\+Callback().
+
+\index{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}}
+\subsubsection[{on\+Headers\+Complete(\+H\+T\+T\+P\+Header\+Size decoded\+Size, bool acknowledge)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Header\+Size}}]{decoded\+Size, }
+\item[{bool}]{acknowledge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HPACK_1_1StreamingCallback_a597eeb4d7fbe2013339317459f2520ed}
+
+
+Implemented in {\bf proxygen\+::compress\+::\+Sim\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1compress_1_1SimStreamingCallback_a18cabfb9e9a459d718cc088a12c05fc1}, {\bf proxygen\+::\+H\+T\+T\+P2\+Codec} \doxyref{}{p.}{classproxygen_1_1HTTP2Codec_af156831a61f0c48cc4678100694a7b47}, and {\bf proxygen\+::\+Test\+Streaming\+Callback} \doxyref{}{p.}{classproxygen_1_1TestStreamingCallback_adf259f0c76f1a8d13c6d0d70ca2ea39a}.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode(), and $\sim$\+Streaming\+Callback().
+
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}!stats@{stats}}
+\index{stats@{stats}!proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback@{proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback}}
+\subsubsection[{stats}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Header\+Codec\+::\+Stats}$\ast$ proxygen\+::\+H\+P\+A\+C\+K\+::\+Streaming\+Callback\+::stats \{{\bf nullptr}\}}\label{classproxygen_1_1HPACK_1_1StreamingCallback_a4b5c21f4d9d780d71d69b4547215d838}
+
+
+Definition at line 25 of file H\+P\+A\+C\+K\+Streaming\+Callback.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::complete\+Decode().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf H\+P\+A\+C\+K\+Streaming\+Callback.\+h}\end{DoxyCompactItemize}

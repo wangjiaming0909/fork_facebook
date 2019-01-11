@@ -1,0 +1,4007 @@
+\section{proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Codec\+Test.cpp File Reference}
+\label{HTTP2CodecTest_8cpp}\index{proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Codec\+Test.\+cpp@{proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+H\+T\+T\+P\+Parallel\+Codec\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Mock\+H\+T\+T\+P\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+Cursor.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P2\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+H\+T\+T\+P2\+Framer\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Message.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Mock.\+h$>$}\\*
+{\ttfamily \#include $<$random$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf H\+T\+T\+P2\+Codec\+Test}
+\item 
+class {\bf Dummy\+Queue}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+ST} (H\+T\+T\+P2\+Codec\+Constants\+Test, H\+T\+T\+P\+Contants\+Are\+Common\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Ignore\+Unknown\+Settings)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, No\+Ex\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Ignore\+Ex\+Headers\+Setting)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Enable\+Ex\+Headers\+Setting)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Invalid\+Ex\+Headers\+Setting)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Header)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Request\+From\+Server)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Response\+From\+Client)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Ex\+Headers\+With\+Priority)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Duplicate\+Ex\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Ignore\+Ex\+Headers\+If\+Not\+Enabled)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Pseudo\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Header\+Values)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Empty\+Header\+Name)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Connect)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Connect)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Normal\+Size\+Header)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Oversized\+Header)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Normal\+Size\+Frame)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Oversized\+Frame)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Big\+Header\+Compressed)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Header\+Reply)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Headers\+Reply)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Cookies)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Continuation\+End\+Stream)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Missing\+Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Missing\+Continuation\+Bad\+Frame)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Continuation\+Stream)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Frame\+Too\+Large)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Unknown\+Frame\+Type)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Junk\+After\+Conn\+Error)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Data)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Long\+Data)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Malformed\+Padding\+Length)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Malformed\+Padding)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, No\+App\+Byte)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Data\+Frame\+Partial\+Data\+On\+Frame\+Header\+Call)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Data\+Frame\+Partial\+Data\+With\+No\+App\+Byte)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Rst)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Rst\+Invalid\+Code)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Ping)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Window)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Zero\+Window)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Goaway)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Goaway)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Double\+Goaway)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Double\+Goaway\+With\+Error)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Goaway\+Handling)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Goaway\+Reply)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Setting)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Settings\+Ack)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Settings)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Push\+Settings)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Settings\+Table\+Size)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Settings\+Table\+Size)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Settings\+Table\+Size\+Early\+Shrink)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Priority)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Header\+Priority)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Duplicate\+Bad\+Header\+Priority)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Priority)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Virtual\+Nodes)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Push\+Promise)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Duplicate\+Push\+Promise)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Push\+Promise)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Certificate\+Request)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Basic\+Certificate)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Bad\+Server\+Preface)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Normal1024\+Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Stream\+Id\+Overflow)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Test\+Multiple\+Different\+Content\+Length\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Test\+Multiple\+Identical\+Content\+Length\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Cleartext\+Upgrade)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, H\+T\+T\+P2\+Settings\+Success)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, H\+T\+T\+P2\+Settings\+Failure)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, H\+T\+T\+P2\+Enable\+Connect)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Websocket\+Upgrade)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Websocket\+Bad\+Header)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Websocket\+Dup\+Protocol)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Websocket\+Incorrect\+Response)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Test\+All\+Egress\+Frame\+Type\+Callbacks)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+With\+Pseudo\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+No\+Body)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+Reply)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+Reply\+With\+No\+Data)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+Reply\+With\+Pseudo\+Headers)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+Reply\+Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+Reply\+Missing\+Continuation)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P2\+Codec\+Test}, Trailers\+Not\+Latest)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t {\bf k\+Buf\+Empty\+Header} [$\,$]
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+H\+T\+T\+P2\+Codec\+Constants\+Test, H\+T\+T\+P\+Contants\+Are\+Common\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{H\+T\+T\+P2\+Codec\+Constants\+Test}]{, }
+\item[{H\+T\+T\+P\+Contants\+Are\+Common\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a9fe1c1f31fb785622db524fc2aee4045}
+
+
+Definition at line 29 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Common\+Headers\+::hash(), proxygen\+::headers\+::k\+Authority, proxygen\+::headers\+::k\+Method, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Scheme, and proxygen\+::headers\+::k\+Status.
+
+
+\begin{DoxyCode}
+29                                                             \{
+30   \textcolor{comment}{// The purpose of this test is to verify some basic assumptions that should}
+31   \textcolor{comment}{// never change but to make clear that the following http2 header constants}
+32   \textcolor{comment}{// map to the respective common headers.  Should this test ever fail, the}
+33   \textcolor{comment}{// H2Codec would need to be updated in the corresponding places when creating}
+34   \textcolor{comment}{// compress/Header objects.}
+35   EXPECT\_EQ(HTTPCommonHeaders::hash(headers::kMethod),
+36             HTTP\_HEADER\_COLON\_METHOD);
+37   EXPECT\_EQ(HTTPCommonHeaders::hash(headers::kScheme),
+38             HTTP\_HEADER\_COLON\_SCHEME);
+39   EXPECT\_EQ(HTTPCommonHeaders::hash(headers::kPath),
+40             HTTP\_HEADER\_COLON\_PATH);
+41   EXPECT\_EQ(
+42     HTTPCommonHeaders::hash(headers::kAuthority),
+43     HTTP\_HEADER\_COLON\_AUTHORITY);
+44   EXPECT\_EQ(HTTPCommonHeaders::hash(headers::kStatus),
+45             HTTP\_HEADER\_COLON\_STATUS);
+46 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Ignore\+Unknown\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Ignore\+Unknown\+Settings}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a81048f8869883daf24db95835afc34c2}
+
+
+Definition at line 65 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse(), settings, and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+65                                               \{
+66   \textcolor{keyword}{auto} numSettings = downstreamCodec\_.getIngressSettings()->getNumSettings();
+67   std::deque<SettingPair> settings;
+68   \textcolor{keywordflow}{for} (uint32\_t i = 200; i < (200 + 1024); i++) \{
+69     settings.push\_back(SettingPair(SettingsId(i), i));
+70   \}
+71   http2::writeSettings(output\_, settings);
+72   parse();
+73 
+74   EXPECT\_EQ(callbacks\_.settings, 1);
+75   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+76   EXPECT\_EQ(numSettings,
+77             downstreamCodec\_.getIngressSettings()->getNumSettings());
+78 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, No\+Ex\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{No\+Ex\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aa842f182769add634bc73d666af27523}
+
+
+Definition at line 80 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+80                                     \{
+81   \textcolor{comment}{// do not emit ENABLE\_EX\_HEADERS setting, if disabled}
+82   SetUpUpstreamTest();
+83 
+84   EXPECT\_EQ(callbacks\_.settings, 0);
+85   EXPECT\_EQ(callbacks\_.numSettings, 0);
+86   EXPECT\_EQ(\textcolor{keyword}{false}, downstreamCodec\_.supportsExTransactions());
+87 
+88   parseUpstream();
+89 
+90   EXPECT\_EQ(callbacks\_.settings, 1);
+91   \textcolor{comment}{// only 3 standard settings: HEADER\_TABLE\_SIZE, ENABLE\_PUSH, MAX\_FRAME\_SIZE.}
+92   EXPECT\_EQ(callbacks\_.numSettings, 3);
+93   EXPECT\_EQ(\textcolor{keyword}{false}, downstreamCodec\_.supportsExTransactions());
+94 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Ignore\+Ex\+Headers\+Setting)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Ignore\+Ex\+Headers\+Setting}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ae2509178aa90af6294d7bccff16368c0}
+
+
+Definition at line 96 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::parse(), and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+96                                                \{
+97   \textcolor{comment}{// disable EX\_HEADERS on egress}
+98   downstreamCodec\_.getEgressSettings()->setSetting(
+99       SettingsId::ENABLE\_EX\_HEADERS, 0);
+100   \textcolor{keyword}{auto} ptr = downstreamCodec\_.getEgressSettings()->getSetting(
+101       SettingsId::ENABLE\_EX\_HEADERS);
+102   EXPECT\_EQ(0, ptr->value);
+103 
+104   ptr = downstreamCodec\_.getIngressSettings()->getSetting(
+105       SettingsId::ENABLE\_EX\_HEADERS);
+106   EXPECT\_EQ(\textcolor{keyword}{nullptr}, ptr);
+107   EXPECT\_EQ(\textcolor{keyword}{false}, downstreamCodec\_.supportsExTransactions());
+108 
+109   \textcolor{comment}{// attempt to enable EX\_HEADERS on ingress}
+110   http2::writeSettings(output\_,
+111                       \{SettingPair(SettingsId::ENABLE\_EX\_HEADERS, 1)\});
+112   parse();
+113 
+114   EXPECT\_EQ(callbacks\_.settings, 1);
+115   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+116   ptr = downstreamCodec\_.getIngressSettings()->getSetting(
+117       SettingsId::ENABLE\_EX\_HEADERS);
+118   EXPECT\_EQ(\textcolor{keyword}{nullptr}, ptr);
+119   EXPECT\_EQ(\textcolor{keyword}{false}, downstreamCodec\_.supportsExTransactions());
+120 
+121   \textcolor{comment}{// attempt to disable EX\_HEADERS on ingress}
+122   callbacks\_.reset();
+123   http2::writeSettings(output\_,
+124                       \{SettingPair(SettingsId::ENABLE\_EX\_HEADERS, 0)\});
+125   parse();
+126 
+127   EXPECT\_EQ(callbacks\_.settings, 1);
+128   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+129   ptr = downstreamCodec\_.getIngressSettings()->getSetting(
+130       SettingsId::ENABLE\_EX\_HEADERS);
+131   EXPECT\_EQ(\textcolor{keyword}{nullptr}, ptr);
+132   EXPECT\_EQ(\textcolor{keyword}{false}, downstreamCodec\_.supportsExTransactions());
+133 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Enable\+Ex\+Headers\+Setting)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Enable\+Ex\+Headers\+Setting}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a66cac1f39aa3bc5ab21671d81e07dcf9}
+
+
+Definition at line 135 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::parse(), and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+135                                                \{
+136   \textcolor{comment}{// enable EX\_HEADERS on egress}
+137   downstreamCodec\_.getEgressSettings()->setSetting(
+138       SettingsId::ENABLE\_EX\_HEADERS, 1);
+139 
+140   \textcolor{keyword}{auto} ptr = downstreamCodec\_.getEgressSettings()->getSetting(
+141       SettingsId::ENABLE\_EX\_HEADERS);
+142   EXPECT\_EQ(1, ptr->value);
+143 
+144   ptr = downstreamCodec\_.getIngressSettings()->getSetting(
+145       SettingsId::ENABLE\_EX\_HEADERS);
+146   EXPECT\_EQ(\textcolor{keyword}{nullptr}, ptr);
+147   EXPECT\_EQ(\textcolor{keyword}{false}, downstreamCodec\_.supportsExTransactions());
+148 
+149   \textcolor{comment}{// attempt to enable EX\_HEADERS on ingress}
+150   http2::writeSettings(output\_,
+151                       \{SettingPair(SettingsId::ENABLE\_EX\_HEADERS, 1)\});
+152   parse();
+153 
+154   EXPECT\_EQ(callbacks\_.settings, 1);
+155   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+156   ptr = downstreamCodec\_.getIngressSettings()->getSetting(
+157       SettingsId::ENABLE\_EX\_HEADERS);
+158   EXPECT\_EQ(1, ptr->value);
+159   EXPECT\_EQ(\textcolor{keyword}{true}, downstreamCodec\_.supportsExTransactions());
+160 
+161   \textcolor{comment}{// attempt to disable EX\_HEADERS on ingress}
+162   callbacks\_.reset();
+163   http2::writeSettings(output\_,
+164                       \{SettingPair(SettingsId::ENABLE\_EX\_HEADERS, 0)\});
+165   parse();
+166 
+167   EXPECT\_EQ(callbacks\_.settings, 1);
+168   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+169   ptr = downstreamCodec\_.getIngressSettings()->getSetting(
+170       SettingsId::ENABLE\_EX\_HEADERS);
+171   EXPECT\_EQ(0, ptr->value);
+172   EXPECT\_EQ(\textcolor{keyword}{false}, downstreamCodec\_.supportsExTransactions());
+173 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Invalid\+Ex\+Headers\+Setting)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Invalid\+Ex\+Headers\+Setting}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_acc5570ddc41917399e55061f1226f2ce}
+
+
+Definition at line 175 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::parse(), and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+175                                                 \{
+176   \textcolor{comment}{// enable EX\_HEADERS on egress}
+177   downstreamCodec\_.getEgressSettings()->setSetting(
+178       SettingsId::ENABLE\_EX\_HEADERS, 1);
+179 
+180   \textcolor{comment}{// attempt to set a invalid ENABLE\_EX\_HEADERS value}
+181   http2::writeSettings(output\_,
+182                       \{SettingPair(SettingsId::ENABLE\_EX\_HEADERS, 110)\});
+183   parse();
+184 
+185   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+186 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a138c9c842848c424563916321a7b98a7}
+
+
+Definition at line 188 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::parse(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Secure().
+
+
+\begin{DoxyCode}
+188                                     \{
+189   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+190   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+191   req.getHeaders().add(\textcolor{stringliteral}{"tab-hdr"}, \textcolor{stringliteral}{"coolio\(\backslash\)tv2"});
+192   \textcolor{comment}{// Connection header will get dropped}
+193   req.getHeaders().add(HTTP\_HEADER\_CONNECTION, \textcolor{stringliteral}{"Love"});
+194   req.setSecure(\textcolor{keyword}{true});
+195   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+196 
+197   parse();
+198   callbacks\_.expectMessage(\textcolor{keyword}{true}, 3, \textcolor{stringliteral}{"/guacamole"});
+199   EXPECT\_TRUE(callbacks\_.msg->isSecure());
+200   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+201   EXPECT\_EQ(\textcolor{stringliteral}{"coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_USER\_AGENT));
+202   EXPECT\_EQ(\textcolor{stringliteral}{"coolio\(\backslash\)tv2"}, headers.getSingleOrEmpty(\textcolor{stringliteral}{"tab-hdr"}));
+203   EXPECT\_EQ(\textcolor{stringliteral}{"www.foo.com"}, headers.getSingleOrEmpty(HTTP\_HEADER\_HOST));
+204 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Request\+From\+Server)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Request\+From\+Server}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_af812a7f4632cdf1d636ea7fb7374129f}
+
+
+Definition at line 206 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::get\+Get\+Request(), and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+206                                           \{
+207   \textcolor{comment}{// this is to test EX\_HEADERS frame, which carrys the HTTP request initiated}
+208   \textcolor{comment}{// by server side}
+209   upstreamCodec\_.getEgressSettings()->setSetting(
+210       SettingsId::ENABLE\_EX\_HEADERS, 1);
+211   SetUpUpstreamTest();
+212   proxygen::http2::writeSettings(
+213       output\_, \{\{proxygen::SettingsId::ENABLE_EX_HEADERS, 1\}\});
+214 
+215   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+216   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+217   req.getHeaders().add(\textcolor{stringliteral}{"tab-hdr"}, \textcolor{stringliteral}{"coolio\(\backslash\)tv2"});
+218   \textcolor{comment}{// Connection header will get dropped}
+219   req.getHeaders().add(HTTP\_HEADER\_CONNECTION, \textcolor{stringliteral}{"Love"});
+220   req.setSecure(\textcolor{keyword}{true});
+221 
+222   HTTPCodec::StreamID stream = folly::Random::rand32(10, 1024) * 2;
+223   HTTPCodec::StreamID controlStream = folly::Random::rand32(10, 1024) * 2 + 1;
+224   upstreamCodec\_.generateExHeader(output\_, stream, req,
+225                                   HTTPCodec::ExAttributes(controlStream, \textcolor{keyword}{true}),
+226                                   \textcolor{keyword}{true});
+227 
+228   parseUpstream();
+229   EXPECT\_EQ(controlStream, callbacks\_.controlStreamId);
+230   EXPECT\_TRUE(callbacks\_.isUnidirectional);
+231   callbacks\_.expectMessage(\textcolor{keyword}{true}, 3, \textcolor{stringliteral}{"/guacamole"});
+232   EXPECT\_TRUE(callbacks\_.msg->isSecure());
+233   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+234   EXPECT\_EQ(\textcolor{stringliteral}{"coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_USER\_AGENT));
+235   EXPECT\_EQ(\textcolor{stringliteral}{"coolio\(\backslash\)tv2"}, headers.getSingleOrEmpty(\textcolor{stringliteral}{"tab-hdr"}));
+236   EXPECT\_EQ(\textcolor{stringliteral}{"www.foo.com"}, headers.getSingleOrEmpty(HTTP\_HEADER\_HOST));
+237 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Response\+From\+Client)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Response\+From\+Client}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_abc01aa1be37a169c5840e0c9b5bdfc7e}
+
+
+Definition at line 239 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+239                                            \{
+240   \textcolor{comment}{// this is to test EX\_HEADERS frame, which carrys the HTTP response replied by}
+241   \textcolor{comment}{// client side}
+242   downstreamCodec\_.getEgressSettings()->setSetting(
+243       SettingsId::ENABLE\_EX\_HEADERS, 1);
+244   proxygen::http2::writeSettings(
+245       output\_, \{\{proxygen::SettingsId::ENABLE_EX_HEADERS, 1\}\});
+246 
+247   HTTPMessage resp;
+248   resp.setStatusCode(200);
+249   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+250   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+251 
+252   HTTPCodec::StreamID stream = folly::Random::rand32(10, 1024) * 2;
+253   HTTPCodec::StreamID controlStream = folly::Random::rand32(10, 1024) * 2 + 1;
+254   downstreamCodec\_.generateExHeader(output\_, stream, resp,
+255     HTTPCodec::ExAttributes(controlStream, \textcolor{keyword}{true}), \textcolor{keyword}{true});
+256 
+257   parse();
+258   EXPECT\_EQ(controlStream, callbacks\_.controlStreamId);
+259   EXPECT\_TRUE(callbacks\_.isUnidirectional);
+260   EXPECT\_EQ(\textcolor{stringliteral}{"OK"}, callbacks\_.msg->getStatusMessage());
+261   callbacks\_.expectMessage(\textcolor{keyword}{true}, 2, 200);
+262   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+263   EXPECT\_EQ(\textcolor{stringliteral}{"OK"}, callbacks\_.msg->getStatusMessage());
+264   EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+265   EXPECT\_EQ(\textcolor{stringliteral}{"x-coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_CONTENT\_TYPE));
+266 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Ex\+Headers\+With\+Priority)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Ex\+Headers\+With\+Priority}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a0d32626624f9b541c115649fbe0238c5}
+
+
+Definition at line 268 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::get\+Get\+Request(), proxygen\+::parse(), and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+268                                               \{
+269   downstreamCodec\_.getEgressSettings()->setSetting(
+270       SettingsId::ENABLE\_EX\_HEADERS, 1);
+271   proxygen::http2::writeSettings(
+272       output\_, \{\{proxygen::SettingsId::ENABLE_EX_HEADERS, 1\}\});
+273 
+274   \textcolor{keyword}{auto} req = getGetRequest();
+275   \textcolor{keyword}{auto} pri = HTTPMessage::HTTPPriority(0, \textcolor{keyword}{false}, 7);
+276   req.setHTTP2Priority(pri);
+277   upstreamCodec\_.generateExHeader(output\_, 3, req,
+278                                   HTTPCodec::ExAttributes(1, \textcolor{keyword}{true}));
+279 
+280   parse();
+281   EXPECT\_EQ(callbacks\_.msg->getHTTP2Priority(), pri);
+282   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+283   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+284 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Duplicate\+Ex\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Duplicate\+Ex\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aa55e49b4432a3cb73ef963b7df370e06}
+
+
+Definition at line 286 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::get\+Get\+Request(), proxygen\+::parse(), and proxygen\+::http2\+::write\+Settings().
+
+
+\begin{DoxyCode}
+286                                            \{
+287   downstreamCodec\_.getEgressSettings()->setSetting(
+288       SettingsId::ENABLE\_EX\_HEADERS, 1);
+289   proxygen::http2::writeSettings(
+290       output\_, \{\{proxygen::SettingsId::ENABLE_EX_HEADERS, 1\}\});
+291 
+292   \textcolor{keyword}{auto} req = getGetRequest();
+293   upstreamCodec\_.generateExHeader(
+294       output\_, 3, req, HTTPCodec::ExAttributes(1, \textcolor{keyword}{true}), \textcolor{comment}{/*eom=*/}\textcolor{keyword}{false});
+295   upstreamCodec\_.generateExHeader(
+296       output\_, 3, req, HTTPCodec::ExAttributes(1, \textcolor{keyword}{true}), \textcolor{comment}{/*eom=*/}\textcolor{keyword}{true});
+297 
+298   parse();
+299   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+300   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+301 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Ignore\+Ex\+Headers\+If\+Not\+Enabled)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Ignore\+Ex\+Headers\+If\+Not\+Enabled}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a35f8aaee294a6327c997b8767c1f9833}
+
+
+Definition at line 303 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::get\+Get\+Request(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+303                                                     \{
+304   downstreamCodec\_.getEgressSettings()->setSetting(
+305       SettingsId::ENABLE\_EX\_HEADERS, 0);
+306 
+307   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+308   downstreamCodec\_.generateExHeader(output\_, 3, req,
+309                                     HTTPCodec::ExAttributes(1, \textcolor{keyword}{true}));
+310 
+311   parse();
+312   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+313   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+314 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a384d75139edc66dce3636f577271aa00}
+
+
+Definition at line 316 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::headers\+::k\+Authority, proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Scheme, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::parse(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+316                                    \{
+317   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v1(\textcolor{stringliteral}{"GET"});
+318   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v2(\textcolor{stringliteral}{"/"});
+319   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v3(\textcolor{stringliteral}{"http"});
+320   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v4(\textcolor{stringliteral}{"foo.com"});
+321   \textcolor{keyword}{static} \textcolor{keyword}{const} vector<proxygen::compress::Header> reqHeaders = \{
+322     Header::makeHeaderForTest(headers::kMethod, v1),
+323     Header::makeHeaderForTest(headers::kPath, v2),
+324     Header::makeHeaderForTest(headers::kScheme, v3),
+325     Header::makeHeaderForTest(headers::kAuthority, v4),
+326   \};
+327 
+328   HPACKCodec headerCodec(TransportDirection::UPSTREAM);
+329   HTTPCodec::StreamID stream = 1;
+330   \textcolor{comment}{// missing fields (missing authority is OK)}
+331   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < reqHeaders.size(); i++, stream += 2) \{
+332     std::vector<proxygen::compress::Header> allHeaders = reqHeaders;
+333     allHeaders.erase(allHeaders.begin() + i);
+334     \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(allHeaders);
+335     http2::writeHeaders(output\_,
+336                         std::move(encodedHeaders),
+337                         stream,
+338                         folly::none,
+339                         http2::kNoPadding,
+340                         \textcolor{keyword}{true},
+341                         \textcolor{keyword}{true});
+342   \}
+343   \textcolor{comment}{// dup fields}
+344   std::string v(\textcolor{stringliteral}{"foomonkey"});
+345   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < reqHeaders.size(); i++, stream += 2) \{
+346     std::vector<proxygen::compress::Header> allHeaders = reqHeaders;
+347     \textcolor{keyword}{auto} h = allHeaders[i];
+348     h.value = &v;
+349     allHeaders.push\_back(h);
+350     \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(allHeaders);
+351     http2::writeHeaders(output\_,
+352                         std::move(encodedHeaders),
+353                         stream,
+354                         folly::none,
+355                         http2::kNoPadding,
+356                         \textcolor{keyword}{true},
+357                         \textcolor{keyword}{true});
+358   \}
+359 
+360   parse();
+361   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+362   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+363   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+364   EXPECT\_EQ(callbacks\_.streamErrors, 7);
+365   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+366 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Pseudo\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Pseudo\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a8fb116d2f5a0c4c6620bb688ac19ae3b}
+
+
+Definition at line 368 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Scheme, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::parse(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+368                                          \{
+369   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v1(\textcolor{stringliteral}{"POST"});
+370   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v2(\textcolor{stringliteral}{"http"});
+371   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string n3(\textcolor{stringliteral}{"foo"});
+372   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v3(\textcolor{stringliteral}{"bar"});
+373   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v4(\textcolor{stringliteral}{"/"});
+374   \textcolor{keyword}{static} \textcolor{keyword}{const} vector<proxygen::compress::Header> reqHeaders = \{
+375     Header::makeHeaderForTest(headers::kMethod, v1),
+376     Header::makeHeaderForTest(headers::kScheme, v2),
+377     Header::makeHeaderForTest(n3, v3),
+378     Header::makeHeaderForTest(headers::kPath, v4),
+379   \};
+380 
+381   HPACKCodec headerCodec(TransportDirection::UPSTREAM);
+382   HTTPCodec::StreamID stream = 1;
+383   std::vector<proxygen::compress::Header> allHeaders = reqHeaders;
+384   \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(allHeaders);
+385   http2::writeHeaders(output\_,
+386                       std::move(encodedHeaders),
+387                       stream,
+388                       folly::none,
+389                       http2::kNoPadding,
+390                       \textcolor{keyword}{true},
+391                       \textcolor{keyword}{true});
+392 
+393   parse();
+394   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+395   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+396   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+397   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+398   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+399 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Header\+Values)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Header\+Values}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a966562acc96781697a00b976b9eaad07}
+
+
+Definition at line 401 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::headers\+::k\+Authority, proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Scheme, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::parse(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+401                                         \{
+402   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v1(\textcolor{stringliteral}{"--1"});
+403   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v2(\textcolor{stringliteral}{"\(\backslash\)13\(\backslash\)10protocol-attack"});
+404   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v3(\textcolor{stringliteral}{"\(\backslash\)13"});
+405   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v4(\textcolor{stringliteral}{"abc.com\(\backslash\)\(\backslash\)13\(\backslash\)\(\backslash\)10"});
+406   \textcolor{keyword}{static} \textcolor{keyword}{const} vector<proxygen::compress::Header> reqHeaders = \{
+407     Header::makeHeaderForTest(headers::kMethod, v1),
+408     Header::makeHeaderForTest(headers::kPath, v2),
+409     Header::makeHeaderForTest(headers::kScheme, v3),
+410     Header::makeHeaderForTest(headers::kAuthority, v4),
+411   \};
+412 
+413   HPACKCodec headerCodec(TransportDirection::UPSTREAM);
+414   HTTPCodec::StreamID stream = 1;
+415   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < reqHeaders.size(); i++, stream += 2) \{
+416     std::vector<proxygen::compress::Header> allHeaders;
+417     allHeaders.push\_back(reqHeaders[i]);
+418     \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(allHeaders);
+419     http2::writeHeaders(output\_,
+420                         std::move(encodedHeaders),
+421                         stream,
+422                         folly::none,
+423                         http2::kNoPadding,
+424                         \textcolor{keyword}{true},
+425                         \textcolor{keyword}{true});
+426   \}
+427 
+428   parse();
+429   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+430   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+431   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+432   EXPECT\_EQ(callbacks\_.streamErrors, 4);
+433   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+434 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Empty\+Header\+Name)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Empty\+Header\+Name}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a52df22fc9dd5e50e04daea0b69972d16}
+
+
+Definition at line 446 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References k\+Buf\+Empty\+Header, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+446                                         \{
+447   output\_.append(IOBuf::copyBuffer(kBufEmptyHeader, \textcolor{keyword}{sizeof}(kBufEmptyHeader)));
+448   parse();
+449   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+450   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+451   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+452   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+453   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+454 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Connect)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Connect}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a6a156454a994c77515808e91a9ee4663}
+
+
+Definition at line 456 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+C\+O\+N\+N\+E\+CT, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::parse(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method().
+
+
+\begin{DoxyCode}
+456                                      \{
+457   std::string authority = \textcolor{stringliteral}{"myhost:1234"};
+458   HTTPMessage request;
+459   request.setMethod(HTTPMethod::CONNECT);
+460   request.getHeaders().add(proxygen::HTTP\_HEADER\_HOST, authority);
+461   upstreamCodec\_.generateHeader(output\_, 1, request, \textcolor{keyword}{false} \textcolor{comment}{/* eom */});
+462 
+463   parse();
+464   callbacks\_.expectMessage(\textcolor{keyword}{false}, 1, \textcolor{stringliteral}{""});
+465   EXPECT\_EQ(HTTPMethod::CONNECT, callbacks\_.msg->getMethod());
+466   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+467   EXPECT\_EQ(authority, headers.getSingleOrEmpty(proxygen::HTTP\_HEADER\_HOST));
+468 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Connect)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Connect}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a4632179b8dc6cafcbb7406b6cfdd0624}
+
+
+Definition at line 470 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::headers\+::k\+Authority, proxygen\+::headers\+::k\+Http, proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Scheme, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::parse(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+470                                    \{
+471   std::string v1 = \textcolor{stringliteral}{"CONNECT"};
+472   std::string v2 = \textcolor{stringliteral}{"somehost:576"};
+473   std::vector<proxygen::compress::Header> goodHeaders = \{
+474     Header::makeHeaderForTest(headers::kMethod, v1),
+475     Header::makeHeaderForTest(headers::kAuthority, v2),
+476   \};
+477 
+478   \textcolor{comment}{// See https://tools.ietf.org/html/rfc7540#section-8.3}
+479   std::string v3 = \textcolor{stringliteral}{"/foobar"};
+480   std::vector<proxygen::compress::Header> badHeaders = \{
+481     Header::makeHeaderForTest(headers::kScheme, headers::kHttp),
+482     Header::makeHeaderForTest(headers::kPath, v3),
+483   \};
+484 
+485   HPACKCodec headerCodec(TransportDirection::UPSTREAM);
+486   HTTPCodec::StreamID stream = 1;
+487 
+488   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < badHeaders.size(); i++, stream += 2) \{
+489     \textcolor{keyword}{auto} allHeaders = goodHeaders;
+490     allHeaders.push\_back(badHeaders[i]);
+491     \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(allHeaders);
+492     http2::writeHeaders(output\_,
+493                         std::move(encodedHeaders),
+494                         stream,
+495                         folly::none,
+496                         http2::kNoPadding,
+497                         \textcolor{keyword}{true},
+498                         \textcolor{keyword}{true});
+499   \}
+500 
+501   parse();
+502   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+503   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+504   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+505   EXPECT\_EQ(callbacks\_.streamErrors, badHeaders.size());
+506   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+507 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Normal\+Size\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Normal\+Size\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a2d0eeef5e1fea730e84d578f307f383e}
+
+
+Definition at line 556 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+556                                          \{
+557   testHeaderListSize(\textcolor{keyword}{false});
+558 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Oversized\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Oversized\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a3fd72986df4eec478d4fd39794be9f4e}
+
+
+Definition at line 560 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+560                                         \{
+561   testHeaderListSize(\textcolor{keyword}{true});
+562 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Normal\+Size\+Frame)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Normal\+Size\+Frame}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ade500f449a9fb225ac4b5a3385d86230}
+
+
+Definition at line 564 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+564                                         \{
+565   testFrameSizeLimit(\textcolor{keyword}{false});
+566 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Oversized\+Frame)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Oversized\+Frame}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a4d64d70cbc40f712f39d50efcad7b72c}
+
+
+Definition at line 568 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+568                                        \{
+569   testFrameSizeLimit(\textcolor{keyword}{true});
+570 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Big\+Header\+Compressed)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Big\+Header\+Compressed}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_acad0228ec602a1097152f8536b4cd256}
+
+
+Definition at line 572 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+I\+S\+T\+\_\+\+S\+I\+ZE, proxygen\+::parse(), and settings.
+
+
+\begin{DoxyCode}
+572                                             \{
+573   SetUpUpstreamTest();
+574   \textcolor{keyword}{auto} settings = downstreamCodec\_.getEgressSettings();
+575   settings->setSetting(SettingsId::MAX\_HEADER\_LIST\_SIZE, 37);
+576   downstreamCodec\_.generateSettings(output\_);
+577   parseUpstream();
+578 
+579   SetUp();
+580   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+581   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+582   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+583 
+584   parse();
+585   \textcolor{comment}{// session error}
+586   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+587   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+588   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+589   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+590   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+591 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Header\+Reply)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Header\+Reply}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a57334778ba376f1e1bf8576398909925}
+
+
+Definition at line 594 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message().
+
+
+\begin{DoxyCode}
+594                                          \{
+595   SetUpUpstreamTest();
+596   HTTPMessage resp;
+597   resp.setStatusCode(200);
+598   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+599   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+600   downstreamCodec\_.generateHeader(output\_, 1, resp);
+601   downstreamCodec\_.generateEOM(output\_, 1);
+602 
+603   parseUpstream();
+604   callbacks\_.expectMessage(\textcolor{keyword}{true}, 2, 200);
+605   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+606   \textcolor{comment}{// HTTP/2 doesnt support serialization - instead you get the default}
+607   EXPECT\_EQ(\textcolor{stringliteral}{"OK"}, callbacks\_.msg->getStatusMessage());
+608   EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+609   EXPECT\_EQ(\textcolor{stringliteral}{"x-coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_CONTENT\_TYPE));
+610 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Headers\+Reply)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Headers\+Reply}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a7d794383d7849b8350b0d7ed5bb97d35}
+
+
+Definition at line 612 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::http2\+::k\+No\+Padding, proxygen\+::headers\+::k\+Status, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::parse(), and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+612                                         \{
+613   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string v1(\textcolor{stringliteral}{"200"});
+614   \textcolor{keyword}{static} \textcolor{keyword}{const} vector<proxygen::compress::Header> respHeaders = \{
+615     Header::makeHeaderForTest(headers::kStatus, v1),
+616   \};
+617 
+618   HPACKCodec headerCodec(TransportDirection::DOWNSTREAM);
+619   HTTPCodec::StreamID stream = 1;
+620   \textcolor{comment}{// missing fields (missing authority is OK)}
+621   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < respHeaders.size(); i++, stream += 2) \{
+622     std::vector<proxygen::compress::Header> allHeaders = respHeaders;
+623     allHeaders.erase(allHeaders.begin() + i);
+624     \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(allHeaders);
+625     http2::writeHeaders(output\_,
+626                         std::move(encodedHeaders),
+627                         stream,
+628                         folly::none,
+629                         http2::kNoPadding,
+630                         \textcolor{keyword}{true},
+631                         \textcolor{keyword}{true});
+632   \}
+633   \textcolor{comment}{// dup fields}
+634   std::string v(\textcolor{stringliteral}{"foomonkey"});
+635   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < respHeaders.size(); i++, stream += 2) \{
+636     std::vector<proxygen::compress::Header> allHeaders = respHeaders;
+637     \textcolor{keyword}{auto} h = allHeaders[i];
+638     h.value = &v;
+639     allHeaders.push\_back(h);
+640     \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(allHeaders);
+641     http2::writeHeaders(output\_,
+642                         std::move(encodedHeaders),
+643                         stream,
+644                         folly::none,
+645                         http2::kNoPadding,
+646                         \textcolor{keyword}{true},
+647                         \textcolor{keyword}{true});
+648   \}
+649 
+650   parse();
+651   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+652   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+653   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+654   EXPECT\_EQ(callbacks\_.streamErrors, 2);
+655   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+656 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Cookies)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Cookies}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_acb71fd3885431574f44170be00221e3c}
+
+
+Definition at line 658 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::parse(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Secure().
+
+
+\begin{DoxyCode}
+658                                 \{
+659   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+660   req.getHeaders().add(\textcolor{stringliteral}{"Cookie"}, \textcolor{stringliteral}{"chocolate-chip=1"});
+661   req.getHeaders().add(\textcolor{stringliteral}{"Cookie"}, \textcolor{stringliteral}{"rainbow-chip=2"});
+662   req.getHeaders().add(\textcolor{stringliteral}{"Cookie"}, \textcolor{stringliteral}{"butterscotch=3"});
+663   req.getHeaders().add(\textcolor{stringliteral}{"Cookie"}, \textcolor{stringliteral}{"oatmeal-raisin=4"});
+664   req.setSecure(\textcolor{keyword}{true});
+665   upstreamCodec\_.generateHeader(output\_, 1, req);
+666 
+667   parse();
+668   callbacks\_.expectMessage(\textcolor{keyword}{false}, 2, \textcolor{stringliteral}{"/guacamole"});
+669   EXPECT\_EQ(callbacks\_.msg->getCookie(\textcolor{stringliteral}{"chocolate-chip"}), \textcolor{stringliteral}{"1"});
+670   EXPECT\_EQ(callbacks\_.msg->getCookie(\textcolor{stringliteral}{"rainbow-chip"}), \textcolor{stringliteral}{"2"});
+671   EXPECT\_EQ(callbacks\_.msg->getCookie(\textcolor{stringliteral}{"butterscotch"}), \textcolor{stringliteral}{"3"});
+672   EXPECT\_EQ(callbacks\_.msg->getCookie(\textcolor{stringliteral}{"oatmeal-raisin"}), \textcolor{stringliteral}{"4"});
+673 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_af4d764119cd44e4be35785199ed24b5e}
+
+
+Definition at line 675 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Big\+Get\+Request(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+675                                           \{
+676   HTTPMessage req = getBigGetRequest();
+677   upstreamCodec\_.generateHeader(output\_, 1, req);
+678 
+679   parse();
+680   callbacks\_.expectMessage(\textcolor{keyword}{false}, -1, \textcolor{stringliteral}{"/"});
+681 \textcolor{preprocessor}{#ifndef NDEBUG}
+682   EXPECT\_GT(downstreamCodec\_.getReceivedFrameCount(), 1);
+683 \textcolor{preprocessor}{#endif}
+684   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+685   EXPECT\_EQ(\textcolor{stringliteral}{"coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_USER\_AGENT));
+686   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+687   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+688   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+689   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+690   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+691 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Continuation\+End\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Continuation\+End\+Stream}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a147684afcd9fcc139a2248f8780cd6c1}
+
+
+Definition at line 693 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Big\+Get\+Request(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+693                                                    \{
+694   \textcolor{comment}{// CONTINUATION with END\_STREAM flag set on the preceding HEADERS frame}
+695   HTTPMessage req = getBigGetRequest();
+696   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+697 
+698   parse();
+699   callbacks\_.expectMessage(\textcolor{keyword}{true}, -1, \textcolor{stringliteral}{"/"});
+700 \textcolor{preprocessor}{#ifndef NDEBUG}
+701   EXPECT\_GT(downstreamCodec\_.getReceivedFrameCount(), 1);
+702 \textcolor{preprocessor}{#endif}
+703   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+704   EXPECT\_EQ(\textcolor{stringliteral}{"coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_USER\_AGENT));
+705   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+706   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+707   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+708   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+709   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+710 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a778f6586d9bb4cf51de23bd6f16a2e3d}
+
+
+Definition at line 712 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::make\+Buf(), proxygen\+::parse(), and proxygen\+::http2\+::write\+Continuation().
+
+
+\begin{DoxyCode}
+712                                         \{
+713   \textcolor{comment}{// CONTINUATION with no preceding HEADERS}
+714   \textcolor{keyword}{auto} fakeHeaders = makeBuf(5);
+715   http2::writeContinuation(output\_, 3, \textcolor{keyword}{true}, std::move(fakeHeaders));
+716 
+717   parse();
+718   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+719   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+720   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+721   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+722   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+723 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Missing\+Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Missing\+Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a95ef4ee1c1292d5a019e0940129fbff3}
+
+
+Definition at line 725 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, proxygen\+::get\+Big\+Get\+Request(), proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::parse(), and proxygen\+::http2\+::write\+Goaway().
+
+
+\begin{DoxyCode}
+725                                             \{
+726   IOBufQueue output(IOBufQueue::cacheChainLength());
+727   HTTPMessage req = getBigGetRequest();
+728 
+729   upstreamCodec\_.generateHeader(output\_, 1, req);
+730   \textcolor{comment}{// empirically determined the size of continuation frame, and strip it}
+731   output\_.trimEnd(http2::kFrameHeaderSize + 4134);
+732 
+733   \textcolor{comment}{// insert a non-continuation (but otherwise valid) frame}
+734   http2::writeGoaway(output\_, 17, ErrorCode::ENHANCE\_YOUR\_CALM);
+735 
+736   parse();
+737   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+738   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+739   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+740   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+741   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+742 \textcolor{preprocessor}{#ifndef NDEBUG}
+743   EXPECT\_EQ(downstreamCodec\_.getReceivedFrameCount(), 2);
+744 \textcolor{preprocessor}{#endif}
+745 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Missing\+Continuation\+Bad\+Frame)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Missing\+Continuation\+Bad\+Frame}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a4b570a9360492483b9fc1740656c397a}
+
+
+Definition at line 747 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Big\+Get\+Request(), proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::make\+Buf(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+747                                                     \{
+748   IOBufQueue output(IOBufQueue::cacheChainLength());
+749   HTTPMessage req = getBigGetRequest();
+750   upstreamCodec\_.generateHeader(output\_, 1, req);
+751 
+752   \textcolor{comment}{// empirically determined the size of continuation frame, and fake it}
+753   output\_.trimEnd(http2::kFrameHeaderSize + 4134);
+754 
+755   \textcolor{comment}{// insert an invalid frame}
+756   \textcolor{keyword}{auto} frame = makeBuf(http2::kFrameHeaderSize + 4134);
+757   *((uint32\_t *)frame->writableData()) = 0xfa000000;
+758   output\_.append(std::move(frame));
+759 
+760   parse();
+761   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+762   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+763   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+764   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+765   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+766 \textcolor{preprocessor}{#ifndef NDEBUG}
+767   EXPECT\_EQ(downstreamCodec\_.getReceivedFrameCount(), 2);
+768 \textcolor{preprocessor}{#endif}
+769 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Continuation\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Continuation\+Stream}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a7b4b6459eef317f538a0356449452438}
+
+
+Definition at line 771 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Big\+Get\+Request(), proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::make\+Buf(), proxygen\+::parse(), and proxygen\+::http2\+::write\+Continuation().
+
+
+\begin{DoxyCode}
+771                                               \{
+772   HTTPMessage req = getBigGetRequest();
+773   upstreamCodec\_.generateHeader(output\_, 1, req);
+774 
+775   \textcolor{comment}{// empirically determined the size of continuation frame, and fake it}
+776   output\_.trimEnd(http2::kFrameHeaderSize + 4134);
+777   \textcolor{keyword}{auto} fakeHeaders = makeBuf(4134);
+778   http2::writeContinuation(output\_, 3, \textcolor{keyword}{true}, std::move(fakeHeaders));
+779 
+780   parse();
+781   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+782   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+783   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+784   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+785   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+786 \textcolor{preprocessor}{#ifndef NDEBUG}
+787   EXPECT\_EQ(downstreamCodec\_.getReceivedFrameCount(), 2);
+788 \textcolor{preprocessor}{#endif}
+789 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Frame\+Too\+Large)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Frame\+Too\+Large}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a4a089f202ae8a6de5b58c1a13194ce50}
+
+
+Definition at line 791 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+F\+R\+A\+M\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+E\+R\+R\+OR, proxygen\+::parse(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+791                                       \{
+792   writeFrameHeaderManual(output\_, 1 << 15, 0, 0, 1);
+793 
+794   parse();
+795   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+796   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+797   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+798   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+799   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+800   EXPECT\_TRUE(callbacks\_.lastParseError->hasCodecStatusCode());
+801   EXPECT\_EQ(callbacks\_.lastParseError->getCodecStatusCode(),
+802             ErrorCode::FRAME\_SIZE\_ERROR);
+803 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Unknown\+Frame\+Type)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Unknown\+Frame\+Type}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a5de023f7b6f13a2e8688aee52e1f0bc8}
+
+
+Definition at line 805 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::parse(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+805                                          \{
+806   HTTPMessage req = getGetRequest();
+807   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+808 
+809   \textcolor{comment}{// unknown frame type 17}
+810   writeFrameHeaderManual(output\_, 17, 37, 0, 1);
+811   output\_.append(\textcolor{stringliteral}{"wicked awesome!!!"});
+812   upstreamCodec\_.generateHeader(output\_, 1, req);
+813 
+814   parse();
+815   callbacks\_.expectMessage(\textcolor{keyword}{false}, 2, \textcolor{stringliteral}{""}); \textcolor{comment}{// + host}
+816 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Junk\+After\+Conn\+Error)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Junk\+After\+Conn\+Error}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_afb5b085e85ace5a2f44f97428cef2bfd}
+
+
+Definition at line 818 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::http2\+::\+H\+E\+A\+D\+E\+RS, proxygen\+::parse(), and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+818                                            \{
+819   HTTPMessage req = getGetRequest();
+820   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+821 
+822   \textcolor{comment}{// write headers frame for stream 0}
+823   writeFrameHeaderManual(output\_, 0, (uint8\_t)http2::FrameType::HEADERS, 0, 0);
+824   \textcolor{comment}{// now write a valid headers frame, should never be parsed}
+825   upstreamCodec\_.generateHeader(output\_, 1, req);
+826 
+827   parse();
+828   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+829   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+830   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+831   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+832   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+833 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Data)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Data}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a5e920f90f865ff9b3e29901b7a63a163}
+
+
+Definition at line 835 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+835                                   \{
+836   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcde"});
+837   \textcolor{keyword}{auto} buf = folly::IOBuf::copyBuffer(data.data(), data.length());
+838   upstreamCodec\_.generateBody(output\_, 2, std::move(buf),
+839                               HTTPCodec::NoPadding, \textcolor{keyword}{true});
+840 
+841   parse();
+842   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+843   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+844   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+845   EXPECT\_EQ(callbacks\_.bodyCalls, 1);
+846   EXPECT\_EQ(callbacks\_.bodyLength, 5);
+847   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+848   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+849   EXPECT\_EQ(callbacks\_.data.move()->moveToFbString(), data);
+850 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Long\+Data)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Long\+Data}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ad5fe3c8c8e989eeec4a2ef6d8c5e70d0}
+
+
+Definition at line 852 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::make\+Buf(), proxygen\+::\+M\+A\+X\+\_\+\+F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Settings\+::set\+Setting(), and settings.
+
+
+\begin{DoxyCode}
+852                                  \{
+853   \textcolor{comment}{// Hack the max frame size artificially low}
+854   HTTPSettings* settings = (HTTPSettings*)upstreamCodec\_.getIngressSettings();
+855   settings->setSetting(SettingsId::MAX\_FRAME\_SIZE, 16);
+856   \textcolor{keyword}{auto} buf = makeBuf(100);
+857   upstreamCodec\_.generateBody(output\_, 1, buf->clone(), HTTPCodec::NoPadding,
+858                               \textcolor{keyword}{true});
+859 
+860   parse();
+861   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+862   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+863   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+864   EXPECT\_EQ(callbacks\_.bodyCalls, 7);
+865   EXPECT\_EQ(callbacks\_.bodyLength, 100);
+866   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+867   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+868   EXPECT\_EQ(callbacks\_.data.move()->moveToFbString(), buf->moveToFbString());
+869 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Malformed\+Padding\+Length)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Malformed\+Padding\+Length}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a6f14f8d99311f33ee27aa64129d0ed58}
+
+
+Definition at line 871 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse().
+
+
+\begin{DoxyCode}
+871                                                \{
+872   \textcolor{keyword}{const} uint8\_t badInput[] = \{0x50, 0x52, 0x49, 0x20, 0x2a, 0x20, 0x48, 0x54,
+873                               0x54, 0x50, 0x2f, 0x32, 0x2e, 0x30, 0x0d, 0x0a,
+874                               0x0d, 0x0a, 0x53, 0x4d, 0x0d, 0x0a, 0x0d, 0x0a,
+875                               0x00, 0x00, 0x7e, 0x00, 0x6f, 0x6f, 0x6f, 0x6f,
+876                               \textcolor{comment}{// The padding length byte below is 0x82 (130}
+877                               \textcolor{comment}{// in decimal) which is greater than the length}
+878                               \textcolor{comment}{// specified by the header's length field, 126}
+879                               0x01, 0x82, 0x87, 0x44, 0x87, 0x92, 0x97, 0x92,
+880                               0x92, 0x92, 0x7a, 0x0b, 0x41, 0x89, 0xf1, 0xe3,
+881                               0xc0, 0xf2, 0x9c, 0xdd, 0x90, 0xf4, 0xff, 0x40,
+882                               0x80, 0x84, 0x2d, 0x35, 0xa7, 0xd7\};
+883   output\_.clear();
+884   output\_.append(badInput, \textcolor{keyword}{sizeof}(badInput));
+885   EXPECT\_EQ(output\_.chainLength(), \textcolor{keyword}{sizeof}(badInput));
+886 
+887   EXPECT\_FALSE(parse());
+888 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Malformed\+Padding)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Malformed\+Padding}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a64ca1a98e795a262c1b8eaeb456440dc}
+
+
+Definition at line 890 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse().
+
+
+\begin{DoxyCode}
+890                                          \{
+891   \textcolor{keyword}{const} uint8\_t badInput[] = \{
+892     0x00, 0x00, 0x0d, 0x01, 0xbe, 0x63, 0x0d, 0x0a, 0x0d, 0x0a, 0x00, 0x73,
+893     0x00, 0x00, 0x06, 0x08, 0x72, 0x00, 0x24, 0x00, 0xfa, 0x4d, 0x0d
+894   \};
+895   output\_.append(badInput, \textcolor{keyword}{sizeof}(badInput));
+896 
+897   EXPECT\_FALSE(parse());
+898 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, No\+App\+Byte)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{No\+App\+Byte}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a8b391c38214082129aef72648dedea1a}
+
+
+Definition at line 900 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse().
+
+
+\begin{DoxyCode}
+900                                   \{
+901   \textcolor{keyword}{const} uint8\_t noAppByte[] = \{0x50, 0x52, 0x49, 0x20, 0x2a, 0x20, 0x48, 0x54,
+902                                0x54, 0x50, 0x2f, 0x32, 0x2e, 0x30, 0x0d, 0x0a,
+903                                0x0d, 0x0a, 0x53, 0x4d, 0x0d, 0x0a, 0x0d, 0x0a,
+904                                0x00, 0x00, 0x56, 0x00, 0x5d, 0x00, 0x00, 0x00,
+905                                0x01, 0x55, 0x00\};
+906   output\_.clear();
+907   output\_.append(noAppByte, \textcolor{keyword}{sizeof}(noAppByte));
+908   EXPECT\_EQ(output\_.chainLength(), \textcolor{keyword}{sizeof}(noAppByte));
+909 
+910   EXPECT\_TRUE(parse());
+911   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+912   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+913   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+914   EXPECT\_EQ(callbacks\_.bodyCalls, 1);
+915   EXPECT\_EQ(callbacks\_.bodyLength, 0);
+916   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+917   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+918 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Data\+Frame\+Partial\+Data\+On\+Frame\+Header\+Call)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Data\+Frame\+Partial\+Data\+On\+Frame\+Header\+Call}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a988d5fd3eda7cb3574d1fe5ae21e0daf}
+
+
+Definition at line 920 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::make\+Buf().
+
+
+\begin{DoxyCode}
+920                                                               \{
+921   \textcolor{keyword}{using namespace }testing;
+922   NiceMock<MockHTTPCodecCallback> mockCallback;
+923   EXPECT\_CALL(mockCallback, onFrameHeader(\_, \_, \_, \_, \_));
+924 
+925   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} bufSize = 10;
+926   \textcolor{keyword}{auto} buf = makeBuf(bufSize);
+927   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} padding = 10;
+928   upstreamCodec\_.generateBody(output\_, 1, buf->clone(), padding, \textcolor{keyword}{true});
+929   EXPECT\_EQ(output\_.chainLength(), 54);
+930 
+931   downstreamCodec\_.setCallback(&mockCallback);
+932 
+933   \textcolor{keyword}{auto} ingress = output\_.move();
+934   ingress->coalesce();
+935   \textcolor{comment}{// Copy partial byte to a new buffer}
+936   \textcolor{keyword}{auto} ingress1 = IOBuf::copyBuffer(ingress->data(), 34);
+937   downstreamCodec\_.onIngress(*ingress1);
+938 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Data\+Frame\+Partial\+Data\+With\+No\+App\+Byte)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Data\+Frame\+Partial\+Data\+With\+No\+App\+Byte}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ac9b5c91eca2dd62fbb7562c3fc1886a2}
+
+
+Definition at line 940 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::make\+Buf().
+
+
+\begin{DoxyCode}
+940                                                           \{
+941   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} bufSize = 10;
+942   \textcolor{keyword}{auto} buf = makeBuf(bufSize);
+943   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} padding = 10;
+944   upstreamCodec\_.generateBody(output\_, 1, buf->clone(), padding, \textcolor{keyword}{true});
+945   EXPECT\_EQ(output\_.chainLength(), 54);
+946 
+947   \textcolor{keyword}{auto} ingress = output\_.move();
+948   ingress->coalesce();
+949   \textcolor{comment}{// Copy up to the padding length byte to a new buffer}
+950   \textcolor{keyword}{auto} ingress1 = IOBuf::copyBuffer(ingress->data(), 34);
+951   \textcolor{keywordtype}{size\_t} parsed = downstreamCodec\_.onIngress(*ingress1);
+952   \textcolor{comment}{// The 34th byte is the padding length byte which should not be parsed}
+953   EXPECT\_EQ(parsed, 33);
+954   \textcolor{comment}{// Copy from the padding length byte to the end}
+955   \textcolor{keyword}{auto} ingress2 = IOBuf::copyBuffer(ingress->data() + 33, 21);
+956   parsed = downstreamCodec\_.onIngress(*ingress2);
+957   \textcolor{comment}{// The padding length byte should be parsed this time along with 10 bytes of}
+958   \textcolor{comment}{// application data and 10 bytes of padding}
+959   EXPECT\_EQ(parsed, 21);
+960 
+961   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+962   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+963   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+964   EXPECT\_EQ(callbacks\_.bodyCalls, 1);
+965   EXPECT\_EQ(callbacks\_.bodyLength, bufSize);
+966   \textcolor{comment}{// Total padding is the padding length byte and the padding bytes}
+967   EXPECT\_EQ(callbacks\_.paddingBytes, padding + 1);
+968   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+969   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+970   EXPECT\_EQ(callbacks\_.data.move()->moveToFbString(), buf->moveToFbString());
+971 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Rst)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Rst}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a2d9364d64d022086dd96fc6d2d48eab0}
+
+
+Definition at line 973 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+973                                  \{
+974   upstreamCodec\_.generateRstStream(output\_, 2, ErrorCode::ENHANCE\_YOUR\_CALM);
+975   parse();
+976   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+977   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+978   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+979   EXPECT\_EQ(callbacks\_.bodyCalls, 0);
+980   EXPECT\_EQ(callbacks\_.aborts, 1);
+981   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+982   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+983 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Rst\+Invalid\+Code)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Rst\+Invalid\+Code}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aff7ffb2083bbe03a33f25a43f023d8f4}
+
+
+Definition at line 985 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+\_\+\+S\+P\+D\+Y\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+985                                             \{
+986   upstreamCodec\_.generateRstStream(output\_, 2, ErrorCode::\_SPDY\_INVALID\_STREAM);
+987   parse();
+988   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+989   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+990   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+991   EXPECT\_EQ(callbacks\_.bodyCalls, 0);
+992   EXPECT\_EQ(callbacks\_.aborts, 1);
+993   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+994   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+995 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Ping)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Ping}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ae59d7d4e9bc21c3133fe8e26010ba076}
+
+
+Definition at line 997 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Connection\+Preface, proxygen\+::http2\+::k\+Frame\+Header\+Size, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+997                                   \{
+998   upstreamCodec\_.generatePingRequest(output\_);
+999   upstreamCodec\_.generatePingReply(output\_, 17);
+1000 
+1001   uint64\_t pingReq;
+1002   parse([&] (IOBuf* ingress) \{
+1003       folly::io::Cursor c(ingress);
+1004       c.skip(http2::kFrameHeaderSize + http2::kConnectionPreface.length());
+1005       pingReq = c.read<uint64\_t>();
+1006     \});
+1007 
+1008   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+1009   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+1010   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+1011   EXPECT\_EQ(callbacks\_.bodyCalls, 0);
+1012   EXPECT\_EQ(callbacks\_.recvPingRequest, pingReq);
+1013   EXPECT\_EQ(callbacks\_.recvPingReply, 17);
+1014   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1015   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1016 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Window)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Window}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aa699c1a5c82af383a17ecfcfb1796471}
+
+
+Definition at line 1018 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Max\+Window\+Update\+Size, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1018                                     \{
+1019   \textcolor{comment}{// This test would fail if the codec had window state}
+1020   upstreamCodec\_.generateWindowUpdate(output\_, 0, 10);
+1021   upstreamCodec\_.generateWindowUpdate(output\_, 0, http2::kMaxWindowUpdateSize);
+1022   upstreamCodec\_.generateWindowUpdate(output\_, 1, 12);
+1023   upstreamCodec\_.generateWindowUpdate(output\_, 1, http2::kMaxWindowUpdateSize);
+1024 
+1025   parse();
+1026   EXPECT\_EQ(callbacks\_.windowUpdateCalls, 4);
+1027   EXPECT\_EQ(callbacks\_.windowUpdates[0],
+1028             std::vector<uint32\_t>(\{10, http2::kMaxWindowUpdateSize\}));
+1029   EXPECT\_EQ(callbacks\_.windowUpdates[1],
+1030             std::vector<uint32\_t>(\{12, http2::kMaxWindowUpdateSize\}));
+1031   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1032   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1033 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Zero\+Window)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Zero\+Window}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ae9cc35df98d415f5149f2946f0064072}
+
+
+Definition at line 1035 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Frame\+Window\+Update\+Size, proxygen\+::parse(), proxygen\+::\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, and stream\+ID.
+
+
+\begin{DoxyCode}
+1035                                    \{
+1036   \textcolor{keyword}{auto} streamID = HTTPCodec::StreamID(1);
+1037   \textcolor{comment}{// First generate a frame with delta=1 so as to pass the checks, and then}
+1038   \textcolor{comment}{// hack the frame so that delta=0 without modifying other checks}
+1039   upstreamCodec\_.generateWindowUpdate(output\_, streamID, 1);
+1040   output\_.trimEnd(http2::kFrameWindowUpdateSize);
+1041   QueueAppender appender(&output\_, http2::kFrameWindowUpdateSize);
+1042   appender.writeBE<uint32\_t>(0);
+1043 
+1044   parse();
+1045   \textcolor{comment}{// This test doesn't ensure that RST\_STREAM is generated}
+1046   EXPECT\_EQ(callbacks\_.windowUpdateCalls, 0);
+1047   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1048   EXPECT\_EQ(callbacks\_.lastParseError->getCodecStatusCode(),
+1049       ErrorCode::PROTOCOL\_ERROR);
+1050 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Goaway)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Goaway}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ab537b2de6800b119fc7f4aef34edbba5}
+
+
+Definition at line 1052 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1052                                     \{
+1053   std::unique\_ptr<folly::IOBuf> debugData =
+1054     folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"debugData"});
+1055   upstreamCodec\_.generateGoaway(output\_, 17, ErrorCode::ENHANCE\_YOUR\_CALM,
+1056                                 std::move(debugData));
+1057 
+1058   parse();
+1059   EXPECT\_EQ(callbacks\_.goaways, 1);
+1060   EXPECT\_EQ(callbacks\_.data.move()->moveToFbString(), \textcolor{stringliteral}{"debugData"});
+1061   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1062   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1063 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Goaway)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Goaway}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_af373f9c00a79e9e816fd087b6edc3ce3}
+
+
+Definition at line 1065 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, and E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE.
+
+
+\begin{DoxyCode}
+1065                                   \{
+1066   std::unique\_ptr<folly::IOBuf> debugData =
+1067     folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"debugData"});
+1068   upstreamCodec\_.generateGoaway(output\_, 17, ErrorCode::ENHANCE\_YOUR\_CALM,
+1069                                 std::move(debugData));
+1070   EXPECT_DEATH_NO_CORE(upstreamCodec\_.generateGoaway(
+1071                          output\_, 27, ErrorCode::ENHANCE\_YOUR\_CALM), \textcolor{stringliteral}{".*"});
+1072 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Double\+Goaway)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Double\+Goaway}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a21a97477e053d963437cd0216a5345bb}
+
+
+Definition at line 1074 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+N\+O\+\_\+\+E\+R\+R\+OR, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1074                                      \{
+1075   parse();
+1076   SetUpUpstreamTest();
+1077   downstreamCodec\_.generateGoaway(output\_, std::numeric\_limits<int32\_t>::max(),
+1078                                   ErrorCode::NO\_ERROR);
+1079   EXPECT\_TRUE(downstreamCodec\_.isWaitingToDrain());
+1080   EXPECT\_TRUE(downstreamCodec\_.isReusable());
+1081   EXPECT\_TRUE(downstreamCodec\_.isStreamIngressEgressAllowed(0));
+1082   EXPECT\_TRUE(downstreamCodec\_.isStreamIngressEgressAllowed(1));
+1083   EXPECT\_TRUE(downstreamCodec\_.isStreamIngressEgressAllowed(2));
+1084   downstreamCodec\_.generateGoaway(output\_, 0, ErrorCode::NO\_ERROR);
+1085   EXPECT\_FALSE(downstreamCodec\_.isWaitingToDrain());
+1086   EXPECT\_FALSE(downstreamCodec\_.isReusable());
+1087   EXPECT\_TRUE(downstreamCodec\_.isStreamIngressEgressAllowed(0));
+1088   EXPECT\_FALSE(downstreamCodec\_.isStreamIngressEgressAllowed(1));
+1089   EXPECT\_TRUE(downstreamCodec\_.isStreamIngressEgressAllowed(2));
+1090 
+1091   EXPECT\_TRUE(upstreamCodec\_.isStreamIngressEgressAllowed(0));
+1092   EXPECT\_TRUE(upstreamCodec\_.isStreamIngressEgressAllowed(1));
+1093   EXPECT\_TRUE(upstreamCodec\_.isStreamIngressEgressAllowed(2));
+1094   parseUpstream();
+1095   EXPECT\_TRUE(upstreamCodec\_.isStreamIngressEgressAllowed(0));
+1096   EXPECT\_FALSE(upstreamCodec\_.isStreamIngressEgressAllowed(1));
+1097   EXPECT\_TRUE(upstreamCodec\_.isStreamIngressEgressAllowed(2));
+1098   EXPECT\_EQ(callbacks\_.goaways, 2);
+1099   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1100   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1101 
+1102   upstreamCodec\_.generateGoaway(output\_, 0, ErrorCode::NO\_ERROR);
+1103   EXPECT\_TRUE(upstreamCodec\_.isStreamIngressEgressAllowed(0));
+1104   EXPECT\_FALSE(upstreamCodec\_.isStreamIngressEgressAllowed(1));
+1105   EXPECT\_FALSE(upstreamCodec\_.isStreamIngressEgressAllowed(2));
+1106   parse();
+1107   EXPECT\_TRUE(downstreamCodec\_.isStreamIngressEgressAllowed(0));
+1108   EXPECT\_FALSE(downstreamCodec\_.isStreamIngressEgressAllowed(1));
+1109   EXPECT\_FALSE(downstreamCodec\_.isStreamIngressEgressAllowed(2));
+1110 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Double\+Goaway\+With\+Error)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Double\+Goaway\+With\+Error}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ab70f4bb91f1e86cdbd900829d2ae31ce}
+
+
+Definition at line 1112 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, and proxygen\+::\+N\+O\+\_\+\+E\+R\+R\+OR.
+
+
+\begin{DoxyCode}
+1112                                               \{
+1113   SetUpUpstreamTest();
+1114   std::unique\_ptr<folly::IOBuf> debugData =
+1115     folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"debugData"});
+1116   downstreamCodec\_.generateGoaway(output\_, std::numeric\_limits<int32\_t>::max(),
+1117                                   ErrorCode::ENHANCE\_YOUR\_CALM,
+1118                                   std::move(debugData));
+1119   EXPECT\_FALSE(downstreamCodec\_.isWaitingToDrain());
+1120   EXPECT\_FALSE(downstreamCodec\_.isReusable());
+1121   \textcolor{keyword}{auto} ret = downstreamCodec\_.generateGoaway(output\_, 0,
+1122                                              ErrorCode::NO\_ERROR);
+1123   EXPECT\_EQ(ret, 0);
+1124 
+1125   parseUpstream();
+1126   EXPECT\_EQ(callbacks\_.goaways, 1);
+1127   EXPECT\_EQ(callbacks\_.data.move()->moveToFbString(), \textcolor{stringliteral}{"debugData"});
+1128   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1129   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1130 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Goaway\+Handling)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Goaway\+Handling}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ab98beed5ada99e234a2e28c6c7c07b38}
+
+
+Definition at line 1132 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+C\+A\+N\+C\+EL, proxygen\+::http2\+::\+D\+A\+TA, proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+P\+U\+SH, proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::make\+Buf(), proxygen\+::\+N\+O\+\_\+\+E\+R\+R\+OR, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), settings, and write\+Frame\+Header\+Manual().
+
+
+\begin{DoxyCode}
+1132                                        \{
+1133   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1134   settings->setSetting(SettingsId::ENABLE\_PUSH, 1);
+1135   upstreamCodec\_.generateSettings(output\_);
+1136 
+1137   \textcolor{comment}{// send request}
+1138   HTTPMessage req = getGetRequest();
+1139   HTTPHeaderSize size;
+1140   size.uncompressed = size.compressed = 0;
+1141   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true}, &size);
+1142   EXPECT\_GT(size.uncompressed, 0);
+1143   parse();
+1144   callbacks\_.expectMessage(\textcolor{keyword}{true}, 1, \textcolor{stringliteral}{"/"});
+1145   callbacks\_.reset();
+1146 
+1147   SetUpUpstreamTest();
+1148   \textcolor{comment}{// drain after this message}
+1149   downstreamCodec\_.generateGoaway(output\_, 1, ErrorCode::NO\_ERROR);
+1150   parseUpstream();
+1151   \textcolor{comment}{// upstream cannot generate id > 1}
+1152   upstreamCodec\_.generateHeader(output\_, 3, req, \textcolor{keyword}{false}, &size);
+1153   EXPECT\_EQ(size.uncompressed, 0);
+1154   upstreamCodec\_.generateWindowUpdate(output\_, 3, 100);
+1155   upstreamCodec\_.generateBody(output\_, 3, makeBuf(10), HTTPCodec::NoPadding,
+1156                               \textcolor{keyword}{false});
+1157   upstreamCodec\_.generatePriority(output\_, 3,
+1158                                   HTTPMessage::HTTPPriority(0, \textcolor{keyword}{true}, 1));
+1159   upstreamCodec\_.generateEOM(output\_, 3);
+1160   upstreamCodec\_.generateRstStream(output\_, 3, ErrorCode::CANCEL);
+1161   EXPECT\_EQ(output\_.chainLength(), 0);
+1162 
+1163   \textcolor{comment}{// send a push promise that will be rejected by downstream}
+1164   req.getHeaders().add(\textcolor{stringliteral}{"foomonkey"}, \textcolor{stringliteral}{"george"});
+1165   downstreamCodec\_.generatePushPromise(output\_, 2, req, 1, \textcolor{keyword}{false}, &size);
+1166   EXPECT\_GT(size.uncompressed, 0);
+1167   HTTPMessage resp;
+1168   resp.setStatusCode(200);
+1169   \textcolor{comment}{// send a push response that will be ignored}
+1170   downstreamCodec\_.generateHeader(output\_, 2, resp, \textcolor{keyword}{false}, &size);
+1171   \textcolor{comment}{// window update for push doesn't make any sense, but whatever}
+1172   downstreamCodec\_.generateWindowUpdate(output\_, 2, 100);
+1173   downstreamCodec\_.generateBody(output\_, 2, makeBuf(10), HTTPCodec::NoPadding,
+1174                                 \textcolor{keyword}{false});
+1175   writeFrameHeaderManual(output\_, 20, (uint8\_t)http2::FrameType::DATA, 0, 2);
+1176   output\_.append(makeBuf(10));
+1177 
+1178   \textcolor{comment}{// tell the upstream no pushing, and parse the first batch}
+1179   IOBufQueue dummy;
+1180   upstreamCodec\_.generateGoaway(dummy, 0, ErrorCode::NO\_ERROR);
+1181   parseUpstream();
+1182 
+1183   output\_.append(makeBuf(10));
+1184   downstreamCodec\_.generatePriority(output\_, 2,
+1185                                     HTTPMessage::HTTPPriority(0, \textcolor{keyword}{true}, 1));
+1186   downstreamCodec\_.generateEOM(output\_, 2);
+1187   downstreamCodec\_.generateRstStream(output\_, 2, ErrorCode::CANCEL);
+1188 
+1189   \textcolor{comment}{// send a response that will be accepted, headers should be ok}
+1190   downstreamCodec\_.generateHeader(output\_, 1, resp, \textcolor{keyword}{true}, &size);
+1191   EXPECT\_GT(size.uncompressed, 0);
+1192 
+1193   \textcolor{comment}{// parse the remainder}
+1194   parseUpstream();
+1195   callbacks\_.expectMessage(\textcolor{keyword}{true}, 1, 200);
+1196 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Goaway\+Reply)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Goaway\+Reply}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a722c303e3dadfd77ee1bc60c178dbf9a}
+
+
+Definition at line 1198 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+N\+O\+\_\+\+E\+R\+R\+OR, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message().
+
+
+\begin{DoxyCode}
+1198                                     \{
+1199   upstreamCodec\_.generateGoaway(output\_, 0, ErrorCode::NO\_ERROR);
+1200 
+1201   parse();
+1202   EXPECT\_EQ(callbacks\_.goaways, 1);
+1203   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1204   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1205 
+1206   SetUpUpstreamTest();
+1207   HTTPMessage resp;
+1208   resp.setStatusCode(200);
+1209   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+1210   downstreamCodec\_.generateHeader(output\_, 1, resp);
+1211   downstreamCodec\_.generateEOM(output\_, 1);
+1212   parseUpstream();
+1213   callbacks\_.expectMessage(\textcolor{keyword}{true}, 1, 200);
+1214   EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+1215 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Setting)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Setting}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ada7726dff05c55fb9bfc97d9043460b4}
+
+
+Definition at line 1217 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE, proxygen\+::\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS, proxygen\+::parse(), and settings.
+
+
+\begin{DoxyCode}
+1217                                      \{
+1218   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1219   settings->setSetting(SettingsId::MAX\_CONCURRENT\_STREAMS, 37);
+1220   settings->setSetting(SettingsId::INITIAL\_WINDOW\_SIZE, 12345);
+1221   upstreamCodec\_.generateSettings(output\_);
+1222 
+1223   parse();
+1224   EXPECT\_EQ(callbacks\_.settings, 1);
+1225   EXPECT\_EQ(callbacks\_.maxStreams, 37);
+1226   EXPECT\_EQ(callbacks\_.windowSize, 12345);
+1227   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1228   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1229 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Settings\+Ack)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Settings\+Ack}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a19cf88eaba905a278463a4ef9a94b741}
+
+
+Definition at line 1231 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1231                                     \{
+1232   upstreamCodec\_.generateSettingsAck(output\_);
+1233 
+1234   parse();
+1235   EXPECT\_EQ(callbacks\_.settings, 0);
+1236   EXPECT\_EQ(callbacks\_.settingsAcks, 1);
+1237   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1238   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1239 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Settings}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a457ce3b8200481384a0b219d84baae1b}
+
+
+Definition at line 1241 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE, proxygen\+::parse(), and settings.
+
+
+\begin{DoxyCode}
+1241                                     \{
+1242   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1243   settings->setSetting(SettingsId::INITIAL\_WINDOW\_SIZE, 0xffffffff);
+1244   upstreamCodec\_.generateSettings(output\_);
+1245 
+1246   parse();
+1247   EXPECT\_EQ(callbacks\_.settings, 0);
+1248   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1249   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+1250 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Push\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Push\+Settings}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_af53ca89860cb9a5392cb5df6af32a73b}
+
+
+Definition at line 1252 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+P\+U\+SH, proxygen\+::http2\+::k\+Frame\+Header\+Size, and settings.
+
+
+\begin{DoxyCode}
+1252                                         \{
+1253   \textcolor{keyword}{auto} settings = downstreamCodec\_.getEgressSettings();
+1254   settings->clearSettings();
+1255   settings->setSetting(SettingsId::ENABLE\_PUSH, 0);
+1256   SetUpUpstreamTest();
+1257 
+1258   parseUpstream([&] (IOBuf* ingress) \{
+1259       EXPECT\_EQ(ingress->computeChainDataLength(), http2::kFrameHeaderSize);
+1260     \});
+1261   EXPECT\_FALSE(upstreamCodec\_.supportsPushTransactions());
+1262   \textcolor{comment}{// Only way to disable push for downstreamCodec\_ is to read}
+1263   \textcolor{comment}{// ENABLE\_PUSH:0 from client}
+1264   EXPECT\_TRUE(downstreamCodec\_.supportsPushTransactions());
+1265   EXPECT\_EQ(callbacks\_.settings, 1);
+1266   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1267   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1268 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Settings\+Table\+Size)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Settings\+Table\+Size}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a451a1360371fd64bd6d4465da3d1f2c0}
+
+
+Definition at line 1271 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+E\+A\+D\+E\+R\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message(), and settings.
+
+
+\begin{DoxyCode}
+1271                                           \{
+1272   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1273   settings->setSetting(SettingsId::HEADER\_TABLE\_SIZE, 8192);
+1274   upstreamCodec\_.generateSettings(output\_);
+1275 
+1276   parse();
+1277   EXPECT\_EQ(callbacks\_.settings, 1);
+1278   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1279   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1280   downstreamCodec\_.generateSettingsAck(output\_);
+1281   parseUpstream();
+1282 
+1283   callbacks\_.reset();
+1284 
+1285   HTTPMessage resp;
+1286   resp.setStatusCode(200);
+1287   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+1288   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+1289   SetUpUpstreamTest();
+1290   downstreamCodec\_.generateHeader(output\_, 1, resp);
+1291 
+1292   parseUpstream();
+1293   callbacks\_.expectMessage(\textcolor{keyword}{false}, 2, 200);
+1294   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+1295   EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+1296   EXPECT\_EQ(\textcolor{stringliteral}{"x-coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_CONTENT\_TYPE));
+1297 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Settings\+Table\+Size)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Settings\+Table\+Size}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a2cebb3239df0822530dadae2344f42b2}
+
+
+Definition at line 1299 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+E\+A\+D\+E\+R\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message(), and settings.
+
+
+\begin{DoxyCode}
+1299                                              \{
+1300   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1301   settings->setSetting(SettingsId::HEADER\_TABLE\_SIZE, 8192);
+1302   \textcolor{comment}{// This sets the max decoder table size to 8k}
+1303   upstreamCodec\_.generateSettings(output\_);
+1304 
+1305   parse();
+1306   EXPECT\_EQ(callbacks\_.settings, 1);
+1307   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1308   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1309 
+1310   callbacks\_.reset();
+1311 
+1312   \textcolor{comment}{// Attempt to set a new max table size.  This is a no-op because the first,}
+1313   \textcolor{comment}{// setting is unacknowledged.  The upstream encoder will up the table size to}
+1314   \textcolor{comment}{// 8k per the first settings frame and the HPACK codec will send a code to}
+1315   \textcolor{comment}{// update the decoder.}
+1316   settings->setSetting(SettingsId::HEADER\_TABLE\_SIZE, 4096);
+1317 
+1318   HTTPMessage resp;
+1319   resp.setStatusCode(200);
+1320   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+1321   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+1322   SetUpUpstreamTest();
+1323   downstreamCodec\_.generateHeader(output\_, 1, resp);
+1324 
+1325   parseUpstream();
+1326   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1327   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+1328   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+1329   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+1330 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Settings\+Table\+Size\+Early\+Shrink)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Settings\+Table\+Size\+Early\+Shrink}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aaf365ceda01a09b1aecc96cebf8ab11f}
+
+
+Definition at line 1332 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+E\+A\+D\+E\+R\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message(), and settings.
+
+
+\begin{DoxyCode}
+1332                                                      \{
+1333   \textcolor{comment}{// Lower size to 2k}
+1334   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1335   settings->setSetting(SettingsId::HEADER\_TABLE\_SIZE, 2048);
+1336   upstreamCodec\_.generateSettings(output\_);
+1337 
+1338   parse();
+1339   EXPECT\_EQ(callbacks\_.settings, 1);
+1340   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1341   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1342   downstreamCodec\_.generateSettingsAck(output\_);
+1343   \textcolor{comment}{// Parsing SETTINGS ack updates upstream decoder to 2k}
+1344   parseUpstream();
+1345 
+1346   callbacks\_.reset();
+1347 
+1348   HTTPMessage resp;
+1349   resp.setStatusCode(200);
+1350   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+1351   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+1352   SetUpUpstreamTest();
+1353   \textcolor{comment}{// downstream encoder will send TSU/2k}
+1354   downstreamCodec\_.generateHeader(output\_, 1, resp);
+1355 
+1356   \textcolor{comment}{// sets pending table size to 512, but doesn't update it yet}
+1357   settings = upstreamCodec\_.getEgressSettings();
+1358   settings->setSetting(SettingsId::HEADER\_TABLE\_SIZE, 512);
+1359   IOBufQueue tmp\{IOBufQueue::cacheChainLength()\};
+1360   upstreamCodec\_.generateSettings(tmp);
+1361 
+1362   \textcolor{comment}{// Previous code would barf here, since TSU/2k is a violation of the current}
+1363   \textcolor{comment}{// max=512}
+1364   parseUpstream();
+1365   callbacks\_.expectMessage(\textcolor{keyword}{false}, 2, 200);
+1366   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+1367   EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+1368   EXPECT\_EQ(\textcolor{stringliteral}{"x-coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_CONTENT\_TYPE));
+1369 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Priority)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Priority}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a8e84cca8245260445612479a5dd5cb49}
+
+
+Definition at line 1371 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1371                                       \{
+1372   \textcolor{keyword}{auto} pri = HTTPMessage::HTTPPriority(0, \textcolor{keyword}{true}, 1);
+1373   upstreamCodec\_.generatePriority(output\_, 1, pri);
+1374 
+1375   EXPECT\_TRUE(parse());
+1376   EXPECT\_EQ(callbacks\_.priority, pri);
+1377   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1378   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1379 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Header\+Priority)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Header\+Priority}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_afeacbad48ed84a2706e8ff9466146dca}
+
+
+Definition at line 1381 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Get\+Request(), proxygen\+::http2\+::k\+Connection\+Preface, proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::parse(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P2\+Priority().
+
+
+\begin{DoxyCode}
+1381                                           \{
+1382   HTTPMessage req = getGetRequest();
+1383   req.setHTTP2Priority(HTTPMessage::HTTPPriority(0, \textcolor{keyword}{false}, 7));
+1384   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+1385 
+1386   \textcolor{comment}{// hack ingress with cirular dep}
+1387   EXPECT\_TRUE(parse([&] (IOBuf* ingress) \{
+1388         folly::io::RWPrivateCursor c(ingress);
+1389         c.skip(http2::kFrameHeaderSize + http2::kConnectionPreface.length());
+1390         c.writeBE<uint32\_t>(1);
+1391       \}));
+1392 
+1393   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1394   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1395 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Duplicate\+Bad\+Header\+Priority)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Duplicate\+Bad\+Header\+Priority}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a4f448e183b138b946cee664a86c09db5}
+
+
+Definition at line 1397 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Get\+Request(), proxygen\+::http2\+::k\+Connection\+Preface, proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::parse(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P2\+Priority().
+
+
+\begin{DoxyCode}
+1397                                                    \{
+1398   \textcolor{comment}{// Sent an initial header with a circular dependency}
+1399   HTTPMessage req = getGetRequest();
+1400   req.setHTTP2Priority(HTTPMessage::HTTPPriority(0, \textcolor{keyword}{false}, 7));
+1401   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+1402 
+1403   \textcolor{comment}{// Hack ingress with circular dependency.}
+1404   EXPECT\_TRUE(parse([&](IOBuf* ingress) \{
+1405     folly::io::RWPrivateCursor c(ingress);
+1406     c.skip(http2::kFrameHeaderSize + http2::kConnectionPreface.length());
+1407     c.writeBE<uint32\_t>(1);
+1408   \}));
+1409 
+1410   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1411   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1412 
+1413   \textcolor{comment}{// On the same stream, send another request.}
+1414   HTTPMessage nextRequest = getGetRequest();
+1415   upstreamCodec\_.generateHeader(output\_, 1, nextRequest, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+1416   parse();
+1417   EXPECT\_EQ(callbacks\_.streamErrors, 2);
+1418   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1419 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Priority)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Priority}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_acb47a9f49755d3a282d2a590ead850ac}
+
+
+Definition at line 1421 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::k\+Connection\+Preface, proxygen\+::http2\+::k\+Frame\+Header\+Size, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1421                                     \{
+1422   \textcolor{keyword}{auto} pri = HTTPMessage::HTTPPriority(0, \textcolor{keyword}{true}, 1);
+1423   upstreamCodec\_.generatePriority(output\_, 1, pri);
+1424 
+1425   \textcolor{comment}{// hack ingress with cirular dep}
+1426   EXPECT\_TRUE(parse([&] (IOBuf* ingress) \{
+1427         folly::io::RWPrivateCursor c(ingress);
+1428         c.skip(http2::kFrameHeaderSize + http2::kConnectionPreface.length());
+1429         c.writeBE<uint32\_t>(1);
+1430       \}));
+1431 
+1432   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1433   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1434 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Virtual\+Nodes)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Virtual\+Nodes}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a39cfcfe3b461d57d2dd6a85314574700}
+
+
+Definition at line 1447 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References Dummy\+Queue\+::nodes\+\_\+, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1447                                      \{
+1448   DummyQueue queue;
+1449   uint8\_t level = 30;
+1450   upstreamCodec\_.addPriorityNodes(queue, output\_, level);
+1451 
+1452   EXPECT\_TRUE(parse());
+1453   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < level; i++) \{
+1454     EXPECT\_EQ(queue.nodes_[i], upstreamCodec\_.mapPriorityToDependency(i));
+1455   \}
+1456 
+1457   \textcolor{comment}{// Out-of-range priorites are mapped to the lowest level of virtual nodes.}
+1458   EXPECT\_EQ(queue.nodes_[level - 1],
+1459             upstreamCodec\_.mapPriorityToDependency(level));
+1460   EXPECT\_EQ(queue.nodes_[level - 1],
+1461             upstreamCodec\_.mapPriorityToDependency(level + 1));
+1462 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Push\+Promise)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Push\+Promise}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aa00992338275cc0db91086e885e03630}
+
+
+Definition at line 1464 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+P\+U\+SH, proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and settings.
+
+
+\begin{DoxyCode}
+1464                                          \{
+1465   upstreamCodec\_.generateSettings(output\_);
+1466   parse();
+1467   EXPECT\_FALSE(upstreamCodec\_.supportsPushTransactions());
+1468   EXPECT\_FALSE(downstreamCodec\_.supportsPushTransactions());
+1469 
+1470   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1471   settings->setSetting(SettingsId::ENABLE\_PUSH, 1);
+1472   upstreamCodec\_.generateSettings(output\_);
+1473   parse();
+1474   EXPECT\_TRUE(upstreamCodec\_.supportsPushTransactions());
+1475   EXPECT\_TRUE(downstreamCodec\_.supportsPushTransactions());
+1476 
+1477   SetUpUpstreamTest();
+1478 
+1479   HTTPCodec::StreamID assocStream = 7;
+1480   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = 0; i < 2; i++) \{
+1481     \textcolor{comment}{// Push promise}
+1482     HTTPCodec::StreamID pushStream = downstreamCodec\_.createStream();
+1483     HTTPMessage req = getGetRequest();
+1484     req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+1485     downstreamCodec\_.generatePushPromise(output\_, pushStream, req, assocStream);
+1486 
+1487     parseUpstream();
+1488     callbacks\_.expectMessage(\textcolor{keyword}{false}, 2, \textcolor{stringliteral}{"/"}); \textcolor{comment}{// + host}
+1489     EXPECT\_EQ(callbacks\_.assocStreamId, assocStream);
+1490     EXPECT\_EQ(callbacks\_.headersCompleteId, pushStream);
+1491     \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+1492     EXPECT\_EQ(\textcolor{stringliteral}{"coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_USER\_AGENT));
+1493     callbacks\_.reset();
+1494 
+1495     \textcolor{comment}{// Actual reply headers}
+1496     HTTPMessage resp;
+1497     resp.setStatusCode(200);
+1498     resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"text/plain"});
+1499     downstreamCodec\_.generateHeader(output\_, pushStream, resp);
+1500 
+1501     parseUpstream();
+1502     callbacks\_.expectMessage(\textcolor{keyword}{false}, 2, 200);
+1503     EXPECT\_EQ(callbacks\_.headersCompleteId, pushStream);
+1504     EXPECT\_EQ(callbacks\_.assocStreamId, 0);
+1505     EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+1506     EXPECT\_EQ(\textcolor{stringliteral}{"text/plain"}, callbacks\_.msg->getHeaders().getSingleOrEmpty(
+1507                   HTTP\_HEADER\_CONTENT\_TYPE));
+1508     callbacks\_.reset();
+1509   \}
+1510 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Duplicate\+Push\+Promise)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Duplicate\+Push\+Promise}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aa2bfb0c2e76d20f60a67fd27d7e48ad5}
+
+
+Definition at line 1512 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+P\+U\+SH, proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::parse(), and settings.
+
+
+\begin{DoxyCode}
+1512                                              \{
+1513   \textcolor{keyword}{auto} settings = upstreamCodec\_.getEgressSettings();
+1514   settings->setSetting(SettingsId::ENABLE\_PUSH, 1);
+1515   upstreamCodec\_.generateSettings(output\_);
+1516   parse();
+1517   EXPECT\_TRUE(upstreamCodec\_.supportsPushTransactions());
+1518   EXPECT\_TRUE(downstreamCodec\_.supportsPushTransactions());
+1519 
+1520   SetUpUpstreamTest();
+1521 
+1522   HTTPCodec::StreamID assocStream = 7;
+1523   HTTPCodec::StreamID pushStream = downstreamCodec\_.createStream();
+1524   HTTPMessage req = getGetRequest();
+1525   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+1526   downstreamCodec\_.generatePushPromise(output\_, pushStream, req, assocStream);
+1527   downstreamCodec\_.generatePushPromise(output\_, pushStream, req, assocStream);
+1528 
+1529   parseUpstream();
+1530 
+1531   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1532   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+1533 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Push\+Promise)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Push\+Promise}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a3e10e1618cb8c6814dd3f5b213ac96ce}
+
+
+Definition at line 1535 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), and proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers().
+
+
+\begin{DoxyCode}
+1535                                        \{
+1536   \textcolor{comment}{// ENABLE\_PUSH is now 0 by default}
+1537   SetUpUpstreamTest();
+1538   HTTPMessage req = getGetRequest();
+1539   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+1540   downstreamCodec\_.generatePushPromise(output\_, 2, req, 1);
+1541 
+1542   parseUpstream();
+1543   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+1544   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+1545   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+1546   EXPECT\_EQ(callbacks\_.assocStreamId, 0);
+1547   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1548   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+1549 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Certificate\+Request)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Certificate\+Request}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a98362d9f730e20120cb0c41799410ea5}
+
+
+Definition at line 1551 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1551                                                 \{
+1552   uint16\_t requestId = 17;
+1553   std::unique\_ptr<folly::IOBuf> authRequest =
+1554       folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"authRequestData"});
+1555   upstreamCodec\_.generateCertificateRequest(
+1556       output\_, requestId, std::move(authRequest));
+1557 
+1558   parse();
+1559   EXPECT\_EQ(callbacks\_.certificateRequests, 1);
+1560   EXPECT\_EQ(callbacks\_.lastCertRequestId, requestId);
+1561   EXPECT\_EQ(callbacks\_.data.move()->moveToFbString(), \textcolor{stringliteral}{"authRequestData"});
+1562   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1563   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1564 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Basic\+Certificate)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Basic\+Certificate}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a1e9a1d4b200ba3a3069c5f2e8e405a25}
+
+
+Definition at line 1566 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1566                                          \{
+1567   uint16\_t certId = 17;
+1568   std::unique\_ptr<folly::IOBuf> authenticator =
+1569       folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"authenticatorData"});
+1570   upstreamCodec\_.generateCertificate(output\_, certId, std::move(authenticator));
+1571 
+1572   parse();
+1573   EXPECT\_EQ(callbacks\_.certificates, 1);
+1574   EXPECT\_EQ(callbacks\_.lastCertId, certId);
+1575   EXPECT\_EQ(callbacks\_.data.move()->moveToFbString(), \textcolor{stringliteral}{"authenticatorData"});
+1576   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1577   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1578 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Bad\+Server\+Preface)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Bad\+Server\+Preface}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a0cba7ca271bd944c58a8e967e74c428e}
+
+
+Definition at line 1580 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+1580                                          \{
+1581   output\_.move();
+1582   downstreamCodec\_.generateWindowUpdate(output\_, 0, 10);
+1583   parseUpstream();
+1584   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+1585   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+1586   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+1587   EXPECT\_EQ(callbacks\_.assocStreamId, 0);
+1588   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1589   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+1590 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Normal1024\+Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Normal1024\+Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a91671fad38343dad9a56dfefae4cce8e}
+
+
+Definition at line 1592 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::parse(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+H\+T\+T\+P2\+Priority().
+
+
+\begin{DoxyCode}
+1592                                                \{
+1593   HTTPMessage req = getGetRequest();
+1594   \textcolor{keywordtype}{string} bigval(8691, \textcolor{charliteral}{'!'});
+1595   bigval.append(8691, \textcolor{charliteral}{' '});
+1596   req.getHeaders().add(\textcolor{stringliteral}{"x-headr"}, bigval);
+1597   req.setHTTP2Priority(HTTPMessage::HTTPPriority(0, \textcolor{keyword}{false}, 7));
+1598   upstreamCodec\_.generateHeader(output\_, 1, req);
+1599 
+1600   parse();
+1601   callbacks\_.expectMessage(\textcolor{keyword}{false}, -1, \textcolor{stringliteral}{"/"});
+1602   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+1603   EXPECT\_EQ(bigval, headers.getSingleOrEmpty(\textcolor{stringliteral}{"x-headr"}));
+1604   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+1605   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+1606   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+1607   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1608   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1609 
+1610   upstreamCodec\_.generateSettingsAck(output\_);
+1611   parse();
+1612   EXPECT\_EQ(callbacks\_.settingsAcks, 1);
+1613 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Stream\+Id\+Overflow)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Stream\+Id\+Overflow}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ac3118a42fa1c993d02813559497a5c70}
+
+
+Definition at line 1615 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::create\+Stream(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Reusable(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Next\+Egress\+Stream\+Id(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+1615                                          \{
+1616   HTTP2Codec codec(TransportDirection::UPSTREAM);
+1617 
+1618   HTTPCodec::StreamID streamId;
+1619   codec.setNextEgressStreamId(std::numeric\_limits<int32\_t>::max() - 10);
+1620   \textcolor{keywordflow}{while} (codec.isReusable()) \{
+1621     streamId = codec.createStream();
+1622   \}
+1623   EXPECT\_EQ(streamId, std::numeric\_limits<int32\_t>::max() - 2);
+1624 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Test\+Multiple\+Different\+Content\+Length\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Test\+Multiple\+Different\+Content\+Length\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_abca17f5123705ef7f7207bdb50f5c5d6}
+
+
+Definition at line 1626 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Headers\+::get\+Number\+Of\+Values(), proxygen\+::get\+Post\+Request(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1626                                                                   \{
+1627   \textcolor{comment}{// Generate a POST request with two Content-Length headers}
+1628   \textcolor{comment}{// NOTE: getPostRequest already adds the content-length}
+1629   HTTPMessage req = getPostRequest();
+1630   req.getHeaders().add(HTTP\_HEADER\_CONTENT\_LENGTH, \textcolor{stringliteral}{"300"});
+1631   EXPECT\_EQ(req.getHeaders().getNumberOfValues(HTTP\_HEADER\_CONTENT\_LENGTH), 2);
+1632 
+1633   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+1634   parse();
+1635 
+1636   \textcolor{comment}{// Check that the request fails before the codec finishes parsing the headers}
+1637   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1638   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+1639   EXPECT\_EQ(callbacks\_.lastParseError->getHttpStatusCode(), 400);
+1640 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Test\+Multiple\+Identical\+Content\+Length\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Test\+Multiple\+Identical\+Content\+Length\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a9952aeb048ae725075231407252dfa18}
+
+
+Definition at line 1642 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Headers\+::get\+Number\+Of\+Values(), proxygen\+::get\+Post\+Request(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1642                                                                   \{
+1643   \textcolor{comment}{// Generate a POST request with two Content-Length headers}
+1644   \textcolor{comment}{// NOTE: getPostRequest already adds the content-length}
+1645   HTTPMessage req = getPostRequest();
+1646   req.getHeaders().add(\textcolor{stringliteral}{"content-length"}, \textcolor{stringliteral}{"200"});
+1647   EXPECT\_EQ(req.getHeaders().getNumberOfValues(\textcolor{stringliteral}{"content-length"}), 2);
+1648 
+1649   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+1650   parse();
+1651 
+1652   \textcolor{comment}{// Check that the headers parsing completes correctly}
+1653   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1654   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+1655 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Cleartext\+Upgrade)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Cleartext\+Upgrade}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a0dd9ca1407aae76fe1506f84a8f98f4d}
+
+
+Definition at line 1657 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::check\+For\+Header\+Token(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Headers\+::get\+Single\+Or\+Empty(), proxygen\+::http2\+::k\+Protocol\+Settings\+Header, and proxygen\+::\+H\+T\+T\+P2\+Codec\+::request\+Upgrade().
+
+
+\begin{DoxyCode}
+1657                                          \{
+1658   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+1659   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+1660   HTTP2Codec::requestUpgrade(req);
+1661   EXPECT\_EQ(req.getHeaders().getSingleOrEmpty(HTTP\_HEADER\_UPGRADE), \textcolor{stringliteral}{"h2c"});
+1662   EXPECT\_TRUE(req.checkForHeaderToken(HTTP\_HEADER\_CONNECTION,
+1663                                       \textcolor{stringliteral}{"Upgrade"}, \textcolor{keyword}{false}));
+1664   EXPECT\_TRUE(req.checkForHeaderToken(
+1665                 HTTP\_HEADER\_CONNECTION,
+1666                 http2::kProtocolSettingsHeader.c\_str(), \textcolor{keyword}{false}));
+1667   EXPECT\_GT(
+1668     req.getHeaders().getSingleOrEmpty(http2::kProtocolSettingsHeader).length(),
+1669     0);
+1670 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, H\+T\+T\+P2\+Settings\+Success)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{H\+T\+T\+P2\+Settings\+Success}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a23985b67693f5ac743b1c7b4418d7923}
+
+
+Definition at line 1672 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::http2\+::k\+Protocol\+Settings\+Header, and proxygen\+::\+H\+T\+T\+P2\+Codec\+::request\+Upgrade().
+
+
+\begin{DoxyCode}
+1672                                              \{
+1673   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+1674 
+1675   \textcolor{comment}{// empty settings}
+1676   req.getHeaders().add(http2::kProtocolSettingsHeader, \textcolor{stringliteral}{""});
+1677   EXPECT\_TRUE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1678 
+1679   \textcolor{comment}{// real settings (overwrites empty)}
+1680   HTTP2Codec::requestUpgrade(req);
+1681   EXPECT\_TRUE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1682 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, H\+T\+T\+P2\+Settings\+Failure)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{H\+T\+T\+P2\+Settings\+Failure}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aa47f5537272215a947e56cfcb769af6b}
+
+
+Definition at line 1684 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::http2\+::k\+Max\+Frame\+Payload\+Length, proxygen\+::http2\+::k\+Protocol\+Settings\+Header, and proxygen\+::\+H\+T\+T\+P\+Headers\+::set().
+
+
+\begin{DoxyCode}
+1684                                              \{
+1685   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+1686   \textcolor{comment}{// no settings}
+1687   EXPECT\_FALSE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1688 
+1689   HTTPHeaders& headers = req.getHeaders();
+1690 
+1691   \textcolor{comment}{// Not base64\_url settings}
+1692   headers.set(http2::kProtocolSettingsHeader, \textcolor{stringliteral}{"????"});
+1693   EXPECT\_FALSE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1694   headers.set(http2::kProtocolSettingsHeader, \textcolor{stringliteral}{"AAA"});
+1695   EXPECT\_FALSE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1696 
+1697   \textcolor{comment}{// Too big}
+1698   \textcolor{keywordtype}{string} bigSettings((http2::kMaxFramePayloadLength + 1) * 4 / 3, \textcolor{charliteral}{'A'});
+1699   headers.set(http2::kProtocolSettingsHeader, bigSettings);
+1700   EXPECT\_FALSE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1701 
+1702   \textcolor{comment}{// Malformed (not a multiple of 6)}
+1703   headers.set(http2::kProtocolSettingsHeader, \textcolor{stringliteral}{"AAAA"});
+1704   EXPECT\_FALSE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1705 
+1706   \textcolor{comment}{// Two headers}
+1707   headers.set(http2::kProtocolSettingsHeader, \textcolor{stringliteral}{"AAAAAAAA"});
+1708   headers.add(http2::kProtocolSettingsHeader, \textcolor{stringliteral}{"AAAAAAAA"});
+1709   EXPECT\_FALSE(downstreamCodec\_.onIngressUpgradeMessage(req));
+1710 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, H\+T\+T\+P2\+Enable\+Connect)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{H\+T\+T\+P2\+Enable\+Connect}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_abf954a2282f871283e54834aa3b82a19}
+
+
+Definition at line 1712 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+P\+R\+O\+T\+O\+C\+OL.
+
+
+\begin{DoxyCode}
+1712                                            \{
+1713   SetUpUpstreamTest();
+1714   \textcolor{comment}{// egress settings have no connect settings.}
+1715   \textcolor{keyword}{auto} ws\_enable = upstreamCodec\_.getEgressSettings()->getSetting(
+1716       SettingsId::ENABLE\_CONNECT\_PROTOCOL);
+1717   \textcolor{comment}{// enable connect settings, and check.}
+1718   upstreamCodec\_.getEgressSettings()->setSetting(
+1719       SettingsId::ENABLE\_CONNECT\_PROTOCOL, 1);
+1720   ws\_enable = upstreamCodec\_.getEgressSettings()->getSetting(
+1721       SettingsId::ENABLE\_CONNECT\_PROTOCOL);
+1722   EXPECT\_EQ(ws\_enable->value, 1);
+1723   \textcolor{comment}{// generateSettings.}
+1724   \textcolor{comment}{// pass the buffer to be parsed by the codec and check for ingress settings.}
+1725   upstreamCodec\_.generateSettings(output\_);
+1726   parseUpstream();
+1727   EXPECT\_EQ(1, upstreamCodec\_.peerHasWebsockets());
+1728 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Websocket\+Upgrade)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Websocket\+Upgrade}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a80bf731a546ed4fc52323e95aa720dc8}
+
+
+Definition at line 1730 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Get\+Request(), proxygen\+::headers\+::k\+Websocket\+String, proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Egress\+Websocket\+Upgrade(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Secure().
+
+
+\begin{DoxyCode}
+1730                                          \{
+1731   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/apples"});
+1732   req.setSecure(\textcolor{keyword}{true});
+1733   req.setEgressWebsocketUpgrade();
+1734 
+1735   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{false});
+1736   parse();
+1737 
+1738   EXPECT\_TRUE(callbacks\_.msg->isIngressWebsocketUpgrade());
+1739   EXPECT\_NE(\textcolor{keyword}{nullptr}, callbacks\_.msg->getUpgradeProtocol());
+1740   EXPECT\_EQ(headers::kWebsocketString, *callbacks\_.msg->getUpgradeProtocol());
+1741 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Websocket\+Bad\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Websocket\+Bad\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_acbe85b9d6c16a1cddd71051493eac43e}
+
+
+Definition at line 1743 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Protocol, proxygen\+::headers\+::k\+Scheme, proxygen\+::headers\+::k\+Websocket\+String, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::parse(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+1743                                            \{
+1744   \textcolor{keyword}{const} std::string kConnect\{\textcolor{stringliteral}{"CONNECT"}\};
+1745   \textcolor{keyword}{const} std::string kWebsocketPath\{\textcolor{stringliteral}{"/websocket"}\};
+1746   \textcolor{keyword}{const} std::string kSchemeHttps\{\textcolor{stringliteral}{"https"}\};
+1747   vector<proxygen::compress::Header> reqHeaders = \{
+1748     Header::makeHeaderForTest(headers::kMethod, kConnect),
+1749     Header::makeHeaderForTest(headers::kProtocol, headers::kWebsocketString),
+1750   \};
+1751   vector<proxygen::compress::Header> optionalHeaders = \{
+1752     Header::makeHeaderForTest(headers::kPath, kWebsocketPath),
+1753     Header::makeHeaderForTest(headers::kScheme, kSchemeHttps),
+1754   \};
+1755 
+1756   HPACKCodec headerCodec(TransportDirection::UPSTREAM);
+1757   \textcolor{keywordtype}{int} stream = 1;
+1758   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < optionalHeaders.size(); ++i, stream += 2) \{
+1759     \textcolor{keyword}{auto} headers = reqHeaders;
+1760     headers.push\_back(optionalHeaders[i]);
+1761     \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(headers);
+1762     http2::writeHeaders(output\_,
+1763                         std::move(encodedHeaders),
+1764                         stream,
+1765                         folly::none,
+1766                         http2::kNoPadding,
+1767                         \textcolor{keyword}{false},
+1768                         \textcolor{keyword}{true});
+1769     parse();
+1770   \}
+1771 
+1772   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+1773   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+1774   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+1775   EXPECT\_EQ(callbacks\_.streamErrors, optionalHeaders.size());
+1776   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1777 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Websocket\+Dup\+Protocol)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Websocket\+Dup\+Protocol}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a905aceb4703826c1baad434ee1a3e2f6}
+
+
+Definition at line 1779 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Protocol, proxygen\+::headers\+::k\+Scheme, proxygen\+::headers\+::k\+Websocket\+String, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::parse(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+1779                                              \{
+1780   \textcolor{keyword}{const} std::string kConnect\{\textcolor{stringliteral}{"CONNECT"}\};
+1781   \textcolor{keyword}{const} std::string kWebsocketPath\{\textcolor{stringliteral}{"/websocket"}\};
+1782   \textcolor{keyword}{const} std::string kSchemeHttps\{\textcolor{stringliteral}{"https"}\};
+1783   vector<proxygen::compress::Header> headers = \{
+1784     Header::makeHeaderForTest(headers::kMethod, kConnect),
+1785     Header::makeHeaderForTest(headers::kProtocol, headers::kWebsocketString),
+1786     Header::makeHeaderForTest(headers::kProtocol, headers::kWebsocketString),
+1787     Header::makeHeaderForTest(headers::kPath, kWebsocketPath),
+1788     Header::makeHeaderForTest(headers::kScheme, kSchemeHttps),
+1789   \};
+1790   HPACKCodec headerCodec(TransportDirection::UPSTREAM);
+1791   \textcolor{keyword}{auto} encodedHeaders = headerCodec.encode(headers);
+1792   http2::writeHeaders(output\_,
+1793                       std::move(encodedHeaders),
+1794                       1,
+1795                       folly::none,
+1796                       http2::kNoPadding,
+1797                       \textcolor{keyword}{false},
+1798                       \textcolor{keyword}{true});
+1799   parse();
+1800   EXPECT\_EQ(callbacks\_.messageBegin, 0);
+1801   EXPECT\_EQ(callbacks\_.headersComplete, 0);
+1802   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+1803   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1804   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1805 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Websocket\+Incorrect\+Response)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Websocket\+Incorrect\+Response}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a4aacc484f41ba6a920ed63e46794fd7b}
+
+
+Definition at line 1807 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Get\+Request(), proxygen\+::parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Egress\+Websocket\+Upgrade(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Secure(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message().
+
+
+\begin{DoxyCode}
+1807                                                    \{
+1808   parse();
+1809   SetUpUpstreamTest();
+1810   parseUpstream();
+1811 
+1812   output\_.clear();
+1813   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/apples"});
+1814   req.setSecure(\textcolor{keyword}{true});
+1815   req.setEgressWebsocketUpgrade();
+1816   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{false});
+1817   parse();
+1818 
+1819   output\_.clear();
+1820   HTTPMessage resp;
+1821   resp.setStatusCode(201);
+1822   resp.setStatusMessage(\textcolor{stringliteral}{"OK"});
+1823   downstreamCodec\_.generateHeader(output\_, 1, resp);
+1824   parseUpstream();
+1825   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1826 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Test\+All\+Egress\+Frame\+Type\+Callbacks)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Test\+All\+Egress\+Frame\+Type\+Callbacks}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a4e5b6a9b25864bd786422d0ac9c00fb5}
+
+
+Definition at line 1828 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::http2\+::\+C\+O\+N\+T\+I\+N\+U\+A\+T\+I\+ON, proxygen\+::http2\+::\+D\+A\+TA, proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, proxygen\+::http2\+::\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, proxygen\+::get\+Big\+Get\+Request(), proxygen\+::get\+Get\+Request(), proxygen\+::http2\+::\+G\+O\+A\+W\+AY, proxygen\+::http2\+::\+H\+E\+A\+D\+E\+RS, proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::http2\+::\+P\+I\+NG, proxygen\+::http2\+::\+P\+R\+I\+O\+R\+I\+TY, proxygen\+::http2\+::\+P\+U\+S\+H\+\_\+\+P\+R\+O\+M\+I\+SE, proxygen\+::http2\+::\+R\+S\+T\+\_\+\+S\+T\+R\+E\+AM, proxygen\+::http2\+::\+S\+E\+T\+T\+I\+N\+GS, and proxygen\+::http2\+::\+W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE.
+
+
+\begin{DoxyCode}
+1828                                                         \{
+1829   \textcolor{keyword}{class }CallbackTypeTracker \{
+1830     std::set<uint8\_t> types;
+1831   \textcolor{keyword}{public}:
+1832     \textcolor{keywordtype}{void} add(uint8\_t, uint8\_t type, uint64\_t, uint16\_t) \{
+1833       types.insert(type);
+1834     \}
+1835 
+1836     \textcolor{keywordtype}{bool} isAllFrameTypesReceived() \{
+1837       http2::FrameType expectedTypes[] = \{
+1838         http2::FrameType::DATA,
+1839         http2::FrameType::HEADERS,
+1840         http2::FrameType::PRIORITY,
+1841         http2::FrameType::RST_STREAM,
+1842         http2::FrameType::SETTINGS,
+1843         http2::FrameType::PUSH\_PROMISE,
+1844         http2::FrameType::PING,
+1845         http2::FrameType::GOAWAY,
+1846         http2::FrameType::WINDOW_UPDATE,
+1847         http2::FrameType::CONTINUATION,
+1848         http2::FrameType::EX\_HEADERS,
+1849       \};
+1850 
+1851       \textcolor{keywordflow}{for}(http2::FrameType type: expectedTypes) \{
+1852         EXPECT\_TRUE(types.find(static\_cast<uint8\_t>(type)) != types.end())
+1853           << \textcolor{stringliteral}{"callback missing for type "} << static\_cast<uint8\_t>(type);
+1854       \}
+1855       \textcolor{keywordflow}{return} types.size() == (\textcolor{keyword}{sizeof}(expectedTypes)/\textcolor{keyword}{sizeof}(http2::FrameType));
+1856     \}
+1857   \};
+1858 
+1859   CallbackTypeTracker callbackTypeTracker;
+1860 
+1861   NiceMock<MockHTTPCodecCallback> mockCallback;
+1862   upstreamCodec\_.setCallback(&mockCallback);
+1863   downstreamCodec\_.setCallback(&mockCallback);
+1864   EXPECT\_CALL(mockCallback, onGenerateFrameHeader(\_, \_, \_, \_)).
+1865     WillRepeatedly(Invoke(&callbackTypeTracker, &CallbackTypeTracker::add));
+1866 
+1867   \textcolor{comment}{// DATA frame}
+1868   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcde"});
+1869   \textcolor{keyword}{auto} buf = folly::IOBuf::copyBuffer(data.data(), data.length());
+1870   upstreamCodec\_.generateBody(output\_, 2, std::move(buf),
+1871                               HTTPCodec::NoPadding, \textcolor{keyword}{true});
+1872 
+1873   HTTPHeaderSize size;
+1874   size.uncompressed = size.compressed = 0;
+1875   HTTPMessage req = getGetRequest();
+1876   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true}, &size);
+1877 
+1878   upstreamCodec\_.generatePriority(output\_, 3,
+1879                                   HTTPMessage::HTTPPriority(0, \textcolor{keyword}{true}, 1));
+1880   upstreamCodec\_.generateRstStream(output\_, 2, ErrorCode::ENHANCE\_YOUR\_CALM);
+1881   upstreamCodec\_.generateSettings(output\_);
+1882   downstreamCodec\_.generatePushPromise(output\_, 2, req, 1);
+1883   upstreamCodec\_.generatePingRequest(output\_);
+1884 
+1885   std::unique\_ptr<folly::IOBuf> debugData =
+1886       folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"debugData"});
+1887   upstreamCodec\_.generateGoaway(output\_, 17, ErrorCode::ENHANCE\_YOUR\_CALM,
+1888                                 std::move(debugData));
+1889 
+1890   upstreamCodec\_.generateWindowUpdate(output\_, 0, 10);
+1891 
+1892   HTTPCodec::StreamID stream = folly::Random::rand32(10, 1024) * 2;
+1893   HTTPCodec::StreamID controlStream = folly::Random::rand32(10, 1024) * 2 + 1;
+1894   downstreamCodec\_.generateExHeader(output\_, stream, req,
+1895     HTTPCodec::ExAttributes(controlStream, \textcolor{keyword}{true}));
+1896 
+1897   \textcolor{comment}{// Tests the continuation frame}
+1898   req = getBigGetRequest();
+1899   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+1900 
+1901   EXPECT\_TRUE(callbackTypeTracker.isAllFrameTypesReceived());
+1902 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_abb83639bae0d736d5589f4085f162caf}
+
+
+Definition at line 1904 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1904                                  \{
+1905   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+1906   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+1907   upstreamCodec\_.generateHeader(output\_, 1, req);
+1908 
+1909   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcde"});
+1910   \textcolor{keyword}{auto} buf = folly::IOBuf::copyBuffer(data.data(), data.length());
+1911   upstreamCodec\_.generateBody(
+1912       output\_, 1, std::move(buf), HTTPCodec::NoPadding, \textcolor{keyword}{false} \textcolor{comment}{/* eom */});
+1913 
+1914   HTTPHeaders trailers;
+1915   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+1916   upstreamCodec\_.generateTrailers(output\_, 1, trailers);
+1917 
+1918   parse();
+1919 
+1920   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+1921   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+1922   EXPECT\_EQ(callbacks\_.bodyCalls, 1);
+1923   EXPECT\_EQ(callbacks\_.bodyLength, 5);
+1924   EXPECT\_EQ(callbacks\_.trailers, 1);
+1925   EXPECT\_NE(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+1926   EXPECT\_EQ(\textcolor{stringliteral}{"pico-de-gallo"},
+1927             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-1"}));
+1928   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+1929   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1930   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1931 \textcolor{preprocessor}{#ifndef NDEBUG}
+1932   EXPECT\_EQ(downstreamCodec\_.getReceivedFrameCount(), 3);
+1933 \textcolor{preprocessor}{#endif}
+1934 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+With\+Pseudo\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+With\+Pseudo\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a31b89a49b74e2faefa14327d9ea9bcd8}
+
+
+Definition at line 1936 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::parse(), proxygen\+::\+U\+P\+S\+T\+R\+E\+AM, and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+1936                                                   \{
+1937   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+1938   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+1939   upstreamCodec\_.generateHeader(output\_, 1, req);
+1940 
+1941   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcde"});
+1942   \textcolor{keyword}{auto} buf = folly::IOBuf::copyBuffer(data.data(), data.length());
+1943   upstreamCodec\_.generateBody(
+1944       output\_, 1, std::move(buf), HTTPCodec::NoPadding, \textcolor{keyword}{false} \textcolor{comment}{/* eom */});
+1945 
+1946   HPACKCodec headerCodec(TransportDirection::UPSTREAM);
+1947   std::string post(\textcolor{stringliteral}{"POST"});
+1948   std::vector<proxygen::compress::Header> trailers = \{
+1949       Header::makeHeaderForTest(headers::kMethod, post)\};
+1950   \textcolor{keyword}{auto} encodedTrailers = headerCodec.encode(trailers);
+1951   http2::writeHeaders(output\_,
+1952                       std::move(encodedTrailers),
+1953                       1,
+1954                       folly::none,
+1955                       http2::kNoPadding,
+1956                       \textcolor{keyword}{true},
+1957                       \textcolor{keyword}{true});
+1958 
+1959   parse();
+1960 
+1961   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+1962   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+1963   EXPECT\_EQ(callbacks\_.bodyCalls, 1);
+1964   EXPECT\_EQ(callbacks\_.bodyLength, 5);
+1965   EXPECT\_EQ(callbacks\_.trailers, 0);
+1966   EXPECT\_EQ(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+1967   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+1968   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+1969 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+No\+Body)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+No\+Body}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a5e68f4b7ab6e8ef6452924b7227741b5}
+
+
+Definition at line 1971 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1971                                        \{
+1972   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+1973   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+1974   upstreamCodec\_.generateHeader(output\_, 1, req);
+1975 
+1976   HTTPHeaders trailers;
+1977   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+1978   upstreamCodec\_.generateTrailers(output\_, 1, trailers);
+1979 
+1980   parse();
+1981 
+1982   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+1983   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+1984   EXPECT\_EQ(callbacks\_.bodyCalls, 0);
+1985   EXPECT\_EQ(callbacks\_.bodyLength, 0);
+1986   EXPECT\_EQ(callbacks\_.trailers, 1);
+1987   EXPECT\_NE(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+1988   EXPECT\_EQ(\textcolor{stringliteral}{"pico-de-gallo"},
+1989             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-1"}));
+1990   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+1991   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+1992   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+1993 \textcolor{preprocessor}{#ifndef NDEBUG}
+1994   EXPECT\_EQ(downstreamCodec\_.getReceivedFrameCount(), 2);
+1995 \textcolor{preprocessor}{#endif}
+1996 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a099aaf60fd7816cd8cbbed04d5b9e5ec}
+
+
+Definition at line 1998 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::http2\+::k\+Max\+Frame\+Payload\+Length\+Min, and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+1998                                              \{
+1999   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+2000   upstreamCodec\_.generateHeader(output\_, 1, req);
+2001 
+2002   HTTPHeaders trailers;
+2003   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+2004   trailers.add(\textcolor{stringliteral}{"x-huge-trailer"},
+2005                std::string(http2::kMaxFramePayloadLengthMin, \textcolor{charliteral}{'!'}));
+2006   upstreamCodec\_.generateTrailers(output\_, 1, trailers);
+2007 
+2008   parse();
+2009 
+2010   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+2011   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+2012   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+2013   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+2014   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+2015   EXPECT\_NE(callbacks\_.msg, \textcolor{keyword}{nullptr});
+2016   EXPECT\_EQ(callbacks\_.trailers, 1);
+2017   EXPECT\_NE(callbacks\_.msg->getTrailers(), \textcolor{keyword}{nullptr});
+2018   EXPECT\_EQ(\textcolor{stringliteral}{"pico-de-gallo"},
+2019             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-1"}));
+2020   EXPECT\_EQ(std::string(http2::kMaxFramePayloadLengthMin, \textcolor{charliteral}{'!'}),
+2021             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-huge-trailer"}));
+2022 \textcolor{preprocessor}{#ifndef NDEBUG}
+2023   EXPECT\_EQ(downstreamCodec\_.getReceivedFrameCount(), 3);
+2024 \textcolor{preprocessor}{#endif}
+2025 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+Reply)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+Reply}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_aab4e79207472cd051d38d17073584e5e}
+
+
+Definition at line 2027 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message().
+
+
+\begin{DoxyCode}
+2027                                       \{
+2028   SetUpUpstreamTest();
+2029   HTTPMessage resp;
+2030   resp.setStatusCode(200);
+2031   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+2032   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+2033   downstreamCodec\_.generateHeader(output\_, 1, resp);
+2034 
+2035   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcde"});
+2036   \textcolor{keyword}{auto} buf = folly::IOBuf::copyBuffer(data.data(), data.length());
+2037   downstreamCodec\_.generateBody(
+2038       output\_, 1, std::move(buf), HTTPCodec::NoPadding, \textcolor{keyword}{false});
+2039 
+2040   HTTPHeaders trailers;
+2041   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+2042   trailers.add(\textcolor{stringliteral}{"x-trailer-2"}, \textcolor{stringliteral}{"chicken-kyiv"});
+2043   downstreamCodec\_.generateTrailers(output\_, 1, trailers);
+2044 
+2045   parseUpstream();
+2046 
+2047   callbacks\_.expectMessage(\textcolor{keyword}{true}, 2, 200);
+2048   EXPECT\_EQ(callbacks\_.bodyCalls, 1);
+2049   EXPECT\_EQ(callbacks\_.bodyLength, 5);
+2050   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+2051   EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+2052   EXPECT\_EQ(\textcolor{stringliteral}{"x-coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_CONTENT\_TYPE));
+2053   EXPECT\_EQ(1, callbacks\_.trailers);
+2054   EXPECT\_NE(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+2055   EXPECT\_EQ(\textcolor{stringliteral}{"pico-de-gallo"},
+2056             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-1"}));
+2057   EXPECT\_EQ(\textcolor{stringliteral}{"chicken-kyiv"},
+2058             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-2"}));
+2059 \textcolor{preprocessor}{#ifndef NDEBUG}
+2060   EXPECT\_EQ(upstreamCodec\_.getReceivedFrameCount(), 4);
+2061 \textcolor{preprocessor}{#endif}
+2062 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+Reply\+With\+No\+Data)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+Reply\+With\+No\+Data}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a1f51eee008c5990f2f232d66c30d4331}
+
+
+Definition at line 2064 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message().
+
+
+\begin{DoxyCode}
+2064                                                 \{
+2065   SetUpUpstreamTest();
+2066   HTTPMessage resp;
+2067   resp.setStatusCode(200);
+2068   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+2069   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+2070   downstreamCodec\_.generateHeader(output\_, 1, resp);
+2071 
+2072   HTTPHeaders trailers;
+2073   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+2074   downstreamCodec\_.generateTrailers(output\_, 1, trailers);
+2075 
+2076   parseUpstream();
+2077 
+2078   callbacks\_.expectMessage(\textcolor{keyword}{true}, 2, 200);
+2079   EXPECT\_EQ(callbacks\_.bodyCalls, 0);
+2080   EXPECT\_EQ(callbacks\_.bodyLength, 0);
+2081   \textcolor{keyword}{const} \textcolor{keyword}{auto}& headers = callbacks\_.msg->getHeaders();
+2082   EXPECT\_TRUE(callbacks\_.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+2083   EXPECT\_EQ(\textcolor{stringliteral}{"x-coolio"}, headers.getSingleOrEmpty(HTTP\_HEADER\_CONTENT\_TYPE));
+2084   EXPECT\_EQ(1, callbacks\_.trailers);
+2085   EXPECT\_NE(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+2086   EXPECT\_EQ(\textcolor{stringliteral}{"pico-de-gallo"},
+2087             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-1"}));
+2088 \textcolor{preprocessor}{#ifndef NDEBUG}
+2089   EXPECT\_EQ(upstreamCodec\_.getReceivedFrameCount(), 3);
+2090 \textcolor{preprocessor}{#endif}
+2091 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+Reply\+With\+Pseudo\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+Reply\+With\+Pseudo\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a76874adf3ea8344772303eac53d119cf}
+
+
+Definition at line 2093 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::headers\+::k\+Method, proxygen\+::http2\+::k\+No\+Padding, proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test(), proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding, proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message(), and proxygen\+::http2\+::write\+Headers().
+
+
+\begin{DoxyCode}
+2093                                                        \{
+2094   SetUpUpstreamTest();
+2095   HTTPMessage resp;
+2096   resp.setStatusCode(200);
+2097   resp.setStatusMessage(\textcolor{stringliteral}{"nifty-nice"});
+2098   resp.getHeaders().add(HTTP\_HEADER\_CONTENT\_TYPE, \textcolor{stringliteral}{"x-coolio"});
+2099   downstreamCodec\_.generateHeader(output\_, 1, resp);
+2100 
+2101   \textcolor{keywordtype}{string} data(\textcolor{stringliteral}{"abcde"});
+2102   \textcolor{keyword}{auto} buf = folly::IOBuf::copyBuffer(data.data(), data.length());
+2103   downstreamCodec\_.generateBody(
+2104       output\_, 1, std::move(buf), HTTPCodec::NoPadding, \textcolor{keyword}{false});
+2105 
+2106   HPACKCodec headerCodec(TransportDirection::DOWNSTREAM);
+2107   std::string post(\textcolor{stringliteral}{"POST"});
+2108   std::vector<proxygen::compress::Header> trailers = \{
+2109       Header::makeHeaderForTest(headers::kMethod, post)\};
+2110   \textcolor{keyword}{auto} encodedTrailers = headerCodec.encode(trailers);
+2111   http2::writeHeaders(output\_,
+2112                       std::move(encodedTrailers),
+2113                       1,
+2114                       folly::none,
+2115                       http2::kNoPadding,
+2116                       \textcolor{keyword}{true},
+2117                       \textcolor{keyword}{true});
+2118   parseUpstream();
+2119 
+2120   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+2121   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+2122   EXPECT\_EQ(callbacks\_.trailers, 0);
+2123   EXPECT\_EQ(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+2124   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+2125   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+2126 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+Reply\+Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+Reply\+Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ae77fbbd5aaeb45fd6b6663e557593022}
+
+
+Definition at line 2128 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::http2\+::k\+Max\+Frame\+Payload\+Length\+Min, and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code().
+
+
+\begin{DoxyCode}
+2128                                                   \{
+2129   SetUpUpstreamTest();
+2130   HTTPMessage resp;
+2131   resp.setStatusCode(200);
+2132   downstreamCodec\_.generateHeader(output\_, 1, resp);
+2133 
+2134   HTTPHeaders trailers;
+2135   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+2136   trailers.add(\textcolor{stringliteral}{"x-huge-trailer"},
+2137                std::string(http2::kMaxFramePayloadLengthMin, \textcolor{charliteral}{'!'}));
+2138   downstreamCodec\_.generateTrailers(output\_, 1, trailers);
+2139 
+2140   parseUpstream();
+2141 
+2142   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+2143   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+2144   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+2145   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+2146   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+2147   EXPECT\_NE(callbacks\_.msg, \textcolor{keyword}{nullptr});
+2148   EXPECT\_EQ(callbacks\_.msg->getStatusCode(), 200);
+2149   EXPECT\_EQ(1, callbacks\_.trailers);
+2150   EXPECT\_NE(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+2151   EXPECT\_EQ(\textcolor{stringliteral}{"pico-de-gallo"},
+2152             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-1"}));
+2153   EXPECT\_EQ(std::string(http2::kMaxFramePayloadLengthMin, \textcolor{charliteral}{'!'}),
+2154             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-huge-trailer"}));
+2155 \textcolor{preprocessor}{#ifndef NDEBUG}
+2156   EXPECT\_EQ(upstreamCodec\_.getReceivedFrameCount(), 4);
+2157 \textcolor{preprocessor}{#endif}
+2158 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+Reply\+Missing\+Continuation)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+Reply\+Missing\+Continuation}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_ae69fe39d887abcc54a887063b16729c2}
+
+
+Definition at line 2160 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+E\+N\+H\+A\+N\+C\+E\+\_\+\+Y\+O\+U\+R\+\_\+\+C\+A\+LM, proxygen\+::http2\+::k\+Frame\+Header\+Size, proxygen\+::http2\+::k\+Max\+Frame\+Payload\+Length\+Min, proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::http2\+::write\+Goaway().
+
+
+\begin{DoxyCode}
+2160                                                          \{
+2161   SetUpUpstreamTest();
+2162   HTTPMessage resp;
+2163   resp.setStatusCode(200);
+2164   downstreamCodec\_.generateHeader(output\_, 1, resp);
+2165 
+2166   HTTPHeaders trailers;
+2167   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+2168   trailers.add(\textcolor{stringliteral}{"x-huge-trailer"},
+2169                std::string(http2::kMaxFramePayloadLengthMin, \textcolor{charliteral}{'!'}));
+2170   downstreamCodec\_.generateTrailers(output\_, 1, trailers);
+2171   \textcolor{comment}{// empirically determined the size of continuation frame, and strip it}
+2172   output\_.trimEnd(http2::kFrameHeaderSize + 4132);
+2173 
+2174   \textcolor{comment}{// insert a non-continuation (but otherwise valid) frame}
+2175   http2::writeGoaway(output\_, 17, ErrorCode::ENHANCE\_YOUR\_CALM);
+2176 
+2177   parseUpstream();
+2178 
+2179   EXPECT\_EQ(callbacks\_.messageBegin, 1);
+2180   EXPECT\_EQ(callbacks\_.headersComplete, 1);
+2181   EXPECT\_EQ(callbacks\_.messageComplete, 0);
+2182   EXPECT\_EQ(callbacks\_.streamErrors, 0);
+2183   EXPECT\_EQ(callbacks\_.sessionErrors, 1);
+2184 \textcolor{preprocessor}{#ifndef NDEBUG}
+2185   EXPECT\_EQ(upstreamCodec\_.getReceivedFrameCount(), 4);
+2186 \textcolor{preprocessor}{#endif}
+2187 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P2\+Codec\+Test, Trailers\+Not\+Latest)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P2\+Codec\+Test}}]{, }
+\item[{Trailers\+Not\+Latest}]{}
+\end{DoxyParamCaption}
+)}\label{HTTP2CodecTest_8cpp_a1538cdd981dc10f055c61cddcc59ff3a}
+
+
+Definition at line 2189 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), and proxygen\+::parse().
+
+
+\begin{DoxyCode}
+2189                                           \{
+2190   HTTPMessage req = getGetRequest(\textcolor{stringliteral}{"/guacamole"});
+2191   req.getHeaders().add(HTTP\_HEADER\_USER\_AGENT, \textcolor{stringliteral}{"coolio"});
+2192   upstreamCodec\_.generateHeader(output\_, 1, req);
+2193   upstreamCodec\_.generateHeader(output\_, 3, req);
+2194 
+2195   HTTPHeaders trailers;
+2196   trailers.add(\textcolor{stringliteral}{"x-trailer-1"}, \textcolor{stringliteral}{"pico-de-gallo"});
+2197   upstreamCodec\_.generateTrailers(output\_, 1, trailers);
+2198   upstreamCodec\_.generateHeader(output\_, 3, req);
+2199 
+2200   parse();
+2201 
+2202   EXPECT\_EQ(callbacks\_.messageBegin, 2);
+2203   EXPECT\_EQ(callbacks\_.headersComplete, 2);
+2204   EXPECT\_EQ(callbacks\_.bodyCalls, 0);
+2205   EXPECT\_EQ(callbacks\_.trailers, 1);
+2206   EXPECT\_NE(\textcolor{keyword}{nullptr}, callbacks\_.msg->getTrailers());
+2207   EXPECT\_EQ(\textcolor{stringliteral}{"pico-de-gallo"},
+2208             callbacks\_.msg->getTrailers()->getSingleOrEmpty(\textcolor{stringliteral}{"x-trailer-1"}));
+2209   EXPECT\_EQ(callbacks\_.messageComplete, 1);
+2210   EXPECT\_EQ(callbacks\_.streamErrors, 1);
+2211   EXPECT\_EQ(callbacks\_.sessionErrors, 0);
+2212 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}!k\+Buf\+Empty\+Header@{k\+Buf\+Empty\+Header}}
+\index{k\+Buf\+Empty\+Header@{k\+Buf\+Empty\+Header}!H\+T\+T\+P2\+Codec\+Test.\+cpp@{H\+T\+T\+P2\+Codec\+Test.\+cpp}}
+\subsubsection[{k\+Buf\+Empty\+Header}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t k\+Buf\+Empty\+Header[$\,$]}\label{HTTP2CodecTest_8cpp_a2b69648be053bedcf384853698c29d8e}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  0x00, 0x00, 0x1d, 0x01, 0x04, 0x00, 0x00, 0x00, 0x01, 0x82,
+  0x87, 0x44, 0x87, 0x62, 0x6b, 0x46, 0x41, 0xd2, 0x7a, 0x0b,
+  0x41, 0x89, 0xf1, 0xe3, 0xc2, 0xf2, 0x9c, 0xeb, 0x90, 0xf4,
+  0xff, 0x40, 0x80, 0x84, 0x2d, 0x35, 0xa7, 0xd7
+\}
+\end{DoxyCode}
+Ingress bytes with an empty header name 
+
+Definition at line 439 of file H\+T\+T\+P2\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+

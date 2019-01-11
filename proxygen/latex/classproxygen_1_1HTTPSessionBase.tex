@@ -1,0 +1,2133 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Session\+Base Class Reference}
+\label{classproxygen_1_1HTTPSessionBase}\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Session\+Base.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Session\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classproxygen_1_1HTTPSessionBase}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Info\+Callback}
+\item 
+class {\bf Priority\+Adapter}
+\item 
+class {\bf Priority\+Map\+Factory}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Session\+Type} \{ {\bf Session\+Type\+::\+H\+T\+TP}, 
+{\bf Session\+Type\+::\+HQ}
+ \}
+\item 
+using {\bf Filter\+Iterator\+Fn} = std\+::function$<$ void({\bf H\+T\+T\+P\+Codec\+Filter} $\ast$)$>$
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session\+Base} (const folly\+::\+Socket\+Address \&{\bf local\+Addr}, const folly\+::\+Socket\+Address \&{\bf peer\+Addr}, {\bf H\+T\+T\+P\+Session\+Controller} $\ast$controller, const wangle\+::\+Transport\+Info \&tinfo, {\bf Info\+Callback} $\ast$info\+Callback, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ codec)
+\item 
+virtual {\bf $\sim$\+H\+T\+T\+P\+Session\+Base} ()
+\item 
+void {\bf set\+Info\+Callback} ({\bf Info\+Callback} $\ast$callback)
+\item 
+{\bf Info\+Callback} $\ast$ {\bf get\+Info\+Callback} () const 
+\item 
+virtual void {\bf set\+Session\+Stats} ({\bf H\+T\+T\+P\+Session\+Stats} $\ast$stats)
+\item 
+virtual {\bf Session\+Type} {\bf get\+Type} () const noexcept=0
+\item 
+virtual folly\+::\+Async\+Transport\+Wrapper $\ast$ {\bf get\+Transport} ()=0
+\item 
+virtual const folly\+::\+Async\+Transport\+Wrapper $\ast$ {\bf get\+Transport} () const =0
+\item 
+virtual folly\+::\+Event\+Base $\ast$ {\bf get\+Event\+Base} () const =0
+\item 
+{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ {\bf get\+Parse\+Error\+Handler} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn, const {\bf H\+T\+T\+P\+Exception} \&error)
+\item 
+virtual bool {\bf has\+Active\+Transactions} () const =0
+\item 
+bool {\bf supports\+More\+Transactions} () const 
+\item 
+virtual uint32\+\_\+t {\bf get\+Num\+Outgoing\+Streams} () const =0
+\item 
+uint32\+\_\+t {\bf get\+Historical\+Max\+Outgoing\+Streams} () const 
+\item 
+virtual uint32\+\_\+t {\bf get\+Num\+Incoming\+Streams} () const =0
+\item 
+virtual uint32\+\_\+t {\bf get\+Max\+Concurrent\+Outgoing\+Streams\+Remote} () const =0
+\item 
+uint32\+\_\+t {\bf get\+Max\+Concurrent\+Outgoing\+Streams} () const 
+\item 
+{\bf H\+T\+T\+P\+Session\+Controller} $\ast$ {\bf get\+Controller} ()
+\item 
+void {\bf set\+Controller} ({\bf H\+T\+T\+P\+Session\+Controller} $\ast$controller)
+\item 
+{\bf Connection\+Close\+Reason} {\bf get\+Connection\+Close\+Reason} () const 
+\item 
+{\footnotesize template$<$typename Filter , typename... Args$>$ }\\void {\bf add\+Codec\+Filter} (Args \&\&...args)
+\item 
+virtual {\bf Codec\+Protocol} {\bf get\+Codec\+Protocol} () const 
+\item 
+virtual void {\bf set\+Flow\+Control} (size\+\_\+t initial\+Receive\+Window, size\+\_\+t receive\+Stream\+Window\+Size, size\+\_\+t receive\+Session\+Window\+Size)=0
+\item 
+virtual void {\bf set\+Egress\+Settings} (const {\bf Settings\+List} \&in\+Settings)=0
+\item 
+void {\bf set\+H\+T\+T\+P2\+Priorities\+Enabled} (bool enabled)
+\item 
+virtual bool {\bf get\+H\+T\+T\+P2\+Priorities\+Enabled} () const 
+\item 
+void {\bf set\+Max\+Concurrent\+Outgoing\+Streams} (uint32\+\_\+t num)
+\item 
+virtual void {\bf set\+Max\+Concurrent\+Incoming\+Streams} (uint32\+\_\+t num)=0
+\item 
+uint32\+\_\+t {\bf get\+Write\+Buffer\+Limit} () const 
+\item 
+void {\bf set\+Write\+Buffer\+Limit} (uint32\+\_\+t limit)
+\item 
+void {\bf set\+Read\+Buffer\+Limit} (uint32\+\_\+t limit)
+\item 
+virtual void {\bf start\+Now} ()=0
+\item 
+virtual size\+\_\+t {\bf send\+Settings} ()=0
+\item 
+virtual size\+\_\+t {\bf send\+Ping} ()=0
+\item 
+virtual {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf send\+Priority} ({\bf http2\+::\+Priority\+Update} pri)=0
+\item 
+virtual size\+\_\+t {\bf send\+Priority} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, {\bf http2\+::\+Priority\+Update} pri)=0
+\item 
+virtual size\+\_\+t {\bf send\+Certificate\+Request} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, std\+::vector$<$ fizz\+::\+Extension $>$)
+\item 
+uint64\+\_\+t {\bf get\+Num\+Txn\+Served} () const 
+\item 
+std\+::chrono\+::seconds {\bf get\+Latest\+Idle\+Time} () const 
+\item 
+void {\bf set\+Priority\+Sampled} (bool sampled)
+\item 
+const folly\+::\+Socket\+Address \& {\bf get\+Local\+Address} () const noexcept
+\item 
+const folly\+::\+Socket\+Address \& {\bf get\+Peer\+Address} () const noexcept
+\item 
+const wangle\+::\+Transport\+Info \& {\bf get\+Setup\+Transport\+Info} () const noexcept
+\item 
+virtual bool {\bf get\+Current\+Transport\+Info} (wangle\+::\+Transport\+Info $\ast$tinfo)=0
+\item 
+virtual bool {\bf get\+Current\+Transport\+Info\+Without\+Update} (wangle\+::\+Transport\+Info $\ast$tinfo) const =0
+\item 
+virtual void {\bf set\+Header\+Codec\+Stats} ({\bf Header\+Codec\+::\+Stats} $\ast$stats)=0
+\item 
+virtual void {\bf enable\+Double\+Goaway\+Drain} ()=0
+\item 
+wangle\+::\+Transport\+Info \& {\bf get\+Setup\+Transport\+Info} () noexcept
+\item 
+virtual bool {\bf conn\+Close\+By\+Remote} ()=0
+\item 
+virtual bool {\bf is\+Detachable} (bool check\+Socket) const =0
+\item 
+virtual void {\bf attach\+Thread\+Locals} (folly\+::\+Event\+Base $\ast$event\+Base, folly\+::\+S\+S\+L\+Context\+Ptr ssl\+Context, const {\bf Wheel\+Timer\+Instance} \&timeout, {\bf H\+T\+T\+P\+Session\+Stats} $\ast$stats, {\bf Filter\+Iterator\+Fn} fn, {\bf Header\+Codec\+::\+Stats} $\ast$header\+Codec\+Stats, {\bf H\+T\+T\+P\+Session\+Controller} $\ast$controller)=0
+\item 
+virtual void {\bf detach\+Thread\+Locals} (bool detach\+S\+S\+L\+Context=false)=0
+\item 
+virtual {\bf H\+T\+T\+P\+Transaction} $\ast$ {\bf new\+Transaction} ({\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$handler)=0
+\item 
+virtual bool {\bf is\+Replay\+Safe} () const =0
+\item 
+virtual bool {\bf is\+Reusable} () const =0
+\item 
+virtual bool {\bf is\+Closing} () const =0
+\item 
+virtual void {\bf drain} ()=0
+\item 
+virtual folly\+::\+Optional$<$ const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} $>$ {\bf get\+H\+T\+T\+P\+Priority} (uint8\+\_\+t level)=0
+\item 
+void {\bf enable\+Ex\+Headers\+Settings} () noexcept
+\item 
+bool {\bf is\+Ex\+Headers\+Enabled} () noexcept
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf set\+Default\+Read\+Buffer\+Limit} (uint32\+\_\+t limit)
+\item 
+static void {\bf set\+Max\+Read\+Buffer\+Size} (uint32\+\_\+t bytes)
+\item 
+static void {\bf set\+Flow\+Controlled\+Body\+Size\+Limit} (uint32\+\_\+t limit)
+\item 
+static void {\bf set\+Default\+Write\+Buffer\+Limit} (uint32\+\_\+t max)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf handle\+Error\+Directly} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn, const {\bf H\+T\+T\+P\+Exception} \&error)
+\item 
+bool {\bf on\+Body\+Impl} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, size\+\_\+t length, uint16\+\_\+t padding, {\bf H\+T\+T\+P\+Transaction} $\ast$txn)
+\item 
+bool {\bf notify\+Body\+Processed} (uint32\+\_\+t bytes)
+\item 
+void {\bf set\+Latest\+Active} ()
+\item 
+bool {\bf ingress\+Limit\+Exceeded} () const 
+\item 
+bool {\bf egress\+Limit\+Exceeded} () const 
+\item 
+void {\bf update\+Pending\+Write\+Size} (int64\+\_\+t delta)
+\item 
+void {\bf on\+Create\+Transaction} ()
+\item 
+void {\bf increment\+Seq\+No} ()
+\item 
+bool {\bf is\+Priority\+Sampled} () const 
+\item 
+void {\bf on\+New\+Outgoing\+Stream} (uint32\+\_\+t outgoing\+Streams)
+\item 
+void {\bf set\+Close\+Reason} ({\bf Connection\+Close\+Reason} reason)
+\item 
+void {\bf run\+Destroy\+Callbacks} ()
+\item 
+void {\bf on\+Codec\+Changed} ()
+\item 
+void {\bf init\+Codec\+Header\+Indexing\+Strategy} ()
+\item 
+void {\bf attach\+To\+Session\+Controller} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf handle\+Last\+Byte\+Events} ({\bf Byte\+Event\+Tracker} $\ast$byte\+Event\+Tracker, {\bf H\+T\+T\+P\+Transaction} $\ast$txn, size\+\_\+t encoded\+Size, size\+\_\+t byte\+Offset, bool piggybacked)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session\+Stats} $\ast$ {\bf session\+Stats\+\_\+} \{{\bf nullptr}\}
+\item 
+{\bf Info\+Callback} $\ast$ {\bf info\+Callback\+\_\+} \{{\bf nullptr}\}
+\item 
+wangle\+::\+Transport\+Info {\bf transport\+Info\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Codec\+Filter\+Chain} {\bf codec\+\_\+}
+\item 
+folly\+::\+Socket\+Address {\bf local\+Addr\+\_\+}
+\item 
+folly\+::\+Socket\+Address {\bf peer\+Addr\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t {\bf k\+Default\+Read\+Buf\+Limit} = 65536
+\item 
+static uint32\+\_\+t {\bf max\+Read\+Buffer\+Size\+\_\+} = 4000
+\item 
+static uint32\+\_\+t {\bf k\+Default\+Write\+Buf\+Limit} = 65536
+\item 
+static uint32\+\_\+t {\bf egress\+Body\+Size\+Limit\+\_\+} = 4096
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::chrono\+::milliseconds {\bf get\+Idle\+Time} () const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session\+Controller} $\ast$ {\bf controller\+\_\+} \{{\bf nullptr}\}
+\item 
+{\bf Time\+Point} {\bf latest\+Active\+\_\+} \{\}
+\item 
+std\+::chrono\+::seconds {\bf latest\+Idle\+Duration\+\_\+} \{\}
+\item 
+uint32\+\_\+t {\bf transaction\+Seq\+No\+\_\+} \{0\}
+\item 
+{\bf Connection\+Close\+Reason} {\bf close\+Reason\+\_\+} \{{\bf Connection\+Close\+Reason\+::k\+M\+A\+X\+\_\+\+R\+E\+A\+S\+ON}\}
+\item 
+uint32\+\_\+t {\bf historical\+Max\+Outgoing\+Streams\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf max\+Concurrent\+Outgoing\+Streams\+Config\+\_\+}
+\item 
+uint32\+\_\+t {\bf read\+Buf\+Limit\+\_\+} \{{\bf k\+Default\+Read\+Buf\+Limit}\}
+\item 
+uint32\+\_\+t {\bf write\+Buf\+Limit\+\_\+} \{{\bf k\+Default\+Write\+Buf\+Limit}\}
+\item 
+uint64\+\_\+t {\bf pending\+Write\+Size\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf pending\+Read\+Size\+\_\+} \{0\}
+\item 
+bool {\bf priority\+Sample\+\_\+}\+:1
+\item 
+bool {\bf h2\+Priorities\+Enabled\+\_\+}\+:1
+\item 
+bool {\bf ex\+Headers\+Enabled\+\_\+}\+:1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 35 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!Filter\+Iterator\+Fn@{Filter\+Iterator\+Fn}}
+\index{Filter\+Iterator\+Fn@{Filter\+Iterator\+Fn}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{Filter\+Iterator\+Fn}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+Filter\+Iterator\+Fn} =  std\+::function$<$void({\bf H\+T\+T\+P\+Codec\+Filter}$\ast$)$>$}\label{classproxygen_1_1HTTPSessionBase_a2969f50b8010be5a0ef38415057f92c6}
+
+
+Definition at line 397 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!Session\+Type@{Session\+Type}}
+\index{Session\+Type@{Session\+Type}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{Session\+Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+Session\+Type}\hspace{0.3cm}{\ttfamily [strong]}}\label{classproxygen_1_1HTTPSessionBase_a1c9bb94538d5eeda59044fec7da1c21d}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{H\+T\+TP@{H\+T\+TP}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!H\+T\+TP@{H\+T\+TP}}\item[{\em 
+H\+T\+TP\label{classproxygen_1_1HTTPSessionBase_a1c9bb94538d5eeda59044fec7da1c21da293c9ea246ff9985dc6f62a650f78986}
+}]\index{HQ@{HQ}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!HQ@{HQ}}\item[{\em 
+HQ\label{classproxygen_1_1HTTPSessionBase_a1c9bb94538d5eeda59044fec7da1c21da8fe49abfd9ab1d6620b6e84dde100789}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 38 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+38                          \{
+39     HTTP,
+40     HQ
+41   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!H\+T\+T\+P\+Session\+Base@{H\+T\+T\+P\+Session\+Base}}
+\index{H\+T\+T\+P\+Session\+Base@{H\+T\+T\+P\+Session\+Base}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{H\+T\+T\+P\+Session\+Base(const folly\+::\+Socket\+Address \&local\+Addr, const folly\+::\+Socket\+Address \&peer\+Addr, H\+T\+T\+P\+Session\+Controller $\ast$controller, const wangle\+::\+Transport\+Info \&tinfo, Info\+Callback $\ast$info\+Callback, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Codec $>$ codec)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+H\+T\+T\+P\+Session\+Base (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Socket\+Address \&}]{local\+Addr, }
+\item[{const folly\+::\+Socket\+Address \&}]{peer\+Addr, }
+\item[{{\bf H\+T\+T\+P\+Session\+Controller} $\ast$}]{controller, }
+\item[{const wangle\+::\+Transport\+Info \&}]{tinfo, }
+\item[{{\bf Info\+Callback} $\ast$}]{info\+Callback, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$}]{codec}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPSessionBase_af8a8f609c01a88071759fd815644e2e3}
+
+
+Definition at line 27 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References local\+Addr\+\_\+, peer\+Addr\+\_\+, and set\+Controller().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Err().
+
+
+\begin{DoxyCode}
+33                                   :
+34     infoCallback_(infoCallback),
+35     transportInfo_(tinfo),
+36     codec_(std::move(codec)),
+37     localAddr_(localAddr),
+38     peerAddr_(peerAddr),
+39     prioritySample_(\textcolor{keyword}{false}),
+40     h2PrioritiesEnabled_(\textcolor{keyword}{true}),
+41     exHeadersEnabled_(\textcolor{keyword}{false}) \{
+42 
+43   \textcolor{comment}{// If we receive IPv4-mapped IPv6 addresses, convert them to IPv4.}
+44   localAddr_.tryConvertToIPv4();
+45   peerAddr_.tryConvertToIPv4();
+46 
+47   setController(controller);
+48 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!````~H\+T\+T\+P\+Session\+Base@{$\sim$\+H\+T\+T\+P\+Session\+Base}}
+\index{````~H\+T\+T\+P\+Session\+Base@{$\sim$\+H\+T\+T\+P\+Session\+Base}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Session\+Base()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::$\sim$\+H\+T\+T\+P\+Session\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionBase_a092b355386e5efda6d2ffd257bd2317b}
+
+
+Definition at line 91 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+91 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!add\+Codec\+Filter@{add\+Codec\+Filter}}
+\index{add\+Codec\+Filter@{add\+Codec\+Filter}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{add\+Codec\+Filter(\+Args \&\&...\+args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Filter , typename... Args$>$ void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::add\+Codec\+Filter (
+\begin{DoxyParamCaption}
+\item[{Args \&\&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a3958ef73c590766781ea4a7a642dca33}
+
+
+Definition at line 188 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+188                                       \{
+189     codec_.add<Filter>(std::forward<Args>(args)...);
+190   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!attach\+Thread\+Locals@{attach\+Thread\+Locals}}
+\index{attach\+Thread\+Locals@{attach\+Thread\+Locals}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{attach\+Thread\+Locals(folly\+::\+Event\+Base $\ast$event\+Base, folly\+::\+S\+S\+L\+Context\+Ptr ssl\+Context, const Wheel\+Timer\+Instance \&timeout, H\+T\+T\+P\+Session\+Stats $\ast$stats, Filter\+Iterator\+Fn fn, Header\+Codec\+::\+Stats $\ast$header\+Codec\+Stats, H\+T\+T\+P\+Session\+Controller $\ast$controller)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::attach\+Thread\+Locals (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{event\+Base, }
+\item[{folly\+::\+S\+S\+L\+Context\+Ptr}]{ssl\+Context, }
+\item[{const {\bf Wheel\+Timer\+Instance} \&}]{timeout, }
+\item[{{\bf H\+T\+T\+P\+Session\+Stats} $\ast$}]{stats, }
+\item[{{\bf Filter\+Iterator\+Fn}}]{fn, }
+\item[{{\bf Header\+Codec\+::\+Stats} $\ast$}]{header\+Codec\+Stats, }
+\item[{{\bf H\+T\+T\+P\+Session\+Controller} $\ast$}]{controller}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a4e810a1d803e52061964419128fc7fc5}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_a6d2cc844677f65cf164b4eed7606752b}, and {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a67c41dc1148a60527662850577ef99be}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!attach\+To\+Session\+Controller@{attach\+To\+Session\+Controller}}
+\index{attach\+To\+Session\+Controller@{attach\+To\+Session\+Controller}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{attach\+To\+Session\+Controller()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::attach\+To\+Session\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_acc7648025a9fb25c6ba01b7717aa59f3}
+Attaches Session to Revproxy\+Controller instance if it\textquotesingle{}s set 
+
+Definition at line 153 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References get\+Controller().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Err().
+
+
+\begin{DoxyCode}
+153                                                 \{
+154   \textcolor{keyword}{auto} controllerPtr = getController();
+155   \textcolor{keywordflow}{if} (controllerPtr) \{
+156     controllerPtr->attachSession(\textcolor{keyword}{this});
+157   \}
+158 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!conn\+Close\+By\+Remote@{conn\+Close\+By\+Remote}}
+\index{conn\+Close\+By\+Remote@{conn\+Close\+By\+Remote}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{conn\+Close\+By\+Remote()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::conn\+Close\+By\+Remote (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a271ccbb8e9438dc47040d4d78995b72c}
+If the connection is closed by remote end 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a0f17d905706699ce11d91ff621057575}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!detach\+Thread\+Locals@{detach\+Thread\+Locals}}
+\index{detach\+Thread\+Locals@{detach\+Thread\+Locals}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{detach\+Thread\+Locals(bool detach\+S\+S\+L\+Context=false)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::detach\+Thread\+Locals (
+\begin{DoxyParamCaption}
+\item[{bool}]{detach\+S\+S\+L\+Context = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a6c0ea565697840e3cceab93c8eb28462}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_af8ac6b4b7a324b290b292988c78befca}, and {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_aece0cdfc3930be2d1f1035bfdf4b8cf4}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!drain@{drain}}
+\index{drain@{drain}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{drain()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::drain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a840a10b132ba952fedbd8af8aac1692d}
+Drains the current transactions and prevents new transactions from being created on this session. When the number of transactions reaches zero, this session will shutdown the transport and delete itself. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a7cf098767599f9b93dced643dd996efb}, and {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a3fb9c14db09f1ddae0e6b30ad783516b}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!egress\+Limit\+Exceeded@{egress\+Limit\+Exceeded}}
+\index{egress\+Limit\+Exceeded@{egress\+Limit\+Exceeded}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{egress\+Limit\+Exceeded() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::egress\+Limit\+Exceeded (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a237f4e26687af1cc1ed5132ecb9afbb0}
+Returns true iff egress should stop on this session. 
+
+Definition at line 478 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::resume\+Transactions(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+New\+Transaction\+Pause\+State(), and proxygen\+::\+H\+T\+T\+P\+Session\+::update\+Write\+Buf\+Size().
+
+
+\begin{DoxyCode}
+478                                    \{
+479     \textcolor{comment}{// Changed to >}
+480     \textcolor{keywordflow}{return} pendingWriteSize_ > writeBufLimit_;
+481   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!enable\+Double\+Goaway\+Drain@{enable\+Double\+Goaway\+Drain}}
+\index{enable\+Double\+Goaway\+Drain@{enable\+Double\+Goaway\+Drain}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{enable\+Double\+Goaway\+Drain()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::enable\+Double\+Goaway\+Drain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_af39df2dc9f0103a2673b71038837ec60}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ab2b5edde97da1c7321b3c1beb2e42ebd}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!enable\+Ex\+Headers\+Settings@{enable\+Ex\+Headers\+Settings}}
+\index{enable\+Ex\+Headers\+Settings@{enable\+Ex\+Headers\+Settings}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{enable\+Ex\+Headers\+Settings() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::enable\+Ex\+Headers\+Settings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionBase_ac53f9465a37d4a9b1bad4adcd80117ea}
+Enable to use Ex Headers in \doxyref{H\+T\+T\+P\+Session}{p.}{classproxygen_1_1HTTPSession} 
+
+Definition at line 145 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References codec\+\_\+, proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+E\+X\+\_\+\+H\+E\+A\+D\+E\+RS, ex\+Headers\+Enabled\+\_\+, proxygen\+::\+H\+T\+T\+P\+Codec\+::get\+Egress\+Settings(), proxygen\+::\+H\+T\+T\+P\+Settings\+::set\+Setting(), and settings.
+
+
+\begin{DoxyCode}
+145                                                        \{
+146   HTTPSettings* settings = codec_->getEgressSettings();
+147   \textcolor{keywordflow}{if} (settings) \{
+148     settings->setSetting(SettingsId::ENABLE_EX_HEADERS, 1);
+149     exHeadersEnabled_ = \textcolor{keyword}{true};
+150   \}
+151 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Codec\+Protocol@{get\+Codec\+Protocol}}
+\index{get\+Codec\+Protocol@{get\+Codec\+Protocol}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Codec\+Protocol() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Codec\+Protocol} proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Codec\+Protocol (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionBase_a9e7374e8253fc82f8514aef4a66a0db6}
+
+
+Definition at line 192 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by H\+T\+T\+P\+Target\+Session\+Acceptor\+::on\+Create().
+
+
+\begin{DoxyCode}
+192                                                  \{
+193     \textcolor{keywordflow}{return} codec_->getProtocol();
+194   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Connection\+Close\+Reason@{get\+Connection\+Close\+Reason}}
+\index{get\+Connection\+Close\+Reason@{get\+Connection\+Close\+Reason}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Connection\+Close\+Reason() const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf Connection\+Close\+Reason} proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Connection\+Close\+Reason (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_ab94370f0363e4f974e819b0bbf1c642b}
+
+
+Definition at line 183 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::shutdown\+Transport().
+
+
+\begin{DoxyCode}
+183                                                          \{
+184     \textcolor{keywordflow}{return} closeReason_;
+185   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Controller@{get\+Controller}}
+\index{get\+Controller@{get\+Controller}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Controller()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session\+Controller}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a907b76607c10117ea4f4a669699835eb}
+
+
+Definition at line 174 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by attach\+To\+Session\+Controller(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::get\+Transaction\+Timeout\+Handler(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Timeout\+Expired(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::setup\+On\+Headers\+Complete(), and proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Err().
+
+
+\begin{DoxyCode}
+174 \{ \textcolor{keywordflow}{return} controller_; \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Current\+Transport\+Info@{get\+Current\+Transport\+Info}}
+\index{get\+Current\+Transport\+Info@{get\+Current\+Transport\+Info}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Current\+Transport\+Info(wangle\+::\+Transport\+Info $\ast$tinfo)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Current\+Transport\+Info (
+\begin{DoxyParamCaption}
+\item[{wangle\+::\+Transport\+Info $\ast$}]{tinfo}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a8164721d4bf7c3f1b9006d0bcdcfdda9}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_aa82b0bd3fa4af3999b03cbccbfe136c8}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Current\+Transport\+Info\+Without\+Update@{get\+Current\+Transport\+Info\+Without\+Update}}
+\index{get\+Current\+Transport\+Info\+Without\+Update@{get\+Current\+Transport\+Info\+Without\+Update}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Current\+Transport\+Info\+Without\+Update(wangle\+::\+Transport\+Info $\ast$tinfo) const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Current\+Transport\+Info\+Without\+Update (
+\begin{DoxyParamCaption}
+\item[{wangle\+::\+Transport\+Info $\ast$}]{tinfo}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a68a5d49e2a7d811eb423565f62877b8e}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a835f8ccd23c3890580f3ba11a7a9b51c}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Event\+Base@{get\+Event\+Base}}
+\index{get\+Event\+Base@{get\+Event\+Base}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Event\+Base() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual folly\+::\+Event\+Base$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Event\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a60d26c60a2326428d9f4bc0e56b0f24d}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_af6225e79bfb92a2b8b5445d02f385eb5}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Historical\+Max\+Outgoing\+Streams@{get\+Historical\+Max\+Outgoing\+Streams}}
+\index{get\+Historical\+Max\+Outgoing\+Streams@{get\+Historical\+Max\+Outgoing\+Streams}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Historical\+Max\+Outgoing\+Streams() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Historical\+Max\+Outgoing\+Streams (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a067ba3e3669d928746bb003df542fd14}
+
+
+Definition at line 160 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+160                                                    \{
+161     \textcolor{keywordflow}{return} historicalMaxOutgoingStreams_;
+162   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+H\+T\+T\+P2\+Priorities\+Enabled@{get\+H\+T\+T\+P2\+Priorities\+Enabled}}
+\index{get\+H\+T\+T\+P2\+Priorities\+Enabled@{get\+H\+T\+T\+P2\+Priorities\+Enabled}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+H\+T\+T\+P2\+Priorities\+Enabled() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+H\+T\+T\+P2\+Priorities\+Enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionBase_a6f0916403f1d1a63bc1236d2fb8b9d4d}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a177d9f43b8dcd75a09ccbe02a2f00498}.
+
+
+
+Definition at line 224 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+H\+T\+T\+P2\+Priorities\+Enabled().
+
+
+\begin{DoxyCode}
+224                                                  \{
+225     \textcolor{keywordflow}{return} h2PrioritiesEnabled_;
+226   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+H\+T\+T\+P\+Priority@{get\+H\+T\+T\+P\+Priority}}
+\index{get\+H\+T\+T\+P\+Priority@{get\+H\+T\+T\+P\+Priority}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+H\+T\+T\+P\+Priority(uint8\+\_\+t level)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual folly\+::\+Optional$<$const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority}$>$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+H\+T\+T\+P\+Priority (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a98b3e5d3b9c5daef7699fa0fe5d3faeb}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a53c7e76d73a80296ffab4461dd0dbb0b}, and {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_af70db0ee27cd989936d7421e6f667b65}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Idle\+Time@{get\+Idle\+Time}}
+\index{get\+Idle\+Time@{get\+Idle\+Time}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Idle\+Time() const override}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Idle\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_af5c2995d30cb12d810660057c8ce786d}
+
+
+Definition at line 586 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+References proxygen\+::milliseconds\+Since(), and proxygen\+::time\+Point\+Initialized().
+
+
+\begin{DoxyCode}
+586                                                      \{
+587     \textcolor{keywordflow}{if} (timePointInitialized(latestActive_)) \{
+588       \textcolor{keywordflow}{return} millisecondsSince(latestActive_);
+589     \} \textcolor{keywordflow}{else} \{
+590       \textcolor{keywordflow}{return} std::chrono::milliseconds(0);
+591     \}
+592   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Info\+Callback@{get\+Info\+Callback}}
+\index{get\+Info\+Callback@{get\+Info\+Callback}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Info\+Callback() const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf Info\+Callback}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Info\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_ae829f698ff44c5184d65aaa156d20ab1}
+
+
+Definition at line 125 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+125                                         \{
+126     \textcolor{keywordflow}{return} infoCallback_;
+127   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Latest\+Idle\+Time@{get\+Latest\+Idle\+Time}}
+\index{get\+Latest\+Idle\+Time@{get\+Latest\+Idle\+Time}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Latest\+Idle\+Time() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::seconds proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Latest\+Idle\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_ad3c0c7b7b5bd8d33d62546d3d27125a8}
+
+
+Definition at line 308 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+308                                              \{
+309     DCHECK\_GT(transactionSeqNo_, 0) << \textcolor{stringliteral}{"No idle time for the first transaction"};
+310     DCHECK(latestActive_ > TimePoint::min());
+311     \textcolor{keywordflow}{return} latestIdleDuration_;
+312   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Local\+Address@{get\+Local\+Address}}
+\index{get\+Local\+Address@{get\+Local\+Address}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Local\+Address() const noexcept}]{\setlength{\rightskip}{0pt plus 5cm}const folly\+::\+Socket\+Address\& proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Local\+Address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionBase_a228fe147434c7ab4d5b78c90431c2bcc}
+
+
+Definition at line 319 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Local\+Address(), and get\+Parse\+Error\+Handler().
+
+
+\begin{DoxyCode}
+320                      \{
+321     \textcolor{keywordflow}{return} localAddr_;
+322   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Max\+Concurrent\+Outgoing\+Streams@{get\+Max\+Concurrent\+Outgoing\+Streams}}
+\index{get\+Max\+Concurrent\+Outgoing\+Streams@{get\+Max\+Concurrent\+Outgoing\+Streams}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Max\+Concurrent\+Outgoing\+Streams() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Max\+Concurrent\+Outgoing\+Streams (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a0d8af596f6840a97339179568169dc4e}
+
+
+Definition at line 169 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+169                                                    \{
+170     \textcolor{keywordflow}{return} std::min(maxConcurrentOutgoingStreamsConfig_,
+171                     getMaxConcurrentOutgoingStreamsRemote());
+172   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Max\+Concurrent\+Outgoing\+Streams\+Remote@{get\+Max\+Concurrent\+Outgoing\+Streams\+Remote}}
+\index{get\+Max\+Concurrent\+Outgoing\+Streams\+Remote@{get\+Max\+Concurrent\+Outgoing\+Streams\+Remote}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Max\+Concurrent\+Outgoing\+Streams\+Remote() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Max\+Concurrent\+Outgoing\+Streams\+Remote (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_af9860328645020065957a76fa95685c7}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ae793a714b3812adadb6c1610002cd7e0}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Num\+Incoming\+Streams@{get\+Num\+Incoming\+Streams}}
+\index{get\+Num\+Incoming\+Streams@{get\+Num\+Incoming\+Streams}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Num\+Incoming\+Streams() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Num\+Incoming\+Streams (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a7a4c7680d780f387820250e4cabe0be3}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a9e47485f76defbdb18a2ee8046d3c8ca}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Num\+Outgoing\+Streams@{get\+Num\+Outgoing\+Streams}}
+\index{get\+Num\+Outgoing\+Streams@{get\+Num\+Outgoing\+Streams}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Num\+Outgoing\+Streams() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Num\+Outgoing\+Streams (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a11605f93fcb9a5831d55a58c96d43766}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a01e761397c1bf1a22dd1591566329d10}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Num\+Txn\+Served@{get\+Num\+Txn\+Served}}
+\index{get\+Num\+Txn\+Served@{get\+Num\+Txn\+Served}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Num\+Txn\+Served() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Num\+Txn\+Served (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a1fb1ea17a47de936a9fc48d69cf212c7}
+
+
+Definition at line 304 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction(), and proxygen\+::\+H\+T\+T\+P\+Session\+::read\+E\+O\+F().
+
+
+\begin{DoxyCode}
+304                                    \{
+305     \textcolor{keywordflow}{return} transactionSeqNo_;
+306   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Parse\+Error\+Handler@{get\+Parse\+Error\+Handler}}
+\index{get\+Parse\+Error\+Handler@{get\+Parse\+Error\+Handler}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Parse\+Error\+Handler(\+H\+T\+T\+P\+Transaction $\ast$txn, const H\+T\+T\+P\+Exception \&error)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Parse\+Error\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{error}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPSessionBase_a9378165e6119a7c11df616a47080606c}
+Called by handle\+Error\+Directly (when handling parse errors) if the transaction has no handler. 
+
+Definition at line 134 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References codec\+\_\+, controller\+\_\+, get\+Local\+Address(), proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Parse\+Error\+Handler(), proxygen\+::\+H\+T\+T\+P\+Codec\+::get\+Transport\+Direction(), and proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+
+Referenced by handle\+Error\+Directly().
+
+
+\begin{DoxyCode}
+135                                                                   \{
+136   \textcolor{comment}{// we encounter an error before we finish reading the ingress headers.}
+137   \textcolor{keywordflow}{if} (codec_->getTransportDirection() == TransportDirection::UPSTREAM) \{
+138     \textcolor{comment}{// do not return the parse error handler for upstreams, since all we}
+139     \textcolor{comment}{// can do in that direction is abort.}
+140     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+141   \}
+142   \textcolor{keywordflow}{return} controller_->getParseErrorHandler(txn, error, getLocalAddress());
+143 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Peer\+Address@{get\+Peer\+Address}}
+\index{get\+Peer\+Address@{get\+Peer\+Address}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Peer\+Address() const noexcept}]{\setlength{\rightskip}{0pt plus 5cm}const folly\+::\+Socket\+Address\& proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Peer\+Address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionBase_afea0d89fc4f306750d2f84dd044e10f6}
+
+
+Definition at line 323 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Peer\+Address().
+
+
+\begin{DoxyCode}
+324                      \{
+325     \textcolor{keywordflow}{return} peerAddr_;
+326   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Setup\+Transport\+Info@{get\+Setup\+Transport\+Info}}
+\index{get\+Setup\+Transport\+Info@{get\+Setup\+Transport\+Info}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Setup\+Transport\+Info() const noexcept}]{\setlength{\rightskip}{0pt plus 5cm}const wangle\+::\+Transport\+Info\& proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Setup\+Transport\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionBase_accdbb04fcad674eb1d709e51db2faa3f}
+
+
+Definition at line 327 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Setup\+Transport\+Info().
+
+
+\begin{DoxyCode}
+328       \{
+329     \textcolor{keywordflow}{return} transportInfo_;
+330   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Setup\+Transport\+Info@{get\+Setup\+Transport\+Info}}
+\index{get\+Setup\+Transport\+Info@{get\+Setup\+Transport\+Info}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Setup\+Transport\+Info() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}wangle\+::\+Transport\+Info\& proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Setup\+Transport\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionBase_a0bdf61d649a17acdd476ee28acd03867}
+
+
+Definition at line 341 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+341                                                         \{
+342     \textcolor{keywordflow}{return} transportInfo_;
+343   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Transport@{get\+Transport}}
+\index{get\+Transport@{get\+Transport}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Transport()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual folly\+::\+Async\+Transport\+Wrapper$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Transport (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a53dc4760bd667494edb310e1fde77e2b}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a9a3bd3fa8d867fec154e90a8d830af35}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Transport@{get\+Transport}}
+\index{get\+Transport@{get\+Transport}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Transport() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual const folly\+::\+Async\+Transport\+Wrapper$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Transport (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a2cd16f658a7a997660ed21b3ce079a39}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ab64b62af1ed594428a7aa50be35449c6}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Type() const noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Session\+Type} proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionBase_ada7ab028d3156a4e7b47512334b46606}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a5e40fcbfdc692240baee16cdf2f7f297}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!get\+Write\+Buffer\+Limit@{get\+Write\+Buffer\+Limit}}
+\index{get\+Write\+Buffer\+Limit@{get\+Write\+Buffer\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{get\+Write\+Buffer\+Limit() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Write\+Buffer\+Limit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a2448b441f26cc399b7226db2b2613401}
+Get/\+Set the number of egress bytes this session will buffer before pausing all transactions\textquotesingle{} egress. 
+
+Definition at line 247 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+247                                        \{
+248     \textcolor{keywordflow}{return} writeBufLimit_;
+249   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!handle\+Error\+Directly@{handle\+Error\+Directly}}
+\index{handle\+Error\+Directly@{handle\+Error\+Directly}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{handle\+Error\+Directly(\+H\+T\+T\+P\+Transaction $\ast$txn, const H\+T\+T\+P\+Exception \&error)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::handle\+Error\+Directly (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a500facae2064dce0fc02ca08d5b35c9b}
+Install a direct response handler for the transaction based on the error. 
+
+Definition at line 117 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References get\+Parse\+Error\+Handler(), proxygen\+::\+Exception\+::get\+Proxygen\+Error(), info\+Callback\+\_\+, proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+Info\+Callback\+::on\+Ingress\+Error(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Abort(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::set\+Handler().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Error().
+
+
+\begin{DoxyCode}
+118                                                                  \{
+119   VLOG(4) << *\textcolor{keyword}{this} << \textcolor{stringliteral}{" creating direct error handler"};
+120   DCHECK(txn);
+121   \textcolor{keyword}{auto} handler = getParseErrorHandler(txn, error);
+122   \textcolor{keywordflow}{if} (!handler) \{
+123     txn->sendAbort();
+124     \textcolor{keywordflow}{return};
+125   \}
+126   txn->setHandler(handler);
+127   \textcolor{keywordflow}{if} (infoCallback_) \{
+128     infoCallback_->onIngressError(*\textcolor{keyword}{this}, error.getProxygenError());
+129   \}
+130   txn->onError(error);
+131 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!handle\+Last\+Byte\+Events@{handle\+Last\+Byte\+Events}}
+\index{handle\+Last\+Byte\+Events@{handle\+Last\+Byte\+Events}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{handle\+Last\+Byte\+Events(\+Byte\+Event\+Tracker $\ast$byte\+Event\+Tracker, H\+T\+T\+P\+Transaction $\ast$txn, size\+\_\+t encoded\+Size, size\+\_\+t byte\+Offset, bool piggybacked)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::handle\+Last\+Byte\+Events (
+\begin{DoxyParamCaption}
+\item[{{\bf Byte\+Event\+Tracker} $\ast$}]{byte\+Event\+Tracker, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{size\+\_\+t}]{encoded\+Size, }
+\item[{size\+\_\+t}]{byte\+Offset, }
+\item[{bool}]{piggybacked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a5372b3c77328279ecdf61bae530b5643}
+
+
+Definition at line 160 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References proxygen\+::\+Byte\+Event\+Tracker\+::add\+Last\+Byte\+Event(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Egress\+Body\+First\+Byte(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Egress\+Body\+Last\+Byte(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::test\+And\+Set\+First\+Byte\+Sent().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::common\+Eom().
+
+
+\begin{DoxyCode}
+165                      \{
+166   \textcolor{comment}{// TODO: sort out the TransportCallback for all the EOM handling cases.}
+167   \textcolor{comment}{//  Current code has the same behavior as before when there wasn't commonEom.}
+168   \textcolor{comment}{//  The issue here is onEgressBodyLastByte can be called twice, depending on}
+169   \textcolor{comment}{//  the encodedSize. E.g., when codec actually write to buffer in sendEOM.}
+170   \textcolor{keywordflow}{if} (!txn->testAndSetFirstByteSent()) \{
+171     txn->onEgressBodyFirstByte();
+172   \}
+173   \textcolor{keywordflow}{if} (!piggybacked) \{
+174     txn->onEgressBodyLastByte();
+175   \}
+176   \textcolor{comment}{// in case encodedSize == 0 we won't get TTLBA which is acceptable}
+177   \textcolor{comment}{// noting the fact that we don't have a response body}
+178   \textcolor{keywordflow}{if} (byteEventTracker && (encodedSize > 0)) \{
+179      byteEventTracker->addLastByteEvent(txn, byteOffset);
+180   \}
+181 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!has\+Active\+Transactions@{has\+Active\+Transactions}}
+\index{has\+Active\+Transactions@{has\+Active\+Transactions}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{has\+Active\+Transactions() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::has\+Active\+Transactions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_ac16349a13d736e043dd0f9120e542709}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a82ff05f591f90fc68145ee47cce9d7da}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!increment\+Seq\+No@{increment\+Seq\+No}}
+\index{increment\+Seq\+No@{increment\+Seq\+No}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{increment\+Seq\+No()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::increment\+Seq\+No (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_ac3fc2909c23c8451b763495fe1c4051f}
+
+
+Definition at line 495 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction().
+
+
+\begin{DoxyCode}
+495                         \{
+496     ++transactionSeqNo_;
+497   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!ingress\+Limit\+Exceeded@{ingress\+Limit\+Exceeded}}
+\index{ingress\+Limit\+Exceeded@{ingress\+Limit\+Exceeded}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{ingress\+Limit\+Exceeded() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::ingress\+Limit\+Exceeded (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a88a0e79bdd0b073703b48c07966c2e35}
+
+
+Definition at line 471 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::pause\+Reads(), and proxygen\+::\+H\+T\+T\+P\+Session\+::resume\+Reads().
+
+
+\begin{DoxyCode}
+471                                     \{
+472     \textcolor{keywordflow}{return} pendingReadSize_ > readBufLimit_;
+473   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!init\+Codec\+Header\+Indexing\+Strategy@{init\+Codec\+Header\+Indexing\+Strategy}}
+\index{init\+Codec\+Header\+Indexing\+Strategy@{init\+Codec\+Header\+Indexing\+Strategy}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{init\+Codec\+Header\+Indexing\+Strategy()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::init\+Codec\+Header\+Indexing\+Strategy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a7a9354a41c82483b95e5b5d745d63fbb}
+Initializes the underlying codec\textquotesingle{}s header indexing strategy, if applicable, by retrieving the requisite strategy from the bound controller. This methods exists as some sessions, notably H\+T\+T\+P\+Upstream\+Sessions, have \subsection*{their parent controller set after instantiation}
+
+Definition at line 68 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References codec\+\_\+, controller\+\_\+, proxygen\+::\+Filter\+Chain$<$ T1, T2, Filter\+Type, set\+\_\+callback, Take\+Ownership $>$\+::get\+Chain\+End\+Ptr(), proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::get\+Header\+Indexing\+Strategy(), proxygen\+::\+H\+T\+T\+P\+Codec\+::get\+Protocol(), proxygen\+::is\+H\+T\+T\+P2\+Codec\+Protocol(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::set\+Header\+Indexing\+Strategy().
+
+
+
+Referenced by on\+Codec\+Changed().
+
+
+\begin{DoxyCode}
+68                                                       \{
+69   \textcolor{comment}{// Set the header indexing strategy to be employed by the codec if H2}
+70   \textcolor{comment}{// This is done here so that the strategy could be dynamic depending on the}
+71   \textcolor{comment}{// session}
+72   \textcolor{keywordflow}{if} (controller_ && isHTTP2CodecProtocol(codec_->getProtocol())) \{
+73     HTTP2Codec* h2Codec = \textcolor{keyword}{static\_cast<}HTTP2Codec*\textcolor{keyword}{>}(codec_.getChainEndPtr());
+74     h2Codec->setHeaderIndexingStrategy(
+75       controller_->getHeaderIndexingStrategy());
+76   \}
+77 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!is\+Closing@{is\+Closing}}
+\index{is\+Closing@{is\+Closing}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{is\+Closing() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::is\+Closing (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_af525d1c596f37b737bfa80603ce0c22d}
+Returns true if the session is shutting down 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a31d7350ff9c9443df8da33bf2830ba14}, and {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_a8077893d0cff2926bbb4e9370f47a497}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!is\+Detachable@{is\+Detachable}}
+\index{is\+Detachable@{is\+Detachable}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{is\+Detachable(bool check\+Socket) const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::is\+Detachable (
+\begin{DoxyParamCaption}
+\item[{bool}]{check\+Socket}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_ac388822ab6bddae72234d11aaf661796}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a7b58add6b1ec1961896913447c51d232}, and {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_a2beb6f3dfd8249d0bcc751c95a909716}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!is\+Ex\+Headers\+Enabled@{is\+Ex\+Headers\+Enabled}}
+\index{is\+Ex\+Headers\+Enabled@{is\+Ex\+Headers\+Enabled}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{is\+Ex\+Headers\+Enabled() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::is\+Ex\+Headers\+Enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionBase_a07bd0261e41bfd84ad1db766869ae9c5}
+
+
+Definition at line 450 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+450                                      \{
+451     \textcolor{keywordflow}{return} exHeadersEnabled_;
+452   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!is\+Priority\+Sampled@{is\+Priority\+Sampled}}
+\index{is\+Priority\+Sampled@{is\+Priority\+Sampled}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{is\+Priority\+Sampled() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::is\+Priority\+Sampled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a99dba7212b5e3f3eb0c7f7aa5c283089}
+
+
+Definition at line 499 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction(), and proxygen\+::\+H\+T\+T\+P\+Session\+::run\+Loop\+Callback().
+
+
+\begin{DoxyCode}
+499                                  \{
+500     \textcolor{keywordflow}{return} prioritySample_;
+501   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!is\+Replay\+Safe@{is\+Replay\+Safe}}
+\index{is\+Replay\+Safe@{is\+Replay\+Safe}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{is\+Replay\+Safe() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::is\+Replay\+Safe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_aef267ab2932aab69bf25e86c1cfb72ca}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a1516fd5d36ab46d9048d886c1cdfbb2a}, and {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_a404d39dbef6a9aba6fd20d9b742cb4c7}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!is\+Reusable@{is\+Reusable}}
+\index{is\+Reusable@{is\+Reusable}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{is\+Reusable() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::is\+Reusable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a0569fef3ef7600b314ae7598164c38a9}
+Returns true if the underlying transport can be used again in a new request. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a0eee19177ebfcce289a79a25dfa13efa}, and {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_a42617632c08a98ebb7c2fc683225c226}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!new\+Transaction@{new\+Transaction}}
+\index{new\+Transaction@{new\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{new\+Transaction(\+H\+T\+T\+P\+Transaction\+::\+Handler $\ast$handler)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Transaction}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::new\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$}]{handler}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a1cd2bf610fd13e24dd2698329730ef61}
+Creates a new transaction on this upstream session. Invoking this function also has the side-\/affect of starting reads after this event loop completes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The request handler to attach to this transaction. It must not be null. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a904bd6327f6abaaefbcde493907004c5}, and {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_ac4f1622f52e102b9365272a3955bcba6}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!notify\+Body\+Processed@{notify\+Body\+Processed}}
+\index{notify\+Body\+Processed@{notify\+Body\+Processed}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{notify\+Body\+Processed(uint32\+\_\+t bytes)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::notify\+Body\+Processed (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{bytes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_ad57d9d8ca3f9020b3bd041aa1bf1c9f8}
+
+
+Definition at line 102 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References pending\+Read\+Size\+\_\+, and read\+Buf\+Limit\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::notify\+Ingress\+Body\+Processed().
+
+
+\begin{DoxyCode}
+102                                                         \{
+103   CHECK\_GE(pendingReadSize_, bytes);
+104   \textcolor{keyword}{auto} oldSize = pendingReadSize_;
+105   pendingReadSize_ -= bytes;
+106   VLOG(4) << *\textcolor{keyword}{this} << \textcolor{stringliteral}{" Dequeued "} << bytes << \textcolor{stringliteral}{" bytes of ingress. "}
+107     << \textcolor{stringliteral}{"Ingress buffer uses "} << pendingReadSize_  << \textcolor{stringliteral}{" of "}
+108     << readBufLimit_ << \textcolor{stringliteral}{" bytes."};
+109   \textcolor{keywordflow}{if} (oldSize > readBufLimit\_ &&
+110       pendingReadSize_ <= readBufLimit\_) \{
+111     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+112   \}
+113   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+114 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!on\+Body\+Impl@{on\+Body\+Impl}}
+\index{on\+Body\+Impl@{on\+Body\+Impl}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{on\+Body\+Impl(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, size\+\_\+t length, uint16\+\_\+t padding, H\+T\+T\+P\+Transaction $\ast$txn)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::on\+Body\+Impl (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain, }
+\item[{size\+\_\+t}]{length, }
+\item[{uint16\+\_\+t}]{padding, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a2401a9244b2ed77c3786c9eec14dd0f4}
+
+
+Definition at line 79 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References info\+Callback\+\_\+, proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Body(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+Info\+Callback\+::on\+Ingress\+Limit\+Exceeded(), pending\+Read\+Size\+\_\+, and read\+Buf\+Limit\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Body().
+
+
+\begin{DoxyCode}
+80                                                                          \{
+81   DestructorGuard dg(\textcolor{keyword}{this});
+82   \textcolor{keyword}{auto} oldSize = pendingReadSize_;
+83   pendingReadSize_ += length + padding;
+84   txn->onIngressBody(std::move(chain), padding);
+85   \textcolor{keywordflow}{if} (oldSize < pendingReadSize_) \{
+86     \textcolor{comment}{// Transaction must have buffered something and not called}
+87     \textcolor{comment}{// notifyBodyProcessed() on it.}
+88     VLOG(4) << *\textcolor{keyword}{this} << \textcolor{stringliteral}{" Enqueued ingress. Ingress buffer uses "}
+89             << pendingReadSize_  << \textcolor{stringliteral}{" of "}  << readBufLimit_
+90             << \textcolor{stringliteral}{" bytes."};
+91     \textcolor{keywordflow}{if} (pendingReadSize_ > readBufLimit\_ &&
+92         oldSize <= readBufLimit\_) \{
+93       \textcolor{keywordflow}{if} (infoCallback_) \{
+94         infoCallback_->onIngressLimitExceeded(*\textcolor{keyword}{this});
+95       \}
+96       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+97     \}
+98   \}
+99   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+100 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!on\+Codec\+Changed@{on\+Codec\+Changed}}
+\index{on\+Codec\+Changed@{on\+Codec\+Changed}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{on\+Codec\+Changed()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::on\+Codec\+Changed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a5aa4d5ee64ecbf3041f7137dff7de265}
+
+
+Definition at line 60 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References controller\+\_\+, init\+Codec\+Header\+Indexing\+Strategy(), and proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::on\+Session\+Codec\+Change().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Native\+Protocol\+Upgrade\+Impl().
+
+
+\begin{DoxyCode}
+60                                      \{
+61   \textcolor{keywordflow}{if} (controller_) \{
+62     controller_->onSessionCodecChange(\textcolor{keyword}{this});
+63   \}
+64 
+65   initCodecHeaderIndexingStrategy();
+66 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!on\+Create\+Transaction@{on\+Create\+Transaction}}
+\index{on\+Create\+Transaction@{on\+Create\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{on\+Create\+Transaction()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::on\+Create\+Transaction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_ac677d2665a8aa20a2b50617ec7034591}
+
+
+Definition at line 488 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+References proxygen\+::seconds\+Since().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction().
+
+
+\begin{DoxyCode}
+488                              \{
+489     \textcolor{keywordflow}{if} (transactionSeqNo_ >= 1) \{
+490       \textcolor{comment}{// idle duration only exists since the 2nd transaction in the session}
+491       latestIdleDuration_ = secondsSince(latestActive_);
+492     \}
+493   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!on\+New\+Outgoing\+Stream@{on\+New\+Outgoing\+Stream}}
+\index{on\+New\+Outgoing\+Stream@{on\+New\+Outgoing\+Stream}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{on\+New\+Outgoing\+Stream(uint32\+\_\+t outgoing\+Streams)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::on\+New\+Outgoing\+Stream (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{outgoing\+Streams}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a9d80fb6cf66d3dc9d7c1b4196dfb0104}
+
+
+Definition at line 503 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::increment\+Outgoing\+Streams().
+
+
+\begin{DoxyCode}
+503                                                      \{
+504     \textcolor{keywordflow}{if} (outgoingStreams > historicalMaxOutgoingStreams_) \{
+505       historicalMaxOutgoingStreams_ = outgoingStreams;
+506     \}
+507   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!run\+Destroy\+Callbacks@{run\+Destroy\+Callbacks}}
+\index{run\+Destroy\+Callbacks@{run\+Destroy\+Callbacks}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{run\+Destroy\+Callbacks()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::run\+Destroy\+Callbacks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_aef99abc8fc5133456be4e073a2d7adc9}
+
+
+Definition at line 50 of file H\+T\+T\+P\+Session\+Base.\+cpp.
+
+
+
+References controller\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+Controller\+::detach\+Session(), info\+Callback\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+Info\+Callback\+::on\+Destroy().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::$\sim$\+H\+T\+T\+P\+Session().
+
+
+\begin{DoxyCode}
+50                                           \{
+51   \textcolor{keywordflow}{if} (infoCallback_) \{
+52     infoCallback_->onDestroy(*\textcolor{keyword}{this});
+53   \}
+54   \textcolor{keywordflow}{if} (controller_) \{
+55     controller_->detachSession(\textcolor{keyword}{this});
+56     controller_ = \textcolor{keyword}{nullptr};
+57   \}
+58 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!send\+Certificate\+Request@{send\+Certificate\+Request}}
+\index{send\+Certificate\+Request@{send\+Certificate\+Request}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{send\+Certificate\+Request(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, std\+::vector$<$ fizz\+::\+Extension $>$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual size\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::send\+Certificate\+Request (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{, }
+\item[{std\+::vector$<$ fizz\+::\+Extension $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionBase_ae0d22bef37bd1144995ea4a9715f9f6b}
+Send a C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+R\+E\+Q\+U\+E\+ST frame. If the underlying protocol doesn\textquotesingle{}t support secondary authentication, this is a no-\/op and 0 is returned. 
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a81217225c4cb8a8268e5c96c80ce7196}.
+
+
+
+Definition at line 298 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+300                                   \{
+301     \textcolor{keywordflow}{return} 0;
+302   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!send\+Ping@{send\+Ping}}
+\index{send\+Ping@{send\+Ping}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{send\+Ping()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual size\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::send\+Ping (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a3509c8946b85d98bbd20fba77b410430}
+Causes a ping to be sent on the session. If the underlying protocol doesn\textquotesingle{}t support pings, this will return 0. Otherwise, it will return the number of bytes written on the transport to send the ping. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ac21aceda7a1827089fc7cd36f49aa1a6}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!send\+Priority@{send\+Priority}}
+\index{send\+Priority@{send\+Priority}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{send\+Priority(http2\+::\+Priority\+Update pri)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::send\+Priority (
+\begin{DoxyParamCaption}
+\item[{{\bf http2\+::\+Priority\+Update}}]{pri}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a26dfb7cec370a18508725daebb17350f}
+Sends a priority message on this session. If the underlying protocol doesn\textquotesingle{}t support priority, this is a no-\/op. A new stream identifier will be selected and returned. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_af56ac7c2c1fa8a251141063e07f86136}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!send\+Priority@{send\+Priority}}
+\index{send\+Priority@{send\+Priority}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{send\+Priority(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, http2\+::\+Priority\+Update pri)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual size\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::send\+Priority (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{{\bf http2\+::\+Priority\+Update}}]{pri}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a4f7dcd3ed81f7c3600c4394436b42cdf}
+As above, but updates an existing priority node. Do not use for real nodes, prefer H\+T\+T\+P\+Transaction\+::change\+Priority. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_ae4f24229a8ed84336d73a25133f93c30}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!send\+Settings@{send\+Settings}}
+\index{send\+Settings@{send\+Settings}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{send\+Settings()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual size\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::send\+Settings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a2a00c57228b4a8cbfc4bfcf97fa79fe8}
+Send a settings frame 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a85a0e02025ed4dbf075761698f277f91}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Close\+Reason@{set\+Close\+Reason}}
+\index{set\+Close\+Reason@{set\+Close\+Reason}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Close\+Reason(\+Connection\+Close\+Reason reason)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Close\+Reason (
+\begin{DoxyParamCaption}
+\item[{{\bf Connection\+Close\+Reason}}]{reason}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a3faf722c743f296676a097511249f152}
+
+
+Definition at line 509 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+References proxygen\+::k\+M\+A\+X\+\_\+\+R\+E\+A\+S\+ON.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::drain(), proxygen\+::\+H\+T\+T\+P\+Session\+::drain\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::drop\+Connection(), proxygen\+::\+H\+T\+T\+P\+Session\+::flow\+Control\+Timeout\+Expired(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Egress\+Message\+Finished(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Goaway(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::on\+Headers\+Sent(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+New\+Transaction\+Parse\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Session\+Parse\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Success(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+E\+O\+F(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Err(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Timeout\+Expired(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Abort(), proxygen\+::\+H\+T\+T\+P\+Session\+::shutdown\+Transport(), and proxygen\+::\+H\+T\+T\+P\+Session\+::write\+Timeout\+Expired().
+
+
+\begin{DoxyCode}
+509                                                     \{
+510     \textcolor{keywordflow}{if} (closeReason_ == ConnectionCloseReason::kMAX_REASON) \{
+511       closeReason_ = reason;
+512     \}
+513   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Controller@{set\+Controller}}
+\index{set\+Controller@{set\+Controller}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Controller(\+H\+T\+T\+P\+Session\+Controller $\ast$controller)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session\+Controller} $\ast$}]{controller}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a2cbeb1b9a7416436303119be719e7caa}
+
+
+Definition at line 176 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::attach\+Thread\+Locals(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::detach\+Thread\+Locals(), and H\+T\+T\+P\+Session\+Base().
+
+
+\begin{DoxyCode}
+176                                                         \{
+177     controller_ = controller;
+178 
+179     \textcolor{comment}{// Controller controlled settings}
+180     initCodecHeaderIndexingStrategy();
+181   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Default\+Read\+Buffer\+Limit@{set\+Default\+Read\+Buffer\+Limit}}
+\index{set\+Default\+Read\+Buffer\+Limit@{set\+Default\+Read\+Buffer\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Default\+Read\+Buffer\+Limit(uint32\+\_\+t limit)}]{\setlength{\rightskip}{0pt plus 5cm}static void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Default\+Read\+Buffer\+Limit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{limit}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1HTTPSessionBase_a610702188cab9a00e8ae68a084139c13}
+Set the read buffer limit to be used for all new \doxyref{H\+T\+T\+P\+Session\+Base}{p.}{classproxygen_1_1HTTPSessionBase} objects. 
+
+Definition at line 96 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+96                                                         \{
+97     kDefaultReadBufLimit = limit;
+98     VLOG(3) << \textcolor{stringliteral}{"read buffer limit: "} << int(limit / 1000) << \textcolor{stringliteral}{"KB"};
+99   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Default\+Write\+Buffer\+Limit@{set\+Default\+Write\+Buffer\+Limit}}
+\index{set\+Default\+Write\+Buffer\+Limit@{set\+Default\+Write\+Buffer\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Default\+Write\+Buffer\+Limit(uint32\+\_\+t max)}]{\setlength{\rightskip}{0pt plus 5cm}static void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Default\+Write\+Buffer\+Limit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{max}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1HTTPSessionBase_ad25843a7c1070d618c5f1dd2b3d5c709}
+Set the default number of egress bytes this session will buffer before pausing all transactions\textquotesingle{} egress. 
+
+Definition at line 117 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+117                                                        \{
+118     kDefaultWriteBufLimit = max;
+119   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Egress\+Settings@{set\+Egress\+Settings}}
+\index{set\+Egress\+Settings@{set\+Egress\+Settings}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Egress\+Settings(const Settings\+List \&in\+Settings)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Egress\+Settings (
+\begin{DoxyParamCaption}
+\item[{const {\bf Settings\+List} \&}]{in\+Settings}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a4eb00f161f175ca1a631e580ac7e86fb}
+Set outgoing settings for this session 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_afd9f33352327dcc51e618f007797f4c8}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Flow\+Control@{set\+Flow\+Control}}
+\index{set\+Flow\+Control@{set\+Flow\+Control}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Flow\+Control(size\+\_\+t initial\+Receive\+Window, size\+\_\+t receive\+Stream\+Window\+Size, size\+\_\+t receive\+Session\+Window\+Size)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Flow\+Control (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{initial\+Receive\+Window, }
+\item[{size\+\_\+t}]{receive\+Stream\+Window\+Size, }
+\item[{size\+\_\+t}]{receive\+Session\+Window\+Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_ae2e92325faa2256085a583798647392c}
+Set flow control properties on the session.
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+Receive\+Window} & size of initial receive window for all ingress streams; set via the initial S\+E\+T\+T\+I\+N\+GS frame \\
+\hline
+{\em receive\+Stream\+Window\+Size} & per-\/stream receive window for N\+EW streams; sent via a W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE frame \\
+\hline
+{\em receive\+Session\+Window\+Size} & per-\/session receive window; sent via a W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE frame \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_abf7a8f45923ceb76bcff72f6939011a0}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Flow\+Controlled\+Body\+Size\+Limit@{set\+Flow\+Controlled\+Body\+Size\+Limit}}
+\index{set\+Flow\+Controlled\+Body\+Size\+Limit@{set\+Flow\+Controlled\+Body\+Size\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Flow\+Controlled\+Body\+Size\+Limit(uint32\+\_\+t limit)}]{\setlength{\rightskip}{0pt plus 5cm}static void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Flow\+Controlled\+Body\+Size\+Limit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{limit}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1HTTPSessionBase_aa97d37a5a6b11241de4cbcb5ae692efc}
+Set the maximum egress body size for any outbound body bytes per loop, when there are $>$ 1 transactions. 
+
+Definition at line 109 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+109                                                              \{
+110     egressBodySizeLimit_ = limit;
+111   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Header\+Codec\+Stats@{set\+Header\+Codec\+Stats}}
+\index{set\+Header\+Codec\+Stats@{set\+Header\+Codec\+Stats}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Header\+Codec\+Stats(\+Header\+Codec\+::\+Stats $\ast$stats)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Header\+Codec\+Stats (
+\begin{DoxyParamCaption}
+\item[{{\bf Header\+Codec\+::\+Stats} $\ast$}]{stats}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a0a1a79eed3a8ed36e51a2723656348f6}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a4d9d59cc2df5eff2fd9e89c4ad433a9d}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+H\+T\+T\+P2\+Priorities\+Enabled@{set\+H\+T\+T\+P2\+Priorities\+Enabled}}
+\index{set\+H\+T\+T\+P2\+Priorities\+Enabled@{set\+H\+T\+T\+P2\+Priorities\+Enabled}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+H\+T\+T\+P2\+Priorities\+Enabled(bool enabled)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+H\+T\+T\+P2\+Priorities\+Enabled (
+\begin{DoxyParamCaption}
+\item[{bool}]{enabled}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_aabc6ad2830a827e37d4d9ed35adb5baa}
+Global flag for turning H\+T\+T\+P2 priorities off 
+
+Definition at line 220 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::set\+H\+T\+T\+P2\+Priorities\+Enabled().
+
+
+\begin{DoxyCode}
+220                                                  \{
+221     h2PrioritiesEnabled_ = enabled;
+222   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Info\+Callback@{set\+Info\+Callback}}
+\index{set\+Info\+Callback@{set\+Info\+Callback}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Info\+Callback(\+Info\+Callback $\ast$callback)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Info\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Info\+Callback} $\ast$}]{callback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a68b4101d8e91fa7fbf3335a96ac34da0}
+
+
+Definition at line 121 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by Proxy\+Service\+::\+Session\+Wrapper\+::\+Session\+Wrapper().
+
+
+\begin{DoxyCode}
+121                                                \{
+122     infoCallback_ = callback;
+123   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Latest\+Active@{set\+Latest\+Active}}
+\index{set\+Latest\+Active@{set\+Latest\+Active}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Latest\+Active()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Latest\+Active (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a156f64337575bea186fc13340dad029d}
+
+
+Definition at line 467 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+References proxygen\+::get\+Current\+Time().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::detach().
+
+
+\begin{DoxyCode}
+467                          \{
+468     latestActive_ = getCurrentTime();
+469   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Max\+Concurrent\+Incoming\+Streams@{set\+Max\+Concurrent\+Incoming\+Streams}}
+\index{set\+Max\+Concurrent\+Incoming\+Streams@{set\+Max\+Concurrent\+Incoming\+Streams}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Max\+Concurrent\+Incoming\+Streams(uint32\+\_\+t num)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Max\+Concurrent\+Incoming\+Streams (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{num}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_a961c0ea702af3c201dd0c83f24b87ee6}
+Set the maximum number of transactions the remote can open at once. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a74cd3ad6f9e4755a65d7d8e5c92a2ce0}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Max\+Concurrent\+Outgoing\+Streams@{set\+Max\+Concurrent\+Outgoing\+Streams}}
+\index{set\+Max\+Concurrent\+Outgoing\+Streams@{set\+Max\+Concurrent\+Outgoing\+Streams}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Max\+Concurrent\+Outgoing\+Streams(uint32\+\_\+t num)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Max\+Concurrent\+Outgoing\+Streams (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{num}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_aef6b05c5f7d87c6da499c087475faaa5}
+Set the maximum number of outgoing transactions this session can open at once. Note\+: you can only call function before \doxyref{start\+Now()}{p.}{classproxygen_1_1HTTPSessionBase_afb0355245a0beec339f0e493870a6114} is called since the remote side can change this value. 
+
+Definition at line 233 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+233                                                      \{
+234     \textcolor{comment}{// TODO: CHECK(started\_);}
+235     maxConcurrentOutgoingStreamsConfig_ = num;
+236   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Max\+Read\+Buffer\+Size@{set\+Max\+Read\+Buffer\+Size}}
+\index{set\+Max\+Read\+Buffer\+Size@{set\+Max\+Read\+Buffer\+Size}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Max\+Read\+Buffer\+Size(uint32\+\_\+t bytes)}]{\setlength{\rightskip}{0pt plus 5cm}static void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Max\+Read\+Buffer\+Size (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{bytes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1HTTPSessionBase_ac7a041ed0fd2686949d1890bc6578880}
+
+
+Definition at line 101 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+\begin{DoxyCode}
+101                                                    \{
+102     maxReadBufferSize_ = bytes;
+103   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Priority\+Sampled@{set\+Priority\+Sampled}}
+\index{set\+Priority\+Sampled@{set\+Priority\+Sampled}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Priority\+Sampled(bool sampled)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Priority\+Sampled (
+\begin{DoxyParamCaption}
+\item[{bool}]{sampled}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a95a22573ef0549e41d0d991bcf0a558a}
+
+
+Definition at line 314 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by H\+T\+T\+P\+Downstream\+Test$<$ S\+P\+D\+Y3\+\_\+1\+Codec\+Pair $>$\+::\+H\+T\+T\+P\+Downstream\+Test().
+
+
+\begin{DoxyCode}
+314                                         \{
+315     prioritySample_ = sampled;
+316   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Read\+Buffer\+Limit@{set\+Read\+Buffer\+Limit}}
+\index{set\+Read\+Buffer\+Limit@{set\+Read\+Buffer\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Read\+Buffer\+Limit(uint32\+\_\+t limit)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Read\+Buffer\+Limit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{limit}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_aefc99913f4b1b6886c01e86a14da7885}
+
+
+Definition at line 256 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Priority\+Map\+Factory\+Provider\+::send\+Priority().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Flow\+Control().
+
+
+\begin{DoxyCode}
+256                                           \{
+257     readBufLimit_ = limit;
+258   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Session\+Stats@{set\+Session\+Stats}}
+\index{set\+Session\+Stats@{set\+Session\+Stats}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Session\+Stats(\+H\+T\+T\+P\+Session\+Stats $\ast$stats)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Session\+Stats (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session\+Stats} $\ast$}]{stats}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionBase_a077f02e05a034b8e282f81753edfea25}
+
+
+Reimplemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a480679a665d1efba1a2393a9c0608665}.
+
+
+
+Definition at line 129 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Session\+Stats().
+
+
+\begin{DoxyCode}
+129                                                         \{
+130     sessionStats_ = stats;
+131   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!set\+Write\+Buffer\+Limit@{set\+Write\+Buffer\+Limit}}
+\index{set\+Write\+Buffer\+Limit@{set\+Write\+Buffer\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{set\+Write\+Buffer\+Limit(uint32\+\_\+t limit)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Write\+Buffer\+Limit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{limit}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a7f9475eb8a559c00f81f9310b2aab42d}
+
+
+Definition at line 251 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::on\+New\+Connection().
+
+
+\begin{DoxyCode}
+251                                            \{
+252     writeBufLimit_ = limit;
+253     VLOG(4) << \textcolor{stringliteral}{"write buffer limit: "} << int(limit / 1000) << \textcolor{stringliteral}{"KB"};
+254   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!start\+Now@{start\+Now}}
+\index{start\+Now@{start\+Now}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{start\+Now()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::start\+Now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPSessionBase_afb0355245a0beec339f0e493870a6114}
+Start reading from the transport and send any introductory messages to the remote side. This function must be called once per session to begin reads. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPSession_a9a89f7a8498e8afae9ee48c61f1c8bdc}, {\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPUpstreamSession_a242b4223b8ff63d7dd7407cc8e312365}, and {\bf proxygen\+::\+H\+T\+T\+P\+Downstream\+Session} \doxyref{}{p.}{classproxygen_1_1HTTPDownstreamSession_a3a03b89e4be6f8d06df0b770eeab06ed}.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!supports\+More\+Transactions@{supports\+More\+Transactions}}
+\index{supports\+More\+Transactions@{supports\+More\+Transactions}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{supports\+More\+Transactions() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::supports\+More\+Transactions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionBase_a54bf79beecf51bb3433b3224cba07dad}
+Returns true iff a new outgoing transaction can be made on this session 
+
+Definition at line 153 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::new\+Transaction(), and proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Set\+Max\+Initiated\+Streams().
+
+
+\begin{DoxyCode}
+153                                         \{
+154     \textcolor{keywordflow}{return} (getNumOutgoingStreams() < getMaxConcurrentOutgoingStreams());
+155   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!update\+Pending\+Write\+Size@{update\+Pending\+Write\+Size}}
+\index{update\+Pending\+Write\+Size@{update\+Pending\+Write\+Size}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{update\+Pending\+Write\+Size(int64\+\_\+t delta)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::update\+Pending\+Write\+Size (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t}]{delta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_aa0e2203943d72d329d3fcc7a4519ddd4}
+
+
+Definition at line 483 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::update\+Write\+Buf\+Size().
+
+
+\begin{DoxyCode}
+483                                              \{
+484     DCHECK(delta >= 0 || uint64\_t(-delta) <= pendingWriteSize_);
+485     pendingWriteSize_ += delta;
+486   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!close\+Reason\+\_\+@{close\+Reason\+\_\+}}
+\index{close\+Reason\+\_\+@{close\+Reason\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{close\+Reason\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Connection\+Close\+Reason} proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::close\+Reason\+\_\+ \{{\bf Connection\+Close\+Reason\+::k\+M\+A\+X\+\_\+\+R\+E\+A\+S\+ON}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_ac2b60b097ea2c58d4675d0b9d66829b6}
+The root cause reason this connection was closed. 
+
+Definition at line 611 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!codec\+\_\+@{codec\+\_\+}}
+\index{codec\+\_\+@{codec\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{codec\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+Filter\+Chain} proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a256aa0726caa81650aae4343fac7ca3d}
+
+
+Definition at line 549 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::attach\+Thread\+Locals(), proxygen\+::\+H\+T\+T\+P\+Session\+::close\+When\+Idle(), proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Session\+::describe(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::detach\+Thread\+Locals(), proxygen\+::\+H\+T\+T\+P\+Session\+::drain\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::enable\+Double\+Goaway\+Drain(), enable\+Ex\+Headers\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Codec(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Codec\+Send\+Window\+Size(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Graceful\+Goaway\+Ack(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Message\+Priority(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Next\+To\+Send(), get\+Parse\+Error\+Handler(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::\+H\+T\+T\+P\+Downstream\+Session(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::\+H\+T\+T\+P\+Upstream\+Session(), init\+Codec\+Header\+Indexing\+Strategy(), proxygen\+::\+H\+T\+T\+P\+Session\+::invalid\+Stream(), proxygen\+::\+H\+T\+T\+P\+Session\+::is\+Busy(), proxygen\+::\+H\+T\+T\+P\+Session\+::is\+Downstream(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::is\+Reusable(), proxygen\+::\+H\+T\+T\+P\+Session\+::is\+Upstream(), proxygen\+::\+H\+T\+T\+P\+Session\+::maybe\+Resume\+Paused\+Pipelined\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Session\+::new\+Ex\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Session\+::new\+Pushed\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::new\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Certificate\+Request(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Egress\+Message\+Finished(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::on\+Headers\+Sent(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Message\+Complete(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::on\+Native\+Protocol\+Upgrade(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::on\+Native\+Protocol\+Upgrade(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Native\+Protocol\+Upgrade\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+New\+Transaction\+Parse\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Ping\+Request(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Session\+Parse\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Success(), proxygen\+::\+H\+T\+T\+P\+Session\+::pause\+Reads(), proxygen\+::\+H\+T\+T\+P\+Session\+::process\+Read\+Data(), proxygen\+::\+H\+T\+T\+P\+Session\+::resume\+Reads(), proxygen\+::\+H\+T\+T\+P\+Session\+::resume\+Reads\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Abort(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Body(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Certificate\+Request(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Chunk\+Header(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Chunk\+Terminator(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+E\+O\+M(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Headers(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Ping(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Priority(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Priority\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Window\+Update(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Egress\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Flow\+Control(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Header\+Codec\+Stats(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Max\+Concurrent\+Incoming\+Streams(), proxygen\+::\+H\+T\+T\+P\+Session\+::setup\+Codec(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::setup\+On\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Session\+::should\+Shutdown(), proxygen\+::\+H\+T\+T\+P\+Session\+::shutdown\+Transport(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::start\+Now(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::start\+Now(), proxygen\+::\+H\+T\+T\+P\+Session\+::start\+Now(), proxygen\+::\+H\+T\+T\+P\+Session\+::transaction\+Timeout(), and proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Err().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!controller\+\_\+@{controller\+\_\+}}
+\index{controller\+\_\+@{controller\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{controller\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session\+Controller}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::controller\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_abf8729066c9e46bf94d9e816379e48e8}
+
+
+Definition at line 583 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by get\+Parse\+Error\+Handler(), init\+Codec\+Header\+Indexing\+Strategy(), on\+Codec\+Changed(), and run\+Destroy\+Callbacks().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!egress\+Body\+Size\+Limit\+\_\+@{egress\+Body\+Size\+Limit\+\_\+}}
+\index{egress\+Body\+Size\+Limit\+\_\+@{egress\+Body\+Size\+Limit\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{egress\+Body\+Size\+Limit\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::egress\+Body\+Size\+Limit\+\_\+ = 4096\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a26155f3fbc91ee2e2cc5adf8ac61f02b}
+Maximum number of bytes to egress per loop when there are $>$ 1 transactions. Otherwise defaults to k\+Default\+Write\+Buf\+Limit. 
+
+Definition at line 571 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Next\+To\+Send().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!ex\+Headers\+Enabled\+\_\+@{ex\+Headers\+Enabled\+\_\+}}
+\index{ex\+Headers\+Enabled\+\_\+@{ex\+Headers\+Enabled\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{ex\+Headers\+Enabled\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::ex\+Headers\+Enabled\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a26f1d1db613860127647fe9d03ed2ec0}
+Indicates whether Ex Headers is supported in \doxyref{H\+T\+T\+P\+Session}{p.}{classproxygen_1_1HTTPSession} 
+
+Definition at line 653 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by enable\+Ex\+Headers\+Settings().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!h2\+Priorities\+Enabled\+\_\+@{h2\+Priorities\+Enabled\+\_\+}}
+\index{h2\+Priorities\+Enabled\+\_\+@{h2\+Priorities\+Enabled\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{h2\+Priorities\+Enabled\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::h2\+Priorities\+Enabled\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a3522c496611d7c478c8121cca62bb55f}
+
+
+Definition at line 648 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!historical\+Max\+Outgoing\+Streams\+\_\+@{historical\+Max\+Outgoing\+Streams\+\_\+}}
+\index{historical\+Max\+Outgoing\+Streams\+\_\+@{historical\+Max\+Outgoing\+Streams\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{historical\+Max\+Outgoing\+Streams\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::historical\+Max\+Outgoing\+Streams\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a68dcc93e32b7085d5f34c63d66b19737}
+The maximum number concurrent transactions in the history of this session 
+
+Definition at line 616 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!info\+Callback\+\_\+@{info\+Callback\+\_\+}}
+\index{info\+Callback\+\_\+@{info\+Callback\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{info\+Callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Info\+Callback}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::info\+Callback\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_adc31f634b819c5a8d802ba68fa322dd6}
+
+
+Definition at line 545 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Session\+::detach(), handle\+Error\+Directly(), on\+Body\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Connection\+Send\+Window\+Closed(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Egress\+Buffer\+Cleared(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Egress\+Buffered(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Egress\+Message\+Finished(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Ex\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Ping\+Reply(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Ping\+Reply\+Latency(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Push\+Message\+Begin(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Replay\+Safe(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Set\+Max\+Initiated\+Streams(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Settings\+Ack(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Success(), proxygen\+::\+H\+T\+T\+P\+Session\+::pause\+Reads\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Buffer\+Available(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Data\+Available(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+E\+O\+F(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Err(), run\+Destroy\+Callbacks(), proxygen\+::\+H\+T\+T\+P\+Session\+::shutdown\+Transport(), proxygen\+::\+H\+T\+T\+P\+Session\+::transaction\+Timeout(), and proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Err().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!k\+Default\+Read\+Buf\+Limit@{k\+Default\+Read\+Buf\+Limit}}
+\index{k\+Default\+Read\+Buf\+Limit@{k\+Default\+Read\+Buf\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{k\+Default\+Read\+Buf\+Limit}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::k\+Default\+Read\+Buf\+Limit = 65536\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_afbfcdb662934838746d7ad7ffa66ae85}
+Maximum number of ingress body bytes that can be buffered across all transactions for this single session/connection. 
+
+Definition at line 555 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!k\+Default\+Write\+Buf\+Limit@{k\+Default\+Write\+Buf\+Limit}}
+\index{k\+Default\+Write\+Buf\+Limit@{k\+Default\+Write\+Buf\+Limit}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{k\+Default\+Write\+Buf\+Limit}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::k\+Default\+Write\+Buf\+Limit = 65536\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_af0ff0b25d137e9d386ab856a10e6f33a}
+Maximum number of bytes that can be buffered across all transactions before this session will start applying backpressure to its transactions. 
+
+Definition at line 566 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!latest\+Active\+\_\+@{latest\+Active\+\_\+}}
+\index{latest\+Active\+\_\+@{latest\+Active\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{latest\+Active\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Point} proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::latest\+Active\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a95dfbd4536dbbaf8dde33b9feef038be}
+The latest time when this session became idle status 
+
+Definition at line 597 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!latest\+Idle\+Duration\+\_\+@{latest\+Idle\+Duration\+\_\+}}
+\index{latest\+Idle\+Duration\+\_\+@{latest\+Idle\+Duration\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{latest\+Idle\+Duration\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::seconds proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::latest\+Idle\+Duration\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_aac29624aa62545df1ce7d8f86265d355}
+The idle duration between latest two consecutive active status 
+
+Definition at line 602 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!local\+Addr\+\_\+@{local\+Addr\+\_\+}}
+\index{local\+Addr\+\_\+@{local\+Addr\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{local\+Addr\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Socket\+Address proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::local\+Addr\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a3d6929811e8611788785a8a690e8d673}
+Address of this end of the connection 
+
+Definition at line 574 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by H\+T\+T\+P\+Session\+Base().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!max\+Concurrent\+Outgoing\+Streams\+Config\+\_\+@{max\+Concurrent\+Outgoing\+Streams\+Config\+\_\+}}
+\index{max\+Concurrent\+Outgoing\+Streams\+Config\+\_\+@{max\+Concurrent\+Outgoing\+Streams\+Config\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{max\+Concurrent\+Outgoing\+Streams\+Config\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::max\+Concurrent\+Outgoing\+Streams\+Config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a69911eddab238d8b4f2db302a387fb45}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    kDefaultMaxConcurrentOutgoingStreams\}
+\end{DoxyCode}
+The maximum number of concurrent transactions that this session may create, as configured locally. 
+
+Definition at line 622 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!max\+Read\+Buffer\+Size\+\_\+@{max\+Read\+Buffer\+Size\+\_\+}}
+\index{max\+Read\+Buffer\+Size\+\_\+@{max\+Read\+Buffer\+Size\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{max\+Read\+Buffer\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::max\+Read\+Buffer\+Size\+\_\+ = 4000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a5824ec59d9bda0b85950dbc0cb168a0e}
+The maximum size of the read buffer from the socket. 
+
+Definition at line 560 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Read\+Buffer().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!peer\+Addr\+\_\+@{peer\+Addr\+\_\+}}
+\index{peer\+Addr\+\_\+@{peer\+Addr\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{peer\+Addr\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Socket\+Address proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::peer\+Addr\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_af25d65212459d499f3ac23f39b7d36f4}
+Address of the remote end of the connection 
+
+Definition at line 577 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by H\+T\+T\+P\+Session\+Base().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!pending\+Read\+Size\+\_\+@{pending\+Read\+Size\+\_\+}}
+\index{pending\+Read\+Size\+\_\+@{pending\+Read\+Size\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{pending\+Read\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::pending\+Read\+Size\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a0b00bb8ab01dfc9e48f834d965c9b7b0}
+Bytes of ingress data read from the socket, but not yet sent to a transaction. 
+
+Definition at line 645 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by notify\+Body\+Processed(), and on\+Body\+Impl().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!pending\+Write\+Size\+\_\+@{pending\+Write\+Size\+\_\+}}
+\index{pending\+Write\+Size\+\_\+@{pending\+Write\+Size\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{pending\+Write\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::pending\+Write\+Size\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a5491ec70c242d2cf41fe59537ec898aa}
+Bytes of egress data sent to the socket but not yet written to the network. 
+
+Definition at line 639 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!priority\+Sample\+\_\+@{priority\+Sample\+\_\+}}
+\index{priority\+Sample\+\_\+@{priority\+Sample\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{priority\+Sample\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::priority\+Sample\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_abea147264ce518655e181e92349054e6}
+
+
+Definition at line 647 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!read\+Buf\+Limit\+\_\+@{read\+Buf\+Limit\+\_\+}}
+\index{read\+Buf\+Limit\+\_\+@{read\+Buf\+Limit\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{read\+Buf\+Limit\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::read\+Buf\+Limit\+\_\+ \{{\bf k\+Default\+Read\+Buf\+Limit}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a3eb143e5d4bd069f2439455ca4d6b111}
+Maximum number of cumulative bytes that can be buffered by the transactions in this session before applying backpressure.
+
+Note read\+Buf\+Limit\+\_\+ is settable via set\+Flow\+Control 
+
+Definition at line 632 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by notify\+Body\+Processed(), and on\+Body\+Impl().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!session\+Stats\+\_\+@{session\+Stats\+\_\+}}
+\index{session\+Stats\+\_\+@{session\+Stats\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{session\+Stats\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session\+Stats}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::session\+Stats\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_a1466339f2e2dd5bfcb4aeb3ce7c6c39b}
+
+
+Definition at line 543 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Next\+To\+Send(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Connection\+Send\+Window\+Closed(), and proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Byte\+Event\+Tracker().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!transaction\+Seq\+No\+\_\+@{transaction\+Seq\+No\+\_\+}}
+\index{transaction\+Seq\+No\+\_\+@{transaction\+Seq\+No\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{transaction\+Seq\+No\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::transaction\+Seq\+No\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a86ebca1e78c89784fad9a4ba35987aec}
+Transaction sequence number 
+
+Definition at line 605 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!transport\+Info\+\_\+@{transport\+Info\+\_\+}}
+\index{transport\+Info\+\_\+@{transport\+Info\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{transport\+Info\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}wangle\+::\+Transport\+Info proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::transport\+Info\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionBase_ad056bc3f3b5b9ed41dba80ace642f174}
+
+
+Definition at line 547 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Current\+Transport\+Info(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Native\+Protocol\+Upgrade\+Impl(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Error(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Success(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+E\+O\+F(), proxygen\+::\+H\+T\+T\+P\+Session\+::read\+Err(), and proxygen\+::\+H\+T\+T\+P\+Session\+::shutdown\+Transport().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}!write\+Buf\+Limit\+\_\+@{write\+Buf\+Limit\+\_\+}}
+\index{write\+Buf\+Limit\+\_\+@{write\+Buf\+Limit\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Base@{proxygen\+::\+H\+T\+T\+P\+Session\+Base}}
+\subsubsection[{write\+Buf\+Limit\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::write\+Buf\+Limit\+\_\+ \{{\bf k\+Default\+Write\+Buf\+Limit}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionBase_a72855a6d8fbe4a6ef5dff8a9a20a6b01}
+
+
+Definition at line 633 of file H\+T\+T\+P\+Session\+Base.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session\+Base.\+h}\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session\+Base.\+cpp}\end{DoxyCompactItemize}

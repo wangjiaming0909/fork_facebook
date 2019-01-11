@@ -1,0 +1,157 @@
+\section{shell\+\_\+quoting Namespace Reference}
+\label{namespaceshell__quoting}\index{shell\+\_\+quoting@{shell\+\_\+quoting}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Shell\+Quoted}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf shell\+\_\+quote} (s)
+\item 
+def {\bf raw\+\_\+shell} (s)
+\item 
+def {\bf shell\+\_\+join} (delim, it)
+\item 
+def {\bf path\+\_\+join} (args)
+\item 
+def {\bf shell\+\_\+comment} (c)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{shell\+\_\+quoting@{shell\+\_\+quoting}!path\+\_\+join@{path\+\_\+join}}
+\index{path\+\_\+join@{path\+\_\+join}!shell\+\_\+quoting@{shell\+\_\+quoting}}
+\subsubsection[{path\+\_\+join(args)}]{\setlength{\rightskip}{0pt plus 5cm}def shell\+\_\+quoting.\+path\+\_\+join (
+\begin{DoxyParamCaption}
+\item[{}]{args}
+\end{DoxyParamCaption}
+)}\label{namespaceshell__quoting_ac7ad4b87b98e39f6a0d1a8afb66bb029}
+
+
+Definition at line 87 of file shell\+\_\+quoting.\+py.
+
+
+
+References raw\+\_\+shell(), and shell\+\_\+quote().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+github\+\_\+project\+\_\+workdir().
+
+
+\begin{DoxyCode}
+87 \textcolor{keyword}{def }path_join(*args):
+88     \textcolor{stringliteral}{'Joins ShellQuoted and raw pieces of paths to make a shell-quoted path'}
+89     \textcolor{keywordflow}{return} ShellQuoted(os.path.join(*[
+90         raw_shell(shell_quote(s)) \textcolor{keywordflow}{for} s \textcolor{keywordflow}{in} args
+91     ]))
+92 
+93 
+\end{DoxyCode}
+\index{shell\+\_\+quoting@{shell\+\_\+quoting}!raw\+\_\+shell@{raw\+\_\+shell}}
+\index{raw\+\_\+shell@{raw\+\_\+shell}!shell\+\_\+quoting@{shell\+\_\+quoting}}
+\subsubsection[{raw\+\_\+shell(s)}]{\setlength{\rightskip}{0pt plus 5cm}def shell\+\_\+quoting.\+raw\+\_\+shell (
+\begin{DoxyParamCaption}
+\item[{}]{s}
+\end{DoxyParamCaption}
+)}\label{namespaceshell__quoting_a52e0c0dd36f7efaa8dd86aa7d35433e5}
+
+
+Definition at line 75 of file shell\+\_\+quoting.\+py.
+
+
+
+Referenced by shell\+\_\+builder.\+Shell\+F\+B\+Code\+Builder.\+\_\+render\+\_\+impl(), docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+render\+\_\+impl(), parse\+\_\+args.\+parse\+\_\+args\+\_\+to\+\_\+fbcode\+\_\+builder\+\_\+opts(), path\+\_\+join(), shell\+\_\+comment(), and shell\+\_\+join().
+
+
+\begin{DoxyCode}
+75 \textcolor{keyword}{def }raw_shell(s):
+76     \textcolor{stringliteral}{'Not a member of ShellQuoted so we get a useful error for raw strings'}
+77     \textcolor{keywordflow}{if} isinstance(s, ShellQuoted):
+78         \textcolor{keywordflow}{return} s.do\_not\_use\_raw\_str
+79     \textcolor{keywordflow}{raise} RuntimeError(\textcolor{stringliteral}{'\{0\} should have been ShellQuoted'}.format(s))
+80 
+81 
+\end{DoxyCode}
+\index{shell\+\_\+quoting@{shell\+\_\+quoting}!shell\+\_\+comment@{shell\+\_\+comment}}
+\index{shell\+\_\+comment@{shell\+\_\+comment}!shell\+\_\+quoting@{shell\+\_\+quoting}}
+\subsubsection[{shell\+\_\+comment(c)}]{\setlength{\rightskip}{0pt plus 5cm}def shell\+\_\+quoting.\+shell\+\_\+comment (
+\begin{DoxyParamCaption}
+\item[{}]{c}
+\end{DoxyParamCaption}
+)}\label{namespaceshell__quoting_a2267d2d12664a5ecea813bf00c4393bb}
+
+
+Definition at line 94 of file shell\+\_\+quoting.\+py.
+
+
+
+References raw\+\_\+shell().
+
+
+
+Referenced by shell\+\_\+builder.\+Shell\+F\+B\+Code\+Builder.\+comment(), and docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+comment().
+
+
+\begin{DoxyCode}
+94 \textcolor{keyword}{def }shell_comment(c):
+95     \textcolor{stringliteral}{'Do not shell-escape raw strings in comments, but do handle line breaks.'}
+96     \textcolor{keywordflow}{return} ShellQuoted(\textcolor{stringliteral}{'# \{c\}'}).format(c=ShellQuoted(
+97         (raw_shell(c) \textcolor{keywordflow}{if} isinstance(c, ShellQuoted) \textcolor{keywordflow}{else} c)
+98             .replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{'\(\backslash\)n# '})
+99     ))
+100 \end{DoxyCode}
+\index{shell\+\_\+quoting@{shell\+\_\+quoting}!shell\+\_\+join@{shell\+\_\+join}}
+\index{shell\+\_\+join@{shell\+\_\+join}!shell\+\_\+quoting@{shell\+\_\+quoting}}
+\subsubsection[{shell\+\_\+join(delim, it)}]{\setlength{\rightskip}{0pt plus 5cm}def shell\+\_\+quoting.\+shell\+\_\+join (
+\begin{DoxyParamCaption}
+\item[{}]{delim, }
+\item[{}]{it}
+\end{DoxyParamCaption}
+)}\label{namespaceshell__quoting_a4cddcc0a65b7879490bea1a1d756a6a6}
+
+
+Definition at line 82 of file shell\+\_\+quoting.\+py.
+
+
+
+References raw\+\_\+shell().
+
+
+
+Referenced by fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+\_\+make\+\_\+vars(), shell\+\_\+builder.\+Shell\+F\+B\+Code\+Builder.\+\_\+render\+\_\+impl(), docker\+\_\+builder.\+Docker\+F\+B\+Code\+Builder.\+\_\+render\+\_\+impl(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+cmake\+\_\+configure(), fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+configure(), and fbcode\+\_\+builder.\+F\+B\+Code\+Builder.\+install\+\_\+debian\+\_\+deps().
+
+
+\begin{DoxyCode}
+82 \textcolor{keyword}{def }shell_join(delim, it):
+83     \textcolor{stringliteral}{'Joins an iterable of ShellQuoted with a delimiter between each two'}
+84     \textcolor{keywordflow}{return} ShellQuoted(delim.join(raw_shell(s) \textcolor{keywordflow}{for} s \textcolor{keywordflow}{in} it))
+85 
+86 
+\end{DoxyCode}
+\index{shell\+\_\+quoting@{shell\+\_\+quoting}!shell\+\_\+quote@{shell\+\_\+quote}}
+\index{shell\+\_\+quote@{shell\+\_\+quote}!shell\+\_\+quoting@{shell\+\_\+quoting}}
+\subsubsection[{shell\+\_\+quote(s)}]{\setlength{\rightskip}{0pt plus 5cm}def shell\+\_\+quoting.\+shell\+\_\+quote (
+\begin{DoxyParamCaption}
+\item[{}]{s}
+\end{DoxyParamCaption}
+)}\label{namespaceshell__quoting_aacedf6681c9c31130ae056c3c0d30f67}
+
+
+Definition at line 69 of file shell\+\_\+quoting.\+py.
+
+
+
+Referenced by shell\+\_\+quoting.\+Shell\+Quoted.\+format(), and path\+\_\+join().
+
+
+\begin{DoxyCode}
+69 \textcolor{keyword}{def }shell_quote(s):
+70     \textcolor{stringliteral}{'Quotes a string if it is not already quoted'}
+71     \textcolor{keywordflow}{return} s \textcolor{keywordflow}{if} isinstance(s, ShellQuoted) \(\backslash\)
+72         \textcolor{keywordflow}{else} ShellQuoted(\textcolor{stringliteral}{"'"} + str(s).replace(\textcolor{stringliteral}{"'"}, \textcolor{stringliteral}{"'\(\backslash\)\(\backslash\)''"}) + \textcolor{stringliteral}{"'"})
+73 
+74 
+\end{DoxyCode}

@@ -1,0 +1,238 @@
+\section{proxygen\+:\+:Service\+Configuration Class Reference}
+\label{classproxygen_1_1ServiceConfiguration}\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+
+
+{\ttfamily \#include $<$Service\+Configuration.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Service\+Configuration} ()
+\item 
+virtual {\bf $\sim$\+Service\+Configuration} ()
+\item 
+void {\bf set\+Acceptors} (const std\+::list$<$ {\bf Acceptor\+Configuration} $>$ \&acceptors)
+\item 
+const std\+::list$<$ {\bf Acceptor\+Configuration} $>$ \& {\bf get\+Acceptors} () const 
+\item 
+void {\bf set\+Write\+Buffer\+Limit} (uint64\+\_\+t size)
+\item 
+uint64\+\_\+t {\bf get\+Write\+Buffer\+Limit} () const 
+\item 
+void {\bf set\+Takeover\+Enabled} (bool enabled)
+\item 
+bool {\bf takeover\+Enabled} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ {\bf Acceptor\+Configuration} $>$ {\bf acceptors\+\_\+}
+\item 
+uint64\+\_\+t {\bf write\+Buffer\+Limit\+\_\+}
+\item 
+bool {\bf takeover\+Enabled\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for all the Configuration objects 
+
+Definition at line 19 of file Service\+Configuration.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!Service\+Configuration@{Service\+Configuration}}
+\index{Service\+Configuration@{Service\+Configuration}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{Service\+Configuration()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Service\+Configuration\+::\+Service\+Configuration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ServiceConfiguration_ae9c1548eb54c3fa66106f32f5e4666e8}
+
+
+Definition at line 21 of file Service\+Configuration.\+h.
+
+
+\begin{DoxyCode}
+22   : writeBufferLimit_(4096)
+23 , takeoverEnabled_(\textcolor{keyword}{false}) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!````~Service\+Configuration@{$\sim$\+Service\+Configuration}}
+\index{````~Service\+Configuration@{$\sim$\+Service\+Configuration}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{$\sim$\+Service\+Configuration()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Service\+Configuration\+::$\sim$\+Service\+Configuration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ServiceConfiguration_a019fd24e19a0539f7acd35e3a3c85211}
+
+
+Definition at line 25 of file Service\+Configuration.\+h.
+
+
+\begin{DoxyCode}
+25 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!get\+Acceptors@{get\+Acceptors}}
+\index{get\+Acceptors@{get\+Acceptors}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{get\+Acceptors() const }]{\setlength{\rightskip}{0pt plus 5cm}const std\+::list$<${\bf Acceptor\+Configuration}$>$\& proxygen\+::\+Service\+Configuration\+::get\+Acceptors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ServiceConfiguration_a4eb55c92126b33cdfa31173495a78da3}
+
+
+Definition at line 35 of file Service\+Configuration.\+h.
+
+
+
+References acceptors\+\_\+.
+
+
+\begin{DoxyCode}
+35                                                              \{
+36     \textcolor{keywordflow}{return} acceptors_;
+37   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!get\+Write\+Buffer\+Limit@{get\+Write\+Buffer\+Limit}}
+\index{get\+Write\+Buffer\+Limit@{get\+Write\+Buffer\+Limit}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{get\+Write\+Buffer\+Limit() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Service\+Configuration\+::get\+Write\+Buffer\+Limit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ServiceConfiguration_ac5f642515c4e0640948735ee6f99ce38}
+
+
+Definition at line 44 of file Service\+Configuration.\+h.
+
+
+
+References write\+Buffer\+Limit\+\_\+.
+
+
+\begin{DoxyCode}
+44 \{ \textcolor{keywordflow}{return} writeBufferLimit_; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!set\+Acceptors@{set\+Acceptors}}
+\index{set\+Acceptors@{set\+Acceptors}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{set\+Acceptors(const std\+::list$<$ Acceptor\+Configuration $>$ \&acceptors)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Service\+Configuration\+::set\+Acceptors (
+\begin{DoxyParamCaption}
+\item[{const std\+::list$<$ {\bf Acceptor\+Configuration} $>$ \&}]{acceptors}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ServiceConfiguration_ac6b77c3f3a8683dc485e50b312c2fe5a}
+Set/get the list of acceptors that will be receiving traffic. 
+
+Definition at line 30 of file Service\+Configuration.\+h.
+
+
+
+References acceptors\+\_\+.
+
+
+\begin{DoxyCode}
+31                                                      \{
+32     acceptors_.clear();
+33     acceptors_.insert(acceptors_.begin(), acceptors.begin(), acceptors.end());
+34   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!set\+Takeover\+Enabled@{set\+Takeover\+Enabled}}
+\index{set\+Takeover\+Enabled@{set\+Takeover\+Enabled}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{set\+Takeover\+Enabled(bool enabled)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Service\+Configuration\+::set\+Takeover\+Enabled (
+\begin{DoxyParamCaption}
+\item[{bool}]{enabled}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ServiceConfiguration_ac4c04b9ce8343138432ff2b2f53c102c}
+Set/get whether or not we should enable socket takeover 
+
+Definition at line 49 of file Service\+Configuration.\+h.
+
+
+
+References takeover\+Enabled\+\_\+.
+
+
+\begin{DoxyCode}
+49 \{ takeoverEnabled_ = enabled; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!set\+Write\+Buffer\+Limit@{set\+Write\+Buffer\+Limit}}
+\index{set\+Write\+Buffer\+Limit@{set\+Write\+Buffer\+Limit}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{set\+Write\+Buffer\+Limit(uint64\+\_\+t size)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Service\+Configuration\+::set\+Write\+Buffer\+Limit (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ServiceConfiguration_a253b5beacdd2079ea38002ce6872048c}
+Set/get the amount of data that we\textquotesingle{}re allowed to buffer in-\/memory before back-\/pressuring the other end of an H\+T\+TP connection. 
+
+Definition at line 43 of file Service\+Configuration.\+h.
+
+
+
+References write\+Buffer\+Limit\+\_\+.
+
+
+\begin{DoxyCode}
+43 \{ writeBufferLimit_ = size; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!takeover\+Enabled@{takeover\+Enabled}}
+\index{takeover\+Enabled@{takeover\+Enabled}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{takeover\+Enabled() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Service\+Configuration\+::takeover\+Enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ServiceConfiguration_a9676873a2e9200e9cd0f3e680df684eb}
+
+
+Definition at line 50 of file Service\+Configuration.\+h.
+
+
+
+References takeover\+Enabled\+\_\+.
+
+
+\begin{DoxyCode}
+50 \{ \textcolor{keywordflow}{return} takeoverEnabled_; \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!acceptors\+\_\+@{acceptors\+\_\+}}
+\index{acceptors\+\_\+@{acceptors\+\_\+}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{acceptors\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<${\bf Acceptor\+Configuration}$>$ proxygen\+::\+Service\+Configuration\+::acceptors\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ServiceConfiguration_a32e1ae5f1e34b47623c6a9bec9fba12c}
+
+
+Definition at line 53 of file Service\+Configuration.\+h.
+
+
+
+Referenced by get\+Acceptors(), and set\+Acceptors().
+
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!takeover\+Enabled\+\_\+@{takeover\+Enabled\+\_\+}}
+\index{takeover\+Enabled\+\_\+@{takeover\+Enabled\+\_\+}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{takeover\+Enabled\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Service\+Configuration\+::takeover\+Enabled\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ServiceConfiguration_af0f1954372b8e186e19fab0310dd0614}
+
+
+Definition at line 55 of file Service\+Configuration.\+h.
+
+
+
+Referenced by set\+Takeover\+Enabled(), and takeover\+Enabled().
+
+\index{proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}!write\+Buffer\+Limit\+\_\+@{write\+Buffer\+Limit\+\_\+}}
+\index{write\+Buffer\+Limit\+\_\+@{write\+Buffer\+Limit\+\_\+}!proxygen\+::\+Service\+Configuration@{proxygen\+::\+Service\+Configuration}}
+\subsubsection[{write\+Buffer\+Limit\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Service\+Configuration\+::write\+Buffer\+Limit\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1ServiceConfiguration_ad9eb8641b61d2903cf3d2cdfd1a5d766}
+
+
+Definition at line 54 of file Service\+Configuration.\+h.
+
+
+
+Referenced by get\+Write\+Buffer\+Limit(), and set\+Write\+Buffer\+Limit().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/services/{\bf Service\+Configuration.\+h}\end{DoxyCompactItemize}

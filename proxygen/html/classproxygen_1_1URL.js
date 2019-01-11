@@ -1,0 +1,28 @@
+var classproxygen_1_1URL =
+[
+    [ "URL", "classproxygen_1_1URL.html#acfbc5aca80c1c103bdd657929795999b", null ],
+    [ "URL", "classproxygen_1_1URL.html#a5c2ac183df1e7673d545190ea260036f", null ],
+    [ "createUrl", "classproxygen_1_1URL.html#a978c5f141464213a1a512ad9b1520404", null ],
+    [ "getFragment", "classproxygen_1_1URL.html#ae758e362349a29c84a989d78084ec35f", null ],
+    [ "getHost", "classproxygen_1_1URL.html#a2e9b32011fabe643c1a0e348be956ddf", null ],
+    [ "getHostAndPort", "classproxygen_1_1URL.html#a624e9849e3d9b4e89aa1e01fec0d0d3e", null ],
+    [ "getPath", "classproxygen_1_1URL.html#ac9f17c295815d31c6f2bceb25308ea32", null ],
+    [ "getPort", "classproxygen_1_1URL.html#a1c8c12e0709047c2d8e95653cd277f84", null ],
+    [ "getQuery", "classproxygen_1_1URL.html#a9da5488ca1563ebaa87f2dc7714351f2", null ],
+    [ "getScheme", "classproxygen_1_1URL.html#adfe7fa6fe9c1003f2f1b81fd42ed3c4b", null ],
+    [ "getUrl", "classproxygen_1_1URL.html#a92e1ea05adf748bbf1c330d2f261d7de", null ],
+    [ "hasHost", "classproxygen_1_1URL.html#a6ff5a5764037e59ce32defcc9c7d0a24", null ],
+    [ "isSecure", "classproxygen_1_1URL.html#ae10d37dd7d5b0267dff66b67783a70b7", null ],
+    [ "isValid", "classproxygen_1_1URL.html#aa828b3fa2371c261b2ad095313b031d7", null ],
+    [ "makeRelativeURL", "classproxygen_1_1URL.html#abd0767dc8ddf53d614cf8ebe9b60ee87", null ],
+    [ "operator!=", "classproxygen_1_1URL.html#ae4aef89a61ff409a5f701f0d9d6a539b", null ],
+    [ "operator==", "classproxygen_1_1URL.html#a5b3addc3626b5feb815664a4a65b36bb", null ],
+    [ "fragment_", "classproxygen_1_1URL.html#a403ff03d2311f9d44d8b7bb2fa20f4e7", null ],
+    [ "host_", "classproxygen_1_1URL.html#ac72263ec3203125638da9484e0d3099a", null ],
+    [ "path_", "classproxygen_1_1URL.html#a5b2dad259798850a968d959872a86beb", null ],
+    [ "port_", "classproxygen_1_1URL.html#a8f9d81d1cda5d7a7a2505ea7779636c5", null ],
+    [ "query_", "classproxygen_1_1URL.html#aee9474708f0246482b8e34895c0331e7", null ],
+    [ "scheme_", "classproxygen_1_1URL.html#a36787bc6cd1229f16b45ae9f1497365b", null ],
+    [ "url_", "classproxygen_1_1URL.html#acd0f3ded6fd9b613d731286740bbfd3f", null ],
+    [ "valid_", "classproxygen_1_1URL.html#a9dda82d9382732aa040e50f39a72011a", null ]
+];

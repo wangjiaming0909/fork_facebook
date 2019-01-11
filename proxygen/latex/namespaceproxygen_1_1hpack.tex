@@ -1,0 +1,279 @@
+\section{proxygen\+:\+:hpack Namespace Reference}
+\label{namespaceproxygen_1_1hpack}\index{proxygen\+::hpack@{proxygen\+::hpack}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Test\+Header\+Codec\+Stats}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf dump\+To\+File} (const string \&filename, const I\+O\+Buf $\ast$buf)
+\item 
+void {\bf verify\+Headers} (vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&headers, vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&decoded\+Headers)
+\item 
+unique\+\_\+ptr$<$ I\+O\+Buf $>$ {\bf encode\+Decode} (vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&headers, {\bf H\+P\+A\+C\+K\+Encoder} \&encoder, {\bf H\+P\+A\+C\+K\+Decoder} \&decoder)
+\item 
+void {\bf encode\+Decode} (vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&headers, {\bf Q\+P\+A\+C\+K\+Encoder} \&encoder, {\bf Q\+P\+A\+C\+K\+Decoder} \&decoder)
+\item 
+unique\+\_\+ptr$<$ {\bf H\+P\+A\+C\+K\+Decoder\+::headers\+\_\+t} $>$ {\bf decode} ({\bf H\+P\+A\+C\+K\+Decoder} \&decoder, const I\+O\+Buf $\ast$buffer)
+\item 
+vector$<$ {\bf compress\+::\+Header} $>$ {\bf headers\+From\+Array} (vector$<$ vector$<$ string $>$$>$ \&a)
+\item 
+vector$<$ {\bf compress\+::\+Header} $>$ {\bf basic\+Headers} ()
+\item 
+void {\bf dump\+To\+File} (const std\+::string \&filename, const folly\+::\+I\+O\+Buf $\ast$buf)
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+P\+A\+C\+K\+Decoder\+::headers\+\_\+t} $>$ {\bf decode} ({\bf H\+P\+A\+C\+K\+Decoder} \&decoder, const folly\+::\+I\+O\+Buf $\ast$buffer)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!basic\+Headers@{basic\+Headers}}
+\index{basic\+Headers@{basic\+Headers}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{basic\+Headers()}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf compress\+::\+Header} $>$ proxygen\+::hpack\+::basic\+Headers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_abd0636ad9eb2ebdb358f22b0094b13cb}
+
+
+Definition at line 116 of file Test\+Util.\+cpp.
+
+
+
+References headers\+From\+Array().
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F(), and T\+E\+S\+T\+\_\+\+P().
+
+
+\begin{DoxyCode}
+116                                       \{
+117   \textcolor{keyword}{static} vector<vector<string>> headersStrings = \{
+118     \{\textcolor{stringliteral}{":path"}, \textcolor{stringliteral}{"/index.php"}\},
+119     \{\textcolor{stringliteral}{":authority"}, \textcolor{stringliteral}{"www.facebook.com"}\},
+120     \{\textcolor{stringliteral}{":method"}, \textcolor{stringliteral}{"GET"}\},
+121     \{\textcolor{stringliteral}{":scheme"}, \textcolor{stringliteral}{"https"}\},
+122     \{\textcolor{stringliteral}{"Host"}, \textcolor{stringliteral}{"www.facebook.com"}\},
+123     \{\textcolor{stringliteral}{"accept-encoding"}, \textcolor{stringliteral}{"gzip"}\}
+124   \};
+125   \textcolor{keyword}{static} vector<compress::Header> headers = headersFromArray(headersStrings);
+126   \textcolor{keywordflow}{return} headers;
+127 \}
+\end{DoxyCode}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!decode@{decode}}
+\index{decode@{decode}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{decode(\+H\+P\+A\+C\+K\+Decoder \&decoder, const folly\+::\+I\+O\+Buf $\ast$buffer)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+P\+A\+C\+K\+Decoder\+::headers\+\_\+t}$>$ proxygen\+::hpack\+::decode (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Decoder} \&}]{decoder, }
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buffer}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_aa6b92b0fa3a3acf3685e455dec734cf6}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!decode@{decode}}
+\index{decode@{decode}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{decode(\+H\+P\+A\+C\+K\+Decoder \&decoder, const I\+O\+Buf $\ast$buffer)}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<${\bf H\+P\+A\+C\+K\+Decoder\+::headers\+\_\+t}$>$ proxygen\+::hpack\+::decode (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Decoder} \&}]{decoder, }
+\item[{const I\+O\+Buf $\ast$}]{buffer}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_aa061a948252af0d148d16d87f86d1872}
+
+
+Definition at line 95 of file Test\+Util.\+cpp.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Streaming(), proxygen\+::\+Test\+Streaming\+Callback\+::has\+Error(), and proxygen\+::\+Test\+Streaming\+Callback\+::hpack\+Headers().
+
+
+
+Referenced by check\+Error(), proxygen\+::compress\+::\+Compression\+Simulator\+::decode\+Packet(), encode\+Decode(), is\+Lowercase(), T\+E\+S\+T(), T\+E\+S\+T\+\_\+\+F(), T\+E\+S\+T\+\_\+\+P(), proxygen\+::\+Base64\+::url\+Decode(), and proxygen\+::huffman\+::\+Huff\+Tree\+::$\sim$\+Huff\+Tree().
+
+
+\begin{DoxyCode}
+96                                                                 \{
+97   \textcolor{keyword}{auto} headers = std::make\_unique<HPACKDecoder::headers\_t>();
+98   folly::io::Cursor cursor(buffer);
+99   uint32\_t totalBytes = buffer ? cursor.totalLength() : 0;
+100   TestStreamingCallback cb;
+101   decoder.decodeStreaming(cursor, totalBytes, &cb);
+102   \textcolor{keywordflow}{if} (cb.hasError()) \{
+103     \textcolor{keywordflow}{return} headers;
+104   \}
+105   \textcolor{keywordflow}{return} cb.hpackHeaders();
+106 \}
+\end{DoxyCode}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!dump\+To\+File@{dump\+To\+File}}
+\index{dump\+To\+File@{dump\+To\+File}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{dump\+To\+File(const std\+::string \&filename, const folly\+::\+I\+O\+Buf $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::dump\+To\+File (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filename, }
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_ac46491359ef094aaf5309aaee69e0bb0}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!dump\+To\+File@{dump\+To\+File}}
+\index{dump\+To\+File@{dump\+To\+File}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{dump\+To\+File(const string \&filename, const I\+O\+Buf $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::dump\+To\+File (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{filename, }
+\item[{const I\+O\+Buf $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_a6f3508a963dbe8937b71fcb8d2f0c9da}
+
+
+Definition at line 27 of file Test\+Util.\+cpp.
+
+
+\begin{DoxyCode}
+27                                                           \{
+28   ofstream outfile(filename, ofstream::binary);
+29   \textcolor{keywordflow}{if} (buf) \{
+30     \textcolor{keyword}{const} IOBuf* p = buf;
+31     \textcolor{keywordflow}{do} \{
+32       outfile.write((\textcolor{keyword}{const} \textcolor{keywordtype}{char} *)p->data(), p->length());
+33       p = p->next();
+34     \} \textcolor{keywordflow}{while} (p->next() != buf);
+35   \}
+36   outfile.close();
+37 \}
+\end{DoxyCode}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!encode\+Decode@{encode\+Decode}}
+\index{encode\+Decode@{encode\+Decode}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{encode\+Decode(vector$<$ H\+P\+A\+C\+K\+Header $>$ \&headers, H\+P\+A\+C\+K\+Encoder \&encoder, H\+P\+A\+C\+K\+Decoder \&decoder)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ proxygen\+::hpack\+::encode\+Decode (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&}]{headers, }
+\item[{{\bf H\+P\+A\+C\+K\+Encoder} \&}]{encoder, }
+\item[{{\bf H\+P\+A\+C\+K\+Decoder} \&}]{decoder}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_a4dbe3aeeb3ee250574429ab9c048646f}
+
+
+Definition at line 55 of file Test\+Util.\+cpp.
+
+
+
+References decode(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode(), proxygen\+::\+H\+P\+A\+C\+K\+Context\+::get\+Table(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::has\+Error(), and verify\+Headers().
+
+
+\begin{DoxyCode}
+58                            \{
+59   unique\_ptr<IOBuf> encoded = encoder.encode(headers);
+60   \textcolor{keyword}{auto} decodedHeaders = hpack::decode(decoder, encoded.get());
+61   CHECK(!decoder.hasError());
+62 
+63   verifyHeaders(headers, *decodedHeaders);
+64 
+65   \textcolor{comment}{// header tables should look the same}
+66   CHECK(encoder.getTable() == decoder.getTable());
+67   EXPECT\_EQ(encoder.getTable(), decoder.getTable());
+68 
+69   \textcolor{keywordflow}{return} encoded;
+70 \}
+\end{DoxyCode}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!encode\+Decode@{encode\+Decode}}
+\index{encode\+Decode@{encode\+Decode}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{encode\+Decode(vector$<$ H\+P\+A\+C\+K\+Header $>$ \&headers, Q\+P\+A\+C\+K\+Encoder \&encoder, Q\+P\+A\+C\+K\+Decoder \&decoder)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::encode\+Decode (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&}]{headers, }
+\item[{{\bf Q\+P\+A\+C\+K\+Encoder} \&}]{encoder, }
+\item[{{\bf Q\+P\+A\+C\+K\+Decoder} \&}]{decoder}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_ad8957e47e7f88771f11318e27d1ad0d3}
+
+
+Definition at line 72 of file Test\+Util.\+cpp.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::decode\+Decoder\+Stream(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Streaming(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Header\+Ack(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Table\+State\+Sync(), proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::get\+Table(), proxygen\+::\+Test\+Streaming\+Callback\+::has\+Error(), proxygen\+::\+Test\+Streaming\+Callback\+::hpack\+Headers(), and verify\+Headers().
+
+
+\begin{DoxyCode}
+75                            \{
+76   \textcolor{keyword}{auto} encoded = encoder.encode(headers, 0, 1);
+77   TestStreamingCallback cb;
+78   \textcolor{keywordflow}{if} (encoded.control) \{
+79     decoder.decodeEncoderStream(std::move(encoded.control));
+80     encoder.decodeDecoderStream(decoder.encodeTableStateSync());
+81   \}
+82   CHECK(encoded.stream);
+83   \textcolor{keyword}{auto} length = encoded.stream->computeChainDataLength();
+84   decoder.decodeStreaming(1, std::move(encoded.stream), length, &cb);
+85   CHECK(!cb.hasError());
+86   \textcolor{keyword}{auto} decodedHeaders = cb.hpackHeaders();
+87   verifyHeaders(headers, *decodedHeaders);
+88   encoder.decodeDecoderStream(decoder.encodeHeaderAck(1));
+89 
+90   \textcolor{comment}{// header tables should look the same}
+91   CHECK(encoder.getTable() == decoder.getTable());
+92   EXPECT\_EQ(encoder.getTable(), decoder.getTable());
+93 \}
+\end{DoxyCode}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!headers\+From\+Array@{headers\+From\+Array}}
+\index{headers\+From\+Array@{headers\+From\+Array}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{headers\+From\+Array(vector$<$ vector$<$ string $>$$>$ \&a)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf compress\+::\+Header} $>$ proxygen\+::hpack\+::headers\+From\+Array (
+\begin{DoxyParamCaption}
+\item[{vector$<$ vector$<$ string $>$$>$ \&}]{a}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_a5162abfec55ad788071ab86618e812f0}
+
+
+Definition at line 108 of file Test\+Util.\+cpp.
+
+
+
+References proxygen\+::compress\+::\+Header\+::make\+Header\+For\+Test().
+
+
+
+Referenced by basic\+Headers(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+108                                                                    \{
+109   vector<compress::Header> headers;
+110   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& ha : a) \{
+111     headers.push\_back(compress::Header::makeHeaderForTest(ha[0], ha[1]));
+112   \}
+113   \textcolor{keywordflow}{return} headers;
+114 \}
+\end{DoxyCode}
+\index{proxygen\+::hpack@{proxygen\+::hpack}!verify\+Headers@{verify\+Headers}}
+\index{verify\+Headers@{verify\+Headers}!proxygen\+::hpack@{proxygen\+::hpack}}
+\subsubsection[{verify\+Headers(vector$<$ H\+P\+A\+C\+K\+Header $>$ \&headers, vector$<$ H\+P\+A\+C\+K\+Header $>$ \&decoded\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::hpack\+::verify\+Headers (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&}]{headers, }
+\item[{vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ \&}]{decoded\+Headers}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1hpack_a73d97fa98e2f0b6cdb05ec90b1e3e455}
+
+
+Definition at line 39 of file Test\+Util.\+cpp.
+
+
+
+References proxygen\+::print\+Delta().
+
+
+
+Referenced by encode\+Decode().
+
+
+\begin{DoxyCode}
+40                                                         \{
+41   EXPECT\_EQ(headers.size(), decodedHeaders.size());
+42   std::sort(decodedHeaders.begin(), decodedHeaders.end());
+43   std::sort(headers.begin(), headers.end());
+44   \textcolor{keywordflow}{if} (headers.size() != decodedHeaders.size()) \{
+45     std::cerr << printDelta(decodedHeaders, headers);
+46     CHECK(\textcolor{keyword}{false}) << \textcolor{stringliteral}{"Mismatched headers size"};
+47   \}
+48   EXPECT\_EQ(headers, decodedHeaders);
+49   \textcolor{keywordflow}{if} (headers != decodedHeaders) \{
+50     std::cerr << printDelta(headers, decodedHeaders);
+51     CHECK(\textcolor{keyword}{false}) << \textcolor{stringliteral}{"Mismatched headers"};
+52   \}
+53 \}
+\end{DoxyCode}

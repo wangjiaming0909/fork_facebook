@@ -1,0 +1,44 @@
+\section{fbcode\+\_\+builder Namespace Reference}
+\label{namespacefbcode__builder}\index{fbcode\+\_\+builder@{fbcode\+\_\+builder}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf F\+B\+Code\+Builder}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \+\_\+read\+\_\+project\+\_\+github\+\_\+hashes} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{fbcode\+\_\+builder@{fbcode\+\_\+builder}!\+\_\+read\+\_\+project\+\_\+github\+\_\+hashes@{\+\_\+read\+\_\+project\+\_\+github\+\_\+hashes}}
+\index{\+\_\+read\+\_\+project\+\_\+github\+\_\+hashes@{\+\_\+read\+\_\+project\+\_\+github\+\_\+hashes}!fbcode\+\_\+builder@{fbcode\+\_\+builder}}
+\subsubsection[{\+\_\+read\+\_\+project\+\_\+github\+\_\+hashes()}]{\setlength{\rightskip}{0pt plus 5cm}def fbcode\+\_\+builder.\+\_\+read\+\_\+project\+\_\+github\+\_\+hashes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{namespacefbcode__builder_a5197663ac679b1e50bae6bc1f756b676}
+
+
+Definition at line 68 of file fbcode\+\_\+builder.\+py.
+
+
+\begin{DoxyCode}
+68 \textcolor{keyword}{def }_read_project_github_hashes():
+69     base\_dir = \textcolor{stringliteral}{'deps/github\_hashes/'}  \textcolor{comment}{# trailing slash used in regex below}
+70     \textcolor{keywordflow}{for} dirname, \_, files \textcolor{keywordflow}{in} os.walk(base\_dir):
+71         \textcolor{keywordflow}{for} filename \textcolor{keywordflow}{in} files:
+72             path = os.path.join(dirname, filename)
+73             with open(path) \textcolor{keyword}{as} f:
+74                 m\_proj = re.match(\textcolor{stringliteral}{'^'} + base\_dir + \textcolor{stringliteral}{'(.*)-rev\(\backslash\).txt$'}, path)
+75                 \textcolor{keywordflow}{if} m\_proj \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+76                     \textcolor{keywordflow}{raise} RuntimeError(\textcolor{stringliteral}{'Not a hash file? \{0\}'}.format(path))
+77                 m\_hash = re.match(\textcolor{stringliteral}{'^Subproject commit ([0-9a-f]+)\(\backslash\)n$'}, f.read())
+78                 \textcolor{keywordflow}{if} m\_hash \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+79                     \textcolor{keywordflow}{raise} RuntimeError(\textcolor{stringliteral}{'No hash in \{0\}'}.format(path))
+80                 \textcolor{keywordflow}{yield} m\_proj.group(1), m\_hash.group(1)
+81 
+82 
+\end{DoxyCode}

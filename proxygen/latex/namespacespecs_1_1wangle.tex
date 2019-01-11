@@ -1,0 +1,33 @@
+\section{specs.\+wangle Namespace Reference}
+\label{namespacespecs_1_1wangle}\index{specs.\+wangle@{specs.\+wangle}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf fbcode\+\_\+builder\+\_\+spec} (builder)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{specs\+::wangle@{specs\+::wangle}!fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}}
+\index{fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}!specs\+::wangle@{specs\+::wangle}}
+\subsubsection[{fbcode\+\_\+builder\+\_\+spec(builder)}]{\setlength{\rightskip}{0pt plus 5cm}def specs.\+wangle.\+fbcode\+\_\+builder\+\_\+spec (
+\begin{DoxyParamCaption}
+\item[{}]{builder}
+\end{DoxyParamCaption}
+)}\label{namespacespecs_1_1wangle_a5d1a07b8914e8d4115da3eadb0503a0e}
+
+
+Definition at line 13 of file wangle.\+py.
+
+
+\begin{DoxyCode}
+13 \textcolor{keyword}{def }fbcode_builder_spec(builder):
+14     \textcolor{comment}{# Projects that simply depend on Wangle need not spend time on tests.}
+15     builder.add\_option(\textcolor{stringliteral}{'wangle/wangle/build:cmake\_defines'}, \{\textcolor{stringliteral}{'BUILD\_TESTS'}: \textcolor{stringliteral}{'OFF'}\})
+16     \textcolor{keywordflow}{return} \{
+17         \textcolor{stringliteral}{'depends\_on'}: [folly, fizz, sodium],
+18         \textcolor{stringliteral}{'steps'}: [
+19             builder.fb\_github\_cmake\_install(\textcolor{stringliteral}{'wangle/wangle/build'}),
+20         ],
+21     \}
+22 \end{DoxyCode}

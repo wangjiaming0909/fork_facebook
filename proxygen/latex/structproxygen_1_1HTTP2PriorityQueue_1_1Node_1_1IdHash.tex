@@ -1,0 +1,43 @@
+\section{proxygen\+:\+:H\+T\+T\+P2\+Priority\+Queue\+:\+:Node\+:\+:Id\+Hash Struct Reference}
+\label{structproxygen_1_1HTTP2PriorityQueue_1_1Node_1_1IdHash}\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Hash@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Hash}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P2\+Priority\+Queue.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t {\bf operator()} (const {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} \&id) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 233 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Hash@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Hash}!operator()@{operator()}}
+\index{operator()@{operator()}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Hash@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Hash}}
+\subsubsection[{operator()(const H\+T\+T\+P\+Codec\+::\+Stream\+I\+D \&id) const }]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Hash\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} \&}]{id}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTP2PriorityQueue_1_1Node_1_1IdHash_af016359234e6bbf755ae708c1574167c}
+
+
+Definition at line 234 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+\begin{DoxyCode}
+234                                                            \{
+235         \textcolor{keywordflow}{return} boost::hash<HTTPCodec::StreamID>()(\textcolor{keywordtype}{id});
+236       \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P2\+Priority\+Queue.\+h}\end{DoxyCompactItemize}

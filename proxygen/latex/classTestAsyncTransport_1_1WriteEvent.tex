@@ -1,0 +1,294 @@
+\section{Test\+Async\+Transport\+:\+:Write\+Event Class Reference}
+\label{classTestAsyncTransport_1_1WriteEvent}\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+
+
+{\ttfamily \#include $<$Test\+Async\+Transport.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf proxygen\+::\+Time\+Point} {\bf get\+Time} () const 
+\item 
+const struct iovec $\ast$ {\bf get\+Io\+Vec} () const 
+\item 
+size\+\_\+t {\bf get\+Count} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ {\bf Write\+Event} $>$ {\bf new\+Event} (const struct iovec $\ast$vec, size\+\_\+t count)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Write\+Event} ({\bf proxygen\+::\+Time\+Point} time, size\+\_\+t count)
+\item 
+{\bf $\sim$\+Write\+Event} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf destroy\+Event} ({\bf Write\+Event} $\ast$event)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf proxygen\+::\+Time\+Point} {\bf time\+\_\+}
+\item 
+size\+\_\+t {\bf count\+\_\+}
+\item 
+struct iovec {\bf vec\+\_\+} [$\,$]
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file Test\+Async\+Transport.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!Write\+Event@{Write\+Event}}
+\index{Write\+Event@{Write\+Event}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{Write\+Event(proxygen\+::\+Time\+Point time, size\+\_\+t count)}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Async\+Transport\+::\+Write\+Event\+::\+Write\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Time\+Point}}]{time, }
+\item[{size\+\_\+t}]{count}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_1_1WriteEvent_ab8490f2513242ca8ebc96226131dafa3}
+
+
+Definition at line 111 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References count\+\_\+, and vec\+\_\+.
+
+
+
+Referenced by get\+Count(), and new\+Event().
+
+
+\begin{DoxyCode}
+112   : time_(time),
+113     count_(count) \{
+114   \textcolor{comment}{// Initialize all of the iov\_base pointers to nullptr.  This way we won't free}
+115   \textcolor{comment}{// an uninitialized pointer in the destructor if we fail to allocate any of}
+116   \textcolor{comment}{// the buffers.}
+117   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} n = 0; n < count_; ++n) \{
+118     vec_[n].iov\_base = \textcolor{keyword}{nullptr};
+119   \}
+120 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!````~Write\+Event@{$\sim$\+Write\+Event}}
+\index{````~Write\+Event@{$\sim$\+Write\+Event}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{$\sim$\+Write\+Event()}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Async\+Transport\+::\+Write\+Event\+::$\sim$\+Write\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_1_1WriteEvent_a2b78699224ca972f5bae64cac69ca06a}
+
+
+Definition at line 122 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References count\+\_\+, and vec\+\_\+.
+
+
+
+Referenced by get\+Count().
+
+
+\begin{DoxyCode}
+122                                           \{
+123   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} n = 0; n < count_; ++n) \{
+124     free(vec_[n].iov\_base);
+125   \}
+126 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!destroy\+Event@{destroy\+Event}}
+\index{destroy\+Event@{destroy\+Event}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{destroy\+Event(\+Write\+Event $\ast$event)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Async\+Transport\+::\+Write\+Event\+::destroy\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf Write\+Event} $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classTestAsyncTransport_1_1WriteEvent_a501bfbab27598aed4c37c530dff85096}
+
+
+Definition at line 159 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References Test\+Async\+Transport\+::event\+Base\+\_\+, Test\+Async\+Transport\+::k\+State\+Open, Test\+Async\+Transport\+::read\+Callback\+\_\+, Test\+Async\+Transport\+::read\+Events\+\_\+, Test\+Async\+Transport\+::read\+State\+\_\+, Test\+Async\+Transport\+::send\+Timeout\+\_\+, Test\+Async\+Transport\+::\+Test\+Async\+Transport(), and Test\+Async\+Transport\+::write\+State\+\_\+.
+
+
+
+Referenced by get\+Count(), and new\+Event().
+
+
+\begin{DoxyCode}
+159                                                             \{
+160   \textcolor{keyword}{event}->~WriteEvent();
+161   free(event);
+162 \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!get\+Count@{get\+Count}}
+\index{get\+Count@{get\+Count}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{get\+Count() const }]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Test\+Async\+Transport\+::\+Write\+Event\+::get\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestAsyncTransport_1_1WriteEvent_a812250285a53d33e785f93198e9ed6b5}
+
+
+Definition at line 33 of file Test\+Async\+Transport.\+h.
+
+
+
+References count\+\_\+, destroy\+Event(), Write\+Event(), and $\sim$\+Write\+Event().
+
+
+\begin{DoxyCode}
+33                             \{
+34       \textcolor{keywordflow}{return} count_;
+35     \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!get\+Io\+Vec@{get\+Io\+Vec}}
+\index{get\+Io\+Vec@{get\+Io\+Vec}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{get\+Io\+Vec() const }]{\setlength{\rightskip}{0pt plus 5cm}const struct iovec$\ast$ Test\+Async\+Transport\+::\+Write\+Event\+::get\+Io\+Vec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestAsyncTransport_1_1WriteEvent_af88c8b3ed0cb006475d2c7644bdd9cc6}
+
+
+Definition at line 30 of file Test\+Async\+Transport.\+h.
+
+
+
+References vec\+\_\+.
+
+
+\begin{DoxyCode}
+30                                          \{
+31       \textcolor{keywordflow}{return} vec_;
+32     \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!get\+Time@{get\+Time}}
+\index{get\+Time@{get\+Time}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{get\+Time() const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+Time\+Point} Test\+Async\+Transport\+::\+Write\+Event\+::get\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestAsyncTransport_1_1WriteEvent_ab24f22ef79f67ef1ba1bda17ac054888}
+
+
+Definition at line 27 of file Test\+Async\+Transport.\+h.
+
+
+
+References time\+\_\+.
+
+
+\begin{DoxyCode}
+27                                       \{
+28       \textcolor{keywordflow}{return} time_;
+29     \}
+\end{DoxyCode}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!new\+Event@{new\+Event}}
+\index{new\+Event@{new\+Event}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{new\+Event(const struct iovec $\ast$vec, size\+\_\+t count)}]{\setlength{\rightskip}{0pt plus 5cm}shared\+\_\+ptr$<$ {\bf Test\+Async\+Transport\+::\+Write\+Event} $>$ Test\+Async\+Transport\+::\+Write\+Event\+::new\+Event (
+\begin{DoxyParamCaption}
+\item[{const struct iovec $\ast$}]{vec, }
+\item[{size\+\_\+t}]{count}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classTestAsyncTransport_1_1WriteEvent_ad7fe238c345f8e9eed579c057415e8a5}
+
+
+Definition at line 129 of file Test\+Async\+Transport.\+cpp.
+
+
+
+References destroy\+Event(), proxygen\+::get\+Current\+Time(), and Write\+Event().
+
+
+
+Referenced by Test\+Async\+Transport\+::writev().
+
+
+\begin{DoxyCode}
+130                                                        \{
+131   \textcolor{keywordtype}{size\_t} bufLen = \textcolor{keyword}{sizeof}(WriteEvent) + (count * \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} iovec));
+132   \textcolor{keywordtype}{void}* buf = malloc(bufLen);
+133   \textcolor{keywordflow}{if} (buf == \textcolor{keyword}{nullptr}) \{
+134     \textcolor{keywordflow}{throw} std::bad\_alloc();
+135   \}
+136 
+137   \textcolor{keyword}{auto} now = proxygen::getCurrentTime();
+138   shared\_ptr<WriteEvent> event(\textcolor{keyword}{new}(buf) WriteEvent(now, count),
+139                                destroyEvent);
+140   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} n = 0; n < count; ++n) \{
+141     \textcolor{keywordtype}{size\_t} len = vec[n].iov\_len;
+142     \textcolor{keyword}{event}->vec\_[n].iov\_len = len;
+143     \textcolor{keywordflow}{if} (len == 0) \{
+144       \textcolor{keyword}{event}->vec\_[n].iov\_base = \textcolor{keyword}{nullptr};
+145       \textcolor{keywordflow}{continue};
+146     \}
+147 
+148     \textcolor{keyword}{event}->vec\_[n].iov\_base = malloc(len);
+149     \textcolor{keywordflow}{if} (event->vec\_[n].iov\_base == \textcolor{keyword}{nullptr}) \{
+150       \textcolor{keywordflow}{throw} std::bad\_alloc();
+151     \}
+152     memcpy(event->vec\_[n].iov\_base, vec[n].iov\_base, len);
+153   \}
+154 
+155   \textcolor{keywordflow}{return} event;
+156 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!count\+\_\+@{count\+\_\+}}
+\index{count\+\_\+@{count\+\_\+}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Test\+Async\+Transport\+::\+Write\+Event\+::count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_1_1WriteEvent_a889554d058e96b2df9fe0f6ce8341195}
+
+
+Definition at line 44 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by get\+Count(), Write\+Event(), and $\sim$\+Write\+Event().
+
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!time\+\_\+@{time\+\_\+}}
+\index{time\+\_\+@{time\+\_\+}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{time\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+Time\+Point} Test\+Async\+Transport\+::\+Write\+Event\+::time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_1_1WriteEvent_a176f1fcbc5b71941a30ef8bddd1a2fd3}
+
+
+Definition at line 43 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by get\+Time().
+
+\index{Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}!vec\+\_\+@{vec\+\_\+}}
+\index{vec\+\_\+@{vec\+\_\+}!Test\+Async\+Transport\+::\+Write\+Event@{Test\+Async\+Transport\+::\+Write\+Event}}
+\subsubsection[{vec\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}struct iovec Test\+Async\+Transport\+::\+Write\+Event\+::vec\+\_\+[$\,$]\hspace{0.3cm}{\ttfamily [private]}}\label{classTestAsyncTransport_1_1WriteEvent_ae4c751432e4680923826affb2f14a9bf}
+
+
+Definition at line 45 of file Test\+Async\+Transport.\+h.
+
+
+
+Referenced by get\+Io\+Vec(), Write\+Event(), and $\sim$\+Write\+Event().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/test/{\bf Test\+Async\+Transport.\+h}\item 
+proxygen/lib/test/{\bf Test\+Async\+Transport.\+cpp}\end{DoxyCompactItemize}

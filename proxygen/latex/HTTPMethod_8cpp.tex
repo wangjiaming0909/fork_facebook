@@ -1,0 +1,40 @@
+\section{proxygen/lib/http/\+H\+T\+T\+P\+Method.cpp File Reference}
+\label{HTTPMethod_8cpp}\index{proxygen/lib/http/\+H\+T\+T\+P\+Method.\+cpp@{proxygen/lib/http/\+H\+T\+T\+P\+Method.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Method.\+h$>$}\\*
+{\ttfamily \#include $<$folly/container/\+Foreach.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Indestructible.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Headers.\+h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+S\+TR}(method)~\#method
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Method} $>$ {\bf proxygen\+::string\+To\+Method} (folly\+::\+String\+Piece method)
+\item 
+const std\+::string \& {\bf proxygen\+::method\+To\+String} ({\bf H\+T\+T\+P\+Method} method)
+\item 
+std\+::ostream \& {\bf proxygen\+::operator$<$$<$} (std\+::ostream \&out, {\bf H\+T\+T\+P\+Method} method)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{H\+T\+T\+P\+Method.\+cpp@{H\+T\+T\+P\+Method.\+cpp}!H\+T\+T\+P\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+S\+TR@{H\+T\+T\+P\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+S\+TR}}
+\index{H\+T\+T\+P\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+S\+TR@{H\+T\+T\+P\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+S\+TR}!H\+T\+T\+P\+Method.\+cpp@{H\+T\+T\+P\+Method.\+cpp}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+S\+TR}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+M\+E\+T\+H\+O\+D\+\_\+\+S\+TR(
+\begin{DoxyParamCaption}
+\item[{}]{method}
+\end{DoxyParamCaption}
+)~\#method}\label{HTTPMethod_8cpp_a73091dd339b2db932524cb39171a2566}
+
+
+Definition at line 17 of file H\+T\+T\+P\+Method.\+cpp.
+

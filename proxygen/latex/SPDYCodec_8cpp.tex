@@ -1,0 +1,147 @@
+\section{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.cpp File Reference}
+\label{SPDYCodec_8cpp}\index{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.\+cpp@{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$boost/algorithm/string.\+hpp$>$}\\*
+{\ttfamily \#include $<$folly/\+Conv.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Memory.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Scope\+Guard.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+String.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+Cursor.\+h$>$}\\*
+{\ttfamily \#include $<$glog/logging.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Message.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Codec\+Dictionaries.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Codec\+Util.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+Gzip\+Header\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Parse\+U\+R\+L.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Util\+Inl.\+h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf C\+T\+R\+L\+\_\+\+M\+A\+SK}~0x80
+\item 
+\#define {\bf F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}~0xff000000
+\item 
+\#define {\bf S\+T\+R\+E\+A\+M\+\_\+\+I\+D\+\_\+\+M\+A\+SK}~0x7fffffff
+\item 
+\#define {\bf V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+SK}~0x7fff
+\item 
+\#define {\bf D\+E\+L\+T\+A\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+Z\+E\+\_\+\+M\+A\+SK}~0x7fffffff
+\item 
+\#define {\bf F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+EN}~8
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!C\+T\+R\+L\+\_\+\+M\+A\+SK@{C\+T\+R\+L\+\_\+\+M\+A\+SK}}
+\index{C\+T\+R\+L\+\_\+\+M\+A\+SK@{C\+T\+R\+L\+\_\+\+M\+A\+SK}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{C\+T\+R\+L\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+T\+R\+L\+\_\+\+M\+A\+SK~0x80}\label{SPDYCodec_8cpp_a74914413f9f8256cbe1e79f5c3162c3b}
+
+
+Definition at line 64 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!D\+E\+L\+T\+A\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+Z\+E\+\_\+\+M\+A\+SK@{D\+E\+L\+T\+A\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+Z\+E\+\_\+\+M\+A\+SK}}
+\index{D\+E\+L\+T\+A\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+Z\+E\+\_\+\+M\+A\+SK@{D\+E\+L\+T\+A\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+Z\+E\+\_\+\+M\+A\+SK}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{D\+E\+L\+T\+A\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+Z\+E\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+L\+T\+A\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+Z\+E\+\_\+\+M\+A\+SK~0x7fffffff}\label{SPDYCodec_8cpp_a2b932bc28e74bf513775bea4dcf1d7f3}
+
+
+Definition at line 68 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame().
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!F\+L\+A\+G\+S\+\_\+\+M\+A\+SK@{F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}}
+\index{F\+L\+A\+G\+S\+\_\+\+M\+A\+SK@{F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{F\+L\+A\+G\+S\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+L\+A\+G\+S\+\_\+\+M\+A\+SK~0xff000000}\label{SPDYCodec_8cpp_a8172c63e94269016779f0dbb60b8a2bc}
+
+
+Definition at line 65 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+EN@{F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+EN}}
+\index{F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+EN@{F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+EN}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+EN}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+L\+EN~8}\label{SPDYCodec_8cpp_a80cded32f6cb2981c079ad9ecc3cf554}
+
+
+Definition at line 71 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!S\+T\+R\+E\+A\+M\+\_\+\+I\+D\+\_\+\+M\+A\+SK@{S\+T\+R\+E\+A\+M\+\_\+\+I\+D\+\_\+\+M\+A\+SK}}
+\index{S\+T\+R\+E\+A\+M\+\_\+\+I\+D\+\_\+\+M\+A\+SK@{S\+T\+R\+E\+A\+M\+\_\+\+I\+D\+\_\+\+M\+A\+SK}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{S\+T\+R\+E\+A\+M\+\_\+\+I\+D\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+T\+R\+E\+A\+M\+\_\+\+I\+D\+\_\+\+M\+A\+SK~0x7fffffff}\label{SPDYCodec_8cpp_a962bcb523d77ffc4f759a71f3aaeedf3}
+
+
+Definition at line 66 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+SK@{V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+SK}}
+\index{V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+SK@{V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+SK}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+SK}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+SK~0x7fff}\label{SPDYCodec_8cpp_a0d391204b13eedba9566bf69943fdf9e}
+
+
+Definition at line 67 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress().
+
+
+
+\subsection{Variable Documentation}
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!is\+New@{is\+New}}
+\index{is\+New@{is\+New}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{is\+New}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+New}\label{SPDYCodec_8cpp_a9530e1e393763277fa4e373d996a2142}
+
+
+Definition at line 130 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!message@{message}}
+\index{message@{message}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{message}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string {\bf message}}\label{SPDYCodec_8cpp_a36bd74109f547f7f8198faf5a12d2879}
+
+
+Definition at line 133 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!status\+Code@{status\+Code}}
+\index{status\+Code@{status\+Code}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{status\+Code}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t status\+Code}\label{SPDYCodec_8cpp_a6d7c29827e855a62945ede0ae6e82786}
+
+
+Definition at line 110 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::expect\+Message\+Helper(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::generate\+Header(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Rst\+Stream(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Push\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Upgrade\+Protocol(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::get\+User\+Agent(), proxygen\+::\+M\+A\+T\+C\+H\+E\+R\+\_\+\+P(), proxygen\+::\+H\+T\+T\+P\+Session\+::num\+Incoming\+Streams(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Goaway(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::on\+Headers\+Sent(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Rst\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Goaway(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Rst\+Stream(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter(), proxygen\+::\+H\+T\+T\+P\+Session\+::send\+Abort(), proxygen\+::\+H\+T\+T\+P\+Exception\+::set\+Codec\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Exception\+::set\+Http\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::set\+Last\+Byte\+Flushed\+Tracking\+Enabled(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::supports\+Push\+Transactions(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::supports\+Push\+Transactions(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Transport\+::$\sim$\+Transport().
+
+\index{S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}!stream\+ID@{stream\+ID}}
+\index{stream\+ID@{stream\+ID}!S\+P\+D\+Y\+Codec.\+cpp@{S\+P\+D\+Y\+Codec.\+cpp}}
+\subsubsection[{stream\+ID}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t stream\+ID}\label{SPDYCodec_8cpp_afa72d8fe10c82e854f975c64b49585de}
+
+
+Definition at line 131 of file S\+P\+D\+Y\+Codec.\+cpp.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::create\+Transaction(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Streaming(), proxygen\+::\+H\+T\+T\+P\+Session\+::detach(), Test\+Abort\+Post$<$ stage $>$\+::do\+Abort\+Test(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::\+H\+T\+T\+P\+Downstream\+Session(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Abort(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Goaway(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Headers\+Complete(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Headers\+Sent(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Message\+Complete(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Rst\+Stream(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter(), H\+T\+T\+P\+Downstream\+Test$<$ S\+P\+D\+Y3\+\_\+1\+Codec\+Pair $>$\+::send\+Request(), proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::setup\+On\+Headers\+Complete(), T\+E\+S\+T(), T\+E\+S\+T\+\_\+\+F(), and T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+P().
+

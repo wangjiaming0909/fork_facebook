@@ -1,0 +1,34 @@
+\section{proxygen/lib/http/structuredheaders/\+Structured\+Headers\+Utilities.h File Reference}
+\label{StructuredHeadersUtilities_8h}\index{proxygen/lib/http/structuredheaders/\+Structured\+Headers\+Utilities.\+h@{proxygen/lib/http/structuredheaders/\+Structured\+Headers\+Utilities.\+h}}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}Structured\+Headers\+Constants.\+h\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\item 
+ {\bf proxygen\+::\+Structured\+Headers}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::is\+Lc\+Alpha} (char c)
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::is\+Valid\+Identifier\+Char} (char c)
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::is\+Valid\+Encoded\+Binary\+Content\+Char} (char c)
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::is\+Valid\+String\+Char} (char c)
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::is\+Valid\+Identifier} (const std\+::string \&s)
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::is\+Valid\+String} (const std\+::string \&s)
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::is\+Valid\+Encoded\+Binary\+Content} (const std\+::string \&s)
+\item 
+bool {\bf proxygen\+::\+Structured\+Headers\+::item\+Type\+Matches\+Content} (const Structured\+Header\+Item \&input)
+\item 
+std\+::string {\bf proxygen\+::\+Structured\+Headers\+::decode\+Base64} (const std\+::string \&encoded)
+\item 
+std\+::string {\bf proxygen\+::\+Structured\+Headers\+::encode\+Base64} (const std\+::string \&input)
+\end{DoxyCompactItemize}

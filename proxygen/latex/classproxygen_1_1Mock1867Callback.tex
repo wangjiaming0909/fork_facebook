@@ -1,0 +1,136 @@
+\section{proxygen\+:\+:Mock1867\+Callback Class Reference}
+\label{classproxygen_1_1Mock1867Callback}\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+Inheritance diagram for proxygen\+:\+:Mock1867\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1Mock1867Callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4} ({\bf on\+Field\+Start\+Impl}, int(const string \&{\bf name}, const std\+::string \&filename, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg, uint64\+\_\+t bytes\+Processed))
+\item 
+int {\bf on\+Field\+Start\+Impl} (const string \&{\bf name}, const std\+::string \&filename, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg, uint64\+\_\+t bytes\+Processed)
+\item 
+int {\bf on\+Field\+Start} (const string \&{\bf name}, folly\+::\+Optional$<$ std\+::string $>$ filename, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg, uint64\+\_\+t bytes\+Processed) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Field\+Data}, int(std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, uint64\+\_\+t))
+\item 
+int {\bf on\+Field\+Data} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ data, uint64\+\_\+t bytes\+Processed) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Field\+End}, void(bool, uint64\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf on\+Error}, void())
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 92 of file R\+F\+C1867\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(on\+Error, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock1867\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Error}}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Mock1867Callback_a024fc1c30a5ca095a4443d8b15e594c7}
+\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Field\+Data, int(std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, uint64\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock1867\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Field\+Data}}]{, }
+\item[{int(std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, uint64\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Mock1867Callback_a394e7376b92199e0f2fe75c02232fe6e}
+\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Field\+End, void(bool, uint64\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock1867\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Field\+End}}]{, }
+\item[{void(bool, uint64\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Mock1867Callback_a5507bf0f8aa00a8e8df35f0479f00f44}
+\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}!proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4(on\+Field\+Start\+Impl, int(const string \&name, const std\+::string \&filename, std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg, uint64\+\_\+t bytes\+Processed))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock1867\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Field\+Start\+Impl}}]{, }
+\item[{int(const string \&{\bf name}, const std\+::string \&filename, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg, uint64\+\_\+t bytes\+Processed)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Mock1867Callback_a26f504e101fd87d71e7c4120f08185fb}
+\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}!on\+Field\+Data@{on\+Field\+Data}}
+\index{on\+Field\+Data@{on\+Field\+Data}!proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+\subsubsection[{on\+Field\+Data(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ data, uint64\+\_\+t bytes\+Processed) override}]{\setlength{\rightskip}{0pt plus 5cm}int proxygen\+::\+Mock1867\+Callback\+::on\+Field\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{data, }
+\item[{uint64\+\_\+t}]{bytes\+Processed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Mock1867Callback_a009045983033bdbc1cd5d88cf57840d4}
+
+
+Implements {\bf proxygen\+::\+R\+F\+C1867\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1RFC1867Codec_1_1Callback_a0a8191fbaaad4ea0938cd5fc4042d544}.
+
+
+
+Definition at line 109 of file R\+F\+C1867\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+110                                                    \{
+111     std::shared\_ptr<IOBuf> sh\_data(data.release());
+112     \textcolor{keywordflow}{return} onFieldData(sh\_data, bytesProcessed);
+113   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}!on\+Field\+Start@{on\+Field\+Start}}
+\index{on\+Field\+Start@{on\+Field\+Start}!proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+\subsubsection[{on\+Field\+Start(const string \&name, folly\+::\+Optional$<$ std\+::string $>$ filename, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg, uint64\+\_\+t bytes\+Processed) override}]{\setlength{\rightskip}{0pt plus 5cm}int proxygen\+::\+Mock1867\+Callback\+::on\+Field\+Start (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name, }
+\item[{folly\+::\+Optional$<$ std\+::string $>$}]{filename, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg, }
+\item[{uint64\+\_\+t}]{bytes\+Processed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classproxygen_1_1Mock1867Callback_aca564f908dbee8530b42bcc164d0231f}
+
+
+Definition at line 103 of file R\+F\+C1867\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+105                                                     \{
+106     \textcolor{keywordflow}{return} onFieldStartImpl(name, filename.value\_or(\textcolor{stringliteral}{""}), std::move(msg), bytesProcessed);
+107   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}!on\+Field\+Start\+Impl@{on\+Field\+Start\+Impl}}
+\index{on\+Field\+Start\+Impl@{on\+Field\+Start\+Impl}!proxygen\+::\+Mock1867\+Callback@{proxygen\+::\+Mock1867\+Callback}}
+\subsubsection[{on\+Field\+Start\+Impl(const string \&name, const std\+::string \&filename, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg, uint64\+\_\+t bytes\+Processed)}]{\setlength{\rightskip}{0pt plus 5cm}int proxygen\+::\+Mock1867\+Callback\+::on\+Field\+Start\+Impl (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name, }
+\item[{const std\+::string \&}]{filename, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg, }
+\item[{uint64\+\_\+t}]{bytes\+Processed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1Mock1867Callback_a7e6a3245831774f41b28d6d1dfb263ef}
+
+
+Definition at line 97 of file R\+F\+C1867\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+99                                            \{
+100     std::shared\_ptr<HTTPMessage> sh\_msg(msg.release());
+101     \textcolor{keywordflow}{return} onFieldStartImpl(name, filename, sh\_msg, bytesProcessed);
+102   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/experimental/test/{\bf R\+F\+C1867\+Test.\+cpp}\end{DoxyCompactItemize}

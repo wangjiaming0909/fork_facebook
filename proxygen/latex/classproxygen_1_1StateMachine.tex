@@ -1,0 +1,138 @@
+\section{proxygen\+:\+:State\+Machine$<$ T $>$ Class Template Reference}
+\label{classproxygen_1_1StateMachine}\index{proxygen\+::\+State\+Machine$<$ T $>$@{proxygen\+::\+State\+Machine$<$ T $>$}}
+
+
+{\ttfamily \#include $<$State\+Machine.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf State} = typename T\+::\+State
+\item 
+using {\bf Event} = typename T\+::\+Event
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf State} {\bf get\+New\+Instance} ()
+\item 
+static bool {\bf transit} ({\bf State} \&{\bf state}, {\bf Event} event)
+\item 
+static bool {\bf can\+Transit} (const {\bf State} {\bf state}, {\bf Event} event)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\\*
+class proxygen\+::\+State\+Machine$<$ T $>$}
+
+
+
+Definition at line 18 of file State\+Machine.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}!Event@{Event}}
+\index{Event@{Event}!proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}}
+\subsubsection[{Event}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ using {\bf proxygen\+::\+State\+Machine}$<$ {\bf T} $>$\+::{\bf Event} =  typename T\+::\+Event}\label{classproxygen_1_1StateMachine_a35c97a192fb193482e41b6dc2fde9ab1}
+
+
+Definition at line 21 of file State\+Machine.\+h.
+
+\index{proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}!State@{State}}
+\index{State@{State}!proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}}
+\subsubsection[{State}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ using {\bf proxygen\+::\+State\+Machine}$<$ {\bf T} $>$\+::{\bf State} =  typename T\+::\+State}\label{classproxygen_1_1StateMachine_ac8e732192ddc7e3de2b8ec4223e12228}
+
+
+Definition at line 20 of file State\+Machine.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}!can\+Transit@{can\+Transit}}
+\index{can\+Transit@{can\+Transit}!proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}}
+\subsubsection[{can\+Transit(const State state, Event event)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ static bool {\bf proxygen\+::\+State\+Machine}$<$ {\bf T} $>$\+::can\+Transit (
+\begin{DoxyParamCaption}
+\item[{const {\bf State}}]{state, }
+\item[{{\bf Event}}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1StateMachine_a57332b7dec38af5665b9656ea2e84b00}
+
+
+Definition at line 44 of file State\+Machine.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::can\+Send\+Headers().
+
+
+\begin{DoxyCode}
+44                                                          \{
+45     \textcolor{keywordtype}{bool} ok;
+46 
+47     std::tie(std::ignore, ok) = T::find(state, event);
+48     \textcolor{keywordflow}{return} ok;
+49   \}
+\end{DoxyCode}
+\index{proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}!get\+New\+Instance@{get\+New\+Instance}}
+\index{get\+New\+Instance@{get\+New\+Instance}!proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}}
+\subsubsection[{get\+New\+Instance()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ static {\bf State} {\bf proxygen\+::\+State\+Machine}$<$ {\bf T} $>$\+::get\+New\+Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1StateMachine_a7d6921dacfc6e1053c0e3d8d2054a45a}
+
+
+Definition at line 23 of file State\+Machine.\+h.
+
+
+\begin{DoxyCode}
+23                                 \{
+24     \textcolor{keywordflow}{return} T::getInitialState();
+25   \}
+\end{DoxyCode}
+\index{proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}!transit@{transit}}
+\index{transit@{transit}!proxygen\+::\+State\+Machine@{proxygen\+::\+State\+Machine}}
+\subsubsection[{transit(\+State \&state, Event event)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ static bool {\bf proxygen\+::\+State\+Machine}$<$ {\bf T} $>$\+::transit (
+\begin{DoxyParamCaption}
+\item[{{\bf State} \&}]{state, }
+\item[{{\bf Event}}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1StateMachine_a0bfb6bcff35dc2400f7bdb48b5fe7c61}
+
+
+Definition at line 27 of file State\+Machine.\+h.
+
+
+
+References proxygen\+::\+E\+R\+R\+OR.
+
+
+
+Referenced by Egress\+State\+Machine\+Fixture\+::fail(), Ingress\+State\+Machine\+Fixture\+::fail(), Egress\+State\+Machine\+Fixture\+::follow(), Ingress\+State\+Machine\+Fixture\+::follow(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Body\+Now(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Chunk\+Header(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Chunk\+Terminator(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+E\+O\+M(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+E\+O\+M\+Now(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Headers\+With\+Optional\+E\+O\+M(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Trailers(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::validate\+Ingress\+State\+Transition().
+
+
+\begin{DoxyCode}
+27                                                  \{
+28     \textcolor{keywordtype}{bool} ok;
+29     State newState;
+30 
+31     std::tie(newState, ok) = T::find(state, event);
+32     \textcolor{keywordflow}{if} (!ok) \{
+33       LOG(ERROR) << T::getName() << \textcolor{stringliteral}{": invalid transition tried: "} << state
+34                  << \textcolor{stringliteral}{" "} << event;
+35       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+36     \} \textcolor{keywordflow}{else} \{
+37       VLOG(6) << T::getName() << \textcolor{stringliteral}{": transitioning from "} << state << \textcolor{stringliteral}{" to "}
+38               << newState;
+39       state = newState;
+40       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+41     \}
+42   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf State\+Machine.\+h}\end{DoxyCompactItemize}

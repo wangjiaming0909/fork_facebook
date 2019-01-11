@@ -1,0 +1,723 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Message\+Filter Class Reference}
+\label{classproxygen_1_1HTTPMessageFilter}\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Message\+Filters.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Message\+Filter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1HTTPMessageFilter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf set\+Next\+Transaction\+Handler} ({\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$next)
+\item 
+{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ {\bf get\+Next\+Transaction\+Handler} ()
+\item 
+virtual std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message\+Filter} $>$ {\bf clone} () noexcept=0
+\item 
+void {\bf on\+Headers\+Complete} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg) noexceptoverride
+\item 
+void {\bf on\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain) noexceptoverride
+\item 
+void {\bf on\+Chunk\+Header} (size\+\_\+t length) noexceptoverride
+\item 
+void {\bf on\+Chunk\+Complete} () noexceptoverride
+\item 
+void {\bf on\+Trailers} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$ trailers) noexceptoverride
+\item 
+void {\bf on\+E\+OM} () noexceptoverride
+\item 
+void {\bf on\+Upgrade} ({\bf Upgrade\+Protocol} protocol) noexceptoverride
+\item 
+void {\bf on\+Error} (const {\bf H\+T\+T\+P\+Exception} \&error) noexceptoverride
+\item 
+void {\bf set\+Transaction} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn) noexceptfinal
+\item 
+void {\bf detach\+Transaction} () noexceptfinal
+\item 
+void {\bf on\+Egress\+Paused} () noexceptfinal
+\item 
+void {\bf on\+Egress\+Resumed} () noexceptfinal
+\item 
+void {\bf on\+Pushed\+Transaction} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn) noexceptfinal
+\item 
+void {\bf on\+Ex\+Transaction} ({\bf H\+T\+T\+P\+Transaction} $\ast$txn) noexceptfinal
+\item 
+virtual const std\+::string \& {\bf get\+Filter\+Name} () noexcept
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf next\+On\+Headers\+Complete} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg)
+\item 
+void {\bf next\+On\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain)
+\item 
+void {\bf next\+On\+Chunk\+Header} (size\+\_\+t length)
+\item 
+void {\bf next\+On\+Chunk\+Complete} ()
+\item 
+void {\bf next\+On\+Trailers} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$ trailers)
+\item 
+void {\bf next\+On\+E\+OM} ()
+\item 
+void {\bf next\+On\+Error} (const {\bf H\+T\+T\+P\+Exception} \&ex)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ {\bf next\+Transaction\+Handler\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!clone@{clone}}
+\index{clone@{clone}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{clone() noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Message\+Filter}$>$ proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a77a94637e1b41f662d005c76baa26ca7}
+
+
+Implemented in {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter} \doxyref{}{p.}{classproxygen_1_1MockHTTPMessageFilter_a4baf6f4e96ba1e6764fba1f7d65223be}.
+
+
+
+Referenced by get\+Next\+Transaction\+Handler().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!detach\+Transaction@{detach\+Transaction}}
+\index{detach\+Transaction@{detach\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{detach\+Transaction() noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::detach\+Transaction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a3214b35fc1b0eac4e3ce90eafd7105d3}
+Called once after a transaction successfully completes. It will be called even if a read or write error happened earlier. This is a terminal callback, which means that the \doxyref{H\+T\+T\+P\+Transaction}{p.}{classproxygen_1_1HTTPTransaction} object that gives this call will be invalid after this function completes. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a67eb253d121a26772f4caa56847ed7cd}.
+
+
+
+Definition at line 63 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::detach\+Transaction(), and next\+Transaction\+Handler\+\_\+.
+
+
+\begin{DoxyCode}
+63                                           \{
+64     nextTransactionHandler_->detachTransaction();
+65   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!get\+Filter\+Name@{get\+Filter\+Name}}
+\index{get\+Filter\+Name@{get\+Filter\+Name}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{get\+Filter\+Name() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}virtual const std\+::string\& proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::get\+Filter\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a2186a92b8c3447dd04a52ca6a67cb98b}
+
+
+Reimplemented in {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter} \doxyref{}{p.}{classproxygen_1_1MockHTTPMessageFilter_a1216f388fe1636f74aedf6d4178edfcb}.
+
+
+
+Definition at line 79 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References proxygen\+::k\+Message\+Filter\+Default\+Name\+\_\+.
+
+
+\begin{DoxyCode}
+79                                                     \{
+80     \textcolor{keywordflow}{return} kMessageFilterDefaultName_;
+81   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!get\+Next\+Transaction\+Handler@{get\+Next\+Transaction\+Handler}}
+\index{get\+Next\+Transaction\+Handler@{get\+Next\+Transaction\+Handler}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{get\+Next\+Transaction\+Handler()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction\+::\+Handler}$\ast$ proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::get\+Next\+Transaction\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPMessageFilter_aaf25df713ff214f4ee370ee2637e5b3d}
+
+
+Definition at line 26 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References clone(), and next\+Transaction\+Handler\+\_\+.
+
+
+\begin{DoxyCode}
+26                                                       \{
+27     \textcolor{keywordflow}{return} nextTransactionHandler_;
+28   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+On\+Body@{next\+On\+Body}}
+\index{next\+On\+Body@{next\+On\+Body}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+On\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_a44112deb5aef5dbdf5350ff9e1222b6d}
+
+
+Definition at line 86 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Body().
+
+
+\begin{DoxyCode}
+86                                                    \{
+87     nextTransactionHandler_->onBody(std::move(chain));
+88   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+On\+Chunk\+Complete@{next\+On\+Chunk\+Complete}}
+\index{next\+On\+Chunk\+Complete@{next\+On\+Chunk\+Complete}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+On\+Chunk\+Complete()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+Chunk\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_a232a74552dd624f88ad4b4bfa4985cb7}
+
+
+Definition at line 92 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Chunk\+Complete().
+
+
+\begin{DoxyCode}
+92                              \{
+93     nextTransactionHandler_->onChunkComplete();
+94   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+On\+Chunk\+Header@{next\+On\+Chunk\+Header}}
+\index{next\+On\+Chunk\+Header@{next\+On\+Chunk\+Header}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+On\+Chunk\+Header(size\+\_\+t length)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+Chunk\+Header (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_ab6cbec8db3fe12f509c80d36d289a2e7}
+
+
+Definition at line 89 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Chunk\+Header().
+
+
+\begin{DoxyCode}
+89                                         \{
+90     nextTransactionHandler_->onChunkHeader(length);
+91   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+On\+E\+OM@{next\+On\+E\+OM}}
+\index{next\+On\+E\+OM@{next\+On\+E\+OM}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+On\+E\+O\+M()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_a003d74eb2f27ffa2ef6f58a87013be19}
+
+
+Definition at line 98 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+E\+O\+M().
+
+
+
+Referenced by proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+E\+O\+M\+Public().
+
+
+\begin{DoxyCode}
+98                    \{
+99     nextTransactionHandler_->onEOM();
+100   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+On\+Error@{next\+On\+Error}}
+\index{next\+On\+Error@{next\+On\+Error}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+On\+Error(const H\+T\+T\+P\+Exception \&ex)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+Error (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{ex}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_aa62234912ebbeda472ea113f1a5adc2d}
+
+
+Definition at line 101 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Error().
+
+
+\begin{DoxyCode}
+101                                             \{
+102     nextTransactionHandler_->onError(ex);
+103   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+On\+Headers\+Complete@{next\+On\+Headers\+Complete}}
+\index{next\+On\+Headers\+Complete@{next\+On\+Headers\+Complete}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+On\+Headers\+Complete(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_a876f9f70fe18308c31da6a24f133af51}
+
+
+Definition at line 83 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Headers\+Complete().
+
+
+
+Referenced by proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+Headers\+Complete\+Public().
+
+
+\begin{DoxyCode}
+83                                                              \{
+84     nextTransactionHandler_->onHeadersComplete(std::move(msg));
+85   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+On\+Trailers@{next\+On\+Trailers}}
+\index{next\+On\+Trailers@{next\+On\+Trailers}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+On\+Trailers(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Headers $>$ trailers)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+On\+Trailers (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$}]{trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_aef246294742e359e95da3a3c2a3bd327}
+
+
+Definition at line 95 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Trailers().
+
+
+\begin{DoxyCode}
+95                                                            \{
+96     nextTransactionHandler_->onTrailers(std::move(trailers));
+97   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a01e700144389e09a8e47c831973eb95a}
+Can be called multiple times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a56a25d7fb8ac5ddf1ed5b16eaca3c5df}.
+
+
+
+Reimplemented in {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter} \doxyref{}{p.}{classproxygen_1_1MockHTTPMessageFilter_a60437ec6bdef57525ace27f4ae2d45e9}.
+
+
+
+Definition at line 37 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Body().
+
+
+\begin{DoxyCode}
+37                                                                  \{
+38     nextTransactionHandler_->onBody(std::move(chain));
+39   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Chunk\+Complete@{on\+Chunk\+Complete}}
+\index{on\+Chunk\+Complete@{on\+Chunk\+Complete}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Chunk\+Complete() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Chunk\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a71664ad5f304232061833473582df6a9}
+Can be called multiple times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). This signifies the end of a chunk. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_ad4befff61cff93d6e2c9459e39556419}.
+
+
+
+Definition at line 43 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Chunk\+Complete().
+
+
+
+Referenced by proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter\+::on\+Body().
+
+
+\begin{DoxyCode}
+43                                            \{
+44     nextTransactionHandler_->onChunkComplete();
+45   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Chunk\+Header@{on\+Chunk\+Header}}
+\index{on\+Chunk\+Header@{on\+Chunk\+Header}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Chunk\+Header(size\+\_\+t length) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Chunk\+Header (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a2bf20ce08d109d3f5a162c3c9a39a2cb}
+Can be called multiple times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). This signifies the beginning of a chunk of length \textquotesingle{}length\textquotesingle{}. You will receive \doxyref{on\+Body()}{p.}{classproxygen_1_1HTTPMessageFilter_a01e700144389e09a8e47c831973eb95a} after this. Also, the length will be greater than zero. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_aa760cd4a327aaa62293b1d09c5811298}.
+
+
+
+Definition at line 40 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Chunk\+Header().
+
+
+
+Referenced by proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter\+::on\+Body().
+
+
+\begin{DoxyCode}
+40                                                       \{
+41     nextTransactionHandler_->onChunkHeader(length);
+42   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Egress\+Paused@{on\+Egress\+Paused}}
+\index{on\+Egress\+Paused@{on\+Egress\+Paused}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Egress\+Paused() noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Egress\+Paused (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a8cc01d5f144c15324f012895d9cad11e}
+If the remote side\textquotesingle{}s receive buffer fills up, this callback will be invoked so you can attempt to stop sending to the remote side. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a0a50acdb32cb51ecbf6a72730053a36b}.
+
+
+
+Definition at line 66 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Egress\+Paused().
+
+
+\begin{DoxyCode}
+66                                        \{
+67     nextTransactionHandler_->onEgressPaused();
+68   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Egress\+Resumed@{on\+Egress\+Resumed}}
+\index{on\+Egress\+Resumed@{on\+Egress\+Resumed}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Egress\+Resumed() noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Egress\+Resumed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a127c78c7c6e6dad9c9422cbd6b327ff9}
+This callback lets you know that the remote side has resumed reading and you can now continue to send data. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a7715b02e413859c26426adbbde7e53d8}.
+
+
+
+Definition at line 69 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Egress\+Resumed().
+
+
+\begin{DoxyCode}
+69                                         \{
+70     nextTransactionHandler_->onEgressResumed();
+71   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+E\+OM@{on\+E\+OM}}
+\index{on\+E\+OM@{on\+E\+OM}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+E\+O\+M() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_adb0375265454cdc5c395de62c7532cc7}
+Can be called once per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). After this callback is received, there will be no more normal ingress callbacks received (on\+Egress$\ast$() and \doxyref{on\+Error()}{p.}{classproxygen_1_1HTTPMessageFilter_a05d0e397267677aef5db7d46beadbaf9} may still be invoked). The Handler should consider ingress complete after receiving this message. This Transaction is still valid, and work may still occur on it until detach\+Transaction is called. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_afdc4d4dec715841ba0c5bb5e58b1d53c}.
+
+
+
+Definition at line 49 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+E\+O\+M().
+
+
+
+Referenced by proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter\+::on\+Trailers().
+
+
+\begin{DoxyCode}
+49                                  \{
+50     nextTransactionHandler_->onEOM();
+51   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Error(const H\+T\+T\+P\+Exception \&error) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{error}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a05d0e397267677aef5db7d46beadbaf9}
+Can be called at any time before \doxyref{detach\+Transaction()}{p.}{classproxygen_1_1HTTPMessageFilter_a3214b35fc1b0eac4e3ce90eafd7105d3}. This callback implies that an error has occurred. To determine if ingress or egress is affected, check the direciont on the \doxyref{H\+T\+T\+P\+Exception}{p.}{classproxygen_1_1HTTPException}. If the direction is I\+N\+G\+R\+E\+SS, it M\+AY still be possible to send egress. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a585c21327eb30ab85ebdb84f663dab3b}.
+
+
+
+Definition at line 55 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Error().
+
+
+
+Referenced by proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter\+::on\+Trailers().
+
+
+\begin{DoxyCode}
+55                                                              \{
+56     nextTransactionHandler_->onError(error);
+57   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Ex\+Transaction@{on\+Ex\+Transaction}}
+\index{on\+Ex\+Transaction@{on\+Ex\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Ex\+Transaction(\+H\+T\+T\+P\+Transaction $\ast$txn) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Ex\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_adadb9db88f45c3fc5c0a8c9166cf5fbc}
+Ask the handler to construct a handler for a Ex\+Transaction associated with its transaction. 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a2a1e6d98064defaccbc8398b81524dd6}.
+
+
+
+Definition at line 75 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Ex\+Transaction().
+
+
+\begin{DoxyCode}
+75                                                             \{
+76     nextTransactionHandler_->onExTransaction(txn);
+77   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Headers\+Complete(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a2e5ce5153f1507ebcd0a0403799f59d2}
+Called at most once per transaction. This is usually the first ingress callback. It is possible to get a read error before this however. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a5e431cbb4c065285c5ad65acaceb0b22}.
+
+
+
+Reimplemented in {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter} \doxyref{}{p.}{classproxygen_1_1MockHTTPMessageFilter_ab1814ccd8fca9403bf599708586c8105}.
+
+
+
+Definition at line 34 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+34                                                                            \{
+35     nextTransactionHandler_->onHeadersComplete(std::move(msg));
+36   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Pushed\+Transaction@{on\+Pushed\+Transaction}}
+\index{on\+Pushed\+Transaction@{on\+Pushed\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Pushed\+Transaction(\+H\+T\+T\+P\+Transaction $\ast$txn) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Pushed\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a29c237ffff978986025d5fcba8a15587}
+Ask the handler to construct a handler for a pushed transaction associated with its transaction.
+
+T\+O\+DO\+: Reconsider default implementation here. If the handler does not implement, better set max initiated to 0 in a settings frame? 
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a9d65c4524f5e38f10d42e0290d51fea6}.
+
+
+
+Definition at line 72 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Pushed\+Transaction().
+
+
+\begin{DoxyCode}
+72                                                                 \{
+73     nextTransactionHandler_->onPushedTransaction(txn);
+74   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Trailers@{on\+Trailers}}
+\index{on\+Trailers@{on\+Trailers}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Trailers(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Headers $>$ trailers) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Trailers (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$}]{trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a9fdaf7b45f3c1e662a9844b07b426986}
+Can be called any number of times per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). Trailers can be received once right before the E\+OM of a chunked H\+T\+T\+P/1.\+1 reponse or multiple times per transaction from S\+P\+DY and H\+T\+T\+P/2.\+0 H\+E\+A\+D\+E\+RS frames. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a219de67110f915deda30d18327f26393}.
+
+
+
+Reimplemented in {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter} \doxyref{}{p.}{classproxygen_1_1MockHTTPMessageFilter_abf61c2dd6a174c2900743065c035d6d5}.
+
+
+
+Definition at line 46 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Trailers().
+
+
+\begin{DoxyCode}
+46                                                                          \{
+47     nextTransactionHandler_->onTrailers(std::move(trailers));
+48   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!on\+Upgrade@{on\+Upgrade}}
+\index{on\+Upgrade@{on\+Upgrade}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{on\+Upgrade(\+Upgrade\+Protocol protocol) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::on\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf Upgrade\+Protocol}}]{protocol}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a8553e010c148a72a93920d7992d81421}
+Can be called once per transaction. If you had previously called pause\+Ingress(), this callback will be delayed until you call resume\+Ingress(). After this callback is invoked, further data will be forwarded using the \doxyref{on\+Body()}{p.}{classproxygen_1_1HTTPMessageFilter_a01e700144389e09a8e47c831973eb95a} callback. Once the data transfer is completed (E\+OF recevied in case of C\+O\+N\+N\+E\+CT), \doxyref{on\+E\+O\+M()}{p.}{classproxygen_1_1HTTPMessageFilter_adb0375265454cdc5c395de62c7532cc7} callback will be invoked. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_acda954bf78c4d2aad951698e78c40a0f}.
+
+
+
+Definition at line 52 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::on\+Upgrade().
+
+
+
+Referenced by proxygen\+::\+Mock\+H\+T\+T\+P\+Message\+Filter\+::on\+Trailers().
+
+
+\begin{DoxyCode}
+52                                                              \{
+53     nextTransactionHandler_->onUpgrade(protocol);
+54   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!set\+Next\+Transaction\+Handler@{set\+Next\+Transaction\+Handler}}
+\index{set\+Next\+Transaction\+Handler@{set\+Next\+Transaction\+Handler}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{set\+Next\+Transaction\+Handler(\+H\+T\+T\+P\+Transaction\+::\+Handler $\ast$next)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::set\+Next\+Transaction\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$}]{next}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPMessageFilter_a4b39bda82151a4cf5bd465731c0e454a}
+
+
+Definition at line 23 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+.
+
+
+\begin{DoxyCode}
+23                                                                \{
+24     nextTransactionHandler_ = CHECK\_NOTNULL(next);
+25   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!set\+Transaction@{set\+Transaction}}
+\index{set\+Transaction@{set\+Transaction}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{set\+Transaction(\+H\+T\+T\+P\+Transaction $\ast$txn) noexceptfinal}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::set\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [final]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPMessageFilter_a61880d9d1bdec908b8c18fcb50704998}
+Called once per transaction. This notifies the handler of which transaction it should talk to and will receive callbacks from. 
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler} \doxyref{}{p.}{classproxygen_1_1HTTPTransactionHandler_a4eb50d5627d26f6ca0d8e8283259d8a4}.
+
+
+
+Definition at line 60 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+References next\+Transaction\+Handler\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Transaction\+Handler\+::set\+Transaction().
+
+
+\begin{DoxyCode}
+60                                                            \{
+61     nextTransactionHandler_->setTransaction(txn);
+62   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}!next\+Transaction\+Handler\+\_\+@{next\+Transaction\+Handler\+\_\+}}
+\index{next\+Transaction\+Handler\+\_\+@{next\+Transaction\+Handler\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Message\+Filter@{proxygen\+::\+H\+T\+T\+P\+Message\+Filter}}
+\subsubsection[{next\+Transaction\+Handler\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction\+::\+Handler}$\ast$ proxygen\+::\+H\+T\+T\+P\+Message\+Filter\+::next\+Transaction\+Handler\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPMessageFilter_af8ddafb24006d44a293dc57af8d53cd4}
+
+
+Definition at line 104 of file H\+T\+T\+P\+Message\+Filters.\+h.
+
+
+
+Referenced by detach\+Transaction(), get\+Next\+Transaction\+Handler(), next\+On\+Body(), next\+On\+Chunk\+Complete(), next\+On\+Chunk\+Header(), next\+On\+E\+O\+M(), next\+On\+Error(), next\+On\+Headers\+Complete(), next\+On\+Trailers(), on\+Body(), on\+Chunk\+Complete(), on\+Chunk\+Header(), on\+Egress\+Paused(), on\+Egress\+Resumed(), on\+E\+O\+M(), on\+Error(), on\+Ex\+Transaction(), on\+Headers\+Complete(), on\+Pushed\+Transaction(), on\+Trailers(), on\+Upgrade(), set\+Next\+Transaction\+Handler(), and set\+Transaction().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/{\bf H\+T\+T\+P\+Message\+Filters.\+h}\end{DoxyCompactItemize}

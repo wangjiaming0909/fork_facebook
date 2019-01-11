@@ -1,0 +1,443 @@
+\section{proxygen\+:\+:Service Class Reference}
+\label{classproxygen_1_1Service}\index{proxygen\+::\+Service@{proxygen\+::\+Service}}
+
+
+{\ttfamily \#include $<$Service.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Service} ()
+\item 
+virtual {\bf $\sim$\+Service} ()
+\item 
+virtual void {\bf init} (folly\+::\+Event\+Base $\ast$main\+Event\+Base, const std\+::list$<$ {\bf Request\+Worker} $\ast$ $>$ \&workers)=0
+\item 
+virtual void {\bf finish\+Init} ()
+\item 
+virtual void {\bf start\+Accepting} ()
+\item 
+virtual void {\bf fail\+Health\+Checks} ()
+\item 
+virtual void {\bf stop\+Accepting} ()=0
+\item 
+virtual void {\bf pause\+Listening} ()
+\item 
+virtual void {\bf drop\+Connections} (double)
+\item 
+virtual void {\bf force\+Stop} ()
+\item 
+virtual void {\bf init\+Worker\+State} ({\bf Request\+Worker} $\ast$)
+\item 
+virtual void {\bf cleanup\+Worker\+State} ({\bf Request\+Worker} $\ast$)
+\item 
+void {\bf add\+Service\+Worker} (std\+::unique\+\_\+ptr$<$ {\bf Service\+Worker} $>$ worker, {\bf Request\+Worker} $\ast$req\+Worker)
+\item 
+const std\+::list$<$ std\+::unique\+\_\+ptr$<$ {\bf Service\+Worker} $>$ $>$ \& {\bf get\+Service\+Workers} () const 
+\item 
+void {\bf clear\+Service\+Workers} ()
+\item 
+void {\bf add\+Worker\+Event\+Base} (folly\+::\+Event\+Base $\ast$evb)
+\item 
+const std\+::vector$<$ folly\+::\+Event\+Base $\ast$ $>$ \& {\bf get\+Worker\+Event\+Bases} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Service} ({\bf Service} const \&)=delete
+\item 
+{\bf Service} \& {\bf operator=} ({\bf Service} const \&)=delete
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ std\+::unique\+\_\+ptr$<$ {\bf Service\+Worker} $>$ $>$ {\bf workers\+\_\+}
+\item 
+std\+::vector$<$ folly\+::\+Event\+Base $\ast$ $>$ {\bf worker\+Evbs\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 32 of file Service.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!Service@{Service}}
+\index{Service@{Service}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{Service()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Service\+::\+Service (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Service_a3dd2ab78ecb35c00c06c249f308a0548}
+
+
+Definition at line 17 of file Service.\+cpp.
+
+
+
+Referenced by get\+Worker\+Event\+Bases().
+
+
+\begin{DoxyCode}
+17                  \{
+18 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!````~Service@{$\sim$\+Service}}
+\index{````~Service@{$\sim$\+Service}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{$\sim$\+Service()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Service\+::$\sim$\+Service (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classproxygen_1_1Service_a19651ee36f0587e739feb16e46335fc1}
+
+
+Definition at line 20 of file Service.\+cpp.
+
+
+\begin{DoxyCode}
+20                   \{
+21 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!Service@{Service}}
+\index{Service@{Service}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{Service(\+Service const \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Service\+::\+Service (
+\begin{DoxyParamCaption}
+\item[{{\bf Service} const \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}\label{classproxygen_1_1Service_ab506559d9d9676b9a6571e35391ed87c}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!add\+Service\+Worker@{add\+Service\+Worker}}
+\index{add\+Service\+Worker@{add\+Service\+Worker}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{add\+Service\+Worker(std\+::unique\+\_\+ptr$<$ Service\+Worker $>$ worker, Request\+Worker $\ast$req\+Worker)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Service\+::add\+Service\+Worker (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf Service\+Worker} $>$}]{worker, }
+\item[{{\bf Request\+Worker} $\ast$}]{req\+Worker}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Service_abdadd74deb16648a332e4a79ef424c70}
+Add a new \doxyref{Service\+Worker}{p.}{classproxygen_1_1ServiceWorker} (subclasses should create one \doxyref{Service\+Worker}{p.}{classproxygen_1_1ServiceWorker} per worker thread) 
+
+Definition at line 23 of file Service.\+cpp.
+
+
+
+References proxygen\+::\+Request\+Worker\+::add\+Service\+Worker(), and workers\+\_\+.
+
+
+
+Referenced by cleanup\+Worker\+State().
+
+
+\begin{DoxyCode}
+24                                                          \{
+25   reqWorker->addServiceWorker(\textcolor{keyword}{this}, worker.get());
+26   workers_.emplace\_back(std::move(worker));
+27 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!add\+Worker\+Event\+Base@{add\+Worker\+Event\+Base}}
+\index{add\+Worker\+Event\+Base@{add\+Worker\+Event\+Base}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{add\+Worker\+Event\+Base(folly\+::\+Event\+Base $\ast$evb)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Service\+::add\+Worker\+Event\+Base (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{evb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1Service_a3d192179cb2c48422cdd60464318deee}
+
+
+Definition at line 164 of file Service.\+h.
+
+
+
+References worker\+Evbs\+\_\+.
+
+
+\begin{DoxyCode}
+164                                                \{
+165     workerEvbs_.push\_back(evb);
+166   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!cleanup\+Worker\+State@{cleanup\+Worker\+State}}
+\index{cleanup\+Worker\+State@{cleanup\+Worker\+State}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{cleanup\+Worker\+State(\+Request\+Worker $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::cleanup\+Worker\+State (
+\begin{DoxyParamCaption}
+\item[{{\bf Request\+Worker} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_a65a04c0c41179f726b95760f1d3ea659}
+Perform per-\/thread cleanup.
+
+This method will be called once for each \doxyref{Request\+Worker}{p.}{classproxygen_1_1RequestWorker} thread, just before that thread is about to exit. Note that this method is called from the worker thread itself, not from the main thread.
+
+\doxyref{fail\+Health\+Checks()}{p.}{classproxygen_1_1Service_a77a22433e5717bee7adf9d7319e7c6c9} and \doxyref{stop\+Accepting()}{p.}{classproxygen_1_1Service_a904b289b962b777e59a1c8798143a2a2} will always be called in the main thread before \doxyref{cleanup\+Worker\+State()}{p.}{classproxygen_1_1Service_a65a04c0c41179f726b95760f1d3ea659} is called in any of the worker threads.
+
+\doxyref{force\+Stop()}{p.}{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382} may be called in the main thread at any point during shutdown. (i.\+e., Some worker threads may already have finished and called \doxyref{cleanup\+Worker\+State()}{p.}{classproxygen_1_1Service_a65a04c0c41179f726b95760f1d3ea659}. Once \doxyref{force\+Stop()}{p.}{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382} is invoked, the remaining threads will forcibly exit and then call \doxyref{cleanup\+Worker\+State()}{p.}{classproxygen_1_1Service_a65a04c0c41179f726b95760f1d3ea659}.) 
+
+Definition at line 143 of file Service.\+h.
+
+
+
+References add\+Service\+Worker().
+
+
+\begin{DoxyCode}
+143 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!clear\+Service\+Workers@{clear\+Service\+Workers}}
+\index{clear\+Service\+Workers@{clear\+Service\+Workers}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{clear\+Service\+Workers()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Service\+::clear\+Service\+Workers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1Service_a479996af2008bb7652052e903b8a7ccd}
+Delete all the workers 
+
+Definition at line 29 of file Service.\+cpp.
+
+
+
+References workers\+\_\+.
+
+
+
+Referenced by get\+Service\+Workers().
+
+
+\begin{DoxyCode}
+29                                   \{
+30   workers_.clear();
+31 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!drop\+Connections@{drop\+Connections}}
+\index{drop\+Connections@{drop\+Connections}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{drop\+Connections(double)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::drop\+Connections (
+\begin{DoxyParamCaption}
+\item[{double}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_a70a38d79e36b6c10b36efbf1ea9042c6}
+Forcibly stop \char`\"{}pct\char`\"{} (0.\+0 to 1.\+0) of the remaining client connections.
+
+If the service does not stop on its own after \doxyref{stop\+Accepting()}{p.}{classproxygen_1_1Service_a904b289b962b777e59a1c8798143a2a2} is called, then proxygen might call \doxyref{drop\+Connections()}{p.}{classproxygen_1_1Service_a70a38d79e36b6c10b36efbf1ea9042c6} several times to gradually stop all processing before finally calling \doxyref{force\+Stop()}{p.}{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382}. 
+
+Definition at line 104 of file Service.\+h.
+
+
+\begin{DoxyCode}
+104 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!fail\+Health\+Checks@{fail\+Health\+Checks}}
+\index{fail\+Health\+Checks@{fail\+Health\+Checks}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{fail\+Health\+Checks()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::fail\+Health\+Checks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_a77a22433e5717bee7adf9d7319e7c6c9}
+Mark the service as about to stop; invoked from main thread.
+
+This indicates that the service will be told to stop at some later time and should continue to service requests but tell the healthchecker that it is dying. 
+
+Definition at line 76 of file Service.\+h.
+
+
+
+References stop\+Accepting().
+
+
+\begin{DoxyCode}
+76 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!finish\+Init@{finish\+Init}}
+\index{finish\+Init@{finish\+Init}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{finish\+Init()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::finish\+Init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_a6c07ad7dcdbd7266ace387753af4b19e}
+Finish any service initialization that requires the use of the worker threads. 
+
+Definition at line 56 of file Service.\+h.
+
+
+\begin{DoxyCode}
+56 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!force\+Stop@{force\+Stop}}
+\index{force\+Stop@{force\+Stop}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{force\+Stop()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::force\+Stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382}
+Forcibly stop the service.
+
+If the service does not stop on its own after \doxyref{stop\+Accepting()}{p.}{classproxygen_1_1Service_a904b289b962b777e59a1c8798143a2a2} is called, \doxyref{force\+Stop()}{p.}{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382} will eventually be called to forcibly stop all processing.
+
+(At the moment this isn\textquotesingle{}t pure virtual simply because I haven\textquotesingle{}t had the time to update all existing services to implement \doxyref{force\+Stop()}{p.}{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382}. Proxygen will forcibly terminate the event loop even if a service does not stop processing when \doxyref{force\+Stop()}{p.}{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382} is called, so properly implementing \doxyref{force\+Stop()}{p.}{classproxygen_1_1Service_a11d6ba913d9ff0322e36745e7de43382} isn\textquotesingle{}t strictly required.) 
+
+Definition at line 118 of file Service.\+h.
+
+
+\begin{DoxyCode}
+118 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!get\+Service\+Workers@{get\+Service\+Workers}}
+\index{get\+Service\+Workers@{get\+Service\+Workers}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{get\+Service\+Workers() const }]{\setlength{\rightskip}{0pt plus 5cm}const std\+::list$<$std\+::unique\+\_\+ptr$<${\bf Service\+Worker}$>$ $>$\& proxygen\+::\+Service\+::get\+Service\+Workers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1Service_a966cc18b1174fb8d568b17b84b2eeb76}
+List of workers 
+
+Definition at line 155 of file Service.\+h.
+
+
+
+References clear\+Service\+Workers(), and workers\+\_\+.
+
+
+\begin{DoxyCode}
+155                                                                          \{
+156     \textcolor{keywordflow}{return} workers_;
+157   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!get\+Worker\+Event\+Bases@{get\+Worker\+Event\+Bases}}
+\index{get\+Worker\+Event\+Bases@{get\+Worker\+Event\+Bases}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{get\+Worker\+Event\+Bases()}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<$folly\+::\+Event\+Base$\ast$$>$\& proxygen\+::\+Service\+::get\+Worker\+Event\+Bases (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1Service_a80e281f3572789548c629907ddc6f327}
+
+
+Definition at line 168 of file Service.\+h.
+
+
+
+References operator=(), Service(), and worker\+Evbs\+\_\+.
+
+
+\begin{DoxyCode}
+168                                                           \{
+169     \textcolor{keywordflow}{return} workerEvbs_;
+170   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!init@{init}}
+\index{init@{init}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{init(folly\+::\+Event\+Base $\ast$main\+Event\+Base, const std\+::list$<$ Request\+Worker $\ast$ $>$ \&workers)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::init (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{main\+Event\+Base, }
+\item[{const std\+::list$<$ {\bf Request\+Worker} $\ast$ $>$ \&}]{workers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1Service_a2022b84c986021512bce0c6a0da92c18}
+Initialize the service.
+
+\doxyref{init()}{p.}{classproxygen_1_1Service_a2022b84c986021512bce0c6a0da92c18} will be invoked from proxygen\textquotesingle{}s main thread, before the worker threads have started processing their event loops.
+
+The return value indicates if the service is enabled or not. Return true if the service is enabled and was initialized successfully, and false if the service is disabled or is intialized successfully. Throw an exception if an error occurred initializing it. \index{proxygen\+::\+Service@{proxygen\+::\+Service}!init\+Worker\+State@{init\+Worker\+State}}
+\index{init\+Worker\+State@{init\+Worker\+State}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{init\+Worker\+State(\+Request\+Worker $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::init\+Worker\+State (
+\begin{DoxyParamCaption}
+\item[{{\bf Request\+Worker} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_a0d1edd8575f9df19636977574e161d88}
+Perform per-\/thread init.
+
+This method will be called once for each \doxyref{Request\+Worker}{p.}{classproxygen_1_1RequestWorker} thread, just after the worker thread started. 
+
+Definition at line 126 of file Service.\+h.
+
+
+\begin{DoxyCode}
+126 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!operator=@{operator=}}
+\index{operator=@{operator=}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{operator=(\+Service const \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Service}\& proxygen\+::\+Service\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Service} const \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}\label{classproxygen_1_1Service_aba21125a46e35702a15af1b2e213b936}
+
+
+Referenced by get\+Worker\+Event\+Bases().
+
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!pause\+Listening@{pause\+Listening}}
+\index{pause\+Listening@{pause\+Listening}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{pause\+Listening()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::pause\+Listening (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_ad0bae3d89b417b14d5e2a8f2089c3e4a}
+Pause listening for new connections; invoked from proxygen\textquotesingle{}s main thread.
+
+This should cause the service to pause listening for new connections. The already accepted connections must not be affected. It may or may not be followed by stop\+Accepting or resume listening. 
+
+Definition at line 95 of file Service.\+h.
+
+
+\begin{DoxyCode}
+95 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!start\+Accepting@{start\+Accepting}}
+\index{start\+Accepting@{start\+Accepting}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{start\+Accepting()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::start\+Accepting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1Service_a8252af19f3d9ed27b92aa86014dba1b0}
+Start to accept connection on the listening sockect(s)
+
+All the expansive preparation work should be done befofe \doxyref{start\+Accepting()}{p.}{classproxygen_1_1Service_a8252af19f3d9ed27b92aa86014dba1b0}, i.\+g., in constructor or \doxyref{init()}{p.}{classproxygen_1_1Service_a2022b84c986021512bce0c6a0da92c18}. \doxyref{start\+Accepting()}{p.}{classproxygen_1_1Service_a8252af19f3d9ed27b92aa86014dba1b0} should be lightweight, ideally just the call of accept() on all the listening sockects. Otherwise, the first accepted connection may experience high latency. 
+
+Definition at line 67 of file Service.\+h.
+
+
+\begin{DoxyCode}
+67 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!stop\+Accepting@{stop\+Accepting}}
+\index{stop\+Accepting@{stop\+Accepting}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{stop\+Accepting()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Service\+::stop\+Accepting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1Service_a904b289b962b777e59a1c8798143a2a2}
+Stop accepting all new work; invoked from proxygen\textquotesingle{}s main thread.
+
+This should cause the service to stop accepting new work, and begin to fully shut down. stop() may return before all work has completed, but it should eventually cause all events for this service to be removed from the main Event\+Base and from the worker threads. 
+
+Referenced by fail\+Health\+Checks().
+
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!worker\+Evbs\+\_\+@{worker\+Evbs\+\_\+}}
+\index{worker\+Evbs\+\_\+@{worker\+Evbs\+\_\+}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{worker\+Evbs\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$folly\+::\+Event\+Base$\ast$$>$ proxygen\+::\+Service\+::worker\+Evbs\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1Service_abf3fe5158aea222d7b6de6006a9f0151}
+
+
+Definition at line 179 of file Service.\+h.
+
+
+
+Referenced by add\+Worker\+Event\+Base(), and get\+Worker\+Event\+Bases().
+
+\index{proxygen\+::\+Service@{proxygen\+::\+Service}!workers\+\_\+@{workers\+\_\+}}
+\index{workers\+\_\+@{workers\+\_\+}!proxygen\+::\+Service@{proxygen\+::\+Service}}
+\subsubsection[{workers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<$std\+::unique\+\_\+ptr$<${\bf Service\+Worker}$>$ $>$ proxygen\+::\+Service\+::workers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1Service_a3597a61a56f378ac599cb410d1beff13}
+
+
+Definition at line 178 of file Service.\+h.
+
+
+
+Referenced by add\+Service\+Worker(), clear\+Service\+Workers(), and get\+Service\+Workers().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/services/{\bf Service.\+h}\item 
+proxygen/lib/services/{\bf Service.\+cpp}\end{DoxyCompactItemize}

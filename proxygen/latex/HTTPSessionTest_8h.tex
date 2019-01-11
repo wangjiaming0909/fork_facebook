@@ -1,0 +1,202 @@
+\section{proxygen/lib/http/session/test/\+H\+T\+T\+P\+Session\+Test.h File Reference}
+\label{HTTPSessionTest_8h}\index{proxygen/lib/http/session/test/\+H\+T\+T\+P\+Session\+Test.\+h@{proxygen/lib/http/session/test/\+H\+T\+T\+P\+Session\+Test.\+h}}
+{\ttfamily \#include $<$folly/\+Memory.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P2\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Transport\+Direction.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Mock\+H\+T\+T\+P\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/test/\+H\+T\+T\+P\+Session\+Mocks.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+enum$<$ Version $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Client\+Codec} (Version version)
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P1x\+Codec} $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Client\+Codec} (Version)
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P2\+Codec} $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Client\+Codec} (Version)
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ My\+Codec, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec} $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Client\+Codec} (Version)
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+enum$<$ Version $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Server\+Codec} (Version version)
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P1x\+Codec} $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Server\+Codec} (Version)
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P2\+Codec} $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Server\+Codec} (Version)
+\item 
+{\footnotesize template$<$class My\+Codec , class Version $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ My\+Codec, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec} $>$\+::value, std\+::unique\+\_\+ptr$<$ My\+Codec $>$ $>$\+::type {\bf make\+Server\+Codec} (Version)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Client\+Codec@{make\+Client\+Codec}}
+\index{make\+Client\+Codec@{make\+Client\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Client\+Codec(\+Version version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$ std\+::is\+\_\+enum$<$Version$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Client\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{version}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_a2ba2b3546a5a1cd7c2e25183706449ff}
+
+
+Definition at line 24 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+
+References proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+24                                  \{
+25   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>(
+26     proxygen::TransportDirection::UPSTREAM, version);
+27 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Client\+Codec@{make\+Client\+Codec}}
+\index{make\+Client\+Codec@{make\+Client\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Client\+Codec(\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$std\+::is\+\_\+same$<$My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P1x\+Codec}$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Client\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_a8554ba2e0b0ae6dd2f718ffa681e7526}
+
+
+Definition at line 32 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+
+References proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+32                            \{
+33   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>(
+34     proxygen::TransportDirection::UPSTREAM);
+35 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Client\+Codec@{make\+Client\+Codec}}
+\index{make\+Client\+Codec@{make\+Client\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Client\+Codec(\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$std\+::is\+\_\+same$<$My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P2\+Codec}$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Client\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_a1156dbcc5b62b2db1ee3d37a67d29a36}
+
+
+Definition at line 40 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+
+References proxygen\+::\+U\+P\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+40                            \{
+41   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>(
+42     proxygen::TransportDirection::UPSTREAM);
+43 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Client\+Codec@{make\+Client\+Codec}}
+\index{make\+Client\+Codec@{make\+Client\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Client\+Codec(\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$std\+::is\+\_\+same$<$My\+Codec, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec}$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Client\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_af1d1700bcc6aeac15503e0b0b88a69d0}
+
+
+Definition at line 48 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+\begin{DoxyCode}
+48                            \{
+49   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>();
+50 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Server\+Codec@{make\+Server\+Codec}}
+\index{make\+Server\+Codec@{make\+Server\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Server\+Codec(\+Version version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$ std\+::is\+\_\+enum$<$Version$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Server\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{version}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_abcecb5167fee2dc0f76f36981bb31569}
+
+
+Definition at line 56 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+56                                  \{
+57   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>(
+58     proxygen::TransportDirection::DOWNSTREAM,
+59     (Version)version);
+60 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Server\+Codec@{make\+Server\+Codec}}
+\index{make\+Server\+Codec@{make\+Server\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Server\+Codec(\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$std\+::is\+\_\+same$<$My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P1x\+Codec}$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Server\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_a781cacc48a3c969b472cef5b159c6f53}
+
+
+Definition at line 65 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+65                            \{
+66   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>(
+67     proxygen::TransportDirection::DOWNSTREAM);
+68 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Server\+Codec@{make\+Server\+Codec}}
+\index{make\+Server\+Codec@{make\+Server\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Server\+Codec(\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$std\+::is\+\_\+same$<$My\+Codec, {\bf proxygen\+::\+H\+T\+T\+P2\+Codec}$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Server\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_a5e3040e688689b3d8e150fb2bf299405}
+
+
+Definition at line 73 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+
+References proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM.
+
+
+\begin{DoxyCode}
+73                            \{
+74   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>(
+75     proxygen::TransportDirection::DOWNSTREAM);
+76 \}
+\end{DoxyCode}
+\index{H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}!make\+Server\+Codec@{make\+Server\+Codec}}
+\index{make\+Server\+Codec@{make\+Server\+Codec}!H\+T\+T\+P\+Session\+Test.\+h@{H\+T\+T\+P\+Session\+Test.\+h}}
+\subsubsection[{make\+Server\+Codec(\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class My\+Codec , class Version $>$ std\+::enable\+\_\+if$<$std\+::is\+\_\+same$<$My\+Codec, {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec}$>$\+::value, std\+::unique\+\_\+ptr$<$My\+Codec$>$ $>$\+::type make\+Server\+Codec (
+\begin{DoxyParamCaption}
+\item[{Version}]{}
+\end{DoxyParamCaption}
+)}\label{HTTPSessionTest_8h_adaad2c27e7c672e67b01af8eccab4d9b}
+
+
+Definition at line 81 of file H\+T\+T\+P\+Session\+Test.\+h.
+
+
+\begin{DoxyCode}
+81                            \{
+82   \textcolor{keywordflow}{return} std::make\_unique<MyCodec>();
+83 \}
+\end{DoxyCode}

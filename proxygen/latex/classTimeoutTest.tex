@@ -1,0 +1,159 @@
+\section{Timeout\+Test Class Reference}
+\label{classTimeoutTest}\index{Timeout\+Test@{Timeout\+Test}}
+Inheritance diagram for Timeout\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTimeoutTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Set\+Up} () override
+\item 
+void {\bf loop} ()
+\item 
+void {\bf set\+Clock} (milliseconds ms)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Mock\+Timeout\+Manager {\bf timeout\+Manager\+\_\+}
+\item 
+{\bf Mock\+Timeout\+Clock} {\bf timeout\+Clock\+\_\+}
+\item 
+boost\+::container\+::flat\+\_\+multimap$<$ milliseconds, Async\+Timeout $\ast$ $>$ {\bf timeouts\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 87 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Timeout\+Test@{Timeout\+Test}!loop@{loop}}
+\index{loop@{loop}!Timeout\+Test@{Timeout\+Test}}
+\subsubsection[{loop()}]{\setlength{\rightskip}{0pt plus 5cm}void Timeout\+Test\+::loop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTimeoutTest_a4dac94e029fc64134a415ccf47f52318}
+
+
+Definition at line 117 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+117               \{
+118     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} t = timeoutClock_.millisecondsSinceEpoch() + milliseconds(1);
+119          !timeouts_.empty(); t++) \{
+120       setClock(t);
+121     \}
+122   \}
+\end{DoxyCode}
+\index{Timeout\+Test@{Timeout\+Test}!set\+Clock@{set\+Clock}}
+\index{set\+Clock@{set\+Clock}!Timeout\+Test@{Timeout\+Test}}
+\subsubsection[{set\+Clock(milliseconds ms)}]{\setlength{\rightskip}{0pt plus 5cm}void Timeout\+Test\+::set\+Clock (
+\begin{DoxyParamCaption}
+\item[{milliseconds}]{ms}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTimeoutTest_a3e9e006ff9c6351dc8254c2501a57931}
+
+
+Definition at line 124 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+References proxygen\+::milliseconds\+Since\+Epoch().
+
+
+\begin{DoxyCode}
+124                                  \{
+125     EXPECT\_CALL(timeoutClock_, millisecondsSinceEpoch())
+126       .WillRepeatedly(Return(ms));
+127 
+128     \textcolor{keywordflow}{while} (!timeouts_.empty() &&
+129            timeoutClock_.millisecondsSinceEpoch() >= timeouts_.begin()->first) \{
+130       AsyncTimeout* timeout = timeouts_.begin()->second;
+131       timeouts_.erase(timeouts_.begin());
+132       folly::event\_ref\_flags(timeout->getEvent()) &= ~EVLIST\_TIMEOUT;
+133       timeout->timeoutExpired();
+134     \}
+135   \}
+\end{DoxyCode}
+\index{Timeout\+Test@{Timeout\+Test}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!Timeout\+Test@{Timeout\+Test}}
+\subsubsection[{Set\+Up() override}]{\setlength{\rightskip}{0pt plus 5cm}void Timeout\+Test\+::\+Set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTimeoutTest_a9af370d6abc64b25847debfa8a78b3d2}
+
+
+Definition at line 90 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+References Test\+Timeout\+::set\+Timeout\+Clock().
+
+
+\begin{DoxyCode}
+90                         \{
+91     TestTimeout::setTimeoutClock(timeoutClock_);
+92     setClock(milliseconds(0));
+93 
+94     EXPECT\_CALL(timeoutManager_, attachTimeoutManager(\_, \_))
+95       .WillRepeatedly(Return());
+96 
+97     EXPECT\_CALL(timeoutManager_, scheduleTimeout(\_, \_))
+98       .WillRepeatedly(Invoke([\textcolor{keyword}{this}] (AsyncTimeout* p, milliseconds t) \{
+99             timeoutManager_.cancelTimeout(p);
+100             folly::event\_ref\_flags(p->getEvent()) |= EVLIST\_TIMEOUT;
+101             timeouts_.emplace(t + timeoutClock_.millisecondsSinceEpoch(),
+102                              p);
+103             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+104           \}));
+105 
+106     EXPECT\_CALL(timeoutManager_, cancelTimeout(\_))
+107       .WillRepeatedly(Invoke([\textcolor{keyword}{this}] (AsyncTimeout* p) \{
+108             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it = timeouts_.begin(); it != timeouts_.end(); it++) \{
+109               \textcolor{keywordflow}{if} (it->second == p) \{
+110                 timeouts_.erase(it);
+111                 \textcolor{keywordflow}{break};
+112               \}
+113             \}
+114           \}));
+115   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Timeout\+Test@{Timeout\+Test}!timeout\+Clock\+\_\+@{timeout\+Clock\+\_\+}}
+\index{timeout\+Clock\+\_\+@{timeout\+Clock\+\_\+}!Timeout\+Test@{Timeout\+Test}}
+\subsubsection[{timeout\+Clock\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mock\+Timeout\+Clock} Timeout\+Test\+::timeout\+Clock\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classTimeoutTest_a8e5d3fb0577c124bec96719123fc9bd2}
+
+
+Definition at line 139 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+\index{Timeout\+Test@{Timeout\+Test}!timeout\+Manager\+\_\+@{timeout\+Manager\+\_\+}}
+\index{timeout\+Manager\+\_\+@{timeout\+Manager\+\_\+}!Timeout\+Test@{Timeout\+Test}}
+\subsubsection[{timeout\+Manager\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Mock\+Timeout\+Manager Timeout\+Test\+::timeout\+Manager\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classTimeoutTest_aaca1adc027eb272eb422df6afd7183f2}
+
+
+Definition at line 138 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+\index{Timeout\+Test@{Timeout\+Test}!timeouts\+\_\+@{timeouts\+\_\+}}
+\index{timeouts\+\_\+@{timeouts\+\_\+}!Timeout\+Test@{Timeout\+Test}}
+\subsubsection[{timeouts\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::container\+::flat\+\_\+multimap$<$milliseconds, Async\+Timeout$\ast$$>$ Timeout\+Test\+::timeouts\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classTimeoutTest_a69e827629a05452eec9827a93c48077e}
+
+
+Definition at line 140 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/test/{\bf Async\+Timeout\+Set\+Test.\+cpp}\end{DoxyCompactItemize}

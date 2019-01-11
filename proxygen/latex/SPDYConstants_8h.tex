@@ -1,0 +1,131 @@
+\section{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.h File Reference}
+\label{SPDYConstants_8h}\index{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.\+h@{proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.\+h}}
+{\ttfamily \#include $<$folly/\+Optional.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Error\+Code.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Settings\+Id.\+h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\item 
+ {\bf proxygen\+::spdy}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf proxygen\+::spdy\+::\+Frame\+Type} \{ \\*
+{\bf proxygen\+::spdy\+::\+S\+Y\+N\+\_\+\+S\+T\+R\+E\+AM} = 1, 
+{\bf proxygen\+::spdy\+::\+S\+Y\+N\+\_\+\+R\+E\+P\+LY} = 2, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+S\+T\+R\+E\+AM} = 3, 
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+GS} = 4, 
+\\*
+{\bf proxygen\+::spdy\+::\+N\+O\+OP} = 5, 
+{\bf proxygen\+::spdy\+::\+P\+I\+NG} = 6, 
+{\bf proxygen\+::spdy\+::\+G\+O\+A\+W\+AY} = 7, 
+{\bf proxygen\+::spdy\+::\+H\+E\+A\+D\+E\+RS} = 8, 
+\\*
+{\bf proxygen\+::spdy\+::\+W\+I\+N\+D\+O\+W\+\_\+\+U\+P\+D\+A\+TE} = 9, 
+{\bf proxygen\+::spdy\+::\+C\+R\+E\+D\+E\+N\+T\+I\+AL} = 10
+ \}
+\item 
+enum {\bf proxygen\+::spdy\+::\+Ctrl\+Flag} \{ {\bf proxygen\+::spdy\+::\+C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+N\+O\+NE} = 0, 
+{\bf proxygen\+::spdy\+::\+C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+F\+IN} = 1, 
+{\bf proxygen\+::spdy\+::\+C\+T\+R\+L\+\_\+\+F\+L\+A\+G\+\_\+\+U\+N\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL} = 2
+ \}
+\item 
+enum {\bf proxygen\+::spdy\+::\+Settings\+Flag} \{ {\bf proxygen\+::spdy\+::\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE} = 0, 
+{\bf proxygen\+::spdy\+::\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+E\+A\+R\+\_\+\+S\+E\+T\+T\+I\+N\+GS} = 1
+ \}
+\item 
+enum {\bf proxygen\+::spdy\+::\+Settings\+Id\+Flag} \{ {\bf proxygen\+::spdy\+::\+I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+N\+O\+NE} = 0, 
+{\bf proxygen\+::spdy\+::\+I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+\_\+\+V\+A\+L\+UE} = 1, 
+{\bf proxygen\+::spdy\+::\+I\+D\+\_\+\+F\+L\+A\+G\+\_\+\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+P\+E\+R\+S\+I\+S\+T\+ED} = 2
+ \}
+\item 
+enum {\bf proxygen\+::spdy\+::\+Settings\+Id} \{ \\*
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH} = 1, 
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+B\+A\+N\+D\+W\+I\+D\+TH} = 2, 
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+R\+O\+U\+N\+D\+\_\+\+T\+R\+I\+P\+\_\+\+T\+I\+ME} = 3, 
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+M\+A\+X\+\_\+\+C\+O\+N\+C\+U\+R\+R\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+MS} = 4, 
+\\*
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+U\+R\+R\+E\+N\+T\+\_\+\+C\+W\+ND} = 5, 
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+D\+O\+W\+N\+L\+O\+A\+D\+\_\+\+R\+E\+T\+R\+A\+N\+S\+\_\+\+R\+A\+TE} = 6, 
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+S\+I\+ZE} = 7, 
+{\bf proxygen\+::spdy\+::\+S\+E\+T\+T\+I\+N\+G\+S\+\_\+\+C\+L\+I\+E\+N\+T\+\_\+\+C\+E\+R\+T\+I\+F\+I\+C\+A\+T\+E\+\_\+\+V\+E\+C\+T\+O\+R\+\_\+\+S\+I\+ZE} = 8
+ \}
+\item 
+enum {\bf proxygen\+::spdy\+::\+Reset\+Status\+Code} \{ \\*
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR} = 1, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+R\+E\+AM} = 2, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+R\+E\+F\+U\+S\+E\+D\+\_\+\+S\+T\+R\+E\+AM} = 3, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+U\+N\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+V\+E\+R\+S\+I\+ON} = 4, 
+\\*
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+C\+A\+N\+C\+EL} = 5, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR} = 6, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR} = 7, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+I\+N\+\_\+\+U\+SE} = 8, 
+\\*
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+S\+T\+R\+E\+A\+M\+\_\+\+A\+L\+R\+E\+A\+D\+Y\+\_\+\+C\+L\+O\+S\+ED} = 9, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+R\+E\+D\+E\+N\+T\+I\+A\+LS} = 10, 
+{\bf proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+F\+R\+A\+M\+E\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE} = 11
+ \}
+\item 
+enum {\bf proxygen\+::spdy\+::\+Goaway\+Status\+Code} \{ {\bf proxygen\+::spdy\+::\+G\+O\+A\+W\+A\+Y\+\_\+\+OK} = 0, 
+{\bf proxygen\+::spdy\+::\+G\+O\+A\+W\+A\+Y\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR} = 1, 
+{\bf proxygen\+::spdy\+::\+G\+O\+A\+W\+A\+Y\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+E\+R\+R\+OR} = 2, 
+{\bf proxygen\+::spdy\+::\+G\+O\+A\+W\+A\+Y\+\_\+\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR} = 7
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Goaway\+Status\+Code {\bf proxygen\+::spdy\+::error\+Code\+To\+Goaway} (Error\+Code code)
+\item 
+Reset\+Status\+Code {\bf proxygen\+::spdy\+::error\+Code\+To\+Reset} (Error\+Code code)
+\item 
+Error\+Code {\bf proxygen\+::spdy\+::goaway\+To\+Error\+Code} (Goaway\+Status\+Code code)
+\item 
+Error\+Code {\bf proxygen\+::spdy\+::rst\+To\+Error\+Code} (uint32\+\_\+t code)
+\item 
+folly\+::\+Optional$<$ {\bf proxygen\+::spdy\+::\+Settings\+Id} $>$ {\bf proxygen\+::spdy\+::http\+To\+Spdy\+Settings\+Id} ({\bf proxygen\+::\+Settings\+Id} id)
+\item 
+folly\+::\+Optional$<$ {\bf proxygen\+::\+Settings\+Id} $>$ {\bf proxygen\+::spdy\+::spdy\+To\+Http\+Settings\+Id} ({\bf proxygen\+::spdy\+::\+Settings\+Id} id)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Session\+Proto\+Name\+S\+P\+D\+Y2}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Session\+Proto\+Name\+S\+P\+D\+Y3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::http\+Version}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Versionv2}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Versionv3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Statusv2}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Statusv3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Methodv2}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Methodv3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Pathv2}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Pathv3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Schemev2}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Schemev3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Name\+Hostv3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Version\+Strv2}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Version\+Strv3}
+\item 
+const std\+::string {\bf proxygen\+::spdy\+::k\+Version\+Strv31}
+\end{DoxyCompactItemize}

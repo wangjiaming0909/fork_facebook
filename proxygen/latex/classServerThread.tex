@@ -1,0 +1,124 @@
+\section{Server\+Thread Class Reference}
+\label{classServerThread}\index{Server\+Thread@{Server\+Thread}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Server\+Thread} ({\bf H\+T\+T\+P\+Server} $\ast$server)
+\item 
+{\bf $\sim$\+Server\+Thread} ()
+\item 
+bool {\bf start} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::barrier {\bf barrier\+\_\+} \{2\}
+\item 
+std\+::thread {\bf t\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Server} $\ast$ {\bf server\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 45 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Server\+Thread@{Server\+Thread}!Server\+Thread@{Server\+Thread}}
+\index{Server\+Thread@{Server\+Thread}!Server\+Thread@{Server\+Thread}}
+\subsubsection[{Server\+Thread(\+H\+T\+T\+P\+Server $\ast$server)}]{\setlength{\rightskip}{0pt plus 5cm}Server\+Thread\+::\+Server\+Thread (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Server} $\ast$}]{server}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classServerThread_a0f17c6485a257a1167fd9bb9ef80d28a}
+
+
+Definition at line 53 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+53 : server_(server) \{\}
+\end{DoxyCode}
+\index{Server\+Thread@{Server\+Thread}!````~Server\+Thread@{$\sim$\+Server\+Thread}}
+\index{````~Server\+Thread@{$\sim$\+Server\+Thread}!Server\+Thread@{Server\+Thread}}
+\subsubsection[{$\sim$\+Server\+Thread()}]{\setlength{\rightskip}{0pt plus 5cm}Server\+Thread\+::$\sim$\+Server\+Thread (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classServerThread_abe8eca98c2b2b3c6665026461b0c917d}
+
+
+Definition at line 54 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+54                   \{
+55     \textcolor{keywordflow}{if} (server_) \{
+56       server_->stop();
+57     \}
+58     t_.join();
+59   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Server\+Thread@{Server\+Thread}!start@{start}}
+\index{start@{start}!Server\+Thread@{Server\+Thread}}
+\subsubsection[{start()}]{\setlength{\rightskip}{0pt plus 5cm}bool Server\+Thread\+::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classServerThread_ac5f56468f63005bc732366f882b814ac}
+
+
+Definition at line 61 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+61                \{
+62     \textcolor{keywordtype}{bool} \textcolor{keywordflow}{throws} = \textcolor{keyword}{false};
+63     t_ = std::thread([&]() \{
+64       server_->start([&]() \{ barrier_.wait(); \},
+65                      [&](std::exception\_ptr \textcolor{comment}{/*ex*/}) \{
+66                        \textcolor{keywordflow}{throws} = \textcolor{keyword}{true};
+67                        server_ = \textcolor{keyword}{nullptr};
+68                        barrier_.wait();
+69                      \});
+70     \});
+71     barrier_.wait();
+72     \textcolor{keywordflow}{return} !\textcolor{keywordflow}{throws};
+73   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Server\+Thread@{Server\+Thread}!barrier\+\_\+@{barrier\+\_\+}}
+\index{barrier\+\_\+@{barrier\+\_\+}!Server\+Thread@{Server\+Thread}}
+\subsubsection[{barrier\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::barrier Server\+Thread\+::barrier\+\_\+ \{2\}\hspace{0.3cm}{\ttfamily [private]}}\label{classServerThread_adbae875712370d2771692cc464d92d6f}
+
+
+Definition at line 47 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+\index{Server\+Thread@{Server\+Thread}!server\+\_\+@{server\+\_\+}}
+\index{server\+\_\+@{server\+\_\+}!Server\+Thread@{Server\+Thread}}
+\subsubsection[{server\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Server}$\ast$ Server\+Thread\+::server\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classServerThread_ab0069922b45e8a4bb8ba048eb31625f0}
+
+
+Definition at line 49 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+\index{Server\+Thread@{Server\+Thread}!t\+\_\+@{t\+\_\+}}
+\index{t\+\_\+@{t\+\_\+}!Server\+Thread@{Server\+Thread}}
+\subsubsection[{t\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::thread Server\+Thread\+::t\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classServerThread_a2b65b970dcde932a653f9d13ab4280bb}
+
+
+Definition at line 48 of file H\+T\+T\+P\+Server\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/tests/{\bf H\+T\+T\+P\+Server\+Test.\+cpp}\end{DoxyCompactItemize}

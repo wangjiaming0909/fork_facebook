@@ -1,0 +1,31 @@
+\section{specs.\+re2 Namespace Reference}
+\label{namespacespecs_1_1re2}\index{specs.\+re2@{specs.\+re2}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf fbcode\+\_\+builder\+\_\+spec} (builder)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{specs\+::re2@{specs\+::re2}!fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}}
+\index{fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}!specs\+::re2@{specs\+::re2}}
+\subsubsection[{fbcode\+\_\+builder\+\_\+spec(builder)}]{\setlength{\rightskip}{0pt plus 5cm}def specs.\+re2.\+fbcode\+\_\+builder\+\_\+spec (
+\begin{DoxyParamCaption}
+\item[{}]{builder}
+\end{DoxyParamCaption}
+)}\label{namespacespecs_1_1re2_ad25b18e26d606f7b8f7dc812008edce7}
+
+
+Definition at line 9 of file re2.\+py.
+
+
+\begin{DoxyCode}
+9 \textcolor{keyword}{def }fbcode_builder_spec(builder):
+10     \textcolor{keywordflow}{return} \{
+11         \textcolor{stringliteral}{'steps'}: [
+12             builder.github\_project\_workdir(\textcolor{stringliteral}{'google/re2'}, \textcolor{stringliteral}{'build'}),
+13             builder.cmake\_install(\textcolor{stringliteral}{'google/re2'}),
+14         ],
+15     \}
+16 \end{DoxyCode}

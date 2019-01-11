@@ -1,0 +1,73 @@
+\section{proxygen/lib/utils/\+Test\+Utils.h File Reference}
+\label{utils_2TestUtils_8h}\index{proxygen/lib/utils/\+Test\+Utils.\+h@{proxygen/lib/utils/\+Test\+Utils.\+h}}
+{\ttfamily \#include $<$folly/\+Random.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Range.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+I\+O\+Buf.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+Cursor.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+Sys\+Resource.\+h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE}(token,  regex)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+String\+Piece {\bf get\+Containing\+Directory} (folly\+::\+String\+Piece input)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{utils/\+Test\+Utils.\+h@{utils/\+Test\+Utils.\+h}!E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE@{E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE}}
+\index{E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE@{E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE}!utils/\+Test\+Utils.\+h@{utils/\+Test\+Utils.\+h}}
+\subsubsection[{E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE(
+\begin{DoxyParamCaption}
+\item[{}]{token, }
+\item[{}]{regex}
+\end{DoxyParamCaption}
+)}\label{utils_2TestUtils_8h_abc242289edc3b090e17d5d1dda82d5b3}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\{    \(\backslash\)
+    rlimit oldLim;                              \(\backslash\)
+    getrlimit(RLIMIT\_CORE, &oldLim);            \(\backslash\)
+    rlimit newLim\{0, oldLim.rlim\_max\};          \(\backslash\)
+    setrlimit(RLIMIT\_CORE, &newLim);            \(\backslash\)
+      EXPECT\_DEATH(token, regex);               \(\backslash\)
+    setrlimit(RLIMIT\_CORE, &oldLim);            \(\backslash\)
+  \}
+\end{DoxyCode}
+
+
+Definition at line 19 of file Test\+Utils.\+h.
+
+
+
+Referenced by H\+T\+T\+P2\+Framer\+Test\+::data\+Frame\+Test(), T\+E\+S\+T(), and T\+E\+S\+T\+\_\+\+F().
+
+
+
+\subsection{Function Documentation}
+\index{utils/\+Test\+Utils.\+h@{utils/\+Test\+Utils.\+h}!get\+Containing\+Directory@{get\+Containing\+Directory}}
+\index{get\+Containing\+Directory@{get\+Containing\+Directory}!utils/\+Test\+Utils.\+h@{utils/\+Test\+Utils.\+h}}
+\subsubsection[{get\+Containing\+Directory(folly\+::\+String\+Piece input)}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+String\+Piece get\+Containing\+Directory (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+String\+Piece}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{utils_2TestUtils_8h_af8eec91e411dbb6899c8554284c9971d}
+
+
+Definition at line 33 of file Test\+Utils.\+h.
+
+
+\begin{DoxyCode}
+33                                                \{
+34   \textcolor{keyword}{auto} pos = folly::rfind(input, \textcolor{charliteral}{'/'});
+35   \textcolor{keywordflow}{if} (pos == std::string::npos) \{
+36     pos = 0;
+37   \} \textcolor{keywordflow}{else} \{
+38     pos += 1;
+39   \}
+40   \textcolor{keywordflow}{return} input.subpiece(0, pos);
+41 \}
+\end{DoxyCode}

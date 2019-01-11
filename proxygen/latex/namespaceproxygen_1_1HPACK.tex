@@ -1,0 +1,497 @@
+\section{proxygen\+:\+:H\+P\+A\+CK Namespace Reference}
+\label{namespaceproxygen_1_1HPACK}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Instruction}
+\item 
+class {\bf Streaming\+Callback}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Literal\+Encoding} \+: uint8\+\_\+t \{ {\bf P\+L\+A\+IN} = 0x00, 
+{\bf H\+U\+F\+F\+M\+AN} = 0x80
+ \}
+\item 
+enum {\bf Decode\+Error} \+: uint8\+\_\+t \{ \\*
+{\bf Decode\+Error\+::\+N\+O\+NE} = 0, 
+{\bf Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX} = 1, 
+{\bf Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+U\+F\+F\+M\+A\+N\+\_\+\+C\+O\+DE} = 2, 
+{\bf Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG} = 3, 
+\\*
+{\bf Decode\+Error\+::\+I\+N\+T\+E\+G\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW} = 4, 
+{\bf Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE} = 5, 
+{\bf Decode\+Error\+::\+H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE} = 6, 
+{\bf Decode\+Error\+::\+B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW} = 7, 
+\\*
+{\bf Decode\+Error\+::\+L\+I\+T\+E\+R\+A\+L\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE} = 8, 
+{\bf Decode\+Error\+::\+T\+I\+M\+E\+O\+UT} = 9, 
+{\bf Decode\+Error\+::\+C\+A\+N\+C\+E\+L\+L\+ED} = 10, 
+{\bf Decode\+Error\+::\+B\+A\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+N\+U\+M\+B\+ER} = 11, 
+\\*
+{\bf Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+CK} = 12, 
+{\bf Decode\+Error\+::\+T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG} = 13
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& {\bf operator$<$$<$} (std\+::ostream \&os, {\bf Decode\+Error} err)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf Instruction} {\bf I\+N\+D\+E\+X\+\_\+\+R\+EF} \{ 0x80, 7 \}
+\item 
+const {\bf Instruction} {\bf L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX} \{ 0x40, 6 \}
+\item 
+const {\bf Instruction} {\bf L\+I\+T\+E\+R\+AL} \{ 0x00, 4 \}
+\item 
+const {\bf Instruction} {\bf L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX} \{ 0x10, 4 \}
+\item 
+const {\bf Instruction} {\bf T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE} \{ 0x20, 5 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF} \{ 0x80, 6 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF} \{ 0x40, 5 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE} \{ 0x20, 5 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE} \{ 0x00, 5 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK} \{ 0x80, 7 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM} \{ 0x40, 6 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC} \{ 0x00, 6 \}
+\item 
+const uint8\+\_\+t {\bf Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG} = 0x80
+\item 
+const uint8\+\_\+t {\bf Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS} = 0x00
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE} \{ 0x00, 7 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+I\+N\+D\+E\+X\+ED} \{ 0x80, 6 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST} \{ 0x10, 4 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF} \{ 0x40, 4 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST} \{ 0x00, 3 \}
+\item 
+const {\bf Instruction} {\bf Q\+\_\+\+L\+I\+T\+E\+R\+AL} \{ 0x20, 3 \}
+\item 
+const uint8\+\_\+t {\bf Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC} = 0x40
+\item 
+const uint8\+\_\+t {\bf Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC} = 0x40
+\item 
+const uint8\+\_\+t {\bf Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC} = 0x10
+\item 
+const uint32\+\_\+t {\bf k\+Default\+Blocking} = 100
+\item 
+const uint32\+\_\+t {\bf k\+Table\+Size} = 4096
+\item 
+const uint8\+\_\+t {\bf N\+B\+I\+T\+\_\+\+M\+A\+S\+KS} [9]
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Decode\+Error@{Decode\+Error}}
+\index{Decode\+Error@{Decode\+Error}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Decode\+Error}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+O\+NE@{N\+O\+NE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!N\+O\+NE@{N\+O\+NE}}\item[{\em 
+N\+O\+NE\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2ab50339a10e1de285ac99d4c3990b8693}
+}]\index{I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX@{I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX@{I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2af059dd129fb8a61588d41ba6df391a4e}
+}]\index{I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+U\+F\+F\+M\+A\+N\+\_\+\+C\+O\+DE@{I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+U\+F\+F\+M\+A\+N\+\_\+\+C\+O\+DE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+U\+F\+F\+M\+A\+N\+\_\+\+C\+O\+DE@{I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+U\+F\+F\+M\+A\+N\+\_\+\+C\+O\+DE}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+U\+F\+F\+M\+A\+N\+\_\+\+C\+O\+DE\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a24e89da4d6c114071fc3909cf5bfb4e8}
+}]\index{I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG@{I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG@{I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a514bf9cd6ca656851424dd9aaddf4555}
+}]\index{I\+N\+T\+E\+G\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW@{I\+N\+T\+E\+G\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!I\+N\+T\+E\+G\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW@{I\+N\+T\+E\+G\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW}}\item[{\em 
+I\+N\+T\+E\+G\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a8b7641826c1f6ac585fc89759a0ea840}
+}]\index{I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE@{I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE@{I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2aad02348d906e346fb95349512755ee56}
+}]\index{H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}}\item[{\em 
+H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2ad96fc900cec6f090538eaee3ef96d45f}
+}]\index{B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW@{B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW@{B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW}}\item[{\em 
+B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2af83ed13db581f1569713429e43a96bb2}
+}]\index{L\+I\+T\+E\+R\+A\+L\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{L\+I\+T\+E\+R\+A\+L\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!L\+I\+T\+E\+R\+A\+L\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE@{L\+I\+T\+E\+R\+A\+L\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE}}\item[{\em 
+L\+I\+T\+E\+R\+A\+L\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a753c43db3acf75ff9bf30c20def956b4}
+}]\index{T\+I\+M\+E\+O\+UT@{T\+I\+M\+E\+O\+UT}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!T\+I\+M\+E\+O\+UT@{T\+I\+M\+E\+O\+UT}}\item[{\em 
+T\+I\+M\+E\+O\+UT\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a070a0fb40f6c308ab544b227660aadff}
+}]\index{C\+A\+N\+C\+E\+L\+L\+ED@{C\+A\+N\+C\+E\+L\+L\+ED}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!C\+A\+N\+C\+E\+L\+L\+ED@{C\+A\+N\+C\+E\+L\+L\+ED}}\item[{\em 
+C\+A\+N\+C\+E\+L\+L\+ED\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a9f935beb31030ad0d4d26126c0f39bf2}
+}]\index{B\+A\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+N\+U\+M\+B\+ER@{B\+A\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+N\+U\+M\+B\+ER}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!B\+A\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+N\+U\+M\+B\+ER@{B\+A\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+N\+U\+M\+B\+ER}}\item[{\em 
+B\+A\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+N\+U\+M\+B\+ER\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a4d46a9b689d219fff73ea58245467b61}
+}]\index{I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+CK@{I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+CK}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+CK@{I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+CK}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+CK\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2acf5d6fc41c35cd6fb9fb9b09ddc6ba3a}
+}]\index{T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG@{T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG@{T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG}}\item[{\em 
+T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG\label{namespaceproxygen_1_1HPACK_a0a78aca21c7af3fc4aaab30ac7e828f2a105013c1a93c499606235c3092586732}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 81 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+\begin{DoxyCode}
+81                        : uint8\_t \{
+82   NONE = 0,
+83   INVALID_INDEX = 1,
+84   INVALID_HUFFMAN_CODE = 2,
+85   INVALID_ENCODING = 3,
+86   INTEGER_OVERFLOW = 4,
+87   INVALID_TABLE_SIZE = 5,
+88   HEADERS_TOO_LARGE = 6,
+89   BUFFER_UNDERFLOW = 7,
+90   LITERAL_TOO_LARGE = 8,
+91   TIMEOUT = 9,
+92   CANCELLED = 10,
+93   BAD_SEQUENCE_NUMBER = 11,
+94   INVALID_ACK = 12,
+95   TOO_MANY_BLOCKING = 13
+96 \};
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Literal\+Encoding@{Literal\+Encoding}}
+\index{Literal\+Encoding@{Literal\+Encoding}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Literal\+Encoding}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Literal\+Encoding} \+: uint8\+\_\+t}\label{namespaceproxygen_1_1HPACK_ab207a122bc558caf44dc89290cdccf6a}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{P\+L\+A\+IN@{P\+L\+A\+IN}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!P\+L\+A\+IN@{P\+L\+A\+IN}}\item[{\em 
+P\+L\+A\+IN\label{namespaceproxygen_1_1HPACK_ab207a122bc558caf44dc89290cdccf6aa8febbf1b69fe4bbe22420554ec18eb0d}
+}]\index{H\+U\+F\+F\+M\+AN@{H\+U\+F\+F\+M\+AN}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!H\+U\+F\+F\+M\+AN@{H\+U\+F\+F\+M\+AN}}\item[{\em 
+H\+U\+F\+F\+M\+AN\label{namespaceproxygen_1_1HPACK_ab207a122bc558caf44dc89290cdccf6aad9450a89a9d6fceb1f5cf1c760e6adb6}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 76 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+\begin{DoxyCode}
+76                      : uint8\_t \{
+77   PLAIN = 0x00,
+78   HUFFMAN = 0x80
+79 \};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{operator$<$$<$(std\+::ostream \&os, Decode\+Error err)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream \& proxygen\+::\+H\+P\+A\+C\+K\+::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os, }
+\item[{{\bf Decode\+Error}}]{err}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1HPACK_ae3067393acab26ccb76dd0f35e5180c6}
+
+
+Definition at line 141 of file H\+P\+A\+C\+K\+Decode\+Buffer.\+cpp.
+
+
+\begin{DoxyCode}
+141                                                         \{
+142   \textcolor{keywordflow}{return} os << static\_cast<uint32\_t>(err);
+143 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!I\+N\+D\+E\+X\+\_\+\+R\+EF@{I\+N\+D\+E\+X\+\_\+\+R\+EF}}
+\index{I\+N\+D\+E\+X\+\_\+\+R\+EF@{I\+N\+D\+E\+X\+\_\+\+R\+EF}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{I\+N\+D\+E\+X\+\_\+\+R\+EF}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+I\+N\+D\+E\+X\+\_\+\+R\+EF \{ 0x80, 7 \}}\label{namespaceproxygen_1_1HPACK_a389cfa2dd345a25792a025b1f8418ea1}
+
+
+Definition at line 24 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Header(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Indexed\+Header(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+As\+Index(), and T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!k\+Default\+Blocking@{k\+Default\+Blocking}}
+\index{k\+Default\+Blocking@{k\+Default\+Blocking}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{k\+Default\+Blocking}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::k\+Default\+Blocking = 100}\label{namespaceproxygen_1_1HPACK_a355daa230590d2aea82c59ad80ee8ba8}
+
+
+Definition at line 60 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!k\+Table\+Size@{k\+Table\+Size}}
+\index{k\+Table\+Size@{k\+Table\+Size}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{k\+Table\+Size}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::k\+Table\+Size = 4096}\label{namespaceproxygen_1_1HPACK_a7b243d3cc0894b78b0abf7f27929cc07}
+
+
+Definition at line 62 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!L\+I\+T\+E\+R\+AL@{L\+I\+T\+E\+R\+AL}}
+\index{L\+I\+T\+E\+R\+AL@{L\+I\+T\+E\+R\+AL}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{L\+I\+T\+E\+R\+AL}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+L\+I\+T\+E\+R\+AL \{ 0x00, 4 \}}\label{namespaceproxygen_1_1HPACK_a8656b9063f59fb6c7d5fba310409e537}
+
+
+Definition at line 26 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+Header(), and proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+As\+Literal().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX@{L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX}}
+\index{L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX@{L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX \{ 0x40, 6 \}}\label{namespaceproxygen_1_1HPACK_a591f6f70d7bb8e65c73104aa4e52bb65}
+
+
+Definition at line 25 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Header(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+Header(), and proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+As\+Literal().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX@{L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX}}
+\index{L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX@{L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX \{ 0x10, 4 \}}\label{namespaceproxygen_1_1HPACK_ae5296b3c5b4f124204185796b408a232}
+
+
+Definition at line 27 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!N\+B\+I\+T\+\_\+\+M\+A\+S\+KS@{N\+B\+I\+T\+\_\+\+M\+A\+S\+KS}}
+\index{N\+B\+I\+T\+\_\+\+M\+A\+S\+KS@{N\+B\+I\+T\+\_\+\+M\+A\+S\+KS}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{N\+B\+I\+T\+\_\+\+M\+A\+S\+KS}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+B\+I\+T\+\_\+\+M\+A\+S\+KS[9]}\label{namespaceproxygen_1_1HPACK_a02303728e71ad2741c07ba31adacf3ce}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  0x00,  
+  0x01,  
+  0x03,  
+  0x07,  
+  0x0F,  
+  0x1F,  
+  0x3F,  
+  0x7F,  
+  0xFF,  
+\}
+\end{DoxyCode}
+
+
+Definition at line 64 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decode\+Buffer\+::decode\+Integer(), and proxygen\+::\+H\+P\+A\+C\+K\+Encode\+Buffer\+::encode\+Integer().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM@{Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM}}
+\index{Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM@{Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM \{ 0x40, 6 \}}\label{namespaceproxygen_1_1HPACK_ad9edbda628d8e28997a4fe0f25a38636}
+
+
+Definition at line 38 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::decode\+Decoder\+Stream(), and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Cancel\+Stream().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE@{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE}}
+\index{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE@{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE \{ 0x00, 7 \}}\label{namespaceproxygen_1_1HPACK_af86477c7c1b0b39b8955289c04d71315}
+
+
+Definition at line 47 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::handle\+Base\+Index().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG@{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG}}
+\index{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG@{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG = 0x80}\label{namespaceproxygen_1_1HPACK_a75ea0c8ba34886386da49a0b04445436}
+
+
+Definition at line 44 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::handle\+Base\+Index().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS@{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS}}
+\index{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS@{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS = 0x00}\label{namespaceproxygen_1_1HPACK_a212fc3ecd4fa1f9e3707ca9e032951fb}
+
+
+Definition at line 45 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE@{Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE}}
+\index{Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE@{Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE \{ 0x00, 5 \}}\label{namespaceproxygen_1_1HPACK_aa5739a43a10ca582d3cd829d68de164f}
+
+
+Definition at line 34 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream\+Instruction(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Duplicate().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK@{Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK}}
+\index{Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK@{Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK \{ 0x80, 7 \}}\label{namespaceproxygen_1_1HPACK_a5e0f3e2c42fedaa77ce9a44b588da812}
+
+
+Definition at line 37 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::decode\+Decoder\+Stream(), and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Header\+Ack().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+I\+N\+D\+E\+X\+ED@{Q\+\_\+\+I\+N\+D\+E\+X\+ED}}
+\index{Q\+\_\+\+I\+N\+D\+E\+X\+ED@{Q\+\_\+\+I\+N\+D\+E\+X\+ED}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+I\+N\+D\+E\+X\+ED}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+ED \{ 0x80, 6 \}}\label{namespaceproxygen_1_1HPACK_a1f96167f40be172541261f98ee8cc007}
+
+
+Definition at line 50 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Header\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST@{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST}}
+\index{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST@{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST \{ 0x10, 4 \}}\label{namespaceproxygen_1_1HPACK_a1f2878140bed75e204b653c83ee82df5}
+
+
+Definition at line 51 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Header\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC@{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC}}
+\index{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC@{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC = 0x40}\label{namespaceproxygen_1_1HPACK_a5a2a6995eba642fced24a678a5698e9e}
+
+
+Definition at line 56 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF@{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}}
+\index{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF@{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF \{ 0x80, 6 \}}\label{namespaceproxygen_1_1HPACK_a65f106c32170ceac679c6be3ca2a99bc}
+
+
+Definition at line 31 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream\+Instruction(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Insert\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC@{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC}}
+\index{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC@{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC = 0x40}\label{namespaceproxygen_1_1HPACK_adfbe369b49d68b8ae6e358c104e620e7}
+
+
+Definition at line 57 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Insert\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF@{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}}
+\index{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF@{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF \{ 0x40, 5 \}}\label{namespaceproxygen_1_1HPACK_a6ce7d013e3bb63b97f33153609e4688d}
+
+
+Definition at line 32 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream\+Instruction(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Insert\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+L\+I\+T\+E\+R\+AL@{Q\+\_\+\+L\+I\+T\+E\+R\+AL}}
+\index{Q\+\_\+\+L\+I\+T\+E\+R\+AL@{Q\+\_\+\+L\+I\+T\+E\+R\+AL}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+L\+I\+T\+E\+R\+AL}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+AL \{ 0x20, 3 \}}\label{namespaceproxygen_1_1HPACK_a1b3217435fce448625741a5a5a83c9ee}
+
+
+Definition at line 54 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Header\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Literal\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF@{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}}
+\index{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF@{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF \{ 0x40, 4 \}}\label{namespaceproxygen_1_1HPACK_a9715f3b3c8662b7a7569a6e67114717d}
+
+
+Definition at line 52 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Header\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Stream\+Literal\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST@{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST}}
+\index{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST@{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST \{ 0x00, 3 \}}\label{namespaceproxygen_1_1HPACK_aa40dce12ec94509411a46df13a97eead}
+
+
+Definition at line 53 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Header\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Stream\+Literal\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC@{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC}}
+\index{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC@{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC = 0x10}\label{namespaceproxygen_1_1HPACK_a37b0cc1bb644c51ddd88fa6b004d8791}
+
+
+Definition at line 58 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Literal\+Q().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE@{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE}}
+\index{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE@{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE \{ 0x20, 5 \}}\label{namespaceproxygen_1_1HPACK_a8ee3e37be3f409cbf92919b444b24a13}
+
+
+Definition at line 33 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream\+Instruction(), and proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+Base\+::handle\+Pending\+Context\+Update().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC@{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC}}
+\index{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC@{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC \{ 0x00, 6 \}}\label{namespaceproxygen_1_1HPACK_a60a184aeb2861ed82ec97724da9a1d41}
+
+
+Definition at line 39 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::decode\+Decoder\+Stream(), and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Table\+State\+Sync().
+
+\index{proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}!T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE@{T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE}}
+\index{T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE@{T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE}!proxygen\+::\+H\+P\+A\+CK@{proxygen\+::\+H\+P\+A\+CK}}
+\subsubsection[{T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Instruction} proxygen\+::\+H\+P\+A\+C\+K\+::\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE \{ 0x20, 5 \}}\label{namespaceproxygen_1_1HPACK_af8823833e183ab790d309f7ad9a8b95e}
+
+
+Definition at line 28 of file H\+P\+A\+C\+K\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Header(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+Base\+::handle\+Pending\+Context\+Update(), and proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::handle\+Table\+Size\+Update().
+

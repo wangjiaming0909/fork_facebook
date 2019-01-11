@@ -1,0 +1,67 @@
+\section{proxygen\+:\+:Ack\+Byte\+Event Class Reference}
+\label{classproxygen_1_1AckByteEvent}\index{proxygen\+::\+Ack\+Byte\+Event@{proxygen\+::\+Ack\+Byte\+Event}}
+
+
+{\ttfamily \#include $<$Byte\+Events.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Ack\+Byte\+Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1AckByteEvent}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Ack\+Byte\+Event} ({\bf Ack\+Timeout\+::\+Callback} $\ast$callback, uint64\+\_\+t byte\+No, {\bf Event\+Type} event\+Type, {\bf H\+T\+T\+P\+Transaction} $\ast$txn)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Ack\+Timeout} {\bf timeout}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 88 of file Byte\+Events.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Ack\+Byte\+Event@{proxygen\+::\+Ack\+Byte\+Event}!Ack\+Byte\+Event@{Ack\+Byte\+Event}}
+\index{Ack\+Byte\+Event@{Ack\+Byte\+Event}!proxygen\+::\+Ack\+Byte\+Event@{proxygen\+::\+Ack\+Byte\+Event}}
+\subsubsection[{Ack\+Byte\+Event(\+Ack\+Timeout\+::\+Callback $\ast$callback, uint64\+\_\+t byte\+No, Event\+Type event\+Type, H\+T\+T\+P\+Transaction $\ast$txn)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Ack\+Byte\+Event\+::\+Ack\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{{\bf Ack\+Timeout\+::\+Callback} $\ast$}]{callback, }
+\item[{uint64\+\_\+t}]{byte\+No, }
+\item[{{\bf Event\+Type}}]{event\+Type, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1AckByteEvent_acb066fcd2cc93f220c37e11e2debed8c}
+
+
+Definition at line 90 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+94       : TransactionByteEvent(byteNo, eventType, txn),
+95         timeout(callback, byteNo) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Ack\+Byte\+Event@{proxygen\+::\+Ack\+Byte\+Event}!timeout@{timeout}}
+\index{timeout@{timeout}!proxygen\+::\+Ack\+Byte\+Event@{proxygen\+::\+Ack\+Byte\+Event}}
+\subsubsection[{timeout}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ack\+Timeout} proxygen\+::\+Ack\+Byte\+Event\+::timeout}\label{classproxygen_1_1AckByteEvent_a10b4acefa8b60d3daa95297a15424e61}
+
+
+Definition at line 97 of file Byte\+Events.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf Byte\+Events.\+h}\end{DoxyCompactItemize}

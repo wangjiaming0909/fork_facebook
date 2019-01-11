@@ -1,0 +1,246 @@
+\section{Echo\+Service\+:\+:Echo\+Handler Class Reference}
+\label{classEchoService_1_1EchoHandler}\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+
+
+{\ttfamily \#include $<$Echo\+Handler.\+h$>$}
+
+Inheritance diagram for Echo\+Service\+:\+:Echo\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classEchoService_1_1EchoHandler}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Echo\+Handler} ({\bf Echo\+Stats} $\ast$stats)
+\item 
+void {\bf on\+Request} (std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$ headers) noexceptoverride
+\item 
+void {\bf on\+Body} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride
+\item 
+void {\bf on\+E\+OM} () noexceptoverride
+\item 
+void {\bf on\+Upgrade} ({\bf proxygen\+::\+Upgrade\+Protocol} proto) noexceptoverride
+\item 
+void {\bf request\+Complete} () noexceptoverride
+\item 
+void {\bf on\+Error} ({\bf proxygen\+::\+Proxygen\+Error} err) noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Echo\+Stats} $\ast$const {\bf stats\+\_\+} \{{\bf nullptr}\}
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf body\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 23 of file Echo\+Handler.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!Echo\+Handler@{Echo\+Handler}}
+\index{Echo\+Handler@{Echo\+Handler}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{Echo\+Handler(\+Echo\+Stats $\ast$stats)}]{\setlength{\rightskip}{0pt plus 5cm}Echo\+Service\+::\+Echo\+Handler\+::\+Echo\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf Echo\+Stats} $\ast$}]{stats}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classEchoService_1_1EchoHandler_aa2fcdba4a6b4a25cde95ef1bf0895b38}
+
+
+Definition at line 21 of file Echo\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+21                                         : stats_(stats) \{
+22 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{on\+Body(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Service\+::\+Echo\+Handler\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classEchoService_1_1EchoHandler_acb1bd2ba7b3bbb9ba7700e2d39260d8a}
+Invoked when we get part of body for the request. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aaf0ed3bb94384e6240e15cca63de82bb}.
+
+
+
+Definition at line 28 of file Echo\+Handler.\+cpp.
+
+
+
+References body\+\_\+.
+
+
+\begin{DoxyCode}
+28                                                                 \{
+29   \textcolor{keywordflow}{if} (body_) \{
+30     body_->prependChain(std::move(body));
+31   \} \textcolor{keywordflow}{else} \{
+32     body_ = std::move(body);
+33   \}
+34 \}
+\end{DoxyCode}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!on\+E\+OM@{on\+E\+OM}}
+\index{on\+E\+OM@{on\+E\+OM}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{on\+E\+O\+M() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Service\+::\+Echo\+Handler\+::on\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classEchoService_1_1EchoHandler_abe8fa1e2a498986931c392bf0881dbcd}
+Invoked when we finish receiving the body. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a24f26d2cf71effaf154ce53aeff51aab}.
+
+
+
+Definition at line 36 of file Echo\+Handler.\+cpp.
+
+
+
+References proxygen\+::\+Response\+Builder\+::body(), body\+\_\+, proxygen\+::\+Request\+Handler\+::downstream\+\_\+, Echo\+Service\+::\+Echo\+Stats\+::get\+Request\+Count(), proxygen\+::\+Response\+Builder\+::header(), proxygen\+::\+Response\+Builder\+::send\+With\+E\+O\+M(), stats\+\_\+, and proxygen\+::\+Response\+Builder\+::status().
+
+
+\begin{DoxyCode}
+36                                  \{
+37   ResponseBuilder(downstream_)
+38     .status(200, \textcolor{stringliteral}{"OK"})
+39     .header(\textcolor{stringliteral}{"Request-Number"},
+40             folly::to<std::string>(stats_->getRequestCount()))
+41     .body(std::move(body_))
+42     .sendWithEOM();
+43 \}
+\end{DoxyCode}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{on\+Error(proxygen\+::\+Proxygen\+Error err) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Service\+::\+Echo\+Handler\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Proxygen\+Error}}]{err}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classEchoService_1_1EchoHandler_ac67effcf7a52288701e2661b0212b2df}
+Request failed. Maybe because of read/write error on socket or client not being able to send request in time.
+
+N\+O\+TE\+: Can be invoked at any time (except for before on\+Request).
+
+No more callbacks will be invoked after this. You should clean up after yourself. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_ad7e6428b925840a334adc58ff6f4f680}.
+
+
+
+Definition at line 53 of file Echo\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+53 \{ \textcolor{keyword}{delete} \textcolor{keyword}{this}; \}
+\end{DoxyCode}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{on\+Request(std\+::unique\+\_\+ptr$<$ proxygen\+::\+H\+T\+T\+P\+Message $>$ headers) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Service\+::\+Echo\+Handler\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf proxygen\+::\+H\+T\+T\+P\+Message} $>$}]{headers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classEchoService_1_1EchoHandler_a932d54649a949672ab933e688cfac4b6}
+Invoked when we have successfully fetched headers from client. This will always be the first callback invoked on your handler. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a61f59e1155f906c7b73062147164320f}.
+
+
+
+Definition at line 24 of file Echo\+Handler.\+cpp.
+
+
+
+References Echo\+Service\+::\+Echo\+Stats\+::record\+Request(), and stats\+\_\+.
+
+
+\begin{DoxyCode}
+24                                                                  \{
+25   stats_->recordRequest();
+26 \}
+\end{DoxyCode}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!on\+Upgrade@{on\+Upgrade}}
+\index{on\+Upgrade@{on\+Upgrade}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{on\+Upgrade(proxygen\+::\+Upgrade\+Protocol proto) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Service\+::\+Echo\+Handler\+::on\+Upgrade (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+Upgrade\+Protocol}}]{prot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classEchoService_1_1EchoHandler_af5cda50efa2d8ff694b4f37a48d61df3}
+Invoked when the session has been upgraded to a different protocol 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_aefed2946bc5558baf6e36a2d11290b79}.
+
+
+
+Definition at line 45 of file Echo\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+45                                                       \{
+46   \textcolor{comment}{// handler doesn't support upgrades}
+47 \}
+\end{DoxyCode}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!request\+Complete@{request\+Complete}}
+\index{request\+Complete@{request\+Complete}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{request\+Complete() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Echo\+Service\+::\+Echo\+Handler\+::request\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classEchoService_1_1EchoHandler_af1e31ad69997ed16af7294fb449e7004}
+Invoked when request processing has been completed and nothing more needs to be done. This may be a good place to log some stats and clean up resources. This is distinct from \doxyref{on\+E\+O\+M()}{p.}{classEchoService_1_1EchoHandler_abe8fa1e2a498986931c392bf0881dbcd} because it is invoked after the response is fully sent. Once this callback has been received, {\ttfamily downstream\+\_\+} should be considered invalid. 
+
+Implements {\bf proxygen\+::\+Request\+Handler} \doxyref{}{p.}{classproxygen_1_1RequestHandler_a0ec159751b407bcd3667994c6d8d7cfe}.
+
+
+
+Definition at line 49 of file Echo\+Handler.\+cpp.
+
+
+\begin{DoxyCode}
+49                                            \{
+50   \textcolor{keyword}{delete} \textcolor{keyword}{this};
+51 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!body\+\_\+@{body\+\_\+}}
+\index{body\+\_\+@{body\+\_\+}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{body\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ Echo\+Service\+::\+Echo\+Handler\+::body\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classEchoService_1_1EchoHandler_a1f73fd52f02a93b6acb4cd591bc1293d}
+
+
+Definition at line 43 of file Echo\+Handler.\+h.
+
+
+
+Referenced by on\+Body(), and on\+E\+O\+M().
+
+\index{Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}!stats\+\_\+@{stats\+\_\+}}
+\index{stats\+\_\+@{stats\+\_\+}!Echo\+Service\+::\+Echo\+Handler@{Echo\+Service\+::\+Echo\+Handler}}
+\subsubsection[{stats\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Echo\+Stats}$\ast$ const Echo\+Service\+::\+Echo\+Handler\+::stats\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classEchoService_1_1EchoHandler_ab421c6cce76b196ef923ef2a8bb2dab6}
+
+
+Definition at line 41 of file Echo\+Handler.\+h.
+
+
+
+Referenced by on\+E\+O\+M(), and on\+Request().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/echo/{\bf Echo\+Handler.\+h}\item 
+proxygen/httpserver/samples/echo/{\bf Echo\+Handler.\+cpp}\end{DoxyCompactItemize}

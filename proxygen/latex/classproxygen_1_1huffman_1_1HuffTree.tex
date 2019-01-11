@@ -1,0 +1,590 @@
+\section{proxygen\+:\+:huffman\+:\+:Huff\+Tree Class Reference}
+\label{classproxygen_1_1huffman_1_1HuffTree}\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+
+
+{\ttfamily \#include $<$Huffman.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:huffman\+:\+:Huff\+Tree\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1huffman_1_1HuffTree}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Huff\+Tree} (const uint32\+\_\+t $\ast$codes, const uint8\+\_\+t $\ast$bits)
+\item 
+{\bf Huff\+Tree} ({\bf Huff\+Tree} \&\&tree)=default
+\item 
+{\bf $\sim$\+Huff\+Tree} ()
+\item 
+bool {\bf decode} (const uint8\+\_\+t $\ast$buf, uint32\+\_\+t size, folly\+::fbstring \&literal) const 
+\item 
+uint32\+\_\+t {\bf encode} (folly\+::\+String\+Piece literal, folly\+::io\+::\+Queue\+Appender \&buf) const 
+\item 
+uint32\+\_\+t {\bf get\+Encode\+Size} (folly\+::\+String\+Piece literal) const 
+\item 
+std\+::pair$<$ uint32\+\_\+t, uint8\+\_\+t $>$ {\bf get\+Code} (uint8\+\_\+t ch) const 
+\item 
+const uint32\+\_\+t $\ast$ {\bf codes\+Table} () const 
+\item 
+const uint8\+\_\+t $\ast$ {\bf bits\+Table} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Huff\+Tree} (const {\bf Huff\+Tree} \&tree)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Super\+Huff\+Node} {\bf table\+\_\+} [46]
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf fill\+Index} ({\bf Super\+Huff\+Node} \&snode, uint32\+\_\+t code, uint8\+\_\+t bits, uint8\+\_\+t ch, uint8\+\_\+t level)
+\item 
+void {\bf build\+Tree} ()
+\item 
+void {\bf insert} (uint32\+\_\+t code, uint8\+\_\+t bits, uint8\+\_\+t ch)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf nodes\+\_\+} \{0\}
+\item 
+const uint32\+\_\+t $\ast$ {\bf codes\+\_\+}
+\item 
+const uint8\+\_\+t $\ast$ {\bf bits\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Immutable Huffman tree used in the process of decoding. Traditionally the huffman tree is binary, but using that approach leads to major inefficiencies since it\textquotesingle{}s using per-\/bit level processing and needs to perform several memory accesses and bit operations for every single bit. This implementation is using 8-\/bit level indexing and uses aggregated nodes that link up to 256 other nodes. The complexity for lookup is reduced from O(bits) to O(\+Bytes) which is 1 or 2 for most of the printable characters. The tradeoff of using this approach is using more memory and generating the tree is more laborious since we need to fill all the subtrees denoted by a character code, which is an unique prefix.
+
+Example
+
+bit stream\+: 00001111 1111010
+\begin{DoxyEnumerate}
+\item our lookup key is 00001111 which will point to character \textquotesingle{}/\textquotesingle{}, since the entire subtree with prefix 0000 points to it. We know the subtree has just 4 bits, we remove just those from the current key. bit stream\+: 11111111 010
+\item key is 11111111 which points to a branch, so we go down one level bit stream\+: 010
+\item we don\textquotesingle{}t have enough bits, so we use paddding and we get a key of 01011111, which points to \textquotesingle{}(\textquotesingle{} character, like any other node under the subtree \textquotesingle{}010\textquotesingle{}. 
+\end{DoxyEnumerate}
+
+Definition at line 84 of file Huffman.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!Huff\+Tree@{Huff\+Tree}}
+\index{Huff\+Tree@{Huff\+Tree}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{Huff\+Tree(const uint32\+\_\+t $\ast$codes, const uint8\+\_\+t $\ast$bits)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::huffman\+::\+Huff\+Tree\+::\+Huff\+Tree (
+\begin{DoxyParamCaption}
+\item[{const uint32\+\_\+t $\ast$}]{codes, }
+\item[{const uint8\+\_\+t $\ast$}]{bits}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1huffman_1_1HuffTree_aa4f2723d4adb20b6ad2fdd22bb0ce86f}
+the constructor assumes the codes and bits tables will not be freed, ideally they are static 
+
+Definition at line 21 of file Huffman.\+cpp.
+
+
+
+References build\+Tree().
+
+
+\begin{DoxyCode}
+22     : codes_(codes), bits_(bits) \{
+23   buildTree();
+24 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!Huff\+Tree@{Huff\+Tree}}
+\index{Huff\+Tree@{Huff\+Tree}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{Huff\+Tree(\+Huff\+Tree \&\&tree)=default}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::huffman\+::\+Huff\+Tree\+::\+Huff\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Huff\+Tree} \&\&}]{tree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [default]}}\label{classproxygen_1_1huffman_1_1HuffTree_aee316dbd7acb48fe393bd4eeef3da1fd}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!````~Huff\+Tree@{$\sim$\+Huff\+Tree}}
+\index{````~Huff\+Tree@{$\sim$\+Huff\+Tree}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{$\sim$\+Huff\+Tree()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::huffman\+::\+Huff\+Tree\+::$\sim$\+Huff\+Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1huffman_1_1HuffTree_a4a2aa3bbea71682531e9f88e4cf609b3}
+
+
+Definition at line 92 of file Huffman.\+h.
+
+
+
+References proxygen\+::huffman\+::\+Huff\+Node\+::ch, proxygen\+::hpack\+::decode(), and encode().
+
+
+\begin{DoxyCode}
+92 \{\}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!Huff\+Tree@{Huff\+Tree}}
+\index{Huff\+Tree@{Huff\+Tree}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{Huff\+Tree(const Huff\+Tree \&tree)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::huffman\+::\+Huff\+Tree\+::\+Huff\+Tree (
+\begin{DoxyParamCaption}
+\item[{const {\bf Huff\+Tree} \&}]{tree}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [protected]}}\label{classproxygen_1_1huffman_1_1HuffTree_a1bfc79b04ec0991806cb4e99ed4d0a81}
+
+
+Definition at line 26 of file Huffman.\+cpp.
+
+
+
+References build\+Tree().
+
+
+\begin{DoxyCode}
+26                                        :
+27     codes_(tree.codes\_), bits_(tree.bits\_) \{
+28   buildTree();
+29 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!bits\+Table@{bits\+Table}}
+\index{bits\+Table@{bits\+Table}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{bits\+Table() const }]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t $\ast$ proxygen\+::huffman\+::\+Huff\+Tree\+::bits\+Table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1huffman_1_1HuffTree_a0050c2e0168a559b17c673e0a57cafd9}
+
+
+Definition at line 102 of file Huffman.\+cpp.
+
+
+
+References bits\+\_\+.
+
+
+\begin{DoxyCode}
+102                                          \{
+103   \textcolor{keywordflow}{return} bits_;
+104 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!build\+Tree@{build\+Tree}}
+\index{build\+Tree@{build\+Tree}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{build\+Tree()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::huffman\+::\+Huff\+Tree\+::build\+Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1huffman_1_1HuffTree_a301a557b4fd6c3f1bfb5ce39c51c0dda}
+initializes and builds the huffman tree 
+
+Definition at line 126 of file Huffman.\+cpp.
+
+
+
+References bits\+\_\+, codes\+\_\+, insert(), and proxygen\+::huffman\+::k\+Table\+Size.
+
+
+
+Referenced by Huff\+Tree().
+
+
+\begin{DoxyCode}
+126                          \{
+127   \textcolor{comment}{// create the indexed table}
+128   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < kTableSize; i++) \{
+129     insert(codes_[i], bits_[i], i);
+130   \}
+131 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!codes\+Table@{codes\+Table}}
+\index{codes\+Table@{codes\+Table}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{codes\+Table() const }]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t $\ast$ proxygen\+::huffman\+::\+Huff\+Tree\+::codes\+Table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1huffman_1_1HuffTree_ae8893b894953629ea8f9f7a4963be7da}
+
+
+Definition at line 98 of file Huffman.\+cpp.
+
+
+
+References codes\+\_\+.
+
+
+\begin{DoxyCode}
+98                                            \{
+99   \textcolor{keywordflow}{return} codes_;
+100 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!decode@{decode}}
+\index{decode@{decode}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{decode(const uint8\+\_\+t $\ast$buf, uint32\+\_\+t size, folly\+::fbstring \&literal) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::huffman\+::\+Huff\+Tree\+::decode (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t $\ast$}]{buf, }
+\item[{uint32\+\_\+t}]{size, }
+\item[{folly\+::fbstring \&}]{literal}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1huffman_1_1HuffTree_a24baed793e01ab0383222eeea8bcec04}
+decode bitstream into a string literal
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & start of a huffman-\/encoded bit stream \\
+\hline
+{\em size} & size of the buffer \\
+\hline
+{\em literal} & where to append decoded characters\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the decode process was successful 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file Huffman.\+cpp.
+
+
+
+References proxygen\+::huffman\+::\+Huff\+Node\+::bits, proxygen\+::huffman\+::\+Huff\+Node\+::ch, proxygen\+::huffman\+::\+Huff\+Node\+::data, proxygen\+::huffman\+::\+Super\+Huff\+Node\+::index, proxygen\+::huffman\+::\+Huff\+Node\+::is\+Leaf(), proxygen\+::huffman\+::\+Huff\+Node\+::metadata, proxygen\+::huffman\+::\+Huff\+Node\+::super\+Node\+Index, and table\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+33           \{
+34   \textcolor{keyword}{const} SuperHuffNode* snode = &table_[0];
+35   uint32\_t w = 0;
+36   uint32\_t wbits = 0;
+37   uint32\_t i = 0;
+38   \textcolor{keywordflow}{while} (i < size || wbits > 0) \{
+39     \textcolor{comment}{// decide if we need to load more bits using an 8-bit chunk}
+40     \textcolor{keywordflow}{if} (i < size && wbits < 8) \{
+41       w = (w << 8) | buf[i];
+42       wbits += 8;
+43       i++;
+44     \}
+45     \textcolor{comment}{// key is used for performing the indexed lookup}
+46     uint32\_t key;
+47     \textcolor{keywordflow}{if} (wbits >= 8) \{
+48       key = w >> (wbits - 8);
+49     \} \textcolor{keywordflow}{else} \{
+50       \textcolor{comment}{// this the case we're at the end of the buffer}
+51       uint8\_t xbits = 8 - wbits;
+52       w = (w << xbits) | ((1 << xbits) - 1);
+53       key = w;
+54       wbits = 8;
+55     \}
+56     \textcolor{comment}{// perform the indexed lookup}
+57     \textcolor{keyword}{const} HuffNode& node = snode->index[key];
+58     \textcolor{keywordflow}{if} (node.isLeaf()) \{
+59       \textcolor{comment}{// final node, we can emit the character}
+60       literal.push\_back(node.data.ch);
+61       wbits -= node.metadata.bits;
+62       snode = &table_[0];
+63     \} \textcolor{keywordflow}{else} \{
+64       \textcolor{comment}{// this is a branch, so we just need to move one level}
+65       wbits -= 8;
+66       snode = &table_[node.data.superNodeIndex];
+67     \}
+68     \textcolor{comment}{// remove what we've just used}
+69     w = w & ((1 << wbits) - 1);
+70   \}
+71   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+72 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!encode@{encode}}
+\index{encode@{encode}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{encode(folly\+::\+String\+Piece literal, folly\+::io\+::\+Queue\+Appender \&buf) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::huffman\+::\+Huff\+Tree\+::encode (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+String\+Piece}]{literal, }
+\item[{folly\+::io\+::\+Queue\+Appender \&}]{buf}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1huffman_1_1HuffTree_abf4a55cc523d378f56061c7759455c4a}
+encode string literal into huffman encoded bit stream
+
+
+\begin{DoxyParams}{Parameters}
+{\em literal} & string to encode \\
+\hline
+{\em buf} & where to append the encoded binary data \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 133 of file Huffman.\+cpp.
+
+
+
+References bits\+\_\+, and codes\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+134                                                            \{
+135   uint32\_t code;  \textcolor{comment}{// the huffman code of a given character}
+136   uint8\_t bits;   \textcolor{comment}{// on how many bits code is represented}
+137   uint32\_t w = 0; \textcolor{comment}{// 4-byte word used for packing bits and write it to memory}
+138   uint8\_t wbits = 0;  \textcolor{comment}{// how many bits we have in 'w'}
+139   uint32\_t totalBytes = 0;
+140   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < literal.size(); i++) \{
+141     uint8\_t ch = literal[i];
+142     code = codes_[ch];
+143     bits = bits_[ch];
+144 
+145     \textcolor{keywordflow}{if} (wbits + bits < 32) \{
+146       w = (w << bits) | code;
+147       wbits += bits;
+148     \} \textcolor{keywordflow}{else} \{
+149       uint8\_t xbits = wbits + bits - 32;
+150       w = (w << (bits - xbits)) | (code >> xbits);
+151       \textcolor{comment}{// write the word into the buffer by converting to network order, which}
+152       \textcolor{comment}{// takes care of the endianness problems}
+153       buf.writeBE<uint32\_t>(w);
+154       totalBytes += 4;
+155       \textcolor{comment}{// carry for next batch}
+156       wbits = xbits;
+157       w = code & ((1 << xbits) - 1);
+158     \}
+159   \}
+160   \textcolor{comment}{// we might have some padding at the byte level}
+161   \textcolor{keywordflow}{if} (wbits & 0x7) \{
+162     \textcolor{comment}{// padding bits}
+163     uint8\_t padbits = 8 - (wbits & 0x7);
+164     w = (w << padbits) | ((1 << padbits) - 1);
+165 
+166     wbits += padbits;
+167   \}
+168   \textcolor{comment}{// we need to write the leftover bytes, from 1 to 4 bytes}
+169   \textcolor{keywordflow}{if} (wbits > 0) \{
+170     uint8\_t bytes = wbits >> 3;
+171     \textcolor{comment}{// align the bits to the MSB}
+172     w = w << (32 - wbits);
+173     \textcolor{comment}{// set the bytes in the network order and copy w[0], w[1]...}
+174     w = htonl(w);
+175     \textcolor{comment}{// we need to use memcpy because we might write less than 4 bytes}
+176     buf.push((uint8\_t*)&w, bytes);
+177     totalBytes += bytes;
+178   \}
+179   \textcolor{keywordflow}{return} totalBytes;
+180 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!fill\+Index@{fill\+Index}}
+\index{fill\+Index@{fill\+Index}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{fill\+Index(\+Super\+Huff\+Node \&snode, uint32\+\_\+t code, uint8\+\_\+t bits, uint8\+\_\+t ch, uint8\+\_\+t level)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::huffman\+::\+Huff\+Tree\+::fill\+Index (
+\begin{DoxyParamCaption}
+\item[{{\bf Super\+Huff\+Node} \&}]{snode, }
+\item[{uint32\+\_\+t}]{code, }
+\item[{uint8\+\_\+t}]{bits, }
+\item[{uint8\+\_\+t}]{ch, }
+\item[{uint8\+\_\+t}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1huffman_1_1HuffTree_ab0c44bbdf8ec389a730a95e6603cbdec}
+recursive function for generating subtrees 
+
+Definition at line 109 of file Huffman.\+cpp.
+
+
+
+References proxygen\+::huffman\+::\+Huff\+Node\+::bits, proxygen\+::huffman\+::\+Huff\+Node\+::ch, proxygen\+::huffman\+::\+Huff\+Node\+::data, proxygen\+::huffman\+::\+Super\+Huff\+Node\+::index, and proxygen\+::huffman\+::\+Huff\+Node\+::metadata.
+
+
+
+Referenced by insert().
+
+
+\begin{DoxyCode}
+110                                \{
+111   \textcolor{keywordflow}{if} (level == 8) \{
+112     snode.index[code].data.ch = ch;
+113     snode.index[code].metadata.bits = bits;
+114     \textcolor{keywordflow}{return};
+115   \}
+116   \textcolor{comment}{// generate the bit at the current level}
+117   code = code << 1;
+118   \textcolor{keywordflow}{for} (uint8\_t bit = 0; bit <= 1; bit++) \{
+119     fillIndex(snode, code | bit, bits, ch, level + 1);
+120   \}
+121 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!get\+Code@{get\+Code}}
+\index{get\+Code@{get\+Code}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{get\+Code(uint8\+\_\+t ch) const }]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ uint32\+\_\+t, uint8\+\_\+t $>$ proxygen\+::huffman\+::\+Huff\+Tree\+::get\+Code (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{ch}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1huffman_1_1HuffTree_a3dff76dde1d16ecd055459f1a04ec8ea}
+get the binary representation for a given character, as a 32-\/bit word and a number of bits is represented on ($<$32). The code is aligned to L\+SB.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ch} & A\+S\+C\+II character \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pair$<$word, bits$>$
+\end{DoxyReturn}
+Example\+: \textquotesingle{}e\textquotesingle{} will be encoded as 1 using 4 bits\+: 0001 
+
+Definition at line 196 of file Huffman.\+cpp.
+
+
+
+References bits\+\_\+, and codes\+\_\+.
+
+
+\begin{DoxyCode}
+196                                                           \{
+197   \textcolor{keywordflow}{return} std::make\_pair(codes_[ch], bits_[ch]);
+198 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!get\+Encode\+Size@{get\+Encode\+Size}}
+\index{get\+Encode\+Size@{get\+Encode\+Size}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{get\+Encode\+Size(folly\+::\+String\+Piece literal) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::huffman\+::\+Huff\+Tree\+::get\+Encode\+Size (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+String\+Piece}]{literal}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1huffman_1_1HuffTree_ad2bdd57b4932f412a1f96b2a374dc783}
+get the encode size for a string literal, works as a dry-\/run for the encode useful to allocate enough buffer space before doing the actual encode
+
+
+\begin{DoxyParams}{Parameters}
+{\em literal} & string literal \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size how many bytes it will take to encode the given string 
+\end{DoxyReturn}
+
+
+Definition at line 182 of file Huffman.\+cpp.
+
+
+
+References bits\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+182                                                                \{
+183   uint32\_t totalBits = 0;
+184   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < literal.size(); i++) \{
+185     \textcolor{comment}{// we just need the number of bits}
+186     uint8\_t ch = literal[i];
+187     totalBits += bits_[ch];
+188   \}
+189   uint32\_t size = totalBits >> 3;
+190   \textcolor{keywordflow}{if} (totalBits & 0x07) \{
+191     ++size;
+192   \}
+193   \textcolor{keywordflow}{return} size;
+194 \}
+\end{DoxyCode}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!insert@{insert}}
+\index{insert@{insert}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{insert(uint32\+\_\+t code, uint8\+\_\+t bits, uint8\+\_\+t ch)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::huffman\+::\+Huff\+Tree\+::insert (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{code, }
+\item[{uint8\+\_\+t}]{bits, }
+\item[{uint8\+\_\+t}]{ch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1huffman_1_1HuffTree_a99724fce94fe0bada99113b2364ca26d}
+insert a new character into the tree, identified by an unique code, a number of bits to represent it. The code is aligned at L\+SB. 
+
+Definition at line 78 of file Huffman.\+cpp.
+
+
+
+References proxygen\+::huffman\+::\+Huff\+Node\+::data, fill\+Index(), proxygen\+::huffman\+::\+Super\+Huff\+Node\+::index, proxygen\+::huffman\+::\+Huff\+Node\+::is\+Leaf(), proxygen\+::huffman\+::\+Huff\+Node\+::is\+Super\+Node, proxygen\+::huffman\+::\+Huff\+Node\+::metadata, nodes\+\_\+, proxygen\+::huffman\+::\+Huff\+Node\+::super\+Node\+Index, and table\+\_\+.
+
+
+
+Referenced by build\+Tree().
+
+
+\begin{DoxyCode}
+78                                                              \{
+79   SuperHuffNode* snode = &table_[0];
+80   \textcolor{keywordflow}{while} (bits > 8) \{
+81     uint32\_t mask = 0xFF << (bits - 8);
+82     uint32\_t x = (code & mask) >> (bits - 8);
+83     \textcolor{comment}{// mark this node as branch}
+84     \textcolor{keywordflow}{if} (snode->index[x].isLeaf()) \{
+85       nodes_++;
+86       HuffNode& node = snode->index[x];
+87       node.metadata.isSuperNode = \textcolor{keyword}{true};
+88       node.data.superNodeIndex = nodes_;
+89     \}
+90     snode = &table_[snode->index[x].data.superNodeIndex];
+91     bits -= 8;
+92     code = code & ~mask;
+93   \}
+94   \textcolor{comment}{// fill the node with all the suffixes}
+95   fillIndex(*snode, code, bits, ch, bits);
+96 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!bits\+\_\+@{bits\+\_\+}}
+\index{bits\+\_\+@{bits\+\_\+}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{bits\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t$\ast$ proxygen\+::huffman\+::\+Huff\+Tree\+::bits\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1huffman_1_1HuffTree_aa361cd824d7b8af43423a484217f1306}
+
+
+Definition at line 148 of file Huffman.\+h.
+
+
+
+Referenced by bits\+Table(), build\+Tree(), encode(), get\+Code(), and get\+Encode\+Size().
+
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!codes\+\_\+@{codes\+\_\+}}
+\index{codes\+\_\+@{codes\+\_\+}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{codes\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t$\ast$ proxygen\+::huffman\+::\+Huff\+Tree\+::codes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1huffman_1_1HuffTree_a83645dcd5290d5d11548d7934a51fe4b}
+
+
+Definition at line 147 of file Huffman.\+h.
+
+
+
+Referenced by build\+Tree(), codes\+Table(), encode(), and get\+Code().
+
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!nodes\+\_\+@{nodes\+\_\+}}
+\index{nodes\+\_\+@{nodes\+\_\+}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{nodes\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::huffman\+::\+Huff\+Tree\+::nodes\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1huffman_1_1HuffTree_a3faa7b416d05787133a5df5bf23bc758}
+
+
+Definition at line 146 of file Huffman.\+h.
+
+
+
+Referenced by insert().
+
+\index{proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}!table\+\_\+@{table\+\_\+}}
+\index{table\+\_\+@{table\+\_\+}!proxygen\+::huffman\+::\+Huff\+Tree@{proxygen\+::huffman\+::\+Huff\+Tree}}
+\subsubsection[{table\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Super\+Huff\+Node} proxygen\+::huffman\+::\+Huff\+Tree\+::table\+\_\+[46]\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1huffman_1_1HuffTree_a5d6350d6a6af123c10585029d4bf98e3}
+
+
+Definition at line 152 of file Huffman.\+h.
+
+
+
+Referenced by decode(), and insert().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Huffman.\+h}\item 
+proxygen/lib/http/codec/compress/{\bf Huffman.\+cpp}\end{DoxyCompactItemize}

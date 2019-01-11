@@ -1,0 +1,195 @@
+\section{make\+\_\+docker\+\_\+context Namespace Reference}
+\label{namespacemake__docker__context}\index{make\+\_\+docker\+\_\+context@{make\+\_\+docker\+\_\+context}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf make\+\_\+docker\+\_\+context} (get\+\_\+steps\+\_\+fn, github\+\_\+project, opts=None, default\+\_\+context\+\_\+dir=None)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\bf config} = read\+\_\+fbcode\+\_\+builder\+\_\+config(\textquotesingle{}fbcode\+\_\+builder\+\_\+config.\+py\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{make\+\_\+docker\+\_\+context@{make\+\_\+docker\+\_\+context}!make\+\_\+docker\+\_\+context@{make\+\_\+docker\+\_\+context}}
+\index{make\+\_\+docker\+\_\+context@{make\+\_\+docker\+\_\+context}!make\+\_\+docker\+\_\+context@{make\+\_\+docker\+\_\+context}}
+\subsubsection[{make\+\_\+docker\+\_\+context(get\+\_\+steps\+\_\+fn, github\+\_\+project, opts=\+None, default\+\_\+context\+\_\+dir=\+None)}]{\setlength{\rightskip}{0pt plus 5cm}def make\+\_\+docker\+\_\+context.\+make\+\_\+docker\+\_\+context (
+\begin{DoxyParamCaption}
+\item[{}]{get\+\_\+steps\+\_\+fn, }
+\item[{}]{github\+\_\+project, }
+\item[{}]{opts = {\ttfamily None}, }
+\item[{}]{default\+\_\+context\+\_\+dir = {\ttfamily None}}
+\end{DoxyParamCaption}
+)}\label{namespacemake__docker__context_aa874edfafba68822b6c60c04a5e86b58}
+\begin{DoxyVerb}Returns a path to the Docker context directory. See parse_args.py.
+
+Helper for making a command-line utility that writes your project's
+Dockerfile and associated data into a (temporary) directory.  Your main
+program might look something like this:
+
+    print(make_docker_context(
+        lambda builder: [builder.step(...), ...],
+        'facebook/your_project',
+    ))
+\end{DoxyVerb}
+ 
+
+Definition at line 29 of file make\+\_\+docker\+\_\+context.\+py.
+
+
+
+References parse\+\_\+args.\+parse\+\_\+args\+\_\+to\+\_\+fbcode\+\_\+builder\+\_\+opts().
+
+
+\begin{DoxyCode}
+29 ):
+30     \textcolor{stringliteral}{'''}
+31 \textcolor{stringliteral}{    Returns a path to the Docker context directory. See parse\_args.py.}
+32 \textcolor{stringliteral}{}
+33 \textcolor{stringliteral}{    Helper for making a command-line utility that writes your project's}
+34 \textcolor{stringliteral}{    Dockerfile and associated data into a (temporary) directory.  Your main}
+35 \textcolor{stringliteral}{    program might look something like this:}
+36 \textcolor{stringliteral}{}
+37 \textcolor{stringliteral}{        print(make\_docker\_context(}
+38 \textcolor{stringliteral}{            lambda builder: [builder.step(...), ...],}
+39 \textcolor{stringliteral}{            'facebook/your\_project',}
+40 \textcolor{stringliteral}{        ))}
+41 \textcolor{stringliteral}{    '''}
+42 
+43     \textcolor{keywordflow}{if} opts \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+44         opts = \{\}
+45 
+46     valid\_versions = (
+47         (\textcolor{stringliteral}{'ubuntu:16.04'}, \textcolor{stringliteral}{'5'}),
+48     )
+49 
+50     \textcolor{keyword}{def }add\_args(parser):
+51         parser.add\_argument(
+52             \textcolor{stringliteral}{'--docker-context-dir'}, metavar=\textcolor{stringliteral}{'DIR'},
+53             default=default\_context\_dir,
+54             help=\textcolor{stringliteral}{'Write the Dockerfile and its context into this directory. '}
+55                 \textcolor{stringliteral}{'If empty, make a temporary directory. Default: %(default)s.'},
+56         )
+57         parser.add\_argument(
+58             \textcolor{stringliteral}{'--user'}, metavar=\textcolor{stringliteral}{'NAME'}, default=opts.get(\textcolor{stringliteral}{'user'}, \textcolor{stringliteral}{'nobody'}),
+59             help=\textcolor{stringliteral}{'Build and install as this user. Default: %(default)s.'},
+60         )
+61         parser.add\_argument(
+62             \textcolor{stringliteral}{'--prefix'}, metavar=\textcolor{stringliteral}{'DIR'},
+63             default=opts.get(\textcolor{stringliteral}{'prefix'}, \textcolor{stringliteral}{'/home/install'}),
+64             help=\textcolor{stringliteral}{'Install all libraries in this prefix. Default: %(default)s.'},
+65         )
+66         parser.add\_argument(
+67             \textcolor{stringliteral}{'--projects-dir'}, metavar=\textcolor{stringliteral}{'DIR'},
+68             default=opts.get(\textcolor{stringliteral}{'projects\_dir'}, \textcolor{stringliteral}{'/home'}),
+69             help=\textcolor{stringliteral}{'Place project code directories here. Default: %(default)s.'},
+70         )
+71         parser.add\_argument(
+72             \textcolor{stringliteral}{'--os-image'}, metavar=\textcolor{stringliteral}{'IMG'}, choices=zip(*valid\_versions)[0],
+73             default=opts.get(\textcolor{stringliteral}{'os\_image'}, valid\_versions[0][0]),
+74             help=\textcolor{stringliteral}{'Docker OS image -- be sure to use only ones you trust (See '}
+75                 \textcolor{stringliteral}{'README.docker). Choices: %(choices)s. Default: %(default)s.'},
+76         )
+77         parser.add\_argument(
+78             \textcolor{stringliteral}{'--gcc-version'}, metavar=\textcolor{stringliteral}{'VER'},
+79             choices=set(zip(*valid\_versions)[1]),
+80             default=opts.get(\textcolor{stringliteral}{'gcc\_version'}, valid\_versions[0][1]),
+81             help=\textcolor{stringliteral}{'Choices: %(choices)s. Default: %(default)s.'},
+82         )
+83         parser.add\_argument(
+84             \textcolor{stringliteral}{'--make-parallelism'}, metavar=\textcolor{stringliteral}{'NUM'}, type=int,
+85             default=opts.get(\textcolor{stringliteral}{'make\_parallelism'}, 1),
+86             help=\textcolor{stringliteral}{'Use `make -j` on multi-CPU systems with lots of RAM. '}
+87                 \textcolor{stringliteral}{'Default: %(default)s.'},
+88         )
+89         parser.add\_argument(
+90             \textcolor{stringliteral}{'--local-repo-dir'}, metavar=\textcolor{stringliteral}{'DIR'},
+91             help=\textcolor{stringliteral}{'If set, build \{0\} from a local directory instead of Github.'}
+92                 .format(github\_project),
+93         )
+94         parser.add\_argument(
+95             \textcolor{stringliteral}{'--ccache-tgz'}, metavar=\textcolor{stringliteral}{'PATH'},
+96             help=\textcolor{stringliteral}{'If set, enable ccache for the build. To initialize the '}
+97                  \textcolor{stringliteral}{'cache, first try to hardlink, then to copy --cache-tgz '}
+98                  \textcolor{stringliteral}{'as ccache.tgz into the --docker-context-dir.'}
+99         )
+100 
+101     opts = parse_args_to_fbcode_builder_opts(
+102         add\_args,
+103         \textcolor{comment}{# These have add\_argument() calls, others are set via --option.}
+104         (
+105             \textcolor{stringliteral}{'docker\_context\_dir'},
+106             \textcolor{stringliteral}{'user'},
+107             \textcolor{stringliteral}{'prefix'},
+108             \textcolor{stringliteral}{'projects\_dir'},
+109             \textcolor{stringliteral}{'os\_image'},
+110             \textcolor{stringliteral}{'gcc\_version'},
+111             \textcolor{stringliteral}{'make\_parallelism'},
+112             \textcolor{stringliteral}{'local\_repo\_dir'},
+113             \textcolor{stringliteral}{'ccache\_tgz'},
+114         ),
+115         opts,
+116         help=textwrap.dedent(\textcolor{stringliteral}{'''}
+117 \textcolor{stringliteral}{}
+118 \textcolor{stringliteral}{        Reads `fbcode\_builder\_config.py` from the current directory, and}
+119 \textcolor{stringliteral}{        prepares a Docker context directory to build \{github\_project\} and}
+120 \textcolor{stringliteral}{        its dependencies.  Prints to stdout the path to the context}
+121 \textcolor{stringliteral}{        directory.}
+122 \textcolor{stringliteral}{}
+123 \textcolor{stringliteral}{        Pass --option \{github\_project\}:git\_hash SHA1 to build something}
+124 \textcolor{stringliteral}{        other than the master branch from Github.}
+125 \textcolor{stringliteral}{}
+126 \textcolor{stringliteral}{        Or, pass --option \{github\_project\}:local\_repo\_dir LOCAL\_PATH to}
+127 \textcolor{stringliteral}{        build from a local repo instead of cloning from Github.}
+128 \textcolor{stringliteral}{}
+129 \textcolor{stringliteral}{        Usage:}
+130 \textcolor{stringliteral}{            (cd $(./make\_docker\_context.py) && docker build . 2>&1 | tee log)}
+131 \textcolor{stringliteral}{}
+132 \textcolor{stringliteral}{        '''}.format(github\_project=github\_project)),
+133     )
+134 
+135     \textcolor{comment}{# This allows travis\_docker\_build.sh not to know the main Github project.}
+136     local\_repo\_dir = opts.pop(\textcolor{stringliteral}{'local\_repo\_dir'}, \textcolor{keywordtype}{None})
+137     \textcolor{keywordflow}{if} local\_repo\_dir \textcolor{keywordflow}{is} \textcolor{keywordflow}{not} \textcolor{keywordtype}{None}:
+138         opts[\textcolor{stringliteral}{'\{0\}:local\_repo\_dir'}.format(github\_project)] = local\_repo\_dir
+139 
+140     \textcolor{keywordflow}{if} (opts.get(\textcolor{stringliteral}{'os\_image'}), opts.get(\textcolor{stringliteral}{'gcc\_version'})) \textcolor{keywordflow}{not} \textcolor{keywordflow}{in} valid\_versions:
+141         \textcolor{keywordflow}{raise} Exception(
+142             \textcolor{stringliteral}{'Due to 4/5 ABI changes (std::string), we can only use \{0\}'}.format(
+143                 \textcolor{stringliteral}{' / '}.join(\textcolor{stringliteral}{'GCC \{1\} on \{0\}'}.format(*p) \textcolor{keywordflow}{for} p \textcolor{keywordflow}{in} valid\_versions)
+144             )
+145         )
+146 
+147     \textcolor{keywordflow}{if} opts.get(\textcolor{stringliteral}{'docker\_context\_dir'}) \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+148         opts[\textcolor{stringliteral}{'docker\_context\_dir'}] = tempfile.mkdtemp(prefix=\textcolor{stringliteral}{'docker-context-'})
+149     \textcolor{keywordflow}{elif} \textcolor{keywordflow}{not} os.path.exists(opts.get(\textcolor{stringliteral}{'docker\_context\_dir'})):
+150         os.makedirs(opts.get(\textcolor{stringliteral}{'docker\_context\_dir'}))
+151 
+152     builder = DockerFBCodeBuilder(**opts)
+153     context\_dir = builder.option(\textcolor{stringliteral}{'docker\_context\_dir'})  \textcolor{comment}{# Mark option "in-use"}
+154     \textcolor{comment}{# The renderer may also populate some files into the context\_dir.}
+155     dockerfile = builder.render(get\_steps\_fn(builder))
+156 
+157     with os.fdopen(os.open(
+158         os.path.join(context\_dir, \textcolor{stringliteral}{'Dockerfile'}),
+159         os.O\_RDWR | os.O\_CREAT | os.O\_EXCL,  \textcolor{comment}{# Do not overwrite existing files}
+160         0o644,
+161     ), \textcolor{stringliteral}{'w'}) \textcolor{keyword}{as} f:
+162         f.write(dockerfile)
+163 
+164     \textcolor{keywordflow}{return} context\_dir
+165 
+166 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{make\+\_\+docker\+\_\+context@{make\+\_\+docker\+\_\+context}!config@{config}}
+\index{config@{config}!make\+\_\+docker\+\_\+context@{make\+\_\+docker\+\_\+context}}
+\subsubsection[{config}]{\setlength{\rightskip}{0pt plus 5cm}make\+\_\+docker\+\_\+context.\+config = read\+\_\+fbcode\+\_\+builder\+\_\+config(\textquotesingle{}fbcode\+\_\+builder\+\_\+config.\+py\textquotesingle{})}\label{namespacemake__docker__context_ab4b29fc508116d295c5eb3c55bcd3ac3}
+
+
+Definition at line 171 of file make\+\_\+docker\+\_\+context.\+py.
+

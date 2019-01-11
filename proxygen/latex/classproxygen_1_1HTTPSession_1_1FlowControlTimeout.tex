@@ -1,0 +1,156 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Session\+:\+:Flow\+Control\+Timeout Class Reference}
+\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout}\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Session\+:\+:Flow\+Control\+Timeout\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPSession_1_1FlowControlTimeout}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Flow\+Control\+Timeout} ({\bf H\+T\+T\+P\+Session} $\ast$session)
+\item 
+{\bf $\sim$\+Flow\+Control\+Timeout} () override
+\item 
+void {\bf timeout\+Expired} () noexceptoverride
+\item 
+std\+::chrono\+::milliseconds {\bf get\+Timeout\+Duration} () const 
+\item 
+void {\bf set\+Timeout\+Duration} (std\+::chrono\+::milliseconds duration)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session} $\ast$ {\bf session\+\_\+}
+\item 
+std\+::chrono\+::milliseconds {\bf duration\+\_\+} \{std\+::chrono\+::milliseconds(0)\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 1002 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}!Flow\+Control\+Timeout@{Flow\+Control\+Timeout}}
+\index{Flow\+Control\+Timeout@{Flow\+Control\+Timeout}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+\subsubsection[{Flow\+Control\+Timeout(\+H\+T\+T\+P\+Session $\ast$session)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::\+Flow\+Control\+Timeout (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session} $\ast$}]{session}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout_a196995a900510384133a70d573da334e}
+
+
+Definition at line 1004 of file H\+T\+T\+P\+Session.\+h.
+
+
+\begin{DoxyCode}
+1004 : session_(session) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}!````~Flow\+Control\+Timeout@{$\sim$\+Flow\+Control\+Timeout}}
+\index{````~Flow\+Control\+Timeout@{$\sim$\+Flow\+Control\+Timeout}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+\subsubsection[{$\sim$\+Flow\+Control\+Timeout() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::$\sim$\+Flow\+Control\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout_aa8cd7f37c8b66715e4145c0b91c10662}
+
+
+Definition at line 1005 of file H\+T\+T\+P\+Session.\+h.
+
+
+\begin{DoxyCode}
+1005 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}!get\+Timeout\+Duration@{get\+Timeout\+Duration}}
+\index{get\+Timeout\+Duration@{get\+Timeout\+Duration}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+\subsubsection[{get\+Timeout\+Duration() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::get\+Timeout\+Duration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout_a2541f897a1161dd1ac4ad0160295310e}
+
+
+Definition at line 1011 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Connection\+Send\+Window\+Closed().
+
+
+\begin{DoxyCode}
+1011                                                      \{
+1012       \textcolor{keywordflow}{return} duration_;
+1013     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}!set\+Timeout\+Duration@{set\+Timeout\+Duration}}
+\index{set\+Timeout\+Duration@{set\+Timeout\+Duration}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+\subsubsection[{set\+Timeout\+Duration(std\+::chrono\+::milliseconds duration)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::set\+Timeout\+Duration (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::milliseconds}]{duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout_a99fce853f6a0c42968a95aefa1eed774}
+
+
+Definition at line 1015 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Err().
+
+
+\begin{DoxyCode}
+1015                                                             \{
+1016       duration_ = duration;
+1017     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}!timeout\+Expired@{timeout\+Expired}}
+\index{timeout\+Expired@{timeout\+Expired}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+\subsubsection[{timeout\+Expired() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::timeout\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout_ac06162824b3977b0ad34215e69a3356e}
+
+
+Definition at line 1007 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::flow\+Control\+Timeout\+Expired(), and proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Timeout\+::session\+\_\+.
+
+
+\begin{DoxyCode}
+1007                                             \{
+1008       session_->flowControlTimeoutExpired();
+1009     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}!duration\+\_\+@{duration\+\_\+}}
+\index{duration\+\_\+@{duration\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+\subsubsection[{duration\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::chrono\+::milliseconds proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::duration\+\_\+ \{std\+::chrono\+::milliseconds(0)\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout_a49f899bd769c1d7e2f2783ed6e1ae31b}
+
+
+Definition at line 1020 of file H\+T\+T\+P\+Session.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}!session\+\_\+@{session\+\_\+}}
+\index{session\+\_\+@{session\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout}}
+\subsubsection[{session\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::session\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSession_1_1FlowControlTimeout_a4aefa54a9c2d58221e0f9f5146b4394c}
+
+
+Definition at line 1019 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session.\+h}\end{DoxyCompactItemize}

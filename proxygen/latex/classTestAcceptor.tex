@@ -1,0 +1,71 @@
+\section{Test\+Acceptor Class Reference}
+\label{classTestAcceptor}\index{Test\+Acceptor@{Test\+Acceptor}}
+Inheritance diagram for Test\+Acceptor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestAcceptor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Test\+Acceptor} (const Server\+Socket\+Config \&acc\+Config)
+\item 
+void {\bf on\+New\+Connection} (folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr, const folly\+::\+Socket\+Address $\ast$, const std\+::string \&, Secure\+Transport\+Type, const Transport\+Info \&) override
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 31 of file Acceptor\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Acceptor@{Test\+Acceptor}!Test\+Acceptor@{Test\+Acceptor}}
+\index{Test\+Acceptor@{Test\+Acceptor}!Test\+Acceptor@{Test\+Acceptor}}
+\subsubsection[{Test\+Acceptor(const Server\+Socket\+Config \&acc\+Config)}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Acceptor\+::\+Test\+Acceptor (
+\begin{DoxyParamCaption}
+\item[{const Server\+Socket\+Config \&}]{acc\+Config}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classTestAcceptor_ab340ee060eec0f1cc0d3e0f200181edc}
+
+
+Definition at line 33 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+34       : Acceptor(accConfig) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Acceptor@{Test\+Acceptor}!on\+New\+Connection@{on\+New\+Connection}}
+\index{on\+New\+Connection@{on\+New\+Connection}!Test\+Acceptor@{Test\+Acceptor}}
+\subsubsection[{on\+New\+Connection(folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr, const folly\+::\+Socket\+Address $\ast$, const std\+::string \&, Secure\+Transport\+Type, const Transport\+Info \&) override}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Acceptor\+::on\+New\+Connection (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr}]{, }
+\item[{const folly\+::\+Socket\+Address $\ast$}]{, }
+\item[{const std\+::string \&}]{, }
+\item[{Secure\+Transport\+Type}]{, }
+\item[{const Transport\+Info \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classTestAcceptor_a67106b0830e635ecfec32c1bab34434e}
+
+
+Definition at line 36 of file Acceptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+40                                                         \{
+41     addConnection(\textcolor{keyword}{new} TestConnection);
+42 
+43     getEventBase()->terminateLoopSoon();
+44   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/services/test/{\bf Acceptor\+Test.\+cpp}\end{DoxyCompactItemize}

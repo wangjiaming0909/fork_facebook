@@ -1,0 +1,243 @@
+\section{Test\+Timeout Class Reference}
+\label{classTestTimeout}\index{Test\+Timeout@{Test\+Timeout}}
+Inheritance diagram for Test\+Timeout\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestTimeout}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\{\bf Test\+Timeout} (Args \&\&...args)
+\item 
+{\bf Test\+Timeout} ()
+\item 
+void {\bf add\+Timeout} ({\bf Async\+Timeout\+Set} $\ast$set)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\void {\bf add\+Timeout} ({\bf Async\+Timeout\+Set} $\ast$set, Args \&\&...args)
+\item 
+void {\bf timeout\+Expired} () noexceptoverride
+\item 
+void {\bf \+\_\+schedule\+Next} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf set\+Timeout\+Clock} ({\bf Mock\+Timeout\+Clock} \&clock)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::deque$<$ milliseconds $>$ {\bf timestamps}
+\item 
+std\+::function$<$ void()$>$ {\bf fn}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::deque$<$ {\bf Async\+Timeout\+Set} $\ast$ $>$ {\bf next\+Sets\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf Mock\+Timeout\+Clock} $\ast$ {\bf clock\+\_\+} = {\bf nullptr}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 37 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Timeout@{Test\+Timeout}!Test\+Timeout@{Test\+Timeout}}
+\index{Test\+Timeout@{Test\+Timeout}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{Test\+Timeout(\+Args \&\&...\+args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ Test\+Timeout\+::\+Test\+Timeout (
+\begin{DoxyParamCaption}
+\item[{Args \&\&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classTestTimeout_a9d6da24d347326b60b03eca7ec1f705f}
+
+
+Definition at line 40 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+40                                        \{
+41     addTimeout(std::forward<Args>(args)...);
+42     _scheduleNext();
+43   \}
+\end{DoxyCode}
+\index{Test\+Timeout@{Test\+Timeout}!Test\+Timeout@{Test\+Timeout}}
+\index{Test\+Timeout@{Test\+Timeout}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{Test\+Timeout()}]{\setlength{\rightskip}{0pt plus 5cm}Test\+Timeout\+::\+Test\+Timeout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestTimeout_ab3383c88c4ed751141c83ace2833112b}
+
+
+Definition at line 44 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+44 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Timeout@{Test\+Timeout}!\+\_\+schedule\+Next@{\+\_\+schedule\+Next}}
+\index{\+\_\+schedule\+Next@{\+\_\+schedule\+Next}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{\+\_\+schedule\+Next()}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Timeout\+::\+\_\+schedule\+Next (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestTimeout_a4bd58e6fa01b0e654dc8db0468ff5004}
+
+
+Definition at line 64 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Async\+Timeout\+Set\+::front(), and proxygen\+::\+Async\+Timeout\+Set\+::schedule\+Timeout().
+
+
+\begin{DoxyCode}
+64                        \{
+65     \textcolor{keywordflow}{if} (nextSets_.empty()) \{
+66       \textcolor{keywordflow}{return};
+67     \}
+68     AsyncTimeoutSet* nextSet = nextSets_.front();
+69     nextSets_.pop\_front();
+70     nextSet->scheduleTimeout(\textcolor{keyword}{this});
+71   \}
+\end{DoxyCode}
+\index{Test\+Timeout@{Test\+Timeout}!add\+Timeout@{add\+Timeout}}
+\index{add\+Timeout@{add\+Timeout}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{add\+Timeout(\+Async\+Timeout\+Set $\ast$set)}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Timeout\+::add\+Timeout (
+\begin{DoxyParamCaption}
+\item[{{\bf Async\+Timeout\+Set} $\ast$}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestTimeout_ae4d40cb5d1a15a2eaa41548b1607b61e}
+
+
+Definition at line 46 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+46                                         \{
+47     nextSets_.push\_back(\textcolor{keyword}{set});
+48   \}
+\end{DoxyCode}
+\index{Test\+Timeout@{Test\+Timeout}!add\+Timeout@{add\+Timeout}}
+\index{add\+Timeout@{add\+Timeout}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{add\+Timeout(\+Async\+Timeout\+Set $\ast$set, Args \&\&...\+args)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Args$>$ void Test\+Timeout\+::add\+Timeout (
+\begin{DoxyParamCaption}
+\item[{{\bf Async\+Timeout\+Set} $\ast$}]{set, }
+\item[{Args \&\&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classTestTimeout_a3e4f7caa34e9aea0e89eec63a9ccbd92}
+
+
+Definition at line 51 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+51                                                         \{
+52     addTimeout(\textcolor{keyword}{set});
+53     addTimeout(std::forward<Args>(args)...);
+54   \}
+\end{DoxyCode}
+\index{Test\+Timeout@{Test\+Timeout}!set\+Timeout\+Clock@{set\+Timeout\+Clock}}
+\index{set\+Timeout\+Clock@{set\+Timeout\+Clock}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{set\+Timeout\+Clock(\+Mock\+Timeout\+Clock \&clock)}]{\setlength{\rightskip}{0pt plus 5cm}static void Test\+Timeout\+::set\+Timeout\+Clock (
+\begin{DoxyParamCaption}
+\item[{{\bf Mock\+Timeout\+Clock} \&}]{clock}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classTestTimeout_a098363ed94ecb860620e6fe642d1f6f9}
+
+
+Definition at line 76 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+Referenced by Timeout\+Test\+::\+Set\+Up().
+
+
+\begin{DoxyCode}
+76                                                        \{
+77     clock_ = &clock;
+78   \}
+\end{DoxyCode}
+\index{Test\+Timeout@{Test\+Timeout}!timeout\+Expired@{timeout\+Expired}}
+\index{timeout\+Expired@{timeout\+Expired}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{timeout\+Expired() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Test\+Timeout\+::timeout\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classTestTimeout_a66a85a8148ca75d881532948d8537df3}
+\doxyref{timeout\+Expired()}{p.}{classTestTimeout_a66a85a8148ca75d881532948d8537df3} is invoked when the timeout has expired. 
+
+Implements {\bf proxygen\+::\+Async\+Timeout\+Set\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1AsyncTimeoutSet_1_1Callback_a6c1534935d53209440d6b02c7a69e96c}.
+
+
+
+Definition at line 56 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+56                                           \{
+57     timestamps.emplace\_back(clock_->millisecondsSinceEpoch());
+58     _scheduleNext();
+59     \textcolor{keywordflow}{if} (fn) \{
+60       fn();
+61     \}
+62   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Test\+Timeout@{Test\+Timeout}!clock\+\_\+@{clock\+\_\+}}
+\index{clock\+\_\+@{clock\+\_\+}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{clock\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mock\+Timeout\+Clock} $\ast$ Test\+Timeout\+::clock\+\_\+ = {\bf nullptr}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classTestTimeout_a87dbec4412cc9f47270eeeec768d98b8}
+
+
+Definition at line 81 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+\index{Test\+Timeout@{Test\+Timeout}!fn@{fn}}
+\index{fn@{fn}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{fn}]{\setlength{\rightskip}{0pt plus 5cm}std\+::function$<$void()$>$ Test\+Timeout\+::fn}\label{classTestTimeout_acbf5133fa9a70f890a525806e78e582c}
+
+
+Definition at line 74 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+\index{Test\+Timeout@{Test\+Timeout}!next\+Sets\+\_\+@{next\+Sets\+\_\+}}
+\index{next\+Sets\+\_\+@{next\+Sets\+\_\+}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{next\+Sets\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<${\bf Async\+Timeout\+Set}$\ast$$>$ Test\+Timeout\+::next\+Sets\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classTestTimeout_a25743fab73eb051353fc5e305a18642d}
+
+
+Definition at line 82 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+\index{Test\+Timeout@{Test\+Timeout}!timestamps@{timestamps}}
+\index{timestamps@{timestamps}!Test\+Timeout@{Test\+Timeout}}
+\subsubsection[{timestamps}]{\setlength{\rightskip}{0pt plus 5cm}std\+::deque$<$milliseconds$>$ Test\+Timeout\+::timestamps}\label{classTestTimeout_ac3de181199eef7ade3a32daa6e991240}
+
+
+Definition at line 73 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/test/{\bf Async\+Timeout\+Set\+Test.\+cpp}\end{DoxyCompactItemize}

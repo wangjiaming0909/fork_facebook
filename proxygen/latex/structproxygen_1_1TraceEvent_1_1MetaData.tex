@@ -1,0 +1,248 @@
+\section{proxygen\+:\+:Trace\+Event\+:\+:Meta\+Data Struct Reference}
+\label{structproxygen_1_1TraceEvent_1_1MetaData}\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+
+
+{\ttfamily \#include $<$Trace\+Event.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Conv\+Visitor}
+\item 
+struct {\bf Conv\+Visitor$<$ std\+::string $>$}
+\item 
+struct {\bf Conv\+Visitor$<$ std\+::vector$<$ std\+::string $>$ $>$}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Meta\+Data\+Type} = boost\+::variant$<$ int64\+\_\+t, std\+::string, std\+::vector$<$ std\+::string $>$$>$
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+integral$<$\+T$>$\+::value,                                                 void$>$\+::type$>$ }\\{\bf Meta\+Data} ({\bf T} value)
+\item 
+{\bf Meta\+Data} (const std\+::string \&value)
+\item 
+{\bf Meta\+Data} (std\+::string \&\&value)
+\item 
+{\bf Meta\+Data} (const char $\ast$value)
+\item 
+{\bf Meta\+Data} (const folly\+::fbstring \&value)
+\item 
+{\bf Meta\+Data} (const std\+::vector$<$ std\+::string $>$ \&value)
+\item 
+{\bf Meta\+Data} (std\+::vector$<$ std\+::string $>$ \&\&value)
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf T} {\bf get\+Value\+As} () const 
+\item 
+const std\+::type\+\_\+info \& {\bf type} () const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Meta\+Data\+Type} {\bf value\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 40 of file Trace\+Event.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data\+Type@{Meta\+Data\+Type}}
+\index{Meta\+Data\+Type@{Meta\+Data\+Type}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data\+Type}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data\+Type} =  boost\+::variant$<$int64\+\_\+t, std\+::string, std\+::vector$<$std\+::string$>$$>$}\label{structproxygen_1_1TraceEvent_1_1MetaData_a3005549559cf0d8791f86809448cbeb4}
+
+
+Definition at line 43 of file Trace\+Event.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data@{Meta\+Data}}
+\index{Meta\+Data@{Meta\+Data}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data(\+T value)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+integral$<$\+T$>$\+::value,                                                 void$>$\+::type$>$ proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf T}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_a599f362c179005e7ea52f11ce576d043}
+
+
+Definition at line 48 of file Trace\+Event.\+h.
+
+
+\begin{DoxyCode}
+49         : value_(folly::to<int64\_t>(value)) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data@{Meta\+Data}}
+\index{Meta\+Data@{Meta\+Data}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data(const std\+::string \&value)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_a2972e5afa43247de88c10757103bf541}
+
+
+Definition at line 51 of file Trace\+Event.\+h.
+
+
+\begin{DoxyCode}
+51                                        :
+52       value_(value) \{
+53     \}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data@{Meta\+Data}}
+\index{Meta\+Data@{Meta\+Data}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data(std\+::string \&\&value)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&\&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_afa29e8b86b5058ca5a0200445898aab5}
+
+
+Definition at line 55 of file Trace\+Event.\+h.
+
+
+\begin{DoxyCode}
+55                                   :
+56       value_(std::move(value)) \{
+57     \}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data@{Meta\+Data}}
+\index{Meta\+Data@{Meta\+Data}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data(const char $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_aaac47ed1d7c7f25b144943fc0c4f2c1c}
+
+
+Definition at line 59 of file Trace\+Event.\+h.
+
+
+\begin{DoxyCode}
+59                                   :
+60       value_(std::string(value)) \{
+61     \}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data@{Meta\+Data}}
+\index{Meta\+Data@{Meta\+Data}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data(const folly\+::fbstring \&value)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data (
+\begin{DoxyParamCaption}
+\item[{const folly\+::fbstring \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_a8a6e74b152942c8388e3bd4b80fe9ba4}
+
+
+Definition at line 63 of file Trace\+Event.\+h.
+
+
+\begin{DoxyCode}
+63                                            :
+64       value_(value.toStdString()) \{
+65     \}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data@{Meta\+Data}}
+\index{Meta\+Data@{Meta\+Data}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data(const std\+::vector$<$ std\+::string $>$ \&value)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ std\+::string $>$ \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_a4a8335e4cb9701dc0e86d51ab457846e}
+
+
+Definition at line 67 of file Trace\+Event.\+h.
+
+
+\begin{DoxyCode}
+67                                                   :
+68       value_(value) \{
+69     \}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!Meta\+Data@{Meta\+Data}}
+\index{Meta\+Data@{Meta\+Data}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{Meta\+Data(std\+::vector$<$ std\+::string $>$ \&\&value)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::\+Meta\+Data (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::string $>$ \&\&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_a693e244b7741bf1d4290b371675fd967}
+
+
+Definition at line 71 of file Trace\+Event.\+h.
+
+
+\begin{DoxyCode}
+71                                              :
+72       value_(std::move(value)) \{
+73     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!get\+Value\+As@{get\+Value\+As}}
+\index{get\+Value\+As@{get\+Value\+As}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{get\+Value\+As() const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf T} proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::get\+Value\+As (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_ae26f2fc0ab213a9381a292376a9c7480}
+
+
+Definition at line 76 of file Trace\+Event.\+h.
+
+
+
+References value\+\_\+.
+
+
+\begin{DoxyCode}
+76                          \{
+77       ConvVisitor<T> visitor;
+78       \textcolor{keywordflow}{return} boost::apply\_visitor(visitor, value_);
+79     \}
+\end{DoxyCode}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!type@{type}}
+\index{type@{type}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{type() const }]{\setlength{\rightskip}{0pt plus 5cm}const std\+::type\+\_\+info\& proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1TraceEvent_1_1MetaData_a132e4a16f2085f2dcce6aff9776a4253}
+
+
+Definition at line 81 of file Trace\+Event.\+h.
+
+
+
+References value\+\_\+.
+
+
+\begin{DoxyCode}
+81                                      \{
+82       \textcolor{keywordflow}{return} value_.type();
+83     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}!value\+\_\+@{value\+\_\+}}
+\index{value\+\_\+@{value\+\_\+}!proxygen\+::\+Trace\+Event\+::\+Meta\+Data@{proxygen\+::\+Trace\+Event\+::\+Meta\+Data}}
+\subsubsection[{value\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Meta\+Data\+Type} proxygen\+::\+Trace\+Event\+::\+Meta\+Data\+::value\+\_\+}\label{structproxygen_1_1TraceEvent_1_1MetaData_a5ed05e2cb7aea3fe2364c9a2dc5268d5}
+
+
+Definition at line 97 of file Trace\+Event.\+h.
+
+
+
+Referenced by get\+Value\+As(), and type().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Trace\+Event.\+h}\end{DoxyCompactItemize}

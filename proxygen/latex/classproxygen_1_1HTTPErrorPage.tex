@@ -1,0 +1,76 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Error\+Page Class Reference}
+\label{classproxygen_1_1HTTPErrorPage}\index{proxygen\+::\+H\+T\+T\+P\+Error\+Page@{proxygen\+::\+H\+T\+T\+P\+Error\+Page}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Error\+Page.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Error\+Page\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPErrorPage}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Page}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+H\+T\+T\+P\+Error\+Page} ()
+\item 
+virtual {\bf Page} {\bf generate} (uint64\+\_\+t request\+ID, unsigned http\+Status\+Code, const std\+::string \&reason, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body, const std\+::string \&detail\+Reason) const =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An \doxyref{H\+T\+T\+P\+Error\+Page}{p.}{classproxygen_1_1HTTPErrorPage} generates the content for a web page that Proxygen can return in response to various error conditions. 
+
+Definition at line 25 of file H\+T\+T\+P\+Error\+Page.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Error\+Page@{proxygen\+::\+H\+T\+T\+P\+Error\+Page}!````~H\+T\+T\+P\+Error\+Page@{$\sim$\+H\+T\+T\+P\+Error\+Page}}
+\index{````~H\+T\+T\+P\+Error\+Page@{$\sim$\+H\+T\+T\+P\+Error\+Page}!proxygen\+::\+H\+T\+T\+P\+Error\+Page@{proxygen\+::\+H\+T\+T\+P\+Error\+Page}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Error\+Page()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P\+Error\+Page\+::$\sim$\+H\+T\+T\+P\+Error\+Page (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPErrorPage_a66d3ea0b09db5ac020a731b0c97f8b46}
+
+
+Definition at line 41 of file H\+T\+T\+P\+Error\+Page.\+h.
+
+
+\begin{DoxyCode}
+41 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Error\+Page@{proxygen\+::\+H\+T\+T\+P\+Error\+Page}!generate@{generate}}
+\index{generate@{generate}!proxygen\+::\+H\+T\+T\+P\+Error\+Page@{proxygen\+::\+H\+T\+T\+P\+Error\+Page}}
+\subsubsection[{generate(uint64\+\_\+t request\+I\+D, unsigned http\+Status\+Code, const std\+::string \&reason, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ body, const std\+::string \&detail\+Reason) const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Page} proxygen\+::\+H\+T\+T\+P\+Error\+Page\+::generate (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{request\+ID, }
+\item[{unsigned}]{http\+Status\+Code, }
+\item[{const std\+::string \&}]{reason, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{body, }
+\item[{const std\+::string \&}]{detail\+Reason}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPErrorPage_ab5216a4bd61c2bcea7a31f4f12caf8f5}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Static\+Error\+Page} \doxyref{}{p.}{classproxygen_1_1HTTPStaticErrorPage_a08df96ff889b8b94244f6addaaec5e75}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Direct\+Response\+Handler\+::on\+Headers\+Complete().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Error\+Page.\+h}\end{DoxyCompactItemize}

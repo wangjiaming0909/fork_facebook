@@ -1,0 +1,27 @@
+\section{proxygen/lib/http/\+R\+F\+C2616.cpp File Reference}
+\label{RFC2616_8cpp}\index{proxygen/lib/http/\+R\+F\+C2616.\+cpp@{proxygen/lib/http/\+R\+F\+C2616.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/\+R\+F\+C2616.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+String.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Thread\+Local.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Headers.\+h$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\item 
+ {\bf proxygen\+::\+R\+F\+C2616}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Body\+Allowed {\bf proxygen\+::\+R\+F\+C2616\+::is\+Request\+Body\+Allowed} (folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Method} $>$ method)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::response\+Body\+Must\+Be\+Empty} (unsigned status)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::body\+Implied} (const H\+T\+T\+P\+Headers \&headers)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::parse\+Qvalues} (folly\+::\+String\+Piece value, std\+::vector$<$ Token\+Q\+Pair $>$ \&output)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::parse\+Byte\+Range\+Spec} (folly\+::\+String\+Piece value, unsigned long \&out\+First\+Byte, unsigned long \&out\+Last\+Byte, unsigned long \&out\+Instance\+Length)
+\end{DoxyCompactItemize}

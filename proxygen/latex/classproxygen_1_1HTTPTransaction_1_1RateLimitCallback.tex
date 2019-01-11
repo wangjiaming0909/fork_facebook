@@ -1,0 +1,99 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Transaction\+:\+:Rate\+Limit\+Callback Class Reference}
+\label{classproxygen_1_1HTTPTransaction_1_1RateLimitCallback}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}}
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Transaction\+:\+:Rate\+Limit\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPTransaction_1_1RateLimitCallback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Rate\+Limit\+Callback} ({\bf H\+T\+T\+P\+Transaction} \&txn)
+\item 
+void {\bf timeout\+Expired} () noexceptoverride
+\item 
+void {\bf callback\+Canceled} () noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Transaction} \& {\bf txn\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 1327 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}!Rate\+Limit\+Callback@{Rate\+Limit\+Callback}}
+\index{Rate\+Limit\+Callback@{Rate\+Limit\+Callback}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}}
+\subsubsection[{Rate\+Limit\+Callback(\+H\+T\+T\+P\+Transaction \&txn)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback\+::\+Rate\+Limit\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} \&}]{txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1HTTPTransaction_1_1RateLimitCallback_a8a0fbf7a3a0eb369421393e2d2f4c3f9}
+
+
+Definition at line 1329 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+1330         : txn_(txn) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}!callback\+Canceled@{callback\+Canceled}}
+\index{callback\+Canceled@{callback\+Canceled}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}}
+\subsubsection[{callback\+Canceled() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback\+::callback\+Canceled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransaction_1_1RateLimitCallback_a293977717ba11743aa008249ca61f165}
+
+
+Definition at line 1335 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+1335                                               \{
+1336       \textcolor{comment}{// no op}
+1337     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}!timeout\+Expired@{timeout\+Expired}}
+\index{timeout\+Expired@{timeout\+Expired}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}}
+\subsubsection[{timeout\+Expired() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback\+::timeout\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransaction_1_1RateLimitCallback_a720b0ed291c9d8663bfaa84033b48d35}
+
+
+Definition at line 1332 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+1332                                             \{
+1333       txn_.rateLimitTimeoutExpired();
+1334     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}!txn\+\_\+@{txn\+\_\+}}
+\index{txn\+\_\+@{txn\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback}}
+\subsubsection[{txn\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Transaction}\& proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Rate\+Limit\+Callback\+::txn\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPTransaction_1_1RateLimitCallback_abdbe76a5d54aef3c832099633d41905a}
+
+
+Definition at line 1339 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Transaction.\+h}\end{DoxyCompactItemize}

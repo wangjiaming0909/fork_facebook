@@ -1,0 +1,31 @@
+\section{specs.\+proxygen Namespace Reference}
+\label{namespacespecs_1_1proxygen}\index{specs.\+proxygen@{specs.\+proxygen}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf fbcode\+\_\+builder\+\_\+spec} (builder)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{specs\+::proxygen@{specs\+::proxygen}!fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}}
+\index{fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}!specs\+::proxygen@{specs\+::proxygen}}
+\subsubsection[{fbcode\+\_\+builder\+\_\+spec(builder)}]{\setlength{\rightskip}{0pt plus 5cm}def specs.\+proxygen.\+fbcode\+\_\+builder\+\_\+spec (
+\begin{DoxyParamCaption}
+\item[{}]{builder}
+\end{DoxyParamCaption}
+)}\label{namespacespecs_1_1proxygen_a346c537cd2933a0136d6a7278c84127f}
+
+
+Definition at line 14 of file proxygen.\+py.
+
+
+\begin{DoxyCode}
+14 \textcolor{keyword}{def }fbcode_builder_spec(builder):
+15     \textcolor{keywordflow}{return} \{
+16         \textcolor{stringliteral}{'depends\_on'}: [folly, wangle, fizz, sodium],
+17         \textcolor{stringliteral}{'steps'}: [
+18             builder.fb\_github\_autoconf\_install(\textcolor{stringliteral}{'proxygen/proxygen'}),
+19         ],
+20     \}
+21 \end{DoxyCode}

@@ -1,0 +1,161 @@
+\section{Test\+Priority\+Adapter Class Reference}
+\label{classTestPriorityAdapter}\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+Inheritance diagram for Test\+Priority\+Adapter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTestPriorityAdapter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual folly\+::\+Optional$<$ const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} $>$ {\bf get\+H\+T\+T\+P\+Priority} (uint8\+\_\+t level) override
+\item 
+virtual {\bf $\sim$\+Test\+Priority\+Adapter} ()=default
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ uint8\+\_\+t, {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} $>$ {\bf priority\+Map\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} {\bf min\+Priority\+\_\+} \{std\+::make\+\_\+tuple(0, false, 0)\}
+\item 
+{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf parent\+Id\+\_\+} \{0\}
+\item 
+{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf hi\+Pri\+Id\+\_\+} \{0\}
+\item 
+{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf lo\+Pri\+Id\+\_\+} \{0\}
+\item 
+{\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} {\bf hi\+Pri\+\_\+} \{std\+::make\+\_\+tuple(0, false, 0)\}
+\item 
+{\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} {\bf lo\+Pri\+\_\+} \{std\+::make\+\_\+tuple(0, false, 0)\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 51 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!````~Test\+Priority\+Adapter@{$\sim$\+Test\+Priority\+Adapter}}
+\index{````~Test\+Priority\+Adapter@{$\sim$\+Test\+Priority\+Adapter}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{$\sim$\+Test\+Priority\+Adapter()=default}]{\setlength{\rightskip}{0pt plus 5cm}virtual Test\+Priority\+Adapter\+::$\sim$\+Test\+Priority\+Adapter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\label{classTestPriorityAdapter_ae043ea2efa5c19bd2074c2b0b7901cfc}
+
+
+\subsection{Member Function Documentation}
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!get\+H\+T\+T\+P\+Priority@{get\+H\+T\+T\+P\+Priority}}
+\index{get\+H\+T\+T\+P\+Priority@{get\+H\+T\+T\+P\+Priority}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{get\+H\+T\+T\+P\+Priority(uint8\+\_\+t level) override}]{\setlength{\rightskip}{0pt plus 5cm}virtual folly\+::\+Optional$<$const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority}$>$ Test\+Priority\+Adapter\+::get\+H\+T\+T\+P\+Priority (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classTestPriorityAdapter_a7c3b6dd766e57395824d91c5d83415ac}
+
+
+Definition at line 53 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+54                               \{
+55     \textcolor{keywordflow}{if} (priorityMap_.empty()) \{
+56       \textcolor{keywordflow}{return} folly::none;
+57     \}
+58     \textcolor{keyword}{auto} it = priorityMap_.find(level);
+59     \textcolor{keywordflow}{if} (it == priorityMap_.end()) \{
+60       \textcolor{keywordflow}{return} minPriority_;
+61     \}
+62     \textcolor{keywordflow}{return} it->second;
+63   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!hi\+Pri\+\_\+@{hi\+Pri\+\_\+}}
+\index{hi\+Pri\+\_\+@{hi\+Pri\+\_\+}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{hi\+Pri\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} Test\+Priority\+Adapter\+::hi\+Pri\+\_\+ \{std\+::make\+\_\+tuple(0, false, 0)\}}\label{classTestPriorityAdapter_a60e0180412966f4006c5721c498f22e8}
+
+
+Definition at line 72 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams().
+
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!hi\+Pri\+Id\+\_\+@{hi\+Pri\+Id\+\_\+}}
+\index{hi\+Pri\+Id\+\_\+@{hi\+Pri\+Id\+\_\+}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{hi\+Pri\+Id\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} Test\+Priority\+Adapter\+::hi\+Pri\+Id\+\_\+ \{0\}}\label{classTestPriorityAdapter_ab8188dc2de83b91483c765d4f2689ff7}
+
+
+Definition at line 70 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams().
+
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!lo\+Pri\+\_\+@{lo\+Pri\+\_\+}}
+\index{lo\+Pri\+\_\+@{lo\+Pri\+\_\+}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{lo\+Pri\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} Test\+Priority\+Adapter\+::lo\+Pri\+\_\+ \{std\+::make\+\_\+tuple(0, false, 0)\}}\label{classTestPriorityAdapter_af3ebb3a61b484a192ee4e1d6944d3f64}
+
+
+Definition at line 73 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams().
+
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!lo\+Pri\+Id\+\_\+@{lo\+Pri\+Id\+\_\+}}
+\index{lo\+Pri\+Id\+\_\+@{lo\+Pri\+Id\+\_\+}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{lo\+Pri\+Id\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} Test\+Priority\+Adapter\+::lo\+Pri\+Id\+\_\+ \{0\}}\label{classTestPriorityAdapter_aa0493cac324039988f565a597b61daff}
+
+
+Definition at line 71 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams().
+
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!min\+Priority\+\_\+@{min\+Priority\+\_\+}}
+\index{min\+Priority\+\_\+@{min\+Priority\+\_\+}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{min\+Priority\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} Test\+Priority\+Adapter\+::min\+Priority\+\_\+ \{std\+::make\+\_\+tuple(0, false, 0)\}}\label{classTestPriorityAdapter_a8e435479993a563a5dc794b0038f49a7}
+
+
+Definition at line 68 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams().
+
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!parent\+Id\+\_\+@{parent\+Id\+\_\+}}
+\index{parent\+Id\+\_\+@{parent\+Id\+\_\+}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{parent\+Id\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} Test\+Priority\+Adapter\+::parent\+Id\+\_\+ \{0\}}\label{classTestPriorityAdapter_ad2a0229e7ed6759955908eafe3606f63}
+
+
+Definition at line 69 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams().
+
+\index{Test\+Priority\+Adapter@{Test\+Priority\+Adapter}!priority\+Map\+\_\+@{priority\+Map\+\_\+}}
+\index{priority\+Map\+\_\+@{priority\+Map\+\_\+}!Test\+Priority\+Adapter@{Test\+Priority\+Adapter}}
+\subsubsection[{priority\+Map\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$uint8\+\_\+t, {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority}$>$ Test\+Priority\+Adapter\+::priority\+Map\+\_\+}\label{classTestPriorityAdapter_a82e081a34a08cd2d1eda577b2184dc0a}
+
+
+Definition at line 67 of file H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P\+Upstream\+Session\+Test.\+cpp}\end{DoxyCompactItemize}

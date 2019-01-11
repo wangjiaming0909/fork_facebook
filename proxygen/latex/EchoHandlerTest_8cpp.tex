@@ -1,0 +1,109 @@
+\section{proxygen/httpserver/samples/echo/test/\+Echo\+Handler\+Test.cpp File Reference}
+\label{EchoHandlerTest_8cpp}\index{proxygen/httpserver/samples/echo/test/\+Echo\+Handler\+Test.\+cpp@{proxygen/httpserver/samples/echo/test/\+Echo\+Handler\+Test.\+cpp}}
+{\ttfamily \#include $<$folly/portability/\+G\+Mock.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpserver/\+Mocks.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpserver/samples/echo/\+Echo\+Handler.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/httpserver/samples/echo/\+Echo\+Stats.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Mock\+Echo\+Stats}
+\item 
+class {\bf Echo\+Handler\+Fixture}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Echo\+Handler\+Fixture}, On\+Proper\+Request\+Sends\+Response)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Echo\+Handler\+Fixture}, Replays\+Body\+Properly)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Echo\+Handler\+Test.\+cpp@{Echo\+Handler\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Echo\+Handler\+Test.\+cpp@{Echo\+Handler\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Echo\+Handler\+Fixture, On\+Proper\+Request\+Sends\+Response)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Echo\+Handler\+Fixture}}]{, }
+\item[{On\+Proper\+Request\+Sends\+Response}]{}
+\end{DoxyParamCaption}
+)}\label{EchoHandlerTest_8cpp_a7bc292ed04721e922f497be6f01e6f9b}
+
+
+Definition at line 49 of file Echo\+Handler\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Headers\+::get\+Single\+Or\+Empty(), and proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Status\+Code().
+
+
+\begin{DoxyCode}
+49                                                          \{
+50   EXPECT\_CALL(stats, recordRequest()).WillOnce(Return());
+51   EXPECT\_CALL(stats, getRequestCount()).WillOnce(Return(5));
+52 
+53   HTTPMessage response;
+54   EXPECT\_CALL(*responseHandler, sendHeaders(\_)).WillOnce(
+55       DoAll(SaveArg<0>(&response), Return()));
+56   EXPECT\_CALL(*responseHandler, sendEOM()).WillOnce(Return());
+57 
+58   \textcolor{comment}{// Since we know we dont touch request, its ok to pass `nullptr` here.}
+59   handler->onRequest(\textcolor{keyword}{nullptr});
+60   handler->onEOM();
+61   handler->requestComplete();
+62 
+63   EXPECT\_EQ(\textcolor{stringliteral}{"5"}, response.getHeaders().getSingleOrEmpty(\textcolor{stringliteral}{"Request-Number"}));
+64   EXPECT\_EQ(200, response.getStatusCode());
+65 \}
+\end{DoxyCode}
+\index{Echo\+Handler\+Test.\+cpp@{Echo\+Handler\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Echo\+Handler\+Test.\+cpp@{Echo\+Handler\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Echo\+Handler\+Fixture, Replays\+Body\+Properly)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Echo\+Handler\+Fixture}}]{, }
+\item[{Replays\+Body\+Properly}]{}
+\end{DoxyParamCaption}
+)}\label{EchoHandlerTest_8cpp_a6451d74772db646e9dd1dc7219bd0322}
+
+
+Definition at line 67 of file Echo\+Handler\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Headers\+::get\+Single\+Or\+Empty(), and proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Status\+Code().
+
+
+\begin{DoxyCode}
+67                                                 \{
+68   EXPECT\_CALL(stats, recordRequest()).WillOnce(Return());
+69   EXPECT\_CALL(stats, getRequestCount()).WillOnce(Return(5));
+70 
+71   HTTPMessage response;
+72   folly::fbstring body;
+73 
+74   EXPECT\_CALL(*responseHandler, sendHeaders(\_)).WillOnce(
+75       DoAll(SaveArg<0>(&response), Return()));
+76 
+77   EXPECT\_CALL(*responseHandler, sendBody(\_)).WillRepeatedly(
+78       DoAll(
+79           Invoke([&] (std::shared\_ptr<folly::IOBuf> b) \{
+80             body += b->moveToFbString();
+81           \}),
+82           Return()));
+83 
+84   EXPECT\_CALL(*responseHandler, sendEOM()).WillOnce(Return());
+85 
+86   \textcolor{comment}{// Since we know we dont touch request, its ok to pass `nullptr` here.}
+87   handler->onRequest(\textcolor{keyword}{nullptr});
+88   handler->onBody(folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"part1"}));
+89   handler->onBody(folly::IOBuf::copyBuffer(\textcolor{stringliteral}{"part2"}));
+90   handler->onEOM();
+91   handler->requestComplete();
+92 
+93   EXPECT\_EQ(\textcolor{stringliteral}{"5"}, response.getHeaders().getSingleOrEmpty(\textcolor{stringliteral}{"Request-Number"}));
+94   EXPECT\_EQ(200, response.getStatusCode());
+95   EXPECT\_EQ(\textcolor{stringliteral}{"part1part2"}, body);
+96 \}
+\end{DoxyCode}

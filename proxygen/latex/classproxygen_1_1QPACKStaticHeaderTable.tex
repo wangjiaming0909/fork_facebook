@@ -1,0 +1,72 @@
+\section{proxygen\+:\+:Q\+P\+A\+C\+K\+Static\+Header\+Table Class Reference}
+\label{classproxygen_1_1QPACKStaticHeaderTable}\index{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table}}
+
+
+{\ttfamily \#include $<$Q\+P\+A\+C\+K\+Static\+Header\+Table.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const {\bf Static\+Header\+Table} \& {\bf get} ()
+\item 
+static bool {\bf is\+Header\+Code\+In\+Table\+With\+Non\+Empty\+Value} ({\bf H\+T\+T\+P\+Header\+Code} header\+Code)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file Q\+P\+A\+C\+K\+Static\+Header\+Table.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table}!get@{get}}
+\index{get@{get}!proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table}}
+\subsubsection[{get()}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Static\+Header\+Table} \& proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table\+::get (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1QPACKStaticHeaderTable_abdb6a4cf4d029f09e4508b13b83b8b36}
+
+
+Definition at line 153 of file Q\+P\+A\+C\+K\+Static\+Header\+Table.\+cpp.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::get\+Static\+Table().
+
+
+\begin{DoxyCode}
+153                                                      \{
+154   \textcolor{keyword}{static} \textcolor{keyword}{const} folly::Indestructible<StaticHeaderTable> table(
+155     s\_tableEntries, kEntriesSize);
+156   \textcolor{keywordflow}{return} *table;
+157 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table}!is\+Header\+Code\+In\+Table\+With\+Non\+Empty\+Value@{is\+Header\+Code\+In\+Table\+With\+Non\+Empty\+Value}}
+\index{is\+Header\+Code\+In\+Table\+With\+Non\+Empty\+Value@{is\+Header\+Code\+In\+Table\+With\+Non\+Empty\+Value}!proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table}}
+\subsubsection[{is\+Header\+Code\+In\+Table\+With\+Non\+Empty\+Value(\+H\+T\+T\+P\+Header\+Code header\+Code)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Static\+Header\+Table\+::is\+Header\+Code\+In\+Table\+With\+Non\+Empty\+Value (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Header\+Code}}]{header\+Code}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1QPACKStaticHeaderTable_a7d628ec2e8ba2c9ab87dbb51f336d93f}
+Not currently used for Q\+P\+A\+CK, because the table contains 28 common headers with non-\/empty value. To get the list run\+:
+
+cat \doxyref{H\+T\+T\+P\+Common\+Headers.\+txt}{p.}{HTTPCommonHeaders_8txt} $\vert$ tr \textquotesingle{}[\+:upper\+:]\textquotesingle{} \textquotesingle{}[\+:lower\+:]\textquotesingle{} $\vert$ \textbackslash{} xargs -\/n 1 --replace=S\+TR \textbackslash{} grep -\/w S\+TR \doxyref{codec/compress/\+Q\+P\+A\+C\+K\+Static\+Header\+Table.\+cpp}{p.}{QPACKStaticHeaderTable_8cpp} $\vert$ \textbackslash{} grep -\/v \char`\"{}\textbackslash{}\char`\"{}"\char`\"{} $\vert$ cut -\/d\textbackslash{}\char`\"{} -\/f 2 $\vert$ sort $\vert$ uniq $\vert$ \textbackslash{} tr \textquotesingle{}[\+:lower\+:]\textquotesingle{} \textquotesingle{}[\+:upper\+:]\textquotesingle{} $\vert$ \textbackslash{} sed -\/e\textquotesingle{}s/$^\wedge$/\+H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+/g\textquotesingle{} -\/e\textquotesingle{}s/-\//\+\_\+/g\textquotesingle{} -\/e\textquotesingle{}s/\+:/\+C\+O\+L\+O\+N\+\_\+/g\textquotesingle{} 
+
+Definition at line 147 of file Q\+P\+A\+C\+K\+Static\+Header\+Table.\+cpp.
+
+
+\begin{DoxyCode}
+148                                \{
+149   LOG(FATAL) << \_\_func\_\_ << \textcolor{stringliteral}{" not supported for QPACK"};
+150   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+151 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Static\+Header\+Table.\+h}\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Static\+Header\+Table.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,651 @@
+\section{proxygen/lib/utils/test/\+Generic\+Filter\+Test.cpp File Reference}
+\label{GenericFilterTest_8cpp}\index{proxygen/lib/utils/test/\+Generic\+Filter\+Test.\+cpp@{proxygen/lib/utils/test/\+Generic\+Filter\+Test.\+cpp}}
+{\ttfamily \#include $<$deque$>$}\\*
+{\ttfamily \#include $<$folly/\+Memory.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Mock.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Filter\+Chain.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Tester\+Interface}
+\item 
+class {\bf Tester\+Interface\+::\+Callback}
+\item 
+class {\bf Mock\+Tester}
+\item 
+class {\bf Mock\+Tester\+Callback}
+\item 
+class {\bf Test\+Filter$<$ Owned $>$}
+\item 
+class {\bf Test\+Filter\+No\+Callback$<$ Owned $>$}
+\item 
+class {\bf Test\+Filter\+No\+Call$<$ Owned $>$}
+\item 
+class {\bf Test\+Filter\+No\+Callback\+No\+Call$<$ Owned $>$}
+\item 
+class {\bf Generic\+Filter\+Test$<$ Owned $>$}
+\item 
+class {\bf Test\+Filter\+Odd\+Delete\+Do}
+\item 
+class {\bf Test\+Filter\+Odd\+Delete\+On$<$ Owned $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf detail}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Owned\+Generic\+Filter\+Test} = {\bf Generic\+Filter\+Test}$<$ true $>$
+\item 
+using {\bf Unowned\+Generic\+Filter\+Test} = {\bf Generic\+Filter\+Test}$<$ false $>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf T} $\ast$ {\bf detail\+::get\+\_\+pointer} (const unique\+\_\+ptr$<$ {\bf T} $>$ \&ptr)
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf T} $\ast$ {\bf detail\+::get\+\_\+pointer} ({\bf T} $\ast$ptr)
+\item 
+{\footnotesize template$<$bool Owned$>$ }\\std\+::enable\+\_\+if$<$ Owned, unique\+\_\+ptr$<$ {\bf Mock\+Tester} $>$ $>$\+::type {\bf get\+Tester} ()
+\item 
+{\footnotesize template$<$bool Owned$>$ }\\std\+::enable\+\_\+if$<$!Owned, {\bf Mock\+Tester} $\ast$ $>$\+::type {\bf get\+Tester} ()
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Empty\+Chain)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Single\+Elem\+Chain)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Multi\+Elem\+Chain)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Multi\+Elem\+Multi\+Add)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Wants)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Wants\+Multi\+Add)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Wants\+Multi\+Add\+Hard)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Change\+Callback)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Unowned\+Generic\+Filter\+Test}, All)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Set\+Null\+Cb)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Unowned\+Generic\+Filter\+Test}, Delete\+Do)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Unowned\+Generic\+Filter\+Test}, Delete\+On)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Delete\+Chain)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Get\+Chain\+End)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Set\+Destination)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Owned\+Generic\+Filter\+Test}, Foreach)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!Owned\+Generic\+Filter\+Test@{Owned\+Generic\+Filter\+Test}}
+\index{Owned\+Generic\+Filter\+Test@{Owned\+Generic\+Filter\+Test}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{Owned\+Generic\+Filter\+Test}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Owned\+Generic\+Filter\+Test} =  {\bf Generic\+Filter\+Test}$<$true$>$}\label{GenericFilterTest_8cpp_a37b522e117bf310a221a30ca9fd99f34}
+
+
+Definition at line 241 of file Generic\+Filter\+Test.\+cpp.
+
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!Unowned\+Generic\+Filter\+Test@{Unowned\+Generic\+Filter\+Test}}
+\index{Unowned\+Generic\+Filter\+Test@{Unowned\+Generic\+Filter\+Test}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{Unowned\+Generic\+Filter\+Test}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Unowned\+Generic\+Filter\+Test} =  {\bf Generic\+Filter\+Test}$<$false$>$}\label{GenericFilterTest_8cpp_ad1383889def8e3e93fe9491cbb2da83a}
+
+
+Definition at line 242 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!get\+Tester@{get\+Tester}}
+\index{get\+Tester@{get\+Tester}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{get\+Tester()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ std\+::enable\+\_\+if$<$Owned, unique\+\_\+ptr$<${\bf Mock\+Tester}$>$ $>$\+::type get\+Tester (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a4b6ac7b8a3bf097fce59f6f4f9bd2051}
+
+
+Definition at line 122 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+122                                                                      \{
+123   \textcolor{keywordflow}{return} std::make\_unique<MockTester>();
+124 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!get\+Tester@{get\+Tester}}
+\index{get\+Tester@{get\+Tester}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{get\+Tester()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ std\+::enable\+\_\+if$<$!Owned, {\bf Mock\+Tester}$\ast$$>$\+::type get\+Tester (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a585919ffc2a7335c5066daeccf6a258e}
+
+
+Definition at line 127 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+127                                                            \{
+128   \textcolor{keywordflow}{return} \textcolor{keyword}{new} MockTester();
+129 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Empty\+Chain)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Empty\+Chain}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a9d7201897184010e35f61fa6fd36bf3e}
+
+
+Definition at line 244 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+244                                            \{
+245   basicTest();
+246 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Single\+Elem\+Chain)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Single\+Elem\+Chain}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_af683ce14fee78da0ee5ff53c56bcd466}
+
+
+Definition at line 248 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+248                                                 \{
+249   \textcolor{keyword}{auto} filterUnique = std::make\_unique<TestFilter<true>>();
+250   \textcolor{keyword}{auto} filter = filterUnique.get();
+251   chain().addFilters(std::move(filterUnique));
+252   EXPECT\_EQ(filter->do\_, 0);
+253   EXPECT\_EQ(filter->on\_, 0);
+254   basicTest();
+255   EXPECT\_EQ(filter->do\_, 1);
+256   EXPECT\_EQ(filter->on\_, 1);
+257 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Multi\+Elem\+Chain)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Multi\+Elem\+Chain}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a4acc1c6d62c6774db0baaf410dff12ce}
+
+
+Definition at line 259 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+References Test\+Filter$<$ Owned $>$\+::do\+\_\+, and Test\+Filter$<$ Owned $>$\+::on\+\_\+.
+
+
+\begin{DoxyCode}
+259                                                \{
+260   \textcolor{keyword}{auto} f1 = std::make\_unique<TestFilter<true>>();
+261   \textcolor{keyword}{auto} f2 = std::make\_unique<TestFilter<true>>();
+262   \textcolor{keyword}{auto} f3 = std::make\_unique<TestFilter<true>>();
+263   TestFilter<true>* fp1 = f1.get();
+264   TestFilter<true>* fp2 = f2.get();
+265   TestFilter<true>* fp3 = f3.get();
+266   chain().addFilters(std::move(f1), std::move(f2), std::move(f3));
+267   basicTest();
+268   EXPECT\_EQ(fp1->do\_, 1);
+269   EXPECT\_EQ(fp1->on\_, 1);
+270   EXPECT\_EQ(fp2->do_, 1);
+271   EXPECT\_EQ(fp2->on_, 1);
+272   EXPECT\_EQ(fp3->do_, 1);
+273   EXPECT\_EQ(fp3->on_, 1);
+274 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Multi\+Elem\+Multi\+Add)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Multi\+Elem\+Multi\+Add}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a77b1faf88c042b669f51c6254c42a731}
+
+
+Definition at line 276 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+276                                                   \{
+277   std::deque<TestFilter<true>*> filters;
+278   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 10; ++i) \{
+279     \textcolor{keyword}{auto} filter = std::make\_unique<TestFilter<true>>();
+280     filters.push\_back(filter.get());
+281     chain().addFilters(std::move(filter));
+282   \}
+283   basicTest();
+284   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} filter: filters) \{
+285     EXPECT\_EQ(filter->do\_, 1);
+286     EXPECT\_EQ(filter->on\_, 1);
+287   \}
+288 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Wants)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Wants}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_acf7f4b698e4f4cbdddc8892f84fbb6ef}
+
+
+Definition at line 290 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+References Test\+Filter$<$ Owned $>$\+::do\+\_\+, and Test\+Filter$<$ Owned $>$\+::on\+\_\+.
+
+
+\begin{DoxyCode}
+290                                       \{
+291   \textcolor{keyword}{auto} f1 = std::make\_unique<TestFilter<true>>();
+292   \textcolor{keyword}{auto} f2 = std::make\_unique<TestFilterNoCallback<true>>();
+293   \textcolor{keyword}{auto} f3 = std::make\_unique<TestFilterNoCall<true>>();
+294   \textcolor{keyword}{auto} f4 = std::make\_unique<TestFilterNoCallbackNoCall<true>>();
+295   TestFilter<true>* fp1 = f1.get();
+296   TestFilter<true>* fp2 = f2.get();
+297   TestFilter<true>* fp3 = f3.get();
+298   TestFilter<true>* fp4 = f4.get();
+299   chain().addFilters(std::move(f1), std::move(f2),
+300                     std::move(f3), std::move(f4));
+301   basicTest();
+302   EXPECT\_EQ(fp1->do\_, 1);
+303   EXPECT\_EQ(fp1->on\_, 1);
+304   \textcolor{comment}{// Only calls}
+305   EXPECT\_EQ(fp2->do_, 1);
+306   EXPECT\_EQ(fp2->on_, 0);
+307   \textcolor{comment}{// Only callbacks}
+308   EXPECT\_EQ(fp3->do_, 0);
+309   EXPECT\_EQ(fp3->on_, 1);
+310   \textcolor{comment}{// No callbacks or calls}
+311   EXPECT\_EQ(fp4->do_, 0);
+312   EXPECT\_EQ(fp4->on_, 0);
+313 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Wants\+Multi\+Add)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Wants\+Multi\+Add}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_aaa8ef89e2f904febfac52f3125b5e243}
+
+
+Definition at line 315 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+References Test\+Filter$<$ Owned $>$\+::do\+\_\+, and Test\+Filter$<$ Owned $>$\+::on\+\_\+.
+
+
+\begin{DoxyCode}
+315                                               \{
+316   \textcolor{keyword}{auto} f1 = std::make\_unique<TestFilterNoCallback<true>>();
+317   \textcolor{keyword}{auto} f2 = std::make\_unique<TestFilterNoCall<true>>();
+318   TestFilter<true>* fp1 = f1.get();
+319   TestFilter<true>* fp2 = f2.get();
+320   chain().addFilters(std::move(f1));
+321   basicTest();
+322 
+323   EXPECT\_EQ(fp1->do\_, 1);
+324   EXPECT\_EQ(fp1->on\_, 0);
+325   EXPECT\_EQ(fp2->do_, 0);
+326   EXPECT\_EQ(fp2->on_, 0);
+327 
+328   chain().addFilters(std::move(f2));
+329   basicTest();
+330 
+331   EXPECT\_EQ(fp1->do\_, 2);
+332   EXPECT\_EQ(fp1->on\_, 0);
+333   EXPECT\_EQ(fp2->do_, 0);
+334   EXPECT\_EQ(fp2->on_, 1);
+335 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Wants\+Multi\+Add\+Hard)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Wants\+Multi\+Add\+Hard}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a62e9e2515493ce06bd2e8c3707da90fc}
+
+
+Definition at line 337 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+337                                                   \{
+338   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} NUM\_FILTERS = 5000;
+339   \textcolor{keyword}{auto} filters = getRandomFilters(NUM\_FILTERS);
+340   \textcolor{comment}{// Now check the counts on each filter. Filters are pushed to the front}
+341   \textcolor{comment}{// of the chain, so filters towards the front have low call/callback counts}
+342   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < NUM\_FILTERS; ++i) \{
+343     \textcolor{keyword}{auto} f = filters[i];
+344     \textcolor{keywordflow}{if} (f->kWantsCalls\_) \{
+345       EXPECT\_EQ(f->do\_, i + 1);
+346     \} \textcolor{keywordflow}{else} \{
+347       EXPECT\_EQ(f->do\_, 0);
+348     \}
+349     \textcolor{keywordflow}{if} (f->kWantsCallbacks\_) \{
+350       EXPECT\_EQ(f->on\_, i + 1);
+351     \} \textcolor{keywordflow}{else} \{
+352       EXPECT\_EQ(f->on\_, 0);
+353     \}
+354   \}
+355 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Change\+Callback)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Change\+Callback}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a11215e5747dac2dd121e8ad9180da14b}
+
+
+Definition at line 357 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+References Test\+Filter$<$ Owned $>$\+::do\+\_\+, and Test\+Filter$<$ Owned $>$\+::on\+\_\+.
+
+
+\begin{DoxyCode}
+357                                                \{
+358   \textcolor{comment}{// The call-only filter in the chain doesn't want callbacks, so doing}
+359   \textcolor{comment}{// chain()->setCallback() is an error! Instead, must use chain().setCallback()}
+360   \textcolor{keyword}{auto} f = std::make\_unique<TestFilterNoCallback<true>>();
+361   MockTesterCallback callback2;
+362 
+363   TestFilter<true>* fp = f.get();
+364   chain().addFilters(std::move(f));
+365   basicTest();
+366 
+367   EXPECT\_EQ(fp->do_, 1);
+368   EXPECT\_EQ(fp->on_, 0);
+369 
+370   chain().setCallback(&callback2);
+371   EXPECT\_EQ(actor\_->cb\_, &callback2);
+372   EXPECT\_CALL(callback2, onA());
+373   actor\_->cb\_->onA();
+374 
+375   EXPECT\_EQ(fp->on_, 0);
+376 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Unowned\+Generic\+Filter\+Test, All)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Unowned\+Generic\+Filter\+Test}}]{, }
+\item[{All}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_af9c31e516880bb3137ea27a1880d668b}
+
+
+Definition at line 378 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+378                                       \{
+379   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} NUM\_FILTERS = 5000;
+380   \textcolor{keyword}{auto} filters = getRandomFilters(NUM\_FILTERS);
+381   \textcolor{comment}{// Now check the counts on each filter}
+382   \textcolor{keywordtype}{unsigned} i = 0;
+383   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} f: filters) \{
+384     \textcolor{keywordflow}{if} (f->kWantsCalls\_) \{
+385       EXPECT\_EQ(f->do\_, i + 1);
+386     \} \textcolor{keywordflow}{else} \{
+387       EXPECT\_EQ(f->do\_, 0);
+388     \}
+389     \textcolor{keywordflow}{if} (f->kWantsCallbacks\_) \{
+390       EXPECT\_EQ(f->on\_, i + 1);
+391     \} \textcolor{keywordflow}{else} \{
+392       EXPECT\_EQ(f->on\_, 0);
+393     \}
+394     \textcolor{keyword}{delete} f;
+395     ++i;
+396   \}
+397   \textcolor{keyword}{delete} actor\_;
+398 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Set\+Null\+Cb)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Set\+Null\+Cb}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_aff194a671b5699403fe4f30cd46c641b}
+
+
+Definition at line 400 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+400                                           \{
+401   \textcolor{comment}{// Some objects have a special behavior when the callback is set to}
+402   \textcolor{comment}{// nullptr. So in this case, we need to make sure it propagates}
+403   \textcolor{keyword}{auto} filters = getRandomFilters(100);
+404   chain().setCallback(\textcolor{keyword}{nullptr});
+405   CHECK(\textcolor{keyword}{nullptr} == actor\_->cb\_);
+406 
+407   testFilters(filters, \textcolor{keyword}{nullptr});
+408 
+409   MockTesterCallback head;
+410   chain().setCallback(&head);
+411 
+412   testFilters(filters, &head);
+413 
+414   TesterInterface::Callback* cb = &head;
+415   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} f: filters) \{
+416     \textcolor{keywordflow}{if} (f->kWantsCallbacks\_) \{
+417       cb = f;
+418     \}
+419   \}
+420   \textcolor{comment}{// The actor's callback should be the last filter in the chain that}
+421   \textcolor{comment}{// wants callbacks}
+422   ASSERT\_EQ(actor\_->cb\_, cb);
+423 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Unowned\+Generic\+Filter\+Test, Delete\+Do)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Unowned\+Generic\+Filter\+Test}}]{, }
+\item[{Delete\+Do}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a021b5236b1773c83d70f8eaab23663ed}
+
+
+Definition at line 446 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+446                                            \{
+447   \textcolor{comment}{// Test where a filter in the middle of the chain deletes itself early}
+448   \textcolor{keywordtype}{int} deletions = 0;
+449 
+450   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 4; ++i) \{
+451     chain().addFilters(\textcolor{keyword}{new} TestFilterOddDeleteDo(&deletions));
+452   \}
+453 
+454   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 2; ++i) \{
+455     \textcolor{comment}{// First time around, the odd id's get deleted}
+456     \textcolor{comment}{// Second time should just forward the calls normally}
+457     EXPECT\_CALL(*actor\_, doA());
+458     chain()->doA();
+459     EXPECT\_EQ(deletions, (i + 1) * 2);
+460   \}
+461   basicTest();
+462   \textcolor{keyword}{delete} actor\_;
+463 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Unowned\+Generic\+Filter\+Test, Delete\+On)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Unowned\+Generic\+Filter\+Test}}]{, }
+\item[{Delete\+On}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a1bc00b66280a9a4e8689dba9ebe8e08b}
+
+
+Definition at line 485 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+485                                            \{
+486   \textcolor{comment}{// Test where a filter in the middle of the chain deletes itself early}
+487   \textcolor{keywordtype}{int} deletions = 0;
+488 
+489   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 4; ++i) \{
+490     chain().addFilters(\textcolor{keyword}{new} TestFilterOddDeleteOn<>(&deletions));
+491   \}
+492 
+493   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 2; ++i) \{
+494     \textcolor{comment}{// First time around, the odd id's get deleted}
+495     \textcolor{comment}{// Second time should just forward the calls normally}
+496     EXPECT\_CALL(callback\_, onA());
+497     actor\_->cb\_->onA();
+498     EXPECT\_EQ(deletions, (i + 1) * 2);
+499   \}
+500   basicTest();
+501   \textcolor{keyword}{delete} actor\_;
+502 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Delete\+Chain)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Delete\+Chain}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_af44e169d2081a69f3ce0359f99b87ad8}
+
+
+Definition at line 504 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+504                                             \{
+505   \textcolor{comment}{// Add some filters to the chain and reset the chain. Make sure all the}
+506   \textcolor{comment}{// filters are deleted.}
+507   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} NUM\_FILTERS = 1000;
+508   \textcolor{keywordtype}{int} deletions = 0;
+509   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < NUM\_FILTERS; ++i) \{
+510     chain().addFilters(
+511       std::make\_unique<TestFilterOddDeleteOn<true>>(&deletions));
+512   \}
+513   chain\_.reset();
+514   EXPECT\_EQ(deletions, NUM\_FILTERS);
+515 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Get\+Chain\+End)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Get\+Chain\+End}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a2a1f84caf085d6be4861d8f1bf639551}
+
+
+Definition at line 517 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+517                                             \{
+518   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 1; i < 100; ++i) \{
+519     \textcolor{keyword}{auto} filters = getRandomFilters(i);
+520     EXPECT\_EQ(actor\_, &chain().getChainEnd());
+521   \}
+522 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Set\+Destination)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Set\+Destination}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a91dfd7db0ac9e6989f914ccd616ed1f0}
+
+
+Definition at line 524 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+524                                                \{
+525   \textcolor{keyword}{auto} filters = getRandomFilters(20);
+526   EXPECT\_CALL(*actor\_, doA());
+527   chain()->doA();
+528   \textcolor{keyword}{auto} tester2 = getTester<true>();
+529   actor\_ = tester2.get();
+530   \textcolor{keyword}{auto} oldTester = chain().setDestination(std::move(tester2));
+531   EXPECT\_CALL(*actor\_, doA());
+532   chain()->doA();
+533 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Generic\+Filter\+Test.\+cpp@{Generic\+Filter\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Owned\+Generic\+Filter\+Test, Foreach)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Owned\+Generic\+Filter\+Test}}]{, }
+\item[{Foreach}]{}
+\end{DoxyParamCaption}
+)}\label{GenericFilterTest_8cpp_a8bbf4e3bc52016c36e67b92f7d0aa751}
+
+
+Definition at line 535 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+References Tester\+Interface\+::set\+Callback().
+
+
+\begin{DoxyCode}
+535                                         \{
+536   \textcolor{keyword}{auto} filters = getRandomFilters(20);
+537   \textcolor{keywordtype}{size\_t} count = 0;
+538   chain().foreach([&count] (GenericFilter<TesterInterface,
+539                             TesterInterface::Callback,
+540                             &TesterInterface::setCallback, \textcolor{keyword}{true},
+541                             std::default\_delete<TesterInterface> >* filter) \{
+542                     \textcolor{keywordflow}{if} (\textcolor{keyword}{dynamic\_cast<}TestFilter<true>*\textcolor{keyword}{>}(filter)) \{
+543                       count++;
+544                     \}
+545                   \});
+546   EXPECT\_EQ(count, 20);
+547 \}
+\end{DoxyCode}

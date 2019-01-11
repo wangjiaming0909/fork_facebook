@@ -1,0 +1,3178 @@
+\section{proxygen/external/http\+\_\+parser/test.c File Reference}
+\label{test_8c}\index{proxygen/external/http\+\_\+parser/test.\+c@{proxygen/external/http\+\_\+parser/test.\+c}}
+{\ttfamily \#include \char`\"{}http\+\_\+parser.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$stdarg.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf message}
+\item 
+struct {\bf url\+\_\+test}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf T\+R\+UE}~1
+\item 
+\#define {\bf F\+A\+L\+SE}~0
+\item 
+\#define {\bf M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+RS}~13
+\item 
+\#define {\bf M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE}~500
+\item 
+\#define {\bf M\+A\+X\+\_\+\+C\+H\+U\+N\+KS}~16
+\item 
+\#define {\bf M\+IN}(a,  b)~((a) $<$ (b) ? (a) \+: (b))
+\item 
+\#define {\bf C\+U\+R\+L\+\_\+\+G\+ET}~0
+\item 
+\#define {\bf F\+I\+R\+E\+F\+O\+X\+\_\+\+G\+ET}~1
+\item 
+\#define {\bf D\+U\+M\+B\+F\+U\+CK}~2
+\item 
+\#define {\bf F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+I\+N\+\_\+\+U\+RI}~3
+\item 
+\#define {\bf G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY}~4
+\item 
+\#define {\bf G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY}~5
+\item 
+\#define {\bf G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}~6
+\item 
+\#define {\bf P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD}~7
+\item 
+\#define {\bf P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE}~8
+\item 
+\#define {\bf T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND}~9
+\item 
+\#define {\bf C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS}~10
+\item 
+\#define {\bf C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH}~11
+\item 
+\#define {\bf W\+I\+T\+H\+\_\+\+Q\+U\+O\+T\+ES}~12
+\item 
+\#define {\bf A\+P\+A\+C\+H\+E\+B\+E\+N\+C\+H\+\_\+\+G\+ET}~13
+\item 
+\#define {\bf Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET}~14
+\item 
+\#define {\bf P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET}~15
+\item 
+\#define {\bf U\+P\+G\+R\+A\+D\+E\+\_\+\+R\+E\+Q\+U\+E\+ST}~16
+\item 
+\#define {\bf C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}~17
+\item 
+\#define {\bf R\+E\+P\+O\+R\+T\+\_\+\+R\+EQ}~18
+\item 
+\#define {\bf N\+O\+\_\+\+H\+T\+T\+P\+\_\+\+V\+E\+R\+S\+I\+ON}~19
+\item 
+\#define {\bf M\+S\+E\+A\+R\+C\+H\+\_\+\+R\+EQ}~20
+\item 
+\#define {\bf L\+I\+N\+E\+\_\+\+F\+O\+L\+D\+I\+N\+G\+\_\+\+I\+N\+\_\+\+H\+E\+A\+D\+ER}~20
+\item 
+\#define {\bf Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+ST}~21
+\item 
+\#define {\bf Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}~22
+\item 
+\#define {\bf S\+P\+A\+C\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}~23
+\item 
+\#define {\bf U\+T\+F8\+\_\+\+P\+A\+T\+H\+\_\+\+R\+EQ}~24
+\item 
+\#define {\bf H\+O\+S\+T\+N\+A\+M\+E\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}~25
+\item 
+\#define {\bf P\+A\+T\+C\+H\+\_\+\+R\+EQ}~26
+\item 
+\#define {\bf C\+O\+N\+N\+E\+C\+T\+\_\+\+C\+A\+P\+S\+\_\+\+R\+E\+Q\+U\+E\+ST}~27
+\item 
+\#define {\bf I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+G\+ET}~28
+\item 
+\#define {\bf I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+C\+O\+N\+N\+E\+CT}~29
+\item 
+\#define {\bf U\+P\+G\+R\+A\+D\+E\+\_\+\+P\+O\+S\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}~30
+\item 
+\#define {\bf C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+T\+H\+\_\+\+B\+O\+D\+Y\+\_\+\+R\+E\+Q\+U\+E\+ST}~31
+\item 
+\#define {\bf G\+O\+O\+G\+L\+E\+\_\+301}~0
+\item 
+\#define {\bf N\+O\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+S\+P\+O\+N\+SE}~1
+\item 
+\#define {\bf N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404}~2
+\item 
+\#define {\bf N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE}~3
+\item 
+\#define {\bf T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY}~4
+\item 
+\#define {\bf N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET}~5
+\item 
+\#define {\bf P\+R\+O\+X\+Y\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}~6
+\item 
+\#define {\bf U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY}~7
+\item 
+\#define {\bf B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR}~8
+\item 
+\#define {\bf R\+E\+S\+\_\+\+F\+I\+E\+L\+D\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}~10
+\item 
+\#define {\bf N\+O\+N\+\_\+\+A\+S\+C\+I\+I\+\_\+\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+L\+I\+NE}~11
+\item 
+\#define {\bf M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ}(expected,  found,  prop)~if (!{\bf check\+\_\+str\+\_\+eq}(expected, \#prop, expected-\/$>$prop, found-\/$>$prop)) return 0
+\item 
+\#define {\bf M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ}(expected,  found,  prop)~if (!{\bf check\+\_\+num\+\_\+eq}(expected, \#prop, expected-\/$>$prop, found-\/$>$prop)) return 0
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf request\+\_\+url\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf header\+\_\+field\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf header\+\_\+value\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf body\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf count\+\_\+body\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf message\+\_\+begin\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf headers\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf message\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf response\+\_\+reason\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf chunk\+\_\+header\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf chunk\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf dontcall\+\_\+message\+\_\+begin\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf dontcall\+\_\+header\+\_\+field\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf dontcall\+\_\+header\+\_\+value\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf dontcall\+\_\+request\+\_\+url\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf dontcall\+\_\+body\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf dontcall\+\_\+headers\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf dontcall\+\_\+message\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf dontcall\+\_\+response\+\_\+reason\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf dontcall\+\_\+chunk\+\_\+header\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf dontcall\+\_\+chunk\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf pause\+\_\+message\+\_\+begin\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf pause\+\_\+header\+\_\+field\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf pause\+\_\+header\+\_\+value\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf pause\+\_\+request\+\_\+url\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf pause\+\_\+body\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf pause\+\_\+headers\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf pause\+\_\+message\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf pause\+\_\+response\+\_\+reason\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+int {\bf pause\+\_\+chunk\+\_\+header\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf pause\+\_\+chunk\+\_\+complete\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf empty\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p)
+\item 
+int {\bf empty\+\_\+data\+\_\+cb} ({\bf http\+\_\+parser} $\ast$p, const char $\ast$buf, size\+\_\+t len)
+\item 
+void {\bf parser\+\_\+init} (enum {\bf http\+\_\+parser\+\_\+type} type)
+\item 
+void {\bf parser\+\_\+free} ()
+\item 
+size\+\_\+t {\bf parse} (const char $\ast$buf, size\+\_\+t len)
+\item 
+size\+\_\+t {\bf parse\+\_\+count\+\_\+body} (const char $\ast$buf, size\+\_\+t len)
+\item 
+size\+\_\+t {\bf parse\+\_\+pause} (const char $\ast$buf, size\+\_\+t len)
+\item 
+static int {\bf check\+\_\+str\+\_\+eq} (const struct {\bf message} $\ast$m, const char $\ast$prop, const char $\ast$expected, const char $\ast$found)
+\item 
+static int {\bf check\+\_\+num\+\_\+eq} (const struct {\bf message} $\ast$m, const char $\ast$prop, int expected, int found)
+\item 
+int {\bf message\+\_\+eq} (int index, const struct {\bf message} $\ast$expected)
+\item 
+size\+\_\+t {\bf count\+\_\+parsed\+\_\+messages} (const size\+\_\+t nmsgs,...)
+\item 
+void {\bf upgrade\+\_\+message\+\_\+fix} (char $\ast$body, const size\+\_\+t nread, const size\+\_\+t nmsgs,...)
+\item 
+static void {\bf print\+\_\+error} (const char $\ast$raw, size\+\_\+t error\+\_\+location)
+\item 
+void {\bf dump\+\_\+url} (const char $\ast$url, const struct {\bf http\+\_\+parser\+\_\+url} $\ast$u)
+\item 
+void {\bf test\+\_\+parse\+\_\+url} (void)
+\item 
+void {\bf test\+\_\+message} (const struct {\bf message} $\ast${\bf message})
+\item 
+void {\bf test\+\_\+message\+\_\+count\+\_\+body} (const struct {\bf message} $\ast${\bf message})
+\item 
+void {\bf test\+\_\+simple} (const char $\ast$buf, enum {\bf http\+\_\+errno} err\+\_\+expected)
+\item 
+void {\bf test\+\_\+header\+\_\+overflow\+\_\+error} (int req)
+\item 
+void {\bf test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body} (int req, size\+\_\+t length)
+\item 
+void {\bf test\+\_\+multiple3} (const struct {\bf message} $\ast$r1, const struct {\bf message} $\ast$r2, const struct {\bf message} $\ast$r3)
+\item 
+void {\bf test\+\_\+scan} (const struct {\bf message} $\ast$r1, const struct {\bf message} $\ast$r2, const struct {\bf message} $\ast$r3)
+\item 
+char $\ast$ {\bf create\+\_\+large\+\_\+chunked\+\_\+message} (int body\+\_\+size\+\_\+in\+\_\+kb, const char $\ast$headers)
+\item 
+void {\bf test\+\_\+message\+\_\+pause} (const struct {\bf message} $\ast$msg)
+\item 
+void {\bf test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb} (const struct {\bf message} $\ast${\bf message})
+\item 
+int {\bf main} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf http\+\_\+parser} $\ast$ {\bf parser}
+\item 
+static int {\bf currently\+\_\+parsing\+\_\+eof}
+\item 
+static struct {\bf message} {\bf messages} [5]
+\item 
+static int {\bf num\+\_\+messages}
+\item 
+static {\bf http\+\_\+parser\+\_\+settings} $\ast$ {\bf current\+\_\+pause\+\_\+parser}
+\item 
+const struct {\bf message} {\bf requests} [$\,$]
+\item 
+const struct {\bf message} {\bf responses} [$\,$]
+\item 
+const struct {\bf message} {\bf on\+\_\+message\+\_\+begin\+\_\+cb\+\_\+test} [$\,$]
+\item 
+static {\bf http\+\_\+parser\+\_\+settings} {\bf settings\+\_\+dontcall}
+\item 
+static {\bf http\+\_\+parser\+\_\+settings} {\bf settings\+\_\+pause}
+\item 
+static {\bf http\+\_\+parser\+\_\+settings} {\bf settings}
+\item 
+static {\bf http\+\_\+parser\+\_\+settings} {\bf settings\+\_\+count\+\_\+body}
+\item 
+static {\bf http\+\_\+parser\+\_\+settings} {\bf settings\+\_\+null}
+\item 
+const struct {\bf url\+\_\+test} {\bf url\+\_\+tests} [$\,$]
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{test.\+c@{test.\+c}!A\+P\+A\+C\+H\+E\+B\+E\+N\+C\+H\+\_\+\+G\+ET@{A\+P\+A\+C\+H\+E\+B\+E\+N\+C\+H\+\_\+\+G\+ET}}
+\index{A\+P\+A\+C\+H\+E\+B\+E\+N\+C\+H\+\_\+\+G\+ET@{A\+P\+A\+C\+H\+E\+B\+E\+N\+C\+H\+\_\+\+G\+ET}!test.\+c@{test.\+c}}
+\subsubsection[{A\+P\+A\+C\+H\+E\+B\+E\+N\+C\+H\+\_\+\+G\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+P\+A\+C\+H\+E\+B\+E\+N\+C\+H\+\_\+\+G\+ET~13}\label{test_8c_a1342fa8973972db3903f2421b1d39b35}
+\index{test.\+c@{test.\+c}!B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR@{B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR}}
+\index{B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR@{B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR}!test.\+c@{test.\+c}}
+\subsubsection[{B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR~8}\label{test_8c_a0b7bbcd6fe3abde0ff41f879f71ad6c5}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH@{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH}}
+\index{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH@{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH}!test.\+c@{test.\+c}}
+\subsubsection[{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH~11}\label{test_8c_a9d1048933857f9e955264fc1ec12232f}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS@{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS}}
+\index{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS@{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS}!test.\+c@{test.\+c}}
+\subsubsection[{C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS~10}\label{test_8c_a262aaf7f83b123bc2172ae144e1e4fd3}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!C\+O\+N\+N\+E\+C\+T\+\_\+\+C\+A\+P\+S\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+C\+A\+P\+S\+\_\+\+R\+E\+Q\+U\+E\+ST}}
+\index{C\+O\+N\+N\+E\+C\+T\+\_\+\+C\+A\+P\+S\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+C\+A\+P\+S\+\_\+\+R\+E\+Q\+U\+E\+ST}!test.\+c@{test.\+c}}
+\subsubsection[{C\+O\+N\+N\+E\+C\+T\+\_\+\+C\+A\+P\+S\+\_\+\+R\+E\+Q\+U\+E\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+N\+N\+E\+C\+T\+\_\+\+C\+A\+P\+S\+\_\+\+R\+E\+Q\+U\+E\+ST~27}\label{test_8c_a46e818aeebc4a260095055a6d3aed3a8}
+\index{test.\+c@{test.\+c}!C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}}
+\index{C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}!test.\+c@{test.\+c}}
+\subsubsection[{C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST~17}\label{test_8c_ab820431e9fdcfb2466efb7c14c147720}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+T\+H\+\_\+\+B\+O\+D\+Y\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+T\+H\+\_\+\+B\+O\+D\+Y\+\_\+\+R\+E\+Q\+U\+E\+ST}}
+\index{C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+T\+H\+\_\+\+B\+O\+D\+Y\+\_\+\+R\+E\+Q\+U\+E\+ST@{C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+T\+H\+\_\+\+B\+O\+D\+Y\+\_\+\+R\+E\+Q\+U\+E\+ST}!test.\+c@{test.\+c}}
+\subsubsection[{C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+T\+H\+\_\+\+B\+O\+D\+Y\+\_\+\+R\+E\+Q\+U\+E\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+N\+N\+E\+C\+T\+\_\+\+W\+I\+T\+H\+\_\+\+B\+O\+D\+Y\+\_\+\+R\+E\+Q\+U\+E\+ST~31}\label{test_8c_a93b141b1e29c82e21f189d59c672e3df}
+\index{test.\+c@{test.\+c}!C\+U\+R\+L\+\_\+\+G\+ET@{C\+U\+R\+L\+\_\+\+G\+ET}}
+\index{C\+U\+R\+L\+\_\+\+G\+ET@{C\+U\+R\+L\+\_\+\+G\+ET}!test.\+c@{test.\+c}}
+\subsubsection[{C\+U\+R\+L\+\_\+\+G\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+U\+R\+L\+\_\+\+G\+ET~0}\label{test_8c_ad87ab2f7f5b6a9202b7b643eb7d05bf8}
+\index{test.\+c@{test.\+c}!D\+U\+M\+B\+F\+U\+CK@{D\+U\+M\+B\+F\+U\+CK}}
+\index{D\+U\+M\+B\+F\+U\+CK@{D\+U\+M\+B\+F\+U\+CK}!test.\+c@{test.\+c}}
+\subsubsection[{D\+U\+M\+B\+F\+U\+CK}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+U\+M\+B\+F\+U\+CK~2}\label{test_8c_a6f1f58522f7b58aa835111257ce97ce5}
+\index{test.\+c@{test.\+c}!F\+A\+L\+SE@{F\+A\+L\+SE}}
+\index{F\+A\+L\+SE@{F\+A\+L\+SE}!test.\+c@{test.\+c}}
+\subsubsection[{F\+A\+L\+SE}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+A\+L\+SE~0}\label{test_8c_aa93f0eb578d23995850d61f7d61c55c1}
+
+
+Definition at line 32 of file test.\+c.
+
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!F\+I\+R\+E\+F\+O\+X\+\_\+\+G\+ET@{F\+I\+R\+E\+F\+O\+X\+\_\+\+G\+ET}}
+\index{F\+I\+R\+E\+F\+O\+X\+\_\+\+G\+ET@{F\+I\+R\+E\+F\+O\+X\+\_\+\+G\+ET}!test.\+c@{test.\+c}}
+\subsubsection[{F\+I\+R\+E\+F\+O\+X\+\_\+\+G\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+I\+R\+E\+F\+O\+X\+\_\+\+G\+ET~1}\label{test_8c_a18046d79919db95a3e905b60724daea9}
+\index{test.\+c@{test.\+c}!F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+I\+N\+\_\+\+U\+RI@{F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+I\+N\+\_\+\+U\+RI}}
+\index{F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+I\+N\+\_\+\+U\+RI@{F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+I\+N\+\_\+\+U\+RI}!test.\+c@{test.\+c}}
+\subsubsection[{F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+I\+N\+\_\+\+U\+RI}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+I\+N\+\_\+\+U\+RI~3}\label{test_8c_a2a448580b9e06e49a6ef0e49d001da7a}
+\index{test.\+c@{test.\+c}!G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH@{G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}}
+\index{G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH@{G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}!test.\+c@{test.\+c}}
+\subsubsection[{G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH~6}\label{test_8c_a197ed84015fe5540c1f77ea6d4d8d990}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY@{G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY}}
+\index{G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY@{G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY}!test.\+c@{test.\+c}}
+\subsubsection[{G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY~4}\label{test_8c_a90e7ed644ec6f1add2fe6d127c4145c7}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY@{G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY}}
+\index{G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY@{G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY}!test.\+c@{test.\+c}}
+\subsubsection[{G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY~5}\label{test_8c_a9fad5e2403c518d4ee069c71f31547ab}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!G\+O\+O\+G\+L\+E\+\_\+301@{G\+O\+O\+G\+L\+E\+\_\+301}}
+\index{G\+O\+O\+G\+L\+E\+\_\+301@{G\+O\+O\+G\+L\+E\+\_\+301}!test.\+c@{test.\+c}}
+\subsubsection[{G\+O\+O\+G\+L\+E\+\_\+301}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+O\+O\+G\+L\+E\+\_\+301~0}\label{test_8c_af6f7218649ae26b783dbb7da4618ea99}
+\index{test.\+c@{test.\+c}!H\+O\+S\+T\+N\+A\+M\+E\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE@{H\+O\+S\+T\+N\+A\+M\+E\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}}
+\index{H\+O\+S\+T\+N\+A\+M\+E\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE@{H\+O\+S\+T\+N\+A\+M\+E\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}!test.\+c@{test.\+c}}
+\subsubsection[{H\+O\+S\+T\+N\+A\+M\+E\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+O\+S\+T\+N\+A\+M\+E\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE~25}\label{test_8c_ab1e18cbf05d4d39f744958df40bf9380}
+\index{test.\+c@{test.\+c}!I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+C\+O\+N\+N\+E\+CT@{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+C\+O\+N\+N\+E\+CT}}
+\index{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+C\+O\+N\+N\+E\+CT@{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+C\+O\+N\+N\+E\+CT}!test.\+c@{test.\+c}}
+\subsubsection[{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+C\+O\+N\+N\+E\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+C\+O\+N\+N\+E\+CT~29}\label{test_8c_a0dd18ee4e284ae3430fdbf8ef58b2eff}
+\index{test.\+c@{test.\+c}!I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+G\+ET@{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+G\+ET}}
+\index{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+G\+ET@{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+G\+ET}!test.\+c@{test.\+c}}
+\subsubsection[{I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+G\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+P\+V6\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+U\+R\+I\+\_\+\+G\+ET~28}\label{test_8c_a7950f48f2c8760e26ebd1e23db6eb6a4}
+\index{test.\+c@{test.\+c}!L\+I\+N\+E\+\_\+\+F\+O\+L\+D\+I\+N\+G\+\_\+\+I\+N\+\_\+\+H\+E\+A\+D\+ER@{L\+I\+N\+E\+\_\+\+F\+O\+L\+D\+I\+N\+G\+\_\+\+I\+N\+\_\+\+H\+E\+A\+D\+ER}}
+\index{L\+I\+N\+E\+\_\+\+F\+O\+L\+D\+I\+N\+G\+\_\+\+I\+N\+\_\+\+H\+E\+A\+D\+ER@{L\+I\+N\+E\+\_\+\+F\+O\+L\+D\+I\+N\+G\+\_\+\+I\+N\+\_\+\+H\+E\+A\+D\+ER}!test.\+c@{test.\+c}}
+\subsubsection[{L\+I\+N\+E\+\_\+\+F\+O\+L\+D\+I\+N\+G\+\_\+\+I\+N\+\_\+\+H\+E\+A\+D\+ER}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+I\+N\+E\+\_\+\+F\+O\+L\+D\+I\+N\+G\+\_\+\+I\+N\+\_\+\+H\+E\+A\+D\+ER~20}\label{test_8c_ad6fc79c0657f3d2a5442bc046d27762c}
+\index{test.\+c@{test.\+c}!M\+A\+X\+\_\+\+C\+H\+U\+N\+KS@{M\+A\+X\+\_\+\+C\+H\+U\+N\+KS}}
+\index{M\+A\+X\+\_\+\+C\+H\+U\+N\+KS@{M\+A\+X\+\_\+\+C\+H\+U\+N\+KS}!test.\+c@{test.\+c}}
+\subsubsection[{M\+A\+X\+\_\+\+C\+H\+U\+N\+KS}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+C\+H\+U\+N\+KS~16}\label{test_8c_a9e879c11aa15653382faa681060e6179}
+
+
+Definition at line 36 of file test.\+c.
+
+
+
+Referenced by chunk\+\_\+header\+\_\+cb(), main(), and message\+\_\+eq().
+
+\index{test.\+c@{test.\+c}!M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE@{M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE}}
+\index{M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE@{M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE}!test.\+c@{test.\+c}}
+\subsubsection[{M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE~500}\label{test_8c_abbb6e2f62d8c3c6933f12598690519b6}
+
+
+Definition at line 35 of file test.\+c.
+
+
+
+Referenced by header\+\_\+value\+\_\+cb().
+
+\index{test.\+c@{test.\+c}!M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+RS@{M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+RS}}
+\index{M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+RS@{M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+RS}!test.\+c@{test.\+c}}
+\subsubsection[{M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+RS}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+RS~13}\label{test_8c_ab8949645fa8d90e1722d233c6bdfc815}
+
+
+Definition at line 34 of file test.\+c.
+
+\index{test.\+c@{test.\+c}!M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ@{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ}}
+\index{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ@{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ}!test.\+c@{test.\+c}}
+\subsubsection[{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{expected, }
+\item[{}]{found, }
+\item[{}]{prop}
+\end{DoxyParamCaption}
+)~if (!{\bf check\+\_\+num\+\_\+eq}(expected, \#prop, expected-\/$>$prop, found-\/$>$prop)) return 0}\label{test_8c_afaf9e0a7964eb87db1696c92678abec4}
+
+
+Definition at line 1655 of file test.\+c.
+
+
+
+Referenced by message\+\_\+eq().
+
+\index{test.\+c@{test.\+c}!M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ@{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ}}
+\index{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ@{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ}!test.\+c@{test.\+c}}
+\subsubsection[{M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ(
+\begin{DoxyParamCaption}
+\item[{}]{expected, }
+\item[{}]{found, }
+\item[{}]{prop}
+\end{DoxyParamCaption}
+)~if (!{\bf check\+\_\+str\+\_\+eq}(expected, \#prop, expected-\/$>$prop, found-\/$>$prop)) return 0}\label{test_8c_a7c8c9718dc05231b9f40b3a7417b5e24}
+
+
+Definition at line 1652 of file test.\+c.
+
+
+
+Referenced by message\+\_\+eq().
+
+\index{test.\+c@{test.\+c}!M\+IN@{M\+IN}}
+\index{M\+IN@{M\+IN}!test.\+c@{test.\+c}}
+\subsubsection[{M\+IN}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+IN(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~((a) $<$ (b) ? (a) \+: (b))}\label{test_8c_a3acffbd305ee72dcd4593c0d8af64a4f}
+
+
+Definition at line 38 of file test.\+c.
+
+
+
+Referenced by test\+\_\+message\+\_\+count\+\_\+body().
+
+\index{test.\+c@{test.\+c}!M\+S\+E\+A\+R\+C\+H\+\_\+\+R\+EQ@{M\+S\+E\+A\+R\+C\+H\+\_\+\+R\+EQ}}
+\index{M\+S\+E\+A\+R\+C\+H\+\_\+\+R\+EQ@{M\+S\+E\+A\+R\+C\+H\+\_\+\+R\+EQ}!test.\+c@{test.\+c}}
+\subsubsection[{M\+S\+E\+A\+R\+C\+H\+\_\+\+R\+EQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+S\+E\+A\+R\+C\+H\+\_\+\+R\+EQ~20}\label{test_8c_a9b42e49e0d3a8bb43f26e1b0da68c66c}
+\index{test.\+c@{test.\+c}!N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET@{N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET}}
+\index{N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET@{N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET}!test.\+c@{test.\+c}}
+\subsubsection[{N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET~5}\label{test_8c_a90dd1fb70bf09f201bfeaa476268b4f1}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!N\+O\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{N\+O\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+S\+P\+O\+N\+SE}}
+\index{N\+O\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{N\+O\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+S\+P\+O\+N\+SE}!test.\+c@{test.\+c}}
+\subsubsection[{N\+O\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+S\+P\+O\+N\+SE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+S\+P\+O\+N\+SE~1}\label{test_8c_afc040ba9124b4e23bc9c94403e9be428}
+\index{test.\+c@{test.\+c}!N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404@{N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404}}
+\index{N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404@{N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404}!test.\+c@{test.\+c}}
+\subsubsection[{N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404~2}\label{test_8c_ad88525423733ebaa43d7ae5a9931a191}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!N\+O\+\_\+\+H\+T\+T\+P\+\_\+\+V\+E\+R\+S\+I\+ON@{N\+O\+\_\+\+H\+T\+T\+P\+\_\+\+V\+E\+R\+S\+I\+ON}}
+\index{N\+O\+\_\+\+H\+T\+T\+P\+\_\+\+V\+E\+R\+S\+I\+ON@{N\+O\+\_\+\+H\+T\+T\+P\+\_\+\+V\+E\+R\+S\+I\+ON}!test.\+c@{test.\+c}}
+\subsubsection[{N\+O\+\_\+\+H\+T\+T\+P\+\_\+\+V\+E\+R\+S\+I\+ON}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+\_\+\+H\+T\+T\+P\+\_\+\+V\+E\+R\+S\+I\+ON~19}\label{test_8c_af0a19441bde210dd1acc89edbd4828d4}
+\index{test.\+c@{test.\+c}!N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE@{N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE}}
+\index{N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE@{N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE}!test.\+c@{test.\+c}}
+\subsubsection[{N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE~3}\label{test_8c_ae5e1ae92a58d25e60c61ab5dc080266c}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!N\+O\+N\+\_\+\+A\+S\+C\+I\+I\+\_\+\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+L\+I\+NE@{N\+O\+N\+\_\+\+A\+S\+C\+I\+I\+\_\+\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+L\+I\+NE}}
+\index{N\+O\+N\+\_\+\+A\+S\+C\+I\+I\+\_\+\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+L\+I\+NE@{N\+O\+N\+\_\+\+A\+S\+C\+I\+I\+\_\+\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+L\+I\+NE}!test.\+c@{test.\+c}}
+\subsubsection[{N\+O\+N\+\_\+\+A\+S\+C\+I\+I\+\_\+\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+L\+I\+NE}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+N\+\_\+\+A\+S\+C\+I\+I\+\_\+\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+L\+I\+NE~11}\label{test_8c_a7cc65f3a95b6ac3578d5448799d11cc9}
+\index{test.\+c@{test.\+c}!P\+A\+T\+C\+H\+\_\+\+R\+EQ@{P\+A\+T\+C\+H\+\_\+\+R\+EQ}}
+\index{P\+A\+T\+C\+H\+\_\+\+R\+EQ@{P\+A\+T\+C\+H\+\_\+\+R\+EQ}!test.\+c@{test.\+c}}
+\subsubsection[{P\+A\+T\+C\+H\+\_\+\+R\+EQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+A\+T\+C\+H\+\_\+\+R\+EQ~26}\label{test_8c_ab782445831e63869201b0d8068738bf6}
+\index{test.\+c@{test.\+c}!P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE@{P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE}}
+\index{P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE@{P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE}!test.\+c@{test.\+c}}
+\subsubsection[{P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE~8}\label{test_8c_a3b39c34207aeb0230597c7c0794e9061}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD@{P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD}}
+\index{P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD@{P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD}!test.\+c@{test.\+c}}
+\subsubsection[{P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD~7}\label{test_8c_a17590e70eb9071a188c6ce079be38671}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET@{P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET}}
+\index{P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET@{P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET}!test.\+c@{test.\+c}}
+\subsubsection[{P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET~15}\label{test_8c_adc3d1e5bee1a7dd3bc69f98e9c17a815}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!P\+R\+O\+X\+Y\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON@{P\+R\+O\+X\+Y\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}}
+\index{P\+R\+O\+X\+Y\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON@{P\+R\+O\+X\+Y\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}!test.\+c@{test.\+c}}
+\subsubsection[{P\+R\+O\+X\+Y\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+R\+O\+X\+Y\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON~6}\label{test_8c_a81f37e03d0ef3a6a147b2cb5c3ffe2ae}
+\index{test.\+c@{test.\+c}!Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+ST@{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+ST}}
+\index{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+ST@{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+ST}!test.\+c@{test.\+c}}
+\subsubsection[{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+ST~21}\label{test_8c_aa7f406e0e21b5f8461ce8a7625d0182a}
+\index{test.\+c@{test.\+c}!Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT@{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}}
+\index{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT@{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}!test.\+c@{test.\+c}}
+\subsubsection[{Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}]{\setlength{\rightskip}{0pt plus 5cm}\#define Q\+U\+E\+R\+Y\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT~22}\label{test_8c_a61f14832cae33bde84c9b40c0adb9334}
+\index{test.\+c@{test.\+c}!Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET@{Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET}}
+\index{Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET@{Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET}!test.\+c@{test.\+c}}
+\subsubsection[{Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET~14}\label{test_8c_a9ed1aed4e99a9032db5839df0c0bafac}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!R\+E\+P\+O\+R\+T\+\_\+\+R\+EQ@{R\+E\+P\+O\+R\+T\+\_\+\+R\+EQ}}
+\index{R\+E\+P\+O\+R\+T\+\_\+\+R\+EQ@{R\+E\+P\+O\+R\+T\+\_\+\+R\+EQ}!test.\+c@{test.\+c}}
+\subsubsection[{R\+E\+P\+O\+R\+T\+\_\+\+R\+EQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+P\+O\+R\+T\+\_\+\+R\+EQ~18}\label{test_8c_a8931be157937ed702c775d068fe50f60}
+\index{test.\+c@{test.\+c}!R\+E\+S\+\_\+\+F\+I\+E\+L\+D\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE@{R\+E\+S\+\_\+\+F\+I\+E\+L\+D\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}}
+\index{R\+E\+S\+\_\+\+F\+I\+E\+L\+D\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE@{R\+E\+S\+\_\+\+F\+I\+E\+L\+D\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}!test.\+c@{test.\+c}}
+\subsubsection[{R\+E\+S\+\_\+\+F\+I\+E\+L\+D\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+S\+\_\+\+F\+I\+E\+L\+D\+\_\+\+U\+N\+D\+E\+R\+S\+C\+O\+RE~10}\label{test_8c_a20d574e5c0a8df7eb448e9c38bd09685}
+\index{test.\+c@{test.\+c}!S\+P\+A\+C\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT@{S\+P\+A\+C\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}}
+\index{S\+P\+A\+C\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT@{S\+P\+A\+C\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}!test.\+c@{test.\+c}}
+\subsubsection[{S\+P\+A\+C\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+P\+A\+C\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+T\+E\+D\+\_\+\+H\+O\+S\+T\+P\+O\+RT~23}\label{test_8c_abc63f2b90404d6e1e8b2ccbd8543f3fc}
+\index{test.\+c@{test.\+c}!T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY@{T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY}}
+\index{T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY@{T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY}!test.\+c@{test.\+c}}
+\subsubsection[{T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY~4}\label{test_8c_a5c276bc42610778925184093de635f0a}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!T\+R\+UE@{T\+R\+UE}}
+\index{T\+R\+UE@{T\+R\+UE}!test.\+c@{test.\+c}}
+\subsubsection[{T\+R\+UE}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+R\+UE~1}\label{test_8c_aa8cecfc5c5c054d2875c03e77b7be15d}
+
+
+Definition at line 30 of file test.\+c.
+
+
+
+Referenced by headers\+\_\+complete\+\_\+cb(), and message\+\_\+complete\+\_\+cb().
+
+\index{test.\+c@{test.\+c}!T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND@{T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND}}
+\index{T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND@{T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND}!test.\+c@{test.\+c}}
+\subsubsection[{T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND~9}\label{test_8c_a35ff7850a69ede9a50b49bed7e79ff8b}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY@{U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY}}
+\index{U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY@{U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY}!test.\+c@{test.\+c}}
+\subsubsection[{U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY~7}\label{test_8c_abe451e3a9878408cea258e3332f3c760}
+
+
+Referenced by main().
+
+\index{test.\+c@{test.\+c}!U\+P\+G\+R\+A\+D\+E\+\_\+\+P\+O\+S\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{U\+P\+G\+R\+A\+D\+E\+\_\+\+P\+O\+S\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}}
+\index{U\+P\+G\+R\+A\+D\+E\+\_\+\+P\+O\+S\+T\+\_\+\+R\+E\+Q\+U\+E\+ST@{U\+P\+G\+R\+A\+D\+E\+\_\+\+P\+O\+S\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}!test.\+c@{test.\+c}}
+\subsubsection[{U\+P\+G\+R\+A\+D\+E\+\_\+\+P\+O\+S\+T\+\_\+\+R\+E\+Q\+U\+E\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+P\+G\+R\+A\+D\+E\+\_\+\+P\+O\+S\+T\+\_\+\+R\+E\+Q\+U\+E\+ST~30}\label{test_8c_ae16f5c4d9c4c4ca989e012323cdfbbc0}
+\index{test.\+c@{test.\+c}!U\+P\+G\+R\+A\+D\+E\+\_\+\+R\+E\+Q\+U\+E\+ST@{U\+P\+G\+R\+A\+D\+E\+\_\+\+R\+E\+Q\+U\+E\+ST}}
+\index{U\+P\+G\+R\+A\+D\+E\+\_\+\+R\+E\+Q\+U\+E\+ST@{U\+P\+G\+R\+A\+D\+E\+\_\+\+R\+E\+Q\+U\+E\+ST}!test.\+c@{test.\+c}}
+\subsubsection[{U\+P\+G\+R\+A\+D\+E\+\_\+\+R\+E\+Q\+U\+E\+ST}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+P\+G\+R\+A\+D\+E\+\_\+\+R\+E\+Q\+U\+E\+ST~16}\label{test_8c_afab034a57df0f060f38137dbe47be419}
+\index{test.\+c@{test.\+c}!U\+T\+F8\+\_\+\+P\+A\+T\+H\+\_\+\+R\+EQ@{U\+T\+F8\+\_\+\+P\+A\+T\+H\+\_\+\+R\+EQ}}
+\index{U\+T\+F8\+\_\+\+P\+A\+T\+H\+\_\+\+R\+EQ@{U\+T\+F8\+\_\+\+P\+A\+T\+H\+\_\+\+R\+EQ}!test.\+c@{test.\+c}}
+\subsubsection[{U\+T\+F8\+\_\+\+P\+A\+T\+H\+\_\+\+R\+EQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+T\+F8\+\_\+\+P\+A\+T\+H\+\_\+\+R\+EQ~24}\label{test_8c_a6570044952548fb59902830fe6e1b05e}
+\index{test.\+c@{test.\+c}!W\+I\+T\+H\+\_\+\+Q\+U\+O\+T\+ES@{W\+I\+T\+H\+\_\+\+Q\+U\+O\+T\+ES}}
+\index{W\+I\+T\+H\+\_\+\+Q\+U\+O\+T\+ES@{W\+I\+T\+H\+\_\+\+Q\+U\+O\+T\+ES}!test.\+c@{test.\+c}}
+\subsubsection[{W\+I\+T\+H\+\_\+\+Q\+U\+O\+T\+ES}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\+I\+T\+H\+\_\+\+Q\+U\+O\+T\+ES~12}\label{test_8c_a8cd87caa8971629bd476ff311c2d9b9a}
+
+
+\subsection{Function Documentation}
+\index{test.\+c@{test.\+c}!body\+\_\+cb@{body\+\_\+cb}}
+\index{body\+\_\+cb@{body\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{body\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int body\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a971ec6d658cb574bb92f02e565b796bf}
+
+
+Definition at line 1246 of file test.\+c.
+
+
+
+References message\+::body, message\+::body\+\_\+size, messages, and num\+\_\+messages.
+
+
+
+Referenced by pause\+\_\+body\+\_\+cb().
+
+
+\begin{DoxyCode}
+1247 \{
+1248   assert(p == parser);
+1249   strncat(messages[num_messages].body, buf, len);
+1250   messages[num_messages].body_size += len;
+1251  \textcolor{comment}{// printf("body\_cb: '%s'\(\backslash\)n", requests[num\_messages].body);}
+1252   \textcolor{keywordflow}{return} 0;
+1253 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!check\+\_\+num\+\_\+eq@{check\+\_\+num\+\_\+eq}}
+\index{check\+\_\+num\+\_\+eq@{check\+\_\+num\+\_\+eq}!test.\+c@{test.\+c}}
+\subsubsection[{check\+\_\+num\+\_\+eq(const struct message $\ast$m, const char $\ast$prop, int expected, int found)}]{\setlength{\rightskip}{0pt plus 5cm}static int check\+\_\+num\+\_\+eq (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{m, }
+\item[{const char $\ast$}]{prop, }
+\item[{int}]{expected, }
+\item[{int}]{found}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{test_8c_a2f7c59402499022ecf8fa37f66abe17c}
+
+
+Definition at line 1639 of file test.\+c.
+
+
+
+References message\+::name.
+
+
+\begin{DoxyCode}
+1642                          \{
+1643   \textcolor{keywordflow}{if} (expected != found) \{
+1644     printf(\textcolor{stringliteral}{"\(\backslash\)n*** Error: %s in '%s' ***\(\backslash\)n\(\backslash\)n"}, prop, m->name);
+1645     printf(\textcolor{stringliteral}{"expected %d\(\backslash\)n"}, expected);
+1646     printf(\textcolor{stringliteral}{"   found %d\(\backslash\)n"}, found);
+1647     \textcolor{keywordflow}{return} 0;
+1648   \}
+1649   \textcolor{keywordflow}{return} 1;
+1650 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!check\+\_\+str\+\_\+eq@{check\+\_\+str\+\_\+eq}}
+\index{check\+\_\+str\+\_\+eq@{check\+\_\+str\+\_\+eq}!test.\+c@{test.\+c}}
+\subsubsection[{check\+\_\+str\+\_\+eq(const struct message $\ast$m, const char $\ast$prop, const char $\ast$expected, const char $\ast$found)}]{\setlength{\rightskip}{0pt plus 5cm}static int check\+\_\+str\+\_\+eq (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{m, }
+\item[{const char $\ast$}]{prop, }
+\item[{const char $\ast$}]{expected, }
+\item[{const char $\ast$}]{found}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{test_8c_a4294b3425bce2683877f558e1289f750}
+
+
+Definition at line 1619 of file test.\+c.
+
+
+
+References message\+::name.
+
+
+
+Referenced by message\+\_\+eq(), and upgrade\+\_\+message\+\_\+fix().
+
+
+\begin{DoxyCode}
+1622                                  \{
+1623   \textcolor{keywordflow}{if} ((expected == NULL) != (found == NULL)) \{
+1624     printf(\textcolor{stringliteral}{"\(\backslash\)n*** Error: %s in '%s' ***\(\backslash\)n\(\backslash\)n"}, prop, m->name);
+1625     printf(\textcolor{stringliteral}{"expected %s\(\backslash\)n"}, (expected == NULL) ? \textcolor{stringliteral}{"NULL"} : expected);
+1626     printf(\textcolor{stringliteral}{"   found %s\(\backslash\)n"}, (found == NULL) ? \textcolor{stringliteral}{"NULL"} : found);
+1627     \textcolor{keywordflow}{return} 0;
+1628   \}
+1629   \textcolor{keywordflow}{if} (expected != NULL && 0 != strcmp(expected, found)) \{
+1630     printf(\textcolor{stringliteral}{"\(\backslash\)n*** Error: %s in '%s' ***\(\backslash\)n\(\backslash\)n"}, prop, m->name);
+1631     printf(\textcolor{stringliteral}{"expected '%s'\(\backslash\)n"}, expected);
+1632     printf(\textcolor{stringliteral}{"   found '%s'\(\backslash\)n"}, found);
+1633     \textcolor{keywordflow}{return} 0;
+1634   \}
+1635   \textcolor{keywordflow}{return} 1;
+1636 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!chunk\+\_\+complete\+\_\+cb@{chunk\+\_\+complete\+\_\+cb}}
+\index{chunk\+\_\+complete\+\_\+cb@{chunk\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{chunk\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int chunk\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_a6ae4db8c0900b49a4658a4d564f8b107}
+
+
+Definition at line 1324 of file test.\+c.
+
+
+
+References messages, message\+::num\+\_\+chunks\+\_\+complete, and num\+\_\+messages.
+
+
+
+Referenced by pause\+\_\+chunk\+\_\+complete\+\_\+cb().
+
+
+\begin{DoxyCode}
+1325 \{
+1326   assert(p == parser);
+1327   ++messages[num_messages].num_chunks_complete;
+1328   \textcolor{keywordflow}{return} 0;
+1329 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!chunk\+\_\+header\+\_\+cb@{chunk\+\_\+header\+\_\+cb}}
+\index{chunk\+\_\+header\+\_\+cb@{chunk\+\_\+header\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{chunk\+\_\+header\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int chunk\+\_\+header\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_af04f17a23b529fba8dd48eb60b3b1a04}
+
+
+Definition at line 1306 of file test.\+c.
+
+
+
+References message\+::chunk\+\_\+lengths, http\+\_\+parser\+::content\+\_\+length, M\+A\+X\+\_\+\+C\+H\+U\+N\+KS, messages, message\+::num\+\_\+chunks, and num\+\_\+messages.
+
+
+
+Referenced by pause\+\_\+chunk\+\_\+header\+\_\+cb().
+
+
+\begin{DoxyCode}
+1307 \{
+1308   assert(p == parser);
+1309   \textcolor{keywordflow}{if} (p->content_length == 0) \{
+1310     \textcolor{comment}{// Terminating chunk.  Don't increment num\_chunks in this case.}
+1311     \textcolor{keywordflow}{return} 0;
+1312   \}
+1313 
+1314   \textcolor{keywordtype}{int} chunk\_idx = messages[num_messages].num_chunks;
+1315   ++messages[num_messages].num_chunks;
+1316   \textcolor{keywordflow}{if} (chunk\_idx < MAX_CHUNKS) \{
+1317     messages[num_messages].chunk_lengths[chunk\_idx] = p->content_length;
+1318   \}
+1319 
+1320   \textcolor{keywordflow}{return} 0;
+1321 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!count\+\_\+body\+\_\+cb@{count\+\_\+body\+\_\+cb}}
+\index{count\+\_\+body\+\_\+cb@{count\+\_\+body\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{count\+\_\+body\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int count\+\_\+body\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a0c3a81c11b4dc99a825abac0e8adbb16}
+
+
+Definition at line 1256 of file test.\+c.
+
+
+
+References message\+::body\+\_\+size, messages, and num\+\_\+messages.
+
+
+\begin{DoxyCode}
+1257 \{
+1258   assert(p == parser);
+1259   assert(buf);
+1260   messages[num_messages].body_size += len;
+1261   \textcolor{keywordflow}{return} 0;
+1262 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!count\+\_\+parsed\+\_\+messages@{count\+\_\+parsed\+\_\+messages}}
+\index{count\+\_\+parsed\+\_\+messages@{count\+\_\+parsed\+\_\+messages}!test.\+c@{test.\+c}}
+\subsubsection[{count\+\_\+parsed\+\_\+messages(const size\+\_\+t nmsgs,...)}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t count\+\_\+parsed\+\_\+messages (
+\begin{DoxyParamCaption}
+\item[{const size\+\_\+t}]{nmsgs, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{test_8c_ad7f37a82e1e6a976afcb70c3d6ef549c}
+
+
+Definition at line 1715 of file test.\+c.
+
+
+
+References message\+::upgrade.
+
+
+
+Referenced by test\+\_\+multiple3(), and test\+\_\+scan().
+
+
+\begin{DoxyCode}
+1715                                                \{
+1716   \textcolor{keywordtype}{size\_t} i;
+1717   va\_list ap;
+1718 
+1719   va\_start(ap, nmsgs);
+1720 
+1721   \textcolor{keywordflow}{for} (i = 0; i < nmsgs; i++) \{
+1722     \textcolor{keyword}{struct }message *m = va\_arg(ap, \textcolor{keyword}{struct} message *);
+1723 
+1724     \textcolor{keywordflow}{if} (m->upgrade) \{
+1725       va\_end(ap);
+1726       \textcolor{keywordflow}{return} i + 1;
+1727     \}
+1728   \}
+1729 
+1730   va\_end(ap);
+1731   \textcolor{keywordflow}{return} nmsgs;
+1732 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!create\+\_\+large\+\_\+chunked\+\_\+message@{create\+\_\+large\+\_\+chunked\+\_\+message}}
+\index{create\+\_\+large\+\_\+chunked\+\_\+message@{create\+\_\+large\+\_\+chunked\+\_\+message}!test.\+c@{test.\+c}}
+\subsubsection[{create\+\_\+large\+\_\+chunked\+\_\+message(int body\+\_\+size\+\_\+in\+\_\+kb, const char $\ast$headers)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ create\+\_\+large\+\_\+chunked\+\_\+message (
+\begin{DoxyParamCaption}
+\item[{int}]{body\+\_\+size\+\_\+in\+\_\+kb, }
+\item[{const char $\ast$}]{headers}
+\end{DoxyParamCaption}
+)}\label{test_8c_a1552a7f8c860575da68030ad65187720}
+
+
+Definition at line 2740 of file test.\+c.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2741 \{
+2742   \textcolor{keywordtype}{int} i;
+2743   \textcolor{keywordtype}{size\_t} wrote = 0;
+2744   \textcolor{keywordtype}{size\_t} headers\_len = strlen(headers);
+2745   \textcolor{keywordtype}{size\_t} bufsize = headers\_len + (5+1024+2)*body\_size\_in\_kb + 6;
+2746   \textcolor{keywordtype}{char} * buf = malloc(bufsize);
+2747 
+2748   memcpy(buf, headers, headers\_len);
+2749   wrote += headers\_len;
+2750 
+2751   \textcolor{keywordflow}{for} (i = 0; i < body\_size\_in\_kb; i++) \{
+2752     \textcolor{comment}{// write 1kb chunk into the body.}
+2753     memcpy(buf + wrote, \textcolor{stringliteral}{"400\(\backslash\)r\(\backslash\)n"}, 5);
+2754     wrote += 5;
+2755     memset(buf + wrote, \textcolor{charliteral}{'C'}, 1024);
+2756     wrote += 1024;
+2757     strcpy(buf + wrote, \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"});
+2758     wrote += 2;
+2759   \}
+2760 
+2761   memcpy(buf + wrote, \textcolor{stringliteral}{"0\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, 6);
+2762   wrote += 6;
+2763   assert(wrote == bufsize);
+2764 
+2765   \textcolor{keywordflow}{return} buf;
+2766 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+body\+\_\+cb@{dontcall\+\_\+body\+\_\+cb}}
+\index{dontcall\+\_\+body\+\_\+cb@{dontcall\+\_\+body\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+body\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+body\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a195e8f86072bef64faf0195efb1e03db}
+
+
+Definition at line 1366 of file test.\+c.
+
+
+\begin{DoxyCode}
+1367 \{
+1368   \textcolor{keywordflow}{if} (p || buf || len) \{ \} \textcolor{comment}{// gcc}
+1369   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_body\_cb() called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1370   exit(1);
+1371 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+chunk\+\_\+complete\+\_\+cb@{dontcall\+\_\+chunk\+\_\+complete\+\_\+cb}}
+\index{dontcall\+\_\+chunk\+\_\+complete\+\_\+cb@{dontcall\+\_\+chunk\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+chunk\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+chunk\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_aa8a5acad8e9938c4144b06ae7b2bbb10}
+
+
+Definition at line 1408 of file test.\+c.
+
+
+\begin{DoxyCode}
+1409 \{
+1410   \textcolor{keywordflow}{if} (p) \{ \} \textcolor{comment}{// gcc}
+1411   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_chunk\_complete() "}
+1412           \textcolor{stringliteral}{"called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1413   exit(1);
+1414 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+chunk\+\_\+header\+\_\+cb@{dontcall\+\_\+chunk\+\_\+header\+\_\+cb}}
+\index{dontcall\+\_\+chunk\+\_\+header\+\_\+cb@{dontcall\+\_\+chunk\+\_\+header\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+chunk\+\_\+header\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+chunk\+\_\+header\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_a9d01f30da444ab51d7a694cc87b8eeac}
+
+
+Definition at line 1400 of file test.\+c.
+
+
+\begin{DoxyCode}
+1401 \{
+1402   \textcolor{keywordflow}{if} (p) \{ \} \textcolor{comment}{// gcc}
+1403   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_chunk\_header() called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1404   exit(1);
+1405 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+header\+\_\+field\+\_\+cb@{dontcall\+\_\+header\+\_\+field\+\_\+cb}}
+\index{dontcall\+\_\+header\+\_\+field\+\_\+cb@{dontcall\+\_\+header\+\_\+field\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+header\+\_\+field\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+header\+\_\+field\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_ae30b605379f100fe52d25f48a6fd8209}
+
+
+Definition at line 1342 of file test.\+c.
+
+
+\begin{DoxyCode}
+1343 \{
+1344   \textcolor{keywordflow}{if} (p || buf || len) \{ \} \textcolor{comment}{// gcc}
+1345   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_header\_field() called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1346   exit(1);
+1347 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+header\+\_\+value\+\_\+cb@{dontcall\+\_\+header\+\_\+value\+\_\+cb}}
+\index{dontcall\+\_\+header\+\_\+value\+\_\+cb@{dontcall\+\_\+header\+\_\+value\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+header\+\_\+value\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+header\+\_\+value\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a5f8f8a45cb3eadaa3a43150e78854822}
+
+
+Definition at line 1350 of file test.\+c.
+
+
+\begin{DoxyCode}
+1351 \{
+1352   \textcolor{keywordflow}{if} (p || buf || len) \{ \} \textcolor{comment}{// gcc}
+1353   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_header\_value() called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1354   exit(1);
+1355 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+headers\+\_\+complete\+\_\+cb@{dontcall\+\_\+headers\+\_\+complete\+\_\+cb}}
+\index{dontcall\+\_\+headers\+\_\+complete\+\_\+cb@{dontcall\+\_\+headers\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+headers\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+headers\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a58bb89b1cb17468e8aa4d13684581ff7}
+
+
+Definition at line 1374 of file test.\+c.
+
+
+\begin{DoxyCode}
+1375 \{
+1376   \textcolor{keywordflow}{if} (p || buf || len) \{ \} \textcolor{comment}{// gcc}
+1377   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_headers\_complete() called on paused "}
+1378                   \textcolor{stringliteral}{"parser ***\(\backslash\)n\(\backslash\)n"});
+1379   exit(1);
+1380 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+message\+\_\+begin\+\_\+cb@{dontcall\+\_\+message\+\_\+begin\+\_\+cb}}
+\index{dontcall\+\_\+message\+\_\+begin\+\_\+cb@{dontcall\+\_\+message\+\_\+begin\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+message\+\_\+begin\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+message\+\_\+begin\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_ae390e625b3ea2aacdb9d4b727af6c0bf}
+
+
+Definition at line 1334 of file test.\+c.
+
+
+\begin{DoxyCode}
+1335 \{
+1336   \textcolor{keywordflow}{if} (p) \{ \} \textcolor{comment}{// gcc}
+1337   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_message\_begin() called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1338   exit(1);
+1339 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+message\+\_\+complete\+\_\+cb@{dontcall\+\_\+message\+\_\+complete\+\_\+cb}}
+\index{dontcall\+\_\+message\+\_\+complete\+\_\+cb@{dontcall\+\_\+message\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+message\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+message\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_a37d995243bc1c256a4c048d9a3b04e11}
+
+
+Definition at line 1383 of file test.\+c.
+
+
+\begin{DoxyCode}
+1384 \{
+1385   \textcolor{keywordflow}{if} (p) \{ \} \textcolor{comment}{// gcc}
+1386   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_message\_complete() called on paused "}
+1387                   \textcolor{stringliteral}{"parser ***\(\backslash\)n\(\backslash\)n"});
+1388   exit(1);
+1389 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+request\+\_\+url\+\_\+cb@{dontcall\+\_\+request\+\_\+url\+\_\+cb}}
+\index{dontcall\+\_\+request\+\_\+url\+\_\+cb@{dontcall\+\_\+request\+\_\+url\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+request\+\_\+url\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+request\+\_\+url\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_ab4669225ce632fe6833e8386da0fafe6}
+
+
+Definition at line 1358 of file test.\+c.
+
+
+\begin{DoxyCode}
+1359 \{
+1360   \textcolor{keywordflow}{if} (p || buf || len) \{ \} \textcolor{comment}{// gcc}
+1361   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_request\_url() called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1362   exit(1);
+1363 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dontcall\+\_\+response\+\_\+reason\+\_\+cb@{dontcall\+\_\+response\+\_\+reason\+\_\+cb}}
+\index{dontcall\+\_\+response\+\_\+reason\+\_\+cb@{dontcall\+\_\+response\+\_\+reason\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{dontcall\+\_\+response\+\_\+reason\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int dontcall\+\_\+response\+\_\+reason\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a161e11d80aa0f5cb44eef103a91ed8c0}
+
+
+Definition at line 1392 of file test.\+c.
+
+
+\begin{DoxyCode}
+1393 \{
+1394   \textcolor{keywordflow}{if} (p || buf || len) \{ \} \textcolor{comment}{// gcc}
+1395   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** on\_reason() called on paused parser ***\(\backslash\)n\(\backslash\)n"});
+1396   exit(1);
+1397 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!dump\+\_\+url@{dump\+\_\+url}}
+\index{dump\+\_\+url@{dump\+\_\+url}!test.\+c@{test.\+c}}
+\subsubsection[{dump\+\_\+url(const char $\ast$url, const struct http\+\_\+parser\+\_\+url $\ast$u)}]{\setlength{\rightskip}{0pt plus 5cm}void dump\+\_\+url (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{url, }
+\item[{const struct {\bf http\+\_\+parser\+\_\+url} $\ast$}]{u}
+\end{DoxyParamCaption}
+)}\label{test_8c_aca79391d1cf1010269536ac37a4bc621}
+
+
+Definition at line 2309 of file test.\+c.
+
+
+
+References http\+\_\+parser\+\_\+url\+::field\+\_\+data, http\+\_\+parser\+\_\+url\+::field\+\_\+set, http\+\_\+parser\+\_\+url\+::len, http\+\_\+parser\+\_\+url\+::off, http\+\_\+parser\+\_\+url\+::port, and U\+F\+\_\+\+M\+AX.
+
+
+
+Referenced by test\+\_\+parse\+\_\+url().
+
+
+\begin{DoxyCode}
+2310 \{
+2311   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i;
+2312 
+2313   printf(\textcolor{stringliteral}{"\(\backslash\)tfield\_set: 0x%x, port: %u\(\backslash\)n"}, u->field_set, u->port);
+2314   \textcolor{keywordflow}{for} (i = 0; i < UF_MAX; i++) \{
+2315     \textcolor{keywordflow}{if} ((u->field_set & (1 << i)) == 0) \{
+2316       printf(\textcolor{stringliteral}{"\(\backslash\)tfield\_data[%u]: unset\(\backslash\)n"}, i);
+2317       \textcolor{keywordflow}{continue};
+2318     \}
+2319 
+2320     printf(\textcolor{stringliteral}{"\(\backslash\)tfield\_data[%u]: off: %u len: %u part: \(\backslash\)"%.*s\(\backslash\)n\(\backslash\)""},
+2321            i,
+2322            u->field_data[i].off,
+2323            u->field_data[i].len,
+2324            u->field_data[i].len,
+2325            url + u->field_data[i].off);
+2326   \}
+2327 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!empty\+\_\+cb@{empty\+\_\+cb}}
+\index{empty\+\_\+cb@{empty\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{empty\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int empty\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_a1703c6f5d62c9d58825191f594d0b46a}
+
+
+Definition at line 1513 of file test.\+c.
+
+
+\begin{DoxyCode}
+1513 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!empty\+\_\+data\+\_\+cb@{empty\+\_\+data\+\_\+cb}}
+\index{empty\+\_\+data\+\_\+cb@{empty\+\_\+data\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{empty\+\_\+data\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int empty\+\_\+data\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a06d89cca42239acddb7003460f053e16}
+
+
+Definition at line 1514 of file test.\+c.
+
+
+\begin{DoxyCode}
+1514 \{ \textcolor{keywordflow}{return} 0; \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!header\+\_\+field\+\_\+cb@{header\+\_\+field\+\_\+cb}}
+\index{header\+\_\+field\+\_\+cb@{header\+\_\+field\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{header\+\_\+field\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int header\+\_\+field\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_ac201ab0074b6bdcf288c59b39c36ca43}
+
+
+Definition at line 1212 of file test.\+c.
+
+
+
+References message\+::\+F\+I\+E\+LD, message\+::headers, message\+::last\+\_\+header\+\_\+element, messages, message\+::num\+\_\+headers, and num\+\_\+messages.
+
+
+
+Referenced by pause\+\_\+header\+\_\+field\+\_\+cb().
+
+
+\begin{DoxyCode}
+1213 \{
+1214   assert(p == parser);
+1215   \textcolor{keyword}{struct }message *m = &messages[num_messages];
+1216 
+1217   \textcolor{keywordflow}{if} (m->last_header_element != FIELD)
+1218     m->num_headers++;
+1219 
+1220   strncat(m->headers[m->num_headers-1][0], buf, len);
+1221 
+1222   m->last_header_element = FIELD;
+1223 
+1224   \textcolor{keywordflow}{return} 0;
+1225 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!header\+\_\+value\+\_\+cb@{header\+\_\+value\+\_\+cb}}
+\index{header\+\_\+value\+\_\+cb@{header\+\_\+value\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{header\+\_\+value\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int header\+\_\+value\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_ab767d37971d9aa50aa0475392ad30db6}
+
+
+Definition at line 1228 of file test.\+c.
+
+
+
+References message\+::headers, message\+::last\+\_\+header\+\_\+element, M\+A\+X\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+S\+I\+ZE, messages, message\+::num\+\_\+headers, num\+\_\+messages, and message\+::\+V\+A\+L\+UE.
+
+
+
+Referenced by pause\+\_\+header\+\_\+value\+\_\+cb().
+
+
+\begin{DoxyCode}
+1229 \{
+1230   assert(p == parser);
+1231   \textcolor{keyword}{struct }message *m = &messages[num_messages];
+1232 
+1233   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} cursize = strlen(m->headers[m->num_headers-1][1]);
+1234   \textcolor{keywordflow}{if} (cursize + len + 1 > MAX_ELEMENT_SIZE) \{
+1235     len = MAX_ELEMENT_SIZE - (cursize + 1);
+1236   \}
+1237 
+1238   strncat(m->headers[m->num_headers-1][1], buf, len);
+1239 
+1240   m->last_header_element = VALUE;
+1241 
+1242   \textcolor{keywordflow}{return} 0;
+1243 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!headers\+\_\+complete\+\_\+cb@{headers\+\_\+complete\+\_\+cb}}
+\index{headers\+\_\+complete\+\_\+cb@{headers\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{headers\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int headers\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a56018d6b95b2306e9ba995e686f0b740}
+
+
+Definition at line 1273 of file test.\+c.
+
+
+
+References message\+::headers\+\_\+complete\+\_\+cb\+\_\+called, message\+::http\+\_\+major, http\+\_\+parser\+::http\+\_\+major, message\+::http\+\_\+minor, http\+\_\+parser\+::http\+\_\+minor, messages, message\+::method, http\+\_\+parser\+::method, num\+\_\+messages, message\+::status\+\_\+code, http\+\_\+parser\+::status\+\_\+code, and T\+R\+UE.
+
+
+
+Referenced by pause\+\_\+headers\+\_\+complete\+\_\+cb().
+
+
+\begin{DoxyCode}
+1274 \{
+1275   assert(p == parser);
+1276   assert(!buf);
+1277   messages[num_messages].method = parser->method;
+1278   messages[num_messages].status_code = parser->status_code;
+1279   messages[num_messages].http_major = parser->http_major;
+1280   messages[num_messages].http_minor = parser->http_minor;
+1281   messages[num_messages].headers_complete_cb_called = TRUE;
+1282   \textcolor{keywordflow}{return} 0;
+1283 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!main@{main}}
+\index{main@{main}!test.\+c@{test.\+c}}
+\subsubsection[{main(void)}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{test_8c_a840291bc02cba5474a4cb46a9b9566fe}
+T\+E\+S\+T\+I\+NG O\+N\+\_\+\+M\+E\+S\+S\+A\+G\+E\+\_\+\+B\+E\+G\+IN C\+A\+L\+LS
+
+R\+E\+Q\+U\+E\+S\+TS 
+
+Definition at line 2834 of file test.\+c.
+
+
+
+References B\+O\+N\+J\+O\+U\+R\+\_\+\+M\+A\+D\+A\+M\+E\+\_\+\+FR, message\+::chunk\+\_\+lengths, C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+B\+U\+L\+L\+S\+H\+I\+T\+\_\+\+A\+F\+T\+E\+R\+\_\+\+L\+E\+N\+G\+TH, C\+H\+U\+N\+K\+E\+D\+\_\+\+W\+\_\+\+T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+H\+E\+A\+D\+E\+RS, C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+Q\+U\+E\+ST, create\+\_\+large\+\_\+chunked\+\_\+message(), F\+A\+L\+SE, G\+E\+T\+\_\+\+F\+U\+N\+K\+Y\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH, G\+E\+T\+\_\+\+N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+DY, G\+E\+T\+\_\+\+O\+N\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+N\+O\+\_\+\+B\+O\+DY, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON, H\+P\+E\+\_\+\+OK, H\+P\+E\+\_\+\+S\+T\+R\+I\+CT, H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN, H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST, H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE, M\+A\+X\+\_\+\+C\+H\+U\+N\+KS, message\+::name, N\+O\+\_\+\+C\+A\+R\+R\+I\+A\+G\+E\+\_\+\+R\+ET, N\+O\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+N\+O\+\_\+\+B\+O\+D\+Y\+\_\+404, N\+O\+\_\+\+R\+E\+A\+S\+O\+N\+\_\+\+P\+H\+R\+A\+SE, P\+O\+S\+T\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+A\+L\+L\+\_\+\+Y\+O\+U\+R\+\_\+\+B\+A\+SE, P\+O\+S\+T\+\_\+\+I\+D\+E\+N\+T\+I\+T\+Y\+\_\+\+B\+O\+D\+Y\+\_\+\+W\+O\+R\+LD, P\+R\+E\+F\+I\+X\+\_\+\+N\+E\+W\+L\+I\+N\+E\+\_\+\+G\+ET, Q\+U\+E\+R\+Y\+\_\+\+U\+R\+L\+\_\+\+W\+I\+T\+H\+\_\+\+Q\+U\+E\+S\+T\+I\+O\+N\+\_\+\+M\+A\+R\+K\+\_\+\+G\+ET, message\+::should\+\_\+keep\+\_\+alive, test\+\_\+header\+\_\+overflow\+\_\+error(), test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+message\+\_\+pause(), test\+\_\+multiple3(), test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), test\+\_\+parse\+\_\+url(), test\+\_\+scan(), test\+\_\+simple(), T\+R\+A\+I\+L\+I\+N\+G\+\_\+\+S\+P\+A\+C\+E\+\_\+\+O\+N\+\_\+\+C\+H\+U\+N\+K\+E\+D\+\_\+\+B\+O\+DY, T\+W\+O\+\_\+\+C\+H\+U\+N\+K\+S\+\_\+\+M\+U\+L\+T\+\_\+\+Z\+E\+R\+O\+\_\+\+E\+ND, and U\+N\+D\+E\+R\+S\+T\+O\+R\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+K\+EY.
+
+
+\begin{DoxyCode}
+2835 \{
+2836   parser = NULL;
+2837   \textcolor{keywordtype}{int} i, j, k;
+2838   \textcolor{keywordtype}{int} request\_count;
+2839   \textcolor{keywordtype}{int} response\_count;
+2840   \textcolor{keywordtype}{int} on\_message\_begin\_cb\_count;
+2841 
+2842   printf(\textcolor{stringliteral}{"sizeof(http\_parser) = %u\(\backslash\)n"}, (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})\textcolor{keyword}{sizeof}(http_parser));
+2843 
+2844   \textcolor{keywordflow}{for} (request\_count = 0; requests[request\_count].name; request\_count++);
+2845   \textcolor{keywordflow}{for} (response\_count = 0; responses[response\_count].name; response\_count++);
+2846   \textcolor{keywordflow}{for} (on\_message\_begin\_cb\_count = 0;
+2847        on_message_begin_cb_test[on\_message\_begin\_cb\_count].name;
+2848        on\_message\_begin\_cb\_count++);
+2849 
+2851   test_parse_url();
+2852 
+2854   \textcolor{keywordflow}{for} (i = 0 ; i < on\_message\_begin\_cb\_count; i++) \{
+2855     test_on_message_begin_cb(&on_message_begin_cb_test[i]);
+2856   \}
+2857 
+2859 
+2860   test_header_overflow_error(HTTP_REQUEST);
+2861   test_no_overflow_long_body(HTTP_REQUEST, 1000);
+2862   test_no_overflow_long_body(HTTP_REQUEST, 100000);
+2863 
+2864   test_header_overflow_error(HTTP_RESPONSE);
+2865   test_no_overflow_long_body(HTTP_RESPONSE, 1000);
+2866   test_no_overflow_long_body(HTTP_RESPONSE, 100000);
+2867 
+2869 
+2870   \textcolor{keywordflow}{for} (i = 0; i < response\_count; i++) \{
+2871     test_message(&responses[i]);
+2872   \}
+2873 
+2874   \textcolor{keywordflow}{for} (i = 0; i < response\_count; i++) \{
+2875     test_message_pause(&responses[i]);
+2876   \}
+2877 
+2878   \textcolor{keywordflow}{for} (i = 0; i < response\_count; i++) \{
+2879     \textcolor{keywordflow}{if} (!responses[i].should_keep_alive) \textcolor{keywordflow}{continue};
+2880     \textcolor{keywordflow}{for} (j = 0; j < response\_count; j++) \{
+2881       \textcolor{keywordflow}{if} (!responses[j].should\_keep\_alive) \textcolor{keywordflow}{continue};
+2882       \textcolor{keywordflow}{for} (k = 0; k < response\_count; k++) \{
+2883         test_multiple3(&responses[i], &responses[j], &responses[k]);
+2884       \}
+2885     \}
+2886   \}
+2887 
+2888   test_message_count_body(&responses[NO_HEADERS_NO_BODY_404]);
+2889   test_message_count_body(&responses[TRAILING_SPACE_ON_CHUNKED_BODY]);
+2890 
+2891   \textcolor{comment}{// test very large chunked response}
+2892   \{
+2893     \textcolor{keywordtype}{char} * msg = create_large_chunked_message(31337,
+2894       \textcolor{stringliteral}{"HTTP/1.0 200 OK\(\backslash\)r\(\backslash\)n"}
+2895       \textcolor{stringliteral}{"Transfer-Encoding: chunked\(\backslash\)r\(\backslash\)n"}
+2896       \textcolor{stringliteral}{"Content-Type: text/plain\(\backslash\)r\(\backslash\)n"}
+2897       \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"});
+2898     \textcolor{keyword}{struct }message large\_chunked =
+2899       \{.name= \textcolor{stringliteral}{"large chunked"}
+2900       ,.type= HTTP_RESPONSE
+2901       ,.raw= msg
+2902       ,.should\_keep\_alive= FALSE
+2903       ,.message\_complete\_on\_eof= FALSE
+2904       ,.http\_major= 1
+2905       ,.http\_minor= 0
+2906       ,.status\_code= 200
+2907       ,.response\_reason= \textcolor{stringliteral}{"OK"}
+2908       ,.num\_headers= 2
+2909       ,.headers=
+2910         \{ \{ \textcolor{stringliteral}{"Transfer-Encoding"}, \textcolor{stringliteral}{"chunked"} \}
+2911         , \{ \textcolor{stringliteral}{"Content-Type"}, \textcolor{stringliteral}{"text/plain"} \}
+2912         \}
+2913       ,.body\_size= 31337*1024
+2914       ,.num\_chunks= 31337
+2915       ,.num\_chunks\_complete= 31338
+2916       \};
+2917     \textcolor{keywordflow}{for} (i = 0; i < MAX_CHUNKS; ++i) \{
+2918       large\_chunked.chunk_lengths[i] = 1024;
+2919     \}
+2920     test_message_count_body(&large\_chunked);
+2921     free(msg);
+2922   \}
+2923 
+2924 
+2925 
+2926   printf(\textcolor{stringliteral}{"response scan 1/2      "});
+2927   test_scan( &responses[TRAILING_SPACE_ON_CHUNKED_BODY]
+2928            , &responses[NO_REASON_PHRASE]
+2929            , &responses[NO_HEADERS_NO_BODY_404]
+2930            );
+2931 
+2932   printf(\textcolor{stringliteral}{"response scan 2/2      "});
+2933   test_scan( &responses[BONJOUR_MADAME_FR]
+2934            , &responses[UNDERSTORE_HEADER_KEY]
+2935            , &responses[NO_CARRIAGE_RET]
+2936            );
+2937 
+2938   puts(\textcolor{stringliteral}{"responses okay"});
+2939 
+2940 
+2942 
+2943   test_simple(\textcolor{stringliteral}{"hello world"}, HPE_INVALID_METHOD);
+2944   test_simple(\textcolor{stringliteral}{"GET / HTP/1.1\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, HPE_INVALID_VERSION);
+2945 
+2946 
+2947   test_simple(\textcolor{stringliteral}{"ASDF / HTTP/1.1\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, HPE_INVALID_METHOD);
+2948   test_simple(\textcolor{stringliteral}{"PROPPATCHA / HTTP/1.1\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, HPE_INVALID_METHOD);
+2949   test_simple(\textcolor{stringliteral}{"GETA / HTTP/1.1\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, HPE_INVALID_METHOD);
+2950 
+2951   \textcolor{comment}{// Well-formed but incomplete}
+2952   test_simple(\textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+2953               \textcolor{stringliteral}{"Content-Type: text/plain\(\backslash\)r\(\backslash\)n"}
+2954               \textcolor{stringliteral}{"Content-Length: 6\(\backslash\)r\(\backslash\)n"}
+2955               \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}
+2956               \textcolor{stringliteral}{"fooba"},
+2957               HPE_OK);
+2958 
+2959   \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *all\_methods[] = \{
+2960     \textcolor{stringliteral}{"DELETE"},
+2961     \textcolor{stringliteral}{"GET"},
+2962     \textcolor{stringliteral}{"HEAD"},
+2963     \textcolor{stringliteral}{"POST"},
+2964     \textcolor{stringliteral}{"PUT"},
+2965     \textcolor{comment}{//"CONNECT", //CONNECT can't be tested like other methods, it's a tunnel}
+2966     \textcolor{stringliteral}{"OPTIONS"},
+2967     \textcolor{stringliteral}{"TRACE"},
+2968     \textcolor{stringliteral}{"COPY"},
+2969     \textcolor{stringliteral}{"LOCK"},
+2970     \textcolor{stringliteral}{"MKCOL"},
+2971     \textcolor{stringliteral}{"MOVE"},
+2972     \textcolor{stringliteral}{"PROPFIND"},
+2973     \textcolor{stringliteral}{"PROPPATCH"},
+2974     \textcolor{stringliteral}{"UNLOCK"},
+2975     \textcolor{stringliteral}{"REPORT"},
+2976     \textcolor{stringliteral}{"MKACTIVITY"},
+2977     \textcolor{stringliteral}{"CHECKOUT"},
+2978     \textcolor{stringliteral}{"MERGE"},
+2979     \textcolor{stringliteral}{"M-SEARCH"},
+2980     \textcolor{stringliteral}{"NOTIFY"},
+2981     \textcolor{stringliteral}{"SUBSCRIBE"},
+2982     \textcolor{stringliteral}{"UNSUBSCRIBE"},
+2983     \textcolor{stringliteral}{"PATCH"},
+2984     0 \};
+2985   \textcolor{keyword}{const} \textcolor{keywordtype}{char} **this\_method;
+2986   \textcolor{keywordflow}{for} (this\_method = all\_methods; *this\_method; this\_method++) \{
+2987     \textcolor{keywordtype}{char} buf[200];
+2988     sprintf(buf, \textcolor{stringliteral}{"%s / HTTP/1.1\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, *this\_method);
+2989     test_simple(buf, HPE_OK);
+2990   \}
+2991 
+2992   \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *bad\_methods[] = \{
+2993       \textcolor{stringliteral}{"C******"},
+2994       \textcolor{stringliteral}{"M****"},
+2995       0 \};
+2996   \textcolor{keywordflow}{for} (this\_method = bad\_methods; *this\_method; this\_method++) \{
+2997     \textcolor{keywordtype}{char} buf[200];
+2998     sprintf(buf, \textcolor{stringliteral}{"%s / HTTP/1.1\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"}, *this\_method);
+2999     test_simple(buf, HPE_UNKNOWN);
+3000   \}
+3001 
+3002   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *dumbfuck2 =
+3003     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3004     \textcolor{stringliteral}{"X-SSL-Bullshit:   -----BEGIN CERTIFICATE-----\(\backslash\)r\(\backslash\)n"}
+3005     \textcolor{stringliteral}{"\(\backslash\)tMIIFbTCCBFWgAwIBAgICH4cwDQYJKoZIhvcNAQEFBQAwcDELMAkGA1UEBhMCVUsx\(\backslash\)r\(\backslash\)n"}
+3006     \textcolor{stringliteral}{"\(\backslash\)tETAPBgNVBAoTCGVTY2llbmNlMRIwEAYDVQQLEwlBdXRob3JpdHkxCzAJBgNVBAMT\(\backslash\)r\(\backslash\)n"}
+3007     \textcolor{stringliteral}{"\(\backslash\)tAkNBMS0wKwYJKoZIhvcNAQkBFh5jYS1vcGVyYXRvckBncmlkLXN1cHBvcnQuYWMu\(\backslash\)r\(\backslash\)n"}
+3008     \textcolor{stringliteral}{"\(\backslash\)tdWswHhcNMDYwNzI3MTQxMzI4WhcNMDcwNzI3MTQxMzI4WjBbMQswCQYDVQQGEwJV\(\backslash\)r\(\backslash\)n"}
+3009     \textcolor{stringliteral}{"\(\backslash\)tSzERMA8GA1UEChMIZVNjaWVuY2UxEzARBgNVBAsTCk1hbmNoZXN0ZXIxCzAJBgNV\(\backslash\)r\(\backslash\)n"}
+3010     \textcolor{stringliteral}{"\(\backslash\)tBAcTmrsogriqMWLAk1DMRcwFQYDVQQDEw5taWNoYWVsIHBhcmQYJKoZIhvcNAQEB\(\backslash\)r\(\backslash\)n"}
+3011     \textcolor{stringliteral}{"\(\backslash\)tBQADggEPADCCAQoCggEBANPEQBgl1IaKdSS1TbhF3hEXSl72G9J+WC/1R64fAcEF\(\backslash\)r\(\backslash\)n"}
+3012     \textcolor{stringliteral}{"\(\backslash\)tW51rEyFYiIeZGx/BVzwXbeBoNUK41OK65sxGuflMo5gLflbwJtHBRIEKAfVVp3YR\(\backslash\)r\(\backslash\)n"}
+3013     \textcolor{stringliteral}{"\(\backslash\)tgW7cMA/s/XKgL1GEC7rQw8lIZT8RApukCGqOVHSi/F1SiFlPDxuDfmdiNzL31+sL\(\backslash\)r\(\backslash\)n"}
+3014     \textcolor{stringliteral}{"\(\backslash\)t0iwHDdNkGjy5pyBSB8Y79dsSJtCW/iaLB0/n8Sj7HgvvZJ7x0fr+RQjYOUUfrePP\(\backslash\)r\(\backslash\)n"}
+3015     \textcolor{stringliteral}{"\(\backslash\)tu2MSpFyf+9BbC/aXgaZuiCvSR+8Snv3xApQY+fULK/xY8h8Ua51iXoQ5jrgu2SqR\(\backslash\)r\(\backslash\)n"}
+3016     \textcolor{stringliteral}{"\(\backslash\)twgA7BUi3G8LFzMBl8FRCDYGUDy7M6QaHXx1ZWIPWNKsCAwEAAaOCAiQwggIgMAwG\(\backslash\)r\(\backslash\)n"}
+3017     \textcolor{stringliteral}{"\(\backslash\)tA1UdEwEB/wQCMAAwEQYJYIZIAYb4QgHTTPAQDAgWgMA4GA1UdDwEB/wQEAwID6DAs\(\backslash\)r\(\backslash\)n"}
+3018     \textcolor{stringliteral}{"\(\backslash\)tBglghkgBhvhCAQ0EHxYdVUsgZS1TY2llbmNlIFVzZXIgQ2VydGlmaWNhdGUwHQYD\(\backslash\)r\(\backslash\)n"}
+3019     \textcolor{stringliteral}{"\(\backslash\)tVR0OBBYEFDTt/sf9PeMaZDHkUIldrDYMNTBZMIGaBgNVHSMEgZIwgY+AFAI4qxGj\(\backslash\)r\(\backslash\)n"}
+3020     \textcolor{stringliteral}{"\(\backslash\)tloCLDdMVKwiljjDastqooXSkcjBwMQswCQYDVQQGEwJVSzERMA8GA1UEChMIZVNj\(\backslash\)r\(\backslash\)n"}
+3021     \textcolor{stringliteral}{"\(\backslash\)taWVuY2UxEjAQBgNVBAsTCUF1dGhvcml0eTELMAkGA1UEAxMCQ0ExLTArBgkqhkiG\(\backslash\)r\(\backslash\)n"}
+3022     \textcolor{stringliteral}{"\(\backslash\)t9w0BCQEWHmNhLW9wZXJhdG9yQGdyaWQtc3VwcG9ydC5hYy51a4IBADApBgNVHRIE\(\backslash\)r\(\backslash\)n"}
+3023     \textcolor{stringliteral}{"\(\backslash\)tIjAggR5jYS1vcGVyYXRvckBncmlkLXN1cHBvcnQuYWMudWswGQYDVR0gBBIwEDAO\(\backslash\)r\(\backslash\)n"}
+3024     \textcolor{stringliteral}{"\(\backslash\)tBgwrBgEEAdkvAQEBAQYwPQYJYIZIAYb4QgEEBDAWLmh0dHA6Ly9jYS5ncmlkLXN1\(\backslash\)r\(\backslash\)n"}
+3025     \textcolor{stringliteral}{"\(\backslash\)tcHBvcnQuYWMudmT4sopwqlBWsvcHViL2NybC9jYWNybC5jcmwwPQYJYIZIAYb4QgEDBDAWLmh0\(\backslash\)r\(\backslash\)n"}
+3026     \textcolor{stringliteral}{"\(\backslash\)tdHA6Ly9jYS5ncmlkLXN1cHBvcnQuYWMudWsvcHViL2NybC9jYWNybC5jcmwwPwYD\(\backslash\)r\(\backslash\)n"}
+3027     \textcolor{stringliteral}{"\(\backslash\)tVR0fBDgwNjA0oDKgMIYuaHR0cDovL2NhLmdyaWQt5hYy51ay9wdWIv\(\backslash\)r\(\backslash\)n"}
+3028     \textcolor{stringliteral}{"\(\backslash\)tY3JsL2NhY3JsLmNybDANBgkqhkiG9w0BAQUFAAOCAQEAS/U4iiooBENGW/Hwmmd3\(\backslash\)r\(\backslash\)n"}
+3029     \textcolor{stringliteral}{"\(\backslash\)tXCy6Zrt08YjKCzGNjorT98g8uGsqYjSxv/hmi0qlnlHs+k/3Iobc3LjS5AMYr5L8\(\backslash\)r\(\backslash\)n"}
+3030     \textcolor{stringliteral}{"\(\backslash\)tUO7OSkgFFlLHQyC9JzPfmLCAugvzEbyv4Olnsr8hbxF1MbKZoQxUZtMVu29wjfXk\(\backslash\)r\(\backslash\)n"}
+3031     \textcolor{stringliteral}{"\(\backslash\)thTeApBv7eaKCWpSp7MCbvgzm74izKhu3vlDk9w6qVrxePfGgpKPqfHiOoGhFnbTK\(\backslash\)r\(\backslash\)n"}
+3032     \textcolor{stringliteral}{"\(\backslash\)twTC6o2xq5y0qZ03JonF7OJspEd3I5zKY3E+ov7/ZhW6DqT8UFvsAdjvQbXyhV8Eu\(\backslash\)r\(\backslash\)n"}
+3033     \textcolor{stringliteral}{"\(\backslash\)tYhixw1aKEPzNjNowuIseVogKOLXxWI5vAi5HgXdS0/ES5gDGsABo4fqovUKlgop3\(\backslash\)r\(\backslash\)n"}
+3034     \textcolor{stringliteral}{"\(\backslash\)tRA==\(\backslash\)r\(\backslash\)n"}
+3035     \textcolor{stringliteral}{"\(\backslash\)t-----END CERTIFICATE-----\(\backslash\)r\(\backslash\)n"}
+3036     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3037   test_simple(dumbfuck2, HPE_OK);
+3038 
+3039   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *corrupted\_header\_name =
+3040     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3041     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3042     \textcolor{stringliteral}{"X-Some-Header\(\backslash\)r\(\backslash\)033\(\backslash\)065\(\backslash\)325eep-Alive\(\backslash\)r\(\backslash\)n"}
+3043     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3044     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3045   test_simple(corrupted\_header\_name, HPE_INVALID_HEADER_TOKEN);
+3046 
+3047   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *header\_with\_space =
+3048     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3049     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3050     \textcolor{stringliteral}{"Foo Foo: some\_value\(\backslash\)r\(\backslash\)n"}
+3051     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3052     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3053   test_simple(header\_with\_space, HPE_INVALID_HEADER_TOKEN);
+3054 
+3055   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *header\_with\_curly\_brace =
+3056     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3057     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3058     \textcolor{stringliteral}{"Foo\}Foo: some\_value\(\backslash\)r\(\backslash\)n"}
+3059     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3060     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3061   test_simple(header\_with\_curly\_brace, HPE_INVALID_HEADER_TOKEN);
+3062 
+3063   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *header\_with\_quote =
+3064     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3065     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3066     \textcolor{stringliteral}{"Foo\(\backslash\)"Foo: some\_value\(\backslash\)r\(\backslash\)n"}
+3067     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3068     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3069   test_simple(header\_with\_quote, HPE_INVALID_HEADER_TOKEN);
+3070 
+3071   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *header\_with\_forward\_slash =
+3072     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3073     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3074     \textcolor{stringliteral}{"Foo/Foo: some\_value\(\backslash\)r\(\backslash\)n"}
+3075     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3076     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3077   test_simple(header\_with\_forward\_slash, HPE_INVALID_HEADER_TOKEN);
+3078 
+3079   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *header\_with\_trailing\_space =
+3080     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3081     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3082     \textcolor{stringliteral}{"X-Some-Header : some\_value\(\backslash\)r\(\backslash\)n"}
+3083     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3084   test_simple(header\_with\_trailing\_space, HPE_INVALID_HEADER_TOKEN);
+3085 
+3086   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *bad\_end\_of\_headers\_1 =
+3087     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3088     \textcolor{stringliteral}{"Host: www.example1.com\(\backslash\)r\(\backslash\)n"}
+3089     \textcolor{stringliteral}{"X-Some-Header: some\_value"}
+3090     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n\(\backslash\)r*"};
+3091   test_simple(bad\_end\_of\_headers\_1, HPE_STRICT);
+3092 
+3093   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *bad\_end\_of\_headers\_2 =
+3094     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3095     \textcolor{stringliteral}{"Host: www.example2.com\(\backslash\)r\(\backslash\)n"}
+3096     \textcolor{stringliteral}{"X-Some-Header: some\_value"}
+3097     \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)r*"};
+3098   test_simple(bad\_end\_of\_headers\_2, HPE_STRICT);
+3099 
+3100   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *empty\_content\_length\_header =
+3101     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3102     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3103     \textcolor{stringliteral}{"Content-Length:\(\backslash\)r\(\backslash\)n"}
+3104     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3105     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3106   test_simple(empty\_content\_length\_header, HPE_INVALID_CONTENT_LENGTH);
+3107 
+3108   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *empty\_transfer\_encoding\_header =
+3109     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3110     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3111     \textcolor{stringliteral}{"Transfer-Encoding:\(\backslash\)r\(\backslash\)n"}
+3112     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3113     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3114   test_simple(empty\_transfer\_encoding\_header, HPE_INVALID_TRANSFER_ENCODING);
+3115 
+3116   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *empty\_upgrade\_header =
+3117     \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3118     \textcolor{stringliteral}{"Host: www.example.com\(\backslash\)r\(\backslash\)n"}
+3119     \textcolor{stringliteral}{"Upgrade:\(\backslash\)r\(\backslash\)n"}
+3120     \textcolor{stringliteral}{"Accept-Encoding: gzip\(\backslash\)r\(\backslash\)n"}
+3121     \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"};
+3122   test_simple(empty\_upgrade\_header, HPE_INVALID_UPGRADE);
+3123 
+3124 \textcolor{preprocessor}{  #if 0}
+3125   \textcolor{comment}{// NOTE(Wed Nov 18 11:57:27 CET 2009) this seems okay. we just read body}
+3126   \textcolor{comment}{// until EOF.}
+3127   \textcolor{comment}{//}
+3128   \textcolor{comment}{// no content-length}
+3129   \textcolor{comment}{// error if there is a body without content length}
+3130   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *bad\_get\_no\_headers\_no\_body = \textcolor{stringliteral}{"GET /bad\_get\_no\_headers\_no\_body/world HTTP/1.1\(\backslash\)r\(\backslash\)n"}
+3131                                            \textcolor{stringliteral}{"Accept: */*\(\backslash\)r\(\backslash\)n"}
+3132                                            \textcolor{stringliteral}{"\(\backslash\)r\(\backslash\)n"}
+3133                                            \textcolor{stringliteral}{"HELLO"};
+3134   test_simple(bad\_get\_no\_headers\_no\_body, 0);
+3135 \textcolor{preprocessor}{#endif}
+3136   \textcolor{comment}{/* TODO sending junk and large headers gets rejected */}
+3137 
+3138 
+3139   \textcolor{comment}{/* check to make sure our predefined requests are okay */}
+3140   \textcolor{keywordflow}{for} (i = 0; requests[i].name; i++) \{
+3141     test_message(&requests[i]);
+3142   \}
+3143 
+3144   \textcolor{keywordflow}{for} (i = 0; i < request\_count; i++) \{
+3145     test_message_pause(&requests[i]);
+3146   \}
+3147 
+3148   \textcolor{keywordflow}{for} (i = 0; i < request\_count; i++) \{
+3149     \textcolor{keywordflow}{if} (!requests[i].should\_keep\_alive) \textcolor{keywordflow}{continue};
+3150     \textcolor{keywordflow}{for} (j = 0; j < request\_count; j++) \{
+3151       \textcolor{keywordflow}{if} (!requests[j].should\_keep\_alive) \textcolor{keywordflow}{continue};
+3152       \textcolor{keywordflow}{for} (k = 0; k < request\_count; k++) \{
+3153         test_multiple3(&requests[i], &requests[j], &requests[k]);
+3154       \}
+3155     \}
+3156   \}
+3157 
+3158   printf(\textcolor{stringliteral}{"request scan 1/4      "});
+3159   test_scan( &requests[GET_NO_HEADERS_NO_BODY]
+3160            , &requests[GET_ONE_HEADER_NO_BODY]
+3161            , &requests[GET\_NO\_HEADERS\_NO\_BODY]
+3162            );
+3163 
+3164   printf(\textcolor{stringliteral}{"request scan 2/4      "});
+3165   test_scan( &requests[POST_CHUNKED_ALL_YOUR_BASE]
+3166            , &requests[POST_IDENTITY_BODY_WORLD]
+3167            , &requests[GET_FUNKY_CONTENT_LENGTH]
+3168            );
+3169 
+3170   printf(\textcolor{stringliteral}{"request scan 3/4      "});
+3171   test_scan( &requests[TWO_CHUNKS_MULT_ZERO_END]
+3172            , &requests[CHUNKED_W_TRAILING_HEADERS]
+3173            , &requests[CHUNKED_W_BULLSHIT_AFTER_LENGTH]
+3174            );
+3175 
+3176   printf(\textcolor{stringliteral}{"request scan 4/4      "});
+3177   test_scan( &requests[QUERY_URL_WITH_QUESTION_MARK_GET]
+3178            , &requests[PREFIX_NEWLINE_GET ]
+3179            , &requests[CONNECT_REQUEST]
+3180            );
+3181 
+3182   puts(\textcolor{stringliteral}{"requests okay"});
+3183 
+3184   \textcolor{keywordflow}{return} 0;
+3185 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!message\+\_\+begin\+\_\+cb@{message\+\_\+begin\+\_\+cb}}
+\index{message\+\_\+begin\+\_\+cb@{message\+\_\+begin\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{message\+\_\+begin\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int message\+\_\+begin\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_a4d200b1f270db893bae79f8d7a988120}
+
+
+Definition at line 1265 of file test.\+c.
+
+
+
+References message\+::message\+\_\+begin\+\_\+cb\+\_\+called, messages, and num\+\_\+messages.
+
+
+
+Referenced by pause\+\_\+message\+\_\+begin\+\_\+cb().
+
+
+\begin{DoxyCode}
+1266 \{
+1267   assert(p == parser);
+1268   messages[num_messages].message_begin_cb_called++;
+1269   \textcolor{keywordflow}{return} 0;
+1270 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!message\+\_\+complete\+\_\+cb@{message\+\_\+complete\+\_\+cb}}
+\index{message\+\_\+complete\+\_\+cb@{message\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{message\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int message\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_a4b943cb90dd8d97b7bd6d2a769ffb112}
+
+
+Definition at line 1286 of file test.\+c.
+
+
+
+References currently\+\_\+parsing\+\_\+eof, message\+::message\+\_\+complete\+\_\+cb\+\_\+called, message\+::message\+\_\+complete\+\_\+on\+\_\+eof, messages, num\+\_\+messages, and T\+R\+UE.
+
+
+
+Referenced by pause\+\_\+message\+\_\+complete\+\_\+cb().
+
+
+\begin{DoxyCode}
+1287 \{
+1288   assert(p == parser);
+1289   messages[num_messages].message_complete_cb_called = TRUE;
+1290 
+1291   messages[num_messages].message_complete_on_eof = currently_parsing_eof;
+1292 
+1293   num_messages++;
+1294   \textcolor{keywordflow}{return} 0;
+1295 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!message\+\_\+eq@{message\+\_\+eq}}
+\index{message\+\_\+eq@{message\+\_\+eq}!test.\+c@{test.\+c}}
+\subsubsection[{message\+\_\+eq(int index, const struct message $\ast$expected)}]{\setlength{\rightskip}{0pt plus 5cm}int message\+\_\+eq (
+\begin{DoxyParamCaption}
+\item[{int}]{index, }
+\item[{const struct {\bf message} $\ast$}]{expected}
+\end{DoxyParamCaption}
+)}\label{test_8c_a50b9e6fa5080581e58a16149f1ccd48b}
+
+
+Definition at line 1660 of file test.\+c.
+
+
+
+References message\+::body, message\+::body\+\_\+size, check\+\_\+str\+\_\+eq(), message\+::chunk\+\_\+lengths, message\+::headers, message\+::headers\+\_\+complete\+\_\+cb\+\_\+called, message\+::http\+\_\+major, message\+::http\+\_\+minor, H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST, M\+A\+X\+\_\+\+C\+H\+U\+N\+KS, message\+::message\+\_\+begin\+\_\+cb\+\_\+called, M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+N\+U\+M\+\_\+\+EQ, M\+E\+S\+S\+A\+G\+E\+\_\+\+C\+H\+E\+C\+K\+\_\+\+S\+T\+R\+\_\+\+EQ, message\+::message\+\_\+complete\+\_\+cb\+\_\+called, message\+::message\+\_\+complete\+\_\+on\+\_\+eof, messages, message\+::method, message\+::num\+\_\+chunks, message\+::num\+\_\+chunks\+\_\+complete, message\+::num\+\_\+headers, message\+::request\+\_\+url, message\+::response\+\_\+reason, message\+::status\+\_\+code, message\+::type, and message\+::upgrade.
+
+
+
+Referenced by test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+message\+\_\+pause(), test\+\_\+multiple3(), and test\+\_\+scan().
+
+
+\begin{DoxyCode}
+1661 \{
+1662   \textcolor{keywordtype}{int} i;
+1663   \textcolor{keyword}{struct }message *m = &messages[index];
+1664 
+1665   MESSAGE_CHECK_NUM_EQ(expected, m, http_major);
+1666   MESSAGE_CHECK_NUM_EQ(expected, m, http_minor);
+1667 
+1668   \textcolor{keywordflow}{if} (expected->type == HTTP_REQUEST) \{
+1669     MESSAGE_CHECK_NUM_EQ(expected, m, method);
+1670   \} \textcolor{keywordflow}{else} \{
+1671     MESSAGE_CHECK_NUM_EQ(expected, m, status_code);
+1672     MESSAGE_CHECK_STR_EQ(expected, m, response_reason);
+1673   \}
+1674 
+1675   MESSAGE_CHECK_NUM_EQ(expected, m, message_complete_on_eof);
+1676 
+1677   assert(m->message_begin_cb_called);
+1678   assert(m->headers_complete_cb_called);
+1679   assert(m->message_complete_cb_called);
+1680 
+1681 
+1682   MESSAGE_CHECK_STR_EQ(expected, m, request_url);
+1683   \textcolor{keywordflow}{if} (expected->body_size) \{
+1684     MESSAGE_CHECK_NUM_EQ(expected, m, body_size);
+1685   \} \textcolor{keywordflow}{else} \{
+1686     MESSAGE_CHECK_STR_EQ(expected, m, body);
+1687   \}
+1688 
+1689   MESSAGE_CHECK_NUM_EQ(expected, m, num_chunks);
+1690   MESSAGE_CHECK_NUM_EQ(expected, m, num_chunks_complete);
+1691   \textcolor{keywordflow}{for} (i = 0; i < m->num_chunks && i < MAX_CHUNKS; i++) \{
+1692     MESSAGE_CHECK_NUM_EQ(expected, m, chunk_lengths[i]);
+1693   \}
+1694 
+1695   MESSAGE_CHECK_NUM_EQ(expected, m, num_headers);
+1696 
+1697   \textcolor{keywordtype}{int} r;
+1698   \textcolor{keywordflow}{for} (i = 0; i < m->num_headers; i++) \{
+1699     r = check_str_eq(expected, \textcolor{stringliteral}{"header field"}, expected->headers[i][0], m->
+      headers[i][0]);
+1700     \textcolor{keywordflow}{if} (!r) \textcolor{keywordflow}{return} 0;
+1701     r = check_str_eq(expected, \textcolor{stringliteral}{"header value"}, expected->headers[i][1], m->
+      headers[i][1]);
+1702     \textcolor{keywordflow}{if} (!r) \textcolor{keywordflow}{return} 0;
+1703   \}
+1704 
+1705   MESSAGE_CHECK_STR_EQ(expected, m, upgrade);
+1706 
+1707   \textcolor{keywordflow}{return} 1;
+1708 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!parse@{parse}}
+\index{parse@{parse}!test.\+c@{test.\+c}}
+\subsubsection[{parse(const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t parse (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a44b400d6e7f4f657e449f26c992c0ee8}
+
+
+Definition at line 1591 of file test.\+c.
+
+
+
+References currently\+\_\+parsing\+\_\+eof, and http\+\_\+parser\+\_\+execute().
+
+
+
+Referenced by H\+T\+T\+P2\+Framer\+Test\+::data\+Frame\+Test(), H\+T\+T\+P2\+Framer\+Test\+::parse(), parse\+S\+P\+D\+Y(), T\+E\+S\+T\+\_\+\+F(), test\+\_\+message(), test\+\_\+multiple3(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), test\+\_\+scan(), test\+\_\+simple(), and proxygen\+::\+R\+F\+C1867\+Base\+::test\+Simple().
+
+
+\begin{DoxyCode}
+1592 \{
+1593   \textcolor{keywordtype}{size\_t} nparsed;
+1594   currently_parsing_eof = (len == 0);
+1595   nparsed = http_parser_execute(parser, &settings, buf, len);
+1596   \textcolor{keywordflow}{return} nparsed;
+1597 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!parse\+\_\+count\+\_\+body@{parse\+\_\+count\+\_\+body}}
+\index{parse\+\_\+count\+\_\+body@{parse\+\_\+count\+\_\+body}!test.\+c@{test.\+c}}
+\subsubsection[{parse\+\_\+count\+\_\+body(const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t parse\+\_\+count\+\_\+body (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_aba7480100df7e34987bf7694d1802424}
+
+
+Definition at line 1599 of file test.\+c.
+
+
+
+References currently\+\_\+parsing\+\_\+eof, and http\+\_\+parser\+\_\+execute().
+
+
+
+Referenced by test\+\_\+message\+\_\+count\+\_\+body().
+
+
+\begin{DoxyCode}
+1600 \{
+1601   \textcolor{keywordtype}{size\_t} nparsed;
+1602   currently_parsing_eof = (len == 0);
+1603   nparsed = http_parser_execute(parser, &settings_count_body, buf, len);
+1604   \textcolor{keywordflow}{return} nparsed;
+1605 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!parse\+\_\+pause@{parse\+\_\+pause}}
+\index{parse\+\_\+pause@{parse\+\_\+pause}!test.\+c@{test.\+c}}
+\subsubsection[{parse\+\_\+pause(const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t parse\+\_\+pause (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a3862f2c2e13851b86181be3951c540ea}
+
+
+Definition at line 1607 of file test.\+c.
+
+
+
+References currently\+\_\+parsing\+\_\+eof, http\+\_\+parser\+\_\+execute(), and settings\+\_\+pause.
+
+
+
+Referenced by test\+\_\+message\+\_\+pause().
+
+
+\begin{DoxyCode}
+1608 \{
+1609   \textcolor{keywordtype}{size\_t} nparsed;
+1610   http_parser_settings s = settings_pause;
+1611 
+1612   currently_parsing_eof = (len == 0);
+1613   current_pause_parser = &s;
+1614   nparsed = http_parser_execute(parser, current_pause_parser, buf, len);
+1615   \textcolor{keywordflow}{return} nparsed;
+1616 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!parser\+\_\+free@{parser\+\_\+free}}
+\index{parser\+\_\+free@{parser\+\_\+free}!test.\+c@{test.\+c}}
+\subsubsection[{parser\+\_\+free()}]{\setlength{\rightskip}{0pt plus 5cm}void parser\+\_\+free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{test_8c_a8c6f2c7c62704fd2d39f2979f11d35a3}
+
+
+Definition at line 1584 of file test.\+c.
+
+
+
+Referenced by test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+message\+\_\+pause(), test\+\_\+multiple3(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), test\+\_\+scan(), and test\+\_\+simple().
+
+
+\begin{DoxyCode}
+1585 \{
+1586   assert(parser);
+1587   free(parser);
+1588   parser = NULL;
+1589 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!parser\+\_\+init@{parser\+\_\+init}}
+\index{parser\+\_\+init@{parser\+\_\+init}!test.\+c@{test.\+c}}
+\subsubsection[{parser\+\_\+init(enum http\+\_\+parser\+\_\+type type)}]{\setlength{\rightskip}{0pt plus 5cm}void parser\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{enum {\bf http\+\_\+parser\+\_\+type}}]{type}
+\end{DoxyParamCaption}
+)}\label{test_8c_aeb01cec0cce5a159ec43344ba5dd6d4f}
+
+
+Definition at line 1569 of file test.\+c.
+
+
+
+References http\+\_\+parser\+\_\+init(), messages, and num\+\_\+messages.
+
+
+
+Referenced by test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+message\+\_\+pause(), test\+\_\+multiple3(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), test\+\_\+scan(), and test\+\_\+simple().
+
+
+\begin{DoxyCode}
+1570 \{
+1571   num_messages = 0;
+1572 
+1573   assert(parser == NULL);
+1574 
+1575   parser = malloc(\textcolor{keyword}{sizeof}(http_parser));
+1576 
+1577   http_parser_init(parser, type);
+1578 
+1579   memset(&messages, 0, \textcolor{keyword}{sizeof} messages);
+1580 
+1581 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+body\+\_\+cb@{pause\+\_\+body\+\_\+cb}}
+\index{pause\+\_\+body\+\_\+cb@{pause\+\_\+body\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+body\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+body\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a1d21926c4526a179aabbf3119a457425}
+
+
+Definition at line 1466 of file test.\+c.
+
+
+
+References body\+\_\+cb(), http\+\_\+parser\+\_\+pause(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1467 \{
+1468   http_parser_pause(p, 1);
+1469   *current_pause_parser = settings_dontcall;
+1470   \textcolor{keywordflow}{return} body_cb(p, buf, len);
+1471 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+chunk\+\_\+complete\+\_\+cb@{pause\+\_\+chunk\+\_\+complete\+\_\+cb}}
+\index{pause\+\_\+chunk\+\_\+complete\+\_\+cb@{pause\+\_\+chunk\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+chunk\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+chunk\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_a433f508adf75a48ff7a426bb17e35e67}
+
+
+Definition at line 1506 of file test.\+c.
+
+
+
+References chunk\+\_\+complete\+\_\+cb(), http\+\_\+parser\+\_\+pause(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1507 \{
+1508   http_parser_pause(p, 1);
+1509   *current_pause_parser = settings_dontcall;
+1510   \textcolor{keywordflow}{return} chunk_complete_cb(p);
+1511 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+chunk\+\_\+header\+\_\+cb@{pause\+\_\+chunk\+\_\+header\+\_\+cb}}
+\index{pause\+\_\+chunk\+\_\+header\+\_\+cb@{pause\+\_\+chunk\+\_\+header\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+chunk\+\_\+header\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+chunk\+\_\+header\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_ab29b2bd4b4859fac124455fd899cecdb}
+
+
+Definition at line 1498 of file test.\+c.
+
+
+
+References chunk\+\_\+header\+\_\+cb(), http\+\_\+parser\+\_\+pause(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1499 \{
+1500   http_parser_pause(p, 1);
+1501   *current_pause_parser = settings_dontcall;
+1502   \textcolor{keywordflow}{return} chunk_header_cb(p);
+1503 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+header\+\_\+field\+\_\+cb@{pause\+\_\+header\+\_\+field\+\_\+cb}}
+\index{pause\+\_\+header\+\_\+field\+\_\+cb@{pause\+\_\+header\+\_\+field\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+header\+\_\+field\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+header\+\_\+field\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_ab32f3e77b507ddbce9baa5b00b666fdc}
+
+
+Definition at line 1442 of file test.\+c.
+
+
+
+References header\+\_\+field\+\_\+cb(), http\+\_\+parser\+\_\+pause(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1443 \{
+1444   http_parser_pause(p, 1);
+1445   *current_pause_parser = settings_dontcall;
+1446   \textcolor{keywordflow}{return} header_field_cb(p, buf, len);
+1447 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+header\+\_\+value\+\_\+cb@{pause\+\_\+header\+\_\+value\+\_\+cb}}
+\index{pause\+\_\+header\+\_\+value\+\_\+cb@{pause\+\_\+header\+\_\+value\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+header\+\_\+value\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+header\+\_\+value\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_aa2685a4c295a76a8b2c99e1173f8722b}
+
+
+Definition at line 1450 of file test.\+c.
+
+
+
+References header\+\_\+value\+\_\+cb(), http\+\_\+parser\+\_\+pause(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1451 \{
+1452   http_parser_pause(p, 1);
+1453   *current_pause_parser = settings_dontcall;
+1454   \textcolor{keywordflow}{return} header_value_cb(p, buf, len);
+1455 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+headers\+\_\+complete\+\_\+cb@{pause\+\_\+headers\+\_\+complete\+\_\+cb}}
+\index{pause\+\_\+headers\+\_\+complete\+\_\+cb@{pause\+\_\+headers\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+headers\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+headers\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a2472ad6d696ee2d3cdfc74177f35db14}
+
+
+Definition at line 1474 of file test.\+c.
+
+
+
+References headers\+\_\+complete\+\_\+cb(), http\+\_\+parser\+\_\+pause(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1475 \{
+1476   http_parser_pause(p, 1);
+1477   *current_pause_parser = settings_dontcall;
+1478   \textcolor{keywordflow}{return} headers_complete_cb(p, buf, len);
+1479 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+message\+\_\+begin\+\_\+cb@{pause\+\_\+message\+\_\+begin\+\_\+cb}}
+\index{pause\+\_\+message\+\_\+begin\+\_\+cb@{pause\+\_\+message\+\_\+begin\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+message\+\_\+begin\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+message\+\_\+begin\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_acc4335c7011cca00c132017a33be6bc5}
+
+
+Definition at line 1434 of file test.\+c.
+
+
+
+References http\+\_\+parser\+\_\+pause(), message\+\_\+begin\+\_\+cb(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1435 \{
+1436   http_parser_pause(p, 1);
+1437   *current_pause_parser = settings_dontcall;
+1438   \textcolor{keywordflow}{return} message_begin_cb(p);
+1439 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+message\+\_\+complete\+\_\+cb@{pause\+\_\+message\+\_\+complete\+\_\+cb}}
+\index{pause\+\_\+message\+\_\+complete\+\_\+cb@{pause\+\_\+message\+\_\+complete\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+message\+\_\+complete\+\_\+cb(http\+\_\+parser $\ast$p)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+message\+\_\+complete\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{test_8c_adfb0d1f60bbf8f54994468be1a5e8353}
+
+
+Definition at line 1482 of file test.\+c.
+
+
+
+References http\+\_\+parser\+\_\+pause(), message\+\_\+complete\+\_\+cb(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1483 \{
+1484   http_parser_pause(p, 1);
+1485   *current_pause_parser = settings_dontcall;
+1486   \textcolor{keywordflow}{return} message_complete_cb(p);
+1487 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+request\+\_\+url\+\_\+cb@{pause\+\_\+request\+\_\+url\+\_\+cb}}
+\index{pause\+\_\+request\+\_\+url\+\_\+cb@{pause\+\_\+request\+\_\+url\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+request\+\_\+url\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+request\+\_\+url\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_aa0ca4e3423059073f4f7d0dc7148bf41}
+
+
+Definition at line 1458 of file test.\+c.
+
+
+
+References http\+\_\+parser\+\_\+pause(), request\+\_\+url\+\_\+cb(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1459 \{
+1460   http_parser_pause(p, 1);
+1461   *current_pause_parser = settings_dontcall;
+1462   \textcolor{keywordflow}{return} request_url_cb(p, buf, len);
+1463 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!pause\+\_\+response\+\_\+reason\+\_\+cb@{pause\+\_\+response\+\_\+reason\+\_\+cb}}
+\index{pause\+\_\+response\+\_\+reason\+\_\+cb@{pause\+\_\+response\+\_\+reason\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{pause\+\_\+response\+\_\+reason\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int pause\+\_\+response\+\_\+reason\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a25ee8a3f5834ad7b906229e2ba7971bf}
+
+
+Definition at line 1490 of file test.\+c.
+
+
+
+References http\+\_\+parser\+\_\+pause(), response\+\_\+reason\+\_\+cb(), and settings\+\_\+dontcall.
+
+
+\begin{DoxyCode}
+1491 \{
+1492   http_parser_pause(p, 1);
+1493   *current_pause_parser = settings_dontcall;
+1494   \textcolor{keywordflow}{return} response_reason_cb(p, buf, len);
+1495 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!print\+\_\+error@{print\+\_\+error}}
+\index{print\+\_\+error@{print\+\_\+error}!test.\+c@{test.\+c}}
+\subsubsection[{print\+\_\+error(const char $\ast$raw, size\+\_\+t error\+\_\+location)}]{\setlength{\rightskip}{0pt plus 5cm}static void print\+\_\+error (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{raw, }
+\item[{size\+\_\+t}]{error\+\_\+location}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_acca1ef783a5e8d8628dee9a4126566b8}
+
+
+Definition at line 1775 of file test.\+c.
+
+
+
+References http\+\_\+errno\+\_\+description(), H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO, and H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE.
+
+
+
+Referenced by test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+multiple3(), and test\+\_\+scan().
+
+
+\begin{DoxyCode}
+1776 \{
+1777   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n*** %s:%d -- %s ***\(\backslash\)n\(\backslash\)n"},
+1778           \textcolor{stringliteral}{"http\_parser.c"}, HTTP_PARSER_ERRNO_LINE(parser),
+1779           http_errno_description(HTTP_PARSER_ERRNO(parser)));
+1780 
+1781   \textcolor{keywordtype}{int} this\_line = 0, char\_len = 0;
+1782   \textcolor{keywordtype}{size\_t} i, j, len = strlen(raw), error\_location\_line = 0;
+1783   \textcolor{keywordflow}{for} (i = 0; i < len; i++) \{
+1784     \textcolor{keywordflow}{if} (i == error\_location) this\_line = 1;
+1785     \textcolor{keywordflow}{switch} (raw[i]) \{
+1786       \textcolor{keywordflow}{case} \textcolor{charliteral}{'\(\backslash\)r'}:
+1787         char\_len = 2;
+1788         fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)\(\backslash\)r"});
+1789         \textcolor{keywordflow}{break};
+1790 
+1791       \textcolor{keywordflow}{case} \textcolor{charliteral}{'\(\backslash\)n'}:
+1792         char\_len = 2;
+1793         fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)\(\backslash\)n\(\backslash\)n"});
+1794 
+1795         \textcolor{keywordflow}{if} (this\_line) \textcolor{keywordflow}{goto} print;
+1796 
+1797         error\_location\_line = 0;
+1798         \textcolor{keywordflow}{continue};
+1799 
+1800       \textcolor{keywordflow}{default}:
+1801         char\_len = 1;
+1802         fputc(raw[i], stderr);
+1803         \textcolor{keywordflow}{break};
+1804     \}
+1805     \textcolor{keywordflow}{if} (!this\_line) error\_location\_line += char\_len;
+1806   \}
+1807 
+1808   fprintf(stderr, \textcolor{stringliteral}{"[eof]\(\backslash\)n"});
+1809 
+1810  print:
+1811   \textcolor{keywordflow}{for} (j = 0; j < error\_location\_line; j++) \{
+1812     fputc(\textcolor{charliteral}{' '}, stderr);
+1813   \}
+1814   fprintf(stderr, \textcolor{stringliteral}{"^\(\backslash\)n\(\backslash\)nerror location: %u\(\backslash\)n"}, (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})error\_location);
+1815 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!request\+\_\+url\+\_\+cb@{request\+\_\+url\+\_\+cb}}
+\index{request\+\_\+url\+\_\+cb@{request\+\_\+url\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{request\+\_\+url\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int request\+\_\+url\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_ad566516547651e57832cb3da11a3c992}
+
+
+Definition at line 1204 of file test.\+c.
+
+
+
+References messages, num\+\_\+messages, and message\+::request\+\_\+url.
+
+
+
+Referenced by pause\+\_\+request\+\_\+url\+\_\+cb().
+
+
+\begin{DoxyCode}
+1205 \{
+1206   assert(p == parser);
+1207   strncat(messages[num_messages].request_url, buf, len);
+1208   \textcolor{keywordflow}{return} 0;
+1209 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!response\+\_\+reason\+\_\+cb@{response\+\_\+reason\+\_\+cb}}
+\index{response\+\_\+reason\+\_\+cb@{response\+\_\+reason\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{response\+\_\+reason\+\_\+cb(http\+\_\+parser $\ast$p, const char $\ast$buf, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}int response\+\_\+reason\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{p, }
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{test_8c_a5116dcb55a8574050111d35e5e27867a}
+
+
+Definition at line 1298 of file test.\+c.
+
+
+
+References messages, num\+\_\+messages, and message\+::response\+\_\+reason.
+
+
+
+Referenced by pause\+\_\+response\+\_\+reason\+\_\+cb().
+
+
+\begin{DoxyCode}
+1299 \{
+1300   assert(p == parser);
+1301   strncat(messages[num_messages].response_reason, buf, len);
+1302   \textcolor{keywordflow}{return} 0;
+1303 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+header\+\_\+overflow\+\_\+error@{test\+\_\+header\+\_\+overflow\+\_\+error}}
+\index{test\+\_\+header\+\_\+overflow\+\_\+error@{test\+\_\+header\+\_\+overflow\+\_\+error}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+header\+\_\+overflow\+\_\+error(int req)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+header\+\_\+overflow\+\_\+error (
+\begin{DoxyParamCaption}
+\item[{int}]{req}
+\end{DoxyParamCaption}
+)}\label{test_8c_a3bfa2b173ae0bd4a19a5baf0e6e0f414}
+
+
+Definition at line 2504 of file test.\+c.
+
+
+
+References H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW, H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO, http\+\_\+parser\+\_\+execute(), http\+\_\+parser\+\_\+init(), H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST, H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE, and parser.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2505 \{
+2506   http_parser parser;
+2507   http_parser_init(&parser, req ? HTTP_REQUEST : HTTP_RESPONSE);
+2508   \textcolor{keywordtype}{size\_t} parsed;
+2509   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf;
+2510   buf = req ? \textcolor{stringliteral}{"GET / HTTP/1.1\(\backslash\)r\(\backslash\)n"} : \textcolor{stringliteral}{"HTTP/1.0 200 OK\(\backslash\)r\(\backslash\)n"};
+2511   parsed = http_parser_execute(&parser, &settings_null, buf, strlen(buf));
+2512   assert(parsed == strlen(buf));
+2513 
+2514   buf = \textcolor{stringliteral}{"header-key: header-value\(\backslash\)r\(\backslash\)n"};
+2515   \textcolor{keywordtype}{size\_t} buflen = strlen(buf);
+2516 
+2517   \textcolor{keywordtype}{int} i;
+2518   \textcolor{keywordflow}{for} (i = 0; i < 10000; i++) \{
+2519     parsed = http_parser_execute(&parser, &settings_null, buf, buflen);
+2520     \textcolor{keywordflow}{if} (parsed != buflen) \{
+2521       \textcolor{comment}{//fprintf(stderr, "error found on iter %d\(\backslash\)n", i);}
+2522       assert(HTTP_PARSER_ERRNO(&parser) == HPE_HEADER_OVERFLOW);
+2523       \textcolor{keywordflow}{return};
+2524     \}
+2525   \}
+2526 
+2527   fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n*** Error expected but none in header overflow test ***\(\backslash\)n"});
+2528   exit(1);
+2529 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+message@{test\+\_\+message}}
+\index{test\+\_\+message@{test\+\_\+message}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+message(const struct message $\ast$message)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+message (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{message}
+\end{DoxyParamCaption}
+)}\label{test_8c_a61b266d37ae4ddac552dbeeb089ee84b}
+
+
+Definition at line 2377 of file test.\+c.
+
+
+
+References message\+\_\+eq(), messages, message\+::name, num\+\_\+messages, parse(), parser\+\_\+free(), parser\+\_\+init(), print\+\_\+error(), message\+::raw, message\+::type, message\+::upgrade, and http\+\_\+parser\+::upgrade.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2378 \{
+2379   \textcolor{keywordtype}{size\_t} raw\_len = strlen(message->raw);
+2380   \textcolor{keywordtype}{size\_t} msg1len;
+2381   \textcolor{keywordflow}{for} (msg1len = 0; msg1len < raw\_len; msg1len++) \{
+2382     parser_init(message->type);
+2383 
+2384     \textcolor{keywordtype}{size\_t} read;
+2385     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *msg1 = message->raw;
+2386     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *msg2 = msg1 + msg1len;
+2387     \textcolor{keywordtype}{size\_t} msg2len = raw\_len - msg1len;
+2388 
+2389     \textcolor{keywordflow}{if} (msg1len) \{
+2390       read = parse(msg1, msg1len);
+2391 
+2392       \textcolor{keywordflow}{if} (message->upgrade && parser->upgrade && num_messages > 0) \{
+2393         messages[num_messages - 1].upgrade = msg1 + read;
+2394         \textcolor{keywordflow}{goto} test;
+2395       \}
+2396 
+2397       \textcolor{keywordflow}{if} (read != msg1len) \{
+2398         print_error(msg1, read);
+2399         exit(1);
+2400       \}
+2401     \}
+2402 
+2403 
+2404     read = parse(msg2, msg2len);
+2405 
+2406     \textcolor{keywordflow}{if} (message->upgrade && parser->upgrade) \{
+2407       messages[num_messages - 1].upgrade = msg2 + read;
+2408       \textcolor{keywordflow}{goto} test;
+2409     \}
+2410 
+2411     \textcolor{keywordflow}{if} (read != msg2len) \{
+2412       print_error(msg2, read);
+2413       exit(1);
+2414     \}
+2415 
+2416     read = parse(NULL, 0);
+2417 
+2418     \textcolor{keywordflow}{if} (read != 0) \{
+2419       print_error(message->raw, read);
+2420       exit(1);
+2421     \}
+2422 
+2423   test:
+2424 
+2425     \textcolor{keywordflow}{if} (num_messages != 1) \{
+2426       printf(\textcolor{stringliteral}{"\(\backslash\)n*** num\_messages != 1 after testing '%s' ***\(\backslash\)n\(\backslash\)n"}, message->name);
+2427       exit(1);
+2428     \}
+2429 
+2430     \textcolor{keywordflow}{if}(!message_eq(0, message)) exit(1);
+2431 
+2432     parser_free();
+2433   \}
+2434 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+message\+\_\+count\+\_\+body@{test\+\_\+message\+\_\+count\+\_\+body}}
+\index{test\+\_\+message\+\_\+count\+\_\+body@{test\+\_\+message\+\_\+count\+\_\+body}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+message\+\_\+count\+\_\+body(const struct message $\ast$message)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+message\+\_\+count\+\_\+body (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{message}
+\end{DoxyParamCaption}
+)}\label{test_8c_a6161275987cb28b0ea5418ff8b552210}
+
+
+Definition at line 2437 of file test.\+c.
+
+
+
+References message\+\_\+eq(), M\+IN, message\+::name, num\+\_\+messages, parse\+\_\+count\+\_\+body(), parser\+\_\+free(), parser\+\_\+init(), print\+\_\+error(), message\+::raw, and message\+::type.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2438 \{
+2439   parser_init(message->type);
+2440 
+2441   \textcolor{keywordtype}{size\_t} read;
+2442   \textcolor{keywordtype}{size\_t} l = strlen(message->raw);
+2443   \textcolor{keywordtype}{size\_t} i, toread;
+2444   \textcolor{keywordtype}{size\_t} chunk = 4024;
+2445 
+2446   \textcolor{keywordflow}{for} (i = 0; i < l; i+= chunk) \{
+2447     toread = MIN(l-i, chunk);
+2448     read = parse_count_body(message->raw + i, toread);
+2449     \textcolor{keywordflow}{if} (read != toread) \{
+2450       print_error(message->raw, read);
+2451       exit(1);
+2452     \}
+2453   \}
+2454 
+2455 
+2456   read = parse_count_body(NULL, 0);
+2457   \textcolor{keywordflow}{if} (read != 0) \{
+2458     print_error(message->raw, read);
+2459     exit(1);
+2460   \}
+2461 
+2462   \textcolor{keywordflow}{if} (num_messages != 1) \{
+2463     printf(\textcolor{stringliteral}{"\(\backslash\)n*** num\_messages != 1 after testing '%s' ***\(\backslash\)n\(\backslash\)n"}, message->name);
+2464     exit(1);
+2465   \}
+2466 
+2467   \textcolor{keywordflow}{if}(!message_eq(0, message)) exit(1);
+2468 
+2469   parser_free();
+2470 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+message\+\_\+pause@{test\+\_\+message\+\_\+pause}}
+\index{test\+\_\+message\+\_\+pause@{test\+\_\+message\+\_\+pause}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+message\+\_\+pause(const struct message $\ast$msg)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+message\+\_\+pause (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)}\label{test_8c_a59f5ada5ef954aeb2e7a2eeb83b1effc}
+
+
+Definition at line 2771 of file test.\+c.
+
+
+
+References H\+P\+E\+\_\+\+P\+A\+U\+S\+ED, H\+P\+E\+\_\+\+S\+T\+R\+I\+CT, H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO, http\+\_\+parser\+\_\+pause(), message\+::message\+\_\+complete\+\_\+cb\+\_\+called, message\+\_\+eq(), messages, message\+::name, num\+\_\+messages, parse\+\_\+pause(), parser\+\_\+free(), parser\+\_\+init(), message\+::raw, message\+::type, message\+::upgrade, and http\+\_\+parser\+::upgrade.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2772 \{
+2773   \textcolor{keywordtype}{char} *buf = (\textcolor{keywordtype}{char}*) msg->raw;
+2774   \textcolor{keywordtype}{size\_t} buflen = strlen(msg->raw);
+2775   \textcolor{keywordtype}{size\_t} nread;
+2776 
+2777   parser_init(msg->type);
+2778 
+2779   \textcolor{keywordflow}{do} \{
+2780     nread = parse_pause(buf, buflen);
+2781 
+2782     \textcolor{comment}{// We can only set the upgrade buffer once we've gotten our message}
+2783     \textcolor{comment}{// completion callback.}
+2784     \textcolor{keywordflow}{if} (messages[0].message_complete_cb_called &&
+2785         msg->upgrade &&
+2786         parser->upgrade) \{
+2787       messages[0].upgrade = buf + nread;
+2788       \textcolor{keywordflow}{goto} test;
+2789     \}
+2790 
+2791     \textcolor{keywordflow}{if} (nread < buflen) \{
+2792 
+2793       \textcolor{comment}{// Not much do to if we failed a strict-mode check}
+2794       \textcolor{keywordflow}{if} (HTTP_PARSER_ERRNO(parser) == HPE_STRICT) \{
+2795         parser_free();
+2796         \textcolor{keywordflow}{return};
+2797       \}
+2798 
+2799       assert (HTTP_PARSER_ERRNO(parser) == HPE_PAUSED);
+2800     \}
+2801 
+2802     buf += nread;
+2803     buflen -= nread;
+2804     http_parser_pause(parser, 0);
+2805   \} \textcolor{keywordflow}{while} (buflen > 0);
+2806 
+2807   nread = parse_pause(NULL, 0);
+2808   assert (nread == 0);
+2809 
+2810 test:
+2811   \textcolor{keywordflow}{if} (num_messages != 1) \{
+2812     printf(\textcolor{stringliteral}{"\(\backslash\)n*** num\_messages != 1 after testing '%s' ***\(\backslash\)n\(\backslash\)n"}, msg->name);
+2813     exit(1);
+2814   \}
+2815 
+2816   \textcolor{keywordflow}{if}(!message_eq(0, msg)) exit(1);
+2817 
+2818   parser_free();
+2819 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+multiple3@{test\+\_\+multiple3}}
+\index{test\+\_\+multiple3@{test\+\_\+multiple3}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+multiple3(const struct message $\ast$r1, const struct message $\ast$r2, const struct message $\ast$r3)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+multiple3 (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{r1, }
+\item[{const struct {\bf message} $\ast$}]{r2, }
+\item[{const struct {\bf message} $\ast$}]{r3}
+\end{DoxyParamCaption}
+)}\label{test_8c_ad6ba8713575fbfd9fdccf25120aa1c09}
+
+
+Definition at line 2565 of file test.\+c.
+
+
+
+References count\+\_\+parsed\+\_\+messages(), message\+\_\+eq(), num\+\_\+messages, parse(), parser\+\_\+free(), parser\+\_\+init(), print\+\_\+error(), message\+::raw, message\+::type, http\+\_\+parser\+::upgrade, and upgrade\+\_\+message\+\_\+fix().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2566 \{
+2567   \textcolor{keywordtype}{int} message\_count = count_parsed_messages(3, r1, r2, r3);
+2568 
+2569   \textcolor{keywordtype}{char} total[ strlen(r1->raw)
+2570             + strlen(r2->raw)
+2571             + strlen(r3->raw)
+2572             + 1
+2573             ];
+2574   total[0] = \textcolor{charliteral}{'\(\backslash\)0'};
+2575 
+2576   strcat(total, r1->raw);
+2577   strcat(total, r2->raw);
+2578   strcat(total, r3->raw);
+2579 
+2580   parser_init(r1->type);
+2581 
+2582   \textcolor{keywordtype}{size\_t} read;
+2583 
+2584   read = parse(total, strlen(total));
+2585 
+2586   \textcolor{keywordflow}{if} (parser->upgrade) \{
+2587     upgrade_message_fix(total, read, 3, r1, r2, r3);
+2588     \textcolor{keywordflow}{goto} test;
+2589   \}
+2590 
+2591   \textcolor{keywordflow}{if} (read != strlen(total)) \{
+2592     print_error(total, read);
+2593     exit(1);
+2594   \}
+2595 
+2596   read = parse(NULL, 0);
+2597 
+2598   \textcolor{keywordflow}{if} (read != 0) \{
+2599     print_error(total, read);
+2600     exit(1);
+2601   \}
+2602 
+2603 test:
+2604 
+2605   \textcolor{keywordflow}{if} (message\_count != num_messages) \{
+2606     fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** Parser didn't see 3 messages only %d *** \(\backslash\)n"}, 
+      num_messages);
+2607     exit(1);
+2608   \}
+2609 
+2610   \textcolor{keywordflow}{if} (!message_eq(0, r1)) exit(1);
+2611   \textcolor{keywordflow}{if} (message\_count > 1 && !message_eq(1, r2)) exit(1);
+2612   \textcolor{keywordflow}{if} (message\_count > 2 && !message_eq(2, r3)) exit(1);
+2613 
+2614   parser_free();
+2615 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body@{test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body}}
+\index{test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body@{test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body(int req, size\+\_\+t length)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body (
+\begin{DoxyParamCaption}
+\item[{int}]{req, }
+\item[{size\+\_\+t}]{length}
+\end{DoxyParamCaption}
+)}\label{test_8c_a0f5b6bcccb99927cf4ba10c43ee23651}
+
+
+Definition at line 2532 of file test.\+c.
+
+
+
+References http\+\_\+parser\+\_\+execute(), http\+\_\+parser\+\_\+init(), H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST, H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE, and parser.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2533 \{
+2534   http_parser parser;
+2535   http_parser_init(&parser, req ? HTTP_REQUEST : HTTP_RESPONSE);
+2536   \textcolor{keywordtype}{size\_t} parsed;
+2537   \textcolor{keywordtype}{size\_t} i;
+2538   \textcolor{keywordtype}{char} buf1[3000];
+2539   \textcolor{keywordtype}{size\_t} buf1len = sprintf(buf1, \textcolor{stringliteral}{"%s\(\backslash\)r\(\backslash\)nConnection: Keep-Alive\(\backslash\)r\(\backslash\)nContent-Length: %zu\(\backslash\)r\(\backslash\)n\(\backslash\)r\(\backslash\)n"},
+2540       req ? \textcolor{stringliteral}{"POST / HTTP/1.0"} : \textcolor{stringliteral}{"HTTP/1.0 200 OK"}, length);
+2541   parsed = http_parser_execute(&parser, &settings_null, buf1, buf1len);
+2542   \textcolor{keywordflow}{if} (parsed != buf1len)
+2543     \textcolor{keywordflow}{goto} err;
+2544 
+2545   \textcolor{keywordflow}{for} (i = 0; i < length; i++) \{
+2546     \textcolor{keywordtype}{char} foo = \textcolor{charliteral}{'a'};
+2547     parsed = http_parser_execute(&parser, &settings_null, &foo, 1);
+2548     \textcolor{keywordflow}{if} (parsed != 1)
+2549       \textcolor{keywordflow}{goto} err;
+2550   \}
+2551 
+2552   parsed = http_parser_execute(&parser, &settings_null, buf1, buf1len);
+2553   \textcolor{keywordflow}{if} (parsed != buf1len) \textcolor{keywordflow}{goto} err;
+2554   \textcolor{keywordflow}{return};
+2555 
+2556  err:
+2557   fprintf(stderr,
+2558           \textcolor{stringliteral}{"\(\backslash\)n*** error in test\_no\_overflow\_long\_body %s of length %zu ***\(\backslash\)n"},
+2559           req ? \textcolor{stringliteral}{"REQUEST"} : \textcolor{stringliteral}{"RESPONSE"},
+2560           length);
+2561   exit(1);
+2562 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb@{test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb}}
+\index{test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb@{test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(const struct message $\ast$message)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{message}
+\end{DoxyParamCaption}
+)}\label{test_8c_afc8d216aca646c6b740bcd965d50a468}
+
+
+Definition at line 2824 of file test.\+c.
+
+
+
+References message\+::message\+\_\+begin\+\_\+cb\+\_\+called, messages, num\+\_\+messages, parse(), parser\+\_\+free(), parser\+\_\+init(), message\+::raw, and message\+::type.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2825 \{
+2826   parser_init(message->type);
+2827   assert(messages[num_messages].message_begin_cb_called == 0);
+2828   parse(message->raw, strlen(message->raw));
+2829   assert(messages[num_messages].message_begin_cb_called == 1);
+2830   parser_free();
+2831 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+parse\+\_\+url@{test\+\_\+parse\+\_\+url}}
+\index{test\+\_\+parse\+\_\+url@{test\+\_\+parse\+\_\+url}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+parse\+\_\+url(void)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+parse\+\_\+url (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{test_8c_a68c783aa996a074b5f6abb0546834cc8}
+
+
+Definition at line 2330 of file test.\+c.
+
+
+
+References dump\+\_\+url(), http\+\_\+parser\+\_\+parse\+\_\+url(), url\+\_\+test\+::is\+\_\+connect, url\+\_\+test\+::name, url\+\_\+test\+::rv, url\+\_\+test\+::u, url\+\_\+test\+::url, and url\+\_\+tests.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2331 \{
+2332   \textcolor{keyword}{struct }http_parser_url u;
+2333   \textcolor{keyword}{const} \textcolor{keyword}{struct }url_test *test;
+2334   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i;
+2335   \textcolor{keywordtype}{int} rv;
+2336 
+2337   \textcolor{keywordflow}{for} (i = 0; i < (\textcolor{keyword}{sizeof}(url_tests) / \textcolor{keyword}{sizeof}(url_tests[0])); i++) \{
+2338     test = &url_tests[i];
+2339     memset(&u, 0, \textcolor{keyword}{sizeof}(u));
+2340 
+2341     rv = http_parser_parse_url(test->url,
+2342                                strlen(test->url),
+2343                                test->is_connect,
+2344                                &u);
+2345 
+2346     \textcolor{keywordflow}{if} (test->rv == 0) \{
+2347       \textcolor{keywordflow}{if} (rv != 0) \{
+2348         printf(\textcolor{stringliteral}{"\(\backslash\)n*** http\_parser\_parse\_url(\(\backslash\)"%s\(\backslash\)") \(\backslash\)"%s\(\backslash\)" test failed, "}
+2349                \textcolor{stringliteral}{"unexpected rv %d ***\(\backslash\)n\(\backslash\)n"}, test->url, test->name, rv);
+2350         abort();
+2351       \}
+2352 
+2353       \textcolor{keywordflow}{if} (memcmp(&u, &test->u, \textcolor{keyword}{sizeof}(u)) != 0) \{
+2354         printf(\textcolor{stringliteral}{"\(\backslash\)n*** http\_parser\_parse\_url(\(\backslash\)"%s\(\backslash\)") \(\backslash\)"%s\(\backslash\)" failed ***\(\backslash\)n"},
+2355                test->url, test->name);
+2356 
+2357         printf(\textcolor{stringliteral}{"target http\_parser\_url:\(\backslash\)n"});
+2358         dump_url(test->url, &test->u);
+2359         printf(\textcolor{stringliteral}{"result http\_parser\_url:\(\backslash\)n"});
+2360         dump_url(test->url, &u);
+2361 
+2362         abort();
+2363       \}
+2364     \} \textcolor{keywordflow}{else} \{
+2365       \textcolor{comment}{/* test->rv != 0 */}
+2366       \textcolor{keywordflow}{if} (rv == 0) \{
+2367         printf(\textcolor{stringliteral}{"\(\backslash\)n*** http\_parser\_parse\_url(\(\backslash\)"%s\(\backslash\)") \(\backslash\)"%s\(\backslash\)" test failed, "}
+2368                \textcolor{stringliteral}{"unexpected rv %d ***\(\backslash\)n\(\backslash\)n"}, test->url, test->name, rv);
+2369         abort();
+2370       \}
+2371     \}
+2372   \}
+2373 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+scan@{test\+\_\+scan}}
+\index{test\+\_\+scan@{test\+\_\+scan}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+scan(const struct message $\ast$r1, const struct message $\ast$r2, const struct message $\ast$r3)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+scan (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf message} $\ast$}]{r1, }
+\item[{const struct {\bf message} $\ast$}]{r2, }
+\item[{const struct {\bf message} $\ast$}]{r3}
+\end{DoxyParamCaption}
+)}\label{test_8c_ac838040e674c55c0eea7e5cd09084fdb}
+
+
+Definition at line 2622 of file test.\+c.
+
+
+
+References count\+\_\+parsed\+\_\+messages(), H\+T\+T\+P\+\_\+\+B\+O\+TH, message\+\_\+eq(), num\+\_\+messages, parse(), parser\+\_\+free(), parser\+\_\+init(), print\+\_\+error(), message\+::raw, message\+::type, http\+\_\+parser\+::upgrade, and upgrade\+\_\+message\+\_\+fix().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2623 \{
+2624   \textcolor{keywordtype}{char} total[80*1024] = \textcolor{stringliteral}{"\(\backslash\)0"};
+2625   \textcolor{keywordtype}{char} buf1[80*1024] = \textcolor{stringliteral}{"\(\backslash\)0"};
+2626   \textcolor{keywordtype}{char} buf2[80*1024] = \textcolor{stringliteral}{"\(\backslash\)0"};
+2627   \textcolor{keywordtype}{char} buf3[80*1024] = \textcolor{stringliteral}{"\(\backslash\)0"};
+2628 
+2629   strcat(total, r1->raw);
+2630   strcat(total, r2->raw);
+2631   strcat(total, r3->raw);
+2632 
+2633   \textcolor{keywordtype}{size\_t} read;
+2634 
+2635   \textcolor{keywordtype}{int} total\_len = strlen(total);
+2636 
+2637   \textcolor{keywordtype}{int} total\_ops = 2 * (total\_len - 1) * (total\_len - 2) / 2;
+2638   \textcolor{keywordtype}{int} ops = 0 ;
+2639 
+2640   \textcolor{keywordtype}{size\_t} buf1\_len, buf2\_len, buf3\_len;
+2641   \textcolor{keywordtype}{int} message\_count = count_parsed_messages(3, r1, r2, r3);
+2642 
+2643   \textcolor{keywordtype}{int} i,j,type\_both;
+2644   \textcolor{keywordflow}{for} (type\_both = 0; type\_both < 2; type\_both ++ ) \{
+2645     \textcolor{keywordflow}{for} (j = 2; j < total\_len; j ++ ) \{
+2646       \textcolor{keywordflow}{for} (i = 1; i < j; i ++ ) \{
+2647 
+2648         \textcolor{keywordflow}{if} (ops % 1000 == 0)  \{
+2649           printf(\textcolor{stringliteral}{"\(\backslash\)b\(\backslash\)b\(\backslash\)b\(\backslash\)b%3.0f%%"}, 100 * (\textcolor{keywordtype}{float})ops /(\textcolor{keywordtype}{float})total\_ops);
+2650           fflush(stdout);
+2651         \}
+2652         ops += 1;
+2653 
+2654         parser_init(type\_both ? HTTP_BOTH : r1->type);
+2655 
+2656         buf1\_len = i;
+2657         strncpy(buf1, total, buf1\_len);
+2658         buf1[buf1\_len] = 0;
+2659 
+2660         buf2\_len = j - i;
+2661         strncpy(buf2, total+i, buf2\_len);
+2662         buf2[buf2\_len] = 0;
+2663 
+2664         buf3\_len = total\_len - j;
+2665         strncpy(buf3, total+j, buf3\_len);
+2666         buf3[buf3\_len] = 0;
+2667 
+2668         read = parse(buf1, buf1\_len);
+2669 
+2670         \textcolor{keywordflow}{if} (parser->upgrade) \textcolor{keywordflow}{goto} test;
+2671 
+2672         \textcolor{keywordflow}{if} (read != buf1\_len) \{
+2673           print_error(buf1, read);
+2674           \textcolor{keywordflow}{goto} error;
+2675         \}
+2676 
+2677         read += parse(buf2, buf2\_len);
+2678 
+2679         \textcolor{keywordflow}{if} (parser->upgrade) \textcolor{keywordflow}{goto} test;
+2680 
+2681         \textcolor{keywordflow}{if} (read != buf1\_len + buf2\_len) \{
+2682           print_error(buf2, read);
+2683           \textcolor{keywordflow}{goto} error;
+2684         \}
+2685 
+2686         read += parse(buf3, buf3\_len);
+2687         \textcolor{keywordflow}{if} (parser->upgrade) \textcolor{keywordflow}{goto} test;
+2688 
+2689         \textcolor{keywordflow}{if} (read != buf1\_len + buf2\_len + buf3\_len) \{
+2690           print_error(buf3, read);
+2691           \textcolor{keywordflow}{goto} error;
+2692         \}
+2693 
+2694         parse(NULL, 0);
+2695 
+2696 test:
+2697         \textcolor{keywordflow}{if} (parser->upgrade) \{
+2698           upgrade_message_fix(total, read, 3, r1, r2, r3);
+2699         \}
+2700 
+2701         \textcolor{keywordflow}{if} (message\_count != num_messages) \{
+2702           fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)nParser didn't see %d messages only %d\(\backslash\)n"},
+2703             message\_count, num_messages);
+2704           \textcolor{keywordflow}{goto} error;
+2705         \}
+2706 
+2707         \textcolor{keywordflow}{if} (!message_eq(0, r1)) \{
+2708           fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)nError matching messages[0] in test\_scan.\(\backslash\)n"});
+2709           \textcolor{keywordflow}{goto} error;
+2710         \}
+2711 
+2712         \textcolor{keywordflow}{if} (message\_count > 1 && !message_eq(1, r2)) \{
+2713           fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)nError matching messages[1] in test\_scan.\(\backslash\)n"});
+2714           \textcolor{keywordflow}{goto} error;
+2715         \}
+2716 
+2717         \textcolor{keywordflow}{if} (message\_count > 2 && !message_eq(2, r3)) \{
+2718           fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)nError matching messages[2] in test\_scan.\(\backslash\)n"});
+2719           \textcolor{keywordflow}{goto} error;
+2720         \}
+2721 
+2722         parser_free();
+2723       \}
+2724     \}
+2725   \}
+2726   puts(\textcolor{stringliteral}{"\(\backslash\)b\(\backslash\)b\(\backslash\)b\(\backslash\)b100%"});
+2727   \textcolor{keywordflow}{return};
+2728 
+2729  error:
+2730   fprintf(stderr, \textcolor{stringliteral}{"i=%d  j=%d\(\backslash\)n"}, i, j);
+2731   fprintf(stderr, \textcolor{stringliteral}{"buf1 (%u) %s\(\backslash\)n\(\backslash\)n"}, (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})buf1\_len, buf1);
+2732   fprintf(stderr, \textcolor{stringliteral}{"buf2 (%u) %s\(\backslash\)n\(\backslash\)n"}, (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})buf2\_len , buf2);
+2733   fprintf(stderr, \textcolor{stringliteral}{"buf3 (%u) %s\(\backslash\)n"}, (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})buf3\_len, buf3);
+2734   exit(1);
+2735 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!test\+\_\+simple@{test\+\_\+simple}}
+\index{test\+\_\+simple@{test\+\_\+simple}!test.\+c@{test.\+c}}
+\subsubsection[{test\+\_\+simple(const char $\ast$buf, enum http\+\_\+errno err\+\_\+expected)}]{\setlength{\rightskip}{0pt plus 5cm}void test\+\_\+simple (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buf, }
+\item[{enum {\bf http\+\_\+errno}}]{err\+\_\+expected}
+\end{DoxyParamCaption}
+)}\label{test_8c_a21990aadb190dd0c728a74b5caae8306}
+
+
+Definition at line 2473 of file test.\+c.
+
+
+
+References H\+P\+E\+\_\+\+OK, H\+P\+E\+\_\+\+S\+T\+R\+I\+CT, http\+\_\+errno\+\_\+name(), H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO, H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST, parse(), parser\+\_\+free(), and parser\+\_\+init().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+2474 \{
+2475   parser_init(HTTP_REQUEST);
+2476 
+2477   \textcolor{keywordtype}{size\_t} parsed;
+2478   \textcolor{keywordtype}{int} pass;
+2479   \textcolor{keyword}{enum} http_errno err;
+2480 
+2481   parsed = parse(buf, strlen(buf));
+2482   pass = (parsed == strlen(buf));
+2483   err = HTTP_PARSER_ERRNO(parser);
+2484   parsed = parse(NULL, 0);
+2485   pass &= (parsed == 0);
+2486 
+2487   parser_free();
+2488 
+2489   \textcolor{comment}{/* In strict mode, allow us to pass with an unexpected HPE\_STRICT as}
+2490 \textcolor{comment}{   * long as the caller isn't expecting success.}
+2491 \textcolor{comment}{   */}
+2492 \textcolor{preprocessor}{#if HTTP\_PARSER\_STRICT}
+2493   \textcolor{keywordflow}{if} (err\_expected != err && err\_expected != HPE_OK && err != HPE_STRICT) \{
+2494 \textcolor{preprocessor}{#else}
+2495   \textcolor{keywordflow}{if} (err\_expected != err) \{
+2496 \textcolor{preprocessor}{#endif}
+2497     fprintf(stderr, \textcolor{stringliteral}{"\(\backslash\)n*** test\_simple expected %s, but saw %s ***\(\backslash\)n\(\backslash\)n%s\(\backslash\)n"},
+2498         http_errno_name(err\_expected), http_errno_name(err), buf);
+2499     exit(1);
+2500   \}
+2501 \}
+\end{DoxyCode}
+\index{test.\+c@{test.\+c}!upgrade\+\_\+message\+\_\+fix@{upgrade\+\_\+message\+\_\+fix}}
+\index{upgrade\+\_\+message\+\_\+fix@{upgrade\+\_\+message\+\_\+fix}!test.\+c@{test.\+c}}
+\subsubsection[{upgrade\+\_\+message\+\_\+fix(char $\ast$body, const size\+\_\+t nread, const size\+\_\+t nmsgs,...)}]{\setlength{\rightskip}{0pt plus 5cm}void upgrade\+\_\+message\+\_\+fix (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{body, }
+\item[{const size\+\_\+t}]{nread, }
+\item[{const size\+\_\+t}]{nmsgs, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{test_8c_aede4983b357196fabd234eff43a6f799}
+
+
+Definition at line 1738 of file test.\+c.
+
+
+
+References check\+\_\+str\+\_\+eq(), messages, num\+\_\+messages, message\+::raw, and message\+::upgrade.
+
+
+
+Referenced by test\+\_\+multiple3(), and test\+\_\+scan().
+
+
+\begin{DoxyCode}
+1738                                                                              \{
+1739   va\_list ap;
+1740   \textcolor{keywordtype}{size\_t} i;
+1741   \textcolor{keywordtype}{size\_t} off = 0;
+1742 
+1743   va\_start(ap, nmsgs);
+1744 
+1745   \textcolor{keywordflow}{for} (i = 0; i < nmsgs; i++) \{
+1746     \textcolor{keyword}{struct }message *m = va\_arg(ap, \textcolor{keyword}{struct} message *);
+1747 
+1748     off += strlen(m->raw);
+1749 
+1750     \textcolor{keywordflow}{if} (m->upgrade) \{
+1751       off -= strlen(m->upgrade);
+1752 
+1753       \textcolor{comment}{/* Check the portion of the response after its specified upgrade */}
+1754       \textcolor{keywordflow}{if} (!check_str_eq(m, \textcolor{stringliteral}{"upgrade"}, body + off, body + nread)) \{
+1755         exit(1);
+1756       \}
+1757 
+1758       \textcolor{comment}{/* Fix up the response so that message\_eq() will verify the beginning}
+1759 \textcolor{comment}{       * of the upgrade */}
+1760       *(body + nread + strlen(m->upgrade)) = \textcolor{charliteral}{'\(\backslash\)0'};
+1761       messages[num_messages -1 ].upgrade = body + nread;
+1762 
+1763       va\_end(ap);
+1764       \textcolor{keywordflow}{return};
+1765     \}
+1766   \}
+1767 
+1768   va\_end(ap);
+1769   printf(\textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n*** Error: expected a message with upgrade ***\(\backslash\)n"});
+1770 
+1771   exit(1);
+1772 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{test.\+c@{test.\+c}!current\+\_\+pause\+\_\+parser@{current\+\_\+pause\+\_\+parser}}
+\index{current\+\_\+pause\+\_\+parser@{current\+\_\+pause\+\_\+parser}!test.\+c@{test.\+c}}
+\subsubsection[{current\+\_\+pause\+\_\+parser}]{\setlength{\rightskip}{0pt plus 5cm}{\bf http\+\_\+parser\+\_\+settings}$\ast$ current\+\_\+pause\+\_\+parser\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_ac3b7f325f30340fa3ac1b4da21ed675f}
+
+
+Definition at line 77 of file test.\+c.
+
+\index{test.\+c@{test.\+c}!currently\+\_\+parsing\+\_\+eof@{currently\+\_\+parsing\+\_\+eof}}
+\index{currently\+\_\+parsing\+\_\+eof@{currently\+\_\+parsing\+\_\+eof}!test.\+c@{test.\+c}}
+\subsubsection[{currently\+\_\+parsing\+\_\+eof}]{\setlength{\rightskip}{0pt plus 5cm}int currently\+\_\+parsing\+\_\+eof\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_ae9895f5b52d281a9eae03cc5c36b5010}
+
+
+Definition at line 73 of file test.\+c.
+
+
+
+Referenced by message\+\_\+complete\+\_\+cb(), parse(), parse\+\_\+count\+\_\+body(), and parse\+\_\+pause().
+
+\index{test.\+c@{test.\+c}!messages@{messages}}
+\index{messages@{messages}!test.\+c@{test.\+c}}
+\subsubsection[{messages}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf message} messages[5]\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a508ec1c400816293decba070bd706934}
+
+
+Definition at line 75 of file test.\+c.
+
+
+
+Referenced by body\+\_\+cb(), chunk\+\_\+complete\+\_\+cb(), chunk\+\_\+header\+\_\+cb(), count\+\_\+body\+\_\+cb(), header\+\_\+field\+\_\+cb(), header\+\_\+value\+\_\+cb(), headers\+\_\+complete\+\_\+cb(), message\+\_\+begin\+\_\+cb(), message\+\_\+complete\+\_\+cb(), message\+\_\+eq(), parser\+\_\+init(), request\+\_\+url\+\_\+cb(), response\+\_\+reason\+\_\+cb(), test\+\_\+message(), test\+\_\+message\+\_\+pause(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), and upgrade\+\_\+message\+\_\+fix().
+
+\index{test.\+c@{test.\+c}!num\+\_\+messages@{num\+\_\+messages}}
+\index{num\+\_\+messages@{num\+\_\+messages}!test.\+c@{test.\+c}}
+\subsubsection[{num\+\_\+messages}]{\setlength{\rightskip}{0pt plus 5cm}int num\+\_\+messages\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a8a04037d0814a8feb187a21859cb06c2}
+
+
+Definition at line 76 of file test.\+c.
+
+
+
+Referenced by body\+\_\+cb(), chunk\+\_\+complete\+\_\+cb(), chunk\+\_\+header\+\_\+cb(), count\+\_\+body\+\_\+cb(), header\+\_\+field\+\_\+cb(), header\+\_\+value\+\_\+cb(), headers\+\_\+complete\+\_\+cb(), message\+\_\+begin\+\_\+cb(), message\+\_\+complete\+\_\+cb(), parser\+\_\+init(), request\+\_\+url\+\_\+cb(), response\+\_\+reason\+\_\+cb(), test\+\_\+message(), test\+\_\+message\+\_\+count\+\_\+body(), test\+\_\+message\+\_\+pause(), test\+\_\+multiple3(), test\+\_\+on\+\_\+message\+\_\+begin\+\_\+cb(), test\+\_\+scan(), and upgrade\+\_\+message\+\_\+fix().
+
+\index{test.\+c@{test.\+c}!on\+\_\+message\+\_\+begin\+\_\+cb\+\_\+test@{on\+\_\+message\+\_\+begin\+\_\+cb\+\_\+test}}
+\index{on\+\_\+message\+\_\+begin\+\_\+cb\+\_\+test@{on\+\_\+message\+\_\+begin\+\_\+cb\+\_\+test}!test.\+c@{test.\+c}}
+\subsubsection[{on\+\_\+message\+\_\+begin\+\_\+cb\+\_\+test}]{\setlength{\rightskip}{0pt plus 5cm}const struct {\bf message} on\+\_\+message\+\_\+begin\+\_\+cb\+\_\+test[$\,$]}\label{test_8c_a6d471bdf4e4d79f57593be0fbb94539b}
+
+
+Definition at line 1138 of file test.\+c.
+
+\index{test.\+c@{test.\+c}!parser@{parser}}
+\index{parser@{parser}!test.\+c@{test.\+c}}
+\subsubsection[{parser}]{\setlength{\rightskip}{0pt plus 5cm}{\bf http\+\_\+parser}$\ast$ parser\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a9c0d3db3dd6b37fbe78193fb322e97dd}
+
+
+Definition at line 40 of file test.\+c.
+
+
+
+Referenced by test\+\_\+header\+\_\+overflow\+\_\+error(), and test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body().
+
+\index{test.\+c@{test.\+c}!requests@{requests}}
+\index{requests@{requests}!test.\+c@{test.\+c}}
+\subsubsection[{requests}]{\setlength{\rightskip}{0pt plus 5cm}const struct {\bf message} requests[$\,$]}\label{test_8c_a2f5f4226fdae63a5d7d98b3cc56a685d}
+
+
+Definition at line 80 of file test.\+c.
+
+\index{test.\+c@{test.\+c}!responses@{responses}}
+\index{responses@{responses}!test.\+c@{test.\+c}}
+\subsubsection[{responses}]{\setlength{\rightskip}{0pt plus 5cm}const struct {\bf message} responses[$\,$]}\label{test_8c_a5b2828484e9b28dc5470ea2ab3397d57}
+
+
+Definition at line 791 of file test.\+c.
+
+\index{test.\+c@{test.\+c}!settings@{settings}}
+\index{settings@{settings}!test.\+c@{test.\+c}}
+\subsubsection[{settings}]{\setlength{\rightskip}{0pt plus 5cm}{\bf http\+\_\+parser\+\_\+settings} settings\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a1dec008fbb156669ec30f7f5f5d10d5c}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+  \{.on\_message\_begin = message_begin_cb
+  ,.on\_header\_field = header_field_cb
+  ,.on\_header\_value = header_value_cb
+  ,.on\_url = request_url_cb
+  ,.on\_body = body_cb
+  ,.on\_headers\_complete = headers_complete_cb
+  ,.on\_message\_complete = message_complete_cb
+  ,.on\_reason = response_reason_cb
+  ,.on\_chunk\_header = chunk_header_cb
+  ,.on\_chunk\_complete = chunk_complete_cb
+  \}
+\end{DoxyCode}
+
+
+Definition at line 1529 of file test.\+c.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::enable\+Ex\+Headers\+Settings(), H\+T\+T\+P\+Downstream\+Test$<$ S\+P\+D\+Y3\+\_\+1\+Codec\+Pair $>$\+::expect\+Responses(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::generate\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Codec\+Send\+Window\+Size(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::get\+Header\+Indexing\+Strategy(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Security\+Protocol(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Ingress\+Upgrade\+Message(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Native\+Protocol\+Upgrade\+Impl(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Settings(), proxygen\+::http2\+::parse\+Settings(), proxygen\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter\+::\+Pass\+Through\+H\+T\+T\+P\+Codec\+Filter(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Egress\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Flow\+Control(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Max\+Concurrent\+Incoming\+Streams(), proxygen\+::\+H\+T\+T\+P\+Session\+::setup\+Codec(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::setup\+On\+Headers\+Complete(), T\+E\+S\+T(), T\+E\+S\+T\+\_\+\+F(), H\+T\+T\+P2\+Codec\+Test\+::test\+Frame\+Size\+Limit(), H\+T\+T\+P2\+Codec\+Test\+::test\+Header\+List\+Size(), and T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+P().
+
+\index{test.\+c@{test.\+c}!settings\+\_\+count\+\_\+body@{settings\+\_\+count\+\_\+body}}
+\index{settings\+\_\+count\+\_\+body@{settings\+\_\+count\+\_\+body}!test.\+c@{test.\+c}}
+\subsubsection[{settings\+\_\+count\+\_\+body}]{\setlength{\rightskip}{0pt plus 5cm}{\bf http\+\_\+parser\+\_\+settings} settings\+\_\+count\+\_\+body\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a864394f0decf4fa58a45fe46a1a40780}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+  \{.on\_message\_begin = message_begin_cb
+  ,.on\_header\_field = header_field_cb
+  ,.on\_header\_value = header_value_cb
+  ,.on\_url = request_url_cb
+  ,.on\_body = count_body_cb
+  ,.on\_headers\_complete = headers_complete_cb
+  ,.on\_message\_complete = message_complete_cb
+  ,.on\_reason = response_reason_cb
+  ,.on\_chunk\_header = chunk_header_cb
+  ,.on\_chunk\_complete = chunk_complete_cb
+  \}
+\end{DoxyCode}
+
+
+Definition at line 1542 of file test.\+c.
+
+\index{test.\+c@{test.\+c}!settings\+\_\+dontcall@{settings\+\_\+dontcall}}
+\index{settings\+\_\+dontcall@{settings\+\_\+dontcall}!test.\+c@{test.\+c}}
+\subsubsection[{settings\+\_\+dontcall}]{\setlength{\rightskip}{0pt plus 5cm}{\bf http\+\_\+parser\+\_\+settings} settings\+\_\+dontcall\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a17009fe0777ccb98c24492cc19868d03}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+  \{.on\_message\_begin = dontcall_message_begin_cb
+  ,.on\_header\_field = dontcall_header_field_cb
+  ,.on\_header\_value = dontcall_header_value_cb
+  ,.on\_url = dontcall_request_url_cb
+  ,.on\_body = dontcall_body_cb
+  ,.on\_headers\_complete = dontcall_headers_complete_cb
+  ,.on\_message\_complete = dontcall_message_complete_cb
+  ,.on\_reason = dontcall_response_reason_cb
+  ,.on\_chunk\_header = dontcall_chunk_header_cb
+  ,.on\_chunk\_complete = dontcall_chunk_complete_cb
+  \}
+\end{DoxyCode}
+
+
+Definition at line 1416 of file test.\+c.
+
+
+
+Referenced by pause\+\_\+body\+\_\+cb(), pause\+\_\+chunk\+\_\+complete\+\_\+cb(), pause\+\_\+chunk\+\_\+header\+\_\+cb(), pause\+\_\+header\+\_\+field\+\_\+cb(), pause\+\_\+header\+\_\+value\+\_\+cb(), pause\+\_\+headers\+\_\+complete\+\_\+cb(), pause\+\_\+message\+\_\+begin\+\_\+cb(), pause\+\_\+message\+\_\+complete\+\_\+cb(), pause\+\_\+request\+\_\+url\+\_\+cb(), and pause\+\_\+response\+\_\+reason\+\_\+cb().
+
+\index{test.\+c@{test.\+c}!settings\+\_\+null@{settings\+\_\+null}}
+\index{settings\+\_\+null@{settings\+\_\+null}!test.\+c@{test.\+c}}
+\subsubsection[{settings\+\_\+null}]{\setlength{\rightskip}{0pt plus 5cm}{\bf http\+\_\+parser\+\_\+settings} settings\+\_\+null\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a3a28672631c46d31a2b3e28aa2284eac}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+  \{.on\_message\_begin = empty_cb
+  ,.on\_header\_field = empty_data_cb
+  ,.on\_header\_value = empty_data_cb
+  ,.on\_url = empty_data_cb
+  ,.on\_body = empty_data_cb
+  ,.on\_headers\_complete = empty_data_cb
+  ,.on\_message\_complete = empty_cb
+  ,.on\_reason = empty_data_cb
+  ,.on\_chunk\_header = empty_cb
+  ,.on\_chunk\_complete = empty_cb
+  \}
+\end{DoxyCode}
+
+
+Definition at line 1555 of file test.\+c.
+
+\index{test.\+c@{test.\+c}!settings\+\_\+pause@{settings\+\_\+pause}}
+\index{settings\+\_\+pause@{settings\+\_\+pause}!test.\+c@{test.\+c}}
+\subsubsection[{settings\+\_\+pause}]{\setlength{\rightskip}{0pt plus 5cm}{\bf http\+\_\+parser\+\_\+settings} settings\+\_\+pause\hspace{0.3cm}{\ttfamily [static]}}\label{test_8c_a19b54d73e1e599f0fd8507007d91bcb4}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+  \{.on\_message\_begin = pause_message_begin_cb
+  ,.on\_header\_field = pause_header_field_cb
+  ,.on\_header\_value = pause_header_value_cb
+  ,.on\_url = pause_request_url_cb
+  ,.on\_body = pause_body_cb
+  ,.on\_headers\_complete = pause_headers_complete_cb
+  ,.on\_message\_complete = pause_message_complete_cb
+  ,.on\_reason = pause_response_reason_cb
+  ,.on\_chunk\_header = pause_chunk_header_cb
+  ,.on\_chunk\_complete = pause_chunk_complete_cb
+  \}
+\end{DoxyCode}
+
+
+Definition at line 1516 of file test.\+c.
+
+
+
+Referenced by parse\+\_\+pause().
+
+\index{test.\+c@{test.\+c}!url\+\_\+tests@{url\+\_\+tests}}
+\index{url\+\_\+tests@{url\+\_\+tests}!test.\+c@{test.\+c}}
+\subsubsection[{url\+\_\+tests}]{\setlength{\rightskip}{0pt plus 5cm}const struct {\bf url\+\_\+test} url\+\_\+tests[$\,$]}\label{test_8c_a8d5787817e4579adaab506928c9e2690}
+
+
+Definition at line 1826 of file test.\+c.
+
+
+
+Referenced by test\+\_\+parse\+\_\+url().
+

@@ -1,0 +1,211 @@
+\section{proxygen\+:\+:H\+T\+T\+P2\+Priority\+Queue\+Base Class Reference}
+\label{classproxygen_1_1HTTP2PriorityQueueBase}\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P2\+Priority\+Queue.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P2\+Priority\+Queue\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1HTTP2PriorityQueueBase}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Base\+Node}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Handle} = {\bf Base\+Node} $\ast$
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P2\+Priority\+Queue\+Base} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} root\+Node\+Id)
+\item 
+virtual {\bf Handle} {\bf add\+Transaction} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} id, {\bf http2\+::\+Priority\+Update} pri, {\bf H\+T\+T\+P\+Transaction} $\ast$txn, bool permanent=false, uint64\+\_\+t $\ast$depth={\bf nullptr})=0
+\item 
+virtual {\bf Handle} {\bf update\+Priority} ({\bf Handle} handle, {\bf http2\+::\+Priority\+Update} pri, uint64\+\_\+t $\ast$depth={\bf nullptr})=0
+\item 
+virtual void {\bf remove\+Transaction} ({\bf Handle} handle)=0
+\item 
+virtual void {\bf signal\+Pending\+Egress} ({\bf Handle} h)=0
+\item 
+virtual void {\bf clear\+Pending\+Egress} ({\bf Handle} h)=0
+\item 
+{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf get\+Root\+Id} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf root\+Node\+Id\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 27 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!Handle@{Handle}}
+\index{Handle@{Handle}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{Handle}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Handle} =  {\bf Base\+Node}$\ast$}\label{classproxygen_1_1HTTP2PriorityQueueBase_a5f3899c53116ed9ab8c8cec47427970e}
+
+
+Definition at line 36 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!H\+T\+T\+P2\+Priority\+Queue\+Base@{H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\index{H\+T\+T\+P2\+Priority\+Queue\+Base@{H\+T\+T\+P2\+Priority\+Queue\+Base}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{H\+T\+T\+P2\+Priority\+Queue\+Base(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D root\+Node\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{root\+Node\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_a6637cea4f7aff6d84a8b7d4feb7eb6cf}
+
+
+Definition at line 38 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+References add\+Transaction(), clear\+Pending\+Egress(), remove\+Transaction(), signal\+Pending\+Egress(), and update\+Priority().
+
+
+\begin{DoxyCode}
+39     : rootNodeId_(rootNodeId) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!add\+Transaction@{add\+Transaction}}
+\index{add\+Transaction@{add\+Transaction}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{add\+Transaction(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D id, http2\+::\+Priority\+Update pri, H\+T\+T\+P\+Transaction $\ast$txn, bool permanent=false, uint64\+\_\+t $\ast$depth=nullptr)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Handle} proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::add\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{id, }
+\item[{{\bf http2\+::\+Priority\+Update}}]{pri, }
+\item[{{\bf H\+T\+T\+P\+Transaction} $\ast$}]{txn, }
+\item[{bool}]{permanent = {\ttfamily false}, }
+\item[{uint64\+\_\+t $\ast$}]{depth = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_ab88b943c7dc595b06dd998ac7fe61efe}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue} \doxyref{}{p.}{classproxygen_1_1HTTP2PriorityQueue_a0f1114b1ae4f30fbee8b97413ebd8d5b}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::add\+Priority\+Node(), proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::drop\+Priority\+Nodes(), H\+T\+T\+P2\+Priority\+Queue\+Base(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+H\+T\+T\+P\+Transaction().
+
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!clear\+Pending\+Egress@{clear\+Pending\+Egress}}
+\index{clear\+Pending\+Egress@{clear\+Pending\+Egress}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{clear\+Pending\+Egress(\+Handle h)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::clear\+Pending\+Egress (
+\begin{DoxyParamCaption}
+\item[{{\bf Handle}}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_a775fcd7d7d4c27b71ca700c4f7ef93ff}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue} \doxyref{}{p.}{classproxygen_1_1HTTP2PriorityQueue_abc08640ffefe5b0a867a29dea74eee59}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::clear\+Transaction(), H\+T\+T\+P2\+Priority\+Queue\+Base(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::notify\+Transport\+Pending\+Egress(), and proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::set\+Max\+Virtual\+Nodes().
+
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!get\+Root\+Id@{get\+Root\+Id}}
+\index{get\+Root\+Id@{get\+Root\+Id}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{get\+Root\+Id()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::get\+Root\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_a84127d301f6e185dd2fdf92d8fbf63f6}
+
+
+Definition at line 61 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+References root\+Node\+Id\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+H\+T\+T\+P\+Transaction(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Priority\+Update().
+
+
+\begin{DoxyCode}
+61                                 \{
+62     \textcolor{keywordflow}{return} rootNodeId_;
+63   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!remove\+Transaction@{remove\+Transaction}}
+\index{remove\+Transaction@{remove\+Transaction}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{remove\+Transaction(\+Handle handle)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::remove\+Transaction (
+\begin{DoxyParamCaption}
+\item[{{\bf Handle}}]{handle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_ab9fda9e325d10dd40994ee45b49c0324}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue} \doxyref{}{p.}{classproxygen_1_1HTTP2PriorityQueue_a681d153d627f4f8d383e0859cce9f56d}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::drop\+Priority\+Nodes(), H\+T\+T\+P2\+Priority\+Queue\+Base(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::$\sim$\+H\+T\+T\+P\+Transaction().
+
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!signal\+Pending\+Egress@{signal\+Pending\+Egress}}
+\index{signal\+Pending\+Egress@{signal\+Pending\+Egress}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{signal\+Pending\+Egress(\+Handle h)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::signal\+Pending\+Egress (
+\begin{DoxyParamCaption}
+\item[{{\bf Handle}}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_affc0541d33b92f8ac94bb95faf4d9015}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue} \doxyref{}{p.}{classproxygen_1_1HTTP2PriorityQueue_aa6cb4f1766dbef9faee951ddfb4478a6}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::clear\+Transaction(), H\+T\+T\+P2\+Priority\+Queue\+Base(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::notify\+Transport\+Pending\+Egress(), and proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::set\+Max\+Virtual\+Nodes().
+
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!update\+Priority@{update\+Priority}}
+\index{update\+Priority@{update\+Priority}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{update\+Priority(\+Handle handle, http2\+::\+Priority\+Update pri, uint64\+\_\+t $\ast$depth=nullptr)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Handle} proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::update\+Priority (
+\begin{DoxyParamCaption}
+\item[{{\bf Handle}}]{handle, }
+\item[{{\bf http2\+::\+Priority\+Update}}]{pri, }
+\item[{uint64\+\_\+t $\ast$}]{depth = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_a79981b30f800a1f4872ddbd708c1bc5a}
+
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue} \doxyref{}{p.}{classproxygen_1_1HTTP2PriorityQueue_a16276ac880fcec6859ce73eb96daacf0}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::drop\+Priority\+Nodes(), H\+T\+T\+P2\+Priority\+Queue\+Base(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Priority\+Update(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+And\+Send\+Priority().
+
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}!root\+Node\+Id\+\_\+@{root\+Node\+Id\+\_\+}}
+\index{root\+Node\+Id\+\_\+@{root\+Node\+Id\+\_\+}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base}}
+\subsubsection[{root\+Node\+Id\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::root\+Node\+Id\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_ab2b1b9b19ab0164a239f881100d395af}
+
+
+Definition at line 66 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::add\+Transaction(), proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::find(), proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::find\+Internal(), get\+Root\+Id(), proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::iterate\+B\+F\+S(), proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::next\+Egress(), and proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::update\+Priority().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P2\+Priority\+Queue.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,348 @@
+\section{proxygen\+:\+:H\+P\+A\+C\+K\+Header Class Reference}
+\label{classproxygen_1_1HPACKHeader}\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+
+
+{\ttfamily \#include $<$H\+P\+A\+C\+K\+Header.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+P\+A\+C\+K\+Header} ()
+\item 
+{\bf H\+P\+A\+C\+K\+Header} (const {\bf H\+P\+A\+C\+K\+Header\+Name} \&name\+\_\+, const folly\+::fbstring \&value\+\_\+)
+\item 
+{\bf H\+P\+A\+C\+K\+Header} (folly\+::\+String\+Piece name\+\_\+, folly\+::\+String\+Piece value\+\_\+)
+\item 
+{\bf H\+P\+A\+C\+K\+Header} ({\bf H\+P\+A\+C\+K\+Header} \&\&goner) noexcept
+\item 
+{\bf H\+P\+A\+C\+K\+Header} \& {\bf operator=} ({\bf H\+P\+A\+C\+K\+Header} \&\&goner) noexcept
+\item 
+{\bf $\sim$\+H\+P\+A\+C\+K\+Header} ()
+\item 
+uint32\+\_\+t {\bf bytes} () const 
+\item 
+bool {\bf operator==} (const {\bf H\+P\+A\+C\+K\+Header} \&other) const 
+\item 
+bool {\bf operator$<$} (const {\bf H\+P\+A\+C\+K\+Header} \&other) const 
+\item 
+bool {\bf operator$>$} (const {\bf H\+P\+A\+C\+K\+Header} \&other) const 
+\item 
+{\bf H\+P\+A\+C\+K\+Header} {\bf copy} () const 
+\item 
+bool {\bf has\+Value} () const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+P\+A\+C\+K\+Header\+Name} {\bf name}
+\item 
+folly\+::fbstring {\bf value}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const uint32\+\_\+t {\bf k\+Min\+Length} = 32
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}}
+\index{H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{H\+P\+A\+C\+K\+Header()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+P\+A\+C\+K\+Header\+::\+H\+P\+A\+C\+K\+Header (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a5f4fe426fff34c22cfde2d85032ff5e2}
+
+
+Definition at line 24 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+Referenced by copy().
+
+
+\begin{DoxyCode}
+24 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}}
+\index{H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{H\+P\+A\+C\+K\+Header(const H\+P\+A\+C\+K\+Header\+Name \&name\+\_\+, const folly\+::fbstring \&value\+\_\+)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+P\+A\+C\+K\+Header\+::\+H\+P\+A\+C\+K\+Header (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header\+Name} \&}]{name\+\_\+, }
+\item[{const folly\+::fbstring \&}]{value\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a08003a16f68558d675c2845a9ac4c64c}
+
+
+Definition at line 26 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+\begin{DoxyCode}
+27                                           :
+28       name(name\_), value(value\_) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}}
+\index{H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{H\+P\+A\+C\+K\+Header(folly\+::\+String\+Piece name\+\_\+, folly\+::\+String\+Piece value\+\_\+)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+P\+A\+C\+K\+Header\+::\+H\+P\+A\+C\+K\+Header (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+String\+Piece}]{name\+\_\+, }
+\item[{folly\+::\+String\+Piece}]{value\+\_\+}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a8dffaa028c0bb3139f05ed87ec655c43}
+
+
+Definition at line 30 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+\begin{DoxyCode}
+31                                       :
+32       name(name\_), value(value\_.data(), value\_.size()) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}}
+\index{H\+P\+A\+C\+K\+Header@{H\+P\+A\+C\+K\+Header}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{H\+P\+A\+C\+K\+Header(\+H\+P\+A\+C\+K\+Header \&\&goner) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+P\+A\+C\+K\+Header\+::\+H\+P\+A\+C\+K\+Header (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Header} \&\&}]{goner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HPACKHeader_a756fb5056d45212c58c616f8d2b2407b}
+
+
+Definition at line 34 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+\begin{DoxyCode}
+35       : name(std::move(goner.name)),
+36         value(std::move(goner.value)) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!````~H\+P\+A\+C\+K\+Header@{$\sim$\+H\+P\+A\+C\+K\+Header}}
+\index{````~H\+P\+A\+C\+K\+Header@{$\sim$\+H\+P\+A\+C\+K\+Header}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{$\sim$\+H\+P\+A\+C\+K\+Header()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+P\+A\+C\+K\+Header\+::$\sim$\+H\+P\+A\+C\+K\+Header (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a6ce7a90b76e98be4b67be7edee7963b0}
+
+
+Definition at line 44 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+\begin{DoxyCode}
+44 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!bytes@{bytes}}
+\index{bytes@{bytes}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{bytes() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+Header\+::bytes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a7835b6c7224a80672c38fcd4e9e200e2}
+size in bytes of the header entry, as defined in the \doxyref{H\+P\+A\+CK}{p.}{namespaceproxygen_1_1HPACK} spec 
+
+Definition at line 49 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+References name, proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name\+::size(), and value.
+
+
+
+Referenced by proxygen\+::\+Header\+Table\+::add(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::can\+Index(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::emit(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+As\+Literal(), proxygen\+::operator$<$$<$(), proxygen\+::\+Header\+Table\+Tests\+::resize\+And\+Fill\+Table(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::should\+Index(), proxygen\+::\+T\+E\+S\+T\+\_\+\+F(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+49                          \{
+50     \textcolor{keywordflow}{return} folly::to<uint32\_t>(kMinLength + name.size() + value.size());
+51   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!copy@{copy}}
+\index{copy@{copy}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{copy() const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+Header} proxygen\+::\+H\+P\+A\+C\+K\+Header\+::copy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a22e34d9a86e403f31422cb920ac38dff}
+
+
+Definition at line 71 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+References H\+P\+A\+C\+K\+Header(), name, and value.
+
+
+
+Referenced by Test\+Context\+::add(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+As\+Literal(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::maybe\+Duplicate(), proxygen\+::\+Header\+Table\+Tests\+::resize\+And\+Fill\+Table(), and proxygen\+::\+T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+71                            \{
+72     \textcolor{keywordflow}{return} HPACKHeader(name, value);
+73   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!has\+Value@{has\+Value}}
+\index{has\+Value@{has\+Value}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{has\+Value() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+P\+A\+C\+K\+Header\+::has\+Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a16856a2ef3e9cc49f4d7492dfc344ccc}
+Some header entries don\textquotesingle{}t have a value, see \doxyref{Static\+Header\+Table}{p.}{classproxygen_1_1StaticHeaderTable} 
+
+Definition at line 78 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+References value.
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+78                         \{
+79     \textcolor{keywordflow}{return} !value.empty();
+80   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{operator$<$(const H\+P\+A\+C\+K\+Header \&other) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+P\+A\+C\+K\+Header\+::operator$<$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header} \&}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a5f32046fab119b9188d9bb98425a0c1a}
+
+
+Definition at line 56 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+References name, and value.
+
+
+\begin{DoxyCode}
+56                                                  \{
+57     \textcolor{keywordtype}{bool} eqname = (name == other.name);
+58     \textcolor{keywordflow}{if} (!eqname) \{
+59       \textcolor{keywordflow}{return} name < other.name;
+60     \}
+61     \textcolor{keywordflow}{return} value < other.value;
+62   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!operator=@{operator=}}
+\index{operator=@{operator=}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{operator=(\+H\+P\+A\+C\+K\+Header \&\&goner) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+Header}\& proxygen\+::\+H\+P\+A\+C\+K\+Header\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Header} \&\&}]{goner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HPACKHeader_ac1e233791464f42bb139372368554f8b}
+
+
+Definition at line 38 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+References name, and value.
+
+
+\begin{DoxyCode}
+38                                                        \{
+39     std::swap(name, goner.name);
+40     std::swap(value, goner.value);
+41     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+42   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!operator==@{operator==}}
+\index{operator==@{operator==}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{operator==(const H\+P\+A\+C\+K\+Header \&other) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+P\+A\+C\+K\+Header\+::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header} \&}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_a31b9452820e5b93de34950c49583a90e}
+
+
+Definition at line 53 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+References name, and value.
+
+
+\begin{DoxyCode}
+53                                                   \{
+54     \textcolor{keywordflow}{return} name == other.name && value == other.value;
+55   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{operator$>$(const H\+P\+A\+C\+K\+Header \&other) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+P\+A\+C\+K\+Header\+::operator$>$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header} \&}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HPACKHeader_ad25bce11f8b9a7b7ccc84f0935c56df9}
+
+
+Definition at line 63 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+References name, and value.
+
+
+\begin{DoxyCode}
+63                                                  \{
+64     \textcolor{keywordtype}{bool} eqname = (name == other.name);
+65     \textcolor{keywordflow}{if} (!eqname) \{
+66       \textcolor{keywordflow}{return} name > other.name;
+67     \}
+68     \textcolor{keywordflow}{return} value > other.value;
+69   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!k\+Min\+Length@{k\+Min\+Length}}
+\index{k\+Min\+Length@{k\+Min\+Length}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{k\+Min\+Length}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t proxygen\+::\+H\+P\+A\+C\+K\+Header\+::k\+Min\+Length = 32\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HPACKHeader_a6649d90586344a7c6f7ac663f6364e8d}
+
+
+Definition at line 22 of file H\+P\+A\+C\+K\+Header.\+h.
+
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!name@{name}}
+\index{name@{name}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+Header\+Name} proxygen\+::\+H\+P\+A\+C\+K\+Header\+::name}\label{classproxygen_1_1HPACKHeader_ad5014c76ba0f1f8b3976b605723c156b}
+
+
+Definition at line 82 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+Referenced by proxygen\+::\+Header\+Table\+::add(), bytes(), copy(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+Header(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+Header\+Q(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::emit(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+As\+Literal(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+Literal(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Literal\+Q\+Helper(), proxygen\+::\+H\+P\+A\+C\+K\+Context\+::get\+Index(), proxygen\+::\+Header\+Table\+::get\+Index(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Index(), proxygen\+::\+No\+Path\+Indexing\+Strategy\+::index\+Header(), proxygen\+::\+Header\+Indexing\+Strategy\+::index\+Header(), operator$<$(), proxygen\+::operator$<$$<$(), operator=(), operator==(), operator$>$(), T\+E\+S\+T\+\_\+\+F(), proxygen\+::\+T\+E\+S\+T\+\_\+\+F(), and T\+E\+S\+T\+\_\+\+P().
+
+\index{proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}!value@{value}}
+\index{value@{value}!proxygen\+::\+H\+P\+A\+C\+K\+Header@{proxygen\+::\+H\+P\+A\+C\+K\+Header}}
+\subsubsection[{value}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::fbstring proxygen\+::\+H\+P\+A\+C\+K\+Header\+::value}\label{classproxygen_1_1HPACKHeader_aec97820acef551b8d393dba963433548}
+
+
+Definition at line 83 of file H\+P\+A\+C\+K\+Header.\+h.
+
+
+
+Referenced by bytes(), copy(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+Header(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+Header\+Q(), proxygen\+::\+H\+P\+A\+C\+K\+Decoder\+Base\+::emit(), proxygen\+::\+H\+P\+A\+C\+K\+Encoder\+::encode\+Literal(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Literal\+Q\+Helper(), proxygen\+::\+H\+P\+A\+C\+K\+Context\+::get\+Index(), proxygen\+::\+Header\+Table\+::get\+Index(), proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Index(), has\+Value(), proxygen\+::\+Header\+Indexing\+Strategy\+::index\+Header(), operator$<$(), proxygen\+::operator$<$$<$(), operator=(), operator==(), operator$>$(), T\+E\+S\+T\+\_\+\+F(), and T\+E\+S\+T\+\_\+\+P().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf H\+P\+A\+C\+K\+Header.\+h}\end{DoxyCompactItemize}

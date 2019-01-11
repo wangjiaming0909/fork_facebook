@@ -1,0 +1,103 @@
+\section{proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Constants.h File Reference}
+\label{HPACKConstants_8h}\index{proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Constants.\+h@{proxygen/lib/http/codec/compress/\+H\+P\+A\+C\+K\+Constants.\+h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$iosfwd$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Instruction}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\item 
+ {\bf proxygen\+::\+H\+P\+A\+CK}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Literal\+Encoding} \+: uint8\+\_\+t \{ {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+P\+L\+A\+IN} = 0x00, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+H\+U\+F\+F\+M\+AN} = 0x80
+ \}
+\item 
+enum {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error} \+: uint8\+\_\+t \{ \\*
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+N\+O\+NE} = 0, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+D\+EX} = 1, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+U\+F\+F\+M\+A\+N\+\_\+\+C\+O\+DE} = 2, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+N\+C\+O\+D\+I\+NG} = 3, 
+\\*
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+I\+N\+T\+E\+G\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW} = 4, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE} = 5, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+H\+E\+A\+D\+E\+R\+S\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE} = 6, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+B\+U\+F\+F\+E\+R\+\_\+\+U\+N\+D\+E\+R\+F\+L\+OW} = 7, 
+\\*
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+L\+I\+T\+E\+R\+A\+L\+\_\+\+T\+O\+O\+\_\+\+L\+A\+R\+GE} = 8, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+T\+I\+M\+E\+O\+UT} = 9, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+C\+A\+N\+C\+E\+L\+L\+ED} = 10, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+B\+A\+D\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+N\+U\+M\+B\+ER} = 11, 
+\\*
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+A\+CK} = 12, 
+{\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+T\+O\+O\+\_\+\+M\+A\+N\+Y\+\_\+\+B\+L\+O\+C\+K\+I\+NG} = 13
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& {\bf proxygen\+::\+H\+P\+A\+C\+K\+::operator$<$$<$} (std\+::ostream \&os, Decode\+Error err)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+I\+N\+D\+E\+X\+\_\+\+R\+EF} \{ 0x80, 7 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+L\+I\+T\+E\+R\+A\+L\+\_\+\+I\+N\+C\+\_\+\+I\+N\+D\+EX} \{ 0x40, 6 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+L\+I\+T\+E\+R\+AL} \{ 0x00, 4 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+E\+V\+\_\+\+I\+N\+D\+EX} \{ 0x10, 4 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE} \{ 0x20, 5 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF} \{ 0x80, 6 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+O\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF} \{ 0x40, 5 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+Z\+E\+\_\+\+U\+P\+D\+A\+TE} \{ 0x20, 5 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+U\+P\+L\+I\+C\+A\+TE} \{ 0x00, 5 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+A\+CK} \{ 0x80, 7 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+C\+A\+N\+C\+E\+L\+\_\+\+S\+T\+R\+E\+AM} \{ 0x40, 6 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+T\+A\+T\+E\+\_\+\+S\+Y\+NC} \{ 0x00, 6 \}
+\item 
+const uint8\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+N\+EG} = 0x80
+\item 
+const uint8\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+S\+E\+\_\+\+P\+OS} = 0x00
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+D\+E\+L\+T\+A\+\_\+\+B\+A\+SE} \{ 0x00, 7 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+ED} \{ 0x80, 6 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+P\+O\+ST} \{ 0x10, 4 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+EF} \{ 0x40, 4 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+P\+O\+ST} \{ 0x00, 3 \}
+\item 
+const Instruction {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+AL} \{ 0x20, 3 \}
+\item 
+const uint8\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+D\+E\+X\+E\+D\+\_\+\+S\+T\+A\+T\+IC} = 0x40
+\item 
+const uint8\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+I\+N\+S\+E\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+R\+E\+F\+\_\+\+S\+T\+A\+T\+IC} = 0x40
+\item 
+const uint8\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+Q\+\_\+\+L\+I\+T\+E\+R\+A\+L\+\_\+\+S\+T\+A\+T\+IC} = 0x10
+\item 
+const uint32\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::k\+Default\+Blocking} = 100
+\item 
+const uint32\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::k\+Table\+Size} = 4096
+\item 
+const uint8\+\_\+t {\bf proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+B\+I\+T\+\_\+\+M\+A\+S\+KS} [9]
+\end{DoxyCompactItemize}

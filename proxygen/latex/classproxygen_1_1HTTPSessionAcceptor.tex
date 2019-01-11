@@ -1,0 +1,704 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Session\+Acceptor Class Reference}
+\label{classproxygen_1_1HTTPSessionAcceptor}\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Session\+Acceptor.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Session\+Acceptor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classproxygen_1_1HTTPSessionAcceptor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session\+Acceptor} (const {\bf Acceptor\+Configuration} \&acc\+Config)
+\item 
+{\bf H\+T\+T\+P\+Session\+Acceptor} (const {\bf Acceptor\+Configuration} \&acc\+Config, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ codec\+Factory)
+\item 
+{\bf $\sim$\+H\+T\+T\+P\+Session\+Acceptor} () override
+\item 
+void {\bf set\+Default\+Error\+Page} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Error\+Page} $>$ generator)
+\item 
+const {\bf H\+T\+T\+P\+Error\+Page} $\ast$ {\bf get\+Default\+Error\+Page} () const 
+\item 
+void {\bf set\+Diagnostic\+Error\+Page} (std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Error\+Page} $>$ generator)
+\item 
+const {\bf H\+T\+T\+P\+Error\+Page} $\ast$ {\bf get\+Diagnostic\+Error\+Page} () const 
+\item 
+virtual const {\bf H\+T\+T\+P\+Error\+Page} $\ast$ {\bf get\+Error\+Page} (const folly\+::\+Socket\+Address \&addr) const 
+\item 
+void {\bf set\+Codec\+Factory} (std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ codec\+Factory)
+\item 
+std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ {\bf get\+Codec\+Factory} ()
+\item 
+virtual {\bf H\+T\+T\+P\+Transaction\+::\+Handler} $\ast$ {\bf new\+Handler} ({\bf H\+T\+T\+P\+Transaction} \&txn, {\bf H\+T\+T\+P\+Message} $\ast$msg) noexcept=0
+\item 
+void {\bf set\+Session\+Info\+Callback} ({\bf H\+T\+T\+P\+Session\+::\+Info\+Callback} $\ast$cb)
+\item 
+virtual bool {\bf get\+Http2\+Priorities\+Enabled} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf H\+T\+T\+P\+Session\+Controller} $\ast$ {\bf get\+Controller} ()
+\item 
+{\bf H\+T\+T\+P\+Session\+::\+Info\+Callback} $\ast$ {\bf get\+Session\+Info\+Callback} ()
+\item 
+void {\bf on\+New\+Connection} (folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr sock, const folly\+::\+Socket\+Address $\ast$address, const std\+::string \&next\+Protocol, wangle\+::\+Secure\+Transport\+Type secure\+Transport\+Type, const wangle\+::\+Transport\+Info \&tinfo) override
+\item 
+folly\+::\+Async\+Socket\+::\+Unique\+Ptr {\bf make\+New\+Async\+Socket} (folly\+::\+Event\+Base $\ast$base, int fd) override
+\item 
+virtual size\+\_\+t {\bf drop\+Idle\+Connections} (size\+\_\+t num)
+\item 
+virtual void {\bf on\+Session\+Creation\+Error} ({\bf Proxygen\+Error})
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session\+Stats} $\ast$ {\bf downstream\+Session\+Stats\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session\+Acceptor} (const {\bf H\+T\+T\+P\+Session\+Acceptor} \&)=delete
+\item 
+{\bf H\+T\+T\+P\+Session\+Acceptor} \& {\bf operator=} (const {\bf H\+T\+T\+P\+Session\+Acceptor} \&)=delete
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Error\+Page} $>$ {\bf default\+Error\+Page\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Error\+Page} $>$ {\bf diagnostic\+Error\+Page\+\_\+}
+\item 
+std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$ {\bf codec\+Factory\+\_\+} \{\}
+\item 
+{\bf Simple\+Controller} {\bf simple\+Controller\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Session\+::\+Info\+Callback} $\ast$ {\bf session\+Info\+Cb\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const folly\+::\+Socket\+Address {\bf unknown\+Socket\+Address\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Specialization of Acceptor that serves as an abstract base for acceptors that support H\+T\+TP and related protocols. 
+
+Definition at line 28 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!H\+T\+T\+P\+Session\+Acceptor@{H\+T\+T\+P\+Session\+Acceptor}}
+\index{H\+T\+T\+P\+Session\+Acceptor@{H\+T\+T\+P\+Session\+Acceptor}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{H\+T\+T\+P\+Session\+Acceptor(const Acceptor\+Configuration \&acc\+Config)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::\+H\+T\+T\+P\+Session\+Acceptor (
+\begin{DoxyParamCaption}
+\item[{const {\bf Acceptor\+Configuration} \&}]{acc\+Config}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1HTTPSessionAcceptor_a063ea9b9b724e1157bc01f863c77b479}
+
+
+Definition at line 26 of file H\+T\+T\+P\+Session\+Acceptor.\+cpp.
+
+
+
+Referenced by on\+Session\+Creation\+Error().
+
+
+\begin{DoxyCode}
+27     : HTTPSessionAcceptor(accConfig, \textcolor{keyword}{nullptr}) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!H\+T\+T\+P\+Session\+Acceptor@{H\+T\+T\+P\+Session\+Acceptor}}
+\index{H\+T\+T\+P\+Session\+Acceptor@{H\+T\+T\+P\+Session\+Acceptor}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{H\+T\+T\+P\+Session\+Acceptor(const Acceptor\+Configuration \&acc\+Config, std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Codec\+Factory $>$ codec\+Factory)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::\+H\+T\+T\+P\+Session\+Acceptor (
+\begin{DoxyParamCaption}
+\item[{const {\bf Acceptor\+Configuration} \&}]{acc\+Config, }
+\item[{std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$}]{codec\+Factory}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classproxygen_1_1HTTPSessionAcceptor_ae6af44b9804b1dbbbc7a1853e5d210c4}
+
+
+Definition at line 29 of file H\+T\+T\+P\+Session\+Acceptor.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Acceptor\+::acc\+Config\+\_\+, and codec\+Factory\+\_\+.
+
+
+\begin{DoxyCode}
+31                                                :
+32     HTTPAcceptor(accConfig),
+33     codecFactory_(codecFactory),
+34     simpleController_(\textcolor{keyword}{this}) \{
+35   \textcolor{keywordflow}{if} (!codecFactory_) \{
+36     codecFactory_ =
+37         std::make\_shared<HTTPDefaultSessionCodecFactory>(accConfig_);
+38   \}
+39 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!````~H\+T\+T\+P\+Session\+Acceptor@{$\sim$\+H\+T\+T\+P\+Session\+Acceptor}}
+\index{````~H\+T\+T\+P\+Session\+Acceptor@{$\sim$\+H\+T\+T\+P\+Session\+Acceptor}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Session\+Acceptor() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::$\sim$\+H\+T\+T\+P\+Session\+Acceptor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1HTTPSessionAcceptor_a1ffb7a321b038a9e0fece6f80f8a5c03}
+
+
+Definition at line 41 of file H\+T\+T\+P\+Session\+Acceptor.\+cpp.
+
+
+\begin{DoxyCode}
+41                                           \{
+42 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!H\+T\+T\+P\+Session\+Acceptor@{H\+T\+T\+P\+Session\+Acceptor}}
+\index{H\+T\+T\+P\+Session\+Acceptor@{H\+T\+T\+P\+Session\+Acceptor}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{H\+T\+T\+P\+Session\+Acceptor(const H\+T\+T\+P\+Session\+Acceptor \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::\+H\+T\+T\+P\+Session\+Acceptor (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Session\+Acceptor} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}\label{classproxygen_1_1HTTPSessionAcceptor_a64e8a2e1551c23c1afca3f203c30495a}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!drop\+Idle\+Connections@{drop\+Idle\+Connections}}
+\index{drop\+Idle\+Connections@{drop\+Idle\+Connections}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{drop\+Idle\+Connections(size\+\_\+t num)}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::drop\+Idle\+Connections (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{num}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionAcceptor_ab1ddb9b6c4564885e68e51868a8771f2}
+
+
+Definition at line 127 of file H\+T\+T\+P\+Session\+Acceptor.\+cpp.
+
+
+
+Referenced by make\+New\+Async\+Socket().
+
+
+\begin{DoxyCode}
+127                                                           \{
+128   \textcolor{comment}{// release in batch for more efficiency}
+129   VLOG(6) << \textcolor{stringliteral}{"attempt to release resource"};
+130   \textcolor{keywordflow}{return} downstreamConnectionManager\_->dropIdleConnections(num);
+131 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!get\+Codec\+Factory@{get\+Codec\+Factory}}
+\index{get\+Codec\+Factory@{get\+Codec\+Factory}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{get\+Codec\+Factory()}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf H\+T\+T\+P\+Codec\+Factory}$>$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::get\+Codec\+Factory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionAcceptor_a587beef1d674542cdc250e5b8a0918e4}
+return the codec factory for this session 
+
+Definition at line 86 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References codec\+Factory\+\_\+, and new\+Handler().
+
+
+\begin{DoxyCode}
+86                                                     \{
+87     \textcolor{keywordflow}{return} codecFactory_;
+88   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!get\+Controller@{get\+Controller}}
+\index{get\+Controller@{get\+Controller}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{get\+Controller()}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Session\+Controller}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::get\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionAcceptor_a1fca63b392c09e421adf9c368e818f64}
+This function is invoked when a new session is created to get the controller to associate with the new session. Child classes may override this function to provide their own more sophisticated controller here. 
+
+Definition at line 119 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References simple\+Controller\+\_\+.
+
+
+
+Referenced by on\+New\+Connection().
+
+
+\begin{DoxyCode}
+119                                                  \{
+120     \textcolor{keywordflow}{return} &simpleController_;
+121   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!get\+Default\+Error\+Page@{get\+Default\+Error\+Page}}
+\index{get\+Default\+Error\+Page@{get\+Default\+Error\+Page}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{get\+Default\+Error\+Page() const }]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+T\+T\+P\+Error\+Page}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::get\+Default\+Error\+Page (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionAcceptor_a09272cdcdd07798b64bb09cb1b4f4c2f}
+Access the default error page generator. 
+
+Definition at line 47 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References default\+Error\+Page\+\_\+.
+
+
+\begin{DoxyCode}
+47                                                    \{
+48     \textcolor{keywordflow}{return} defaultErrorPage_.get();
+49   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!get\+Diagnostic\+Error\+Page@{get\+Diagnostic\+Error\+Page}}
+\index{get\+Diagnostic\+Error\+Page@{get\+Diagnostic\+Error\+Page}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{get\+Diagnostic\+Error\+Page() const }]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+T\+T\+P\+Error\+Page}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::get\+Diagnostic\+Error\+Page (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionAcceptor_adebf935491d748ced63c11432db74838}
+Access the diagnostic error page generator. 
+
+Definition at line 61 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References diagnostic\+Error\+Page\+\_\+, and get\+Error\+Page().
+
+
+\begin{DoxyCode}
+61                                                       \{
+62     \textcolor{keywordflow}{return} diagnosticErrorPage_.get();
+63   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!get\+Error\+Page@{get\+Error\+Page}}
+\index{get\+Error\+Page@{get\+Error\+Page}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{get\+Error\+Page(const folly\+::\+Socket\+Address \&addr) const }]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+T\+T\+P\+Error\+Page} $\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::get\+Error\+Page (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+Socket\+Address \&}]{addr}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionAcceptor_a0ce0a4757b7b068d05c394801a8fe9fd}
+Access the right error page generator for a connection. 
+\begin{DoxyParams}{Parameters}
+{\em local\+Addr} & Address of the local end of the connection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The diagnostic error page generator if one has been set A\+ND the connection is to an internal V\+IP, or else the default error page generator if one has been set, or else nullptr. 
+\end{DoxyReturn}
+
+
+Definition at line 44 of file H\+T\+T\+P\+Session\+Acceptor.\+cpp.
+
+
+
+References default\+Error\+Page\+\_\+, diagnostic\+Error\+Page\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Acceptor\+::is\+Internal().
+
+
+
+Referenced by get\+Diagnostic\+Error\+Page(), proxygen\+::\+Simple\+Controller\+::get\+Parse\+Error\+Handler(), and proxygen\+::\+Simple\+Controller\+::get\+Transaction\+Timeout\+Handler().
+
+
+\begin{DoxyCode}
+45                                      \{
+46   \textcolor{keyword}{const} HTTPErrorPage* errorPage = \textcolor{keyword}{nullptr};
+47   \textcolor{keywordflow}{if} (isInternal()) \{
+48     \textcolor{keywordflow}{if} (addr.isPrivateAddress()) \{
+49       errorPage = diagnosticErrorPage_.get();
+50     \}
+51   \}
+52   \textcolor{keywordflow}{if} (errorPage == \textcolor{keyword}{nullptr}) \{
+53     errorPage = defaultErrorPage_.get();
+54   \}
+55   \textcolor{keywordflow}{return} errorPage;
+56 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!get\+Http2\+Priorities\+Enabled@{get\+Http2\+Priorities\+Enabled}}
+\index{get\+Http2\+Priorities\+Enabled@{get\+Http2\+Priorities\+Enabled}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{get\+Http2\+Priorities\+Enabled()}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::get\+Http2\+Priorities\+Enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionAcceptor_a87b0e6b6d6805c7807136d52d2286cbf}
+
+
+Definition at line 108 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Acceptor\+::acc\+Config\+\_\+, and proxygen\+::\+Acceptor\+Configuration\+::\+H\+T\+T\+P2\+Priorities\+Enabled.
+
+
+
+Referenced by on\+New\+Connection().
+
+
+\begin{DoxyCode}
+108                                            \{
+109     \textcolor{keywordflow}{return} accConfig_.HTTP2PrioritiesEnabled;
+110   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!get\+Session\+Info\+Callback@{get\+Session\+Info\+Callback}}
+\index{get\+Session\+Info\+Callback@{get\+Session\+Info\+Callback}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{get\+Session\+Info\+Callback()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session\+::\+Info\+Callback}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::get\+Session\+Info\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionAcceptor_ac8207bbe478fc7f635a6969f2c00f231}
+
+
+Definition at line 125 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References on\+New\+Connection(), and session\+Info\+Cb\+\_\+.
+
+
+\begin{DoxyCode}
+125                                                     \{
+126     \textcolor{keywordflow}{return} sessionInfoCb_ ? sessionInfoCb_ : \textcolor{keyword}{this};
+127   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!make\+New\+Async\+Socket@{make\+New\+Async\+Socket}}
+\index{make\+New\+Async\+Socket@{make\+New\+Async\+Socket}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{make\+New\+Async\+Socket(folly\+::\+Event\+Base $\ast$base, int fd) override}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Async\+Socket\+::\+Unique\+Ptr proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::make\+New\+Async\+Socket (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{base, }
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionAcceptor_aa56e436fec5ae6037da42c441a996e44}
+
+
+Definition at line 137 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References drop\+Idle\+Connections().
+
+
+\begin{DoxyCode}
+138                                                                     \{
+139     \textcolor{keywordflow}{return} folly::AsyncSocket::UniquePtr(
+140       \textcolor{keyword}{new} folly::AsyncSocket(base, fd));
+141   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!new\+Handler@{new\+Handler}}
+\index{new\+Handler@{new\+Handler}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{new\+Handler(\+H\+T\+T\+P\+Transaction \&txn, H\+T\+T\+P\+Message $\ast$msg) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Transaction\+::\+Handler}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::new\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Transaction} \&}]{txn, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSessionAcceptor_aaf24d4ddcf78a27d32330633a22e4a9b}
+Create a Handler for a new transaction. The transaction and H\+T\+TP message (request) are passed so the implementation can construct different handlers based on these. The transaction will be explicitly set on the handler later via set\+Transaction. The request message will be passed in on\+Headers\+Complete. 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor} \doxyref{}{p.}{classproxygen_1_1HTTPServerAcceptor_a3c2e4393964245f2868deeff34d5fa55}, and {\bf H\+T\+T\+P\+Target\+Session\+Acceptor} \doxyref{}{p.}{classHTTPTargetSessionAcceptor_ae08c574cc422a5c1a4af3660d3d39794}.
+
+
+
+Referenced by get\+Codec\+Factory(), and proxygen\+::\+Simple\+Controller\+::get\+Request\+Handler().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!on\+New\+Connection@{on\+New\+Connection}}
+\index{on\+New\+Connection@{on\+New\+Connection}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{on\+New\+Connection(folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr sock, const folly\+::\+Socket\+Address $\ast$address, const std\+::string \&next\+Protocol, wangle\+::\+Secure\+Transport\+Type secure\+Transport\+Type, const wangle\+::\+Transport\+Info \&tinfo) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::on\+New\+Connection (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Unique\+Ptr}]{sock, }
+\item[{const folly\+::\+Socket\+Address $\ast$}]{address, }
+\item[{const std\+::string \&}]{next\+Protocol, }
+\item[{wangle\+::\+Secure\+Transport\+Type}]{secure\+Transport\+Type, }
+\item[{const wangle\+::\+Transport\+Info \&}]{tinfo}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionAcceptor_a27e105a6ad38c082b735a2df8384fdca}
+
+
+Definition at line 58 of file H\+T\+T\+P\+Session\+Acceptor.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Acceptor\+::acc\+Config\+\_\+, codec\+Factory\+\_\+, proxygen\+::\+D\+O\+W\+N\+S\+T\+R\+E\+AM, downstream\+Session\+Stats\+\_\+, proxygen\+::\+Acceptor\+Configuration\+::egress\+Settings, get\+Controller(), get\+Http2\+Priorities\+Enabled(), proxygen\+::\+H\+T\+T\+P\+Acceptor\+::get\+Transaction\+Timeout\+Set(), proxygen\+::\+Acceptor\+Configuration\+::initial\+Receive\+Window, proxygen\+::k\+Error\+Unsupported\+Scheme, proxygen\+::\+Acceptor\+Configuration\+::max\+Concurrent\+Incoming\+Streams, on\+Session\+Creation\+Error(), proxygen\+::\+Acceptor\+Configuration\+::receive\+Session\+Window\+Size, proxygen\+::\+Acceptor\+Configuration\+::receive\+Stream\+Window\+Size, session\+Info\+Cb\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Egress\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Flow\+Control(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+H\+T\+T\+P2\+Priorities\+Enabled(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Max\+Concurrent\+Incoming\+Streams(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Session\+Stats(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Write\+Buffer\+Limit(), proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::start\+Now(), unknown\+Socket\+Address\+\_\+, and proxygen\+::\+Acceptor\+Configuration\+::write\+Buffer\+Limit.
+
+
+
+Referenced by get\+Session\+Info\+Callback(), and proxygen\+::\+H\+T\+T\+P\+Server\+Acceptor\+::on\+New\+Connection().
+
+
+\begin{DoxyCode}
+63                                       \{
+64 
+65   unique\_ptr<HTTPCodec> codec
+66       = codecFactory_->getCodec(
+67           nextProtocol,
+68           TransportDirection::DOWNSTREAM,
+69           \textcolor{comment}{// we assume if security protocol isn't empty, then it's TLS}
+70           !sock->getSecurityProtocol().empty());
+71 
+72   \textcolor{keywordflow}{if} (!codec) \{
+73     VLOG(2) << \textcolor{stringliteral}{"codecFactory\_ failed to provide codec"};
+74     onSessionCreationError(ProxygenError::kErrorUnsupportedScheme);
+75     \textcolor{keywordflow}{return};
+76   \}
+77 
+78   \textcolor{keyword}{auto} controller = getController();
+79   SocketAddress localAddress;
+80   \textcolor{keywordflow}{try} \{
+81     sock->getLocalAddress(&localAddress);
+82   \} \textcolor{keywordflow}{catch} (...) \{
+83     VLOG(3) << \textcolor{stringliteral}{"couldn't get local address for socket"};
+84     localAddress = unknownSocketAddress_;
+85   \}
+86 
+87   \textcolor{comment}{// overwrite address if the socket has no IP, e.g. Unix domain socket}
+88   \textcolor{keywordflow}{if} (!localAddress.isFamilyInet()) \{
+89     \textcolor{keywordflow}{if} (accConfig_.bindAddress.isFamilyInet()) \{
+90       localAddress = accConfig_.bindAddress;
+91     \} \textcolor{keywordflow}{else} \{
+92       localAddress = unknownSocketAddress_;
+93     \}
+94     VLOG(4) << \textcolor{stringliteral}{"set localAddress="} << localAddress.describe();
+95   \}
+96 
+97   \textcolor{keyword}{auto} sessionInfoCb = sessionInfoCb_ ? sessionInfoCb_ : \textcolor{keyword}{this};
+98   VLOG(4) << \textcolor{stringliteral}{"Created new "} << nextProtocol
+99           << \textcolor{stringliteral}{" session for peer "} << *peerAddress;
+100   HTTPDownstreamSession* session =
+101     \textcolor{keyword}{new} HTTPDownstreamSession(getTransactionTimeoutSet(), std::move(sock),
+102                               localAddress, *peerAddress,
+103                               controller, std::move(codec), tinfo,
+104                               sessionInfoCb);
+105   \textcolor{keywordflow}{if} (accConfig_.maxConcurrentIncomingStreams) \{
+106     session->setMaxConcurrentIncomingStreams(
+107         accConfig_.maxConcurrentIncomingStreams);
+108   \}
+109   session->setEgressSettings(accConfig_.egressSettings);
+110 
+111   \textcolor{comment}{// set HTTP2 priorities flag on session object}
+112   \textcolor{keyword}{auto} HTTP2PrioritiesEnabled = getHttp2PrioritiesEnabled();
+113   session->setHTTP2PrioritiesEnabled(HTTP2PrioritiesEnabled);
+114 
+115   \textcolor{comment}{// set flow control parameters}
+116   session->setFlowControl(accConfig_.initialReceiveWindow,
+117                           accConfig_.receiveStreamWindowSize,
+118                           accConfig_.receiveSessionWindowSize);
+119   \textcolor{keywordflow}{if} (accConfig_.writeBufferLimit > 0) \{
+120     session->setWriteBufferLimit(accConfig_.writeBufferLimit);
+121   \}
+122   session->setSessionStats(downstreamSessionStats_);
+123   Acceptor::addConnection(session);
+124   session->startNow();
+125 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!on\+Session\+Creation\+Error@{on\+Session\+Creation\+Error}}
+\index{on\+Session\+Creation\+Error@{on\+Session\+Creation\+Error}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{on\+Session\+Creation\+Error(\+Proxygen\+Error)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::on\+Session\+Creation\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf Proxygen\+Error}}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPSessionAcceptor_a3064ee452b305c863eec7e854e0c1536}
+
+
+Reimplemented in {\bf H\+T\+T\+P\+Target\+Session\+Acceptor} \doxyref{}{p.}{classHTTPTargetSessionAcceptor_a0632626c7a7d1f7cb70f841ca8e647f5}.
+
+
+
+Definition at line 145 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References H\+T\+T\+P\+Session\+Acceptor(), and operator=().
+
+
+
+Referenced by on\+New\+Connection().
+
+
+\begin{DoxyCode}
+145 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!operator=@{operator=}}
+\index{operator=@{operator=}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{operator=(const H\+T\+T\+P\+Session\+Acceptor \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session\+Acceptor}\& proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Session\+Acceptor} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}\label{classproxygen_1_1HTTPSessionAcceptor_a0c2121fb8e00127c5a735223f876e2b6}
+
+
+Referenced by on\+Session\+Creation\+Error().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!set\+Codec\+Factory@{set\+Codec\+Factory}}
+\index{set\+Codec\+Factory@{set\+Codec\+Factory}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{set\+Codec\+Factory(std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Codec\+Factory $>$ codec\+Factory)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::set\+Codec\+Factory (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec\+Factory} $>$}]{codec\+Factory}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionAcceptor_a2586154b3ddb05a9b28fa2b0f1a21f59}
+Set the codec factory for this session 
+
+Definition at line 79 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References codec\+Factory\+\_\+.
+
+
+\begin{DoxyCode}
+79                                                                      \{
+80     codecFactory_ = codecFactory;
+81   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!set\+Default\+Error\+Page@{set\+Default\+Error\+Page}}
+\index{set\+Default\+Error\+Page@{set\+Default\+Error\+Page}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{set\+Default\+Error\+Page(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Error\+Page $>$ generator)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::set\+Default\+Error\+Page (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Error\+Page} $>$}]{generator}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionAcceptor_a202f451c05591797e2e54eb412065671}
+Set the default error page generator. 
+
+Definition at line 40 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References default\+Error\+Page\+\_\+.
+
+
+\begin{DoxyCode}
+40                                                                    \{
+41     defaultErrorPage_ = std::move(generator);
+42   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!set\+Diagnostic\+Error\+Page@{set\+Diagnostic\+Error\+Page}}
+\index{set\+Diagnostic\+Error\+Page@{set\+Diagnostic\+Error\+Page}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{set\+Diagnostic\+Error\+Page(std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Error\+Page $>$ generator)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::set\+Diagnostic\+Error\+Page (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Error\+Page} $>$}]{generator}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionAcceptor_a0679fd754236052e214c952dbab4e9f5}
+Set an alternate error page generator to use for internal clients. 
+
+Definition at line 54 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References diagnostic\+Error\+Page\+\_\+.
+
+
+\begin{DoxyCode}
+54                                                                       \{
+55     diagnosticErrorPage_ = std::move(generator);
+56   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!set\+Session\+Info\+Callback@{set\+Session\+Info\+Callback}}
+\index{set\+Session\+Info\+Callback@{set\+Session\+Info\+Callback}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{set\+Session\+Info\+Callback(\+H\+T\+T\+P\+Session\+::\+Info\+Callback $\ast$cb)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::set\+Session\+Info\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session\+::\+Info\+Callback} $\ast$}]{cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSessionAcceptor_a5a9129075cee1b1fe4c0c389ea3b14b6}
+Set an H\+T\+T\+P\+Session\+::\+Info\+Callback to use for each session instead of the acceptor object. 
+
+Definition at line 104 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+References session\+Info\+Cb\+\_\+.
+
+
+\begin{DoxyCode}
+104                                                            \{
+105     sessionInfoCb_ = cb;
+106   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!codec\+Factory\+\_\+@{codec\+Factory\+\_\+}}
+\index{codec\+Factory\+\_\+@{codec\+Factory\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{codec\+Factory\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf H\+T\+T\+P\+Codec\+Factory}$>$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::codec\+Factory\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionAcceptor_a8f70ac4362c1b846e403f47308eb8b3c}
+
+
+Definition at line 157 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+Referenced by get\+Codec\+Factory(), H\+T\+T\+P\+Session\+Acceptor(), on\+New\+Connection(), and set\+Codec\+Factory().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!default\+Error\+Page\+\_\+@{default\+Error\+Page\+\_\+}}
+\index{default\+Error\+Page\+\_\+@{default\+Error\+Page\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{default\+Error\+Page\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Error\+Page}$>$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::default\+Error\+Page\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionAcceptor_a99f03c7b580421bf2f58a0ee3e4142b3}
+General-\/case error page generator 
+
+Definition at line 152 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+Referenced by get\+Default\+Error\+Page(), get\+Error\+Page(), and set\+Default\+Error\+Page().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!diagnostic\+Error\+Page\+\_\+@{diagnostic\+Error\+Page\+\_\+}}
+\index{diagnostic\+Error\+Page\+\_\+@{diagnostic\+Error\+Page\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{diagnostic\+Error\+Page\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Error\+Page}$>$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::diagnostic\+Error\+Page\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionAcceptor_aaa5eedc6c321f5d7705227ccb8e8785b}
+Generator of more detailed error pages for internal clients 
+
+Definition at line 155 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+Referenced by get\+Diagnostic\+Error\+Page(), get\+Error\+Page(), and set\+Diagnostic\+Error\+Page().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!downstream\+Session\+Stats\+\_\+@{downstream\+Session\+Stats\+\_\+}}
+\index{downstream\+Session\+Stats\+\_\+@{downstream\+Session\+Stats\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{downstream\+Session\+Stats\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session\+Stats}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::downstream\+Session\+Stats\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HTTPSessionAcceptor_ab4c90c10266060c2fba74afee1cb63d2}
+
+
+Definition at line 123 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+Referenced by on\+New\+Connection().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!session\+Info\+Cb\+\_\+@{session\+Info\+Cb\+\_\+}}
+\index{session\+Info\+Cb\+\_\+@{session\+Info\+Cb\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{session\+Info\+Cb\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session\+::\+Info\+Callback}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::session\+Info\+Cb\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionAcceptor_a877565242e2357433f472acd2cea35cc}
+
+
+Definition at line 161 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+Referenced by get\+Session\+Info\+Callback(), on\+New\+Connection(), and set\+Session\+Info\+Callback().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!simple\+Controller\+\_\+@{simple\+Controller\+\_\+}}
+\index{simple\+Controller\+\_\+@{simple\+Controller\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{simple\+Controller\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Simple\+Controller} proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::simple\+Controller\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionAcceptor_a2c6f4126491cc35603151e07a8f1ec97}
+
+
+Definition at line 159 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+Referenced by get\+Controller().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}!unknown\+Socket\+Address\+\_\+@{unknown\+Socket\+Address\+\_\+}}
+\index{unknown\+Socket\+Address\+\_\+@{unknown\+Socket\+Address\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor@{proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor}}
+\subsubsection[{unknown\+Socket\+Address\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const Socket\+Address proxygen\+::\+H\+T\+T\+P\+Session\+Acceptor\+::unknown\+Socket\+Address\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classproxygen_1_1HTTPSessionAcceptor_aee76db6b0a49114facae78bf00df3db5}
+0.\+0.\+0.\+0\+:0, a valid address to use if getsockname() or getpeername() fails 
+
+Definition at line 166 of file H\+T\+T\+P\+Session\+Acceptor.\+h.
+
+
+
+Referenced by on\+New\+Connection().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session\+Acceptor.\+h}\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session\+Acceptor.\+cpp}\end{DoxyCompactItemize}

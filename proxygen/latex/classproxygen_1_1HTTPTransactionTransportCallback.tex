@@ -1,0 +1,175 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Transaction\+Transport\+Callback Class Reference}
+\label{classproxygen_1_1HTTPTransactionTransportCallback}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Transaction.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Transaction\+Transport\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPTransactionTransportCallback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf first\+Header\+Byte\+Flushed} () noexcept=0
+\item 
+virtual void {\bf first\+Byte\+Flushed} () noexcept=0
+\item 
+virtual void {\bf last\+Byte\+Flushed} () noexcept=0
+\item 
+virtual void {\bf tracked\+Byte\+Flushed} () noexcept
+\item 
+virtual void {\bf last\+Byte\+Acked} (std\+::chrono\+::milliseconds latency) noexcept=0
+\item 
+virtual void {\bf header\+Bytes\+Generated} ({\bf H\+T\+T\+P\+Header\+Size} \&size) noexcept=0
+\item 
+virtual void {\bf header\+Bytes\+Received} (const {\bf H\+T\+T\+P\+Header\+Size} \&size) noexcept=0
+\item 
+virtual void {\bf body\+Bytes\+Generated} (size\+\_\+t nbytes) noexcept=0
+\item 
+virtual void {\bf body\+Bytes\+Received} (size\+\_\+t size) noexcept=0
+\item 
+virtual {\bf $\sim$\+H\+T\+T\+P\+Transaction\+Transport\+Callback} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Callback interface to be notified of events on the byte stream. 
+
+Definition at line 301 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!````~H\+T\+T\+P\+Transaction\+Transport\+Callback@{$\sim$\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\index{````~H\+T\+T\+P\+Transaction\+Transport\+Callback@{$\sim$\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Transaction\+Transport\+Callback()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::$\sim$\+H\+T\+T\+P\+Transaction\+Transport\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a13d2d0623e6310ed9c2e77c72fc64b5d}
+
+
+Definition at line 321 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+\begin{DoxyCode}
+321 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!body\+Bytes\+Generated@{body\+Bytes\+Generated}}
+\index{body\+Bytes\+Generated@{body\+Bytes\+Generated}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{body\+Bytes\+Generated(size\+\_\+t nbytes) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::body\+Bytes\+Generated (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{nbytes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_afc053d6a939eec4c3794c07132f7be82}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Deferred\+Body(), proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+E\+O\+M(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Headers\+With\+Optional\+E\+O\+M().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!body\+Bytes\+Received@{body\+Bytes\+Received}}
+\index{body\+Bytes\+Received@{body\+Bytes\+Received}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{body\+Bytes\+Received(size\+\_\+t size) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::body\+Bytes\+Received (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a5ef8dc83f2158fc452f029e3f3f40a71}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Body().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!first\+Byte\+Flushed@{first\+Byte\+Flushed}}
+\index{first\+Byte\+Flushed@{first\+Byte\+Flushed}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{first\+Byte\+Flushed() noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::first\+Byte\+Flushed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a464cd5c01e33a077256f95de31463c26}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Egress\+Body\+First\+Byte().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!first\+Header\+Byte\+Flushed@{first\+Header\+Byte\+Flushed}}
+\index{first\+Header\+Byte\+Flushed@{first\+Header\+Byte\+Flushed}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{first\+Header\+Byte\+Flushed() noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::first\+Header\+Byte\+Flushed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a9c02c5e17cca8e78b7cd6fe92ccdccba}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Egress\+Header\+First\+Byte().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!header\+Bytes\+Generated@{header\+Bytes\+Generated}}
+\index{header\+Bytes\+Generated@{header\+Bytes\+Generated}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{header\+Bytes\+Generated(\+H\+T\+T\+P\+Header\+Size \&size) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::header\+Bytes\+Generated (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Header\+Size} \&}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a8c465da22a769b3cae95ce03e71f7456}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Abort(), and proxygen\+::\+H\+T\+T\+P\+Transaction\+::send\+Headers\+With\+Optional\+E\+O\+M().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!header\+Bytes\+Received@{header\+Bytes\+Received}}
+\index{header\+Bytes\+Received@{header\+Bytes\+Received}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{header\+Bytes\+Received(const H\+T\+T\+P\+Header\+Size \&size) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::header\+Bytes\+Received (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Header\+Size} \&}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a3f99aed58bb09a1b4b6bb803d49d83ae}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Ingress\+Headers\+Complete().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!last\+Byte\+Acked@{last\+Byte\+Acked}}
+\index{last\+Byte\+Acked@{last\+Byte\+Acked}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{last\+Byte\+Acked(std\+::chrono\+::milliseconds latency) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::last\+Byte\+Acked (
+\begin{DoxyParamCaption}
+\item[{std\+::chrono\+::milliseconds}]{latency}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a08a22f1b3b1b494d43aa839483f93715}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Egress\+Last\+Byte\+Ack().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!last\+Byte\+Flushed@{last\+Byte\+Flushed}}
+\index{last\+Byte\+Flushed@{last\+Byte\+Flushed}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{last\+Byte\+Flushed() noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::last\+Byte\+Flushed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_ab689d82403553c69944197d9fbbeedf1}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Egress\+Body\+Last\+Byte().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}!tracked\+Byte\+Flushed@{tracked\+Byte\+Flushed}}
+\index{tracked\+Byte\+Flushed@{tracked\+Byte\+Flushed}!proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback@{proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback}}
+\subsubsection[{tracked\+Byte\+Flushed() noexcept}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+H\+T\+T\+P\+Transaction\+Transport\+Callback\+::tracked\+Byte\+Flushed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPTransactionTransportCallback_a690ec40de2214b704962e7d4af558239}
+
+
+Definition at line 309 of file H\+T\+T\+P\+Transaction.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::on\+Egress\+Tracked\+Byte().
+
+
+\begin{DoxyCode}
+309 \{\}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Transaction.\+h}\end{DoxyCompactItemize}

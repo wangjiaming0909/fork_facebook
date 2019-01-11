@@ -1,0 +1,55 @@
+\section{proxygen\+:\+:Hex\+Folly\+Printer Class Reference}
+\label{classproxygen_1_1HexFollyPrinter}\index{proxygen\+::\+Hex\+Folly\+Printer@{proxygen\+::\+Hex\+Folly\+Printer}}
+
+
+{\ttfamily \#include $<$Logging.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Hex\+Folly\+Printer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HexFollyPrinter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bf print} (const folly\+::\+I\+O\+Buf $\ast$buf) override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 155 of file Logging.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Hex\+Folly\+Printer@{proxygen\+::\+Hex\+Folly\+Printer}!print@{print}}
+\index{print@{print}!proxygen\+::\+Hex\+Folly\+Printer@{proxygen\+::\+Hex\+Folly\+Printer}}
+\subsubsection[{print(const folly\+::\+I\+O\+Buf $\ast$buf) override}]{\setlength{\rightskip}{0pt plus 5cm}string proxygen\+::\+Hex\+Folly\+Printer\+::print (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HexFollyPrinter_a7bcd6a0f671f8f46ed8542e8fffd3d71}
+
+
+Implements {\bf proxygen\+::\+I\+O\+Buf\+Printer} \doxyref{}{p.}{classproxygen_1_1IOBufPrinter_a317ea00fb51d7d42c37a440488f42664}.
+
+
+
+Definition at line 56 of file Logging.\+cpp.
+
+
+\begin{DoxyCode}
+56                                               \{
+57   \textcolor{keywordflow}{return} folly::hexDump(buf->data(), buf->length());
+58 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Logging.\+h}\item 
+proxygen/lib/utils/{\bf Logging.\+cpp}\end{DoxyCompactItemize}

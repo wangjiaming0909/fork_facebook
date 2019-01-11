@@ -1,0 +1,48 @@
+\section{specs.\+fbzmq Namespace Reference}
+\label{namespacespecs_1_1fbzmq}\index{specs.\+fbzmq@{specs.\+fbzmq}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf fbcode\+\_\+builder\+\_\+spec} (builder)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{specs\+::fbzmq@{specs\+::fbzmq}!fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}}
+\index{fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}!specs\+::fbzmq@{specs\+::fbzmq}}
+\subsubsection[{fbcode\+\_\+builder\+\_\+spec(builder)}]{\setlength{\rightskip}{0pt plus 5cm}def specs.\+fbzmq.\+fbcode\+\_\+builder\+\_\+spec (
+\begin{DoxyParamCaption}
+\item[{}]{builder}
+\end{DoxyParamCaption}
+)}\label{namespacespecs_1_1fbzmq_a3728ef4030394a0301fb7c7fb27d6656}
+
+
+Definition at line 17 of file fbzmq.\+py.
+
+
+\begin{DoxyCode}
+17 \textcolor{keyword}{def }fbcode_builder_spec(builder):
+18     builder.add\_option(\textcolor{stringliteral}{'zeromq/libzmq:git\_hash'}, \textcolor{stringliteral}{'v4.2.5'})
+19     \textcolor{keywordflow}{return} \{
+20         \textcolor{stringliteral}{'depends\_on'}: [folly, fbthrift, gmock, sodium, sigar],
+21         \textcolor{stringliteral}{'steps'}: [
+22             builder.github\_project\_workdir(\textcolor{stringliteral}{'zeromq/libzmq'}, \textcolor{stringliteral}{'.'}),
+23             builder.step(\textcolor{stringliteral}{'Build and install zeromq/libzmq'}, [
+24                 builder.run(ShellQuoted(\textcolor{stringliteral}{'./autogen.sh'})),
+25                 builder.configure(),
+26                 builder.make\_and\_install(),
+27             ]),
+28 
+29             builder.fb\_github\_project\_workdir(\textcolor{stringliteral}{'fbzmq/fbzmq/build'}, \textcolor{stringliteral}{'facebook'}),
+30             builder.step(\textcolor{stringliteral}{'Build and install fbzmq/fbzmq/build'}, [
+31                 builder.cmake\_configure(\textcolor{stringliteral}{'fbzmq/fbzmq/build'}),
+32                 \textcolor{comment}{# we need the pythonpath to find the thrift compiler}
+33                 builder.run(ShellQuoted(
+34                     \textcolor{stringliteral}{'PYTHONPATH="$PYTHONPATH:"\{p\}/lib/python2.7/site-packages '}
+35                     \textcolor{stringliteral}{'make -j \{n\}'}
+36                 ).format(p=builder.option(\textcolor{stringliteral}{'prefix'}), n=builder.option(\textcolor{stringliteral}{'make\_parallelism'}))),
+37                 builder.run(ShellQuoted(\textcolor{stringliteral}{'make install'})),
+38             ]),
+39         ],
+40     \}
+41 \end{DoxyCode}

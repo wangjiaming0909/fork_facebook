@@ -1,0 +1,127 @@
+\section{proxygen/lib/http/\+Proxygen\+Error\+Enum.h File Reference}
+\label{ProxygenErrorEnum_8h}\index{proxygen/lib/http/\+Proxygen\+Error\+Enum.\+h@{proxygen/lib/http/\+Proxygen\+Error\+Enum.\+h}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+EN}(x)
+\item 
+\#define {\bf P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+T\+S\+I\+ZE}~6
+\item 
+\#define {\bf P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+N\+UM}(error)~k\+Error\#\#error
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf proxygen\+::\+Proxygen\+Error} \{ \\*
+{\bf proxygen\+::k\+Error\+None}, 
+{\bf proxygen\+::k\+Error\+Message}, 
+{\bf proxygen\+::k\+Error\+Connect}, 
+{\bf proxygen\+::k\+Error\+Connect\+Timeout}, 
+\\*
+{\bf proxygen\+::k\+Error\+Read}, 
+{\bf proxygen\+::k\+Error\+Write}, 
+{\bf proxygen\+::k\+Error\+Timeout}, 
+{\bf proxygen\+::k\+Error\+Handshake}, 
+\\*
+{\bf proxygen\+::k\+Error\+No\+Server}, 
+{\bf proxygen\+::k\+Error\+Max\+Redirects}, 
+{\bf proxygen\+::k\+Error\+Invalid\+Redirect}, 
+{\bf proxygen\+::k\+Error\+Response\+Action}, 
+\\*
+{\bf proxygen\+::k\+Error\+Max\+Connects}, 
+{\bf proxygen\+::k\+Error\+Dropped}, 
+{\bf proxygen\+::k\+Error\+Connection}, 
+{\bf proxygen\+::k\+Error\+Connection\+Reset}, 
+\\*
+{\bf proxygen\+::k\+Error\+Parse\+Header}, 
+{\bf proxygen\+::k\+Error\+Parse\+Body}, 
+{\bf proxygen\+::k\+Error\+E\+OF}, 
+{\bf proxygen\+::k\+Error\+Client\+Renegotiation}, 
+\\*
+{\bf proxygen\+::k\+Error\+Unknown}, 
+{\bf proxygen\+::k\+Error\+Bad\+Decompress}, 
+{\bf proxygen\+::k\+Error\+S\+SL}, 
+{\bf proxygen\+::k\+Error\+Stream\+Abort}, 
+\\*
+{\bf proxygen\+::k\+Error\+Stream\+Unacknowledged}, 
+{\bf proxygen\+::k\+Error\+Write\+Timeout}, 
+{\bf proxygen\+::k\+Error\+Address\+Private}, 
+{\bf proxygen\+::k\+Error\+Address\+Family\+Not\+Supported}, 
+\\*
+{\bf proxygen\+::k\+Error\+D\+N\+S\+No\+Results}, 
+{\bf proxygen\+::k\+Error\+Malformed\+Input}, 
+{\bf proxygen\+::k\+Error\+Unsupported\+Expectation}, 
+{\bf proxygen\+::k\+Error\+Method\+Not\+Supported}, 
+\\*
+{\bf proxygen\+::k\+Error\+Unsupported\+Scheme}, 
+{\bf proxygen\+::k\+Error\+Shutdown}, 
+{\bf proxygen\+::k\+Error\+Ingress\+State\+Transition}, 
+{\bf proxygen\+::k\+Error\+Client\+Silent}, 
+\\*
+{\bf proxygen\+::k\+Error\+Canceled}, 
+{\bf proxygen\+::k\+Error\+Parse\+Response}, 
+{\bf proxygen\+::k\+Error\+Conn\+Refused}, 
+{\bf proxygen\+::k\+Error\+D\+N\+S\+Other\+Server}, 
+\\*
+{\bf proxygen\+::k\+Error\+D\+N\+S\+Other\+Client}, 
+{\bf proxygen\+::k\+Error\+D\+N\+S\+Other\+Cancelled}, 
+{\bf proxygen\+::k\+Error\+D\+N\+Sshutdown}, 
+{\bf proxygen\+::k\+Error\+D\+N\+Sgetaddrinfo}, 
+\\*
+{\bf proxygen\+::k\+Error\+D\+N\+Sthreadpool}, 
+{\bf proxygen\+::k\+Error\+D\+N\+Sunimplemented}, 
+{\bf proxygen\+::k\+Error\+Network}, 
+{\bf proxygen\+::k\+Error\+Configuration}, 
+\\*
+{\bf proxygen\+::k\+Error\+Early\+Data\+Rejected}, 
+{\bf proxygen\+::k\+Error\+Early\+Data\+Failed}, 
+{\bf proxygen\+::k\+Error\+Auth\+Required}, 
+{\bf proxygen\+::k\+Error\+Unauthorized}, 
+\\*
+{\bf proxygen\+::k\+Error\+Max}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bf proxygen\+::get\+Error\+String} ({\bf Proxygen\+Error} error)
+\item 
+const char $\ast$ {\bf proxygen\+::get\+Error\+String\+By\+Index} (int i)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Proxygen\+Error\+Enum.\+h@{Proxygen\+Error\+Enum.\+h}!P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+T\+S\+I\+ZE@{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+T\+S\+I\+ZE}}
+\index{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+T\+S\+I\+ZE@{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+T\+S\+I\+ZE}!Proxygen\+Error\+Enum.\+h@{Proxygen\+Error\+Enum.\+h}}
+\subsubsection[{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+T\+S\+I\+ZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+B\+I\+T\+S\+I\+ZE~6}\label{ProxygenErrorEnum_8h_a4c0963b953af57dd61527274fac95cb2}
+
+
+Definition at line 71 of file Proxygen\+Error\+Enum.\+h.
+
+\index{Proxygen\+Error\+Enum.\+h@{Proxygen\+Error\+Enum.\+h}!P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+N\+UM@{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+N\+UM}}
+\index{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+N\+UM@{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+N\+UM}!Proxygen\+Error\+Enum.\+h@{Proxygen\+Error\+Enum.\+h}}
+\subsubsection[{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+N\+UM}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+N\+UM(
+\begin{DoxyParamCaption}
+\item[{}]{error}
+\end{DoxyParamCaption}
+)~k\+Error\#\#error}\label{ProxygenErrorEnum_8h_a7fa091e022bc982e98cadab127e851ba}
+
+
+Definition at line 73 of file Proxygen\+Error\+Enum.\+h.
+
+\index{Proxygen\+Error\+Enum.\+h@{Proxygen\+Error\+Enum.\+h}!P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+EN@{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+EN}}
+\index{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+EN@{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+EN}!Proxygen\+Error\+Enum.\+h@{Proxygen\+Error\+Enum.\+h}}
+\subsubsection[{P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+EN}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+R\+O\+X\+Y\+G\+E\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+G\+EN(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)}\label{ProxygenErrorEnum_8h_a524218173ef55ff1de90809ef2def816}
+
+
+Definition at line 15 of file Proxygen\+Error\+Enum.\+h.
+

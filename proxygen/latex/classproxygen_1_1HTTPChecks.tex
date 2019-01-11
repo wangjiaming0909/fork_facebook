@@ -1,0 +1,104 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Checks Class Reference}
+\label{classproxygen_1_1HTTPChecks}\index{proxygen\+::\+H\+T\+T\+P\+Checks@{proxygen\+::\+H\+T\+T\+P\+Checks}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Checks.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Checks\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.698795cm]{classproxygen_1_1HTTPChecks}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf on\+Headers\+Complete} (Stream\+ID {\bf stream}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg) override
+\item 
+void {\bf generate\+Header} (folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, Stream\+ID {\bf stream}, const {\bf H\+T\+T\+P\+Message} \&msg, bool eom, {\bf H\+T\+T\+P\+Header\+Size} $\ast$size\+Out) override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class enforces certain higher-\/level H\+T\+TP semantics. It does not enforce conditions that require state to decide. That is, this class is stateless and only examines the calls and callbacks that go through it. 
+
+Definition at line 22 of file H\+T\+T\+P\+Checks.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Checks@{proxygen\+::\+H\+T\+T\+P\+Checks}!generate\+Header@{generate\+Header}}
+\index{generate\+Header@{generate\+Header}!proxygen\+::\+H\+T\+T\+P\+Checks@{proxygen\+::\+H\+T\+T\+P\+Checks}}
+\subsubsection[{generate\+Header(folly\+::\+I\+O\+Buf\+Queue \&write\+Buf, Stream\+I\+D stream, const H\+T\+T\+P\+Message \&msg, bool eom, H\+T\+T\+P\+Header\+Size $\ast$size\+Out) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Checks\+::generate\+Header (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+I\+O\+Buf\+Queue \&}]{write\+Buf, }
+\item[{Stream\+ID}]{stream, }
+\item[{const {\bf H\+T\+T\+P\+Message} \&}]{msg, }
+\item[{bool}]{eom, }
+\item[{{\bf H\+T\+T\+P\+Header\+Size} $\ast$}]{size\+Out}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1HTTPChecks_a151f6f1d5379af794b78896376de3ae0}
+
+
+Definition at line 35 of file H\+T\+T\+P\+Checks.\+cpp.
+
+
+
+References proxygen\+::\+R\+F\+C2616\+::body\+Implied(), proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::call\+\_\+, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::is\+Request(), proxygen\+::\+R\+F\+C2616\+::is\+Request\+Body\+Allowed(), and proxygen\+::\+R\+F\+C2616\+::\+N\+O\+T\+\_\+\+A\+L\+L\+O\+W\+ED.
+
+
+\begin{DoxyCode}
+39                                                          \{
+40   \textcolor{keywordflow}{if} (msg.isRequest() && RFC2616::bodyImplied(msg.getHeaders())) \{
+41     CHECK(RFC2616::isRequestBodyAllowed(msg.getMethod()) !=
+42           RFC2616::BodyAllowed::NOT_ALLOWED);
+43     \textcolor{comment}{// We could also add a "strict" mode that disallows sending body on GET}
+44     \textcolor{comment}{// requests here too.}
+45   \}
+46 
+47   call_->generateHeader(writeBuf, stream, msg, eom, sizeOut);
+48 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Checks@{proxygen\+::\+H\+T\+T\+P\+Checks}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+H\+T\+T\+P\+Checks@{proxygen\+::\+H\+T\+T\+P\+Checks}}
+\subsubsection[{on\+Headers\+Complete(\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Checks\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{Stream\+ID}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}\label{classproxygen_1_1HTTPChecks_ad901595c4a33eb9afa7f400594814d02}
+
+
+Definition at line 16 of file H\+T\+T\+P\+Checks.\+cpp.
+
+
+
+References proxygen\+::\+R\+F\+C2616\+::body\+Implied(), proxygen\+::\+Generic\+Filter$<$ T1, T2, set\+\_\+callback, Take\+Ownership, Dp $>$\+::callback\+\_\+, proxygen\+::\+H\+T\+T\+P\+Exception\+::\+I\+N\+G\+R\+E\+SS, proxygen\+::\+R\+F\+C2616\+::is\+Request\+Body\+Allowed(), proxygen\+::k\+Error\+Parse\+Header, proxygen\+::\+R\+F\+C2616\+::\+N\+O\+T\+\_\+\+A\+L\+L\+O\+W\+ED, proxygen\+::\+H\+T\+T\+P\+Exception\+::set\+Http\+Status\+Code(), and proxygen\+::\+Exception\+::set\+Proxygen\+Error().
+
+
+\begin{DoxyCode}
+17                                                                    \{
+18 
+19   \textcolor{keywordflow}{if} (msg->isRequest() && (RFC2616::isRequestBodyAllowed(msg->getMethod())
+20                            == RFC2616::BodyAllowed::NOT_ALLOWED) &&
+21       RFC2616::bodyImplied(msg->getHeaders())) \{
+22     HTTPException ex(
+23       HTTPException::Direction::INGRESS, \textcolor{stringliteral}{"RFC2616: Request Body Not Allowed"});
+24     ex.setProxygenError(kErrorParseHeader);
+25     \textcolor{comment}{// setting the status code means that the error is at the HTTP layer and}
+26     \textcolor{comment}{// that parsing succeeded.}
+27     ex.setHttpStatusCode(400);
+28     callback_->onError(stream, ex, \textcolor{keyword}{true});
+29     \textcolor{keywordflow}{return};
+30   \}
+31 
+32   callback_->onHeadersComplete(stream, std::move(msg));
+33 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P\+Checks.\+h}\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P\+Checks.\+cpp}\end{DoxyCompactItemize}

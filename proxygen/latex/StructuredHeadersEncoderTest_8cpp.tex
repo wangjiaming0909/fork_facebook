@@ -1,0 +1,77 @@
+\section{proxygen/lib/http/structuredheaders/test/\+Structured\+Headers\+Encoder\+Test.cpp File Reference}
+\label{StructuredHeadersEncoderTest_8cpp}\index{proxygen/lib/http/structuredheaders/test/\+Structured\+Headers\+Encoder\+Test.\+cpp@{proxygen/lib/http/structuredheaders/test/\+Structured\+Headers\+Encoder\+Test.\+cpp}}
+{\ttfamily \#include $<$proxygen/lib/http/structuredheaders/\+Structured\+Headers\+Encoder.\+h$>$}\\*
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Mock.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf proxygen\+::\+Structured\+Headers\+Encoder\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Integer)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Integer\+Negative)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Float)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Float\+Too\+Much\+Precision)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Float\+Negative)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+String)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+String\+Bad\+Content)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+String\+Backslash)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+String\+Quote)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Binary\+Content)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Identifier)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Identifier\+Bad\+Content)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Wrong\+Type)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+List\+Many\+Elts)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+List\+One\+Elt)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+List\+Empty)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+List\+Bad\+Item)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Dictionary\+One\+Elt)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Dictionary\+Many\+Elts)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Dictionary\+Empty)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Dictionary\+Bad\+Item)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Dictionary\+Bad\+Identifier)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Param\+List\+One\+Elt)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Param\+List\+Successive\+Nulls)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Param\+List\+Many\+Elts)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Param\+List\+Empty)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Param\+List\+Bad\+Secondary\+Identifier)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Param\+List\+Bad\+Primary\+Identifier)
+\item 
+{\bf proxygen\+::\+T\+E\+S\+T\+\_\+F} (Structured\+Headers\+Encoder\+Test, Test\+Param\+List\+Bad\+Items)
+\end{DoxyCompactItemize}

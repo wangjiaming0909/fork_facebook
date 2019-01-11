@@ -1,0 +1,50 @@
+\section{detail Namespace Reference}
+\label{namespacedetail}\index{detail@{detail}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf T} $\ast$ {\bf get\+\_\+pointer} (const unique\+\_\+ptr$<$ {\bf T} $>$ \&ptr)
+\item 
+{\footnotesize template$<$typename T $>$ }\\{\bf T} $\ast$ {\bf get\+\_\+pointer} ({\bf T} $\ast$ptr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{detail@{detail}!get\+\_\+pointer@{get\+\_\+pointer}}
+\index{get\+\_\+pointer@{get\+\_\+pointer}!detail@{detail}}
+\subsubsection[{get\+\_\+pointer(const unique\+\_\+ptr$<$ T $>$ \&ptr)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf T}$\ast$ detail\+::get\+\_\+pointer (
+\begin{DoxyParamCaption}
+\item[{const unique\+\_\+ptr$<$ {\bf T} $>$ \&}]{ptr}
+\end{DoxyParamCaption}
+)}\label{namespacedetail_ace0b73ea1930ea894345a59049c989b9}
+
+
+Definition at line 29 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+Referenced by Generic\+Filter\+Test$<$ Owned $>$\+::add\+Filter\+To\+Chain().
+
+
+\begin{DoxyCode}
+29                                          \{
+30   \textcolor{keywordflow}{return} ptr.get();
+31 \}
+\end{DoxyCode}
+\index{detail@{detail}!get\+\_\+pointer@{get\+\_\+pointer}}
+\index{get\+\_\+pointer@{get\+\_\+pointer}!detail@{detail}}
+\subsubsection[{get\+\_\+pointer(\+T $\ast$ptr)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf T}$\ast$ detail\+::get\+\_\+pointer (
+\begin{DoxyParamCaption}
+\item[{{\bf T} $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)}\label{namespacedetail_ae936749b71fd1d1240da68c209c60914}
+
+
+Definition at line 34 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+34                        \{
+35   \textcolor{keywordflow}{return} ptr;
+36 \}
+\end{DoxyCode}

@@ -1,0 +1,550 @@
+\section{proxygen\+:\+:Mock\+H\+T\+T\+P\+Codec\+Callback Class Reference}
+\label{classproxygen_1_1MockHTTPCodecCallback}\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+
+
+{\ttfamily \#include $<$Mock\+H\+T\+T\+P\+Codec.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Mock\+H\+T\+T\+P\+Codec\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1MockHTTPCodecCallback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Message\+Begin}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Message} $\ast$))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3} ({\bf on\+Push\+Message\+Begin}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Message} $\ast$))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4} ({\bf on\+Ex\+Message\+Begin}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, bool, {\bf H\+T\+T\+P\+Message} $\ast$))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Headers\+Complete}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$))
+\item 
+void {\bf on\+Headers\+Complete} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf stream}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3} ({\bf on\+Body}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, uint8\+\_\+t))
+\item 
+void {\bf on\+Body} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf stream}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t padding) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Chunk\+Header}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, size\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf on\+Chunk\+Complete}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Trailers\+Complete}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$))
+\item 
+void {\bf on\+Trailers\+Complete} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf stream}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$ trailers) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Message\+Complete}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, bool))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3} ({\bf on\+Error}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Exception} $>$, bool))
+\item 
+void {\bf on\+Error} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf stream}, const {\bf H\+T\+T\+P\+Exception} \&exc, bool new\+Stream) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5} ({\bf on\+Frame\+Header}, void(uint64\+\_\+t, uint8\+\_\+t, uint64\+\_\+t, uint8\+\_\+t, uint16\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Abort}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf Error\+Code}))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3} ({\bf on\+Goaway}, void(uint64\+\_\+t, {\bf Error\+Code}, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))
+\item 
+void {\bf on\+Goaway} (uint64\+\_\+t last\+Good\+Stream\+ID, {\bf Error\+Code} code, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ debug\+Data) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf on\+Ping\+Request}, void(uint64\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf on\+Ping\+Reply}, void(uint64\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Window\+Update}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, uint32\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1} ({\bf on\+Settings}, void(const {\bf Settings\+List} \&))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf on\+Settings\+Ack}, void())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Priority}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} \&))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Certificate\+Request}, void(uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))
+\item 
+void {\bf on\+Certificate\+Request} (uint16\+\_\+t request\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ cert\+Request\+Data) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2} ({\bf on\+Certificate}, void(uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))
+\item 
+void {\bf on\+Certificate} (uint16\+\_\+t cert\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ cert\+Data) override
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4} ({\bf on\+Native\+Protocol\+Upgrade}, bool({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf Codec\+Protocol}, const std\+::string \&, {\bf H\+T\+T\+P\+Message} \&))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4} ({\bf on\+Generate\+Frame\+Header}, void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, uint8\+\_\+t, uint64\+\_\+t, uint16\+\_\+t))
+\item 
+{\bf M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf num\+Outgoing\+Streams}, uint32\+\_\+t())
+\item 
+{\bf M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0} ({\bf num\+Incoming\+Streams}, uint32\+\_\+t())
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 136 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(num\+Outgoing\+Streams, uint32\+\_\+t())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf num\+Outgoing\+Streams}}]{, }
+\item[{uint32\+\_\+t()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a7b91e8fe32ec07bcb1fa69cf6732b14d}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(num\+Incoming\+Streams, uint32\+\_\+t())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf num\+Incoming\+Streams}}]{, }
+\item[{uint32\+\_\+t()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a46cffda55028b954be20ac0ac70bd1b0}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(on\+Settings\+Ack, void())}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Settings\+Ack}}]{, }
+\item[{void()}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_aff2ccf60fbf8be18acf718a459fc79f4}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(on\+Chunk\+Complete, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Chunk\+Complete}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID})}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a064a3a3a455ff0e576035703c2c0e8d6}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(on\+Ping\+Request, void(uint64\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Ping\+Request}}]{, }
+\item[{void(uint64\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a9051c2b9870d87d4655acbc71b2670d5}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(on\+Ping\+Reply, void(uint64\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Ping\+Reply}}]{, }
+\item[{void(uint64\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_ada03095764514dd8be98d818ffa99aa7}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(on\+Settings, void(const Settings\+List \&))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Settings}}]{, }
+\item[{void(const {\bf Settings\+List} \&)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a578f179675e9195f75f3afc1b706a113}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Message\+Begin, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, H\+T\+T\+P\+Message $\ast$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Message\+Begin}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Message} $\ast$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a72a7a1eba9f1cda5cd468caf37a71bb2}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Headers\+Complete, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Headers\+Complete}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_aaa13ade194f05332c1cbebc2c2717585}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Chunk\+Header, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, size\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Chunk\+Header}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, size\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a05bd5e5f2dba8ad6170b958bdb9d2d48}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Trailers\+Complete, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Headers $>$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Trailers\+Complete}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a46f5ba19e545d9c9e60f7f8c5c8bfee1}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Message\+Complete, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, bool))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Message\+Complete}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, bool)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a1d3c1ae6473d0ed4951d7bdf6ff26ec5}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Abort, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, Error\+Code))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Abort}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf Error\+Code})}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a12fcc2289690eba7190c26fc867f13c8}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Window\+Update, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, uint32\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Window\+Update}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, uint32\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_aba4999c6f8926b1a14d0db33ae5303b1}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Priority, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, const H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority \&))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Priority}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, const {\bf H\+T\+T\+P\+Message\+::\+H\+T\+T\+P\+Priority} \&)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a310d0562e770c8976b2f79a766042f07}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Certificate\+Request, void(uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Certificate\+Request}}]{, }
+\item[{void(uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a55449ac049459460da58e5ffd697e149}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(on\+Certificate, void(uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Certificate}}]{, }
+\item[{void(uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a6033b47a93feb7c53291a4d2b25148e8}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3(on\+Push\+Message\+Begin, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, H\+T\+T\+P\+Message $\ast$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Push\+Message\+Begin}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Message} $\ast$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a176d74076a47b5589d420c2da6af63d8}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3(on\+Body, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, uint8\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Body}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$, uint8\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a1bd1abe8d198ac080cc3af0669198231}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3(on\+Error, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, std\+::shared\+\_\+ptr$<$ H\+T\+T\+P\+Exception $>$, bool))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Error}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::shared\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Exception} $>$, bool)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a8593ccfa429bbdbfc429c6b87c0208df}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3(on\+Goaway, void(uint64\+\_\+t, Error\+Code, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Goaway}}]{, }
+\item[{void(uint64\+\_\+t, {\bf Error\+Code}, std\+::shared\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_aa2785e4e7d2bcd1f2f22e62a7b0b698c}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4(on\+Ex\+Message\+Begin, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, bool, H\+T\+T\+P\+Message $\ast$))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Ex\+Message\+Begin}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, bool, {\bf H\+T\+T\+P\+Message} $\ast$)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a903782bb6b4daad0cc80d88dcb42fba7}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4(on\+Native\+Protocol\+Upgrade, bool(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, Codec\+Protocol, const std\+::string \&, H\+T\+T\+P\+Message \&))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Native\+Protocol\+Upgrade}}]{, }
+\item[{bool({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf Codec\+Protocol}, const std\+::string \&, {\bf H\+T\+T\+P\+Message} \&)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_ac6b36fc70975322f3f36437fb44502d9}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4(on\+Generate\+Frame\+Header, void(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, uint8\+\_\+t, uint64\+\_\+t, uint16\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Generate\+Frame\+Header}}]{, }
+\item[{void({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, uint8\+\_\+t, uint64\+\_\+t, uint16\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_af6a5a611b549577ee5e487c9965f0a2d}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5}}
+\index{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5@{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5(on\+Frame\+Header, void(uint64\+\_\+t, uint8\+\_\+t, uint64\+\_\+t, uint8\+\_\+t, uint16\+\_\+t))}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5 (
+\begin{DoxyParamCaption}
+\item[{{\bf on\+Frame\+Header}}]{, }
+\item[{void(uint64\+\_\+t, uint8\+\_\+t, uint64\+\_\+t, uint8\+\_\+t, uint16\+\_\+t)}]{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1MockHTTPCodecCallback_a4c9f3311bf5069a2d706dd9b4c1a22cd}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{on\+Body(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t padding) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain, }
+\item[{uint16\+\_\+t}]{padding}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockHTTPCodecCallback_ac4e58e068ff76da169802b8668befd73}
+Called for each block of message body data 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em chain} & One or more buffers of body data. The codec will remove any protocol framing, such as H\+T\+T\+P/1.\+1 chunk headers, from the buffers before calling this function. \\
+\hline
+{\em padding} & Number of pad bytes that came with the data segment \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_af6661786cb419aa6b0138ed1d8085d52}.
+
+
+
+Definition at line 154 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(), and proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2().
+
+
+\begin{DoxyCode}
+155                                                                           \{
+156     onBody(stream, std::shared\_ptr<folly::IOBuf>(chain.release()), padding);
+157   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!on\+Certificate@{on\+Certificate}}
+\index{on\+Certificate@{on\+Certificate}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{on\+Certificate(uint16\+\_\+t cert\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ cert\+Data) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::on\+Certificate (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockHTTPCodecCallback_aef5b399bf8a0191cb96354611ff945fc}
+Called upon receipt of an authenticator, for protocols that support secondary certificate authentication. 
+\begin{DoxyParams}{Parameters}
+{\em cert\+Id} & The Cert-\/\+ID identifying this authenticator \\
+\hline
+{\em authenticator} & The authenticator request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols support secondary certificate authentication. H\+T\+T\+P/2 does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a39962dfe4038936e8042e725e50c2d45}.
+
+
+
+Definition at line 203 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+C\+O\+N\+S\+T\+\_\+\+M\+E\+T\+H\+O\+D0(), and proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D4().
+
+
+\begin{DoxyCode}
+204                                                                   \{
+205     onCertificate(certId, std::shared\_ptr<folly::IOBuf>(certData.release()));
+206   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!on\+Certificate\+Request@{on\+Certificate\+Request}}
+\index{on\+Certificate\+Request@{on\+Certificate\+Request}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{on\+Certificate\+Request(uint16\+\_\+t request\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ cert\+Request\+Data) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::on\+Certificate\+Request (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockHTTPCodecCallback_a6890b812cc7565952643b5cec3f131c6}
+Called upon receipt of a certificate request frame, for protocols that support secondary certificate authentication. 
+\begin{DoxyParams}{Parameters}
+{\em request\+Id} & The Request-\/\+ID identifying the certificate request \\
+\hline
+{\em auth\+Request} & The authenticator request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols support secondary certificate authentication. H\+T\+T\+P/2 does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a982896bcd896ea45a10b03a294ded590}.
+
+
+
+Definition at line 196 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2().
+
+
+\begin{DoxyCode}
+198                                                           \{
+199     onCertificateRequest(
+200         requestId, std::shared\_ptr<folly::IOBuf>(certRequestData.release()));
+201   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{on\+Error(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D stream, const H\+T\+T\+P\+Exception \&exc, bool new\+Stream) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{error, }
+\item[{bool}]{new\+Txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockHTTPCodecCallback_accda1fe4c5523b1fed69b013a3ed63e5}
+Called when a parsing or protocol error has occurred 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em error} & Description of the error \\
+\hline
+{\em new\+Txn} & true if on\+Message\+Begin has not been called for txn \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a39e04260da7dd1a074393fe473d6ac34}.
+
+
+
+Definition at line 170 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(), proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3(), and proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D5().
+
+
+\begin{DoxyCode}
+172                                         \{
+173     onError(stream,
+174             std::shared\_ptr<HTTPException>(\textcolor{keyword}{new} HTTPException(exc)),
+175             newStream);
+176   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!on\+Goaway@{on\+Goaway}}
+\index{on\+Goaway@{on\+Goaway}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{on\+Goaway(uint64\+\_\+t last\+Good\+Stream\+I\+D, Error\+Code code, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ debug\+Data) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::on\+Goaway (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{, }
+\item[{{\bf Error\+Code}}]{, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockHTTPCodecCallback_ab9c7e41e4d0aeed9b01a64ea468492f3}
+Called upon receipt of a goaway. 
+\begin{DoxyParams}{Parameters}
+{\em last\+Good\+Stream\+ID} & Last successful stream created by the receiver \\
+\hline
+{\em code} & The code the connection was aborted with \\
+\hline
+{\em debug\+Data} & The additional debug data for diagnostic purpose \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Not all protocols have goaways. S\+P\+DY does, but H\+T\+T\+P/1.\+1 doesn\textquotesingle{}t. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a782493dc0d063e7f5c626db2617d042b}.
+
+
+
+Definition at line 182 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D0(), proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D1(), and proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2().
+
+
+\begin{DoxyCode}
+183                                                               \{
+184     onGoaway(lastGoodStreamID, code,
+185              std::shared\_ptr<folly::IOBuf>(debugData.release()));
+186   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{on\+Headers\+Complete(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockHTTPCodecCallback_a1844c9fda354a134d1d665b73037af6e}
+Called when all the headers of an ingress message have been parsed 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em msg} & The message \\
+\hline
+{\em size} & Size of the ingress header \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a7c462d2b3485d0d1077a9ba775f90ebc}.
+
+
+
+Definition at line 148 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3().
+
+
+\begin{DoxyCode}
+149                                                                   \{
+150     onHeadersComplete(stream, std::shared\_ptr<HTTPMessage>(msg.release()));
+151   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}!on\+Trailers\+Complete@{on\+Trailers\+Complete}}
+\index{on\+Trailers\+Complete@{on\+Trailers\+Complete}!proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback@{proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback}}
+\subsubsection[{on\+Trailers\+Complete(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D stream, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Headers $>$ trailers) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Callback\+::on\+Trailers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$}]{trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1MockHTTPCodecCallback_a9d4e0dded6c6f755ff821f73826c8944}
+Called when all the trailers of an ingress message have been parsed, but only if the number of trailers is nonzero. 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em trailers} & The message trailers \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_aa3ecee42ce8c09840aa67ee824c5cfe3}.
+
+
+
+Definition at line 162 of file Mock\+H\+T\+T\+P\+Codec.\+h.
+
+
+
+References proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D2(), and proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+::\+M\+O\+C\+K\+\_\+\+M\+E\+T\+H\+O\+D3().
+
+
+\begin{DoxyCode}
+163                                                                         \{
+164     onTrailersComplete(stream,
+165                        std::shared\_ptr<HTTPHeaders>(trailers.release()));
+166   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/test/{\bf Mock\+H\+T\+T\+P\+Codec.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,294 @@
+\section{proxygen\+:\+:Header\+Codec Class Reference}
+\label{classproxygen_1_1HeaderCodec}\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+
+
+{\ttfamily \#include $<$Header\+Codec.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Header\+Codec\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HeaderCodec}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Stats}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Type} \+: uint8\+\_\+t \{ {\bf Type\+::\+G\+Z\+IP} = 0, 
+{\bf Type\+::\+H\+P\+A\+CK} = 1, 
+{\bf Type\+::\+Q\+P\+A\+CK} = 2
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Header\+Codec} ()
+\item 
+virtual {\bf $\sim$\+Header\+Codec} ()
+\item 
+const {\bf H\+T\+T\+P\+Header\+Size} \& {\bf get\+Encoded\+Size} ()
+\item 
+void {\bf set\+Encode\+Headroom} (uint32\+\_\+t headroom)
+\item 
+virtual void {\bf set\+Max\+Uncompressed} (uint64\+\_\+t max\+Uncompressed)
+\item 
+uint64\+\_\+t {\bf get\+Max\+Uncompressed} () const 
+\item 
+void {\bf set\+Stats} ({\bf Stats} $\ast$stats)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const uint32\+\_\+t {\bf k\+Max\+Uncompressed} = 128 $\ast$ 1024
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Header\+Size} {\bf encoded\+Size\+\_\+}
+\item 
+uint32\+\_\+t {\bf encode\+Headroom\+\_\+} \{0\}
+\item 
+uint64\+\_\+t {\bf max\+Uncompressed\+\_\+} \{{\bf k\+Max\+Uncompressed}\}
+\item 
+{\bf Stats} $\ast$ {\bf stats\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 35 of file Header\+Codec.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!Type@{Type}}
+\index{Type@{Type}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+Header\+Codec\+::\+Type} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\label{classproxygen_1_1HeaderCodec_a0d608e95f85eeea77922c12bcbd88892}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{G\+Z\+IP@{G\+Z\+IP}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!G\+Z\+IP@{G\+Z\+IP}}\item[{\em 
+G\+Z\+IP\label{classproxygen_1_1HeaderCodec_a0d608e95f85eeea77922c12bcbd88892af1cd28417b03cfab3a8e16d66e34e18a}
+}]\index{H\+P\+A\+CK@{H\+P\+A\+CK}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!H\+P\+A\+CK@{H\+P\+A\+CK}}\item[{\em 
+H\+P\+A\+CK\label{classproxygen_1_1HeaderCodec_a0d608e95f85eeea77922c12bcbd88892abeeb357da92a0c9056f9e9f91fc48938}
+}]\index{Q\+P\+A\+CK@{Q\+P\+A\+CK}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!Q\+P\+A\+CK@{Q\+P\+A\+CK}}\item[{\em 
+Q\+P\+A\+CK\label{classproxygen_1_1HeaderCodec_a0d608e95f85eeea77922c12bcbd88892a722622dacf22345d7f65d96d10d5d1ae}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 39 of file Header\+Codec.\+h.
+
+
+\begin{DoxyCode}
+39                   : uint8\_t \{
+40     GZIP = 0,
+41     HPACK = 1,
+42     QPACK = 2
+43   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!Header\+Codec@{Header\+Codec}}
+\index{Header\+Codec@{Header\+Codec}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{Header\+Codec()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Header\+Codec\+::\+Header\+Codec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HeaderCodec_a8350ffa5967148f8de0dd7240eb9229c}
+
+
+Definition at line 56 of file Header\+Codec.\+h.
+
+
+\begin{DoxyCode}
+56 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!````~Header\+Codec@{$\sim$\+Header\+Codec}}
+\index{````~Header\+Codec@{$\sim$\+Header\+Codec}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{$\sim$\+Header\+Codec()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Header\+Codec\+::$\sim$\+Header\+Codec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HeaderCodec_a544352d65713461ee0ebeed2df72b58f}
+
+
+Definition at line 57 of file Header\+Codec.\+h.
+
+
+\begin{DoxyCode}
+57 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!get\+Encoded\+Size@{get\+Encoded\+Size}}
+\index{get\+Encoded\+Size@{get\+Encoded\+Size}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{get\+Encoded\+Size()}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+T\+T\+P\+Header\+Size}\& proxygen\+::\+Header\+Codec\+::get\+Encoded\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HeaderCodec_ae178418e59ed4cf7744b2057c288ec09}
+compressed and uncompressed size of the last encode 
+
+Definition at line 62 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+H\+P\+A\+C\+K\+Scheme\+::encode(), proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::encode(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::encode\+Headers(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::encode\+Headers().
+
+
+\begin{DoxyCode}
+62                                          \{
+63     \textcolor{keywordflow}{return} encodedSize_;
+64   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!get\+Max\+Uncompressed@{get\+Max\+Uncompressed}}
+\index{get\+Max\+Uncompressed@{get\+Max\+Uncompressed}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{get\+Max\+Uncompressed() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Header\+Codec\+::get\+Max\+Uncompressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HeaderCodec_abd25fab5293f08ae05e4dfff3e2c97e0}
+
+
+Definition at line 77 of file Header\+Codec.\+h.
+
+
+\begin{DoxyCode}
+77                                       \{
+78     \textcolor{keywordflow}{return} maxUncompressed_;
+79   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!set\+Encode\+Headroom@{set\+Encode\+Headroom}}
+\index{set\+Encode\+Headroom@{set\+Encode\+Headroom}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{set\+Encode\+Headroom(uint32\+\_\+t headroom)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Header\+Codec\+::set\+Encode\+Headroom (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{headroom}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HeaderCodec_aff6e2f8e61f5fb67edc3c28cd203c65d}
+amount of space to reserve as a headroom in the encode buffer 
+
+Definition at line 69 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::encode\+Headers(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::encode\+Headers(), and proxygen\+::compress\+::\+H\+P\+A\+C\+K\+Scheme\+::\+H\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+69                                             \{
+70     encodeHeadroom_ = headroom;
+71   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!set\+Max\+Uncompressed@{set\+Max\+Uncompressed}}
+\index{set\+Max\+Uncompressed@{set\+Max\+Uncompressed}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{set\+Max\+Uncompressed(uint64\+\_\+t max\+Uncompressed)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Header\+Codec\+::set\+Max\+Uncompressed (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{max\+Uncompressed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HeaderCodec_a219babf61a8c726fa6479e88f3fdece0}
+
+
+Reimplemented in {\bf proxygen\+::\+Q\+P\+A\+C\+K\+Codec} \doxyref{}{p.}{classproxygen_1_1QPACKCodec_a3e3cf3dd0faf343437fa794eacd71f5b}, and {\bf proxygen\+::\+H\+P\+A\+C\+K\+Codec} \doxyref{}{p.}{classproxygen_1_1HPACKCodec_ab2616a90c991a6259baf4998b05c9431}.
+
+
+
+Definition at line 73 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::set\+Max\+Uncompressed\+Headers(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::\+S\+P\+D\+Y\+Codec().
+
+
+\begin{DoxyCode}
+73                                                             \{
+74     maxUncompressed_ = maxUncompressed;
+75   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!set\+Stats@{set\+Stats}}
+\index{set\+Stats@{set\+Stats}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{set\+Stats(\+Stats $\ast$stats)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Header\+Codec\+::set\+Stats (
+\begin{DoxyParamCaption}
+\item[{{\bf Stats} $\ast$}]{stats}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HeaderCodec_a05d1e61481ae8448bdf74e984b133f6c}
+set the stats object 
+
+Definition at line 84 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::set\+Header\+Codec\+Stats().
+
+
+\begin{DoxyCode}
+84                               \{
+85     stats_ = stats;
+86   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!encoded\+Size\+\_\+@{encoded\+Size\+\_\+}}
+\index{encoded\+Size\+\_\+@{encoded\+Size\+\_\+}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{encoded\+Size\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Header\+Size} proxygen\+::\+Header\+Codec\+::encoded\+Size\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HeaderCodec_abea55bc049c4a93baa62cd7047ed39ba}
+
+
+Definition at line 90 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::\+Gzip\+Header\+Codec\+::encode(), proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::record\+Compressed\+Size(), and proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::record\+Compressed\+Size().
+
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!encode\+Headroom\+\_\+@{encode\+Headroom\+\_\+}}
+\index{encode\+Headroom\+\_\+@{encode\+Headroom\+\_\+}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{encode\+Headroom\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Header\+Codec\+::encode\+Headroom\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HeaderCodec_a96fe8905e1caaebfaaa2ee32eb2d0779}
+
+
+Definition at line 91 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode(), proxygen\+::\+Gzip\+Header\+Codec\+::encode(), and proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::encode().
+
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!k\+Max\+Uncompressed@{k\+Max\+Uncompressed}}
+\index{k\+Max\+Uncompressed@{k\+Max\+Uncompressed}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{k\+Max\+Uncompressed}]{\setlength{\rightskip}{0pt plus 5cm}const uint32\+\_\+t proxygen\+::\+Header\+Codec\+::k\+Max\+Uncompressed = 128 $\ast$ 1024\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HeaderCodec_a521a1942c91e48d1dbd782c99e1e18fb}
+
+
+Definition at line 37 of file Header\+Codec.\+h.
+
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!max\+Uncompressed\+\_\+@{max\+Uncompressed\+\_\+}}
+\index{max\+Uncompressed\+\_\+@{max\+Uncompressed\+\_\+}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{max\+Uncompressed\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Header\+Codec\+::max\+Uncompressed\+\_\+ \{{\bf k\+Max\+Uncompressed}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HeaderCodec_a530ac54e03d1fa795ca250effd3a9a26}
+
+
+Definition at line 92 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::decode(), and proxygen\+::\+Gzip\+Header\+Codec\+::get\+Header\+Buf().
+
+\index{proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}!stats\+\_\+@{stats\+\_\+}}
+\index{stats\+\_\+@{stats\+\_\+}!proxygen\+::\+Header\+Codec@{proxygen\+::\+Header\+Codec}}
+\subsubsection[{stats\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Stats}$\ast$ proxygen\+::\+Header\+Codec\+::stats\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1HeaderCodec_a84629226fdbbcc42e4bed72e59fb0a78}
+
+
+Definition at line 93 of file Header\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::decode(), proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::decode\+Streaming(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Streaming(), proxygen\+::\+Gzip\+Header\+Codec\+::encode(), proxygen\+::\+H\+P\+A\+C\+K\+Codec\+::record\+Compressed\+Size(), and proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::record\+Compressed\+Size().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Header\+Codec.\+h}\end{DoxyCompactItemize}

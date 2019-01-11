@@ -1,0 +1,71 @@
+\section{proxygen\+:\+:Bin\+Printer Class Reference}
+\label{classproxygen_1_1BinPrinter}\index{proxygen\+::\+Bin\+Printer@{proxygen\+::\+Bin\+Printer}}
+
+
+{\ttfamily \#include $<$Logging.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Bin\+Printer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1BinPrinter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bf print} (const folly\+::\+I\+O\+Buf $\ast$buf) override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 165 of file Logging.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Bin\+Printer@{proxygen\+::\+Bin\+Printer}!print@{print}}
+\index{print@{print}!proxygen\+::\+Bin\+Printer@{proxygen\+::\+Bin\+Printer}}
+\subsubsection[{print(const folly\+::\+I\+O\+Buf $\ast$buf) override}]{\setlength{\rightskip}{0pt plus 5cm}string proxygen\+::\+Bin\+Printer\+::print (
+\begin{DoxyParamCaption}
+\item[{const folly\+::\+I\+O\+Buf $\ast$}]{buf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1BinPrinter_a466c1ecf4967a9bf06db76f9a44a34f7}
+
+
+Implements {\bf proxygen\+::\+I\+O\+Buf\+Printer} \doxyref{}{p.}{classproxygen_1_1IOBufPrinter_a317ea00fb51d7d42c37a440488f42664}.
+
+
+
+Definition at line 84 of file Logging.\+cpp.
+
+
+\begin{DoxyCode}
+84                                          \{
+85   \textcolor{keyword}{static} uint8\_t bytesPerLine = 8;
+86   \textcolor{keywordtype}{string} out;
+87   \textcolor{keyword}{const} uint8\_t* data = buf->data();
+88   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < buf->length(); i++) \{
+89     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} b = 7; b >= 0; b--) \{
+90       out += data[i] & 1 << b ? \textcolor{charliteral}{'1'} : \textcolor{charliteral}{'0'};
+91     \}
+92     out += \textcolor{charliteral}{' '};
+93     out += isprint(data[i]) ? data[i] : \textcolor{charliteral}{' '};
+94     \textcolor{keywordflow}{if} ((i + 1) % bytesPerLine == 0) \{
+95       out += \textcolor{charliteral}{'\(\backslash\)n'};
+96     \} \textcolor{keywordflow}{else} \{
+97       out += \textcolor{charliteral}{' '};
+98     \}
+99   \}
+100   out += \textcolor{charliteral}{'\(\backslash\)n'};
+101   \textcolor{keywordflow}{return} out;
+102 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Logging.\+h}\item 
+proxygen/lib/utils/{\bf Logging.\+cpp}\end{DoxyCompactItemize}

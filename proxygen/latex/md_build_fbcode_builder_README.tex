@@ -1,0 +1,46 @@
+This is a Python 2.\+6+ library designed to simplify continuous-\/integration (and other builds) of Facebook projects.
+
+For external Travis builds, the entry point is {\ttfamily travis\+\_\+docker\+\_\+build.\+sh}.
+
+\subsection*{Using Docker to reproduce a CI build}
+
+If you are debugging or enhancing a CI build, you will want to do so from host or virtual machine that can run a reasonably modern version of Docker\+:
+
+
+\begin{DoxyCode}
+1 ./make\_docker\_context.py --help  # See available options for OS & compiler
+2 # Tiny wrapper that starts a Travis-like build with compile caching:
+3 os\_image=ubuntu:16.04 \(\backslash\)
+4   gcc\_version=5 \(\backslash\)
+5   make\_parallelism=2 \(\backslash\)
+6   travis\_cache\_dir=~/travis\_ccache \(\backslash\)
+7     ./travis\_docker\_build.sh &> build\_at\_$(date +'%Y%m%d\_%H%M%S').log
+\end{DoxyCode}
+
+
+{\bfseries I\+M\+P\+O\+R\+T\+A\+NT}\+: Read {\ttfamily fbcode\+\_\+builder/\+R\+E\+A\+D\+M\+E.\+docker} before diving in!
+
+Setting {\ttfamily travis\+\_\+cache\+\_\+dir} turns on {\tt ccache}, saving a fresh copy of {\ttfamily ccache.\+tgz} after every build. This will invalidate Docker\textquotesingle{}s layer cache, foring it to rebuild starting right after OS package setup, but the builds will be fast because all the compiles will be cached. To iterate without invalidating the Docker layer cache, just {\ttfamily cd /tmp/docker-\/context-\/$\ast$} and interact with the {\ttfamily Dockerfile} normally. Note that the {\ttfamily docker-\/context-\/$\ast$} dirs preserve a copy of {\ttfamily ccache.\+tgz} as they first used it.
+
+\section*{What to read next}
+
+The $\ast$.py files are fairly well-\/documented. You might want to peruse them in this order\+:
+\begin{DoxyItemize}
+\item \doxyref{shell\+\_\+quoting.\+py}{p.}{shell__quoting_8py}
+\item \doxyref{fbcode\+\_\+builder.\+py}{p.}{fbcode__builder_8py}
+\item \doxyref{docker\+\_\+builder.\+py}{p.}{docker__builder_8py}
+\item \doxyref{make\+\_\+docker\+\_\+context.\+py}{p.}{make__docker__context_8py}
+\end{DoxyItemize}
+
+As far as runs on Travis go, the control flow is\+:
+\begin{DoxyItemize}
+\item .travis.\+yml calls
+\item travis\+\_\+docker\+\_\+build.\+sh calls
+\item docker\+\_\+build\+\_\+with\+\_\+ccache.\+sh
+\end{DoxyItemize}
+
+This library also has an (unpublished) component targeting Facebook\textquotesingle{}s internal continuous-\/integration platform using the same build-\/step D\+SL.
+
+\section*{Contributing}
+
+Please follow the ambient style (or P\+E\+P-\/8), and keep the code Python 2.\+6 compatible -- since {\ttfamily \doxyref{fbcode\+\_\+builder}{p.}{namespacefbcode__builder}}\textquotesingle{}s only dependency is Docker, we want to allow building projects on even fairly ancient base systems. We also wish to be compatible with Python 3, and would appreciate it if you kept that in mind while making changes also. 

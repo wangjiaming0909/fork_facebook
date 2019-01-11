@@ -1,0 +1,38 @@
+\section{proxygen/lib/http/session/test/\+Test\+Utils.h File Reference}
+\label{http_2session_2test_2TestUtils_8h}\index{proxygen/lib/http/session/test/\+Test\+Utils.\+h@{proxygen/lib/http/session/test/\+Test\+Utils.\+h}}
+{\ttfamily \#include $<$folly/io/async/\+Event\+Base.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Timeout\+Manager.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/session/\+H\+T\+T\+P\+Session.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/test/\+Mock\+Async\+Transport.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Mock\+H\+T\+T\+P\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P1x\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P2\+Codec.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf proxygen\+::\+H\+T\+T\+P1x\+Codec\+Pair}
+\item 
+struct {\bf proxygen\+::\+S\+P\+D\+Y3\+Codec\+Pair}
+\item 
+struct {\bf proxygen\+::\+S\+P\+D\+Y3\+\_\+1\+Codec\+Pair}
+\item 
+struct {\bf proxygen\+::\+H\+T\+T\+P2\+Codec\+Pair}
+\item 
+struct {\bf proxygen\+::\+Mock\+H\+T\+T\+P\+Codec\+Pair}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+H\+H\+Wheel\+Timer\+::\+Unique\+Ptr {\bf proxygen\+::make\+Internal\+Timeout\+Set} (folly\+::\+Event\+Base $\ast$evb)
+\item 
+folly\+::\+H\+H\+Wheel\+Timer\+::\+Unique\+Ptr {\bf proxygen\+::make\+Timeout\+Set} (folly\+::\+Event\+Base $\ast$evb)
+\item 
+testing\+::\+Nice\+Mock$<$ folly\+::test\+::\+Mock\+Async\+Transport $>$ $\ast$ {\bf proxygen\+::new\+Mock\+Transport} (folly\+::\+Event\+Base $\ast$evb)
+\end{DoxyCompactItemize}

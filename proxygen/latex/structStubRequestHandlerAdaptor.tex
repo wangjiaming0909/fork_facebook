@@ -1,0 +1,90 @@
+\section{Stub\+Request\+Handler\+Adaptor Struct Reference}
+\label{structStubRequestHandlerAdaptor}\index{Stub\+Request\+Handler\+Adaptor@{Stub\+Request\+Handler\+Adaptor}}
+Inheritance diagram for Stub\+Request\+Handler\+Adaptor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{structStubRequestHandlerAdaptor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf send\+Headers} ({\bf H\+T\+T\+P\+Message} \&) noexceptoverride
+\item 
+void {\bf send\+E\+OM} () noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf headers\+Sent\+\_\+} \{false\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 20 of file Request\+Handler\+Adaptor\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Stub\+Request\+Handler\+Adaptor@{Stub\+Request\+Handler\+Adaptor}!send\+E\+OM@{send\+E\+OM}}
+\index{send\+E\+OM@{send\+E\+OM}!Stub\+Request\+Handler\+Adaptor@{Stub\+Request\+Handler\+Adaptor}}
+\subsubsection[{send\+E\+O\+M() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Stub\+Request\+Handler\+Adaptor\+::send\+E\+OM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{structStubRequestHandlerAdaptor_abdf45070c58eb5186c33551cf927fb5a}
+
+
+Reimplemented from {\bf proxygen\+::\+Request\+Handler\+Adaptor} \doxyref{}{p.}{classproxygen_1_1RequestHandlerAdaptor_aaaf1c05ad017acd946e27f47434416d5}.
+
+
+
+Definition at line 27 of file Request\+Handler\+Adaptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+27                                    \{
+28     \textcolor{comment}{// prevent using tx\_}
+29   \}
+\end{DoxyCode}
+\index{Stub\+Request\+Handler\+Adaptor@{Stub\+Request\+Handler\+Adaptor}!send\+Headers@{send\+Headers}}
+\index{send\+Headers@{send\+Headers}!Stub\+Request\+Handler\+Adaptor@{Stub\+Request\+Handler\+Adaptor}}
+\subsubsection[{send\+Headers(\+H\+T\+T\+P\+Message \&) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void Stub\+Request\+Handler\+Adaptor\+::send\+Headers (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Message} \&}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}\label{structStubRequestHandlerAdaptor_ac5a3de3b54a79a7229fd60124f498fe9}
+N\+O\+TE\+: We take response message as non-\/const reference, to allow filters between your handler and client to be able to modify response if they want to.
+
+eg. a compression filter might want to change the content-\/encoding 
+
+Reimplemented from {\bf proxygen\+::\+Request\+Handler\+Adaptor} \doxyref{}{p.}{classproxygen_1_1RequestHandlerAdaptor_a1bd9944f8ec74ea977cc17ea9cb3aed7}.
+
+
+
+Definition at line 23 of file Request\+Handler\+Adaptor\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+23                                                      \{
+24     headersSent_ = \textcolor{keyword}{true};
+25   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Stub\+Request\+Handler\+Adaptor@{Stub\+Request\+Handler\+Adaptor}!headers\+Sent\+\_\+@{headers\+Sent\+\_\+}}
+\index{headers\+Sent\+\_\+@{headers\+Sent\+\_\+}!Stub\+Request\+Handler\+Adaptor@{Stub\+Request\+Handler\+Adaptor}}
+\subsubsection[{headers\+Sent\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Stub\+Request\+Handler\+Adaptor\+::headers\+Sent\+\_\+ \{false\}}\label{structStubRequestHandlerAdaptor_a2410277af30cd2ae4abf0b08af2c2eab}
+
+
+Definition at line 31 of file Request\+Handler\+Adaptor\+Test.\+cpp.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/tests/{\bf Request\+Handler\+Adaptor\+Test.\+cpp}\end{DoxyCompactItemize}

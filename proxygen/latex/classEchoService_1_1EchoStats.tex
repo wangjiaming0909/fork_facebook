@@ -1,0 +1,124 @@
+\section{Echo\+Service\+:\+:Echo\+Stats Class Reference}
+\label{classEchoService_1_1EchoStats}\index{Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}}
+
+
+{\ttfamily \#include $<$Echo\+Stats.\+h$>$}
+
+Inheritance diagram for Echo\+Service\+:\+:Echo\+Stats\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classEchoService_1_1EchoStats}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Echo\+Stats} ()
+\item 
+virtual void {\bf record\+Request} ()
+\item 
+virtual uint64\+\_\+t {\bf get\+Request\+Count} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t {\bf req\+Count\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Just some dummy class containing request count. Since we keep one instance of this in each class, there is no need of synchronization 
+
+Definition at line 21 of file Echo\+Stats.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}!````~Echo\+Stats@{$\sim$\+Echo\+Stats}}
+\index{````~Echo\+Stats@{$\sim$\+Echo\+Stats}!Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}}
+\subsubsection[{$\sim$\+Echo\+Stats()}]{\setlength{\rightskip}{0pt plus 5cm}virtual Echo\+Service\+::\+Echo\+Stats\+::$\sim$\+Echo\+Stats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classEchoService_1_1EchoStats_ad032c0cca3fd9dbf4f8b03f8387a58fa}
+
+
+Definition at line 23 of file Echo\+Stats.\+h.
+
+
+\begin{DoxyCode}
+23                        \{
+24   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}!get\+Request\+Count@{get\+Request\+Count}}
+\index{get\+Request\+Count@{get\+Request\+Count}!Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}}
+\subsubsection[{get\+Request\+Count()}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint64\+\_\+t Echo\+Service\+::\+Echo\+Stats\+::get\+Request\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classEchoService_1_1EchoStats_a26ebc46f67809f621d2aa26777562b0c}
+
+
+Definition at line 35 of file Echo\+Stats.\+h.
+
+
+
+References req\+Count\+\_\+.
+
+
+
+Referenced by Echo\+Service\+::\+Echo\+Handler\+::on\+E\+O\+M().
+
+
+\begin{DoxyCode}
+35                                      \{
+36     \textcolor{keywordflow}{return} reqCount_;
+37   \}
+\end{DoxyCode}
+\index{Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}!record\+Request@{record\+Request}}
+\index{record\+Request@{record\+Request}!Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}}
+\subsubsection[{record\+Request()}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Echo\+Service\+::\+Echo\+Stats\+::record\+Request (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classEchoService_1_1EchoStats_a8718aed3002dd750773258d62942257d}
+
+
+Definition at line 31 of file Echo\+Stats.\+h.
+
+
+
+References req\+Count\+\_\+.
+
+
+
+Referenced by Echo\+Service\+::\+Echo\+Handler\+::on\+Request().
+
+
+\begin{DoxyCode}
+31                                \{
+32     ++reqCount_;
+33   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}!req\+Count\+\_\+@{req\+Count\+\_\+}}
+\index{req\+Count\+\_\+@{req\+Count\+\_\+}!Echo\+Service\+::\+Echo\+Stats@{Echo\+Service\+::\+Echo\+Stats}}
+\subsubsection[{req\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t Echo\+Service\+::\+Echo\+Stats\+::req\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classEchoService_1_1EchoStats_ab4c069f4bc26d9b40dd7417b3b4297a9}
+
+
+Definition at line 40 of file Echo\+Stats.\+h.
+
+
+
+Referenced by get\+Request\+Count(), and record\+Request().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/echo/{\bf Echo\+Stats.\+h}\end{DoxyCompactItemize}

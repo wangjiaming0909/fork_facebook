@@ -1,0 +1,405 @@
+\section{proxygen/lib/utils/test/\+Zlib\+Tests.cpp File Reference}
+\label{ZlibTests_8cpp}\index{proxygen/lib/utils/test/\+Zlib\+Tests.\+cpp@{proxygen/lib/utils/test/\+Zlib\+Tests.\+cpp}}
+{\ttfamily \#include $<$folly/\+Random.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Scope\+Guard.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+Cursor.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/\+I\+O\+Buf.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$glog/logging.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Zlib\+Stream\+Compressor.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Zlib\+Stream\+Decompressor.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Zlib\+Tests}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf make\+Buf} (uint32\+\_\+t size)
+\item 
+void {\bf verify} ({\bf Zlib\+Compression\+Type} type, std\+::unique\+\_\+ptr$<$ I\+O\+Buf $>$ original, std\+::unique\+\_\+ptr$<$ I\+O\+Buf $>$ compressed)
+\item 
+void {\bf compress\+Then\+Decompress} ({\bf Zlib\+Compression\+Type} type, int level, unique\+\_\+ptr$<$ I\+O\+Buf $>$ buf)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Gzip5000)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Gzip2000)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Gzip1024)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Gzip500)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Gzip50)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Deflate)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Empty)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Chain)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Streaming)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Zlib\+Tests}, Compress\+Decompress\+Small\+Buffer)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!compress\+Then\+Decompress@{compress\+Then\+Decompress}}
+\index{compress\+Then\+Decompress@{compress\+Then\+Decompress}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{compress\+Then\+Decompress(\+Zlib\+Compression\+Type type, int level, unique\+\_\+ptr$<$ I\+O\+Buf $>$ buf)}]{\setlength{\rightskip}{0pt plus 5cm}void compress\+Then\+Decompress (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Compression\+Type}}]{type, }
+\item[{int}]{level, }
+\item[{unique\+\_\+ptr$<$ I\+O\+Buf $>$}]{buf}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a9697397faa71f38122e5047ccd967f17}
+
+
+Definition at line 52 of file Zlib\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+Zlib\+Stream\+Compressor\+::compress(), proxygen\+::\+Zlib\+Stream\+Compressor\+::get\+Status(), proxygen\+::\+Zlib\+Stream\+Compressor\+::has\+Error(), and verify().
+
+
+
+Referenced by T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+54                                                    \{
+55 
+56   unique\_ptr<IOBuf> compressed;
+57   unique\_ptr<IOBuf> decompressed;
+58 
+59   unique\_ptr<ZlibStreamCompressor> zc(\textcolor{keyword}{new} ZlibStreamCompressor(type, level));
+60 
+61   compressed = zc->compress(buf.get(), \textcolor{keyword}{true});
+62   ASSERT\_FALSE(zc->hasError()) << \textcolor{stringliteral}{"Compression error. r="} << zc->getStatus();
+63 
+64   verify(type, std::move(buf), std::move(compressed));
+65 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!make\+Buf@{make\+Buf}}
+\index{make\+Buf@{make\+Buf}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{make\+Buf(uint32\+\_\+t size)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ make\+Buf (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a3af9f7741f10c29c2c99a81fcc70abf3}
+
+
+Definition at line 26 of file Zlib\+Tests.\+cpp.
+
+
+
+Referenced by Test\+Priority\+Map\+Builder\+::create\+Virtual\+Streams(), H\+T\+T\+P2\+Framer\+Test\+::data\+Frame\+Test(), Test\+Abort\+Post$<$ stage $>$\+::do\+Abort\+Test(), proxygen\+::fake\+Mock\+Codec(), proxygen\+::make\+Response(), T\+E\+S\+T\+\_\+\+F(), Mock\+Codec\+Downstream\+Test\+::test\+Conn\+Flow\+Control\+Blocked(), and T\+Y\+P\+E\+D\+\_\+\+T\+E\+S\+T\+\_\+\+P().
+
+
+\begin{DoxyCode}
+26                                                  \{
+27   \textcolor{keyword}{auto} out = folly::IOBuf::create(size);
+28   out->append(size);
+29   \textcolor{comment}{// fill with random junk}
+30   folly::io::RWPrivateCursor cursor(out.get());
+31   \textcolor{keywordflow}{while} (cursor.length() >= 8) \{
+32     cursor.write<uint64\_t>(folly::Random::rand64());
+33   \}
+34   \textcolor{keywordflow}{while} (cursor.length()) \{
+35     cursor.write<uint8\_t>((uint8\_t)folly::Random::rand32());
+36   \}
+37   \textcolor{keywordflow}{return} out;
+38 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Gzip5000)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Gzip5000}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a7f71bf3f63e6ac92ff9ad7d1b622e4fd}
+
+
+Definition at line 68 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+68                                               \{
+69   ASSERT\_NO\_FATAL\_FAILURE(
+70       \{ compressThenDecompress(ZlibCompressionType::GZIP, 6, makeBuf(5000)); \});
+71 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Gzip2000)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Gzip2000}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a0a922dcc3f52af67157f2eafadc16a53}
+
+
+Definition at line 73 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+73                                               \{
+74   ASSERT\_NO\_FATAL\_FAILURE(
+75       \{ compressThenDecompress(ZlibCompressionType::GZIP, 6, makeBuf(2000)); \});
+76 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Gzip1024)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Gzip1024}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a23a6baf85936cf86b71c9e148e133d12}
+
+
+Definition at line 78 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+78                                               \{
+79   ASSERT\_NO\_FATAL\_FAILURE(
+80       \{ compressThenDecompress(ZlibCompressionType::GZIP, 6, makeBuf(1024)); \});
+81 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Gzip500)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Gzip500}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a1841565045377460164407f251ef7610}
+
+
+Definition at line 83 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+83                                              \{
+84   ASSERT\_NO\_FATAL\_FAILURE(
+85       \{ compressThenDecompress(ZlibCompressionType::GZIP, 6, makeBuf(500)); \});
+86 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Gzip50)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Gzip50}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a47198fad04d40b5e1422c2b5f0c0d3f2}
+
+
+Definition at line 88 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+88                                             \{
+89   ASSERT\_NO\_FATAL\_FAILURE(
+90       \{ compressThenDecompress(ZlibCompressionType::GZIP, 6, makeBuf(50)); \});
+91 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Deflate)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Deflate}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_ae9945d890ee69244bc15b8108c5dedab}
+
+
+Definition at line 93 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+93                                              \{
+94   ASSERT\_NO\_FATAL\_FAILURE(\{
+95     compressThenDecompress(ZlibCompressionType::DEFLATE, 6, makeBuf(500));
+96   \});
+97 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Empty)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Empty}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a484b182270a8f5879c5a76bb74081a3c}
+
+
+Definition at line 99 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+99                                            \{
+100   ASSERT\_NO\_FATAL\_FAILURE(
+101       \{ compressThenDecompress(ZlibCompressionType::GZIP, 4, makeBuf(0)); \});
+102 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Chain)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Chain}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a924634cb138b348c877d8bd69413bbbc}
+
+
+Definition at line 104 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+104                                            \{
+105   ASSERT\_NO\_FATAL\_FAILURE(\{
+106     \textcolor{keyword}{auto} buf = makeBuf(4);
+107     buf->appendChain(makeBuf(38));
+108     buf->appendChain(makeBuf(12));
+109     buf->appendChain(makeBuf(0));
+110     compressThenDecompress(ZlibCompressionType::GZIP, 6, std::move(buf));
+111   \});
+112 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Streaming)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Streaming}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a9199bacfb05faba1c40bd21d9f63d32f}
+
+
+Definition at line 114 of file Zlib\+Tests.\+cpp.
+
+
+
+References make\+Buf(), and verify().
+
+
+\begin{DoxyCode}
+114                                                \{
+115   ASSERT\_NO\_FATAL\_FAILURE(\{
+116     \textcolor{keyword}{auto} compressor =
+117         std::make\_unique<ZlibStreamCompressor>(ZlibCompressionType::GZIP, 6);
+118 
+119     \textcolor{keyword}{auto} first = makeBuf(38);
+120     \textcolor{keyword}{auto} out = compressor->compress(first.get(), \textcolor{keyword}{false});
+121 
+122     \textcolor{keyword}{auto} second = makeBuf(12);
+123     out->prev()->appendChain(compressor->compress(second.get(), \textcolor{keyword}{false}));
+124     first->prev()->appendChain(std::move(second));
+125 
+126     \textcolor{keyword}{auto} third = makeBuf(4096); \textcolor{comment}{// Larger than buffer size}
+127     out->prev()->appendChain(compressor->compress(third.get(), \textcolor{keyword}{false}));
+128     first->prev()->appendChain(std::move(third));
+129 
+130     \textcolor{keyword}{auto} empty = IOBuf::create(0);
+131     out->prev()->appendChain(compressor->compress(empty.get(), \textcolor{keyword}{true}));
+132 
+133     verify(ZlibCompressionType::GZIP, std::move(first), std::move(out));
+134   \});
+135 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Zlib\+Tests, Compress\+Decompress\+Small\+Buffer)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Tests}}]{, }
+\item[{Compress\+Decompress\+Small\+Buffer}]{}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a8a3813d54b424fc31bbc88df970099de}
+
+
+Definition at line 137 of file Zlib\+Tests.\+cpp.
+
+
+
+References compress\+Then\+Decompress(), and make\+Buf().
+
+
+\begin{DoxyCode}
+137                                                  \{
+138   ASSERT\_NO\_FATAL\_FAILURE(\{
+139     \textcolor{keyword}{auto} oldFlag = FLAGS\_zlib\_compressor\_buffer\_growth;
+140     \textcolor{keyword}{auto} guard = folly::makeGuard([&] \{
+141       FLAGS\_zlib\_compressor\_buffer\_growth = oldFlag;
+142     \});
+143     \textcolor{comment}{// NB: This is picked intentionally so we don't generate multiple}
+144     \textcolor{comment}{// zlib flush markers as ZlibStreamDecompressor fatals on them.}
+145     FLAGS\_zlib\_compressor\_buffer\_growth = 10;
+146     compressThenDecompress(ZlibCompressionType::GZIP, 4, makeBuf(127));
+147   \});
+148 \}
+\end{DoxyCode}
+\index{Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}!verify@{verify}}
+\index{verify@{verify}!Zlib\+Tests.\+cpp@{Zlib\+Tests.\+cpp}}
+\subsubsection[{verify(\+Zlib\+Compression\+Type type, std\+::unique\+\_\+ptr$<$ I\+O\+Buf $>$ original, std\+::unique\+\_\+ptr$<$ I\+O\+Buf $>$ compressed)}]{\setlength{\rightskip}{0pt plus 5cm}void verify (
+\begin{DoxyParamCaption}
+\item[{{\bf Zlib\+Compression\+Type}}]{type, }
+\item[{std\+::unique\+\_\+ptr$<$ I\+O\+Buf $>$}]{original, }
+\item[{std\+::unique\+\_\+ptr$<$ I\+O\+Buf $>$}]{compressed}
+\end{DoxyParamCaption}
+)}\label{ZlibTests_8cpp_a91f03071fc8420a4ed4ed8799f25af75}
+
+
+Definition at line 40 of file Zlib\+Tests.\+cpp.
+
+
+
+Referenced by compress\+Then\+Decompress(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+42                                              \{
+43   \textcolor{keyword}{auto} zd = std::make\_unique<ZlibStreamDecompressor>(type);
+44 
+45   \textcolor{keyword}{auto} decompressed = zd->decompress(compressed.get());
+46   ASSERT\_FALSE(zd->hasError()) << \textcolor{stringliteral}{"Decompression error. r="} << zd->getStatus();
+47 
+48   IOBufEqualTo eq;
+49   ASSERT\_TRUE(eq(original, decompressed));
+50 \}
+\end{DoxyCode}

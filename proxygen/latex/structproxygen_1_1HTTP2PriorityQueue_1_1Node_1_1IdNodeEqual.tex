@@ -1,0 +1,72 @@
+\section{proxygen\+:\+:H\+T\+T\+P2\+Priority\+Queue\+:\+:Node\+:\+:Id\+Node\+Equal Struct Reference}
+\label{structproxygen_1_1HTTP2PriorityQueue_1_1Node_1_1IdNodeEqual}\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P2\+Priority\+Queue.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf operator()} (const {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} \&id, const {\bf Node} \&node)
+\item 
+bool {\bf operator()} (const {\bf Node} \&node, const {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} \&id)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 223 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal}!operator()@{operator()}}
+\index{operator()@{operator()}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal}}
+\subsubsection[{operator()(const H\+T\+T\+P\+Codec\+::\+Stream\+I\+D \&id, const Node \&node)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} \&}]{id, }
+\item[{const {\bf Node} \&}]{node}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTP2PriorityQueue_1_1Node_1_1IdNodeEqual_adf6d2a185eff71c74a569c956ed1d809}
+
+
+Definition at line 224 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::id\+\_\+.
+
+
+\begin{DoxyCode}
+224                                                                      \{
+225         \textcolor{keywordflow}{return} \textcolor{keywordtype}{id} == node.id\_;
+226       \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal}!operator()@{operator()}}
+\index{operator()@{operator()}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal}}
+\subsubsection[{operator()(const Node \&node, const H\+T\+T\+P\+Codec\+::\+Stream\+I\+D \&id)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::\+Id\+Node\+Equal\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const {\bf Node} \&}]{node, }
+\item[{const {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} \&}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTP2PriorityQueue_1_1Node_1_1IdNodeEqual_af83d362976167d7c4aaf5627e22ff38a}
+
+
+Definition at line 227 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::id\+\_\+.
+
+
+\begin{DoxyCode}
+227                                                                      \{
+228         \textcolor{keywordflow}{return} node.id\_ == id;
+229       \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P2\+Priority\+Queue.\+h}\end{DoxyCompactItemize}

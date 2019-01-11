@@ -1,0 +1,279 @@
+\section{Generic\+Filter\+Test$<$ Owned $>$ Class Template Reference}
+\label{classGenericFilterTest}\index{Generic\+Filter\+Test$<$ Owned $>$@{Generic\+Filter\+Test$<$ Owned $>$}}
+Inheritance diagram for Generic\+Filter\+Test$<$ Owned $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classGenericFilterTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf basic\+Test} ()
+\item 
+void {\bf test\+Filters} (const std\+::deque$<$ {\bf Test\+Filter}$<$ Owned $>$ $\ast$ $>$ \&filters, {\bf Mock\+Tester\+Callback} $\ast$expected\+Cb)
+\item 
+void {\bf Set\+Up} () override
+\item 
+{\bf Filter\+Chain}$<$ {\bf Tester\+Interface}, {\bf Tester\+Interface\+::\+Callback}, {\bf Test\+Filter}$<$ Owned $>$,\&{\bf Tester\+Interface\+::set\+Callback}, Owned $>$ \& {\bf chain} ()
+\item 
+{\footnotesize template$<$typename FilterT $>$ }\\std\+::enable\+\_\+if$<$!Owned, FilterT $\ast$ $>$\+::type {\bf get\+Filter} ()
+\item 
+{\footnotesize template$<$typename FilterT $>$ }\\std\+::enable\+\_\+if$<$ Owned, unique\+\_\+ptr$<$ FilterT $>$ $>$\+::type {\bf get\+Filter} ()
+\item 
+{\footnotesize template$<$typename FilterT $>$ }\\void {\bf add\+Filter\+To\+Chain} (std\+::deque$<$ {\bf Test\+Filter}$<$ Owned $>$ $\ast$ $>$ \&refs)
+\item 
+std\+::deque$<$ {\bf Test\+Filter}$<$ Owned $>$ $\ast$ $>$ {\bf get\+Random\+Filters} (unsigned num)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Mock\+Tester\+Callback} {\bf callback\+\_\+}
+\item 
+unique\+\_\+ptr$<$ {\bf Filter\+Chain}$<$ {\bf Tester\+Interface}, {\bf Tester\+Interface\+::\+Callback}, {\bf Test\+Filter}$<$ Owned $>$,\&{\bf Tester\+Interface\+::set\+Callback}, Owned $>$ $>$ {\bf chain\+\_\+}
+\item 
+{\bf Mock\+Tester} $\ast$ {\bf actor\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$bool Owned$>$\\*
+class Generic\+Filter\+Test$<$ Owned $>$}
+
+
+
+Definition at line 132 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!add\+Filter\+To\+Chain@{add\+Filter\+To\+Chain}}
+\index{add\+Filter\+To\+Chain@{add\+Filter\+To\+Chain}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{add\+Filter\+To\+Chain(std\+::deque$<$ Test\+Filter$<$ Owned $>$ $\ast$ $>$ \&refs)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ template$<$typename FilterT $>$ void {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::add\+Filter\+To\+Chain (
+\begin{DoxyParamCaption}
+\item[{std\+::deque$<$ {\bf Test\+Filter}$<$ Owned $>$ $\ast$ $>$ \&}]{refs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classGenericFilterTest_a852a17ec9140c91e426afb463bb9ed18}
+
+
+Definition at line 165 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+References detail\+::get\+\_\+pointer().
+
+
+\begin{DoxyCode}
+165                                                             \{
+166     \textcolor{keyword}{auto} f = getFilter<FilterT>();
+167     refs.push\_front(::detail::get_pointer(f));
+168     chain().addFilters(std::move(f));
+169   \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!basic\+Test@{basic\+Test}}
+\index{basic\+Test@{basic\+Test}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{basic\+Test()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ void {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::basic\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGenericFilterTest_ab877588d397bb89b0a33dd03e6d60330}
+
+
+Definition at line 198 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+198                                          \{
+199   InSequence enforceOrder;
+200 
+201   \textcolor{comment}{// Test call side}
+202   EXPECT\_CALL(*actor_, doA());
+203   chain()->doA();
+204 
+205   \textcolor{comment}{// Now poke the callback side}
+206   EXPECT\_CALL(callback_, onA());
+207   CHECK\_NOTNULL(actor_->cb_);
+208   actor_->cb_->onA();
+209 \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!chain@{chain}}
+\index{chain@{chain}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{chain()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ {\bf Filter\+Chain}$<${\bf Tester\+Interface}, {\bf Tester\+Interface\+::\+Callback}, {\bf Test\+Filter}$<$Owned$>$, \&{\bf Tester\+Interface\+::set\+Callback}, Owned$>$\& {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::chain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classGenericFilterTest_a99942d6adf9aae2a02d3789b59e68f94}
+
+
+Definition at line 150 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+150                                                            \{
+151     \textcolor{keywordflow}{return} *chain_;
+152   \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!get\+Filter@{get\+Filter}}
+\index{get\+Filter@{get\+Filter}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{get\+Filter()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ template$<$typename FilterT $>$ std\+::enable\+\_\+if$<$!Owned, FilterT$\ast$$>$\+::type {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::get\+Filter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classGenericFilterTest_a73c355af21d6baea3a16c6da9160d871}
+
+
+Definition at line 155 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+155                                                           \{
+156     \textcolor{keywordflow}{return} \textcolor{keyword}{new} FilterT();
+157   \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!get\+Filter@{get\+Filter}}
+\index{get\+Filter@{get\+Filter}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{get\+Filter()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ template$<$typename FilterT $>$ std\+::enable\+\_\+if$<$Owned, unique\+\_\+ptr$<$FilterT$>$ $>$\+::type {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::get\+Filter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classGenericFilterTest_a978e49652d8a235531f1b8af9ecb3795}
+
+
+Definition at line 160 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+160                                                                     \{
+161     \textcolor{keywordflow}{return} std::make\_unique<FilterT>();
+162   \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!get\+Random\+Filters@{get\+Random\+Filters}}
+\index{get\+Random\+Filters@{get\+Random\+Filters}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{get\+Random\+Filters(unsigned num)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ std\+::deque$<${\bf Test\+Filter}$<$Owned$>$$\ast$$>$ {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::get\+Random\+Filters (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{num}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classGenericFilterTest_af81c83f42a6e11fceeeda8b7d7245014}
+
+
+Definition at line 171 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+171                                                               \{
+172     std::deque<TestFilter<Owned>*> filters;
+173     srand(0);
+174     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < num; ++i) \{
+175       \textcolor{keyword}{auto} r = rand() % 4;
+176       \textcolor{keywordflow}{if} (r == 0) \{
+177         addFilterToChain<TestFilter<Owned>>(filters);
+178       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (r == 1) \{
+179         addFilterToChain<TestFilterNoCall<Owned>>(filters);
+180       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (r == 2) \{
+181         addFilterToChain<TestFilterNoCallback<Owned>>(filters);
+182       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (r == 3) \{
+183         addFilterToChain<TestFilterNoCallbackNoCall<Owned>>(filters);
+184       \}
+185       basicTest();
+186     \}
+187     \textcolor{keywordflow}{return} filters;
+188   \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{Set\+Up() override}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ void {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::Set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classGenericFilterTest_a0133cfab371a3f5bb573d8983b257a7e}
+
+
+Definition at line 139 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+References Tester\+Interface\+::set\+Callback().
+
+
+\begin{DoxyCode}
+139                         \{
+140     chain_ = std::make\_unique<
+141       FilterChain<TesterInterface, TesterInterface::Callback,
+142                   TestFilter<Owned>,
+143                   &TesterInterface::setCallback,
+144                   Owned>>(getTester<Owned>());
+145     chain().setCallback(&callback_);
+146     actor_ = CHECK\_NOTNULL(static\_cast<MockTester*>(chain_->call()));
+147   \}
+\end{DoxyCode}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!test\+Filters@{test\+Filters}}
+\index{test\+Filters@{test\+Filters}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{test\+Filters(const std\+::deque$<$ Test\+Filter$<$ Owned $>$ $\ast$ $>$ \&filters, Mock\+Tester\+Callback $\ast$expected\+Cb)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ void {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::test\+Filters (
+\begin{DoxyParamCaption}
+\item[{const std\+::deque$<$ {\bf Test\+Filter}$<$ Owned $>$ $\ast$ $>$ \&}]{filters, }
+\item[{{\bf Mock\+Tester\+Callback} $\ast$}]{expected\+Cb}
+\end{DoxyParamCaption}
+)}\label{classGenericFilterTest_ad8f42092824f571426fc85654efb2398}
+
+
+Definition at line 211 of file Generic\+Filter\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+213                                     \{
+214   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} f: filters) \{
+215     f->do\_ = 0;
+216     f->on\_ = 0;
+217   \}
+218   \textcolor{comment}{// Call}
+219   EXPECT\_CALL(*actor_, doA());
+220   chain()->doA();
+221   \textcolor{comment}{// Callback}
+222   \textcolor{keywordflow}{if} (expectedCb) \{
+223     EXPECT\_CALL(*expectedCb, onA());
+224     CHECK\_NOTNULL(actor_->cb_);
+225     actor_->cb_->onA();
+226   \}
+227   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} f: filters) \{
+228     \textcolor{keywordflow}{if} (f->kWantsCalls\_) \{
+229       EXPECT\_EQ(f->do\_, 1);
+230     \} \textcolor{keywordflow}{else} \{
+231       EXPECT\_EQ(f->do\_, 0);
+232     \}
+233     \textcolor{keywordflow}{if} (f->kWantsCallbacks\_) \{
+234       EXPECT\_EQ(f->on\_, expectedCb ? 1 : 0);
+235     \} \textcolor{keywordflow}{else} \{
+236       EXPECT\_EQ(f->on\_, 0);
+237     \}
+238   \}
+239 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!actor\+\_\+@{actor\+\_\+}}
+\index{actor\+\_\+@{actor\+\_\+}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{actor\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ {\bf Mock\+Tester}$\ast$ {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::actor\+\_\+ \{{\bf nullptr}\}}\label{classGenericFilterTest_a01122058f0740a991c09fd6ce97e2c74}
+
+
+Definition at line 194 of file Generic\+Filter\+Test.\+cpp.
+
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!callback\+\_\+@{callback\+\_\+}}
+\index{callback\+\_\+@{callback\+\_\+}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ {\bf Mock\+Tester\+Callback} {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::callback\+\_\+}\label{classGenericFilterTest_afad6f89b1cea3888dd3762d83b8267fd}
+
+
+Definition at line 190 of file Generic\+Filter\+Test.\+cpp.
+
+\index{Generic\+Filter\+Test@{Generic\+Filter\+Test}!chain\+\_\+@{chain\+\_\+}}
+\index{chain\+\_\+@{chain\+\_\+}!Generic\+Filter\+Test@{Generic\+Filter\+Test}}
+\subsubsection[{chain\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}template$<$bool Owned$>$ unique\+\_\+ptr$<${\bf Filter\+Chain}$<${\bf Tester\+Interface}, {\bf Tester\+Interface\+::\+Callback}, {\bf Test\+Filter}$<$Owned$>$, \&{\bf Tester\+Interface\+::set\+Callback}, Owned$>$ $>$ {\bf Generic\+Filter\+Test}$<$ Owned $>$\+::chain\+\_\+}\label{classGenericFilterTest_a27a1ccc0948037590f14d8b61f1a759f}
+
+
+Definition at line 193 of file Generic\+Filter\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/test/{\bf Generic\+Filter\+Test.\+cpp}\end{DoxyCompactItemize}

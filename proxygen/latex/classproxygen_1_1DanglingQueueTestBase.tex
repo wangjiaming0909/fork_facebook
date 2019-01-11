@@ -1,0 +1,138 @@
+\section{proxygen\+:\+:Dangling\+Queue\+Test\+Base Class Reference}
+\label{classproxygen_1_1DanglingQueueTestBase}\index{proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}}
+Inheritance diagram for proxygen\+:\+:Dangling\+Queue\+Test\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1DanglingQueueTestBase}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Dangling\+Queue\+Test\+Base} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf expire\+Nodes} ()
+\item 
+void {\bf tick} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ folly\+::\+Async\+Timeout $\ast$ $>$ {\bf timeouts\+\_\+}
+\item 
+testing\+::\+Nice\+Mock$<$ Mock\+Timeout\+Manager $>$ {\bf timeout\+Manager\+\_\+}
+\item 
+folly\+::\+Undelayed\+Destruction$<$ H\+H\+Wheel\+Timer $>$ {\bf timer\+\_\+} \{\&{\bf timeout\+Manager\+\_\+}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 719 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}!Dangling\+Queue\+Test\+Base@{Dangling\+Queue\+Test\+Base}}
+\index{Dangling\+Queue\+Test\+Base@{Dangling\+Queue\+Test\+Base}!proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}}
+\subsubsection[{Dangling\+Queue\+Test\+Base()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Dangling\+Queue\+Test\+Base\+::\+Dangling\+Queue\+Test\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1DanglingQueueTestBase_a30b2582dcf1539654226c971f97d0f32}
+
+
+Definition at line 721 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+721                           \{
+722     \textcolor{comment}{// Just under two ticks}
+723     HTTP2PriorityQueue::setNodeLifetime(
+724       std::chrono::milliseconds(2 * HHWheelTimer::DEFAULT\_TICK\_INTERVAL - 1));
+725     EXPECT\_CALL(timeoutManager_, scheduleTimeout(\_, \_))
+726       .WillRepeatedly(Invoke([\textcolor{keyword}{this}] (folly::AsyncTimeout* timeout,
+727                                      std::chrono::milliseconds) \{
+728                                timeouts_.push\_back(timeout);
+729                                \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+730                              \}));
+731   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}!expire\+Nodes@{expire\+Nodes}}
+\index{expire\+Nodes@{expire\+Nodes}!proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}}
+\subsubsection[{expire\+Nodes()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Dangling\+Queue\+Test\+Base\+::expire\+Nodes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1DanglingQueueTestBase_a1ab7b50aca2fe87775cfa7ca2892846f}
+
+
+Definition at line 734 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+734                      \{
+735     std::this\_thread::sleep\_for(
+736       std::chrono::milliseconds(2 * HHWheelTimer::DEFAULT\_TICK\_INTERVAL));
+737     \textcolor{comment}{// Node lifetime it just under two ticks, so firing twice expires all nodes}
+738     tick();
+739     tick();
+740   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}!tick@{tick}}
+\index{tick@{tick}!proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}}
+\subsubsection[{tick()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Dangling\+Queue\+Test\+Base\+::tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classproxygen_1_1DanglingQueueTestBase_aed87de9e5448543c171c5d3d0d093bfc}
+
+
+Definition at line 742 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+742               \{
+743     std::list<folly::AsyncTimeout*> timeouts;
+744     std::swap(timeouts_, timeouts);
+745     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} timeout: timeouts) \{
+746       timeout->timeoutExpired();
+747     \}
+748   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}!timeout\+Manager\+\_\+@{timeout\+Manager\+\_\+}}
+\index{timeout\+Manager\+\_\+@{timeout\+Manager\+\_\+}!proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}}
+\subsubsection[{timeout\+Manager\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}testing\+::\+Nice\+Mock$<$Mock\+Timeout\+Manager$>$ proxygen\+::\+Dangling\+Queue\+Test\+Base\+::timeout\+Manager\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1DanglingQueueTestBase_a524fa9fbf6ecb1e83e3d5fa7429c8905}
+
+
+Definition at line 751 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+\index{proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}!timeouts\+\_\+@{timeouts\+\_\+}}
+\index{timeouts\+\_\+@{timeouts\+\_\+}!proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}}
+\subsubsection[{timeouts\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<$folly\+::\+Async\+Timeout$\ast$$>$ proxygen\+::\+Dangling\+Queue\+Test\+Base\+::timeouts\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1DanglingQueueTestBase_ad591bb3840b23d95d7af977604868ca3}
+
+
+Definition at line 750 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+\index{proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}!timer\+\_\+@{timer\+\_\+}}
+\index{timer\+\_\+@{timer\+\_\+}!proxygen\+::\+Dangling\+Queue\+Test\+Base@{proxygen\+::\+Dangling\+Queue\+Test\+Base}}
+\subsubsection[{timer\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Undelayed\+Destruction$<$H\+H\+Wheel\+Timer$>$ proxygen\+::\+Dangling\+Queue\+Test\+Base\+::timer\+\_\+ \{\&{\bf timeout\+Manager\+\_\+}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1DanglingQueueTestBase_ac65c387cda8f4586a75684bf908499b1}
+
+
+Definition at line 752 of file H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf H\+T\+T\+P2\+Priority\+Queue\+Test.\+cpp}\end{DoxyCompactItemize}

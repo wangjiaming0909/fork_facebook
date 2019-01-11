@@ -1,0 +1,1087 @@
+\section{proxygen\+:\+:Structured\+Headers Namespace Reference}
+\label{namespaceproxygen_1_1StructuredHeaders}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Parameterised\+Identifier}
+\item 
+class {\bf Structured\+Header\+Item}
+\item 
+class {\bf Structured\+Headers\+Utilities\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Parameterised\+List} = std\+::vector$<$ {\bf Structured\+Headers\+::\+Parameterised\+Identifier} $>$
+\item 
+using {\bf Dictionary} = std\+::unordered\+\_\+map$<$ std\+::string, {\bf Structured\+Header\+Item} $>$
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Decode\+Error} \+: uint8\+\_\+t \{ \\*
+{\bf Decode\+Error\+::\+OK} = 0, 
+{\bf Decode\+Error\+::\+V\+A\+L\+U\+E\+\_\+\+T\+O\+O\+\_\+\+L\+O\+NG} = 1, 
+{\bf Decode\+Error\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+A\+R\+A\+C\+T\+ER} = 2, 
+{\bf Decode\+Error\+::\+U\+N\+D\+E\+C\+O\+D\+E\+A\+B\+L\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+C\+O\+N\+T\+E\+NT} = 3, 
+\\*
+{\bf Decode\+Error\+::\+U\+N\+E\+X\+P\+E\+C\+T\+E\+D\+\_\+\+E\+N\+D\+\_\+\+O\+F\+\_\+\+B\+U\+F\+F\+ER} = 4, 
+{\bf Decode\+Error\+::\+U\+N\+P\+A\+R\+S\+E\+A\+B\+L\+E\+\_\+\+N\+U\+M\+E\+R\+I\+C\+\_\+\+T\+Y\+PE} = 5, 
+{\bf Decode\+Error\+::\+D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+K\+EY} = 6
+ \}
+\item 
+enum {\bf Encode\+Error} \+: uint8\+\_\+t \{ \\*
+{\bf Encode\+Error\+::\+OK} = 0, 
+{\bf Encode\+Error\+::\+E\+M\+P\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE} = 1, 
+{\bf Encode\+Error\+::\+B\+A\+D\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER} = 2, 
+{\bf Encode\+Error\+::\+B\+A\+D\+\_\+\+S\+T\+R\+I\+NG} = 3, 
+\\*
+{\bf Encode\+Error\+::\+I\+T\+E\+M\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+I\+S\+M\+A\+T\+CH} = 4, 
+{\bf Encode\+Error\+::\+E\+N\+C\+O\+D\+I\+N\+G\+\_\+\+N\+U\+L\+L\+\_\+\+I\+T\+EM} = 5
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf is\+Lc\+Alpha} (char c)
+\item 
+bool {\bf is\+Valid\+Identifier\+Char} (char c)
+\item 
+bool {\bf is\+Valid\+Encoded\+Binary\+Content\+Char} (char c)
+\item 
+bool {\bf is\+Valid\+String\+Char} (char c)
+\item 
+bool {\bf is\+Valid\+Identifier} (const std\+::string \&s)
+\item 
+bool {\bf is\+Valid\+String} (const std\+::string \&s)
+\item 
+bool {\bf is\+Valid\+Encoded\+Binary\+Content} (const std\+::string \&s)
+\item 
+bool {\bf item\+Type\+Matches\+Content} (const {\bf Structured\+Header\+Item} \&input)
+\item 
+std\+::string {\bf decode\+Base64} (const std\+::string \&encoded)
+\item 
+std\+::string {\bf encode\+Base64} (const std\+::string \&input)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Lcalpha)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Is\+Valid\+Identifier\+Char)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+alphanumeric)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+allowed\+\_\+symbols)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+disallowed\+\_\+symbols)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Is\+Valid\+String\+Char\+Allowed)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Is\+Valid\+String\+Char\+Disallowed)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Is\+Valid\+Identifier\+Allowed)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Is\+Valid\+Identifier\+Disallowed)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Is\+Valid\+String\+Allowed)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Is\+Valid\+String\+Disallowed)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Good\+Binary\+Content)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Bad\+Binary\+Content)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+\_\+\+Decode\+Binary\+Content)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+\_\+\+Encode\+Binary\+Content)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+\_\+\+Binary\+Content\+Empty)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Item\+Type\+Matches\+Content\+Good)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Structured\+Headers\+Utilities\+Test}, Test\+Item\+Type\+Matches\+Content\+Bad)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const int {\bf k\+Max\+Valid\+Integer\+Length} = 19
+\item 
+static const int {\bf k\+Max\+Valid\+Float\+Length} = 16
+\item 
+static const std\+::map$<$ {\bf Decode\+Error}, std\+::string $>$ {\bf decode\+Error\+Description}
+\item 
+static const std\+::map$<$ {\bf Encode\+Error}, std\+::string $>$ {\bf encode\+Error\+Description}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!Dictionary@{Dictionary}}
+\index{Dictionary@{Dictionary}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{Dictionary}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf proxygen\+::\+Structured\+Headers\+::\+Dictionary} = typedef std\+::unordered\+\_\+map$<$std\+::string, {\bf Structured\+Header\+Item}$>$}\label{namespaceproxygen_1_1StructuredHeaders_ac73b84119fa228ad7c41e18a17a53e24}
+
+
+Definition at line 61 of file Structured\+Headers\+Constants.\+h.
+
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!Parameterised\+List@{Parameterised\+List}}
+\index{Parameterised\+List@{Parameterised\+List}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{Parameterised\+List}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf proxygen\+::\+Structured\+Headers\+::\+Parameterised\+List} = typedef std\+::vector$<${\bf Structured\+Headers\+::\+Parameterised\+Identifier}$>$}\label{namespaceproxygen_1_1StructuredHeaders_adf3e361bfc9379624beaa5526794aeb5}
+
+
+Definition at line 59 of file Structured\+Headers\+Constants.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!Decode\+Error@{Decode\+Error}}
+\index{Decode\+Error@{Decode\+Error}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{Decode\+Error}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+Structured\+Headers\+::\+Decode\+Error} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{OK@{OK}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!OK@{OK}}\item[{\em 
+OK\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310ae0aa021e21dddbd6d8cecec71e9cf564}
+}]\index{V\+A\+L\+U\+E\+\_\+\+T\+O\+O\+\_\+\+L\+O\+NG@{V\+A\+L\+U\+E\+\_\+\+T\+O\+O\+\_\+\+L\+O\+NG}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!V\+A\+L\+U\+E\+\_\+\+T\+O\+O\+\_\+\+L\+O\+NG@{V\+A\+L\+U\+E\+\_\+\+T\+O\+O\+\_\+\+L\+O\+NG}}\item[{\em 
+V\+A\+L\+U\+E\+\_\+\+T\+O\+O\+\_\+\+L\+O\+NG\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310af2c5e40300f0a5a785913aab7782f807}
+}]\index{I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+A\+R\+A\+C\+T\+ER@{I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+A\+R\+A\+C\+T\+ER}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+A\+R\+A\+C\+T\+ER@{I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+A\+R\+A\+C\+T\+ER}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+A\+R\+A\+C\+T\+ER\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310adb362ba5c5ae04cf6a9bdcf286ef9fa9}
+}]\index{U\+N\+D\+E\+C\+O\+D\+E\+A\+B\+L\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+C\+O\+N\+T\+E\+NT@{U\+N\+D\+E\+C\+O\+D\+E\+A\+B\+L\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+C\+O\+N\+T\+E\+NT}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!U\+N\+D\+E\+C\+O\+D\+E\+A\+B\+L\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+C\+O\+N\+T\+E\+NT@{U\+N\+D\+E\+C\+O\+D\+E\+A\+B\+L\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+C\+O\+N\+T\+E\+NT}}\item[{\em 
+U\+N\+D\+E\+C\+O\+D\+E\+A\+B\+L\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+C\+O\+N\+T\+E\+NT\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310a5cf0223b794371996b2af601e64a1204}
+}]\index{U\+N\+E\+X\+P\+E\+C\+T\+E\+D\+\_\+\+E\+N\+D\+\_\+\+O\+F\+\_\+\+B\+U\+F\+F\+ER@{U\+N\+E\+X\+P\+E\+C\+T\+E\+D\+\_\+\+E\+N\+D\+\_\+\+O\+F\+\_\+\+B\+U\+F\+F\+ER}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!U\+N\+E\+X\+P\+E\+C\+T\+E\+D\+\_\+\+E\+N\+D\+\_\+\+O\+F\+\_\+\+B\+U\+F\+F\+ER@{U\+N\+E\+X\+P\+E\+C\+T\+E\+D\+\_\+\+E\+N\+D\+\_\+\+O\+F\+\_\+\+B\+U\+F\+F\+ER}}\item[{\em 
+U\+N\+E\+X\+P\+E\+C\+T\+E\+D\+\_\+\+E\+N\+D\+\_\+\+O\+F\+\_\+\+B\+U\+F\+F\+ER\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310a0ed304e6e7e555ba48ffdefa3d058124}
+}]\index{U\+N\+P\+A\+R\+S\+E\+A\+B\+L\+E\+\_\+\+N\+U\+M\+E\+R\+I\+C\+\_\+\+T\+Y\+PE@{U\+N\+P\+A\+R\+S\+E\+A\+B\+L\+E\+\_\+\+N\+U\+M\+E\+R\+I\+C\+\_\+\+T\+Y\+PE}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!U\+N\+P\+A\+R\+S\+E\+A\+B\+L\+E\+\_\+\+N\+U\+M\+E\+R\+I\+C\+\_\+\+T\+Y\+PE@{U\+N\+P\+A\+R\+S\+E\+A\+B\+L\+E\+\_\+\+N\+U\+M\+E\+R\+I\+C\+\_\+\+T\+Y\+PE}}\item[{\em 
+U\+N\+P\+A\+R\+S\+E\+A\+B\+L\+E\+\_\+\+N\+U\+M\+E\+R\+I\+C\+\_\+\+T\+Y\+PE\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310a19dce93779791c951feffac73f6adce5}
+}]\index{D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+K\+EY@{D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+K\+EY}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+K\+EY@{D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+K\+EY}}\item[{\em 
+D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+K\+EY\label{namespaceproxygen_1_1StructuredHeaders_aa3973d91549103c6c79b9adb9b659310afc32c944cf407e8ee38eb89ffd7e3717}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 63 of file Structured\+Headers\+Constants.\+h.
+
+
+\begin{DoxyCode}
+63                        : uint8\_t \{
+64   OK = 0,
+65   VALUE_TOO_LONG = 1,
+66   INVALID_CHARACTER = 2,
+67   UNDECODEABLE_BINARY_CONTENT = 3,
+68   UNEXPECTED_END_OF_BUFFER = 4,
+69   UNPARSEABLE_NUMERIC_TYPE = 5,
+70   DUPLICATE_KEY = 6
+71 \};
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!Encode\+Error@{Encode\+Error}}
+\index{Encode\+Error@{Encode\+Error}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{Encode\+Error}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+Structured\+Headers\+::\+Encode\+Error} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\label{namespaceproxygen_1_1StructuredHeaders_a254f85bc437cbfca87fcc81c9324db49}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{OK@{OK}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!OK@{OK}}\item[{\em 
+OK\label{namespaceproxygen_1_1StructuredHeaders_a254f85bc437cbfca87fcc81c9324db49ae0aa021e21dddbd6d8cecec71e9cf564}
+}]\index{E\+M\+P\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE@{E\+M\+P\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!E\+M\+P\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE@{E\+M\+P\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE}}\item[{\em 
+E\+M\+P\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+S\+T\+R\+U\+C\+T\+U\+RE\label{namespaceproxygen_1_1StructuredHeaders_a254f85bc437cbfca87fcc81c9324db49a139b1eeb54a9561c5398bf1b53c38dc4}
+}]\index{B\+A\+D\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER@{B\+A\+D\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!B\+A\+D\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER@{B\+A\+D\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER}}\item[{\em 
+B\+A\+D\+\_\+\+I\+D\+E\+N\+T\+I\+F\+I\+ER\label{namespaceproxygen_1_1StructuredHeaders_a254f85bc437cbfca87fcc81c9324db49ae608b76494aeea747e830241b19dcda1}
+}]\index{B\+A\+D\+\_\+\+S\+T\+R\+I\+NG@{B\+A\+D\+\_\+\+S\+T\+R\+I\+NG}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!B\+A\+D\+\_\+\+S\+T\+R\+I\+NG@{B\+A\+D\+\_\+\+S\+T\+R\+I\+NG}}\item[{\em 
+B\+A\+D\+\_\+\+S\+T\+R\+I\+NG\label{namespaceproxygen_1_1StructuredHeaders_a254f85bc437cbfca87fcc81c9324db49a7dc471547c6947114b70f9d889f0ae94}
+}]\index{I\+T\+E\+M\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+I\+S\+M\+A\+T\+CH@{I\+T\+E\+M\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+I\+S\+M\+A\+T\+CH}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!I\+T\+E\+M\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+I\+S\+M\+A\+T\+CH@{I\+T\+E\+M\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+I\+S\+M\+A\+T\+CH}}\item[{\em 
+I\+T\+E\+M\+\_\+\+T\+Y\+P\+E\+\_\+\+M\+I\+S\+M\+A\+T\+CH\label{namespaceproxygen_1_1StructuredHeaders_a254f85bc437cbfca87fcc81c9324db49acc37143951cf54ccba654820c666a09c}
+}]\index{E\+N\+C\+O\+D\+I\+N\+G\+\_\+\+N\+U\+L\+L\+\_\+\+I\+T\+EM@{E\+N\+C\+O\+D\+I\+N\+G\+\_\+\+N\+U\+L\+L\+\_\+\+I\+T\+EM}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!E\+N\+C\+O\+D\+I\+N\+G\+\_\+\+N\+U\+L\+L\+\_\+\+I\+T\+EM@{E\+N\+C\+O\+D\+I\+N\+G\+\_\+\+N\+U\+L\+L\+\_\+\+I\+T\+EM}}\item[{\em 
+E\+N\+C\+O\+D\+I\+N\+G\+\_\+\+N\+U\+L\+L\+\_\+\+I\+T\+EM\label{namespaceproxygen_1_1StructuredHeaders_a254f85bc437cbfca87fcc81c9324db49a63252fb546132e1e7f1ab9e825078074}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 73 of file Structured\+Headers\+Constants.\+h.
+
+
+\begin{DoxyCode}
+73                        : uint8\_t \{
+74   OK = 0,
+75   EMPTY_DATA_STRUCTURE = 1,
+76   BAD_IDENTIFIER = 2,
+77   BAD_STRING = 3,
+78   ITEM_TYPE_MISMATCH = 4,
+79   ENCODING_NULL_ITEM = 5
+80 \};
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!decode\+Base64@{decode\+Base64}}
+\index{decode\+Base64@{decode\+Base64}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{decode\+Base64(const std\+::string \&encoded)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Structured\+Headers\+::decode\+Base64 (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{encoded}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a0e834f426c2b9d27b0b2038ceb8f8c18}
+
+
+Definition at line 105 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Binary\+Content(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+106                               \{
+107 
+108   \textcolor{keywordflow}{if} (encoded.size() == 0) \{
+109     \textcolor{comment}{// special case, to prevent an integer overflow down below.}
+110     \textcolor{keywordflow}{return} \textcolor{stringliteral}{""};
+111   \}
+112 
+113   \textcolor{keyword}{using namespace }boost::archive::iterators;
+114   \textcolor{keyword}{using} b64it =
+115     transform\_width<binary\_from\_base64<std::string::const\_iterator>, 8, 6>;
+116 
+117   std::string decoded = std::string(b64it(std::begin(encoded)),
+118                                     b64it(std::end(encoded)));
+119 
+120   uint32\_t numPadding = std::count(encoded.begin(), encoded.end(), \textcolor{charliteral}{'='});
+121   decoded.erase(decoded.end() - numPadding, decoded.end());
+122 
+123   \textcolor{keywordflow}{return} decoded;
+124 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!encode\+Base64@{encode\+Base64}}
+\index{encode\+Base64@{encode\+Base64}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{encode\+Base64(const std\+::string \&input)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Structured\+Headers\+::encode\+Base64 (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{input}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a3f05083e8f2e84ed4969975c953655af}
+
+
+Definition at line 126 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Encoder\+::encode\+Binary\+Content(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Binary\+Content(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+126                                                \{
+127   \textcolor{keyword}{using namespace }boost::archive::iterators;
+128   \textcolor{keyword}{using} b64it = base64\_from\_binary<transform\_width<const char*, 6, 8>>;
+129 
+130   \textcolor{keyword}{auto} data = input.data();
+131   std::string encoded(b64it(data), b64it(data + (input.length())));
+132   encoded.append((3 - (input.length() % 3)) % 3, \textcolor{charliteral}{'='});
+133 
+134   \textcolor{keywordflow}{return} encoded;
+135 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!is\+Lc\+Alpha@{is\+Lc\+Alpha}}
+\index{is\+Lc\+Alpha@{is\+Lc\+Alpha}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{is\+Lc\+Alpha(char c)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::is\+Lc\+Alpha (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a8b56d8b792d485b0ffdb7e3a5854ad12}
+
+
+Definition at line 20 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+Referenced by is\+Valid\+Identifier(), is\+Valid\+Identifier\+Char(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Identifier(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+20                        \{
+21   \textcolor{keywordflow}{return} c >= 0x61 && c <= 0x7A;
+22 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!is\+Valid\+Encoded\+Binary\+Content@{is\+Valid\+Encoded\+Binary\+Content}}
+\index{is\+Valid\+Encoded\+Binary\+Content@{is\+Valid\+Encoded\+Binary\+Content}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{is\+Valid\+Encoded\+Binary\+Content(const std\+::string \&s)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::is\+Valid\+Encoded\+Binary\+Content (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a8e5c36b1683326d33491c343979579de}
+
+
+Definition at line 68 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+References is\+Valid\+Encoded\+Binary\+Content\+Char().
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Binary\+Content(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+69                       \{
+70 
+71   \textcolor{keywordflow}{if} (s.size() % 4 != 0) \{
+72     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+73   \}
+74 
+75   \textcolor{keywordtype}{bool} equalSeen = \textcolor{keyword}{false};
+76   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it = s.begin(); it != s.end(); it++) \{
+77     \textcolor{keywordflow}{if} (*it == \textcolor{charliteral}{'='}) \{
+78       equalSeen = \textcolor{keyword}{true};
+79     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (equalSeen || !isValidEncodedBinaryContentChar(*it)) \{
+80       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+81     \}
+82   \}
+83 
+84   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+85 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!is\+Valid\+Encoded\+Binary\+Content\+Char@{is\+Valid\+Encoded\+Binary\+Content\+Char}}
+\index{is\+Valid\+Encoded\+Binary\+Content\+Char@{is\+Valid\+Encoded\+Binary\+Content\+Char}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{is\+Valid\+Encoded\+Binary\+Content\+Char(char c)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::is\+Valid\+Encoded\+Binary\+Content\+Char (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a995192c5ebd2b561cc3394de82349bd6}
+
+
+Definition at line 29 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+Referenced by is\+Valid\+Encoded\+Binary\+Content(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Binary\+Content(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+30            \{
+31   \textcolor{keywordflow}{return} std::isalpha(c) || std::isdigit(c) || c == \textcolor{charliteral}{'+'} || c == \textcolor{charliteral}{'/'} || c == \textcolor{charliteral}{'='};
+32 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!is\+Valid\+Identifier@{is\+Valid\+Identifier}}
+\index{is\+Valid\+Identifier@{is\+Valid\+Identifier}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{is\+Valid\+Identifier(const std\+::string \&s)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::is\+Valid\+Identifier (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a1e3557055989ce7701fe453c42469aa7}
+
+
+Definition at line 45 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+References is\+Lc\+Alpha(), and is\+Valid\+Identifier\+Char().
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Encoder\+::encode\+Identifier(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+45                                            \{
+46   \textcolor{keywordflow}{if} (s.size() == 0 || !isLcAlpha(s[0])) \{
+47     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+48   \}
+49 
+50   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} c : s) \{
+51     \textcolor{keywordflow}{if} (!isValidIdentifierChar(c)) \{
+52       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+53     \}
+54   \}
+55 
+56   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+57 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!is\+Valid\+Identifier\+Char@{is\+Valid\+Identifier\+Char}}
+\index{is\+Valid\+Identifier\+Char@{is\+Valid\+Identifier\+Char}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{is\+Valid\+Identifier\+Char(char c)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::is\+Valid\+Identifier\+Char (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a9a22b17f6f15bae6924adaa8b68f8f05}
+
+
+Definition at line 24 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+References is\+Lc\+Alpha().
+
+
+
+Referenced by is\+Valid\+Identifier(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Identifier(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+24                                    \{
+25   \textcolor{keywordflow}{return} isLcAlpha(c) || std::isdigit(c) || c == \textcolor{charliteral}{'\_'} || c == \textcolor{charliteral}{'-'} || c == \textcolor{charliteral}{'*'} ||
+26     c == \textcolor{charliteral}{'/'};
+27 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!is\+Valid\+String@{is\+Valid\+String}}
+\index{is\+Valid\+String@{is\+Valid\+String}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{is\+Valid\+String(const std\+::string \&s)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::is\+Valid\+String (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{s}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_ac24ed5d0617f80bca6dc76fe80dba30a}
+
+
+Definition at line 59 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+References is\+Valid\+String\+Char().
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Encoder\+::encode\+String(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+59                                        \{
+60   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char} c : s) \{
+61     \textcolor{keywordflow}{if} (!isValidStringChar(c)) \{
+62       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+63     \}
+64   \}
+65   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+66 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!is\+Valid\+String\+Char@{is\+Valid\+String\+Char}}
+\index{is\+Valid\+String\+Char@{is\+Valid\+String\+Char}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{is\+Valid\+String\+Char(char c)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::is\+Valid\+String\+Char (
+\begin{DoxyParamCaption}
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_ad3ee9bb11bf19b7fb43cc4bdf1c19080}
+
+
+Definition at line 34 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+Referenced by is\+Valid\+String(), proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+String(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+34                                \{
+35   \textcolor{comment}{/*}
+36 \textcolor{comment}{  * The difference between the character restriction here and that mentioned}
+37 \textcolor{comment}{  * in section 3.7 of version 6 of the Structured Headers draft is that this}
+38 \textcolor{comment}{  * function accepts \(\backslash\) and DQUOTE characters. These characters are allowed}
+39 \textcolor{comment}{  * as long as they are present as a part of an escape sequence, which is}
+40 \textcolor{comment}{  * checked for in the parseString() function in the StructuredHeadersBuffer.}
+41 \textcolor{comment}{  */}
+42   \textcolor{keywordflow}{return} c >= 0x20 && c <= 0x7E;
+43 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!item\+Type\+Matches\+Content@{item\+Type\+Matches\+Content}}
+\index{item\+Type\+Matches\+Content@{item\+Type\+Matches\+Content}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{item\+Type\+Matches\+Content(const Structured\+Header\+Item \&input)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Structured\+Headers\+::item\+Type\+Matches\+Content (
+\begin{DoxyParamCaption}
+\item[{const {\bf Structured\+Header\+Item} \&}]{input}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a012b58466ad0dc3c607e7f5feb914c8a}
+
+
+Definition at line 87 of file Structured\+Headers\+Utilities.\+cpp.
+
+
+
+References proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+D\+O\+U\+B\+LE, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+I\+D\+E\+N\+T\+I\+F\+I\+ER, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+I\+N\+T64, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+N\+O\+NE, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+S\+T\+R\+I\+NG, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::tag, and proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::value.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Encoder\+::encode\+Item(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+88                                       \{
+89   \textcolor{keywordflow}{switch} (input.tag) \{
+90     \textcolor{keywordflow}{case} StructuredHeaderItem::Type::BINARYCONTENT:
+91     \textcolor{keywordflow}{case} StructuredHeaderItem::Type::IDENTIFIER:
+92     \textcolor{keywordflow}{case} StructuredHeaderItem::Type::STRING:
+93       \textcolor{keywordflow}{return} input.value.type() == \textcolor{keyword}{typeid}(std::string);
+94     \textcolor{keywordflow}{case} StructuredHeaderItem::Type::INT64:
+95       \textcolor{keywordflow}{return} input.value.type() == \textcolor{keyword}{typeid}(int64\_t);
+96     \textcolor{keywordflow}{case} StructuredHeaderItem::Type::DOUBLE:
+97       \textcolor{keywordflow}{return} input.value.type() == \textcolor{keyword}{typeid}(double);
+98     \textcolor{keywordflow}{case} StructuredHeaderItem::Type::NONE:
+99       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+100   \}
+101 
+102   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+103 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Lcalpha)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Lcalpha}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_ab5b0a1b4bd778865fb4226bc47b1c9c8}
+
+
+Definition at line 20 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Lc\+Alpha().
+
+
+\begin{DoxyCode}
+20                                                     \{
+21   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < 256; i++) \{
+22     uint8\_t c = (uint8\_t) i;
+23     \textcolor{keywordflow}{if} (c >= \textcolor{charliteral}{'a'} && c <= \textcolor{charliteral}{'z'}) \{
+24       EXPECT\_TRUE(isLcAlpha(c));
+25     \} \textcolor{keywordflow}{else} \{
+26       EXPECT\_FALSE(isLcAlpha(c));
+27     \}
+28   \}
+29 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Is\+Valid\+Identifier\+Char)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Is\+Valid\+Identifier\+Char}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a24f441b286127f23722ef4d03a650f2d}
+
+
+Definition at line 31 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Identifier\+Char().
+
+
+\begin{DoxyCode}
+31                                                                   \{
+32   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < 256; i++) \{
+33     uint8\_t c = (uint8\_t) i;
+34     \textcolor{keywordflow}{if} ((c >= \textcolor{charliteral}{'a'} && c <= \textcolor{charliteral}{'z'}) ||
+35         (c >= \textcolor{charliteral}{'0'} && c <= \textcolor{charliteral}{'9'}) ||
+36         (c == \textcolor{charliteral}{'\_'} || c == \textcolor{charliteral}{'-'} || c == \textcolor{charliteral}{'*'} || c == \textcolor{charliteral}{'/'})) \{
+37       EXPECT\_TRUE(isValidIdentifierChar(c));
+38     \} \textcolor{keywordflow}{else} \{
+39       EXPECT\_FALSE(isValidIdentifierChar(c));
+40     \}
+41   \}
+42 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+alphanumeric)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+alphanumeric}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a511f945215428795e3cf869307582d6c}
+
+
+Definition at line 44 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Encoded\+Binary\+Content\+Char().
+
+
+\begin{DoxyCode}
+45                                                       \{
+46   EXPECT\_TRUE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'a'}));
+47   EXPECT\_TRUE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'Z'}));
+48   EXPECT\_TRUE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'0'}));
+49   EXPECT\_TRUE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'9'}));
+50 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+allowed\+\_\+symbols)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+allowed\+\_\+symbols}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a634f298a2538a1c01a608d8dd4a3a571}
+
+
+Definition at line 52 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Encoded\+Binary\+Content\+Char().
+
+
+\begin{DoxyCode}
+53                                                          \{
+54   EXPECT\_TRUE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'+'}));
+55   EXPECT\_TRUE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'/'}));
+56   EXPECT\_TRUE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'='}));
+57 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+disallowed\+\_\+symbols)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{test\+\_\+is\+Valid\+Encoded\+Binary\+Content\+Char\+\_\+disallowed\+\_\+symbols}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_aac0492c19316b964c7baff8f64be4b57}
+
+
+Definition at line 59 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Encoded\+Binary\+Content\+Char().
+
+
+\begin{DoxyCode}
+60                                                             \{
+61   EXPECT\_FALSE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'*'}));
+62   EXPECT\_FALSE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'\_'}));
+63   EXPECT\_FALSE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{'-'}));
+64   EXPECT\_FALSE(isValidEncodedBinaryContentChar(\textcolor{charliteral}{' '}));
+65 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Is\+Valid\+String\+Char\+Allowed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Is\+Valid\+String\+Char\+Allowed}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a63b9419e9e8d9a18a496e7782b8dd9d9}
+
+
+Definition at line 67 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+String\+Char().
+
+
+\begin{DoxyCode}
+67                                                                      \{
+68   EXPECT\_TRUE(isValidStringChar(\textcolor{charliteral}{' '}));
+69   EXPECT\_TRUE(isValidStringChar(\textcolor{charliteral}{'~'}));
+70   EXPECT\_TRUE(isValidStringChar(\textcolor{charliteral}{'\(\backslash\)\(\backslash\)'}));
+71   EXPECT\_TRUE(isValidStringChar(\textcolor{charliteral}{'\(\backslash\)"'}));
+72   EXPECT\_TRUE(isValidStringChar(\textcolor{charliteral}{'a'}));
+73   EXPECT\_TRUE(isValidStringChar(\textcolor{charliteral}{'0'}));
+74   EXPECT\_TRUE(isValidStringChar(\textcolor{charliteral}{'A'}));
+75 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Is\+Valid\+String\+Char\+Disallowed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Is\+Valid\+String\+Char\+Disallowed}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a6fd8ff4cee3a78fa37586d0b59ffdb34}
+
+
+Definition at line 77 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+String\+Char().
+
+
+\begin{DoxyCode}
+77                                                                         \{
+78   EXPECT\_FALSE(isValidStringChar(\textcolor{charliteral}{'\(\backslash\)0'}));
+79   EXPECT\_FALSE(isValidStringChar(0x1F));
+80   EXPECT\_FALSE(isValidStringChar(0x7F));
+81   EXPECT\_FALSE(isValidStringChar(\textcolor{charliteral}{'\(\backslash\)t'}));
+82 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Is\+Valid\+Identifier\+Allowed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Is\+Valid\+Identifier\+Allowed}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a452aae590330cdf1a46532af5bcc84a8}
+
+
+Definition at line 84 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Identifier().
+
+
+\begin{DoxyCode}
+84                                                                      \{
+85   EXPECT\_TRUE(isValidIdentifier(\textcolor{stringliteral}{"a"}));
+86   EXPECT\_TRUE(isValidIdentifier(\textcolor{stringliteral}{"a\_0-*/"}));
+87   EXPECT\_TRUE(isValidIdentifier(\textcolor{stringliteral}{"abc\_\_\_xyz"}));
+88 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Is\+Valid\+Identifier\+Disallowed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Is\+Valid\+Identifier\+Disallowed}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_ace4c4b8afd9bd237a3c2a13e462ab9b4}
+
+
+Definition at line 90 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Identifier().
+
+
+\begin{DoxyCode}
+90                                                                         \{
+91   EXPECT\_FALSE(isValidIdentifier(\textcolor{stringliteral}{"aAAA"}));
+92   EXPECT\_FALSE(isValidIdentifier(\textcolor{stringliteral}{"\_aa"}));
+93   EXPECT\_FALSE(isValidIdentifier(\textcolor{stringliteral}{"0abc"}));
+94   EXPECT\_FALSE(isValidIdentifier(\textcolor{stringliteral}{""}));
+95 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Is\+Valid\+String\+Allowed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Is\+Valid\+String\+Allowed}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a398e1c47136558cb957ba6fd01a35974}
+
+
+Definition at line 97 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+String().
+
+
+\begin{DoxyCode}
+97                                                                  \{
+98   EXPECT\_TRUE(isValidString(\textcolor{stringliteral}{"a cat."}));
+99   EXPECT\_TRUE(isValidString(\textcolor{stringliteral}{"!~)($@^^) g"}));
+100   EXPECT\_TRUE(isValidString(\textcolor{stringliteral}{"\(\backslash\)\(\backslash\)\(\backslash\)"\(\backslash\)"\(\backslash\)\(\backslash\)"}));
+101   EXPECT\_TRUE(isValidString(\textcolor{stringliteral}{""}));
+102 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Is\+Valid\+String\+Disallowed)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Is\+Valid\+String\+Disallowed}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_af1975886039b1db1a447e69cc449df87}
+
+
+Definition at line 104 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+String().
+
+
+\begin{DoxyCode}
+104                                                                     \{
+105   EXPECT\_FALSE(isValidString(\textcolor{stringliteral}{"a\(\backslash\)tcat."}));
+106   EXPECT\_FALSE(isValidString(\textcolor{stringliteral}{"\(\backslash\)x10 aaaaaaa"}));
+107   EXPECT\_FALSE(isValidString(\textcolor{stringliteral}{"chocolate\(\backslash\)x11"}));
+108   EXPECT\_FALSE(isValidString(\textcolor{stringliteral}{"pota\(\backslash\)nto"}));
+109 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Good\+Binary\+Content)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Good\+Binary\+Content}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a6fefe4d120d387e6b13f8cd686d34f82}
+
+
+Definition at line 111 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Encoded\+Binary\+Content().
+
+
+\begin{DoxyCode}
+111                                                               \{
+112   EXPECT\_TRUE(isValidEncodedBinaryContent(\textcolor{stringliteral}{"aGVsbG8="}));
+113   EXPECT\_TRUE(isValidEncodedBinaryContent(\textcolor{stringliteral}{"ZGZzZGZmc2Rm"}));
+114   EXPECT\_TRUE(isValidEncodedBinaryContent(\textcolor{stringliteral}{"ZA=="}));
+115 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Bad\+Binary\+Content)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Bad\+Binary\+Content}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a3365d6f62acbfc2de69c0778093808ed}
+
+
+Definition at line 117 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References is\+Valid\+Encoded\+Binary\+Content().
+
+
+\begin{DoxyCode}
+117                                                              \{
+118   EXPECT\_FALSE(isValidEncodedBinaryContent(\textcolor{stringliteral}{"aGVsbG8"}));
+119   EXPECT\_FALSE(isValidEncodedBinaryContent(\textcolor{stringliteral}{"aGVsb G8="}));
+120   EXPECT\_FALSE(isValidEncodedBinaryContent(\textcolor{stringliteral}{"aGVsbG!8="}));
+121   EXPECT\_FALSE(isValidEncodedBinaryContent(\textcolor{stringliteral}{"=aGVsbG8"}));
+122 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+\_\+\+Decode\+Binary\+Content)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+\_\+\+Decode\+Binary\+Content}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a607b65a44d48d26d4f9f2d7e082c00ea}
+
+
+Definition at line 124 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References decode\+Base64().
+
+
+\begin{DoxyCode}
+124                                                                  \{
+125   std::string input1 = \textcolor{stringliteral}{"ZnJ1aXQ="};
+126   std::string input2 = \textcolor{stringliteral}{"dG9tYXRv"};
+127   std::string input3 = \textcolor{stringliteral}{"ZWdncw=="};
+128   EXPECT\_EQ(decodeBase64(input1), \textcolor{stringliteral}{"fruit"});
+129   EXPECT\_EQ(decodeBase64(input2), \textcolor{stringliteral}{"tomato"});
+130   EXPECT\_EQ(decodeBase64(input3), \textcolor{stringliteral}{"eggs"});
+131 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+\_\+\+Encode\+Binary\+Content)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+\_\+\+Encode\+Binary\+Content}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a1865dc34da49ebe2e090b83fa85dca59}
+
+
+Definition at line 133 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References encode\+Base64().
+
+
+\begin{DoxyCode}
+133                                                                  \{
+134   std::string input1 = \textcolor{stringliteral}{"fruit"};
+135   std::string input2 = \textcolor{stringliteral}{"tomato"};
+136   std::string input3 = \textcolor{stringliteral}{"eggs"};
+137   EXPECT\_EQ(encodeBase64(input1), \textcolor{stringliteral}{"ZnJ1aXQ="});
+138   EXPECT\_EQ(encodeBase64(input2), \textcolor{stringliteral}{"dG9tYXRv"});
+139   EXPECT\_EQ(encodeBase64(input3), \textcolor{stringliteral}{"ZWdncw=="});
+140 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+\_\+\+Binary\+Content\+Empty)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+\_\+\+Binary\+Content\+Empty}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a971d360a170df0aadde070157957ef65}
+
+
+Definition at line 142 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References decode\+Base64(), and encode\+Base64().
+
+
+\begin{DoxyCode}
+142                                                                 \{
+143   std::string input1 = \textcolor{stringliteral}{""};
+144   std::string input2 = \textcolor{stringliteral}{""};
+145   EXPECT\_EQ(encodeBase64(input1), \textcolor{stringliteral}{""});
+146   EXPECT\_EQ(decodeBase64(input2), \textcolor{stringliteral}{""});
+147 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Item\+Type\+Matches\+Content\+Good)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Item\+Type\+Matches\+Content\+Good}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_a6478b47cbbd71a6127fbdd87d12f0bae}
+
+
+Definition at line 149 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+D\+O\+U\+B\+LE, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+I\+D\+E\+N\+T\+I\+F\+I\+ER, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+I\+N\+T64, item\+Type\+Matches\+Content(), proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+N\+O\+NE, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+S\+T\+R\+I\+NG, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::tag, and proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::value.
+
+
+\begin{DoxyCode}
+149                                                                        \{
+150   StructuredHeaderItem item;
+151   item.value = \textcolor{stringliteral}{"\(\backslash\)"potato\(\backslash\)""};
+152   item.tag = StructuredHeaderItem::Type::STRING;
+153   EXPECT\_TRUE(itemTypeMatchesContent(item));
+154 
+155   item.value = \textcolor{stringliteral}{"a\_800"};
+156   item.tag = StructuredHeaderItem::Type::IDENTIFIER;
+157   EXPECT\_TRUE(itemTypeMatchesContent(item));
+158 
+159   item.tag = StructuredHeaderItem::Type::NONE;
+160   EXPECT\_TRUE(itemTypeMatchesContent(item));
+161 
+162   item.value = \textcolor{stringliteral}{"hello"};
+163   item.tag = StructuredHeaderItem::Type::BINARYCONTENT;
+164   EXPECT\_TRUE(itemTypeMatchesContent(item));
+165 
+166   item.value = int64\_t(88);
+167   item.tag = StructuredHeaderItem::Type::INT64;
+168   EXPECT\_TRUE(itemTypeMatchesContent(item));
+169 
+170   item.value = double(88.8);
+171   item.tag = StructuredHeaderItem::Type::DOUBLE;
+172   EXPECT\_TRUE(itemTypeMatchesContent(item));
+173 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Structured\+Headers\+Utilities\+Test, Test\+Item\+Type\+Matches\+Content\+Bad)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Structured\+Headers\+::\+T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Structured\+Headers\+Utilities\+Test}}]{, }
+\item[{Test\+Item\+Type\+Matches\+Content\+Bad}]{}
+\end{DoxyParamCaption}
+)}\label{namespaceproxygen_1_1StructuredHeaders_adae3e57e4b778afbf69178ed36cddaa6}
+
+
+Definition at line 175 of file Structured\+Headers\+Utilities\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+B\+I\+N\+A\+R\+Y\+C\+O\+N\+T\+E\+NT, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+D\+O\+U\+B\+LE, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+I\+D\+E\+N\+T\+I\+F\+I\+ER, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+I\+N\+T64, item\+Type\+Matches\+Content(), proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::\+S\+T\+R\+I\+NG, proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::tag, and proxygen\+::\+Structured\+Headers\+::\+Structured\+Header\+Item\+::value.
+
+
+\begin{DoxyCode}
+175                                                                       \{
+176   StructuredHeaderItem item;
+177 
+178   item.value = \textcolor{stringliteral}{"hello"};
+179   item.tag = StructuredHeaderItem::Type::DOUBLE;
+180   EXPECT\_FALSE(itemTypeMatchesContent(item));
+181   item.tag = StructuredHeaderItem::Type::INT64;
+182   EXPECT\_FALSE(itemTypeMatchesContent(item));
+183 
+184   item.value = int64\_t(68);
+185   item.tag = StructuredHeaderItem::Type::DOUBLE;
+186   EXPECT\_FALSE(itemTypeMatchesContent(item));
+187   item.tag = StructuredHeaderItem::Type::STRING;
+188   EXPECT\_FALSE(itemTypeMatchesContent(item));
+189   item.tag = StructuredHeaderItem::Type::BINARYCONTENT;
+190   EXPECT\_FALSE(itemTypeMatchesContent(item));
+191   item.tag = StructuredHeaderItem::Type::IDENTIFIER;
+192   EXPECT\_FALSE(itemTypeMatchesContent(item));
+193 
+194   item.value = double(68.8);
+195   item.tag = StructuredHeaderItem::Type::INT64;
+196   EXPECT\_FALSE(itemTypeMatchesContent(item));
+197   item.tag = StructuredHeaderItem::Type::IDENTIFIER;
+198   EXPECT\_FALSE(itemTypeMatchesContent(item));
+199   item.tag = StructuredHeaderItem::Type::STRING;
+200   EXPECT\_FALSE(itemTypeMatchesContent(item));
+201   item.tag = StructuredHeaderItem::Type::BINARYCONTENT;
+202   EXPECT\_FALSE(itemTypeMatchesContent(item));
+203 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!decode\+Error\+Description@{decode\+Error\+Description}}
+\index{decode\+Error\+Description@{decode\+Error\+Description}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{decode\+Error\+Description}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::map$<${\bf Decode\+Error}, std\+::string$>$ proxygen\+::\+Structured\+Headers\+::decode\+Error\+Description\hspace{0.3cm}{\ttfamily [static]}}\label{namespaceproxygen_1_1StructuredHeaders_aa95c94eaa045d61c111ec8583a5fc065}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    \{DecodeError::OK, \textcolor{stringliteral}{"No error"}\},
+    \{DecodeError::VALUE\_TOO\_LONG, \textcolor{stringliteral}{"Numeric value is too long"}\},
+    \{DecodeError::INVALID\_CHARACTER, \textcolor{stringliteral}{"Invalid character"}\},
+    \{DecodeError::UNDECODEABLE\_BINARY\_CONTENT, \textcolor{stringliteral}{"Undecodable binary content"}\},
+    \{DecodeError::UNEXPECTED\_END\_OF\_BUFFER, \textcolor{stringliteral}{"Unexpected end of buffer"}\},
+    \{DecodeError::UNPARSEABLE\_NUMERIC\_TYPE, \textcolor{stringliteral}{"Unparseable numeric type"}\},
+    \{DecodeError::DUPLICATE\_KEY, \textcolor{stringliteral}{"Duplicate key found"}\}
+\}
+\end{DoxyCode}
+
+
+Definition at line 83 of file Structured\+Headers\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Buffer\+::handle\+Decode\+Error().
+
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!encode\+Error\+Description@{encode\+Error\+Description}}
+\index{encode\+Error\+Description@{encode\+Error\+Description}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{encode\+Error\+Description}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::map$<${\bf Encode\+Error}, std\+::string$>$ proxygen\+::\+Structured\+Headers\+::encode\+Error\+Description\hspace{0.3cm}{\ttfamily [static]}}\label{namespaceproxygen_1_1StructuredHeaders_ae7b91a2067c03c208fc35ce8883b53ec}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+    \{EncodeError::OK, \textcolor{stringliteral}{"No error"}\},
+    \{EncodeError::EMPTY\_DATA\_STRUCTURE, \textcolor{stringliteral}{"Empty data structure"}\},
+    \{EncodeError::BAD\_IDENTIFIER, \textcolor{stringliteral}{"Bad identifier"}\},
+    \{EncodeError::BAD\_STRING, \textcolor{stringliteral}{"Bad string"}\},
+    \{EncodeError::ITEM\_TYPE\_MISMATCH, \textcolor{stringliteral}{"Item type mismatch"}\},
+    \{EncodeError::ENCODING\_NULL\_ITEM, \textcolor{stringliteral}{"Tried to encode null item"}\}
+\}
+\end{DoxyCode}
+
+
+Definition at line 94 of file Structured\+Headers\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Encoder\+::handle\+Encode\+Error().
+
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!k\+Max\+Valid\+Float\+Length@{k\+Max\+Valid\+Float\+Length}}
+\index{k\+Max\+Valid\+Float\+Length@{k\+Max\+Valid\+Float\+Length}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{k\+Max\+Valid\+Float\+Length}]{\setlength{\rightskip}{0pt plus 5cm}const int proxygen\+::\+Structured\+Headers\+::k\+Max\+Valid\+Float\+Length = 16\hspace{0.3cm}{\ttfamily [static]}}\label{namespaceproxygen_1_1StructuredHeaders_a7dc35307c00ef16631037e84c4549f34}
+
+
+Definition at line 21 of file Structured\+Headers\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Number(), and proxygen\+::\+Structured\+Headers\+Encoder\+::\+Structured\+Headers\+Encoder().
+
+\index{proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}!k\+Max\+Valid\+Integer\+Length@{k\+Max\+Valid\+Integer\+Length}}
+\index{k\+Max\+Valid\+Integer\+Length@{k\+Max\+Valid\+Integer\+Length}!proxygen\+::\+Structured\+Headers@{proxygen\+::\+Structured\+Headers}}
+\subsubsection[{k\+Max\+Valid\+Integer\+Length}]{\setlength{\rightskip}{0pt plus 5cm}const int proxygen\+::\+Structured\+Headers\+::k\+Max\+Valid\+Integer\+Length = 19\hspace{0.3cm}{\ttfamily [static]}}\label{namespaceproxygen_1_1StructuredHeaders_a10a15630c1045d489383efa237108d87}
+
+
+Definition at line 20 of file Structured\+Headers\+Constants.\+h.
+
+
+
+Referenced by proxygen\+::\+Structured\+Headers\+Buffer\+::parse\+Number().
+

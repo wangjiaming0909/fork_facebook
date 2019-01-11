@@ -1,0 +1,74 @@
+\section{proxygen\+:\+:H\+T\+T\+P2\+Priority\+Queue\+Base\+:\+:Base\+Node Class Reference}
+\label{classproxygen_1_1HTTP2PriorityQueueBase_1_1BaseNode}\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P2\+Priority\+Queue.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Base\+Node} ()
+\item 
+virtual bool {\bf is\+Enqueued} () const =0
+\item 
+virtual uint64\+\_\+t {\bf calculate\+Depth} (bool include\+Virtual=true) const =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 29 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node}!````~Base\+Node@{$\sim$\+Base\+Node}}
+\index{````~Base\+Node@{$\sim$\+Base\+Node}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node}}
+\subsubsection[{$\sim$\+Base\+Node()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node\+::$\sim$\+Base\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_1_1BaseNode_a81db3ac47423c50fc20ff68cd6eebe09}
+
+
+Definition at line 31 of file H\+T\+T\+P2\+Priority\+Queue.\+h.
+
+
+
+References calculate\+Depth(), and is\+Enqueued().
+
+
+\begin{DoxyCode}
+31 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node}!calculate\+Depth@{calculate\+Depth}}
+\index{calculate\+Depth@{calculate\+Depth}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node}}
+\subsubsection[{calculate\+Depth(bool include\+Virtual=true) const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint64\+\_\+t proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node\+::calculate\+Depth (
+\begin{DoxyParamCaption}
+\item[{bool}]{include\+Virtual = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_1_1BaseNode_ae5abfb9239fce01e8b66097c0a0368f4}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Transaction\+::update\+Contentions\+Count(), proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::update\+Priority(), and $\sim$\+Base\+Node().
+
+\index{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node}!is\+Enqueued@{is\+Enqueued}}
+\index{is\+Enqueued@{is\+Enqueued}!proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node@{proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node}}
+\subsubsection[{is\+Enqueued() const =0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+Base\+::\+Base\+Node\+::is\+Enqueued (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTP2PriorityQueueBase_1_1BaseNode_a433cbcf28eb308085b0658e4c0c7fb78}
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::\+Node\+::in\+Egress\+Tree(), proxygen\+::\+H\+T\+T\+P2\+Priority\+Queue\+::signal\+Pending\+Egress(), and $\sim$\+Base\+Node().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P2\+Priority\+Queue.\+h}\end{DoxyCompactItemize}

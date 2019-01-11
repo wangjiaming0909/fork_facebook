@@ -1,0 +1,457 @@
+\section{H\+T\+T\+P1x\+Codec\+Callback Class Reference}
+\label{classHTTP1xCodecCallback}\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+Inheritance diagram for H\+T\+T\+P1x\+Codec\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHTTP1xCodecCallback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P1x\+Codec\+Callback} ()
+\item 
+void {\bf on\+Message\+Begin} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Message} $\ast$) override
+\item 
+void {\bf on\+Push\+Message\+Begin} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, {\bf H\+T\+T\+P\+Message} $\ast$) override
+\item 
+void {\bf on\+Headers\+Complete} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ msg) override
+\item 
+void {\bf on\+Body} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t) override
+\item 
+void {\bf on\+Chunk\+Header} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, size\+\_\+t) override
+\item 
+void {\bf on\+Chunk\+Complete} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}) override
+\item 
+void {\bf on\+Trailers\+Complete} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$ trailers) override
+\item 
+void {\bf on\+Message\+Complete} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, bool) override
+\item 
+void {\bf on\+Error} ({\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}, const {\bf H\+T\+T\+P\+Exception} \&error, bool) override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf headers\+Complete} \{0\}
+\item 
+uint32\+\_\+t {\bf trailers\+Complete} \{0\}
+\item 
+uint32\+\_\+t {\bf message\+Complete} \{0\}
+\item 
+uint32\+\_\+t {\bf errors} \{0\}
+\item 
+uint32\+\_\+t {\bf body\+Len} \{0\}
+\item 
+{\bf H\+T\+T\+P\+Header\+Size} {\bf header\+Size}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ {\bf msg\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$ {\bf trailers\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 22 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{H\+T\+T\+P1x\+Codec\+Callback()}]{\setlength{\rightskip}{0pt plus 5cm}H\+T\+T\+P1x\+Codec\+Callback\+::\+H\+T\+T\+P1x\+Codec\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classHTTP1xCodecCallback_ad5d617560cdfd341ba670fb80d412fca}
+
+
+Definition at line 24 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+24 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Body@{on\+Body}}
+\index{on\+Body@{on\+Body}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Body(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ chain, uint16\+\_\+t) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Body (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{chain, }
+\item[{uint16\+\_\+t}]{padding}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_a45c3eac90864197e1ec5334016629431}
+Called for each block of message body data 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em chain} & One or more buffers of body data. The codec will remove any protocol framing, such as H\+T\+T\+P/1.\+1 chunk headers, from the buffers before calling this function. \\
+\hline
+{\em padding} & Number of pad bytes that came with the data segment \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_af6661786cb419aa6b0138ed1d8085d52}.
+
+
+
+Definition at line 37 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+39                                    \{
+40     bodyLen += chain->computeChainDataLength();
+41   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Chunk\+Complete@{on\+Chunk\+Complete}}
+\index{on\+Chunk\+Complete@{on\+Chunk\+Complete}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Chunk\+Complete(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Chunk\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_ab9f5539148d7b2f8ba195a56aefc13b0}
+Called when the terminating C\+R\+LF is received to end a chunk of H\+T\+TP body data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_aad1fa297ee8929ea5032b7037956198b}.
+
+
+
+Definition at line 44 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+44 \{\}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Chunk\+Header@{on\+Chunk\+Header}}
+\index{on\+Chunk\+Header@{on\+Chunk\+Header}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Chunk\+Header(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, size\+\_\+t) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Chunk\+Header (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{, }
+\item[{size\+\_\+t}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_a37b309b40fb28e30cf01c25e737801b7}
+Called for each H\+T\+TP chunk header.
+
+\doxyref{on\+Chunk\+Header()}{p.}{classHTTP1xCodecCallback_a37b309b40fb28e30cf01c25e737801b7} will be called when the chunk header is received. As the chunk data arrives, it will be passed to the callback normally with \doxyref{on\+Body()}{p.}{classHTTP1xCodecCallback_a45c3eac90864197e1ec5334016629431} calls. Note that the chunk data may arrive in multiple \doxyref{on\+Body()}{p.}{classHTTP1xCodecCallback_a45c3eac90864197e1ec5334016629431} calls\+: it is not guaranteed to arrive in a single \doxyref{on\+Body()}{p.}{classHTTP1xCodecCallback_a45c3eac90864197e1ec5334016629431} call.
+
+After the chunk data has been received and the terminating C\+R\+LF has been received, \doxyref{on\+Chunk\+Complete()}{p.}{classHTTP1xCodecCallback_ab9f5539148d7b2f8ba195a56aefc13b0} will be called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em length} & The chunk length. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_ae106b662c7e855b4677ec55d4235e66d}.
+
+
+
+Definition at line 42 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+43                                         \{\}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Error@{on\+Error}}
+\index{on\+Error@{on\+Error}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Error(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, const H\+T\+T\+P\+Exception \&error, bool) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Error (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{const {\bf H\+T\+T\+P\+Exception} \&}]{error, }
+\item[{bool}]{new\+Txn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_ade76ef6d005c0b44518982f4c743f50c}
+Called when a parsing or protocol error has occurred 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em error} & Description of the error \\
+\hline
+{\em new\+Txn} & true if on\+Message\+Begin has not been called for txn \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a39e04260da7dd1a074393fe473d6ac34}.
+
+
+
+Definition at line 54 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+E\+R\+R\+OR.
+
+
+\begin{DoxyCode}
+56                                 \{
+57     ++errors;
+58     LOG(ERROR) << \textcolor{stringliteral}{"parse error "} << error;
+59   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Headers\+Complete(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Message $>$ msg) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_a931173aed9988e11ed2222cf1545189e}
+Called when all the headers of an ingress message have been parsed 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em msg} & The message \\
+\hline
+{\em size} & Size of the ingress header \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a7c462d2b3485d0d1077a9ba775f90ebc}.
+
+
+
+Definition at line 31 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Ingress\+Header\+Size().
+
+
+\begin{DoxyCode}
+32                                                                   \{
+33     headersComplete++;
+34     headerSize = msg->getIngressHeaderSize();
+35     msg_ = std::move(msg);
+36   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Message\+Begin@{on\+Message\+Begin}}
+\index{on\+Message\+Begin@{on\+Message\+Begin}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Message\+Begin(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, H\+T\+T\+P\+Message $\ast$) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Message\+Begin (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_a39aea280119e87229685df6b4b18dcbb}
+Called when a new message is seen while parsing the ingress 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em msg} & A newly allocated H\+T\+T\+P\+Message \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a7bcd0c639fd05f92b31806cee4f4b1aa}.
+
+
+
+Definition at line 26 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+27                                                \{\}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Message\+Complete@{on\+Message\+Complete}}
+\index{on\+Message\+Complete@{on\+Message\+Complete}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Message\+Complete(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, bool) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Message\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{bool}]{upgrade}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_a7a8ad6d532d80bf525f344e24114fd00}
+Called at end of a message (including body and trailers, if applicable) 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em upgrade} & Whether the connection has been upgraded to another protocol. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a8b42c169cc7f48b42be7f97b463db08e}.
+
+
+
+Definition at line 50 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+51                                           \{
+52     ++messageComplete;
+53   \}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Push\+Message\+Begin@{on\+Push\+Message\+Begin}}
+\index{on\+Push\+Message\+Begin@{on\+Push\+Message\+Begin}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Push\+Message\+Begin(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, H\+T\+T\+P\+Message $\ast$) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Push\+Message\+Begin (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{, }
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_adcbd6ed2fa495238b09bf35a778e4900}
+Called when a new push message is seen while parsing the ingress.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em assoc\+Stream} & The stream ID of the associated stream, which can never be 0 \\
+\hline
+{\em msg} & A newly allocated H\+T\+T\+P\+Message \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_a2a54bb421215a2929e2c8ee0d2112032}.
+
+
+
+Definition at line 28 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+30                                                    \{\}
+\end{DoxyCode}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!on\+Trailers\+Complete@{on\+Trailers\+Complete}}
+\index{on\+Trailers\+Complete@{on\+Trailers\+Complete}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{on\+Trailers\+Complete(\+H\+T\+T\+P\+Codec\+::\+Stream\+I\+D, std\+::unique\+\_\+ptr$<$ H\+T\+T\+P\+Headers $>$ trailers) override}]{\setlength{\rightskip}{0pt plus 5cm}void H\+T\+T\+P1x\+Codec\+Callback\+::on\+Trailers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID}}]{stream, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Headers} $>$}]{trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classHTTP1xCodecCallback_a90d3f9b28edbed340ce02d2eb83bbd16}
+Called when all the trailers of an ingress message have been parsed, but only if the number of trailers is nonzero. 
+\begin{DoxyParams}{Parameters}
+{\em stream} & The stream ID \\
+\hline
+{\em trailers} & The message trailers \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf proxygen\+::\+H\+T\+T\+P\+Codec\+::\+Callback} \doxyref{}{p.}{classproxygen_1_1HTTPCodec_1_1Callback_aa3ecee42ce8c09840aa67ee824c5cfe3}.
+
+
+
+Definition at line 45 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+46                                                                         \{
+47     trailersComplete++;
+48     trailers_ = std::move(trailers);
+49   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!body\+Len@{body\+Len}}
+\index{body\+Len@{body\+Len}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{body\+Len}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t H\+T\+T\+P1x\+Codec\+Callback\+::body\+Len \{0\}}\label{classHTTP1xCodecCallback_a6f8674e5a63dc828d037eeb8d998317e}
+
+
+Definition at line 65 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!errors@{errors}}
+\index{errors@{errors}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{errors}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t H\+T\+T\+P1x\+Codec\+Callback\+::errors \{0\}}\label{classHTTP1xCodecCallback_ae99b1392e65c34270ba9babbeec6114d}
+
+
+Definition at line 64 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!headers\+Complete@{headers\+Complete}}
+\index{headers\+Complete@{headers\+Complete}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{headers\+Complete}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t H\+T\+T\+P1x\+Codec\+Callback\+::headers\+Complete \{0\}}\label{classHTTP1xCodecCallback_a1308e199e5e8333172e77c8f4122c0c1}
+
+
+Definition at line 61 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T(), and T\+E\+S\+T\+\_\+\+P().
+
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!header\+Size@{header\+Size}}
+\index{header\+Size@{header\+Size}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{header\+Size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Header\+Size} H\+T\+T\+P1x\+Codec\+Callback\+::header\+Size}\label{classHTTP1xCodecCallback_ad8354df7a63de60ff4719f7da562fa5f}
+
+
+Definition at line 66 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!message\+Complete@{message\+Complete}}
+\index{message\+Complete@{message\+Complete}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{message\+Complete}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t H\+T\+T\+P1x\+Codec\+Callback\+::message\+Complete \{0\}}\label{classHTTP1xCodecCallback_aebfeb1b689a9f9ec196d1aabc24f4923}
+
+
+Definition at line 63 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!msg\+\_\+@{msg\+\_\+}}
+\index{msg\+\_\+@{msg\+\_\+}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{msg\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Message}$>$ H\+T\+T\+P1x\+Codec\+Callback\+::msg\+\_\+}\label{classHTTP1xCodecCallback_a2beca3aadf55f92c8eca0e1dcc14b11a}
+
+
+Definition at line 67 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T(), and T\+E\+S\+T\+\_\+\+P().
+
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!trailers\+\_\+@{trailers\+\_\+}}
+\index{trailers\+\_\+@{trailers\+\_\+}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{trailers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Headers}$>$ H\+T\+T\+P1x\+Codec\+Callback\+::trailers\+\_\+}\label{classHTTP1xCodecCallback_a9588d2eb08015f14bc97f2489174d3f0}
+
+
+Definition at line 68 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}!trailers\+Complete@{trailers\+Complete}}
+\index{trailers\+Complete@{trailers\+Complete}!H\+T\+T\+P1x\+Codec\+Callback@{H\+T\+T\+P1x\+Codec\+Callback}}
+\subsubsection[{trailers\+Complete}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t H\+T\+T\+P1x\+Codec\+Callback\+::trailers\+Complete \{0\}}\label{classHTTP1xCodecCallback_ab14ed0b8a7f46cc963dce83209ced5b5}
+
+
+Definition at line 62 of file H\+T\+T\+P1x\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/test/{\bf H\+T\+T\+P1x\+Codec\+Test.\+cpp}\end{DoxyCompactItemize}

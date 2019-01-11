@@ -1,0 +1,394 @@
+\section{proxygen\+:\+:Header\+Decode\+Info Class Reference}
+\label{classproxygen_1_1HeaderDecodeInfo}\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+
+
+{\ttfamily \#include $<$Header\+Decode\+Info.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf init} (bool is\+Request\+In, bool is\+Request\+Trailers)
+\item 
+bool {\bf on\+Header} (const folly\+::fbstring \&{\bf name}, const folly\+::fbstring \&value)
+\item 
+void {\bf on\+Headers\+Complete} ({\bf H\+T\+T\+P\+Header\+Size} decoded\+Size)
+\item 
+bool {\bf has\+Status} () const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Message} $>$ {\bf msg}
+\item 
+{\bf H\+T\+T\+P\+Request\+Verifier} {\bf verifier}
+\item 
+std\+::string {\bf parsing\+Error}
+\item 
+{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} {\bf decode\+Error} \{{\bf H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+N\+O\+NE}\}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf is\+Request\+\_\+} \{false\}
+\item 
+bool {\bf is\+Request\+Trailers\+\_\+} \{false\}
+\item 
+bool {\bf has\+Status\+\_\+} \{false\}
+\item 
+bool {\bf regular\+Header\+Seen\+\_\+} \{false\}
+\item 
+bool {\bf pseudo\+Header\+Seen\+\_\+} \{false\}
+\item 
+folly\+::\+Optional$<$ uint32\+\_\+t $>$ {\bf content\+Length\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Header\+Decode\+Info.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!has\+Status@{has\+Status}}
+\index{has\+Status@{has\+Status}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{has\+Status() const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Header\+Decode\+Info\+::has\+Status (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1HeaderDecodeInfo_a80ffac3cb82f51ad84bd42be83f39341}
+
+
+Definition at line 135 of file Header\+Decode\+Info.\+cpp.
+
+
+
+References has\+Status\+\_\+.
+
+
+
+Referenced by init(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parsing\+Trailers().
+
+
+\begin{DoxyCode}
+135                                        \{
+136   \textcolor{keywordflow}{return} hasStatus_;
+137 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!init@{init}}
+\index{init@{init}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{init(bool is\+Request\+In, bool is\+Request\+Trailers)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Header\+Decode\+Info\+::init (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\+Request\+In, }
+\item[{bool}]{is\+Request\+Trailers}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HeaderDecodeInfo_ad857e35a3c1882f0bc958ae6d63849b5}
+
+
+Definition at line 21 of file Header\+Decode\+Info.\+h.
+
+
+
+References content\+Length\+\_\+, decode\+Error, has\+Status(), has\+Status\+\_\+, is\+Request\+\_\+, is\+Request\+Trailers\+\_\+, msg, name, proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, on\+Header(), on\+Headers\+Complete(), parsing\+Error, pseudo\+Header\+Seen\+\_\+, regular\+Header\+Seen\+\_\+, proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::reset(), and verifier.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames().
+
+
+\begin{DoxyCode}
+21                                                       \{
+22     CHECK(!msg);
+23     msg.reset(\textcolor{keyword}{new} HTTPMessage());
+24     isRequest_ = isRequestIn;
+25     isRequestTrailers_ = isRequestTrailers;
+26     hasStatus_ = \textcolor{keyword}{false};
+27     contentLength_ = folly::none;
+28     regularHeaderSeen_ = \textcolor{keyword}{false};
+29     pseudoHeaderSeen_ = \textcolor{keyword}{false};
+30     parsingError = \textcolor{stringliteral}{""};
+31     decodeError = HPACK::DecodeError::NONE;
+32     verifier.reset(msg.get());
+33   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!on\+Header@{on\+Header}}
+\index{on\+Header@{on\+Header}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{on\+Header(const folly\+::fbstring \&name, const folly\+::fbstring \&value)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Header\+Decode\+Info\+::on\+Header (
+\begin{DoxyParamCaption}
+\item[{const folly\+::fbstring \&}]{name, }
+\item[{const folly\+::fbstring \&}]{value}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HeaderDecodeInfo_afdb2d683757fb05b650f04dd2ea60771}
+
+
+Definition at line 16 of file Header\+Decode\+Info.\+cpp.
+
+
+
+References content\+Length\+\_\+, decode\+Error, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Default\+Reason(), has\+Status\+\_\+, is\+Request\+\_\+, proxygen\+::headers\+::k\+Authority, proxygen\+::headers\+::k\+Method, proxygen\+::headers\+::k\+Path, proxygen\+::headers\+::k\+Protocol, proxygen\+::headers\+::k\+Scheme, proxygen\+::headers\+::k\+Status, msg, proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, parsing\+Error, pseudo\+Header\+Seen\+\_\+, regular\+Header\+Seen\+\_\+, proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::set\+Authority(), proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::set\+Path(), proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::set\+Scheme(), proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::set\+Upgrade\+Protocol(), proxygen\+::\+Codec\+Util\+::\+S\+T\+R\+I\+CT, proxygen\+::\+Codec\+Util\+::validate\+Header\+Name(), proxygen\+::\+Codec\+Util\+::validate\+Header\+Value(), and verifier.
+
+
+
+Referenced by init(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Header().
+
+
+\begin{DoxyCode}
+17                                                             \{
+18   \textcolor{comment}{// Refuse decoding other headers if an error is already found}
+19   \textcolor{keywordflow}{if} (decodeError != HPACK::DecodeError::NONE
+20       || parsingError != \textcolor{stringliteral}{""}) \{
+21     VLOG(4) << \textcolor{stringliteral}{"Ignoring header="} << name << \textcolor{stringliteral}{" value="} << value <<
+22       \textcolor{stringliteral}{" due to parser error="} << parsingError;
+23     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+24   \}
+25   VLOG(5) << \textcolor{stringliteral}{"Processing header="} << name << \textcolor{stringliteral}{" value="} << value;
+26   folly::StringPiece nameSp(name);
+27   folly::StringPiece valueSp(value);
+28 
+29   \textcolor{keywordflow}{if} (nameSp.startsWith(\textcolor{charliteral}{':'})) \{
+30     pseudoHeaderSeen_ = \textcolor{keyword}{true};
+31     \textcolor{keywordflow}{if} (regularHeaderSeen_) \{
+32       parsingError = folly::to<string>(\textcolor{stringliteral}{"Illegal pseudo header name="}, nameSp);
+33       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+34     \}
+35     \textcolor{keywordflow}{if} (isRequest_) \{
+36       \textcolor{keywordflow}{if} (nameSp == headers::kMethod) \{
+37         \textcolor{keywordflow}{if} (!verifier.setMethod(valueSp)) \{
+38           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+39         \}
+40       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nameSp == headers::kScheme) \{
+41         \textcolor{keywordflow}{if} (!verifier.setScheme(valueSp)) \{
+42           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+43         \}
+44       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nameSp == headers::kAuthority) \{
+45         \textcolor{keywordflow}{if} (!verifier.setAuthority(valueSp)) \{
+46           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+47         \}
+48       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nameSp == headers::kPath) \{
+49         \textcolor{keywordflow}{if} (!verifier.setPath(valueSp)) \{
+50           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+51         \}
+52       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (nameSp == headers::kProtocol) \{
+53         \textcolor{keywordflow}{if} (!verifier.setUpgradeProtocol(valueSp)) \{
+54           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+55         \}
+56       \} \textcolor{keywordflow}{else} \{
+57         parsingError = folly::to<string>(\textcolor{stringliteral}{"Invalid req header name="}, nameSp);
+58         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+59       \}
+60     \} \textcolor{keywordflow}{else} \{
+61       \textcolor{keywordflow}{if} (nameSp == headers::kStatus) \{
+62         \textcolor{keywordflow}{if} (hasStatus_) \{
+63           parsingError = string(\textcolor{stringliteral}{"Duplicate status"});
+64           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+65         \}
+66         hasStatus_ = \textcolor{keyword}{true};
+67         int32\_t code = -1;
+68         folly::tryTo<int32\_t>(valueSp).then(
+69             [&code](int32\_t num) \{ code = num; \});
+70         \textcolor{keywordflow}{if} (code >= 100 && code <= 999) \{
+71           msg->setStatusCode(code);
+72           msg->setStatusMessage(HTTPMessage::getDefaultReason(code));
+73         \} \textcolor{keywordflow}{else} \{
+74           parsingError = folly::to<string>(\textcolor{stringliteral}{"Malformed status code="}, valueSp);
+75           \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+76         \}
+77       \} \textcolor{keywordflow}{else} \{
+78         parsingError = folly::to<string>(\textcolor{stringliteral}{"Invalid resp header name="}, nameSp);
+79         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+80       \}
+81     \}
+82   \} \textcolor{keywordflow}{else} \{
+83     regularHeaderSeen_ = \textcolor{keyword}{true};
+84     \textcolor{keywordflow}{if} (nameSp == \textcolor{stringliteral}{"connection"}) \{
+85       parsingError = string(\textcolor{stringliteral}{"HTTP/2 Message with Connection header"});
+86       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+87     \}
+88     \textcolor{keywordflow}{if} (nameSp == \textcolor{stringliteral}{"content-length"}) \{
+89       uint32\_t cl = 0;
+90       folly::tryTo<uint32\_t>(valueSp).then(
+91           [&cl](uint32\_t num) \{ cl = num; \});
+92       \textcolor{keywordflow}{if} (contentLength_ && *contentLength_ != cl) \{
+93         parsingError = string(\textcolor{stringliteral}{"Multiple content-length headers"});
+94         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+95       \}
+96       contentLength_ = cl;
+97     \}
+98     \textcolor{keywordtype}{bool} nameOk = CodecUtil::validateHeaderName(nameSp);
+99     \textcolor{keywordtype}{bool} valueOk = CodecUtil::validateHeaderValue(valueSp, CodecUtil::STRICT);
+100     \textcolor{keywordflow}{if} (!nameOk || !valueOk) \{
+101       parsingError = folly::to<string>(\textcolor{stringliteral}{"Bad header value: name="},
+102                                        nameSp, \textcolor{stringliteral}{" value="}, valueSp);
+103       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+104     \}
+105     \textcolor{comment}{// Add the (name, value) pair to headers}
+106     msg->getHeaders().add(nameSp, valueSp);
+107   \}
+108   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+109 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!on\+Headers\+Complete@{on\+Headers\+Complete}}
+\index{on\+Headers\+Complete@{on\+Headers\+Complete}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{on\+Headers\+Complete(\+H\+T\+T\+P\+Header\+Size decoded\+Size)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Header\+Decode\+Info\+::on\+Headers\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Header\+Size}}]{decoded\+Size}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HeaderDecodeInfo_ad8bdd9b9c1ffe378e61c12d91f9f446e}
+
+
+Definition at line 111 of file Header\+Decode\+Info.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::combine(), proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::error, has\+Status\+\_\+, is\+Request\+\_\+, is\+Request\+Trailers\+\_\+, msg, parsing\+Error, pseudo\+Header\+Seen\+\_\+, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Request\+Verifier\+::validate(), and verifier.
+
+
+
+Referenced by init(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+111                                                                    \{
+112   HTTPHeaders& headers = msg->getHeaders();
+113 
+114   \textcolor{keywordflow}{if} (isRequest_ && !isRequestTrailers_) \{
+115     \textcolor{keyword}{auto} combinedCookie = headers.combine(HTTP\_HEADER\_COOKIE, \textcolor{stringliteral}{"; "});
+116     \textcolor{keywordflow}{if} (!combinedCookie.empty()) \{
+117       headers.set(HTTP\_HEADER\_COOKIE, combinedCookie);
+118     \}
+119     \textcolor{keywordflow}{if} (!verifier.validate()) \{
+120       parsingError = verifier.error;
+121       \textcolor{keywordflow}{return};
+122     \}
+123   \}
+124 
+125   \textcolor{keywordtype}{bool} isResponseTrailers = (!isRequest_ && !hasStatus_);
+126   \textcolor{keywordflow}{if} ((isRequestTrailers_ || isResponseTrailers) && pseudoHeaderSeen_) \{
+127     parsingError = \textcolor{stringliteral}{"Pseudo headers forbidden in trailers."};
+128     \textcolor{keywordflow}{return};
+129   \}
+130 
+131   msg->setHTTPVersion(1, 1);
+132   msg->setIngressHeaderSize(decodedSize);
+133 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!content\+Length\+\_\+@{content\+Length\+\_\+}}
+\index{content\+Length\+\_\+@{content\+Length\+\_\+}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{content\+Length\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Optional$<$uint32\+\_\+t$>$ proxygen\+::\+Header\+Decode\+Info\+::content\+Length\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HeaderDecodeInfo_ac4f8d4707ff340c762e102d181daf291}
+
+
+Definition at line 54 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), and on\+Header().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!decode\+Error@{decode\+Error}}
+\index{decode\+Error@{decode\+Error}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{decode\+Error}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} proxygen\+::\+Header\+Decode\+Info\+::decode\+Error \{{\bf H\+P\+A\+C\+K\+::\+Decode\+Error\+::\+N\+O\+NE}\}}\label{classproxygen_1_1HeaderDecodeInfo_a1ee0cd983100c8e34030b33f176c29e6}
+
+
+Definition at line 46 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Decode\+Error(), on\+Header(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!has\+Status\+\_\+@{has\+Status\+\_\+}}
+\index{has\+Status\+\_\+@{has\+Status\+\_\+}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{has\+Status\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Header\+Decode\+Info\+::has\+Status\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HeaderDecodeInfo_a66a48dd79098a7e71a04afcf5e3c3c2d}
+
+
+Definition at line 51 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by has\+Status(), init(), on\+Header(), and on\+Headers\+Complete().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!is\+Request\+\_\+@{is\+Request\+\_\+}}
+\index{is\+Request\+\_\+@{is\+Request\+\_\+}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{is\+Request\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Header\+Decode\+Info\+::is\+Request\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HeaderDecodeInfo_a00d0768c36e79101d800d300c9fd2612}
+
+
+Definition at line 49 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), on\+Header(), and on\+Headers\+Complete().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!is\+Request\+Trailers\+\_\+@{is\+Request\+Trailers\+\_\+}}
+\index{is\+Request\+Trailers\+\_\+@{is\+Request\+Trailers\+\_\+}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{is\+Request\+Trailers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Header\+Decode\+Info\+::is\+Request\+Trailers\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HeaderDecodeInfo_ac647e1e441d03ec7a48dbde0ed4caa96}
+
+
+Definition at line 50 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), and on\+Headers\+Complete().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!msg@{msg}}
+\index{msg@{msg}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{msg}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Message}$>$ proxygen\+::\+Header\+Decode\+Info\+::msg}\label{classproxygen_1_1HeaderDecodeInfo_ab2bd908e32fc3dc3164d9ddba192fa9a}
+
+
+Definition at line 43 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), on\+Header(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Headers\+Complete(), on\+Headers\+Complete(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!parsing\+Error@{parsing\+Error}}
+\index{parsing\+Error@{parsing\+Error}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{parsing\+Error}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string proxygen\+::\+Header\+Decode\+Info\+::parsing\+Error}\label{classproxygen_1_1HeaderDecodeInfo_ab2b5405e0ba8df58913f00a254861e3f}
+
+
+Definition at line 45 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Header(), on\+Header(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Headers\+Complete(), on\+Headers\+Complete(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Decode\+Frames().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!pseudo\+Header\+Seen\+\_\+@{pseudo\+Header\+Seen\+\_\+}}
+\index{pseudo\+Header\+Seen\+\_\+@{pseudo\+Header\+Seen\+\_\+}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{pseudo\+Header\+Seen\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Header\+Decode\+Info\+::pseudo\+Header\+Seen\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HeaderDecodeInfo_ab057dcf3b4aba361a1b16b24763fdffa}
+
+
+Definition at line 53 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), on\+Header(), and on\+Headers\+Complete().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!regular\+Header\+Seen\+\_\+@{regular\+Header\+Seen\+\_\+}}
+\index{regular\+Header\+Seen\+\_\+@{regular\+Header\+Seen\+\_\+}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{regular\+Header\+Seen\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Header\+Decode\+Info\+::regular\+Header\+Seen\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HeaderDecodeInfo_ac280b3fffa362ea88f4522806968ee27}
+
+
+Definition at line 52 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), and on\+Header().
+
+\index{proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}!verifier@{verifier}}
+\index{verifier@{verifier}!proxygen\+::\+Header\+Decode\+Info@{proxygen\+::\+Header\+Decode\+Info}}
+\subsubsection[{verifier}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Request\+Verifier} proxygen\+::\+Header\+Decode\+Info\+::verifier}\label{classproxygen_1_1HeaderDecodeInfo_a29f39dc842c38cd602a798990182fddf}
+
+
+Definition at line 44 of file Header\+Decode\+Info.\+h.
+
+
+
+Referenced by init(), on\+Header(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::on\+Headers\+Complete(), and on\+Headers\+Complete().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf Header\+Decode\+Info.\+h}\item 
+proxygen/lib/http/codec/{\bf Header\+Decode\+Info.\+cpp}\end{DoxyCompactItemize}

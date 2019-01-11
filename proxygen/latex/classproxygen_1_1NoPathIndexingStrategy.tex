@@ -1,0 +1,117 @@
+\section{proxygen\+:\+:No\+Path\+Indexing\+Strategy Class Reference}
+\label{classproxygen_1_1NoPathIndexingStrategy}\index{proxygen\+::\+No\+Path\+Indexing\+Strategy@{proxygen\+::\+No\+Path\+Indexing\+Strategy}}
+
+
+{\ttfamily \#include $<$No\+Path\+Indexing\+Strategy.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:No\+Path\+Indexing\+Strategy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1NoPathIndexingStrategy}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf No\+Path\+Indexing\+Strategy} ()
+\item 
+bool {\bf index\+Header} (const {\bf H\+P\+A\+C\+K\+Header} \&header) const override
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const {\bf No\+Path\+Indexing\+Strategy} $\ast$ {\bf get\+Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 16 of file No\+Path\+Indexing\+Strategy.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+No\+Path\+Indexing\+Strategy@{proxygen\+::\+No\+Path\+Indexing\+Strategy}!No\+Path\+Indexing\+Strategy@{No\+Path\+Indexing\+Strategy}}
+\index{No\+Path\+Indexing\+Strategy@{No\+Path\+Indexing\+Strategy}!proxygen\+::\+No\+Path\+Indexing\+Strategy@{proxygen\+::\+No\+Path\+Indexing\+Strategy}}
+\subsubsection[{No\+Path\+Indexing\+Strategy()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+No\+Path\+Indexing\+Strategy\+::\+No\+Path\+Indexing\+Strategy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1NoPathIndexingStrategy_ab9d11ea110330fbd7a7a672d002dd009}
+
+
+Definition at line 20 of file No\+Path\+Indexing\+Strategy.\+h.
+
+
+
+Referenced by get\+Instance().
+
+
+\begin{DoxyCode}
+21     : HeaderIndexingStrategy() \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+No\+Path\+Indexing\+Strategy@{proxygen\+::\+No\+Path\+Indexing\+Strategy}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!proxygen\+::\+No\+Path\+Indexing\+Strategy@{proxygen\+::\+No\+Path\+Indexing\+Strategy}}
+\subsubsection[{get\+Instance()}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf No\+Path\+Indexing\+Strategy} $\ast$ proxygen\+::\+No\+Path\+Indexing\+Strategy\+::get\+Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1NoPathIndexingStrategy_af1c67c739881bf95a78959773010951a}
+
+
+Definition at line 14 of file No\+Path\+Indexing\+Strategy.\+cpp.
+
+
+
+References No\+Path\+Indexing\+Strategy().
+
+
+
+Referenced by proxygen\+::compress\+::\+H\+P\+A\+C\+K\+Scheme\+::\+H\+P\+A\+C\+K\+Scheme(), and proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+14                                                                   \{
+15   \textcolor{keyword}{static} \textcolor{keyword}{const} NoPathIndexingStrategy* instance = \textcolor{keyword}{new} NoPathIndexingStrategy();
+16   \textcolor{keywordflow}{return} instance;
+17 \}
+\end{DoxyCode}
+\index{proxygen\+::\+No\+Path\+Indexing\+Strategy@{proxygen\+::\+No\+Path\+Indexing\+Strategy}!index\+Header@{index\+Header}}
+\index{index\+Header@{index\+Header}!proxygen\+::\+No\+Path\+Indexing\+Strategy@{proxygen\+::\+No\+Path\+Indexing\+Strategy}}
+\subsubsection[{index\+Header(const H\+P\+A\+C\+K\+Header \&header) const override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+No\+Path\+Indexing\+Strategy\+::index\+Header (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header} \&}]{header}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1NoPathIndexingStrategy_a8bf76389e2bdde554cc371b66079d935}
+
+
+Reimplemented from {\bf proxygen\+::\+Header\+Indexing\+Strategy} \doxyref{}{p.}{classproxygen_1_1HeaderIndexingStrategy_a289999a0414abe3d57570ad2a2459ce9}.
+
+
+
+Definition at line 24 of file No\+Path\+Indexing\+Strategy.\+h.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Header\+Name\+::get\+Header\+Code(), proxygen\+::\+Header\+Indexing\+Strategy\+::index\+Header(), and proxygen\+::\+H\+P\+A\+C\+K\+Header\+::name.
+
+
+\begin{DoxyCode}
+24                                                              \{
+25     \textcolor{keywordflow}{if} (header.name.getHeaderCode() == HTTP\_HEADER\_COLON\_PATH) \{
+26       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+27     \} \textcolor{keywordflow}{else} \{
+28       \textcolor{keywordflow}{return} HeaderIndexingStrategy::indexHeader(header);
+29     \}
+30   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf No\+Path\+Indexing\+Strategy.\+h}\item 
+proxygen/lib/http/codec/compress/{\bf No\+Path\+Indexing\+Strategy.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,611 @@
+\section{proxygen\+:\+:Q\+P\+A\+C\+K\+Codec Class Reference}
+\label{classproxygen_1_1QPACKCodec}\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+
+
+{\ttfamily \#include $<$Q\+P\+A\+C\+K\+Codec.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Q\+P\+A\+C\+K\+Codec\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1QPACKCodec}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Q\+P\+A\+C\+K\+Codec} ()
+\item 
+{\bf $\sim$\+Q\+P\+A\+C\+K\+Codec} () override
+\item 
+{\bf Q\+P\+A\+C\+K\+Encoder\+::\+Encode\+Result} {\bf encode} (std\+::vector$<$ {\bf compress\+::\+Header} $>$ \&headers, uint64\+\_\+t id, uint32\+\_\+t max\+Encoder\+Stream\+Bytes=std\+::numeric\+\_\+limits$<$ uint32\+\_\+t $>$\+::max()) noexcept
+\item 
+{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} {\bf decode\+Encoder\+Stream} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ buf)
+\item 
+void {\bf decode\+Streaming} (uint64\+\_\+t stream\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ block, uint32\+\_\+t length, {\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$streaming\+Cb) noexcept
+\item 
+void {\bf set\+Encoder\+Header\+Table\+Size} (uint32\+\_\+t size)
+\item 
+void {\bf set\+Decoder\+Header\+Table\+Max\+Size} (uint32\+\_\+t size)
+\item 
+{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} {\bf decode\+Decoder\+Stream} (std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ buf)
+\item 
+void {\bf on\+Stream\+Reset} (uint64\+\_\+t stream\+Id)
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf encode\+Table\+State\+Sync} ()
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf encode\+Header\+Ack} (uint64\+\_\+t stream\+Id)
+\item 
+std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf encode\+Cancel\+Stream} (uint64\+\_\+t stream\+Id)
+\item 
+void {\bf describe} (std\+::ostream \&os) const 
+\item 
+void {\bf set\+Max\+Uncompressed} (uint64\+\_\+t max\+Uncompressed) override
+\item 
+{\bf Compression\+Info} {\bf get\+Compression\+Info} () const 
+\item 
+void {\bf set\+Header\+Indexing\+Strategy} (const {\bf Header\+Indexing\+Strategy} $\ast$indexing\+Strat)
+\item 
+const {\bf Header\+Indexing\+Strategy} $\ast$ {\bf get\+Header\+Indexing\+Strategy} () const 
+\item 
+uint64\+\_\+t {\bf get\+Hol\+Block\+Count} () const 
+\item 
+uint64\+\_\+t {\bf get\+Queued\+Bytes} () const 
+\item 
+void {\bf set\+Max\+Vulnerable} (uint32\+\_\+t max\+Vulnerable)
+\item 
+void {\bf set\+Max\+Blocking} (uint32\+\_\+t max\+Blocking)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Q\+P\+A\+C\+K\+Encoder} {\bf encoder\+\_\+}
+\item 
+{\bf Q\+P\+A\+C\+K\+Decoder} {\bf decoder\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf record\+Compressed\+Size} (const {\bf Q\+P\+A\+C\+K\+Encoder\+::\+Encode\+Result} \&encode\+Res)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ {\bf H\+P\+A\+C\+K\+Header} $>$ {\bf decoded\+Headers\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 36 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!Q\+P\+A\+C\+K\+Codec@{Q\+P\+A\+C\+K\+Codec}}
+\index{Q\+P\+A\+C\+K\+Codec@{Q\+P\+A\+C\+K\+Codec}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{Q\+P\+A\+C\+K\+Codec()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::\+Q\+P\+A\+C\+K\+Codec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKCodec_acf9b04b184d6d541eba0e2029f668595}
+
+
+Definition at line 29 of file Q\+P\+A\+C\+K\+Codec.\+cpp.
+
+
+\begin{DoxyCode}
+30     : encoder_(\textcolor{keyword}{true}, HPACK::kTableSize),
+31       decoder_(HPACK::kTableSize, maxUncompressed_) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!````~Q\+P\+A\+C\+K\+Codec@{$\sim$\+Q\+P\+A\+C\+K\+Codec}}
+\index{````~Q\+P\+A\+C\+K\+Codec@{$\sim$\+Q\+P\+A\+C\+K\+Codec}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{$\sim$\+Q\+P\+A\+C\+K\+Codec() override}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::$\sim$\+Q\+P\+A\+C\+K\+Codec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classproxygen_1_1QPACKCodec_ae3d79c3a1293dd83d98fae0fc4e025a8}
+
+
+Definition at line 39 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+References encode().
+
+
+\begin{DoxyCode}
+39 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!decode\+Decoder\+Stream@{decode\+Decoder\+Stream}}
+\index{decode\+Decoder\+Stream@{decode\+Decoder\+Stream}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{decode\+Decoder\+Stream(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ buf)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Decoder\+Stream (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{buf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a6d333d593a519946facc20bad948ceb0}
+
+
+Definition at line 69 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::recv\+Ack().
+
+
+\begin{DoxyCode}
+70                                      \{
+71     \textcolor{keywordflow}{return} encoder_.decodeDecoderStream(std::move(buf));
+72   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!decode\+Encoder\+Stream@{decode\+Encoder\+Stream}}
+\index{decode\+Encoder\+Stream@{decode\+Encoder\+Stream}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{decode\+Encoder\+Stream(std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ buf)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+P\+A\+C\+K\+::\+Decode\+Error} proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Encoder\+Stream (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{buf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a5bba09029c47d2599873196822ddda91}
+
+
+Definition at line 47 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::decode().
+
+
+\begin{DoxyCode}
+47                                                                       \{
+48     \textcolor{comment}{// stats?}
+49     \textcolor{keywordflow}{return} decoder_.decodeEncoderStream(std::move(buf));
+50   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!decode\+Streaming@{decode\+Streaming}}
+\index{decode\+Streaming@{decode\+Streaming}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{decode\+Streaming(uint64\+\_\+t stream\+Id, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ block, uint32\+\_\+t length, H\+P\+A\+C\+K\+::\+Streaming\+Callback $\ast$streaming\+Cb) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Streaming (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{block, }
+\item[{uint32\+\_\+t}]{length, }
+\item[{{\bf H\+P\+A\+C\+K\+::\+Streaming\+Callback} $\ast$}]{streaming\+Cb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classproxygen_1_1QPACKCodec_a6456e83fc40883ea3a395c2317d08df3}
+
+
+Definition at line 59 of file Q\+P\+A\+C\+K\+Codec.\+cpp.
+
+
+
+References decoder\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Streaming(), proxygen\+::\+Header\+Codec\+::stats\+\_\+, and stream\+ID.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::decode().
+
+
+\begin{DoxyCode}
+63                                                   \{
+64   \textcolor{keywordflow}{if} (streamingCb) \{
+65     streamingCb->stats = stats_;
+66   \}
+67   decoder_.decodeStreaming(streamID, std::move(block), length, streamingCb);
+68 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!describe@{describe}}
+\index{describe@{describe}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{describe(std\+::ostream \&os) const }]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::describe (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1QPACKCodec_a770abefb23da15a1eccd3d1345242983}
+
+
+Definition at line 70 of file Q\+P\+A\+C\+K\+Codec.\+cpp.
+
+
+
+References decoder\+\_\+, and encoder\+\_\+.
+
+
+
+Referenced by proxygen\+::operator$<$$<$().
+
+
+\begin{DoxyCode}
+70                                                   \{
+71   stream << \textcolor{stringliteral}{"DecoderTable:\(\backslash\)n"} << decoder_;
+72   stream << \textcolor{stringliteral}{"EncoderTable:\(\backslash\)n"} << encoder_;
+73 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!encode@{encode}}
+\index{encode@{encode}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{encode(std\+::vector$<$ compress\+::\+Header $>$ \&headers, uint64\+\_\+t id, uint32\+\_\+t max\+Encoder\+Stream\+Bytes=std\+::numeric\+\_\+limits$<$ uint32\+\_\+t $>$\+::max()) noexcept}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Encoder\+::\+Encode\+Result} proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf compress\+::\+Header} $>$ \&}]{headers, }
+\item[{uint64\+\_\+t}]{id, }
+\item[{uint32\+\_\+t}]{max\+Encoder\+Stream\+Bytes = {\ttfamily std\+:\+:numeric\+\_\+limits$<$uint32\+\_\+t$>$\+:\+:max()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}\label{classproxygen_1_1QPACKCodec_aa4635fabf5c4735b5520544aa412ec82}
+
+
+Definition at line 47 of file Q\+P\+A\+C\+K\+Codec.\+cpp.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode(), proxygen\+::\+Header\+Codec\+::encoded\+Size\+\_\+, proxygen\+::\+Header\+Codec\+::encode\+Headroom\+\_\+, encoder\+\_\+, proxygen\+::compress\+::prepare\+Headers(), and record\+Compressed\+Size().
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::encode().
+
+
+\begin{DoxyCode}
+50                                              \{
+51   \textcolor{keyword}{auto} prepared = compress::prepareHeaders(headers);
+52   encodedSize_.uncompressed = prepared.second;
+53   \textcolor{keyword}{auto} res = encoder_.encode(prepared.first, encodeHeadroom_, streamId,
+54                              maxEncoderStreamBytes);
+55   recordCompressedSize(res);
+56   \textcolor{keywordflow}{return} res;
+57 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!encode\+Cancel\+Stream@{encode\+Cancel\+Stream}}
+\index{encode\+Cancel\+Stream@{encode\+Cancel\+Stream}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{encode\+Cancel\+Stream(uint64\+\_\+t stream\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode\+Cancel\+Stream (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_aefc70681001724c2eea8163bcf876404}
+
+
+Definition at line 88 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+\begin{DoxyCode}
+88                                                                   \{
+89     \textcolor{keywordflow}{return} decoder_.encodeCancelStream(streamId);
+90   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!encode\+Header\+Ack@{encode\+Header\+Ack}}
+\index{encode\+Header\+Ack@{encode\+Header\+Ack}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{encode\+Header\+Ack(uint64\+\_\+t stream\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode\+Header\+Ack (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_aa5af46c83e894864d33aa30acb9ed43a}
+
+
+Definition at line 84 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::get\+Ack().
+
+
+\begin{DoxyCode}
+84                                                                \{
+85     \textcolor{keywordflow}{return} decoder_.encodeHeaderAck(streamId);
+86   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!encode\+Table\+State\+Sync@{encode\+Table\+State\+Sync}}
+\index{encode\+Table\+State\+Sync@{encode\+Table\+State\+Sync}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{encode\+Table\+State\+Sync()}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode\+Table\+State\+Sync (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_aaa4331cdf67990cf8ec8f3db39089abd}
+
+
+Definition at line 80 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::get\+Ack().
+
+
+\begin{DoxyCode}
+80                                                    \{
+81     \textcolor{keywordflow}{return} decoder_.encodeTableStateSync();
+82   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!get\+Compression\+Info@{get\+Compression\+Info}}
+\index{get\+Compression\+Info@{get\+Compression\+Info}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{get\+Compression\+Info() const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf Compression\+Info} proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::get\+Compression\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a3f7c235c785e96d2cd323b96db3f8627}
+
+
+Definition at line 99 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+\begin{DoxyCode}
+99                                              \{
+100     \textcolor{keywordflow}{return} CompressionInfo(encoder_.getTableSize(),
+101                            encoder_.getBytesStored(),
+102                            encoder_.getHeadersStored(),
+103                            decoder_.getTableSize(),
+104                            decoder_.getBytesStored(),
+105                            decoder_.getHeadersStored());
+106   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!get\+Header\+Indexing\+Strategy@{get\+Header\+Indexing\+Strategy}}
+\index{get\+Header\+Indexing\+Strategy@{get\+Header\+Indexing\+Strategy}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{get\+Header\+Indexing\+Strategy() const }]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Header\+Indexing\+Strategy}$\ast$ proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::get\+Header\+Indexing\+Strategy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a9aee09ac5de667a391339ceb26ea53b0}
+
+
+Definition at line 111 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+\begin{DoxyCode}
+111                                                                   \{
+112     \textcolor{keywordflow}{return} encoder_.getHeaderIndexingStrategy();
+113   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!get\+Hol\+Block\+Count@{get\+Hol\+Block\+Count}}
+\index{get\+Hol\+Block\+Count@{get\+Hol\+Block\+Count}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{get\+Hol\+Block\+Count() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::get\+Hol\+Block\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_ac5d9c4b329b52c41c8e7459da1ed04e2}
+
+
+Definition at line 115 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::get\+Hol\+Block\+Count().
+
+
+\begin{DoxyCode}
+115                                     \{
+116     \textcolor{keywordflow}{return} decoder_.getHolBlockCount();
+117   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!get\+Queued\+Bytes@{get\+Queued\+Bytes}}
+\index{get\+Queued\+Bytes@{get\+Queued\+Bytes}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{get\+Queued\+Bytes() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::get\+Queued\+Bytes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a58b6eb2322ded7b7f7b57270253d8c0f}
+
+
+Definition at line 119 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::decode(), and proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::$\sim$\+Q\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+119                                   \{
+120     \textcolor{keywordflow}{return} decoder_.getQueuedBytes();
+121   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!on\+Stream\+Reset@{on\+Stream\+Reset}}
+\index{on\+Stream\+Reset@{on\+Stream\+Reset}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{on\+Stream\+Reset(uint64\+\_\+t stream\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::on\+Stream\+Reset (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{stream\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_aa67b920044abbd68dba22aeecd76ee60}
+
+
+Definition at line 76 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+\begin{DoxyCode}
+76                                         \{
+77     encoder_.onHeaderAck(streamId, \textcolor{keyword}{true});
+78   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!record\+Compressed\+Size@{record\+Compressed\+Size}}
+\index{record\+Compressed\+Size@{record\+Compressed\+Size}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{record\+Compressed\+Size(const Q\+P\+A\+C\+K\+Encoder\+::\+Encode\+Result \&encode\+Res)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::record\+Compressed\+Size (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+P\+A\+C\+K\+Encoder\+::\+Encode\+Result} \&}]{encode\+Res}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKCodec_a63b720ad2abc2c4c821e35ac95ca6b37}
+
+
+Definition at line 33 of file Q\+P\+A\+C\+K\+Codec.\+cpp.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::\+Encode\+Result\+::control, proxygen\+::\+Header\+Codec\+::encoded\+Size\+\_\+, proxygen\+::\+Header\+Codec\+::\+Q\+P\+A\+CK, proxygen\+::\+Header\+Codec\+::\+Stats\+::record\+Encode(), proxygen\+::\+Header\+Codec\+::stats\+\_\+, and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::\+Encode\+Result\+::stream.
+
+
+
+Referenced by encode().
+
+
+\begin{DoxyCode}
+34                                              \{
+35   encodedSize_.compressed = 0;
+36   \textcolor{keywordflow}{if} (encodeRes.control) \{
+37     encodedSize_.compressed += encodeRes.control->computeChainDataLength();
+38   \}
+39   \textcolor{keywordflow}{if} (encodeRes.stream) \{
+40     encodedSize_.compressed += encodeRes.stream->computeChainDataLength();
+41   \}
+42   \textcolor{keywordflow}{if} (stats_) \{
+43     stats_->recordEncode(Type::QPACK, encodedSize_);
+44   \}
+45 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!set\+Decoder\+Header\+Table\+Max\+Size@{set\+Decoder\+Header\+Table\+Max\+Size}}
+\index{set\+Decoder\+Header\+Table\+Max\+Size@{set\+Decoder\+Header\+Table\+Max\+Size}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{set\+Decoder\+Header\+Table\+Max\+Size(uint32\+\_\+t size)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Decoder\+Header\+Table\+Max\+Size (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a80fa1ea53c2bbd056499b0d16846dd39}
+
+
+Definition at line 64 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by main(), and proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+64                                                    \{
+65     decoder_.setHeaderTableMaxSize(size);
+66   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!set\+Encoder\+Header\+Table\+Size@{set\+Encoder\+Header\+Table\+Size}}
+\index{set\+Encoder\+Header\+Table\+Size@{set\+Encoder\+Header\+Table\+Size}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{set\+Encoder\+Header\+Table\+Size(uint32\+\_\+t size)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Encoder\+Header\+Table\+Size (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_ae8f49311461a561ba73fe68f4dac706b}
+
+
+Definition at line 60 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+60                                                 \{
+61     encoder_.setHeaderTableSize(size);
+62   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!set\+Header\+Indexing\+Strategy@{set\+Header\+Indexing\+Strategy}}
+\index{set\+Header\+Indexing\+Strategy@{set\+Header\+Indexing\+Strategy}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{set\+Header\+Indexing\+Strategy(const Header\+Indexing\+Strategy $\ast$indexing\+Strat)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Header\+Indexing\+Strategy (
+\begin{DoxyParamCaption}
+\item[{const {\bf Header\+Indexing\+Strategy} $\ast$}]{indexing\+Strat}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a24e52aea486597225e9fd026aedf48bf}
+
+
+Definition at line 108 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+108                                                                               \{
+109     encoder_.setHeaderIndexingStrategy(indexingStrat);
+110   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!set\+Max\+Blocking@{set\+Max\+Blocking}}
+\index{set\+Max\+Blocking@{set\+Max\+Blocking}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{set\+Max\+Blocking(uint32\+\_\+t max\+Blocking)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Max\+Blocking (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{max\+Blocking}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_ababbc81f08e74826bc5c79ad9f84d3c2}
+
+
+Definition at line 127 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by main(), and proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+127                                             \{
+128     decoder_.setMaxBlocking(maxBlocking);
+129   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!set\+Max\+Uncompressed@{set\+Max\+Uncompressed}}
+\index{set\+Max\+Uncompressed@{set\+Max\+Uncompressed}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{set\+Max\+Uncompressed(uint64\+\_\+t max\+Uncompressed) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Max\+Uncompressed (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{max\+Uncompressed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKCodec_a3e3cf3dd0faf343437fa794eacd71f5b}
+
+
+Reimplemented from {\bf proxygen\+::\+Header\+Codec} \doxyref{}{p.}{classproxygen_1_1HeaderCodec_a219babf61a8c726fa6479e88f3fdece0}.
+
+
+
+Definition at line 94 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+\begin{DoxyCode}
+94                                                              \{
+95     HeaderCodec::setMaxUncompressed(maxUncompressed);
+96     decoder_.setMaxUncompressed(maxUncompressed);
+97   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!set\+Max\+Vulnerable@{set\+Max\+Vulnerable}}
+\index{set\+Max\+Vulnerable@{set\+Max\+Vulnerable}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{set\+Max\+Vulnerable(uint32\+\_\+t max\+Vulnerable)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Max\+Vulnerable (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{max\+Vulnerable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKCodec_a41bb215ade71db1380254480d6ecfba6}
+
+
+Definition at line 123 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Scheme().
+
+
+\begin{DoxyCode}
+123                                                 \{
+124     encoder_.setMaxVulnerable(maxVulnerable);
+125   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!decoded\+Headers\+\_\+@{decoded\+Headers\+\_\+}}
+\index{decoded\+Headers\+\_\+@{decoded\+Headers\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{decoded\+Headers\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf H\+P\+A\+C\+K\+Header}$>$ proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decoded\+Headers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKCodec_ac623e15ade552b4ebe7471a46b32e900}
+
+
+Definition at line 138 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!decoder\+\_\+@{decoder\+\_\+}}
+\index{decoder\+\_\+@{decoder\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{decoder\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Decoder} proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decoder\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1QPACKCodec_ae30e51276063946b6a02c5f140b2cd9c}
+
+
+Definition at line 133 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by decode\+Streaming(), and describe().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}!encoder\+\_\+@{encoder\+\_\+}}
+\index{encoder\+\_\+@{encoder\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Codec@{proxygen\+::\+Q\+P\+A\+C\+K\+Codec}}
+\subsubsection[{encoder\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Encoder} proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encoder\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classproxygen_1_1QPACKCodec_a0c511054b6a4a55d220386b13e0fa0d7}
+
+
+Definition at line 132 of file Q\+P\+A\+C\+K\+Codec.\+h.
+
+
+
+Referenced by describe(), and encode().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Codec.\+h}\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Codec.\+cpp}\end{DoxyCompactItemize}

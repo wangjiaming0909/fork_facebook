@@ -1,0 +1,434 @@
+\section{proxygen\+:\+:compress\+:\+:Q\+P\+A\+C\+K\+Scheme Class Reference}
+\label{classproxygen_1_1compress_1_1QPACKScheme}\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+
+
+{\ttfamily \#include $<$Q\+P\+A\+C\+K\+Scheme.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:compress\+:\+:Q\+P\+A\+C\+K\+Scheme\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1compress_1_1QPACKScheme}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Q\+P\+A\+C\+K\+Ack}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Q\+P\+A\+C\+K\+Scheme} ({\bf Compression\+Simulator} $\ast$sim, uint32\+\_\+t table\+Size, uint32\+\_\+t max\+Blocking)
+\item 
+{\bf $\sim$\+Q\+P\+A\+C\+K\+Scheme} ()
+\item 
+std\+::unique\+\_\+ptr$<$ {\bf Ack} $>$ {\bf get\+Ack} (uint16\+\_\+t seqn) override
+\item 
+void {\bf recv\+Ack} (std\+::unique\+\_\+ptr$<$ {\bf Ack} $>$ ack) override
+\item 
+std\+::pair$<$ {\bf Frame\+Flags}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ $>$ {\bf encode} (bool, std\+::vector$<$ {\bf compress\+::\+Header} $>$ all\+Headers, {\bf Sim\+Stats} \&stats) override
+\item 
+void {\bf decode} ({\bf Frame\+Flags} {\bf flags}, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ encoded\+Req, {\bf Sim\+Stats} \&stats, {\bf Sim\+Streaming\+Callback} \&callback) override
+\item 
+uint32\+\_\+t {\bf get\+Hol\+Block\+Count} () const override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Q\+P\+A\+C\+K\+Codec} {\bf client\+\_\+}
+\item 
+{\bf Q\+P\+A\+C\+K\+Codec} {\bf server\+\_\+}
+\item 
+std\+::map$<$ uint16\+\_\+t, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ $>$ {\bf control\+Queue\+\_\+}
+\item 
+uint16\+\_\+t {\bf encode\+Control\+Index\+\_\+} \{0\}
+\item 
+uint16\+\_\+t {\bf decode\+Control\+Index\+\_\+} \{0\}
+\item 
+std\+::map$<$ uint16\+\_\+t, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ $>$ {\bf acks\+\_\+}
+\item 
+uint16\+\_\+t {\bf send\+Ack\+\_\+} \{1\}
+\item 
+uint16\+\_\+t {\bf recv\+Ack\+\_\+} \{1\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 18 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!Q\+P\+A\+C\+K\+Scheme@{Q\+P\+A\+C\+K\+Scheme}}
+\index{Q\+P\+A\+C\+K\+Scheme@{Q\+P\+A\+C\+K\+Scheme}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{Q\+P\+A\+C\+K\+Scheme(\+Compression\+Simulator $\ast$sim, uint32\+\_\+t table\+Size, uint32\+\_\+t max\+Blocking)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Scheme (
+\begin{DoxyParamCaption}
+\item[{{\bf Compression\+Simulator} $\ast$}]{sim, }
+\item[{uint32\+\_\+t}]{table\+Size, }
+\item[{uint32\+\_\+t}]{max\+Blocking}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1compress_1_1QPACKScheme_adf73914009e1add4198279cd15a6ac3a}
+
+
+Definition at line 20 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+References client\+\_\+, proxygen\+::\+No\+Path\+Indexing\+Strategy\+::get\+Instance(), server\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Decoder\+Header\+Table\+Max\+Size(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Encoder\+Header\+Table\+Size(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Header\+Indexing\+Strategy(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Max\+Blocking(), and proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::set\+Max\+Vulnerable().
+
+
+\begin{DoxyCode}
+22       : CompressionScheme(sim) \{
+23     client_.setHeaderIndexingStrategy(NoPathIndexingStrategy::getInstance());
+24     server_.setHeaderIndexingStrategy(NoPathIndexingStrategy::getInstance());
+25     client_.setEncoderHeaderTableSize(tableSize);
+26     server_.setDecoderHeaderTableMaxSize(tableSize);
+27     client_.setMaxVulnerable(maxBlocking);
+28     server_.setMaxBlocking(maxBlocking);
+29   \}
+\end{DoxyCode}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!````~Q\+P\+A\+C\+K\+Scheme@{$\sim$\+Q\+P\+A\+C\+K\+Scheme}}
+\index{````~Q\+P\+A\+C\+K\+Scheme@{$\sim$\+Q\+P\+A\+C\+K\+Scheme}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{$\sim$\+Q\+P\+A\+C\+K\+Scheme()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::$\sim$\+Q\+P\+A\+C\+K\+Scheme (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1compress_1_1QPACKScheme_a432edd25706296429bea697fed72b0ab}
+
+
+Definition at line 31 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::get\+Queued\+Bytes(), and server\+\_\+.
+
+
+\begin{DoxyCode}
+31                  \{
+32     CHECK\_EQ(server_.getQueuedBytes(), 0);
+33   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!decode@{decode}}
+\index{decode@{decode}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{decode(\+Frame\+Flags flags, std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ encoded\+Req, Sim\+Stats \&stats, Sim\+Streaming\+Callback \&callback) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::decode (
+\begin{DoxyParamCaption}
+\item[{{\bf Frame\+Flags}}]{flags, }
+\item[{std\+::unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$}]{encoded\+Req, }
+\item[{{\bf Sim\+Stats} \&}]{stats, }
+\item[{{\bf Sim\+Streaming\+Callback} \&}]{callback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1compress_1_1QPACKScheme_aaf6b32a5a4350a4f03dda162da4dc188}
+
+
+Implements {\bf proxygen\+::compress\+::\+Compression\+Scheme} \doxyref{}{p.}{classproxygen_1_1compress_1_1CompressionScheme_ac5ddabc82889df4797e1e869dc32e4e2}.
+
+
+
+Definition at line 115 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+References proxygen\+::compress\+::\+Frame\+Flags\+::allow\+O\+OO, control\+Queue\+\_\+, decode\+Control\+Index\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Encoder\+Stream(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Streaming(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::get\+Queued\+Bytes(), proxygen\+::compress\+::\+Sim\+Stats\+::max\+Queue\+Buffer\+Bytes, proxygen\+::compress\+::\+Sim\+Streaming\+Callback\+::maybe\+Mark\+Hol\+Delay(), proxygen\+::compress\+::\+Sim\+Streaming\+Callback\+::request\+Index, proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Ack\+::seqn, proxygen\+::compress\+::\+Sim\+Streaming\+Callback\+::seqn, and server\+\_\+.
+
+
+\begin{DoxyCode}
+118                                                        \{
+119     folly::io::Cursor cursor(encodedReq.get());
+120     \textcolor{keyword}{auto} toTrim = \textcolor{keyword}{sizeof}(uint16\_t) * 3;
+121     \textcolor{keyword}{auto} len = cursor.readBE<uint16\_t>();
+122     \textcolor{keywordflow}{if} (len > 0) \{
+123       \textcolor{comment}{// check decode result}
+124       \textcolor{keyword}{auto} controlIndex = cursor.readBE<uint16\_t>();
+125       toTrim += \textcolor{keyword}{sizeof}(uint16\_t);
+126       std::unique\_ptr<folly::IOBuf> control;
+127       cursor.clone(control, len);
+128       \textcolor{keywordflow}{if} (controlIndex == decodeControlIndex_) \{
+129         \textcolor{comment}{// next expected control block, decode}
+130         VLOG(5) << \textcolor{stringliteral}{"decode controlIndex="} << controlIndex;
+131         server_.decodeEncoderStream(std::move(control));
+132         decodeControlIndex_++;
+133         \textcolor{keywordflow}{while} (!controlQueue_.empty() &&
+134                controlQueue_.begin()->first == decodeControlIndex_) \{
+135           \textcolor{comment}{// drain the queue}
+136           VLOG(5) << \textcolor{stringliteral}{"decode controlIndex="} << controlQueue_.begin()->first;
+137           \textcolor{keyword}{auto} it = controlQueue_.begin();
+138           server_.decodeEncoderStream(std::move(it->second));
+139           decodeControlIndex_++;
+140           controlQueue_.erase(it);
+141         \}
+142       \} \textcolor{keywordflow}{else} \{
+143         \textcolor{comment}{// out of order control block, queue it}
+144         controlQueue_.emplace(controlIndex, std::move(control));
+145       \}
+146       toTrim += len;
+147     \}
+148     \textcolor{keyword}{auto} seqn = cursor.readBE<uint16\_t>();
+149     callback.seqn = seqn;
+150     VLOG(1) << \textcolor{stringliteral}{"Decoding request="} << callback.requestIndex
+151             << \textcolor{stringliteral}{" header seqn="} << seqn
+152             << \textcolor{stringliteral}{" allowOOO="} << uint32\_t(flags.allowOOO);
+153     len = cursor.readBE<uint16\_t>();
+154     folly::IOBufQueue queue;
+155     queue.append(std::move(encodedReq));
+156     queue.trimStart(toTrim);
+157     server_.decodeStreaming(seqn, queue.move(), len, &callback);
+158     callback.maybeMarkHolDelay();
+159     \textcolor{keywordflow}{if} (server_.getQueuedBytes() > stats.maxQueueBufferBytes) \{
+160       stats.maxQueueBufferBytes = server_.getQueuedBytes();
+161     \}
+162   \}
+\end{DoxyCode}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!encode@{encode}}
+\index{encode@{encode}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{encode(bool, std\+::vector$<$ compress\+::\+Header $>$ all\+Headers, Sim\+Stats \&stats) override}]{\setlength{\rightskip}{0pt plus 5cm}std\+::pair$<${\bf Frame\+Flags}, std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ $>$ proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::encode (
+\begin{DoxyParamCaption}
+\item[{bool}]{, }
+\item[{std\+::vector$<$ {\bf compress\+::\+Header} $>$}]{all\+Headers, }
+\item[{{\bf Sim\+Stats} \&}]{stats}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1compress_1_1QPACKScheme_a2e7fe9421b392a72672b44922494a1e5}
+
+
+Implements {\bf proxygen\+::compress\+::\+Compression\+Scheme} \doxyref{}{p.}{classproxygen_1_1compress_1_1CompressionScheme_a4e013945112c438374a2cb99eb753d67}.
+
+
+
+Definition at line 81 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+References client\+\_\+, proxygen\+::compress\+::\+Sim\+Stats\+::compressed, proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode(), encode\+Control\+Index\+\_\+, proxygen\+::\+Header\+Codec\+::get\+Encoded\+Size(), proxygen\+::compress\+::\+Compression\+Scheme\+::index, and proxygen\+::compress\+::\+Sim\+Stats\+::uncompressed.
+
+
+\begin{DoxyCode}
+84                                 \{
+85     index++;
+86     \textcolor{keyword}{auto} result = client_.encode(allHeaders, index);
+87     uint16\_t len = 0;
+88     folly::IOBufQueue queue;
+89     \textcolor{keyword}{static} \textcolor{keyword}{const} uint32\_t growth = 1400; \textcolor{comment}{// chosen arbitrarily}
+90     folly::io::QueueAppender cursor(&queue, growth);
+91     \textcolor{keywordflow}{if} (result.control) \{
+92       VLOG(5) << \textcolor{stringliteral}{"Writing encodeControlIndex\_="} << encodeControlIndex_;
+93       len = result.control->computeChainDataLength();
+94       cursor.writeBE<uint16\_t>(len);
+95       cursor.writeBE<uint16\_t>(encodeControlIndex_++);
+96       cursor.insert(std::move(result.control));
+97       \textcolor{comment}{// Don't count the framing against the compression ratio, for now}
+98       \textcolor{comment}{// stats.compressed += 3 * sizeof(uint16\_t);}
+99     \} \textcolor{keywordflow}{else} \{
+100       cursor.writeBE<uint16\_t>(0);
+101     \}
+102     \textcolor{keywordflow}{if} (result.stream) \{
+103       len = result.stream->computeChainDataLength();
+104     \}
+105     cursor.writeBE<uint16\_t>(index);
+106     cursor.writeBE<uint16\_t>(len);
+107     cursor.insert(std::move(result.stream));
+108     stats.uncompressed += client_.getEncodedSize().uncompressed;
+109     stats.compressed += client_.getEncodedSize().compressed;
+110     \textcolor{comment}{// OOO is allowed if there has not been an eviction}
+111     FrameFlags flags(\textcolor{keyword}{false}, \textcolor{keyword}{false});
+112     \textcolor{keywordflow}{return} \{flags, queue.move()\};
+113   \}
+\end{DoxyCode}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!get\+Ack@{get\+Ack}}
+\index{get\+Ack@{get\+Ack}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{get\+Ack(uint16\+\_\+t seqn) override}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf Ack}$>$ proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::get\+Ack (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{seqn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1compress_1_1QPACKScheme_afb944df19670c2872f1ba870b101695a}
+
+
+Implements {\bf proxygen\+::compress\+::\+Compression\+Scheme} \doxyref{}{p.}{classproxygen_1_1compress_1_1CompressionScheme_af8a906f3f6600f903a3f8249478f9ea6}.
+
+
+
+Definition at line 51 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode\+Header\+Ack(), proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::encode\+Table\+State\+Sync(), send\+Ack\+\_\+, proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::\+Q\+P\+A\+C\+K\+Ack\+::seqn, and server\+\_\+.
+
+
+\begin{DoxyCode}
+51                                                     \{
+52     VLOG(4) << \textcolor{stringliteral}{"Sending ack for seqn="} << seqn;
+53     \textcolor{keyword}{auto} res = std::make\_unique<QPACKAck>(seqn, sendAck_++,
+54                                           server_.encodeHeaderAck(seqn),
+55                                           server_.encodeTableStateSync());
+56     \textcolor{keywordflow}{return} std::move(res);
+57   \}
+\end{DoxyCode}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!get\+Hol\+Block\+Count@{get\+Hol\+Block\+Count}}
+\index{get\+Hol\+Block\+Count@{get\+Hol\+Block\+Count}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{get\+Hol\+Block\+Count() const override}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::get\+Hol\+Block\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1compress_1_1QPACKScheme_a03b7c3817a7c4f36759b57890f3681bb}
+
+
+Implements {\bf proxygen\+::compress\+::\+Compression\+Scheme} \doxyref{}{p.}{classproxygen_1_1compress_1_1CompressionScheme_a08043930336620a278f3763256384a38}.
+
+
+
+Definition at line 164 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+References proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::get\+Hol\+Block\+Count(), and server\+\_\+.
+
+
+\begin{DoxyCode}
+164                                              \{
+165     \textcolor{keywordflow}{return} server_.getHolBlockCount();
+166   \}
+\end{DoxyCode}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!recv\+Ack@{recv\+Ack}}
+\index{recv\+Ack@{recv\+Ack}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{recv\+Ack(std\+::unique\+\_\+ptr$<$ Ack $>$ ack) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::recv\+Ack (
+\begin{DoxyParamCaption}
+\item[{std\+::unique\+\_\+ptr$<$ {\bf Ack} $>$}]{ack}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1compress_1_1QPACKScheme_a11bfbfc191956116934fa2c36ebe3411}
+
+
+Implements {\bf proxygen\+::compress\+::\+Compression\+Scheme} \doxyref{}{p.}{classproxygen_1_1compress_1_1CompressionScheme_a8b5b9dbfd8f08e0dfdc6415e7432ddbf}.
+
+
+
+Definition at line 58 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+References acks\+\_\+, client\+\_\+, proxygen\+::\+Q\+P\+A\+C\+K\+Codec\+::decode\+Decoder\+Stream(), proxygen\+::\+H\+P\+A\+C\+K\+::\+N\+O\+NE, and recv\+Ack\+\_\+.
+
+
+\begin{DoxyCode}
+58                                                 \{
+59     CHECK(ack);
+60     \textcolor{keyword}{auto} qpackAck = \textcolor{keyword}{dynamic\_cast<}QPACKAck*\textcolor{keyword}{>}(ack.get());
+61     CHECK\_NOTNULL(qpackAck);
+62     VLOG(4) << \textcolor{stringliteral}{"Received ack for seqn="} << qpackAck->seqn;
+63     CHECK(qpackAck->headerAck);
+64     \textcolor{keywordflow}{if} (qpackAck->controlAck) \{
+65       qpackAck->headerAck->prependChain(std::move(qpackAck->controlAck));
+66     \}
+67     \textcolor{comment}{// The decoder stream must be processed in order}
+68     acks_.emplace(qpackAck->ackSeqn, std::move(qpackAck->headerAck));
+69     \textcolor{keywordflow}{do} \{
+70       \textcolor{keyword}{auto} it = acks_.begin();
+71       \textcolor{keywordflow}{if} (it->first != recvAck_) \{
+72         \textcolor{keywordflow}{break};
+73       \}
+74       CHECK\_EQ(client_.decodeDecoderStream(std::move(it->second)),
+75                HPACK::DecodeError::NONE);
+76       recvAck_++;
+77       acks_.erase(it);
+78     \} \textcolor{keywordflow}{while} (!acks_.empty());
+79   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!acks\+\_\+@{acks\+\_\+}}
+\index{acks\+\_\+@{acks\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{acks\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$uint16\+\_\+t, std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ $>$ proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::acks\+\_\+}\label{classproxygen_1_1compress_1_1QPACKScheme_a197d4af089c1c60dbb7a2e02c1466528}
+
+
+Definition at line 173 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by recv\+Ack().
+
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!client\+\_\+@{client\+\_\+}}
+\index{client\+\_\+@{client\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{client\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Codec} proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::client\+\_\+}\label{classproxygen_1_1compress_1_1QPACKScheme_a7e02832a312a072158a73c66042b8e66}
+
+
+Definition at line 168 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by encode(), Q\+P\+A\+C\+K\+Scheme(), and recv\+Ack().
+
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!control\+Queue\+\_\+@{control\+Queue\+\_\+}}
+\index{control\+Queue\+\_\+@{control\+Queue\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{control\+Queue\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$uint16\+\_\+t, std\+::unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ $>$ proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::control\+Queue\+\_\+}\label{classproxygen_1_1compress_1_1QPACKScheme_abc7a8551eb227170bf64d03a5e2af478}
+
+
+Definition at line 170 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by decode().
+
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!decode\+Control\+Index\+\_\+@{decode\+Control\+Index\+\_\+}}
+\index{decode\+Control\+Index\+\_\+@{decode\+Control\+Index\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{decode\+Control\+Index\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::decode\+Control\+Index\+\_\+ \{0\}}\label{classproxygen_1_1compress_1_1QPACKScheme_ad97c6965187b401fe4dec04f17e9e212}
+
+
+Definition at line 172 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by decode().
+
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!encode\+Control\+Index\+\_\+@{encode\+Control\+Index\+\_\+}}
+\index{encode\+Control\+Index\+\_\+@{encode\+Control\+Index\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{encode\+Control\+Index\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::encode\+Control\+Index\+\_\+ \{0\}}\label{classproxygen_1_1compress_1_1QPACKScheme_a33f1606695adc84397afe82b4a741100}
+
+
+Definition at line 171 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by encode().
+
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!recv\+Ack\+\_\+@{recv\+Ack\+\_\+}}
+\index{recv\+Ack\+\_\+@{recv\+Ack\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{recv\+Ack\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::recv\+Ack\+\_\+ \{1\}}\label{classproxygen_1_1compress_1_1QPACKScheme_add9731ea6dbb640c7f5e763aec262860}
+
+
+Definition at line 175 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by recv\+Ack().
+
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!send\+Ack\+\_\+@{send\+Ack\+\_\+}}
+\index{send\+Ack\+\_\+@{send\+Ack\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{send\+Ack\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::send\+Ack\+\_\+ \{1\}}\label{classproxygen_1_1compress_1_1QPACKScheme_a8e4fec1a33d02d4b3b0a4223cbcaa6e5}
+
+
+Definition at line 174 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by get\+Ack().
+
+\index{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}!server\+\_\+@{server\+\_\+}}
+\index{server\+\_\+@{server\+\_\+}!proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme@{proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme}}
+\subsubsection[{server\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Codec} proxygen\+::compress\+::\+Q\+P\+A\+C\+K\+Scheme\+::server\+\_\+}\label{classproxygen_1_1compress_1_1QPACKScheme_ad110c85cc4afb4c5291009400cb13c62}
+
+
+Definition at line 169 of file Q\+P\+A\+C\+K\+Scheme.\+h.
+
+
+
+Referenced by decode(), get\+Ack(), get\+Hol\+Block\+Count(), Q\+P\+A\+C\+K\+Scheme(), and $\sim$\+Q\+P\+A\+C\+K\+Scheme().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/experimental/simulator/{\bf Q\+P\+A\+C\+K\+Scheme.\+h}\end{DoxyCompactItemize}

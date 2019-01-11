@@ -1,0 +1,264 @@
+\section{proxygen\+:\+:S\+P\+D\+Y\+Version\+Settings Struct Reference}
+\label{structproxygen_1_1SPDYVersionSettings}\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+
+
+{\ttfamily \#include $<$S\+P\+D\+Y\+Version\+Settings.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string {\bf version\+Str}
+\item 
+const std\+::string {\bf status\+Str}
+\item 
+const std\+::string {\bf method\+Str}
+\item 
+const std\+::string {\bf path\+Str}
+\item 
+const std\+::string {\bf scheme\+Str}
+\item 
+const std\+::string {\bf host\+Str}
+\item 
+const std\+::string {\bf proto\+Name}
+\item 
+uint32\+\_\+t($\ast$ {\bf parse\+Size\+Fun} )(folly\+::io\+::\+Cursor $\ast$)
+\item 
+void($\ast$ {\bf append\+Size\+Fun} )(uint8\+\_\+t $\ast$\&, size\+\_\+t)
+\item 
+const unsigned char $\ast$ {\bf dict}
+\item 
+size\+\_\+t {\bf dict\+Size}
+\item 
+uint16\+\_\+t {\bf control\+Version}
+\item 
+uint16\+\_\+t {\bf syn\+Reply\+Size}
+\item 
+uint16\+\_\+t {\bf name\+Value\+Size}
+\item 
+uint16\+\_\+t {\bf goaway\+Size}
+\item 
+uint8\+\_\+t {\bf pri\+Shift}
+\item 
+uint8\+\_\+t {\bf major\+Version}
+\item 
+uint8\+\_\+t {\bf minor\+Version}
+\item 
+{\bf S\+P\+D\+Y\+Version} {\bf version}
+\item 
+const std\+::string \& {\bf protocol\+Version\+String}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper struct to carry common settings for a spdy version 
+
+Definition at line 24 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!append\+Size\+Fun@{append\+Size\+Fun}}
+\index{append\+Size\+Fun@{append\+Size\+Fun}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{append\+Size\+Fun}]{\setlength{\rightskip}{0pt plus 5cm}void($\ast$ proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::append\+Size\+Fun) (uint8\+\_\+t $\ast$\&, size\+\_\+t)}\label{structproxygen_1_1SPDYVersionSettings_a2e096c8b4bacae41548815c1ea0feda6}
+
+
+Definition at line 33 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::encode().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!control\+Version@{control\+Version}}
+\index{control\+Version@{control\+Version}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{control\+Version}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::control\+Version}\label{structproxygen_1_1SPDYVersionSettings_afee2050344b0824a66667bf9a38bf1f0}
+
+
+Definition at line 36 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Ping\+Common(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Rst\+Stream(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Settings(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Syn\+Reply(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Syn\+Stream(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Window\+Update().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!dict@{dict}}
+\index{dict@{dict}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{dict}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned char$\ast$ proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::dict}\label{structproxygen_1_1SPDYVersionSettings_acd8ca16d74f7c025e9c25be07de67b0e}
+
+
+Definition at line 34 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::decode().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!dict\+Size@{dict\+Size}}
+\index{dict\+Size@{dict\+Size}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{dict\+Size}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::dict\+Size}\label{structproxygen_1_1SPDYVersionSettings_a08599d561a37456bcb83d08a9b88511f}
+
+
+Definition at line 35 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::decode().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!goaway\+Size@{goaway\+Size}}
+\index{goaway\+Size@{goaway\+Size}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{goaway\+Size}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::goaway\+Size}\label{structproxygen_1_1SPDYVersionSettings_a06aafc19620d2878f01bb73acb234036}
+
+
+Definition at line 39 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!host\+Str@{host\+Str}}
+\index{host\+Str@{host\+Str}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{host\+Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::host\+Str}\label{structproxygen_1_1SPDYVersionSettings_a17cdd083b02f6ae596ed485d33029b61}
+
+
+Definition at line 30 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::serialize\+Request\+Headers().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!major\+Version@{major\+Version}}
+\index{major\+Version@{major\+Version}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{major\+Version}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::major\+Version}\label{structproxygen_1_1SPDYVersionSettings_a9505080269932e964debec2b57831343}
+
+
+Definition at line 41 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::encode\+Headers(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Settings(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Syn\+Reply(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Syn\+Stream(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Window\+Update(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::is\+S\+P\+D\+Y\+Reserved(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Syn\+Common(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::parse\+Ingress(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::rst\+Status\+Supported(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::serialize\+Request\+Headers(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::\+S\+P\+D\+Y\+Codec(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::supports\+Session\+Flow\+Control(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::supports\+Stream\+Flow\+Control().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!method\+Str@{method\+Str}}
+\index{method\+Str@{method\+Str}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{method\+Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::method\+Str}\label{structproxygen_1_1SPDYVersionSettings_a1b8b9ca2e9aad735c2ab143bfa915ad6}
+
+
+Definition at line 27 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!minor\+Version@{minor\+Version}}
+\index{minor\+Version@{minor\+Version}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{minor\+Version}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::minor\+Version}\label{structproxygen_1_1SPDYVersionSettings_aa9294919b03d9323634e6f182d80d3f5}
+
+
+Definition at line 42 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Window\+Update(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Minor\+Version(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::\+S\+P\+D\+Y\+Codec(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::supports\+Session\+Flow\+Control().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!name\+Value\+Size@{name\+Value\+Size}}
+\index{name\+Value\+Size@{name\+Value\+Size}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{name\+Value\+Size}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::name\+Value\+Size}\label{structproxygen_1_1SPDYVersionSettings_ab8dd0a9fdebc8c14557a7f55fa14f8fe}
+
+
+Definition at line 38 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::encode(), and proxygen\+::\+Gzip\+Header\+Codec\+::parse\+Name\+Values().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!parse\+Size\+Fun@{parse\+Size\+Fun}}
+\index{parse\+Size\+Fun@{parse\+Size\+Fun}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{parse\+Size\+Fun}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t($\ast$ proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::parse\+Size\+Fun) (folly\+::io\+::\+Cursor $\ast$)}\label{structproxygen_1_1SPDYVersionSettings_ae1253223a1619105303ad1bf269a3c07}
+
+
+Definition at line 32 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+Gzip\+Header\+Codec\+::parse\+Name\+Values().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!path\+Str@{path\+Str}}
+\index{path\+Str@{path\+Str}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{path\+Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::path\+Str}\label{structproxygen_1_1SPDYVersionSettings_a7a15b3c5944b00423d03fe1f488fe862}
+
+
+Definition at line 28 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!pri\+Shift@{pri\+Shift}}
+\index{pri\+Shift@{pri\+Shift}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{pri\+Shift}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::pri\+Shift}\label{structproxygen_1_1SPDYVersionSettings_a8ccf0b26cf42cdd4ea87d23af5e0ff3c}
+
+
+Definition at line 40 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Syn\+Stream(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!protocol\+Version\+String@{protocol\+Version\+String}}
+\index{protocol\+Version\+String@{protocol\+Version\+String}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{protocol\+Version\+String}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string\& proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::protocol\+Version\+String}\label{structproxygen_1_1SPDYVersionSettings_a5646c57b5be5e09248a362935e20309c}
+
+
+Definition at line 44 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Syn\+Common().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!proto\+Name@{proto\+Name}}
+\index{proto\+Name@{proto\+Name}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{proto\+Name}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::proto\+Name}\label{structproxygen_1_1SPDYVersionSettings_adc88f8269d420a7fd412166ff91ff0d2}
+
+
+Definition at line 31 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!scheme\+Str@{scheme\+Str}}
+\index{scheme\+Str@{scheme\+Str}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{scheme\+Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::scheme\+Str}\label{structproxygen_1_1SPDYVersionSettings_a92911ad1dc3c344a439f8b8ecef27e3e}
+
+
+Definition at line 29 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!status\+Str@{status\+Str}}
+\index{status\+Str@{status\+Str}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{status\+Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::status\+Str}\label{structproxygen_1_1SPDYVersionSettings_ae6776fc3887aa959054ce8d79f11e01b}
+
+
+Definition at line 26 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!syn\+Reply\+Size@{syn\+Reply\+Size}}
+\index{syn\+Reply\+Size@{syn\+Reply\+Size}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{syn\+Reply\+Size}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::syn\+Reply\+Size}\label{structproxygen_1_1SPDYVersionSettings_a4ad78580445e8afd82e70f13df216967}
+
+
+Definition at line 37 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Syn\+Reply(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Control\+Frame().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!version@{version}}
+\index{version@{version}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{version}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\+P\+D\+Y\+Version} proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::version}\label{structproxygen_1_1SPDYVersionSettings_a875f65c7e068ac0a2699b4f3441c468f}
+
+
+Definition at line 43 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Protocol().
+
+\index{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}!version\+Str@{version\+Str}}
+\index{version\+Str@{version\+Str}!proxygen\+::\+S\+P\+D\+Y\+Version\+Settings@{proxygen\+::\+S\+P\+D\+Y\+Version\+Settings}}
+\subsubsection[{version\+Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string proxygen\+::\+S\+P\+D\+Y\+Version\+Settings\+::version\+Str}\label{structproxygen_1_1SPDYVersionSettings_a04d30b41fb0b9b2f0b1468ec4327d4be}
+
+
+Definition at line 25 of file S\+P\+D\+Y\+Version\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::encode\+Headers().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf S\+P\+D\+Y\+Version\+Settings.\+h}\end{DoxyCompactItemize}

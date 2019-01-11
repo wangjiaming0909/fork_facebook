@@ -1,0 +1,130 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Codec\+Factory Class Reference}
+\label{classproxygen_1_1HTTPCodecFactory}\index{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Codec\+Factory.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Codec\+Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPCodecFactory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Codec\+Factory} ()
+\item 
+virtual {\bf $\sim$\+H\+T\+T\+P\+Codec\+Factory} ()
+\item 
+virtual std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ {\bf get\+Codec} (const std\+::string \&protocol\+Hint, {\bf Transport\+Direction} direction, bool is\+T\+LS)=0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ {\bf get\+Codec} ({\bf Codec\+Protocol} protocol, {\bf Transport\+Direction} direction)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Factory for produces \doxyref{H\+T\+T\+P\+Codec}{p.}{classproxygen_1_1HTTPCodec} objects. 
+
+Definition at line 20 of file H\+T\+T\+P\+Codec\+Factory.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}!H\+T\+T\+P\+Codec\+Factory@{H\+T\+T\+P\+Codec\+Factory}}
+\index{H\+T\+T\+P\+Codec\+Factory@{H\+T\+T\+P\+Codec\+Factory}!proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}}
+\subsubsection[{H\+T\+T\+P\+Codec\+Factory()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Codec\+Factory\+::\+H\+T\+T\+P\+Codec\+Factory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1HTTPCodecFactory_a363b087760556e19739989d01ff7cdf4}
+
+
+Definition at line 22 of file H\+T\+T\+P\+Codec\+Factory.\+h.
+
+
+\begin{DoxyCode}
+22 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}!````~H\+T\+T\+P\+Codec\+Factory@{$\sim$\+H\+T\+T\+P\+Codec\+Factory}}
+\index{````~H\+T\+T\+P\+Codec\+Factory@{$\sim$\+H\+T\+T\+P\+Codec\+Factory}!proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}}
+\subsubsection[{$\sim$\+H\+T\+T\+P\+Codec\+Factory()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+H\+T\+T\+P\+Codec\+Factory\+::$\sim$\+H\+T\+T\+P\+Codec\+Factory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1HTTPCodecFactory_a707e0152d06e5b7a67c27445febaad3b}
+
+
+Definition at line 23 of file H\+T\+T\+P\+Codec\+Factory.\+h.
+
+
+
+References get\+Codec().
+
+
+\begin{DoxyCode}
+23 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}!get\+Codec@{get\+Codec}}
+\index{get\+Codec@{get\+Codec}!proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}}
+\subsubsection[{get\+Codec(const std\+::string \&protocol\+Hint, Transport\+Direction direction, bool is\+T\+L\+S)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::unique\+\_\+ptr$<${\bf H\+T\+T\+P\+Codec}$>$ proxygen\+::\+H\+T\+T\+P\+Codec\+Factory\+::get\+Codec (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{protocol\+Hint, }
+\item[{{\bf Transport\+Direction}}]{direction, }
+\item[{bool}]{is\+T\+LS}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{classproxygen_1_1HTTPCodecFactory_ab0d8d25513603c7d4bd0d7036ab78066}
+Get a codec instance 
+
+Implemented in {\bf proxygen\+::\+H\+T\+T\+P\+Default\+Session\+Codec\+Factory} \doxyref{}{p.}{classproxygen_1_1HTTPDefaultSessionCodecFactory_ab274955051b45a2fb377f44859c51e32}, and {\bf proxygen\+::\+Default\+H\+T\+T\+P\+Codec\+Factory} \doxyref{}{p.}{classproxygen_1_1DefaultHTTPCodecFactory_ad87f587d94ea757a1db0e3863bf8b643}.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Downstream\+Session\+::on\+Native\+Protocol\+Upgrade(), and $\sim$\+H\+T\+T\+P\+Codec\+Factory().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}!get\+Codec@{get\+Codec}}
+\index{get\+Codec@{get\+Codec}!proxygen\+::\+H\+T\+T\+P\+Codec\+Factory@{proxygen\+::\+H\+T\+T\+P\+Codec\+Factory}}
+\subsubsection[{get\+Codec(\+Codec\+Protocol protocol, Transport\+Direction direction)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf H\+T\+T\+P\+Codec} $>$ proxygen\+::\+H\+T\+T\+P\+Codec\+Factory\+::get\+Codec (
+\begin{DoxyParamCaption}
+\item[{{\bf Codec\+Protocol}}]{protocol, }
+\item[{{\bf Transport\+Direction}}]{direction}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classproxygen_1_1HTTPCodecFactory_a4f4c3379ceee01a9da5b5d4c943af995}
+
+
+Definition at line 17 of file H\+T\+T\+P\+Codec\+Factory.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+\_\+1\+\_\+1, proxygen\+::\+H\+T\+T\+P\+\_\+2, proxygen\+::\+S\+P\+D\+Y3, proxygen\+::\+S\+P\+D\+Y3\+\_\+1, proxygen\+::\+S\+P\+D\+Y\+\_\+3, and proxygen\+::\+S\+P\+D\+Y\+\_\+3\+\_\+1.
+
+
+\begin{DoxyCode}
+18                                                         \{
+19   \textcolor{keywordflow}{switch} (protocol) \{
+20     \textcolor{keywordflow}{case} CodecProtocol::HTTP_1_1:
+21       \textcolor{keywordflow}{return} std::make\_unique<HTTP1xCodec>(direction);
+22     \textcolor{keywordflow}{case} CodecProtocol::SPDY_3:
+23       \textcolor{keywordflow}{return} std::make\_unique<SPDYCodec>(direction, SPDYVersion::SPDY3);
+24     \textcolor{keywordflow}{case} CodecProtocol::SPDY_3_1:
+25       \textcolor{keywordflow}{return} std::make\_unique<SPDYCodec>(direction, SPDYVersion::SPDY3_1);
+26     \textcolor{keywordflow}{case} CodecProtocol::HTTP_2:
+27       \textcolor{keywordflow}{return} std::make\_unique<HTTP2Codec>(direction);
+28     \textcolor{keywordflow}{default}:
+29       LOG(FATAL) << \textcolor{stringliteral}{"Unreachable"};
+30       \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+31   \}
+32 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P\+Codec\+Factory.\+h}\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P\+Codec\+Factory.\+cpp}\end{DoxyCompactItemize}

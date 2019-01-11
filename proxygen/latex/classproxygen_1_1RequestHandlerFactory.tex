@@ -1,0 +1,108 @@
+\section{proxygen\+:\+:Request\+Handler\+Factory Class Reference}
+\label{classproxygen_1_1RequestHandlerFactory}\index{proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}}
+
+
+{\ttfamily \#include $<$Request\+Handler\+Factory.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Request\+Handler\+Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=8.181818cm]{classproxygen_1_1RequestHandlerFactory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Request\+Handler\+Factory} ()
+\item 
+virtual void {\bf on\+Server\+Start} (folly\+::\+Event\+Base $\ast$evb) noexcept=0
+\item 
+virtual void {\bf on\+Server\+Stop} () noexcept=0
+\item 
+virtual {\bf Request\+Handler} $\ast$ {\bf on\+Request} ({\bf Request\+Handler} $\ast$, {\bf H\+T\+T\+P\+Message} $\ast$) noexcept=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Factory for Request\+Handlers. 
+
+Definition at line 19 of file Request\+Handler\+Factory.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}!````~Request\+Handler\+Factory@{$\sim$\+Request\+Handler\+Factory}}
+\index{````~Request\+Handler\+Factory@{$\sim$\+Request\+Handler\+Factory}!proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}}
+\subsubsection[{$\sim$\+Request\+Handler\+Factory()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Request\+Handler\+Factory\+::$\sim$\+Request\+Handler\+Factory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1RequestHandlerFactory_ae76a2e4bfeb24457f701a4c88fc24dcd}
+
+
+Definition at line 21 of file Request\+Handler\+Factory.\+h.
+
+
+
+References on\+Request(), on\+Server\+Start(), and on\+Server\+Stop().
+
+
+\begin{DoxyCode}
+21 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}!on\+Request@{on\+Request}}
+\index{on\+Request@{on\+Request}!proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}}
+\subsubsection[{on\+Request(\+Request\+Handler $\ast$, H\+T\+T\+P\+Message $\ast$) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Request\+Handler}$\ast$ proxygen\+::\+Request\+Handler\+Factory\+::on\+Request (
+\begin{DoxyParamCaption}
+\item[{{\bf Request\+Handler} $\ast$}]{, }
+\item[{{\bf H\+T\+T\+P\+Message} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1RequestHandlerFactory_a9c2cbbc96d006244ea28cea44a3e6a60}
+Invoked for each new request server handles. \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage} is provided so that user can potentially choose among several implementation of handler based on \doxyref{U\+RL}{p.}{classproxygen_1_1URL} or something. No need to save/copy this \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage}. \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler} will be given the \doxyref{H\+T\+T\+P\+Message}{p.}{classproxygen_1_1HTTPMessage} in a separate callback.
+
+Some request handlers don\textquotesingle{}t handle the request themselves (think filters). They do take some actions based on request/response but otherwise they just hand-\/off request to some other \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler}. This upstream \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler} is given as first parameter. For the terminal \doxyref{Request\+Handler}{p.}{classproxygen_1_1RequestHandler} this will by nullptr. 
+
+Implemented in {\bf Test\+Handler\+Factory} \doxyref{}{p.}{classTestHandlerFactory_ae2ce41f2f726ee62497d9979148836ed}, {\bf proxygen\+::\+Zlib\+Server\+Filter\+Factory} \doxyref{}{p.}{classproxygen_1_1ZlibServerFilterFactory_a0f8a7acc4b46b452123ec5bbfda4bc5c}, {\bf Dummy\+Filter\+Factory} \doxyref{}{p.}{classDummyFilterFactory_a2a79bb927c1d7bb0d6c0e036b9a4e424}, {\bf proxygen\+::\+Reject\+Connect\+Filter\+Factory} \doxyref{}{p.}{classproxygen_1_1RejectConnectFilterFactory_a572452c4ebc826c0f27d439e14b92228}, {\bf proxygen\+::\+Scoped\+Handler\+Factory$<$ Handler\+Type $>$} \doxyref{}{p.}{classproxygen_1_1ScopedHandlerFactory_a3426b1050b058f472d3b6b64095a62f1}, {\bf Proxy\+Handler\+Factory} \doxyref{}{p.}{classProxyHandlerFactory_a53ba7cda3ece728c8ef5063a63813d90}, {\bf Echo\+Handler\+Factory} \doxyref{}{p.}{classEchoHandlerFactory_aea5858e08e8ecdb3a6a6be1e12872b50}, and {\bf Push\+Request\+Handler\+Factory} \doxyref{}{p.}{classPushRequestHandlerFactory_a21316e49b26c4a743eeeac35988dd6e5}.
+
+
+
+Referenced by $\sim$\+Request\+Handler\+Factory().
+
+\index{proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}!on\+Server\+Start@{on\+Server\+Start}}
+\index{on\+Server\+Start@{on\+Server\+Start}!proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}}
+\subsubsection[{on\+Server\+Start(folly\+::\+Event\+Base $\ast$evb) noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Request\+Handler\+Factory\+::on\+Server\+Start (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Event\+Base $\ast$}]{evb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1RequestHandlerFactory_af76091b8a51a8d069fcc1aec3007a1cc}
+Invoked in each thread server is going to handle requests before we start handling requests. Can be used to setup thread-\/local setup for each thread (stats and such). 
+
+Implemented in {\bf Test\+Handler\+Factory} \doxyref{}{p.}{classTestHandlerFactory_a5ddc2633f4c6cbcc6940e983036b9951}, {\bf proxygen\+::\+Zlib\+Server\+Filter\+Factory} \doxyref{}{p.}{classproxygen_1_1ZlibServerFilterFactory_afd16e05cecf09a23de577b6082c1a51b}, {\bf Dummy\+Filter\+Factory} \doxyref{}{p.}{classDummyFilterFactory_a8db0e2a4e0be334f537c54c2da92b35f}, {\bf proxygen\+::\+Reject\+Connect\+Filter\+Factory} \doxyref{}{p.}{classproxygen_1_1RejectConnectFilterFactory_a9024e7a892391d86c259fa7e2b8922a8}, {\bf proxygen\+::\+Scoped\+Handler\+Factory$<$ Handler\+Type $>$} \doxyref{}{p.}{classproxygen_1_1ScopedHandlerFactory_a8decc6f35ec73c447f8e711522a0c475}, {\bf Proxy\+Handler\+Factory} \doxyref{}{p.}{classProxyHandlerFactory_a5ceca193cb19b8df0b7d327ab2072537}, {\bf Echo\+Handler\+Factory} \doxyref{}{p.}{classEchoHandlerFactory_a458dde996e97432619ab11bf8b55d58b}, and {\bf Push\+Request\+Handler\+Factory} \doxyref{}{p.}{classPushRequestHandlerFactory_ac0a51b11a0225cd0249a585c772b4a49}.
+
+
+
+Referenced by $\sim$\+Request\+Handler\+Factory().
+
+\index{proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}!on\+Server\+Stop@{on\+Server\+Stop}}
+\index{on\+Server\+Stop@{on\+Server\+Stop}!proxygen\+::\+Request\+Handler\+Factory@{proxygen\+::\+Request\+Handler\+Factory}}
+\subsubsection[{on\+Server\+Stop() noexcept=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void proxygen\+::\+Request\+Handler\+Factory\+::on\+Server\+Stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1RequestHandlerFactory_a0791d6b33c13513ed6f550bbbd7bca85}
+Invoked in each handler thread after all the connections are drained from that thread. Can be used to tear down thread-\/local setup. 
+
+Implemented in {\bf Test\+Handler\+Factory} \doxyref{}{p.}{classTestHandlerFactory_a8e15796810745fef9e782715a23e6c16}, {\bf proxygen\+::\+Zlib\+Server\+Filter\+Factory} \doxyref{}{p.}{classproxygen_1_1ZlibServerFilterFactory_a1b4e4b39ed0b92b0bb7123143d0fd26b}, {\bf Dummy\+Filter\+Factory} \doxyref{}{p.}{classDummyFilterFactory_a6bca57ceeef14bc159f4fd47c13ef573}, {\bf proxygen\+::\+Reject\+Connect\+Filter\+Factory} \doxyref{}{p.}{classproxygen_1_1RejectConnectFilterFactory_a3f5c314b4ddce7d44d8b6b3c971df0cc}, {\bf proxygen\+::\+Scoped\+Handler\+Factory$<$ Handler\+Type $>$} \doxyref{}{p.}{classproxygen_1_1ScopedHandlerFactory_a9c3d96441ffd7c6fdbf02ea84b22e1ff}, {\bf Proxy\+Handler\+Factory} \doxyref{}{p.}{classProxyHandlerFactory_a46b4431a97feaa9d2bed959ae167cdd0}, {\bf Echo\+Handler\+Factory} \doxyref{}{p.}{classEchoHandlerFactory_a5e461a60e6e9f8e49e4c07ca13eba7b6}, and {\bf Push\+Request\+Handler\+Factory} \doxyref{}{p.}{classPushRequestHandlerFactory_a311b52f3968ba5048f8a4661a10ca179}.
+
+
+
+Referenced by $\sim$\+Request\+Handler\+Factory().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/{\bf Request\+Handler\+Factory.\+h}\end{DoxyCompactItemize}

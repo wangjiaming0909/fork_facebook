@@ -1,0 +1,1225 @@
+\section{proxygen\+:\+:Q\+P\+A\+C\+K\+Header\+Table Class Reference}
+\label{classproxygen_1_1QPACKHeaderTable}\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+
+
+{\ttfamily \#include $<$Q\+P\+A\+C\+K\+Header\+Table.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Q\+P\+A\+C\+K\+Header\+Table\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1QPACKHeaderTable}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ {\bf U\+N\+A\+C\+K\+ED} = std\+:\+:numeric\+\_\+limits$<$uint32\+\_\+t$>$\+:\+:max()
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Q\+P\+A\+C\+K\+Header\+Table} (uint32\+\_\+t capacity\+Val, bool track\+References)
+\item 
+{\bf $\sim$\+Q\+P\+A\+C\+K\+Header\+Table} ()
+\item 
+{\bf Q\+P\+A\+C\+K\+Header\+Table} (const {\bf Q\+P\+A\+C\+K\+Header\+Table} \&)=delete
+\item 
+{\bf Q\+P\+A\+C\+K\+Header\+Table} \& {\bf operator=} (const {\bf Q\+P\+A\+C\+K\+Header\+Table} \&)=delete
+\item 
+uint32\+\_\+t {\bf get\+Max\+Entries} () const 
+\item 
+uint32\+\_\+t {\bf get\+Base\+Index} () const 
+\item 
+bool {\bf is\+Vulnerable} (uint32\+\_\+t abs\+Index) const 
+\item 
+bool {\bf can\+Index} (const {\bf H\+P\+A\+C\+K\+Header} \&header)
+\item 
+bool {\bf is\+Draining} (uint32\+\_\+t relative\+Index)
+\item 
+std\+::pair$<$ bool, uint32\+\_\+t $>$ {\bf maybe\+Duplicate} (uint32\+\_\+t relative\+Index, bool allow\+Vulnerable)
+\item 
+bool {\bf add} ({\bf H\+P\+A\+C\+K\+Header} header) override
+\item 
+bool {\bf set\+Capacity} (uint32\+\_\+t {\bf capacity}) override
+\item 
+void {\bf set\+Min\+Free\+For\+Testing} (uint32\+\_\+t min\+Free)
+\item 
+uint32\+\_\+t {\bf get\+Index} (const {\bf H\+P\+A\+C\+K\+Header} \&header, bool allow\+Vulnerable=true) const 
+\item 
+const {\bf H\+P\+A\+C\+K\+Header} \& {\bf get\+Header} (uint32\+\_\+t index, uint32\+\_\+t base=0) const 
+\item 
+bool {\bf is\+Valid} (uint32\+\_\+t index, uint32\+\_\+t base=0) const 
+\item 
+uint32\+\_\+t {\bf name\+Index} (const {\bf H\+P\+A\+C\+K\+Header\+Name} \&header\+Name, bool allow\+Vulnerable=true) const 
+\item 
+bool {\bf on\+Table\+State\+Sync} (uint32\+\_\+t inserts)
+\item 
+void {\bf set\+Max\+Acked} (uint32\+\_\+t max\+Acked)
+\item 
+uint32\+\_\+t {\bf relative\+To\+Absolute} (uint32\+\_\+t relative\+Index) const 
+\item 
+uint32\+\_\+t {\bf absolute\+To\+Relative} (uint32\+\_\+t abs\+Index) const 
+\item 
+void {\bf add\+Ref} (uint32\+\_\+t abs\+Index)
+\item 
+void {\bf sub\+Ref} (uint32\+\_\+t abs\+Index)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf get\+Index\+Impl} (const {\bf H\+P\+A\+C\+K\+Header\+Name} \&header, const folly\+::fbstring \&value, bool name\+Only, bool allow\+Vulnerable=true) const 
+\item 
+void {\bf increase\+Table\+Length\+To} (uint32\+\_\+t new\+Length) override
+\item 
+void {\bf resize\+Table} (uint32\+\_\+t new\+Length) override
+\item 
+void {\bf update\+Resized\+Table} (uint32\+\_\+t old\+Tail, uint32\+\_\+t old\+Length, uint32\+\_\+t new\+Length) override
+\item 
+uint32\+\_\+t {\bf remove\+Last} () override
+\item 
+bool {\bf can\+Evict} (uint32\+\_\+t needed)
+\item 
+uint32\+\_\+t {\bf evict} (uint32\+\_\+t needed, uint32\+\_\+t desired\+Capacity) override
+\item 
+uint32\+\_\+t {\bf to\+Internal} (uint32\+\_\+t external\+Index, uint32\+\_\+t base) const 
+\item 
+uint32\+\_\+t {\bf internal\+To\+Absolute} (uint32\+\_\+t internal\+Index) const 
+\item 
+uint32\+\_\+t {\bf absolute\+To\+Internal} (uint32\+\_\+t absolute\+Index) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bf base\+Index\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf drained\+Bytes\+\_\+} \{0\}
+\item 
+uint32\+\_\+t {\bf min\+Usable\+\_\+} \{1\}
+\item 
+uint32\+\_\+t {\bf max\+Acked\+\_\+} \{0\}
+\item 
+std\+::unique\+\_\+ptr$<$ std\+::vector$<$ uint16\+\_\+t $>$ $>$ {\bf ref\+Count\+\_\+}
+\item 
+uint32\+\_\+t {\bf min\+Free\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Data structure for maintaining indexed headers, based on a fixed-\/length ring with F\+I\+FO semantics. Externally it acts as an array. 
+
+Definition at line 22 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}\label{classproxygen_1_1QPACKHeaderTable_a0e3284c60186423e7cea31c5fbe11852}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{U\+N\+A\+C\+K\+ED@{U\+N\+A\+C\+K\+ED}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!U\+N\+A\+C\+K\+ED@{U\+N\+A\+C\+K\+ED}}\item[{\em 
+U\+N\+A\+C\+K\+ED\label{classproxygen_1_1QPACKHeaderTable_a0e3284c60186423e7cea31c5fbe11852a3b454dca9b81f8a234f91d3912cf5ca4}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 24 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+\begin{DoxyCode}
+24        \{
+25     UNACKED = std::numeric\_limits<uint32\_t>::max()
+26   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!Q\+P\+A\+C\+K\+Header\+Table@{Q\+P\+A\+C\+K\+Header\+Table}}
+\index{Q\+P\+A\+C\+K\+Header\+Table@{Q\+P\+A\+C\+K\+Header\+Table}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{Q\+P\+A\+C\+K\+Header\+Table(uint32\+\_\+t capacity\+Val, bool track\+References)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::\+Q\+P\+A\+C\+K\+Header\+Table (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{capacity\+Val, }
+\item[{bool}]{track\+References}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKHeaderTable_a91cd637a7b648a1566d4f70668685495}
+
+
+Definition at line 39 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References min\+Free\+\_\+, ref\+Count\+\_\+, and proxygen\+::\+Header\+Table\+::table\+\_\+.
+
+
+
+Referenced by $\sim$\+Q\+P\+A\+C\+K\+Header\+Table().
+
+
+\begin{DoxyCode}
+40     : HeaderTable(capacityVal) \{
+41   \textcolor{keywordflow}{if} (trackReferences) \{
+42     refCount_ = std::make\_unique<std::vector<uint16\_t>>(table_.size(), 0);
+43     minFree_ = getMinFree(capacityVal);
+44   \} \textcolor{keywordflow}{else} \{
+45     minFree_ = 0;
+46   \}
+47 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!````~Q\+P\+A\+C\+K\+Header\+Table@{$\sim$\+Q\+P\+A\+C\+K\+Header\+Table}}
+\index{````~Q\+P\+A\+C\+K\+Header\+Table@{$\sim$\+Q\+P\+A\+C\+K\+Header\+Table}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{$\sim$\+Q\+P\+A\+C\+K\+Header\+Table()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::$\sim$\+Q\+P\+A\+C\+K\+Header\+Table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_a371becfc2263a202e1a024edcc4f4d02}
+
+
+Definition at line 30 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References operator=(), and Q\+P\+A\+C\+K\+Header\+Table().
+
+
+\begin{DoxyCode}
+30 \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!Q\+P\+A\+C\+K\+Header\+Table@{Q\+P\+A\+C\+K\+Header\+Table}}
+\index{Q\+P\+A\+C\+K\+Header\+Table@{Q\+P\+A\+C\+K\+Header\+Table}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{Q\+P\+A\+C\+K\+Header\+Table(const Q\+P\+A\+C\+K\+Header\+Table \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::\+Q\+P\+A\+C\+K\+Header\+Table (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+P\+A\+C\+K\+Header\+Table} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}\label{classproxygen_1_1QPACKHeaderTable_aab8e805456ff8c4a0c7b6e470530b5c7}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!absolute\+To\+Internal@{absolute\+To\+Internal}}
+\index{absolute\+To\+Internal@{absolute\+To\+Internal}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{absolute\+To\+Internal(uint32\+\_\+t absolute\+Index) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::absolute\+To\+Internal (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{absolute\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_aa9ae7eecb864c907777a8cec818237da}
+
+
+Definition at line 276 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References absolute\+To\+Relative(), and to\+Internal().
+
+
+
+Referenced by absolute\+To\+Relative(), add(), add\+Ref(), and sub\+Ref().
+
+
+\begin{DoxyCode}
+277                                 \{
+278   \textcolor{keywordflow}{return} toInternal(absoluteToRelative(absoluteIndex), 0);
+279 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!absolute\+To\+Relative@{absolute\+To\+Relative}}
+\index{absolute\+To\+Relative@{absolute\+To\+Relative}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{absolute\+To\+Relative(uint32\+\_\+t abs\+Index) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::absolute\+To\+Relative (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{abs\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_a3c0462ac5cb2817e9497aee9fc5b75ea}
+Convert an absolute index to a relative index 
+
+Definition at line 164 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References absolute\+To\+Internal(), add\+Ref(), base\+Index\+\_\+, can\+Evict(), evict(), get\+Index\+Impl(), increase\+Table\+Length\+To(), internal\+To\+Absolute(), remove\+Last(), resize\+Table(), sub\+Ref(), to\+Internal(), and update\+Resized\+Table().
+
+
+
+Referenced by absolute\+To\+Internal(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::get\+Name\+Index\+Q(), and to\+Internal().
+
+
+\begin{DoxyCode}
+164                                                        \{
+165     CHECK\_LE(absIndex, baseIndex_);
+166     \textcolor{keywordflow}{return} baseIndex_ - absIndex + 1;
+167   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!add@{add}}
+\index{add@{add}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{add(\+H\+P\+A\+C\+K\+Header header) override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::add (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+P\+A\+C\+K\+Header}}]{header}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKHeaderTable_a92966263016752609108f97a231e18ca}
+Add the header entry at the beginning of the table (index=1)
+
+\begin{DoxyReturn}{Returns}
+true if it was able to add the entry 
+\end{DoxyReturn}
+
+
+Reimplemented from {\bf proxygen\+::\+Header\+Table} \doxyref{}{p.}{classproxygen_1_1HeaderTable_a733f7bd056a003bbbf3e8f8d5ab9fa11}.
+
+
+
+Definition at line 49 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References absolute\+To\+Internal(), proxygen\+::\+Header\+Table\+::add(), base\+Index\+\_\+, proxygen\+::\+Header\+Table\+::bytes(), proxygen\+::\+Header\+Table\+::bytes\+\_\+, proxygen\+::\+Header\+Table\+::capacity\+\_\+, drained\+Bytes\+\_\+, proxygen\+::\+E\+R\+R\+OR, proxygen\+::\+Header\+Table\+::head\+\_\+, internal\+To\+Absolute(), min\+Free\+\_\+, min\+Usable\+\_\+, ref\+Count\+\_\+, and proxygen\+::\+Header\+Table\+::table\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Encoder\+Stream\+Instruction(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Literal\+Header\+Q(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), is\+Draining(), maybe\+Duplicate(), and proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::seed\+Header\+Table().
+
+
+\begin{DoxyCode}
+49                                              \{
+50   \textcolor{keywordflow}{if} (baseIndex_ == std::numeric\_limits<uint32\_t>::max()) \{
+51     LOG(ERROR) << \textcolor{stringliteral}{"Cowardly refusing to add more entries since baseIndex\_ "}
+52       \textcolor{stringliteral}{" would wrap"};
+53     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+54   \}
+55 
+56   VLOG(6) << \textcolor{stringliteral}{"Adding header="} << header;
+57   \textcolor{keywordflow}{if} (!HeaderTable::add(std::move(header))) \{
+58     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+59   \}
+60   \textcolor{keywordflow}{if} (refCount_) \{
+61     (*refCount\_)[head_] = 0;
+62   \}
+63   ++baseIndex_;
+64   DCHECK\_EQ(internalToAbsolute(head_), baseIndex_);
+65   \textcolor{comment}{// Increase minUsable\_ until the free space + drainedBytes is >= minFree.}
+66   \textcolor{comment}{// For HPACK, minFree is 0 and this is a no-op.}
+67   \textcolor{keywordflow}{while} (capacity_ - bytes_ + drainedBytes_ < minFree_ &&
+68          minUsable_ <= baseIndex_) \{
+69     \textcolor{keyword}{auto} bytes = table_[absoluteToInternal(minUsable_)].bytes();
+70     VLOG(5) << \textcolor{stringliteral}{"Draining absolute index "} << minUsable_ << \textcolor{stringliteral}{" bytes="}
+71             << bytes << \textcolor{stringliteral}{" drainedBytes\_= "} << (drainedBytes_ + bytes);
+72     drainedBytes_  += bytes;
+73     minUsable_++;
+74   \}
+75   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+76 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!add\+Ref@{add\+Ref}}
+\index{add\+Ref@{add\+Ref}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{add\+Ref(uint32\+\_\+t abs\+Index)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::add\+Ref (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{abs\+Index}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKHeaderTable_a2f72a16b43e5f3fc9c1502b3282054dc}
+Add a reference for the given index. Entries with non-\/zero references cannot be evicted 
+
+Definition at line 254 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References absolute\+To\+Internal(), and ref\+Count\+\_\+.
+
+
+
+Referenced by absolute\+To\+Relative(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::track\+Reference().
+
+
+\begin{DoxyCode}
+254                                                \{
+255   \textcolor{comment}{// refCount is 16 bits.  It should really never get this big in practice,}
+256   \textcolor{comment}{// unless a decoder is not sending HEADER\_ACK in a timely way.}
+257   CHECK(refCount_);
+258   (*refCount\_)[absoluteToInternal(absIndex)]++;
+259 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!can\+Evict@{can\+Evict}}
+\index{can\+Evict@{can\+Evict}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{can\+Evict(uint32\+\_\+t needed)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::can\+Evict (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{needed}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_aa8434e37cc7bcbf0bc50b811b3a57031}
+Return true if the table can evict needed bytes 
+
+Definition at line 192 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References proxygen\+::\+Header\+Table\+::capacity\+\_\+, internal\+To\+Absolute(), max\+Acked\+\_\+, proxygen\+::\+Header\+Table\+::next(), ref\+Count\+\_\+, proxygen\+::\+Header\+Table\+::size(), proxygen\+::\+Header\+Table\+::size\+\_\+, proxygen\+::\+Header\+Table\+::table\+\_\+, and proxygen\+::\+Header\+Table\+::tail().
+
+
+
+Referenced by absolute\+To\+Relative(), can\+Index(), and evict().
+
+
+\begin{DoxyCode}
+192                                                \{
+193   \textcolor{keywordflow}{if} (size_ == 0 || !refCount_) \{
+194     \textcolor{keywordflow}{return} needed <= capacity_;
+195   \}
+196   uint32\_t freeable = 0;
+197   uint32\_t i = tail();
+198   uint32\_t nChecked = 0;
+199   \textcolor{keywordflow}{while} (nChecked++ < size() && freeable < needed && ((*refCount_)[i] == 0) &&
+200          internalToAbsolute(i) <= maxAcked_) \{ \textcolor{comment}{// don't evict unacked headers}
+201     freeable += table_[i].bytes();
+202     i = next(i);
+203   \}
+204   \textcolor{keywordflow}{if} (freeable < needed) \{
+205     VLOG(5) << \textcolor{stringliteral}{"header="} << table_[i].name << \textcolor{stringliteral}{" blocked eviction, recount="}
+206             << (*refCount\_)[i];
+207     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+208   \}
+209   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+210 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!can\+Index@{can\+Index}}
+\index{can\+Index@{can\+Index}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{can\+Index(const H\+P\+A\+C\+K\+Header \&header)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::can\+Index (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header} \&}]{header}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_ad44b7487db0dcad52b944bcd9b0c3d5b}
+Returns true if the header can be added to the table. May be linear in the number of entries 
+
+Definition at line 57 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References proxygen\+::\+H\+P\+A\+C\+K\+Header\+::bytes(), proxygen\+::\+Header\+Table\+::bytes\+\_\+, can\+Evict(), proxygen\+::\+Header\+Table\+::capacity\+\_\+, and min\+Free\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), and maybe\+Duplicate().
+
+
+\begin{DoxyCode}
+57                                            \{
+58     \textcolor{keyword}{auto} totalBytes = bytes_ + header.bytes();
+59     \textcolor{comment}{// Don't index headers that would immediately be drained}
+60     \textcolor{keywordflow}{return} ((header.bytes() <= (capacity_ - minFree_)) &&
+61             (totalBytes <= capacity_ || canEvict(totalBytes - capacity_)));
+62   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!evict@{evict}}
+\index{evict@{evict}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{evict(uint32\+\_\+t needed, uint32\+\_\+t desired\+Capacity) override}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::evict (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{needed, }
+\item[{uint32\+\_\+t}]{desired\+Capacity}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKHeaderTable_a7acf709b3c58e89a33d70a409b81c237}
+Evict entries to make space for the needed amount of bytes. 
+
+Reimplemented from {\bf proxygen\+::\+Header\+Table} \doxyref{}{p.}{classproxygen_1_1HeaderTable_a8503522cb62d6f94dc5aff4843e5c322}.
+
+
+
+Definition at line 184 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References proxygen\+::\+Header\+Table\+::bytes\+\_\+, can\+Evict(), and proxygen\+::\+Header\+Table\+::evict().
+
+
+
+Referenced by absolute\+To\+Relative().
+
+
+\begin{DoxyCode}
+184                                                                           \{
+185   \textcolor{keywordflow}{if} (bytes_ + needed < desiredCapacity ||
+186       !canEvict(bytes_ + needed - desiredCapacity)) \{
+187     \textcolor{keywordflow}{return} 0;
+188   \}
+189   \textcolor{keywordflow}{return} HeaderTable::evict(needed, desiredCapacity);
+190 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!get\+Base\+Index@{get\+Base\+Index}}
+\index{get\+Base\+Index@{get\+Base\+Index}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{get\+Base\+Index() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Base\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_ab119df15f8127d3f643068d137c145e2}
+Return Base Index -\/ the total number of headers inserted to this table, including evictions 
+
+Definition at line 42 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References base\+Index\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::decode\+Streaming(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::drain\+Queue(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Q(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::encode\+Table\+State\+Sync(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::enqueue\+Header\+Block(), and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::handle\+Base\+Index().
+
+
+\begin{DoxyCode}
+42                                 \{
+43     \textcolor{keywordflow}{return} baseIndex_;
+44   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!get\+Header@{get\+Header}}
+\index{get\+Header@{get\+Header}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{get\+Header(uint32\+\_\+t index, uint32\+\_\+t base=0) const }]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+P\+A\+C\+K\+Header} \& proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Header (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{index, }
+\item[{uint32\+\_\+t}]{base = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1QPACKHeaderTable_ad120ca35c65d3e1d40a235baf8c322d3}
+Get the table entry at the given external index. If base is 0, index is relative to head/base\+Index. If base is non-\/zero, index is relative to base.
+
+\begin{DoxyReturn}{Returns}
+the header entry 
+\end{DoxyReturn}
+
+
+Definition at line 129 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References is\+Valid(), proxygen\+::\+Header\+Table\+::table\+\_\+, and to\+Internal().
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Context\+::get\+Header(), maybe\+Duplicate(), and set\+Min\+Free\+For\+Testing().
+
+
+\begin{DoxyCode}
+130                                                                     \{
+131   CHECK(isValid(index, base));
+132   \textcolor{keywordflow}{return} table_[toInternal(index, base)];
+133 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!get\+Index@{get\+Index}}
+\index{get\+Index@{get\+Index}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{get\+Index(const H\+P\+A\+C\+K\+Header \&header, bool allow\+Vulnerable=true) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Index (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header} \&}]{header, }
+\item[{bool}]{allow\+Vulnerable = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1QPACKHeaderTable_a3db9f10b5869b05e1f3846edd8d0e268}
+Get the index of the given header, if found. The index is relative to head/base\+Index. If allow\+Vulnerable is true, the index returned may not have been acknowledged by the decoder.
+
+\begin{DoxyReturn}{Returns}
+0 in case the header is not found 
+\end{DoxyReturn}
+
+
+Definition at line 88 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References get\+Index\+Impl(), proxygen\+::\+H\+P\+A\+C\+K\+Header\+::name, and proxygen\+::\+H\+P\+A\+C\+K\+Header\+::value.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), and set\+Min\+Free\+For\+Testing().
+
+
+\begin{DoxyCode}
+89                                                                 \{
+90   \textcolor{keywordflow}{return} getIndexImpl(header.name, header.value, \textcolor{keyword}{false}, allowVulnerable);
+91 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!get\+Index\+Impl@{get\+Index\+Impl}}
+\index{get\+Index\+Impl@{get\+Index\+Impl}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{get\+Index\+Impl(const H\+P\+A\+C\+K\+Header\+Name \&header, const folly\+::fbstring \&value, bool name\+Only, bool allow\+Vulnerable=true) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Index\+Impl (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header\+Name} \&}]{header, }
+\item[{const folly\+::fbstring \&}]{value, }
+\item[{bool}]{name\+Only, }
+\item[{bool}]{allow\+Vulnerable = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_ac770b32b74646a20489512329bbbac0f}
+
+
+Definition at line 93 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References internal\+To\+Absolute(), max\+Acked\+\_\+, proxygen\+::\+Header\+Table\+::names\+\_\+, proxygen\+::\+Header\+Table\+::table\+\_\+, proxygen\+::\+Header\+Table\+::to\+External(), and U\+N\+A\+C\+K\+ED.
+
+
+
+Referenced by absolute\+To\+Relative(), get\+Index(), and name\+Index().
+
+
+\begin{DoxyCode}
+96                                                                     \{
+97   \textcolor{keyword}{auto} it = names_.find(headerName);
+98   \textcolor{keywordflow}{if} (it == names_.end()) \{
+99     \textcolor{keywordflow}{return} 0;
+100   \}
+101   \textcolor{keywordtype}{bool} encoderHasUnackedEntry = \textcolor{keyword}{false};
+102   \textcolor{comment}{// Searching backwards gives smallest index, but more likely vulnerable}
+103   \textcolor{comment}{// Searching forwards least likely vulnerable but could prevent eviction}
+104   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} indexIt = it->second.rbegin(); indexIt != it->second.rend();
+105        ++indexIt) \{
+106     \textcolor{keyword}{auto} i = *indexIt;
+107     \textcolor{keywordflow}{if} (nameOnly || table_[i].value == value) \{
+108       \textcolor{comment}{// allow vulnerable or not vulnerable}
+109       \textcolor{keywordflow}{if} (allowVulnerable || internalToAbsolute(i) <= maxAcked_) \{
+110         \textcolor{comment}{// index *may* be draining, caller has to check}
+111         \textcolor{keywordflow}{return} toExternal(i);
+112       \} \textcolor{keywordflow}{else} \{
+113         encoderHasUnackedEntry = \textcolor{keyword}{true};
+114       \}
+115     \}
+116   \}
+117   \textcolor{keywordflow}{if} (encoderHasUnackedEntry) \{
+118     \textcolor{keywordflow}{return} UNACKED;
+119   \}
+120   \textcolor{keywordflow}{return} 0;
+121 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!get\+Max\+Entries@{get\+Max\+Entries}}
+\index{get\+Max\+Entries@{get\+Max\+Entries}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{get\+Max\+Entries() const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::get\+Max\+Entries (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_aafc5cb31776a6095c07a49ebe6c4b783}
+
+
+Definition at line 34 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References proxygen\+::\+Header\+Table\+::capacity\+\_\+, and proxygen\+::\+Header\+Table\+::get\+Max\+Table\+Length().
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Q(), and proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::handle\+Base\+Index().
+
+
+\begin{DoxyCode}
+34                                  \{
+35     \textcolor{keywordflow}{return} getMaxTableLength(capacity_);
+36   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!increase\+Table\+Length\+To@{increase\+Table\+Length\+To}}
+\index{increase\+Table\+Length\+To@{increase\+Table\+Length\+To}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{increase\+Table\+Length\+To(uint32\+\_\+t new\+Length) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::increase\+Table\+Length\+To (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{new\+Length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKHeaderTable_a4a34bdab42cd92d5f865fc439243c383}
+
+
+Reimplemented from {\bf proxygen\+::\+Header\+Table} \doxyref{}{p.}{classproxygen_1_1HeaderTable_af24d57b442441844ac18fbd870eadb8c}.
+
+
+
+Definition at line 159 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References base\+Index\+\_\+, proxygen\+::\+Header\+Table\+::head\+\_\+, proxygen\+::\+Header\+Table\+::increase\+Table\+Length\+To(), internal\+To\+Absolute(), proxygen\+::\+Header\+Table\+::size\+\_\+, and proxygen\+::\+Header\+Table\+::tail().
+
+
+
+Referenced by absolute\+To\+Relative().
+
+
+\begin{DoxyCode}
+159                                                                \{
+160   HeaderTable::increaseTableLengthTo(newLength);
+161   \textcolor{keywordflow}{if} (size_ > 0) \{
+162     DCHECK\_EQ(internalToAbsolute(head_), baseIndex_);
+163     DCHECK\_EQ(internalToAbsolute(tail()), baseIndex_ - size_ + 1);
+164   \}
+165 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!internal\+To\+Absolute@{internal\+To\+Absolute}}
+\index{internal\+To\+Absolute@{internal\+To\+Absolute}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{internal\+To\+Absolute(uint32\+\_\+t internal\+Index) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::internal\+To\+Absolute (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{internal\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_aea47e8f45fe941908014113db1632923}
+
+
+Definition at line 270 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References relative\+To\+Absolute(), and proxygen\+::\+Header\+Table\+::to\+External().
+
+
+
+Referenced by absolute\+To\+Relative(), add(), can\+Evict(), get\+Index\+Impl(), increase\+Table\+Length\+To(), and remove\+Last().
+
+
+\begin{DoxyCode}
+271                                 \{
+272   \textcolor{keywordflow}{return} relativeToAbsolute(toExternal(internalIndex));
+273 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!is\+Draining@{is\+Draining}}
+\index{is\+Draining@{is\+Draining}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{is\+Draining(uint32\+\_\+t relative\+Index)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::is\+Draining (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{relative\+Index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_af31a6edb5f7d8a6cdff785420707a1cb}
+Returns true if the index should not be used so table space can be freed 
+
+Definition at line 67 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References add(), proxygen\+::\+Header\+Table\+::capacity(), maybe\+Duplicate(), min\+Usable\+\_\+, relative\+To\+Absolute(), and set\+Capacity().
+
+
+\begin{DoxyCode}
+67                                           \{
+68     \textcolor{keywordflow}{return} relativeToAbsolute(relativeIndex) < minUsable_;
+69   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!is\+Valid@{is\+Valid}}
+\index{is\+Valid@{is\+Valid}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{is\+Valid(uint32\+\_\+t index, uint32\+\_\+t base=0) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::is\+Valid (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{index, }
+\item[{uint32\+\_\+t}]{base = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1QPACKHeaderTable_a19186fd873984d81664ec1f591827a4a}
+Checks if an external index is valid. If base is 0, index is relative to head/base\+Index. If base is non-\/zero, index is relative to base. 
+
+Definition at line 212 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References base\+Index\+\_\+, and proxygen\+::\+Header\+Table\+::is\+Valid().
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::encode\+Header\+Q(), get\+Header(), proxygen\+::\+Q\+P\+A\+C\+K\+Decoder\+::is\+Valid(), maybe\+Duplicate(), relative\+To\+Absolute(), and set\+Min\+Free\+For\+Testing().
+
+
+\begin{DoxyCode}
+212                                                                   \{
+213   int64\_t testIndex = index;
+214   \textcolor{keywordflow}{if} (base > 0) \{
+215     \textcolor{keyword}{auto} baseOffset = ((int64\_t)base - (int64\_t)baseIndex_);
+216     \textcolor{comment}{// recompute relative to current baseIndex\_.  testIndex may go negative}
+217     \textcolor{comment}{// if this is a reference to an entry that hasn't arrived yet}
+218     testIndex -= baseOffset;
+219   \}
+220   \textcolor{keywordflow}{return} HeaderTable::isValid(testIndex);
+221 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!is\+Vulnerable@{is\+Vulnerable}}
+\index{is\+Vulnerable@{is\+Vulnerable}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{is\+Vulnerable(uint32\+\_\+t abs\+Index) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::is\+Vulnerable (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{abs\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_ac5a39f3c399710cfba68374856577642}
+Returns true if the absolute index has not been ack\textquotesingle{}ed yet. 
+
+Definition at line 49 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References max\+Acked\+\_\+.
+
+
+
+Referenced by maybe\+Duplicate(), T\+E\+S\+T(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::track\+Reference().
+
+
+\begin{DoxyCode}
+49                                              \{
+50     \textcolor{keywordflow}{return} (absIndex > maxAcked_);
+51   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!maybe\+Duplicate@{maybe\+Duplicate}}
+\index{maybe\+Duplicate@{maybe\+Duplicate}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{maybe\+Duplicate(uint32\+\_\+t relative\+Index, bool allow\+Vulnerable)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::pair$<$ bool, uint32\+\_\+t $>$ proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::maybe\+Duplicate (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{relative\+Index, }
+\item[{bool}]{allow\+Vulnerable}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKHeaderTable_ae8fffce8e2f4578bd3eab9e6397ea084}
+Returns the absolute index for a reference to the header at relative\+Index, along with a boolean indicating if the returned index is a duplicate. It may return 0 if the entry at relative\+Index was draining and could not be duplicated, or vulnerable references are not allowed. 
+
+Definition at line 228 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References add(), base\+Index\+\_\+, can\+Index(), proxygen\+::\+H\+P\+A\+C\+K\+Header\+::copy(), get\+Header(), is\+Valid(), is\+Vulnerable(), min\+Usable\+\_\+, relative\+To\+Absolute(), and U\+N\+A\+C\+K\+ED.
+
+
+
+Referenced by is\+Draining(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::maybe\+Duplicate().
+
+
+\begin{DoxyCode}
+230                             \{
+231   \textcolor{keywordflow}{if} (relativeIndex == UNACKED) \{
+232     \textcolor{keywordflow}{return} \{\textcolor{keyword}{false}, 0\};
+233   \}
+234   DCHECK(isValid(relativeIndex));
+235   uint32\_t absIndex = relativeToAbsolute(relativeIndex);
+236   DCHECK(!isVulnerable(absIndex) || allowVulnerable);
+237   \textcolor{keywordflow}{if} (absIndex < minUsable_) \{
+238     \textcolor{comment}{// draining}
+239     \textcolor{keyword}{const} HPACKHeader& header = getHeader(relativeIndex);
+240     \textcolor{keywordflow}{if} (canIndex(header)) \{
+241       CHECK(add(header.copy()));
+242       \textcolor{keywordflow}{if} (allowVulnerable) \{
+243         \textcolor{keywordflow}{return} \{\textcolor{keyword}{true}, baseIndex_\};
+244       \} \textcolor{keywordflow}{else} \{
+245         \textcolor{keywordflow}{return} \{\textcolor{keyword}{true}, 0\};
+246       \}
+247     \} \textcolor{keywordflow}{else} \{
+248       \textcolor{keywordflow}{return} \{\textcolor{keyword}{false}, 0\};
+249     \}
+250   \}
+251   \textcolor{keywordflow}{return} \{\textcolor{keyword}{false}, absIndex\};
+252 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!name\+Index@{name\+Index}}
+\index{name\+Index@{name\+Index}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{name\+Index(const H\+P\+A\+C\+K\+Header\+Name \&header\+Name, bool allow\+Vulnerable=true) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::name\+Index (
+\begin{DoxyParamCaption}
+\item[{const {\bf H\+P\+A\+C\+K\+Header\+Name} \&}]{header\+Name, }
+\item[{bool}]{allow\+Vulnerable = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1QPACKHeaderTable_a3d56929d08f697c09a26863d8f462051}
+Get any index of a header that has the given name. From all the headers with the given name we pick the last one added to the header table, but the way we pick the header can be arbitrary.
+
+See get\+Index for a description of base/allow\+Vulnerable 
+
+Definition at line 123 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References get\+Index\+Impl().
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::get\+Name\+Index\+Q(), and set\+Min\+Free\+For\+Testing().
+
+
+\begin{DoxyCode}
+124                                                                  \{
+125   folly::fbstring value;
+126   \textcolor{keywordflow}{return} getIndexImpl(headerName, value, \textcolor{keyword}{true} \textcolor{comment}{/* name only */}, allowVulnerable);
+127 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!on\+Table\+State\+Sync@{on\+Table\+State\+Sync}}
+\index{on\+Table\+State\+Sync@{on\+Table\+State\+Sync}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{on\+Table\+State\+Sync(uint32\+\_\+t inserts)}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::on\+Table\+State\+Sync (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{inserts}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_ad4abb796fef2de98cf50e7285b2a1fae}
+
+
+Definition at line 131 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References base\+Index\+\_\+, proxygen\+::\+E\+R\+R\+OR, and max\+Acked\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::on\+Table\+State\+Sync().
+
+
+\begin{DoxyCode}
+131                                           \{
+132     \textcolor{comment}{// compare this way to avoid overflow}
+133     \textcolor{keywordflow}{if} (inserts > baseIndex_ ||
+134         maxAcked_ > baseIndex_ - inserts) \{
+135       LOG(ERROR) << \textcolor{stringliteral}{"Decoder ack'd too much maxAcked\_="}
+136                  << maxAcked_ << \textcolor{stringliteral}{" baseIndex\_="} << baseIndex_
+137                  << \textcolor{stringliteral}{" inserts="} << inserts;
+138       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+139     \}
+140     maxAcked_ += inserts;
+141     CHECK\_LE(maxAcked_, baseIndex_);
+142     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+143   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!operator=@{operator=}}
+\index{operator=@{operator=}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{operator=(const Q\+P\+A\+C\+K\+Header\+Table \&)=delete}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+P\+A\+C\+K\+Header\+Table}\& proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+P\+A\+C\+K\+Header\+Table} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}\label{classproxygen_1_1QPACKHeaderTable_ac43c84ae515682f0ef856ef00eb869da}
+
+
+Referenced by $\sim$\+Q\+P\+A\+C\+K\+Header\+Table().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!relative\+To\+Absolute@{relative\+To\+Absolute}}
+\index{relative\+To\+Absolute@{relative\+To\+Absolute}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{relative\+To\+Absolute(uint32\+\_\+t relative\+Index) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::relative\+To\+Absolute (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{relative\+Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_a44b64e0b7d835335091c9541a19af24e}
+Convert a relative index to an absolute index 
+
+Definition at line 156 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References base\+Index\+\_\+, and is\+Valid().
+
+
+
+Referenced by internal\+To\+Absolute(), is\+Draining(), and maybe\+Duplicate().
+
+
+\begin{DoxyCode}
+156                                                             \{
+157     DCHECK(isValid(relativeIndex, 0));
+158     \textcolor{keywordflow}{return} baseIndex_ - relativeIndex + 1;
+159   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!remove\+Last@{remove\+Last}}
+\index{remove\+Last@{remove\+Last}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{remove\+Last() override}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::remove\+Last (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKHeaderTable_aea7ebea22434b56fc18a77f972e4718a}
+Removes one header entry from the beginning of the header table. 
+
+Reimplemented from {\bf proxygen\+::\+Header\+Table} \doxyref{}{p.}{classproxygen_1_1HeaderTable_a04e79a9372362641082e61130c3e8dbb}.
+
+
+
+Definition at line 135 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References base\+Index\+\_\+, drained\+Bytes\+\_\+, internal\+To\+Absolute(), min\+Usable\+\_\+, ref\+Count\+\_\+, proxygen\+::\+Header\+Table\+::remove\+Last(), proxygen\+::\+Header\+Table\+::size(), and proxygen\+::\+Header\+Table\+::tail().
+
+
+
+Referenced by absolute\+To\+Relative().
+
+
+\begin{DoxyCode}
+135                                       \{
+136   \textcolor{keyword}{auto} idx = tail();
+137   \textcolor{keywordflow}{if} (refCount_) \{
+138     CHECK\_EQ((*refCount_)[idx], 0) << \textcolor{stringliteral}{"Removed header with nonzero references"};
+139   \}
+140   \textcolor{keyword}{auto} removedBytes = HeaderTable::removeLast();
+141   \textcolor{comment}{// Only non-zero when minUsable\_ > baseIndex\_ - size\_.}
+142   \textcolor{keywordflow}{if} (drainedBytes_ > 0) \{
+143     VLOG(5) << \textcolor{stringliteral}{"Removing draining entry="} << idx << \textcolor{stringliteral}{" size="} << removedBytes
+144             << \textcolor{stringliteral}{" drainedBytes\_="} << drainedBytes_ << \textcolor{stringliteral}{" new drainedBytes\_="}
+145             << (int32\_t(drainedBytes_) - removedBytes);
+146     CHECK\_GE(drainedBytes_, removedBytes);
+147     drainedBytes_ -= removedBytes;
+148   \} \textcolor{keywordflow}{else} \{
+149       \textcolor{comment}{// Keep minUsable\_ as a valid index when evicting an undrained header}
+150     \textcolor{keywordflow}{if} (size() > 0) \{
+151       minUsable_ = internalToAbsolute(tail());
+152     \} \textcolor{keywordflow}{else} \{
+153       minUsable_ = baseIndex_ + 1;
+154     \}
+155   \}
+156   \textcolor{keywordflow}{return} removedBytes;
+157 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!resize\+Table@{resize\+Table}}
+\index{resize\+Table@{resize\+Table}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{resize\+Table(uint32\+\_\+t new\+Length) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::resize\+Table (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{new\+Length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKHeaderTable_aa061b4f5265f968c081aca198615347e}
+
+
+Reimplemented from {\bf proxygen\+::\+Header\+Table} \doxyref{}{p.}{classproxygen_1_1HeaderTable_a5f6febb1d6eb8b091fa3e601a5a96f72}.
+
+
+
+Definition at line 167 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References ref\+Count\+\_\+, and proxygen\+::\+Header\+Table\+::resize\+Table().
+
+
+
+Referenced by absolute\+To\+Relative().
+
+
+\begin{DoxyCode}
+167                                                      \{
+168   HeaderTable::resizeTable(newLength);
+169   \textcolor{keywordflow}{if} (refCount_) \{
+170     refCount_->resize(newLength);
+171   \}
+172 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!set\+Capacity@{set\+Capacity}}
+\index{set\+Capacity@{set\+Capacity}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{set\+Capacity(uint32\+\_\+t capacity) override}]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::set\+Capacity (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{capacity}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKHeaderTable_a8ee51228fbddd7ef548f1be1c2b8950b}
+Sets the current capacity of the header table, and evicts entries if needed. Returns false if eviction failed. 
+
+Reimplemented from {\bf proxygen\+::\+Header\+Table} \doxyref{}{p.}{classproxygen_1_1HeaderTable_a20ce3242a2f6a5a77a100f6010db8a47}.
+
+
+
+Definition at line 78 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References min\+Free\+\_\+, ref\+Count\+\_\+, and proxygen\+::\+Header\+Table\+::set\+Capacity().
+
+
+
+Referenced by is\+Draining().
+
+
+\begin{DoxyCode}
+78                                                     \{
+79   \textcolor{keywordflow}{if} (!HeaderTable::setCapacity(capacity)) \{
+80     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+81   \}
+82   \textcolor{keywordflow}{if} (refCount_) \{
+83     minFree_ = getMinFree(capacity);
+84   \} \textcolor{comment}{// else minFree is always 0}
+85   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+86 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!set\+Max\+Acked@{set\+Max\+Acked}}
+\index{set\+Max\+Acked@{set\+Max\+Acked}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{set\+Max\+Acked(uint32\+\_\+t max\+Acked)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::set\+Max\+Acked (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{max\+Acked}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_af4afb4ce9bf3b26d3e6ad176d93cc828}
+
+
+Definition at line 145 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References base\+Index\+\_\+, and max\+Acked\+\_\+.
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::on\+Header\+Ack().
+
+
+\begin{DoxyCode}
+145                                       \{
+146     \textcolor{keywordflow}{if} (maxAcked < maxAcked_) \{
+147       \textcolor{keywordflow}{return};
+148     \}
+149     CHECK\_LE(maxAcked, baseIndex_);
+150     maxAcked_ = maxAcked;
+151   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!set\+Min\+Free\+For\+Testing@{set\+Min\+Free\+For\+Testing}}
+\index{set\+Min\+Free\+For\+Testing@{set\+Min\+Free\+For\+Testing}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{set\+Min\+Free\+For\+Testing(uint32\+\_\+t min\+Free)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::set\+Min\+Free\+For\+Testing (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{min\+Free}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1QPACKHeaderTable_a9e5bf0bf11473625809ba1548809a828}
+
+
+Definition at line 91 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+References get\+Header(), get\+Index(), is\+Valid(), min\+Free\+\_\+, and name\+Index().
+
+
+
+Referenced by proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::set\+Min\+Free\+For\+Testing().
+
+
+\begin{DoxyCode}
+91                                               \{
+92     minFree_ = minFree;
+93   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!sub\+Ref@{sub\+Ref}}
+\index{sub\+Ref@{sub\+Ref}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{sub\+Ref(uint32\+\_\+t abs\+Index)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::sub\+Ref (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{abs\+Index}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1QPACKHeaderTable_a936a8faf7d593a9939c69700a40f95e8}
+Subtract a reference for the given index 
+
+Definition at line 261 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References absolute\+To\+Internal(), and ref\+Count\+\_\+.
+
+
+
+Referenced by absolute\+To\+Relative(), and proxygen\+::\+Q\+P\+A\+C\+K\+Encoder\+::on\+Header\+Ack().
+
+
+\begin{DoxyCode}
+261                                                \{
+262   CHECK(refCount_);
+263   uint32\_t index = absoluteToInternal(absIndex);
+264   CHECK\_GT((*refCount_)[index], 0);
+265   (*refCount\_)[index]--;
+266 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!to\+Internal@{to\+Internal}}
+\index{to\+Internal@{to\+Internal}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{to\+Internal(uint32\+\_\+t external\+Index, uint32\+\_\+t base) const }]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::to\+Internal (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{external\+Index, }
+\item[{uint32\+\_\+t}]{base}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_ab9dadf2391332a9a4f538a0efe7e479b}
+Translate external index to internal one. 
+
+Definition at line 281 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References absolute\+To\+Relative(), and proxygen\+::\+Header\+Table\+::to\+Internal().
+
+
+
+Referenced by absolute\+To\+Internal(), absolute\+To\+Relative(), and get\+Header().
+
+
+\begin{DoxyCode}
+282                                                  \{
+283   \textcolor{keywordflow}{if} (base > 0) \{
+284     uint32\_t absIndex = base - externalIndex + 1;
+285     externalIndex = absoluteToRelative(absIndex);
+286   \}
+287   \textcolor{keywordflow}{return} HeaderTable::toInternal(externalIndex);
+288 \}
+\end{DoxyCode}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!update\+Resized\+Table@{update\+Resized\+Table}}
+\index{update\+Resized\+Table@{update\+Resized\+Table}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{update\+Resized\+Table(uint32\+\_\+t old\+Tail, uint32\+\_\+t old\+Length, uint32\+\_\+t new\+Length) override}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::update\+Resized\+Table (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{old\+Tail, }
+\item[{uint32\+\_\+t}]{old\+Length, }
+\item[{uint32\+\_\+t}]{new\+Length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}\label{classproxygen_1_1QPACKHeaderTable_aadf63828e34b169116a27425f31ba61b}
+
+
+Reimplemented from {\bf proxygen\+::\+Header\+Table} \doxyref{}{p.}{classproxygen_1_1HeaderTable_a766176c1fe1a275f02170cd5847ea520}.
+
+
+
+Definition at line 174 of file Q\+P\+A\+C\+K\+Header\+Table.\+cpp.
+
+
+
+References ref\+Count\+\_\+, and proxygen\+::\+Header\+Table\+::update\+Resized\+Table().
+
+
+
+Referenced by absolute\+To\+Relative().
+
+
+\begin{DoxyCode}
+175                                                               \{
+176   HeaderTable::updateResizedTable(oldTail, oldLength, newLength);
+177   \textcolor{keywordflow}{if} (refCount_) \{
+178     std::move\_backward(refCount_->begin() + oldTail,
+179                        refCount_->begin() + oldLength,
+180                        refCount_->begin() + newLength);
+181   \}
+182 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!base\+Index\+\_\+@{base\+Index\+\_\+}}
+\index{base\+Index\+\_\+@{base\+Index\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{base\+Index\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::base\+Index\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_aac517bc8a554987a0d20006af242a7a8}
+
+
+Definition at line 222 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+Referenced by absolute\+To\+Relative(), add(), get\+Base\+Index(), increase\+Table\+Length\+To(), is\+Valid(), maybe\+Duplicate(), on\+Table\+State\+Sync(), relative\+To\+Absolute(), remove\+Last(), and set\+Max\+Acked().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!drained\+Bytes\+\_\+@{drained\+Bytes\+\_\+}}
+\index{drained\+Bytes\+\_\+@{drained\+Bytes\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{drained\+Bytes\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::drained\+Bytes\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_ab2b7fb27410abc6f56f28c48c896da32}
+
+
+Definition at line 223 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+Referenced by add(), and remove\+Last().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!max\+Acked\+\_\+@{max\+Acked\+\_\+}}
+\index{max\+Acked\+\_\+@{max\+Acked\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{max\+Acked\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::max\+Acked\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_ad4c410cf904f758509b3763a2a1b766a}
+
+
+Definition at line 225 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+Referenced by can\+Evict(), get\+Index\+Impl(), is\+Vulnerable(), on\+Table\+State\+Sync(), and set\+Max\+Acked().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!min\+Free\+\_\+@{min\+Free\+\_\+}}
+\index{min\+Free\+\_\+@{min\+Free\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{min\+Free\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::min\+Free\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_afaead50c19bee0f4cac313c3f1521ecf}
+
+
+Definition at line 227 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+Referenced by add(), can\+Index(), Q\+P\+A\+C\+K\+Header\+Table(), set\+Capacity(), and set\+Min\+Free\+For\+Testing().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!min\+Usable\+\_\+@{min\+Usable\+\_\+}}
+\index{min\+Usable\+\_\+@{min\+Usable\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{min\+Usable\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::min\+Usable\+\_\+ \{1\}\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_abaad0b009f26ce1cb032d7bbc96e84b4}
+
+
+Definition at line 224 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+Referenced by add(), is\+Draining(), maybe\+Duplicate(), and remove\+Last().
+
+\index{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}!ref\+Count\+\_\+@{ref\+Count\+\_\+}}
+\index{ref\+Count\+\_\+@{ref\+Count\+\_\+}!proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table@{proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table}}
+\subsubsection[{ref\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$std\+::vector$<$uint16\+\_\+t$>$ $>$ proxygen\+::\+Q\+P\+A\+C\+K\+Header\+Table\+::ref\+Count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1QPACKHeaderTable_adbe72412a4c286870da504eb1f4ca144}
+
+
+Definition at line 226 of file Q\+P\+A\+C\+K\+Header\+Table.\+h.
+
+
+
+Referenced by add(), add\+Ref(), can\+Evict(), Q\+P\+A\+C\+K\+Header\+Table(), remove\+Last(), resize\+Table(), set\+Capacity(), sub\+Ref(), and update\+Resized\+Table().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Header\+Table.\+h}\item 
+proxygen/lib/http/codec/compress/{\bf Q\+P\+A\+C\+K\+Header\+Table.\+cpp}\end{DoxyCompactItemize}

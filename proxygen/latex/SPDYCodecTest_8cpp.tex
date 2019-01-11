@@ -1,0 +1,2633 @@
+\section{proxygen/lib/http/codec/test/\+S\+P\+D\+Y\+Codec\+Test.cpp File Reference}
+\label{SPDYCodecTest_8cpp}\index{proxygen/lib/http/codec/test/\+S\+P\+D\+Y\+Codec\+Test.\+cpp@{proxygen/lib/http/codec/test/\+S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Message.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Constants.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+S\+P\+D\+Y\+Version\+Settings.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+H\+T\+T\+P\+Parallel\+Codec\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Test\+Utils.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/compress/\+Logging.\+h$>$}\\*
+{\ttfamily \#include $<$random$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf S\+P\+D\+Y\+Codec\+TestF}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf copy\+For\+Me}(F,  C,  V)
+\item 
+\#define {\bf permute\+Test}(f)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t {\bf parse\+S\+P\+DY} ({\bf S\+P\+D\+Y\+Codec} $\ast$codec, const uint8\+\_\+t $\ast$input\+Data, uint32\+\_\+t length, int32\+\_\+t at\+Once, {\bf Fake\+H\+T\+T\+P\+Codec\+Callback} \&callbacks)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, S\+P\+D\+Y\+Version\+Settings\+Common\+Header\+Name\+Check)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Junk\+S\+P\+DY)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Long\+Ping)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Bad\+Type)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Syn\+Stream\+Boundaries)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Set\+Settings)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Frame\+Too\+Large)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Frame\+Uncompressed\+Too\+Large)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Unsupported\+Version)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Unsupported\+Frame\+Type)
+\item 
+{\footnotesize template$<$typename Codec $>$ }\\unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf get\+Syn\+Stream} (Codec \&egress\+Codec, uint32\+\_\+t {\bf stream\+ID}, const {\bf H\+T\+T\+P\+Message} \&msg, uint32\+\_\+t assoc\+Stream\+Id=S\+P\+D\+Y\+Codec\+::\+No\+Stream, bool eom=false, {\bf H\+T\+T\+P\+Header\+Size} $\ast$size={\bf nullptr})
+\item 
+{\footnotesize template$<$typename Codec $>$ }\\unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf get\+Syn\+Stream} (Codec \&egress\+Codec, uint32\+\_\+t {\bf stream\+ID})
+\item 
+{\footnotesize template$<$typename Codec , typename F , typename V $>$ }\\void {\bf call\+Function} (F f, V version)
+\item 
+unique\+\_\+ptr$<$ folly\+::\+I\+O\+Buf $>$ {\bf get\+Versioned\+Spdy\+Frame} (const uint8\+\_\+t $\ast$bytes, size\+\_\+t len, uint8\+\_\+t version)
+\item 
+{\footnotesize template$<$typename Codec1 , typename Codec2 $>$ }\\void {\bf max\+Transaction\+Helper} (Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec, uint32\+\_\+t parallel)
+\item 
+{\footnotesize template$<$typename Codec1 , typename Codec2 $>$ }\\void {\bf do\+Default\+Max\+Transaction\+Test} (Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec)
+\item 
+{\footnotesize template$<$typename Codec1 , typename Codec2 $>$ }\\void {\bf do\+Non\+Default\+Max\+Transaction\+Test} (Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Default\+Max\+Transactions)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Non\+Default\+Max\+Transactions)
+\item 
+{\footnotesize template$<$typename Codec1 , typename Codec2 $>$ }\\void {\bf do\+Empty\+Header\+Value\+Test} (Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Empty\+Header\+Value)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Syn\+Stream\+Wrong\+Version)
+\item 
+{\footnotesize template$<$typename Codec1 , typename Codec2 $>$ }\\void {\bf do\+Short\+Syn\+Reply\+Test} (Codec1 \&, Codec2 \&egress\+Codec)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Short\+Syn\+Reply)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Supports\+Session\+Flow\+Control)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Header\+With\+Many\+Values)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Multiple\+Paths)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Large\+Frame\+Encoding)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Invalid\+Settings)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Header\+With\+Fin)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Server\+Push)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Server\+Push\+With\+Status)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Host\+Missing)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Invalid\+Id)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Invalid\+Flags)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Without\+Assoc)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Status\+Reason)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Upstream\+Ping)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Downstream\+Ping)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Date\+Header)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Header\+DoS)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Double\+Goaway\+Server)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Double\+Goaway\+Client)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Single\+Goaway\+Client)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Odd\+Header\+List\+Test)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Send\+Rst\+Parsing\+Frame)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Bad\+Num\+Name\+Values)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Short\+Settings)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Segmented\+Header\+Block)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Colon\+Headers)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Stream\+Id\+Overflow)
+\item 
+{\bf T\+E\+ST} (S\+P\+D\+Y\+Codec\+Test, Bad\+N\+V\+Block)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf S\+P\+D\+Y\+Codec\+TestF}, Goaway\+Handling)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t {\bf short\+Syn\+Stream} [$\,$]
+\item 
+uint8\+\_\+t {\bf long\+Ping} [$\,$]
+\item 
+uint8\+\_\+t {\bf bad\+Type} [$\,$]
+\item 
+uint8\+\_\+t {\bf syn\+Stream} [$\,$]
+\item 
+uint8\+\_\+t {\bf spdy3\+Unknown\+Ctl\+Frame} [$\,$]
+\item 
+uint8\+\_\+t {\bf short\+Syn\+Reply} [$\,$]
+\item 
+uint8\+\_\+t {\bf multiple\+\_\+path\+\_\+headers} [$\,$]
+\item 
+uint8\+\_\+t {\bf push\+Stream\+With\+Host\+Missing} [$\,$]
+\item 
+uint8\+\_\+t {\bf push\+Stream\+With\+Odd\+Id} [$\,$]
+\item 
+uint8\+\_\+t {\bf push\+Stream\+Without\+Unidirectional} [$\,$]
+\item 
+uint8\+\_\+t {\bf push\+Stream\+Without\+Assoc} [$\,$]
+\item 
+uint8\+\_\+t {\bf multi\+Valued\+Header\+Attack} [$\,$]
+\item 
+uint8\+\_\+t {\bf invalid\+Header\+Plus\+Empty\+Block} [$\,$]
+\item 
+uint8\+\_\+t {\bf invalid\+Num\+Name\+Values\+Block} [$\,$]
+\item 
+const uint8\+\_\+t {\bf k\+Short\+Settings} [$\,$]
+\item 
+const uint8\+\_\+t {\bf k\+Colon\+Headers} [$\,$]
+\item 
+const uint8\+\_\+t {\bf k\+Buf\+Bad\+N\+V\+Block} [$\,$]
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!copy\+For\+Me@{copy\+For\+Me}}
+\index{copy\+For\+Me@{copy\+For\+Me}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{copy\+For\+Me}]{\setlength{\rightskip}{0pt plus 5cm}\#define copy\+For\+Me(
+\begin{DoxyParamCaption}
+\item[{}]{F, }
+\item[{}]{C, }
+\item[{}]{V}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a778f166c32e9f5ca92e5595971429700}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+callFunction<C>(F<C, C>,                 \(\backslash\)
+                                           SPDYVersion::V)
+\end{DoxyCode}
+
+
+Definition at line 380 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!permute\+Test@{permute\+Test}}
+\index{permute\+Test@{permute\+Test}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{permute\+Test}]{\setlength{\rightskip}{0pt plus 5cm}\#define permute\+Test(
+\begin{DoxyParamCaption}
+\item[{}]{f}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ae6a057fe2ea64fa3b0f9797e5b8aba54}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+copyForMe(f, SPDYCodec, SPDY3);              \
+                       copyForMe(f, SPDYCodec, SPDY3\_1);
+\end{DoxyCode}
+
+
+Definition at line 383 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+
+\subsection{Function Documentation}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!call\+Function@{call\+Function}}
+\index{call\+Function@{call\+Function}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{call\+Function(\+F f, V version)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec , typename F , typename V $>$ void call\+Function (
+\begin{DoxyParamCaption}
+\item[{F}]{f, }
+\item[{V}]{version}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ad2128d4951eb3dec6cfb4fd206128702}
+
+
+Definition at line 374 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+374                                   \{
+375   Codec ingressCodec(TransportDirection::DOWNSTREAM, version);
+376   Codec egressCodec(TransportDirection::UPSTREAM, version);
+377   f(ingressCodec, egressCodec);
+378 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!do\+Default\+Max\+Transaction\+Test@{do\+Default\+Max\+Transaction\+Test}}
+\index{do\+Default\+Max\+Transaction\+Test@{do\+Default\+Max\+Transaction\+Test}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{do\+Default\+Max\+Transaction\+Test(\+Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec1 , typename Codec2 $>$ void do\+Default\+Max\+Transaction\+Test (
+\begin{DoxyParamCaption}
+\item[{Codec1 \&}]{ingress\+Codec, }
+\item[{Codec2 \&}]{egress\+Codec}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aa3eb18f461933e5226bebe4425b97073}
+
+
+Definition at line 419 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References max\+Transaction\+Helper().
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+419                                                                             \{
+420   maxTransactionHelper(ingressCodec, egressCodec, 50);
+421 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!do\+Empty\+Header\+Value\+Test@{do\+Empty\+Header\+Value\+Test}}
+\index{do\+Empty\+Header\+Value\+Test@{do\+Empty\+Header\+Value\+Test}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{do\+Empty\+Header\+Value\+Test(\+Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec1 , typename Codec2 $>$ void do\+Empty\+Header\+Value\+Test (
+\begin{DoxyParamCaption}
+\item[{Codec1 \&}]{ingress\+Codec, }
+\item[{Codec2 \&}]{egress\+Codec}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aa9746bc258503f84bd4bb1c326acc350}
+
+
+Definition at line 437 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::msg, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+437                                                                        \{
+438   uint8\_t version = ingressCodec.getVersion();
+439   \textcolor{keywordtype}{bool} emptyAllowed = version != 2;
+440   FakeHTTPCodecCallback callbacks;
+441   ingressCodec.setCallback(&callbacks);
+442   HTTPMessage toSend;
+443   toSend.setMethod(\textcolor{stringliteral}{"GET"});
+444   toSend.setURL(\textcolor{stringliteral}{"http://www.foo.com"});
+445   \textcolor{keyword}{auto}& headers = toSend.getHeaders();
+446   headers.set(HTTP\_HEADER\_HOST, \textcolor{stringliteral}{"www.foo.com"});
+447   headers.set(HTTP\_HEADER\_PRAGMA, \textcolor{stringliteral}{""});
+448   headers.set(\textcolor{stringliteral}{"X-Test1"}, \textcolor{stringliteral}{"yup"});
+449   HTTPHeaderSize size;
+450   std::string pragmaValue;
+451   HTTPCodec::StreamID id(1);
+452 
+453   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = 0; i < 3; i++) \{
+454     \textcolor{keyword}{auto} toParse = getSynStream(egressCodec, \textcolor{keywordtype}{id} + 2 * i,
+455                                 toSend, 0, \textcolor{keyword}{false}, &size);
+456     ingressCodec.onIngress(*toParse);
+457 
+458     EXPECT\_EQ(callbacks.sessionErrors, 0);
+459     EXPECT\_EQ(callbacks.streamErrors, 0);
+460     ASSERT\_NE(callbacks.msg.get(), \textcolor{keyword}{nullptr});
+461     \textcolor{keyword}{const} \textcolor{keyword}{auto}& parsed = callbacks.msg->getHeaders();
+462     EXPECT\_EQ(parsed.exists(\textcolor{stringliteral}{"Pragma"}), emptyAllowed);
+463     EXPECT\_EQ(parsed.exists(\textcolor{stringliteral}{"pragma"}), emptyAllowed);
+464     EXPECT\_EQ(parsed.getSingleOrEmpty(\textcolor{stringliteral}{"Pragma"}), pragmaValue);
+465     EXPECT\_EQ(parsed.getSingleOrEmpty(\textcolor{stringliteral}{"X-Test1"}), \textcolor{stringliteral}{"yup"});
+466     \textcolor{comment}{// All codecs add the accept-encoding header}
+467     EXPECT\_EQ(parsed.exists(\textcolor{stringliteral}{"accept-encoding"}), \textcolor{keyword}{true});
+468     \textcolor{comment}{// SPDY/2 subtracts the Host header, but it should infer it from the}
+469     \textcolor{comment}{// host:port portion of the requested url and present it in the headers}
+470     EXPECT\_EQ(parsed.exists(\textcolor{stringliteral}{"host"}), \textcolor{keyword}{true});
+471     EXPECT\_EQ(callbacks.msg->getURL(), \textcolor{stringliteral}{"http://www.foo.com"});
+472     EXPECT\_EQ(parsed.size(), emptyAllowed ? 4 : 3);
+473     EXPECT\_TRUE(size.uncompressed > 0);
+474     EXPECT\_TRUE(size.compressed > 0);
+475 
+476     \textcolor{keywordflow}{if} (i == 0) \{
+477       headers.add(\textcolor{stringliteral}{"Pragma"}, \textcolor{stringliteral}{""});
+478     \}
+479     \textcolor{keywordflow}{if} (i == 1) \{
+480       pragmaValue = \textcolor{stringliteral}{"foo"};
+481       headers.add(\textcolor{stringliteral}{"Pragma"}, pragmaValue);
+482       emptyAllowed = \textcolor{keyword}{true}; \textcolor{comment}{// SPDY/2 better have it now too}
+483     \}
+484   \}
+485 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!do\+Non\+Default\+Max\+Transaction\+Test@{do\+Non\+Default\+Max\+Transaction\+Test}}
+\index{do\+Non\+Default\+Max\+Transaction\+Test@{do\+Non\+Default\+Max\+Transaction\+Test}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{do\+Non\+Default\+Max\+Transaction\+Test(\+Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec1 , typename Codec2 $>$ void do\+Non\+Default\+Max\+Transaction\+Test (
+\begin{DoxyParamCaption}
+\item[{Codec1 \&}]{ingress\+Codec, }
+\item[{Codec2 \&}]{egress\+Codec}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a6b0beaea6decf71e773bcdc38adf9e3e}
+
+
+Definition at line 424 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References max\+Transaction\+Helper().
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+424                                                                                \{
+425   maxTransactionHelper(ingressCodec, egressCodec, 100);
+426 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!do\+Short\+Syn\+Reply\+Test@{do\+Short\+Syn\+Reply\+Test}}
+\index{do\+Short\+Syn\+Reply\+Test@{do\+Short\+Syn\+Reply\+Test}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{do\+Short\+Syn\+Reply\+Test(\+Codec1 \&, Codec2 \&egress\+Codec)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec1 , typename Codec2 $>$ void do\+Short\+Syn\+Reply\+Test (
+\begin{DoxyParamCaption}
+\item[{Codec1 \&}]{, }
+\item[{Codec2 \&}]{egress\+Codec}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aca4ec8ba69db5ed76cb43d9ac0f3e4f8}
+
+
+Definition at line 521 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References get\+Versioned\+Spdy\+Frame(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, short\+Syn\+Reply, and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+521                                                          \{
+522   FakeHTTPCodecCallback callbacks;
+523   egressCodec.setCallback(&callbacks);
+524   \textcolor{keyword}{auto} frame = getVersionedSpdyFrame(shortSynReply, \textcolor{keyword}{sizeof}(shortSynReply),
+525                                      egressCodec.getVersion());
+526   egressCodec.onIngress(*frame);
+527   EXPECT\_EQ(callbacks.sessionErrors, 1);
+528   EXPECT\_EQ(callbacks.streamErrors, 0);
+529 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!get\+Syn\+Stream@{get\+Syn\+Stream}}
+\index{get\+Syn\+Stream@{get\+Syn\+Stream}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{get\+Syn\+Stream(\+Codec \&egress\+Codec, uint32\+\_\+t stream\+I\+D, const H\+T\+T\+P\+Message \&msg, uint32\+\_\+t assoc\+Stream\+Id=\+S\+P\+D\+Y\+Codec\+::\+No\+Stream, bool eom=false, H\+T\+T\+P\+Header\+Size $\ast$size=nullptr)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec $>$ unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ get\+Syn\+Stream (
+\begin{DoxyParamCaption}
+\item[{Codec \&}]{egress\+Codec, }
+\item[{uint32\+\_\+t}]{stream\+ID, }
+\item[{const {\bf H\+T\+T\+P\+Message} \&}]{msg, }
+\item[{uint32\+\_\+t}]{assoc\+Stream\+Id = {\ttfamily SPDYCodec\+:\+:NoStream}, }
+\item[{bool}]{eom = {\ttfamily false}, }
+\item[{{\bf H\+T\+T\+P\+Header\+Size} $\ast$}]{size = {\ttfamily {\bf nullptr}}}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aee55830ca5487628304d8f910ba6c997}
+
+
+Definition at line 345 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by do\+Empty\+Header\+Value\+Test(), get\+Syn\+Stream(), max\+Transaction\+Helper(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+351                                     \{
+352   folly::IOBufQueue output(folly::IOBufQueue::cacheChainLength());
+353   \textcolor{keywordflow}{if} (assocStreamId == SPDYCodec::NoStream) \{
+354     egressCodec.generateHeader(output, streamID, msg, eom, size);
+355   \} \textcolor{keywordflow}{else} \{
+356     egressCodec.generatePushPromise(output, streamID, msg, assocStreamId, eom,
+357                                     size);
+358   \}
+359   \textcolor{keywordflow}{return} output.move();
+360 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!get\+Syn\+Stream@{get\+Syn\+Stream}}
+\index{get\+Syn\+Stream@{get\+Syn\+Stream}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{get\+Syn\+Stream(\+Codec \&egress\+Codec, uint32\+\_\+t stream\+I\+D)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec $>$ unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ get\+Syn\+Stream (
+\begin{DoxyParamCaption}
+\item[{Codec \&}]{egress\+Codec, }
+\item[{uint32\+\_\+t}]{stream\+ID}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a41f4686b9d5aaa63349e4bd192ad922a}
+
+
+Definition at line 363 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), get\+Syn\+Stream(), proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L().
+
+
+\begin{DoxyCode}
+364                                                          \{
+365   HTTPMessage msg;
+366   msg.setMethod(\textcolor{stringliteral}{"GET"});
+367   msg.getHeaders().set(\textcolor{stringliteral}{"HOST"}, \textcolor{stringliteral}{"www.foo.com"});
+368   msg.setURL(\textcolor{stringliteral}{"https://www.foo.com"});
+369   \textcolor{keywordflow}{return} getSynStream(egressCodec, streamID, msg);
+370 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!get\+Versioned\+Spdy\+Frame@{get\+Versioned\+Spdy\+Frame}}
+\index{get\+Versioned\+Spdy\+Frame@{get\+Versioned\+Spdy\+Frame}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{get\+Versioned\+Spdy\+Frame(const uint8\+\_\+t $\ast$bytes, size\+\_\+t len, uint8\+\_\+t version)}]{\setlength{\rightskip}{0pt plus 5cm}unique\+\_\+ptr$<$folly\+::\+I\+O\+Buf$>$ get\+Versioned\+Spdy\+Frame (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t $\ast$}]{bytes, }
+\item[{size\+\_\+t}]{len, }
+\item[{uint8\+\_\+t}]{version}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a53be535cb8d5560ce21b07c315a8030b}
+Returns a S\+P\+DY frame with the specified version 
+
+Definition at line 389 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by do\+Short\+Syn\+Reply\+Test(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+391                                                                 \{
+392   \textcolor{keyword}{auto} frame = folly::IOBuf::copyBuffer(bytes, len);
+393   uint8\_t* data = frame->writableData();
+394   data[1] = version; \textcolor{comment}{/* Set the version */}
+395   \textcolor{keywordflow}{return} frame;
+396 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!max\+Transaction\+Helper@{max\+Transaction\+Helper}}
+\index{max\+Transaction\+Helper@{max\+Transaction\+Helper}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{max\+Transaction\+Helper(\+Codec1 \&ingress\+Codec, Codec2 \&egress\+Codec, uint32\+\_\+t parallel)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Codec1 , typename Codec2 $>$ void max\+Transaction\+Helper (
+\begin{DoxyParamCaption}
+\item[{Codec1 \&}]{ingress\+Codec, }
+\item[{Codec2 \&}]{egress\+Codec, }
+\item[{uint32\+\_\+t}]{parallel}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a696c7df509e4e648a7f0f14eacdf8852}
+
+
+Definition at line 399 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+
+Referenced by do\+Default\+Max\+Transaction\+Test(), and do\+Non\+Default\+Max\+Transaction\+Test().
+
+
+\begin{DoxyCode}
+400                                              \{
+401   uint16\_t expectedFailures = 0;
+402   uint16\_t synCount = 101;
+403   ingressCodec.getEgressSettings()->setSetting(
+404     SettingsId::MAX\_CONCURRENT\_STREAMS, parallel);
+405   FakeHTTPCodecCallback callbacks;
+406   ingressCodec.setCallback(&callbacks);
+407   \textcolor{keywordflow}{for} (uint16\_t i = 0; i < synCount; ++i) \{
+408     \textcolor{keywordflow}{if} (i >= parallel) \{
+409       ++expectedFailures;
+410     \}
+411     \textcolor{keyword}{auto} toParse = getSynStream(egressCodec, 2*i + 1);
+412     ingressCodec.onIngress(*toParse);
+413     EXPECT\_EQ(callbacks.sessionErrors, 0);
+414     EXPECT\_EQ(callbacks.streamErrors, expectedFailures);
+415   \}
+416 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!parse\+S\+P\+DY@{parse\+S\+P\+DY}}
+\index{parse\+S\+P\+DY@{parse\+S\+P\+DY}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{parse\+S\+P\+D\+Y(\+S\+P\+D\+Y\+Codec $\ast$codec, const uint8\+\_\+t $\ast$input\+Data, uint32\+\_\+t length, int32\+\_\+t at\+Once, Fake\+H\+T\+T\+P\+Codec\+Callback \&callbacks)}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t parse\+S\+P\+DY (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+D\+Y\+Codec} $\ast$}]{codec, }
+\item[{const uint8\+\_\+t $\ast$}]{input\+Data, }
+\item[{uint32\+\_\+t}]{length, }
+\item[{int32\+\_\+t}]{at\+Once, }
+\item[{{\bf Fake\+H\+T\+T\+P\+Codec\+Callback} \&}]{callbacks}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ab34c8521c30a10f53a07b456a53a9dce}
+
+
+Definition at line 26 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::get\+Stop\+Fn(), parse(), and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback().
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+27                                                                    \{
+28   codec->setCallback(&callbacks);
+29   \textcolor{keywordflow}{return} parse(codec, inputData, length, atOnce, callbacks.getStopFn());
+30 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, S\+P\+D\+Y\+Version\+Settings\+Common\+Header\+Name\+Check)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{S\+P\+D\+Y\+Version\+Settings\+Common\+Header\+Name\+Check}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_af66b6ae554f0cf587228ee323ab3e43a}
+
+
+Definition at line 38 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+T\+H\+ER, proxygen\+::spdy\+::k\+Name\+Hostv3, proxygen\+::spdy\+::k\+Name\+Methodv3, proxygen\+::spdy\+::k\+Name\+Pathv3, proxygen\+::spdy\+::k\+Name\+Schemev3, proxygen\+::spdy\+::k\+Name\+Statusv3, and proxygen\+::spdy\+::k\+Name\+Versionv3.
+
+
+\begin{DoxyCode}
+38                                                               \{
+39   \textcolor{comment}{// The purpose of this test is to ensure that should the below header names}
+40   \textcolor{comment}{// become part of the common set, it fails indicating that the SPDYCodec}
+41   \textcolor{comment}{// needs updating in those places that create compress/Header objects using}
+42   \textcolor{comment}{// the failed name.}
+43   EXPECT\_EQ(HTTPCommonHeaders::hash(spdy::kNameVersionv3), HTTP_HEADER_OTHER);
+44   EXPECT\_EQ(HTTPCommonHeaders::hash(spdy::kNameHostv3), HTTP_HEADER_OTHER);
+45   \textcolor{comment}{// The follow verifies assumptions that should never change regarding the}
+46   \textcolor{comment}{// mapping of specific SPDY3 constants to common headers.  Should they fail,}
+47   \textcolor{comment}{// the SPDYCodec would require updating in the places in which they are used}
+48   \textcolor{comment}{// in creating compress/Header objects.}
+49   EXPECT\_EQ(HTTPCommonHeaders::hash(
+50     spdy::kNameStatusv3), HTTP\_HEADER\_COLON\_STATUS);
+51   EXPECT\_EQ(HTTPCommonHeaders::hash(
+52     spdy::kNameMethodv3), HTTP\_HEADER\_COLON\_METHOD);
+53   EXPECT\_EQ(HTTPCommonHeaders::hash(
+54     spdy::kNameSchemev3), HTTP\_HEADER\_COLON\_SCHEME);
+55   EXPECT\_EQ(HTTPCommonHeaders::hash(
+56     spdy::kNamePathv3), HTTP\_HEADER\_COLON\_PATH);
+57 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Junk\+S\+P\+D\+Y)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Junk\+S\+P\+DY}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a296c175b17d18f15a56d4ebed061426e}
+
+
+Definition at line 59 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References parse\+S\+P\+D\+Y(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, short\+Syn\+Stream, and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+59                               \{
+60   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+61   FakeHTTPCodecCallback callbacks;
+62   \textcolor{keywordtype}{size\_t} unconsumed =
+63     parseSPDY(&codec, shortSynStream, \textcolor{keyword}{sizeof}(shortSynStream), -1, callbacks);
+64   EXPECT\_EQ(unconsumed, 0);
+65   EXPECT\_EQ(callbacks.sessionErrors, 1);
+66   EXPECT\_EQ(callbacks.streamErrors, 0);
+67 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Long\+Ping)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Long\+Ping}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a1778cae0b8dc09a2cfceaa6a1a475146}
+
+
+Definition at line 76 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References long\+Ping, parse\+S\+P\+D\+Y(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+76                               \{
+77   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+78   FakeHTTPCodecCallback callbacks;
+79   \textcolor{keywordtype}{size\_t} unconsumed =
+80     parseSPDY(&codec, longPing, \textcolor{keyword}{sizeof}(longPing), -1, callbacks);
+81   EXPECT\_EQ(unconsumed, 0);
+82   EXPECT\_EQ(callbacks.sessionErrors, 1);
+83   EXPECT\_EQ(callbacks.streamErrors, 0);
+84 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Bad\+Type)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Bad\+Type}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a5289738f7113a42a480b193cb866eb4f}
+
+
+Definition at line 93 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References bad\+Type, parse\+S\+P\+D\+Y(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+93                              \{
+94   \textcolor{comment}{// If an endpoint receives a control frame for a type it does not recognize,}
+95   \textcolor{comment}{// it must ignore the frame.}
+96   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+97   FakeHTTPCodecCallback callbacks;
+98   \textcolor{keywordtype}{size\_t} unconsumed =
+99     parseSPDY(&codec, badType, \textcolor{keyword}{sizeof}(badType), -1, callbacks);
+100   EXPECT\_EQ(unconsumed, 0);
+101   EXPECT\_EQ(callbacks.sessionErrors, 0);
+102   EXPECT\_EQ(callbacks.streamErrors, 0);
+103 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Syn\+Stream\+Boundaries)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Syn\+Stream\+Boundaries}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a5e7a83f6eb0d6efb5b72aeb72933915c}
+
+
+Definition at line 245 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, parse\+S\+P\+D\+Y(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors, and syn\+Stream.
+
+
+\begin{DoxyCode}
+245                                          \{
+246   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = -1; i < int(\textcolor{keyword}{sizeof}(synStream)); i++) \{
+247     SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3\_1);
+248     FakeHTTPCodecCallback callbacks;
+249     \textcolor{keywordtype}{size\_t} unconsumed =
+250       parseSPDY(&codec, synStream, \textcolor{keyword}{sizeof}(synStream), i, callbacks);
+251     EXPECT\_EQ(unconsumed, 0);
+252     EXPECT\_EQ(callbacks.messageBegin, 1);
+253     EXPECT\_EQ(callbacks.headersComplete, 1);
+254     EXPECT\_EQ(callbacks.messageComplete, 1);
+255     EXPECT\_EQ(callbacks.streamErrors, 0);
+256     EXPECT\_EQ(callbacks.sessionErrors, 0);
+257   \}
+258 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Set\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Set\+Settings}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a0e28e868e82f35583f3031caf3192738}
+
+
+Definition at line 260 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Egress\+Settings(), proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+Num\+Settings(), proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+Setting(), proxygen\+::http2\+::k\+Initial\+Window, proxygen\+::spdy\+::k\+Max\+Concurrent\+Streams, proxygen\+::\+H\+T\+T\+P\+Settings\+::set\+Setting(), settings, proxygen\+::\+H\+T\+T\+P\+Settings\+::unset\+Setting(), and proxygen\+::\+H\+T\+T\+P\+Setting\+::value.
+
+
+\begin{DoxyCode}
+260                                  \{
+261   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+262   HTTPSettings* settings = codec.getEgressSettings();
+263   \textcolor{comment}{// There are 2 settings by default.  Turn on another setting}
+264   settings->setSetting(SettingsId::\_SPDY\_DOWNLOAD\_BANDWIDTH, 10);
+265   \textcolor{comment}{// This should no-op since this setting should be off by default}
+266   settings->unsetSetting(SettingsId::\_SPDY\_ROUND\_TRIP\_TIME);
+267   EXPECT\_EQ(settings->getSetting(SettingsId::\_SPDY\_ROUND\_TRIP\_TIME), \textcolor{keyword}{nullptr});
+268   EXPECT\_EQ(settings->getSetting(SettingsId::\_SPDY\_CURRENT\_CWND), \textcolor{keyword}{nullptr});
+269   EXPECT\_EQ(settings->getSetting(SettingsId::MAX\_CONCURRENT\_STREAMS)->value,
+270             spdy::kMaxConcurrentStreams);
+271   EXPECT\_EQ(settings->getSetting(SettingsId::INITIAL\_WINDOW\_SIZE)->value,
+272             spdy::kInitialWindow);
+273   EXPECT\_EQ(
+274     settings->getSetting(SettingsId::\_SPDY\_DOWNLOAD\_BANDWIDTH)->value, 10);
+275   \textcolor{comment}{// Turn off one of the defaults}
+276   settings->unsetSetting(SettingsId::MAX\_CONCURRENT\_STREAMS);
+277   \textcolor{comment}{// Change the value of an existing default setting}
+278   settings->setSetting(SettingsId::INITIAL\_WINDOW\_SIZE, 123);
+279   EXPECT\_EQ(settings->getSetting(SettingsId::MAX\_CONCURRENT\_STREAMS),
+280             \textcolor{keyword}{nullptr});
+281   EXPECT\_EQ(settings->getSetting(SettingsId::INITIAL\_WINDOW\_SIZE)->value,
+282             123);
+283   EXPECT\_EQ(settings->getNumSettings(), 2);
+284   \textcolor{comment}{// Change the value of a unset setting}
+285   settings->setSetting(SettingsId::MAX\_CONCURRENT\_STREAMS, 400);
+286   EXPECT\_EQ(settings->getSetting(SettingsId::MAX\_CONCURRENT\_STREAMS)->value,
+287             400);
+288   EXPECT\_EQ(settings->getNumSettings(), 3);
+289 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Frame\+Too\+Large)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Frame\+Too\+Large}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a7ba49c4655d3050cb795b3578de120d3}
+
+
+Definition at line 291 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References parse\+S\+P\+D\+Y(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+S\+P\+D\+Y\+Codec\+::set\+Max\+Frame\+Length(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors, and syn\+Stream.
+
+
+\begin{DoxyCode}
+291                                    \{
+292   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3\_1);
+293   codec.setMaxFrameLength(500);
+294   FakeHTTPCodecCallback callbacks;
+295   \textcolor{keywordtype}{size\_t} unconsumed = parseSPDY(&codec, synStream, \textcolor{keyword}{sizeof}(synStream), -1,
+296                                 callbacks);
+297   EXPECT\_EQ(unconsumed, 0);
+298   EXPECT\_EQ(callbacks.sessionErrors, 1);
+299   EXPECT\_EQ(callbacks.streamErrors, 1);
+300 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Frame\+Uncompressed\+Too\+Large)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Frame\+Uncompressed\+Too\+Large}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a0d6ef9425087f90928d6a2bd21a39e5c}
+
+
+Definition at line 302 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References parse\+S\+P\+D\+Y(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+S\+P\+D\+Y\+Codec\+::set\+Max\+Uncompressed\+Headers(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors, and syn\+Stream.
+
+
+\begin{DoxyCode}
+302                                                \{
+303   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3\_1);
+304   codec.setMaxUncompressedHeaders(600);
+305   FakeHTTPCodecCallback callbacks;
+306   \textcolor{keywordtype}{size\_t} unconsumed = parseSPDY(&codec, synStream, \textcolor{keyword}{sizeof}(synStream), -1,
+307                                 callbacks);
+308   EXPECT\_EQ(unconsumed, 0);
+309   EXPECT\_EQ(callbacks.sessionErrors, 1);
+310   EXPECT\_EQ(callbacks.streamErrors, 1);
+311 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Unsupported\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Unsupported\+Version}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ad4691827cf42f57380666c7ea160cba1}
+
+
+Definition at line 319 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::last\+Parse\+Error, parse\+S\+P\+D\+Y(), proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::spdy\+::rst\+To\+Error\+Code(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, short\+Syn\+Stream, and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+319                                         \{
+320   \textcolor{comment}{// Send a spdy/2 frame on a spdy/3 codec}
+321   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+322   FakeHTTPCodecCallback callbacks;
+323   \textcolor{keywordtype}{size\_t} unconsumed = parseSPDY(&codec, shortSynStream,
+324                                 \textcolor{keyword}{sizeof}(shortSynStream), -1, callbacks);
+325   EXPECT\_EQ(unconsumed, 0);
+326   \textcolor{comment}{// Expect a GOAWAY with PROTOCOL\_ERROR (because of unsupported version)}
+327   EXPECT\_EQ(callbacks.sessionErrors, 1);
+328   EXPECT\_EQ(callbacks.streamErrors, 0);
+329   EXPECT\_EQ(callbacks.lastParseError->getCodecStatusCode(),
+330             spdy::rstToErrorCode(spdy::RST_PROTOCOL_ERROR));
+331 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Unsupported\+Frame\+Type)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Unsupported\+Frame\+Type}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_af2fbd375e6b37e262561fe8d6673727e}
+
+
+Definition at line 333 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References parse\+S\+P\+D\+Y(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, spdy3\+Unknown\+Ctl\+Frame, and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+333                                           \{
+334   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+335   FakeHTTPCodecCallback callbacks;
+336   \textcolor{keywordtype}{size\_t} unconsumed = parseSPDY(&codec, spdy3UnknownCtlFrame,
+337                                 \textcolor{keyword}{sizeof}(spdy3UnknownCtlFrame), -1, callbacks);
+338   EXPECT\_EQ(unconsumed, 0);
+339   EXPECT\_EQ(callbacks.sessionErrors, 0);
+340   EXPECT\_EQ(callbacks.streamErrors, 0);
+341   \textcolor{comment}{// Spec says unknown control frames must be ignored}
+342 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Default\+Max\+Transactions)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Default\+Max\+Transactions}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a30d6189d0ad1e6a0cd110009e575acb1}
+
+
+Definition at line 428 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References do\+Default\+Max\+Transaction\+Test(), and permute\+Test.
+
+
+\begin{DoxyCode}
+428                                             \{
+429   permuteTest(doDefaultMaxTransactionTest);
+430 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Non\+Default\+Max\+Transactions)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Non\+Default\+Max\+Transactions}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a262cf854ebba2707d13239f4b1fbe3b5}
+
+
+Definition at line 432 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References do\+Non\+Default\+Max\+Transaction\+Test(), and permute\+Test.
+
+
+\begin{DoxyCode}
+432                                                \{
+433   permuteTest(doNonDefaultMaxTransactionTest);
+434 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Empty\+Header\+Value)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Empty\+Header\+Value}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a63d9ccd5cc759f2f7c58e4b8797329db}
+
+
+Definition at line 487 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References do\+Empty\+Header\+Value\+Test(), and permute\+Test.
+
+
+\begin{DoxyCode}
+487                                       \{
+488   permuteTest(doEmptyHeaderValueTest);
+489 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Syn\+Stream\+Wrong\+Version)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Syn\+Stream\+Wrong\+Version}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aa8447e32f6bcfed44b54d94b7004585f}
+Tests a syn stream request containing the wrong version. This frame is generated by using the v3 syn\+Stream firefox frame specified above and changing the version field to 2. The dictionary used for the zlib compression will be different and the session will be rejected. 
+
+Definition at line 497 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References get\+Versioned\+Spdy\+Frame(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::last\+Parse\+Error, parse\+S\+P\+D\+Y(), proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::spdy\+::rst\+To\+Error\+Code(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors, and syn\+Stream.
+
+
+\begin{DoxyCode}
+497                                            \{
+498   SPDYCodec codec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+499   FakeHTTPCodecCallback callbacks;
+500   \textcolor{keyword}{auto} frame = getVersionedSpdyFrame(synStream, \textcolor{keyword}{sizeof}(synStream), 2);
+501   \textcolor{keywordtype}{size\_t} unconsumed = parseSPDY(&codec, frame->data(), frame->length(), -1,
+502                                 callbacks);
+503   EXPECT\_EQ(unconsumed, 0);
+504   \textcolor{comment}{// Since the session compression state is inconsistent we need to send a}
+505   \textcolor{comment}{// session error. Expect a GOAWAY with PROTOCOL\_ERROR.}
+506   EXPECT\_EQ(callbacks.sessionErrors, 1);
+507   EXPECT\_EQ(callbacks.streamErrors, 0);
+508   EXPECT\_EQ(callbacks.lastParseError->getCodecStatusCode(),
+509             spdy::rstToErrorCode(spdy::RST_PROTOCOL_ERROR));
+510 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Short\+Syn\+Reply)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Short\+Syn\+Reply}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aec8cba1912e6995af23b3ea2b507607c}
+
+
+Definition at line 531 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References do\+Short\+Syn\+Reply\+Test(), and permute\+Test.
+
+
+\begin{DoxyCode}
+531                                    \{
+532   permuteTest(doShortSynReplyTest);
+533 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Supports\+Session\+Flow\+Control)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Supports\+Session\+Flow\+Control}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ad014d518f79bc96201c5196e994a333d}
+
+
+Definition at line 535 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::supports\+Session\+Flow\+Control().
+
+
+\begin{DoxyCode}
+535                                                 \{
+536   SPDYCodec spdy3(TransportDirection::UPSTREAM,
+537                   SPDYVersion::SPDY3);
+538   SPDYCodec spdy3\_1(TransportDirection::UPSTREAM,
+539                     SPDYVersion::SPDY3\_1);
+540   EXPECT\_FALSE(spdy3.supportsSessionFlowControl());
+541   EXPECT\_TRUE(spdy3\_1.supportsSessionFlowControl());
+542 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Header\+With\+Many\+Values)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Header\+With\+Many\+Values}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a242d67ef986233fc9ef8016e2ffe7a69}
+
+
+Definition at line 545 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::msg, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+545                                           \{
+546   \textcolor{keyword}{const} std::string kMultiValued = \textcolor{stringliteral}{"X-Multi-Valued"};
+547   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} kNumValues = 1000;
+548 
+549   FakeHTTPCodecCallback callbacks;
+550   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+551                         SPDYVersion::SPDY3);
+552   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+553                          SPDYVersion::SPDY3);
+554   ingressCodec.setCallback(&callbacks);
+555 
+556   HTTPMessage req;
+557   req.setMethod(\textcolor{stringliteral}{"GET"});
+558   req.getHeaders().set(\textcolor{stringliteral}{"HOST"}, \textcolor{stringliteral}{"www.foo.com"});
+559   req.setURL(\textcolor{stringliteral}{"https://www.foo.com"});
+560   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < kNumValues; ++i) \{
+561     req.getHeaders().add(kMultiValued, folly::to<string>(\textcolor{stringliteral}{"Value"}, i));
+562   \}
+563   \textcolor{keyword}{auto} syn = getSynStream(egressCodec, 1, req);
+564   ingressCodec.onIngress(*syn);
+565   EXPECT\_EQ(callbacks.messageBegin, 1);
+566   EXPECT\_EQ(callbacks.headersComplete, 1);
+567   EXPECT\_EQ(callbacks.messageComplete, 0);
+568   EXPECT\_EQ(callbacks.streamErrors, 0);
+569   EXPECT\_EQ(callbacks.sessionErrors, 0);
+570   CHECK\_NOTNULL(callbacks.msg.get());
+571   EXPECT\_EQ(callbacks.msg->getHeaders().getNumberOfValues(kMultiValued),
+572             kNumValues);
+573 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Multiple\+Paths)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Multiple\+Paths}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_adb1c374f97eab6e7829de2c94e3a6bd0}
+
+
+Definition at line 604 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Version(), get\+Versioned\+Spdy\+Frame(), multiple\+\_\+path\+\_\+headers, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+604                                    \{
+605   FakeHTTPCodecCallback callbacks;
+606   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM, SPDYVersion::SPDY3);
+607   \textcolor{keyword}{auto} frame = getVersionedSpdyFrame(multiple_path_headers,
+608      \textcolor{keyword}{sizeof}(multiple_path_headers), ingressCodec.getVersion());
+609   ingressCodec.setCallback(&callbacks);
+610   ingressCodec.onIngress(*frame);
+611   EXPECT\_EQ(callbacks.streamErrors, 1);
+612   EXPECT\_EQ(callbacks.sessionErrors, 0);
+613 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Large\+Frame\+Encoding)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Large\+Frame\+Encoding}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a39f0357bcc7978eaf9c7287346a6ccd5}
+
+
+Definition at line 615 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::get\+Get\+Request(), get\+Syn\+Stream(), and proxygen\+::\+S\+P\+D\+Y\+Codec\+::set\+Max\+Uncompressed\+Headers().
+
+
+\begin{DoxyCode}
+615                                         \{
+616   \textcolor{keyword}{const} std::string kMultiValued = \textcolor{stringliteral}{"X-Multi-Valued"};
+617   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} kNumValues = 1000;
+618 
+619   SPDYCodec codec(TransportDirection::UPSTREAM, SPDYVersion::SPDY3);
+620   \textcolor{comment}{// This will simulate the condition where we have a very small}
+621   \textcolor{comment}{// compresed headers size compared to the number of headers we}
+622   \textcolor{comment}{// have.}
+623   codec.setMaxUncompressedHeaders(0);
+624   \textcolor{keyword}{auto} req = getGetRequest();
+625   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < kNumValues; ++i) \{
+626     req.getHeaders().add(kMultiValued, folly::to<string>(\textcolor{stringliteral}{"Value"}, i));
+627   \}
+628   \textcolor{keyword}{auto} syn = getSynStream(codec, 1, req);
+629 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Invalid\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Invalid\+Settings}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a7581140f29c0f27ec8ca4fd2c2e55fda}
+
+
+Definition at line 632 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Settings(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::get\+Egress\+Settings(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Settings\+::set\+Setting(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+632                                      \{
+633   FakeHTTPCodecCallback callbacks;
+634 
+635   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+636                         SPDYVersion::SPDY3);
+637   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+638                          SPDYVersion::SPDY3);
+639   ingressCodec.setCallback(&callbacks);
+640 
+641   folly::IOBufQueue output(folly::IOBufQueue::cacheChainLength());
+642   egressCodec.getEgressSettings()->setSetting(
+643     SettingsId::INITIAL\_WINDOW\_SIZE,
+644     (uint32\_t)std::numeric\_limits<int32\_t>::max() + 1);
+645   egressCodec.generateSettings(output);
+646   \textcolor{keyword}{auto} ingress = output.move();
+647   ingressCodec.onIngress(*ingress);
+648   EXPECT\_EQ(callbacks.messageBegin, 0);
+649   EXPECT\_EQ(callbacks.headersComplete, 0);
+650   EXPECT\_EQ(callbacks.messageComplete, 0);
+651   EXPECT\_EQ(callbacks.streamErrors, 0);
+652   EXPECT\_EQ(callbacks.sessionErrors, 1);
+653 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Header\+With\+Fin)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Header\+With\+Fin}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aef015097c020e60909c6b20faeeed4ef}
+
+
+Definition at line 655 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::assoc\+Stream\+Id, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+655                                    \{
+656   FakeHTTPCodecCallback callbacks;
+657   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+658                         SPDYVersion::SPDY3);
+659   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+660                          SPDYVersion::SPDY3);
+661   ingressCodec.setCallback(&callbacks);
+662 
+663   HTTPMessage req;
+664   req.setMethod(\textcolor{stringliteral}{"GET"});
+665   req.getHeaders().set(\textcolor{stringliteral}{"HOST"}, \textcolor{stringliteral}{"www.foo.com"});
+666   req.setURL(\textcolor{stringliteral}{"https://www.foo.com/"});
+667   \textcolor{keyword}{auto} syn = getSynStream(egressCodec, 1, req, 0, \textcolor{keyword}{true} \textcolor{comment}{/* eom */});
+668   ingressCodec.onIngress(*syn);
+669   EXPECT\_EQ(callbacks.messageBegin, 1);
+670   EXPECT\_EQ(callbacks.headersComplete, 1);
+671   EXPECT\_EQ(callbacks.messageComplete, 1);
+672   EXPECT\_EQ(callbacks.streamErrors, 0);
+673   EXPECT\_EQ(callbacks.sessionErrors, 0);
+674   EXPECT\_EQ(callbacks.assocStreamId, 0);
+675 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Server\+Push)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Server\+Push}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a265f2c5e9dc8ecccce76996d8bfc2fc8}
+
+
+Definition at line 677 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::assoc\+Stream\+Id, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+677                                 \{
+678   FakeHTTPCodecCallback callbacks;
+679   SPDYCodec egressCodec(TransportDirection::DOWNSTREAM,
+680                         SPDYVersion::SPDY3);
+681   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+682                          SPDYVersion::SPDY3);
+683   ingressCodec.setCallback(&callbacks);
+684 
+685   HTTPMessage push;
+686   push.getHeaders().set(\textcolor{stringliteral}{"HOST"}, \textcolor{stringliteral}{"www.foo.com"});
+687   push.setURL(\textcolor{stringliteral}{"https://www.foo.com/"});
+688   \textcolor{keyword}{auto} syn = getSynStream(egressCodec, 2, push, 1);
+689   ingressCodec.onIngress(*syn);
+690   EXPECT\_EQ(callbacks.messageBegin, 1);
+691   EXPECT\_EQ(callbacks.headersComplete, 1);
+692   EXPECT\_EQ(callbacks.messageComplete, 0);
+693   EXPECT\_EQ(callbacks.streamErrors, 0);
+694   EXPECT\_EQ(callbacks.sessionErrors, 0);
+695   EXPECT\_EQ(callbacks.assocStreamId, 1);
+696 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Server\+Push\+With\+Status)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Server\+Push\+With\+Status}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a8ea4bb47c897b5d38eecf5210222e5f7}
+
+
+Definition at line 698 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::assoc\+Stream\+Id, proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::msg, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Push\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+698                                           \{
+699   FakeHTTPCodecCallback callbacks;
+700   SPDYCodec egressCodec(TransportDirection::DOWNSTREAM,
+701                         SPDYVersion::SPDY3);
+702   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+703                          SPDYVersion::SPDY3);
+704   ingressCodec.setCallback(&callbacks);
+705 
+706   HTTPMessage push;
+707   push.getHeaders().set(\textcolor{stringliteral}{"HOST"}, \textcolor{stringliteral}{"www.foo.com"});
+708   push.setURL(\textcolor{stringliteral}{"https://www.foo.com/"});
+709   push.setPushStatusCode(200);
+710   \textcolor{keyword}{auto} syn = getSynStream(egressCodec, 2, push, 1);
+711   ingressCodec.onIngress(*syn);
+712   EXPECT\_EQ(callbacks.messageBegin, 1);
+713   EXPECT\_EQ(callbacks.headersComplete, 1);
+714   EXPECT\_EQ(callbacks.messageComplete, 0);
+715   EXPECT\_EQ(callbacks.streamErrors, 0);
+716   EXPECT\_EQ(callbacks.sessionErrors, 0);
+717   EXPECT\_EQ(callbacks.assocStreamId, 1);
+718   EXPECT\_EQ(callbacks.msg->getPushStatusCode(), 200);
+719 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Host\+Missing)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Server\+Push\+Host\+Missing}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a2ecfcefc7dce20d7a38dc1d0074225fb}
+
+
+Definition at line 744 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::assoc\+Stream\+Id, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), push\+Stream\+With\+Host\+Missing, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+744                                            \{
+745   FakeHTTPCodecCallback callbacks;
+746   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+747                          SPDYVersion::SPDY3);
+748   ingressCodec.setCallback(&callbacks);
+749 
+750   \textcolor{keyword}{auto} syn = folly::IOBuf::copyBuffer(pushStreamWithHostMissing,
+751                                       \textcolor{keyword}{sizeof}(pushStreamWithHostMissing));
+752   ingressCodec.onIngress(*syn);
+753   EXPECT\_EQ(callbacks.messageBegin, 0);
+754   EXPECT\_EQ(callbacks.headersComplete, 0);
+755   EXPECT\_EQ(callbacks.messageComplete, 0);
+756   EXPECT\_EQ(callbacks.streamErrors, 1);
+757   EXPECT\_EQ(callbacks.sessionErrors, 0);
+758   EXPECT\_EQ(callbacks.assocStreamId, 0);
+759 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Invalid\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Server\+Push\+Invalid\+Id}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a2705159a53b9450043b87c6d876c1529}
+
+
+Definition at line 787 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::assoc\+Stream\+Id, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), push\+Stream\+With\+Odd\+Id, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+787                                          \{
+788   FakeHTTPCodecCallback callbacks;
+789   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+790                          SPDYVersion::SPDY3);
+791   ingressCodec.setCallback(&callbacks);
+792 
+793   \textcolor{keyword}{auto} syn = folly::IOBuf::copyBuffer(pushStreamWithOddId,
+794                                       \textcolor{keyword}{sizeof}(pushStreamWithOddId));
+795   ingressCodec.onIngress(*syn);
+796   EXPECT\_EQ(callbacks.messageBegin, 0);
+797   EXPECT\_EQ(callbacks.headersComplete, 0);
+798   EXPECT\_EQ(callbacks.messageComplete, 0);
+799   EXPECT\_EQ(callbacks.streamErrors, 0);
+800   EXPECT\_EQ(callbacks.sessionErrors, 1);
+801   EXPECT\_EQ(callbacks.assocStreamId, 0);
+802 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Invalid\+Flags)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Server\+Push\+Invalid\+Flags}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a30ad4e7e486c932402b737df5ce550b9}
+
+
+Definition at line 830 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::assoc\+Stream\+Id, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), push\+Stream\+Without\+Unidirectional, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+830                                             \{
+831   FakeHTTPCodecCallback callbacks;
+832   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+833                          SPDYVersion::SPDY3);
+834   ingressCodec.setCallback(&callbacks);
+835 
+836   \textcolor{keyword}{auto} syn = folly::IOBuf::copyBuffer(pushStreamWithoutUnidirectional,
+837                                       \textcolor{keyword}{sizeof}(pushStreamWithoutUnidirectional));
+838   ingressCodec.onIngress(*syn);
+839   EXPECT\_EQ(callbacks.messageBegin, 0);
+840   EXPECT\_EQ(callbacks.headersComplete, 0);
+841   EXPECT\_EQ(callbacks.messageComplete, 0);
+842   EXPECT\_EQ(callbacks.streamErrors, 1);
+843   EXPECT\_EQ(callbacks.sessionErrors, 0);
+844   EXPECT\_EQ(callbacks.assocStreamId, 0);
+845 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Server\+Push\+Without\+Assoc)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Server\+Push\+Without\+Assoc}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a28c54da65d122ce515645775f33950a1}
+
+
+Definition at line 873 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::assoc\+Stream\+Id, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), push\+Stream\+Without\+Assoc, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+873                                             \{
+874   FakeHTTPCodecCallback callbacks;
+875   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+876                          SPDYVersion::SPDY3);
+877   ingressCodec.setCallback(&callbacks);
+878 
+879   \textcolor{keyword}{auto} syn = folly::IOBuf::copyBuffer(pushStreamWithoutAssoc,
+880                                       \textcolor{keyword}{sizeof}(pushStreamWithoutAssoc));
+881   ingressCodec.onIngress(*syn);
+882   EXPECT\_EQ(callbacks.messageBegin, 0);
+883   EXPECT\_EQ(callbacks.headersComplete, 0);
+884   EXPECT\_EQ(callbacks.messageComplete, 0);
+885   EXPECT\_EQ(callbacks.streamErrors, 0);
+886   EXPECT\_EQ(callbacks.sessionErrors, 1);
+887   EXPECT\_EQ(callbacks.assocStreamId, 0);
+888 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Status\+Reason)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Status\+Reason}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ac7736c83cd1e68a6d564bf09167810f8}
+
+
+Definition at line 890 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::last\+Parse\+Error, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::msg, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::reset(), proxygen\+::spdy\+::\+R\+S\+T\+\_\+\+P\+R\+O\+T\+O\+C\+O\+L\+\_\+\+E\+R\+R\+OR, proxygen\+::spdy\+::rst\+To\+Error\+Code(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Message(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+890                                   \{
+891   FakeHTTPCodecCallback callbacks;
+892   SPDYCodec egressCodec(TransportDirection::DOWNSTREAM,
+893                         SPDYVersion::SPDY3);
+894   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+895                          SPDYVersion::SPDY3);
+896   ingressCodec.setCallback(&callbacks);
+897 
+898   HTTPMessage resp;
+899   resp.setStatusCode(200);
+900   \textcolor{keyword}{auto} syn = getSynStream(egressCodec, 1, resp, 0);
+901   ingressCodec.onIngress(*syn);
+902   EXPECT\_EQ(callbacks.messageBegin, 1);
+903   EXPECT\_EQ(callbacks.headersComplete, 1);
+904   EXPECT\_EQ(callbacks.messageComplete, 0);
+905   EXPECT\_EQ(callbacks.streamErrors, 0);
+906   EXPECT\_EQ(callbacks.sessionErrors, 0);
+907   EXPECT\_EQ(callbacks.msg->getStatusCode(), 200);
+908   EXPECT\_EQ(callbacks.msg->getStatusMessage(), \textcolor{stringliteral}{""});
+909   callbacks.reset();
+910 
+911   resp.setStatusCode(200);
+912   resp.setStatusMessage(\textcolor{stringliteral}{"Awesome"});
+913   syn = getSynStream(egressCodec, 1, resp, 0);
+914   ingressCodec.onIngress(*syn);
+915   EXPECT\_EQ(callbacks.messageBegin, 1);
+916   EXPECT\_EQ(callbacks.headersComplete, 1);
+917   EXPECT\_EQ(callbacks.messageComplete, 0);
+918   EXPECT\_EQ(callbacks.streamErrors, 0);
+919   EXPECT\_EQ(callbacks.sessionErrors, 0);
+920   EXPECT\_EQ(callbacks.msg->getStatusCode(), 200);
+921   EXPECT\_EQ(callbacks.msg->getStatusMessage(), \textcolor{stringliteral}{"Awesome"});
+922   callbacks.reset();
+923 
+924   \textcolor{comment}{// Out of range}
+925   resp.setStatusCode(2000);
+926   resp.setStatusMessage(\textcolor{stringliteral}{"10x OK"});
+927   syn = getSynStream(egressCodec, 1, resp, 0);
+928   ingressCodec.onIngress(*syn);
+929   EXPECT\_EQ(callbacks.messageBegin, 0);
+930   EXPECT\_EQ(callbacks.headersComplete, 0);
+931   EXPECT\_EQ(callbacks.messageComplete, 0);
+932   EXPECT\_EQ(callbacks.streamErrors, 1);
+933   EXPECT\_EQ(callbacks.sessionErrors, 0);
+934   EXPECT\_TRUE(callbacks.lastParseError->hasCodecStatusCode());
+935   EXPECT\_EQ(callbacks.lastParseError->getCodecStatusCode(),
+936             spdy::rstToErrorCode(spdy::RST_PROTOCOL_ERROR));
+937   callbacks.reset();
+938 
+939   resp.setStatusCode(64);
+940   resp.setStatusMessage(\textcolor{stringliteral}{"Ought to be enough for anybody"});
+941   syn = getSynStream(egressCodec, 1, resp, 0);
+942   ingressCodec.onIngress(*syn);
+943   EXPECT\_EQ(callbacks.messageBegin, 0);
+944   EXPECT\_EQ(callbacks.headersComplete, 0);
+945   EXPECT\_EQ(callbacks.messageComplete, 0);
+946   EXPECT\_EQ(callbacks.streamErrors, 1);
+947   EXPECT\_EQ(callbacks.sessionErrors, 0);
+948   EXPECT\_TRUE(callbacks.lastParseError->hasCodecStatusCode());
+949   EXPECT\_EQ(callbacks.lastParseError->getCodecStatusCode(),
+950             spdy::rstToErrorCode(spdy::RST_PROTOCOL_ERROR));
+951   callbacks.reset();
+952 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Upstream\+Ping)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Upstream\+Ping}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a30a8757ae7b0812346a45ce8af2ec217}
+
+
+Definition at line 954 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Ping\+Reply(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Ping\+Request(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::recv\+Ping\+Reply, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::recv\+Ping\+Request, and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+954                                   \{
+955   folly::IOBufQueue buf(folly::IOBufQueue::cacheChainLength());
+956   FakeHTTPCodecCallback callbacks;
+957   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+958                         SPDYVersion::SPDY3);
+959   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+960                          SPDYVersion::SPDY3);
+961   ingressCodec.setCallback(&callbacks);
+962 
+963   \textcolor{comment}{// Send a reply with no corresponding ping request}
+964   egressCodec.generatePingReply(buf, 2);
+965   \textcolor{keyword}{auto} pingReply = buf.move();
+966   ingressCodec.onIngress(*pingReply);
+967   ASSERT\_EQ(callbacks.recvPingReply, 0); \textcolor{comment}{// should be ignored}
+968 
+969   \textcolor{keyword}{auto} lastRequest = callbacks.recvPingRequest;
+970   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 10; ++i) \{
+971     egressCodec.generatePingRequest(buf);
+972     \textcolor{keyword}{auto} pingReq = buf.move();
+973     ingressCodec.onIngress(*pingReq);
+974     ASSERT\_GT(callbacks.recvPingRequest, lastRequest);
+975     ASSERT\_EQ(callbacks.recvPingRequest % 2, 1);
+976     lastRequest = callbacks.recvPingRequest;
+977   \}
+978 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Downstream\+Ping)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Downstream\+Ping}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a7834f876bc9e2cb06edf44f1a7f9527e}
+
+
+Definition at line 980 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Ping\+Reply(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Ping\+Request(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::recv\+Ping\+Reply, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::recv\+Ping\+Request, and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+980                                     \{
+981   folly::IOBufQueue buf(folly::IOBufQueue::cacheChainLength());
+982   FakeHTTPCodecCallback callbacks;
+983   SPDYCodec egressCodec(TransportDirection::DOWNSTREAM,
+984                         SPDYVersion::SPDY3);
+985   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+986                          SPDYVersion::SPDY3);
+987   ingressCodec.setCallback(&callbacks);
+988 
+989   \textcolor{comment}{// Send a reply with no corresponding ping request}
+990   egressCodec.generatePingReply(buf, 1);
+991   \textcolor{keyword}{auto} pingReply = buf.move();
+992   ingressCodec.onIngress(*pingReply);
+993   ASSERT\_EQ(callbacks.recvPingReply, 0); \textcolor{comment}{// should be ignored}
+994 
+995   \textcolor{keyword}{auto} lastRequest = callbacks.recvPingRequest;
+996   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < 10; ++i) \{
+997     egressCodec.generatePingRequest(buf);
+998     \textcolor{keyword}{auto} pingReq = buf.move();
+999     ingressCodec.onIngress(*pingReq);
+1000     ASSERT\_GT(callbacks.recvPingRequest, lastRequest);
+1001     ASSERT\_EQ(callbacks.recvPingRequest % 2, 0);
+1002     lastRequest = callbacks.recvPingRequest;
+1003   \}
+1004 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Date\+Header)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Date\+Header}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a976409c0489e9ecdf2047a9844b21b72}
+
+
+Definition at line 1006 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::msg, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1006                                 \{
+1007   FakeHTTPCodecCallback callbacks;
+1008   SPDYCodec egressCodec(TransportDirection::DOWNSTREAM,
+1009                         SPDYVersion::SPDY3);
+1010   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+1011                          SPDYVersion::SPDY3);
+1012   ingressCodec.setCallback(&callbacks);
+1013 
+1014   HTTPMessage resp;
+1015   resp.setStatusCode(200);
+1016   \textcolor{keyword}{auto} syn = getSynStream(egressCodec, 1, resp, 0);
+1017   ingressCodec.onIngress(*syn);
+1018   EXPECT\_EQ(callbacks.messageBegin, 1);
+1019   EXPECT\_EQ(callbacks.headersComplete, 1);
+1020   EXPECT\_EQ(callbacks.messageComplete, 0);
+1021   EXPECT\_EQ(callbacks.streamErrors, 0);
+1022   EXPECT\_EQ(callbacks.sessionErrors, 0);
+1023   EXPECT\_TRUE(callbacks.msg->getHeaders().exists(HTTP\_HEADER\_DATE));
+1024 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Header\+Do\+S)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Header\+DoS}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a38a8e050696baadad7a71725c712fbc2}
+
+
+Definition at line 1100 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Complete, multi\+Valued\+Header\+Attack, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1100                                \{
+1101   FakeHTTPCodecCallback callbacks;
+1102   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+1103                          SPDYVersion::SPDY3);
+1104   ingressCodec.setCallback(&callbacks);
+1105 
+1106   \textcolor{keyword}{auto} attack = folly::IOBuf::copyBuffer(multiValuedHeaderAttack,
+1107                                          \textcolor{keyword}{sizeof}(multiValuedHeaderAttack));
+1108 
+1109   ingressCodec.onIngress(*attack);
+1110   EXPECT\_EQ(callbacks.messageBegin, 0);
+1111   EXPECT\_EQ(callbacks.headersComplete, 0);
+1112   EXPECT\_EQ(callbacks.messageComplete, 0);
+1113   EXPECT\_EQ(callbacks.streamErrors, 1);
+1114   EXPECT\_EQ(callbacks.sessionErrors, 1);
+1115 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Double\+Goaway\+Server)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Double\+Goaway\+Server}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a77cc46548601004fe27d44ebbfab662e}
+
+
+Definition at line 1119 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::enable\+Double\+Goaway\+Drain(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::goaways, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Reusable(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Waiting\+To\+Drain(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+1119                                         \{
+1120   FakeHTTPCodecCallback callbacks;
+1121   SPDYCodec egressCodec(TransportDirection::DOWNSTREAM,
+1122                         SPDYVersion::SPDY3);
+1123   SPDYCodec ingressCodec(TransportDirection::UPSTREAM,
+1124                          SPDYVersion::SPDY3);
+1125 
+1126   egressCodec.enableDoubleGoawayDrain();
+1127   ingressCodec.setCallback(&callbacks);
+1128   egressCodec.setCallback(&callbacks);
+1129 
+1130   \textcolor{keywordtype}{unsigned} ack = std::numeric\_limits<int32\_t>::max();
+1131   \textcolor{keyword}{auto} f = [&] () \{
+1132     folly::IOBufQueue output(folly::IOBufQueue::cacheChainLength());
+1133     egressCodec.generateGoaway(output, ack, ErrorCode::NO\_ERROR);
+1134     \textcolor{keyword}{auto} ingress = output.move();
+1135     ingressCodec.onIngress(*ingress);
+1136     ack -= 2;
+1137   \};
+1138 
+1139   EXPECT\_TRUE(egressCodec.isReusable());
+1140   EXPECT\_FALSE(egressCodec.isWaitingToDrain());
+1141   EXPECT\_TRUE(ingressCodec.isReusable());
+1142   f();
+1143   \textcolor{comment}{// server spdy codec remains reusable after the first goaway}
+1144   EXPECT\_TRUE(egressCodec.isReusable());
+1145   EXPECT\_TRUE(egressCodec.isWaitingToDrain());
+1146   f();
+1147   EXPECT\_FALSE(egressCodec.isReusable());
+1148   EXPECT\_FALSE(egressCodec.isWaitingToDrain());
+1149 
+1150   EXPECT\_EQ(2, callbacks.goaways);
+1151 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Double\+Goaway\+Client)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Double\+Goaway\+Client}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ab3b935f3014bc67c270c23aa4e097939}
+
+
+Definition at line 1153 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::enable\+Double\+Goaway\+Drain(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::goaways, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Reusable(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Waiting\+To\+Drain(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+1153                                         \{
+1154   FakeHTTPCodecCallback callbacks;
+1155   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+1156                         SPDYVersion::SPDY3);
+1157   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1158                          SPDYVersion::SPDY3);
+1159 
+1160   egressCodec.enableDoubleGoawayDrain();
+1161   ingressCodec.setCallback(&callbacks);
+1162   egressCodec.setCallback(&callbacks);
+1163 
+1164   \textcolor{keywordtype}{unsigned} ack = std::numeric\_limits<int32\_t>::max();
+1165   \textcolor{keyword}{auto} f = [&] () \{
+1166     folly::IOBufQueue output(folly::IOBufQueue::cacheChainLength());
+1167     egressCodec.generateGoaway(output, ack, ErrorCode::NO\_ERROR);
+1168     \textcolor{keyword}{auto} ingress = output.move();
+1169     ingressCodec.onIngress(*ingress);
+1170     ack -= 2;
+1171   \};
+1172 
+1173   EXPECT\_TRUE(egressCodec.isReusable());
+1174   EXPECT\_FALSE(egressCodec.isWaitingToDrain());
+1175   f();
+1176   \textcolor{comment}{// client spdy codec not reusable after the first goaway}
+1177   EXPECT\_FALSE(egressCodec.isReusable());
+1178   EXPECT\_TRUE(egressCodec.isWaitingToDrain());
+1179   EXPECT\_FALSE(ingressCodec.isReusable());
+1180   f();
+1181   EXPECT\_FALSE(egressCodec.isReusable());
+1182   EXPECT\_FALSE(egressCodec.isWaitingToDrain());
+1183   EXPECT\_FALSE(ingressCodec.isReusable());
+1184 
+1185   EXPECT\_EQ(2, callbacks.goaways);
+1186 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Single\+Goaway\+Client)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Single\+Goaway\+Client}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a4e115bdfa1dc24c6df30b01c1e5f153e}
+
+
+Definition at line 1189 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Goaway(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::goaways, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Reusable(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Waiting\+To\+Drain(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+1189                                         \{
+1190   FakeHTTPCodecCallback callbacks;
+1191   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+1192                         SPDYVersion::SPDY3);
+1193   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1194                          SPDYVersion::SPDY3);
+1195 
+1196   ingressCodec.setCallback(&callbacks);
+1197   egressCodec.setCallback(&callbacks);
+1198 
+1199   \textcolor{keywordtype}{unsigned} ack = 0;
+1200   \textcolor{keyword}{auto} f = [&] () \{
+1201     folly::IOBufQueue output(folly::IOBufQueue::cacheChainLength());
+1202     egressCodec.generateGoaway(output, ack, ErrorCode::NO\_ERROR);
+1203     \textcolor{keyword}{auto} ingress = output.move();
+1204     ingressCodec.onIngress(*ingress);
+1205     ack -= 2;
+1206   \};
+1207 
+1208   EXPECT\_TRUE(egressCodec.isReusable());
+1209   EXPECT\_TRUE(egressCodec.isWaitingToDrain());
+1210   f();
+1211   \textcolor{comment}{// client spdy codec not reusable after the first goaway}
+1212   EXPECT\_FALSE(egressCodec.isReusable());
+1213   EXPECT\_FALSE(egressCodec.isWaitingToDrain());
+1214   EXPECT\_FALSE(ingressCodec.isReusable());
+1215 
+1216   EXPECT\_EQ(1, callbacks.goaways);
+1217 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Odd\+Header\+List\+Test)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Odd\+Header\+List\+Test}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a791b0b8e55cd3509f3689b4f55cc6bc2}
+
+
+Definition at line 1235 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, invalid\+Header\+Plus\+Empty\+Block, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1235                                        \{
+1236   FakeHTTPCodecCallback callbacks;
+1237   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1238                          SPDYVersion::SPDY3);
+1239   ingressCodec.setCallback(&callbacks);
+1240 
+1241   \textcolor{keyword}{auto} attack = folly::IOBuf::copyBuffer(invalidHeaderPlusEmptyBlock,
+1242                                          \textcolor{keyword}{sizeof}(invalidHeaderPlusEmptyBlock));
+1243 
+1244   ingressCodec.onIngress(*attack);
+1245   EXPECT\_EQ(callbacks.messageBegin, 1);
+1246   EXPECT\_EQ(callbacks.headersComplete, 1);
+1247   EXPECT\_EQ(callbacks.streamErrors, 1);
+1248 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Send\+Rst\+Parsing\+Frame)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Send\+Rst\+Parsing\+Frame}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_ad05a7047ad7fcc2f94c013439a8ef62a}
+
+
+Definition at line 1252 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+E\+O\+M(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Rst\+Stream(), get\+Syn\+Stream(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback().
+
+
+\begin{DoxyCode}
+1252                                          \{
+1253   NiceMock<MockHTTPCodecCallback> callbacks;
+1254   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+1255                         SPDYVersion::SPDY3\_1);
+1256   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1257                          SPDYVersion::SPDY3\_1);
+1258   folly::IOBufQueue egressCodecQueue(folly::IOBufQueue::cacheChainLength());
+1259   folly::IOBufQueue ingressCodecQueue(folly::IOBufQueue::cacheChainLength());
+1260 
+1261   InSequence enforceOrder;
+1262 
+1263   EXPECT\_CALL(callbacks, onHeadersComplete(3, \_))
+1264     .WillOnce(InvokeWithoutArgs([&] \{
+1265           ingressCodec.generateRstStream(ingressCodecQueue,
+1266                                          1, ErrorCode::CANCEL);
+1267         \}));
+1268   EXPECT\_CALL(callbacks, onMessageComplete(3, \textcolor{keyword}{false}));
+1269 
+1270   ingressCodec.setCallback(&callbacks);
+1271   \textcolor{keyword}{auto} syn = getSynStream(egressCodec, 3);
+1272   egressCodecQueue.append(std::move(syn));
+1273   egressCodec.generateEOM(egressCodecQueue, 3);
+1274   \textcolor{keyword}{auto} ingress = egressCodecQueue.move();
+1275   ingress->coalesce();
+1276   ingressCodec.onIngress(*ingress);
+1277 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Bad\+Num\+Name\+Values)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Bad\+Num\+Name\+Values}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a2ef57ed39a43e815fb792e834247c81e}
+
+
+Definition at line 1303 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, invalid\+Num\+Name\+Values\+Block, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1303                                       \{
+1304   FakeHTTPCodecCallback callbacks;
+1305   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1306                          SPDYVersion::SPDY3\_1);
+1307   ingressCodec.setCallback(&callbacks);
+1308 
+1309   \textcolor{keyword}{auto} attack = folly::IOBuf::copyBuffer(invalidNumNameValuesBlock,
+1310                                          \textcolor{keyword}{sizeof}(invalidNumNameValuesBlock));
+1311 
+1312   ingressCodec.onIngress(*attack);
+1313   EXPECT\_EQ(callbacks.messageBegin, 0);
+1314   EXPECT\_EQ(callbacks.headersComplete, 0);
+1315   EXPECT\_EQ(callbacks.streamErrors, 0);
+1316   EXPECT\_EQ(callbacks.sessionErrors, 1);
+1317 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Short\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Short\+Settings}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_aad5278434d7ee94e9980a24ef89a504c}
+
+
+Definition at line 1323 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, k\+Short\+Settings, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::message\+Begin, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1323                                    \{
+1324   FakeHTTPCodecCallback callbacks;
+1325   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1326                          SPDYVersion::SPDY3\_1);
+1327   ingressCodec.setCallback(&callbacks);
+1328 
+1329   \textcolor{keyword}{auto} attack = folly::IOBuf::copyBuffer(kShortSettings,
+1330                                          \textcolor{keyword}{sizeof}(kShortSettings));
+1331 
+1332   ingressCodec.onIngress(*attack);
+1333   EXPECT\_EQ(callbacks.messageBegin, 0);
+1334   EXPECT\_EQ(callbacks.headersComplete, 0);
+1335   EXPECT\_EQ(callbacks.streamErrors, 0);
+1336   EXPECT\_EQ(callbacks.sessionErrors, 1);
+1337 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Segmented\+Header\+Block)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Segmented\+Header\+Block}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a7029611b241ab414c46f60e2eb384215}
+
+
+Definition at line 1339 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), get\+Syn\+Stream(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::msg, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::reset(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Headers\+::set(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+U\+R\+L(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1339                                           \{
+1340   SPDYCodec egressCodec(TransportDirection::UPSTREAM,
+1341                         SPDYVersion::SPDY3\_1);
+1342   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1343                          SPDYVersion::SPDY3\_1);
+1344   \textcolor{comment}{// generate huge string to use as a header value}
+1345   \textcolor{keywordtype}{string} huge;
+1346   uint32\_t size = 20000;
+1347   \textcolor{keywordtype}{char} ch = \textcolor{charliteral}{'a'};
+1348   \textcolor{keywordflow}{for} (uint32\_t i = 0; i < size; i++) \{
+1349     huge.push\_back(ch);
+1350     \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'z'}) \{
+1351       ch = \textcolor{charliteral}{'a'};
+1352     \} \textcolor{keywordflow}{else} \{
+1353       ch++;
+1354     \}
+1355   \}
+1356   HTTPMessage req;
+1357   req.setMethod(\textcolor{stringliteral}{"GET"});
+1358   req.setURL(\textcolor{stringliteral}{"http://www.facebook.com"});
+1359   \textcolor{keyword}{auto}& reqHeaders = req.getHeaders();
+1360   reqHeaders.set(\textcolor{stringliteral}{"HOST"}, \textcolor{stringliteral}{"www.facebook.com"});
+1361   \textcolor{comment}{// setting this huge header value will cause allocation of a separate IOBuf}
+1362   reqHeaders.set(\textcolor{stringliteral}{"X-FB-Huge"}, huge);
+1363   \textcolor{keyword}{auto} buf = getSynStream(egressCodec, 1, req);
+1364   FakeHTTPCodecCallback callbacks;
+1365   ingressCodec.setCallback(&callbacks);
+1366   ingressCodec.onIngress(*buf);
+1367   EXPECT\_EQ(callbacks.streamErrors, 0);
+1368   EXPECT\_EQ(callbacks.sessionErrors, 0);
+1369   EXPECT\_EQ(callbacks.headersComplete, 1);
+1370   EXPECT\_EQ(callbacks.msg->getHeaders().getSingleOrEmpty(\textcolor{stringliteral}{"x-fb-huge"}).size(),
+1371             size);
+1372 
+1373   \textcolor{comment}{// do it for responses}
+1374   HTTPMessage resp;
+1375   resp.setStatusCode(200);
+1376   resp.setStatusMessage(\textcolor{stringliteral}{"OK"});
+1377   \textcolor{keyword}{auto}& respHeaders = resp.getHeaders();
+1378   respHeaders.set(\textcolor{stringliteral}{"X-FB-Huge"}, huge);
+1379   \textcolor{keyword}{auto} buf2 = getSynStream(ingressCodec, 1, resp);
+1380   callbacks.reset();
+1381   egressCodec.setCallback(&callbacks);
+1382   egressCodec.onIngress(*buf2);
+1383   EXPECT\_EQ(callbacks.streamErrors, 0);
+1384   EXPECT\_EQ(callbacks.sessionErrors, 0);
+1385   EXPECT\_EQ(callbacks.headersComplete, 1);
+1386   EXPECT\_EQ(callbacks.msg->getHeaders().getSingleOrEmpty(\textcolor{stringliteral}{"x-fb-huge"}).size(),
+1387             size);
+1388 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Colon\+Headers)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Colon\+Headers}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a4d83cd3ceab1bb9d3a2cad13a6402d55}
+
+
+Definition at line 1397 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, k\+Colon\+Headers, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1397                                   \{
+1398   FakeHTTPCodecCallback callbacks;
+1399   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1400                          SPDYVersion::SPDY3\_1);
+1401   ingressCodec.setCallback(&callbacks);
+1402 
+1403   \textcolor{keyword}{auto} testBuf = folly::IOBuf::copyBuffer(kColonHeaders,
+1404                                          \textcolor{keyword}{sizeof}(kColonHeaders));
+1405 
+1406   ingressCodec.onIngress(*testBuf);
+1407   EXPECT\_EQ(callbacks.headersComplete, 0);
+1408   EXPECT\_EQ(callbacks.streamErrors, 1);
+1409   EXPECT\_EQ(callbacks.sessionErrors, 0);
+1410 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Stream\+Id\+Overflow)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Stream\+Id\+Overflow}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a803b42b6c22414d76c3c9df024783cf4}
+
+
+Definition at line 1412 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::create\+Stream(), proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::is\+Reusable(), and proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Next\+Egress\+Stream\+Id().
+
+
+\begin{DoxyCode}
+1412                                       \{
+1413   SPDYCodec codec(TransportDirection::UPSTREAM,
+1414                   SPDYVersion::SPDY3\_1);
+1415 
+1416   HTTPCodec::StreamID streamId;
+1417   codec.setNextEgressStreamId(std::numeric\_limits<int32\_t>::max() - 10);
+1418   \textcolor{keywordflow}{while} (codec.isReusable()) \{
+1419     streamId = codec.createStream();
+1420   \}
+1421   EXPECT\_EQ(streamId, std::numeric\_limits<int32\_t>::max() - 2);
+1422 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T(\+S\+P\+D\+Y\+Codec\+Test, Bad\+N\+V\+Block)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+ST (
+\begin{DoxyParamCaption}
+\item[{S\+P\+D\+Y\+Codec\+Test}]{, }
+\item[{Bad\+N\+V\+Block}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a6f8ccd8186d6ed21e7dd699bd330192d}
+Test case where nv item length is greater than total frame length 
+
+Definition at line 1435 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::headers\+Complete, k\+Buf\+Bad\+N\+V\+Block, proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Ingress(), proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::session\+Errors, proxygen\+::\+H\+T\+T\+P\+Parallel\+Codec\+::set\+Callback(), and proxygen\+::\+Fake\+H\+T\+T\+P\+Codec\+Callback\+::stream\+Errors.
+
+
+\begin{DoxyCode}
+1435                                 \{
+1436   FakeHTTPCodecCallback callbacks;
+1437   SPDYCodec ingressCodec(TransportDirection::DOWNSTREAM,
+1438                          SPDYVersion::SPDY3\_1);
+1439 
+1440   \textcolor{keyword}{auto} testBuf = IOBuf::copyBuffer(kBufBadNVBlock, \textcolor{keyword}{sizeof}(kBufBadNVBlock));
+1441   ingressCodec.setCallback(&callbacks);
+1442   ingressCodec.onIngress(*testBuf);
+1443   EXPECT\_EQ(callbacks.headersComplete, 0);
+1444   EXPECT\_EQ(callbacks.streamErrors, 0);
+1445   EXPECT\_EQ(callbacks.sessionErrors, 1);
+1446 \}
+\end{DoxyCode}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+S\+P\+D\+Y\+Codec\+Test\+F, Goaway\+Handling)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf S\+P\+D\+Y\+Codec\+TestF}}]{, }
+\item[{Goaway\+Handling}]{}
+\end{DoxyParamCaption}
+)}\label{SPDYCodecTest_8cpp_a541f27525ea87dc29704e03e8ef6e045}
+
+
+Definition at line 1460 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Headers\+::add(), proxygen\+::get\+Get\+Request(), proxygen\+::\+H\+T\+T\+P\+Message\+::get\+Headers(), make\+Buf(), parse(), proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Push\+Status\+Code(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Status\+Code().
+
+
+\begin{DoxyCode}
+1460                                        \{
+1461   \textcolor{comment}{// send request}
+1462   HTTPMessage req = getGetRequest();
+1463   HTTPHeaderSize size;
+1464   size.uncompressed = size.compressed = 0;
+1465   upstreamCodec\_.generateHeader(output\_, 1, req, \textcolor{keyword}{true}, &size);
+1466   EXPECT\_GT(size.uncompressed, 0);
+1467   parse();
+1468   callbacks\_.expectMessage(\textcolor{keyword}{true}, 2, \textcolor{stringliteral}{"/"});
+1469   callbacks\_.reset();
+1470 
+1471   SetUpUpstreamTest();
+1472   \textcolor{comment}{// drain after this message}
+1473   downstreamCodec\_.generateGoaway(output\_, 1, ErrorCode::NO\_ERROR);
+1474   parseUpstream();
+1475   \textcolor{comment}{// upstream cannot generate id > 1}
+1476   upstreamCodec\_.generateHeader(output\_, 3, req, \textcolor{keyword}{false}, &size);
+1477   EXPECT\_EQ(size.uncompressed, 0);
+1478   upstreamCodec\_.generateWindowUpdate(output\_, 3, 100);
+1479   upstreamCodec\_.generateBody(output\_, 3, makeBuf(10), HTTPCodec::NoPadding,
+1480                               \textcolor{keyword}{false});
+1481   upstreamCodec\_.generatePriority(output\_, 3,
+1482                                   HTTPMessage::HTTPPriority(0, \textcolor{keyword}{true}, 1));
+1483   upstreamCodec\_.generateEOM(output\_, 3);
+1484   upstreamCodec\_.generateRstStream(output\_, 3, ErrorCode::CANCEL);
+1485   EXPECT\_EQ(output\_.chainLength(), 0);
+1486 
+1487   \textcolor{comment}{// send a push promise that will be rejected by downstream}
+1488   req.setPushStatusCode(200);
+1489   req.getHeaders().add(\textcolor{stringliteral}{"foomonkey"}, \textcolor{stringliteral}{"george"});
+1490   downstreamCodec\_.generatePushPromise(output\_, 2, req, 1, \textcolor{keyword}{false}, &size);
+1491   EXPECT\_GT(size.uncompressed, 0);
+1492   \textcolor{comment}{// window update for push doesn't make any sense, but whatever}
+1493   downstreamCodec\_.generateWindowUpdate(output\_, 2, 100);
+1494   downstreamCodec\_.generateBody(output\_, 2, makeBuf(10), HTTPCodec::NoPadding,
+1495                                 \textcolor{keyword}{false});
+1496 
+1497   \textcolor{comment}{// tell the upstream no pushing, and parse the first batch}
+1498   IOBufQueue dummy\{IOBufQueue::cacheChainLength()\};
+1499   upstreamCodec\_.generateGoaway(dummy, 0, ErrorCode::NO\_ERROR);
+1500   parseUpstream();
+1501 
+1502   downstreamCodec\_.generatePriority(output\_, 2,
+1503                                     HTTPMessage::HTTPPriority(0, \textcolor{keyword}{true}, 1));
+1504   downstreamCodec\_.generateEOM(output\_, 2);
+1505   downstreamCodec\_.generateRstStream(output\_, 2, ErrorCode::CANCEL);
+1506 
+1507   \textcolor{comment}{// send a response that will be accepted, headers should be ok}
+1508   HTTPMessage resp;
+1509   resp.setStatusCode(200);
+1510   downstreamCodec\_.generateHeader(output\_, 1, resp, \textcolor{keyword}{true}, &size);
+1511   EXPECT\_GT(size.uncompressed, 0);
+1512 
+1513   \textcolor{comment}{// parse the remainder}
+1514   parseUpstream();
+1515   callbacks\_.expectMessage(\textcolor{keyword}{true}, 1, 200);
+1516 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!bad\+Type@{bad\+Type}}
+\index{bad\+Type@{bad\+Type}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{bad\+Type}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t bad\+Type[$\,$]}\label{SPDYCodecTest_8cpp_aa822462decb359951f20089cbe97e732}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x0A,
+  0x00, 0x00, 0x00, 0x05,
+  0x00, 0x00, 0x00, 0x00,
+  0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 86 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!invalid\+Header\+Plus\+Empty\+Block@{invalid\+Header\+Plus\+Empty\+Block}}
+\index{invalid\+Header\+Plus\+Empty\+Block@{invalid\+Header\+Plus\+Empty\+Block}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{invalid\+Header\+Plus\+Empty\+Block}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t invalid\+Header\+Plus\+Empty\+Block[$\,$]}\label{SPDYCodecTest_8cpp_af46264bcbbc201f978f9dc76368eb01d}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x02, 0xc4, 0x00, 0x00, 0x14,
+  0xf7, 0x76, 0x2d, 0x37, 0x78, 0x9c, 0x93, 0x60,
+  0x00, 0x03, 0x75, 0x06, 0xbd, 0x76, 0x21, 0xb2,
+  0xd0, 0xd9, 0x54, 0x91, 0x80, 0x03, 0x00, 0x01,
+  0x4e, 0x00, 0x00, 0x0a, 0xbe, 0x14, 0x31, 0x55,
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 1222 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!invalid\+Num\+Name\+Values\+Block@{invalid\+Num\+Name\+Values\+Block}}
+\index{invalid\+Num\+Name\+Values\+Block@{invalid\+Num\+Name\+Values\+Block}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{invalid\+Num\+Name\+Values\+Block}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t invalid\+Num\+Name\+Values\+Block[$\,$]}\label{SPDYCodecTest_8cpp_a6f8e2f8af8ea89266a9fff3035e1d159}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  0x80, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x91,
+  0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01,
+  0x00, 0x00, 0x38, 0x30, 0xe3, 0xc6, 0xa7, 0xc2,
+  0x00, 0x77, 0x00, 0x88, 0xff, 0x00, 0x00, 0x00,
+  0x05, 0x00, 0x00, 0x00, 0x05, 0x3a, 0x68, 0x6f,
+  0x73, 0x74, 0x00, 0x00, 0x00, 0x0b, 0x77, 0x77,
+  0x77, 0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f,
+  0x6d, 0x00, 0x00, 0x00, 0x77, 0x3a, 0x6d, 0x65,
+  0x74, 0x68, 0x6f, 0x64, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x05, 0x3a, 0x70, 0x61, 0x74,
+  0x68, 0x00, 0x13, 0x00, 0x14, 0x68, 0x74, 0x74,
+  0x39, 0x73, 0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77,
+  0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f, 0x6d,
+  0x2f, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x73, 0x63,
+  0x68, 0x65, 0x6d, 0x65, 0x00, 0x00, 0x00, 0x04,
+  0x68, 0x74, 0x74, 0x70, 0x00, 0x00, 0x00, 0x08,
+  0x3a, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+  0x00, 0x00, 0x00, 0x08, 0x48, 0x54, 0x54, 0x50,
+  0x2f, 0x31, 0x2e, 0x31, 0x00, 0x00, 0x00, 0xff,
+  0xff
+\}
+\end{DoxyCode}
+
+
+Definition at line 1279 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!k\+Buf\+Bad\+N\+V\+Block@{k\+Buf\+Bad\+N\+V\+Block}}
+\index{k\+Buf\+Bad\+N\+V\+Block@{k\+Buf\+Bad\+N\+V\+Block}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{k\+Buf\+Bad\+N\+V\+Block}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t k\+Buf\+Bad\+N\+V\+Block[$\,$]}\label{SPDYCodecTest_8cpp_ac26dd1d9ebaf6a267addbc4f78578e17}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+ 0x80, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x1c,
+ 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
+ 0x00, 0x00, 0x78, 0xbb, 0xe3, 0xc6, 0xa7, 0xc2,
+ 0x02, 0xa6, 0x23, 0xc6, 0xff, 0x40, 0x00, 0x00,
+ 0x00, 0x00, 0xff, 0xff
+\}
+\end{DoxyCode}
+
+
+Definition at line 1424 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!k\+Colon\+Headers@{k\+Colon\+Headers}}
+\index{k\+Colon\+Headers@{k\+Colon\+Headers}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{k\+Colon\+Headers}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t k\+Colon\+Headers[$\,$]}\label{SPDYCodecTest_8cpp_a3d39f09aa938389ef1e29c5aeda469e0}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  0x80, 0x03, 0x00, 0x01, 0x48, 0x00, 0x00, 0x1a, 0xf6, 0xf6, 0x1a, 0xb5,
+  0x00, 0x00, 0x00, 0x00, 0x17, 0x28, 0x28, 0x53, 0x62, 0x60, 0x60, 0x10,
+  0x60, 0x60, 0x60, 0x60, 0xb4, 0x1a, 0xbc, 0x84, 0xa4, 0xa4
+\}
+\end{DoxyCode}
+
+
+Definition at line 1390 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!k\+Short\+Settings@{k\+Short\+Settings}}
+\index{k\+Short\+Settings@{k\+Short\+Settings}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{k\+Short\+Settings}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t k\+Short\+Settings[$\,$]}\label{SPDYCodecTest_8cpp_a4c83311f67dbbaef65864929f63717ba}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+  0x80, 0x03, 0x00, 0x04, 0xee, 0x00, 0x00, 0x01, 0x00, 0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 1319 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!long\+Ping@{long\+Ping}}
+\index{long\+Ping@{long\+Ping}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{long\+Ping}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t long\+Ping[$\,$]}\label{SPDYCodecTest_8cpp_a8a922eaeb35b406e465651d87e136975}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x06,
+  0x00, 0x00, 0x00, 0x05,
+  0x00, 0x00, 0x00, 0x00,
+  0x00
+\}
+\end{DoxyCode}
+
+
+Definition at line 69 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!multiple\+\_\+path\+\_\+headers@{multiple\+\_\+path\+\_\+headers}}
+\index{multiple\+\_\+path\+\_\+headers@{multiple\+\_\+path\+\_\+headers}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{multiple\+\_\+path\+\_\+headers}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t multiple\+\_\+path\+\_\+headers[$\,$]}\label{SPDYCodecTest_8cpp_aae21bbfba78aecf82b987539ee7a0523}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+    \{0x80, 0x03, 0x00, 0x01, 0x01, 0x00, 0x01, 0x13, 0x00, 0x00, 0x00, 0x01,
+     0x00, 0x00, 0x00, 0x00, 0x60, 0x00, 0x38, 0x30, 0xe3, 0xc6, 0xa7, 0xc2,
+     0x00, 0xf9, 0x00, 0x06, 0xff, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00,
+     0x05, 0x3a, 0x68, 0x6f, 0x73, 0x74, 0x00, 0x00, 0x00, 0x10, 0x77, 0x77,
+     0x77, 0x2e, 0x66, 0x61, 0x63, 0x65, 0x62, 0x6f, 0x6f, 0x6b, 0x2e, 0x63,
+     0x6f, 0x6d, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x6d, 0x65, 0x74, 0x68, 0x6f,
+     0x64, 0x00, 0x00, 0x00, 0x03, 0x47, 0x45, 0x54, 0x00, 0x00, 0x00, 0x05,
+     0x3a, 0x70, 0x61, 0x74, 0x68, 0x00, 0x00, 0x00, 0x35, 0x2f, 0x65, 0x6e,
+     0x63, 0x72, 0x79, 0x70, 0x74, 0x65, 0x64, 0x72, 0x65, 0x71, 0x75, 0x65,
+     0x73, 0x74, 0x00, 0x2a, 0x23, 0x2f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e,
+     0x2f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2f, 0x73, 0x69, 0x74, 0x65, 0x5f,
+     0x76, 0x61, 0x72, 0x69, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x2e, 0x70, 0x68,
+     0x70, 0x3f, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x73, 0x63, 0x68, 0x65, 0x6d,
+     0x65, 0x00, 0x00, 0x00, 0x05, 0x68, 0x74, 0x74, 0x70, 0x73, 0x00, 0x00,
+     0x00, 0x08, 0x3a, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x00, 0x00,
+     0x00, 0x08, 0x48, 0x54, 0x54, 0x50, 0x2f, 0x31, 0x2e, 0x31, 0x00, 0x00,
+     0x00, 0x06, 0x61, 0x63, 0x63, 0x65, 0x70, 0x74, 0x00, 0x00, 0x00, 0x03,
+     0x2a, 0x2f, 0x2a, 0x00, 0x00, 0x00, 0x0f, 0x61, 0x63, 0x63, 0x65, 0x70,
+     0x74, 0x2d, 0x65, 0x6e, 0x63, 0x6f, 0x64, 0x69, 0x6e, 0x67, 0x00, 0x00,
+     0x00, 0x0d, 0x67, 0x7a, 0x69, 0x70, 0x2c, 0x20, 0x64, 0x65, 0x66, 0x6c,
+     0x61, 0x74, 0x65, 0x00, 0x00, 0x00, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x2d,
+     0x61, 0x67, 0x65, 0x6e, 0x74, 0x00, 0x00, 0x00, 0x11, 0x73, 0x70, 0x64,
+     0x79, 0x6c, 0x61, 0x79, 0x2f, 0x31, 0x2e, 0x33, 0x2e, 0x33, 0x2d, 0x44,
+     0x45, 0x56, 0x00, 0x00, 0x00, 0xff, 0xff, 0x80, 0x03, 0x00, 0x07, 0x00,
+     0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00\}
+\end{DoxyCode}
+
+
+Definition at line 576 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!multi\+Valued\+Header\+Attack@{multi\+Valued\+Header\+Attack}}
+\index{multi\+Valued\+Header\+Attack@{multi\+Valued\+Header\+Attack}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{multi\+Valued\+Header\+Attack}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t multi\+Valued\+Header\+Attack[$\,$]}\label{SPDYCodecTest_8cpp_a2b0756a67089ddf098584d2d11b659cd}
+
+
+Definition at line 1027 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!push\+Stream\+With\+Host\+Missing@{push\+Stream\+With\+Host\+Missing}}
+\index{push\+Stream\+With\+Host\+Missing@{push\+Stream\+With\+Host\+Missing}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{push\+Stream\+With\+Host\+Missing}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t push\+Stream\+With\+Host\+Missing[$\,$]}\label{SPDYCodecTest_8cpp_a7114cf6fc04601d73f31ea2a8230813c}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{  0x80, 0x3, 0x0, 0x1, 0x2, 0x0, 0x0, 0x7c,
+   0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x1,
+   0x0, 0x0, 0x38, 0x30, 0xe3, 0xc6, 0xa7, 0xc2,
+   0x0, 0x62, 0x0, 0x9d, 0xff, 0x0, 0x0, 0x0,
+   0x4, 0x0, 0x0, 0x0, 0x5, 0x3a, 0x70, 0x61,
+   0x74, 0x68, 0x0, 0x0, 0x0, 0x14, 0x68, 0x74,
+   0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x77, 0x77,
+   0x77, 0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f,
+   0x6d, 0x2f, 0x0, 0x0, 0x0, 0x7, 0x3a, 0x73,
+   0x63, 0x68, 0x65, 0x6d, 0x65, 0x0, 0x0, 0x0,
+   0x4, 0x68, 0x74, 0x74, 0x70, 0x0, 0x0, 0x0,
+   0x7, 0x3a, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+   0x0, 0x0, 0x0, 0x3, 0x32, 0x30, 0x30, 0x0,
+   0x0, 0x0, 0x8, 0x3a, 0x76, 0x65, 0x72, 0x73,
+   0x69, 0x6f, 0x6e, 0x0, 0x0, 0x0, 0x8, 0x48,
+   0x54, 0x54, 0x50, 0x2f, 0x31, 0x2e, 0x31, 0x0,
+   0x0, 0x0, 0xff, 0xff
+\}
+\end{DoxyCode}
+A push stream with Host header missing 
+
+Definition at line 724 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!push\+Stream\+With\+Odd\+Id@{push\+Stream\+With\+Odd\+Id}}
+\index{push\+Stream\+With\+Odd\+Id@{push\+Stream\+With\+Odd\+Id}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{push\+Stream\+With\+Odd\+Id}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t push\+Stream\+With\+Odd\+Id[$\,$]}\label{SPDYCodecTest_8cpp_a24f70503a4a54bf2a393338b6ba5cbeb}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x01, 0x02, 0x00, 0x00, 0x91,
+  0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x01,
+  0x00, 0x00, 0x38, 0x30, 0xe3, 0xc6, 0xa7, 0xc2,
+  0x00, 0x77, 0x00, 0x88, 0xff, 0x00, 0x00, 0x00,
+  0x05, 0x00, 0x00, 0x00, 0x05, 0x3a, 0x68, 0x6f,
+  0x73, 0x74, 0x00, 0x00, 0x00, 0x0b, 0x77, 0x77,
+  0x77, 0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f,
+  0x6d, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x6d, 0x65,
+  0x74, 0x68, 0x6f, 0x64, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x05, 0x3a, 0x70, 0x61, 0x74,
+  0x68, 0x00, 0x00, 0x00, 0x14, 0x68, 0x74, 0x74,
+  0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77,
+  0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f, 0x6d,
+  0x2f, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x73, 0x63,
+  0x68, 0x65, 0x6d, 0x65, 0x00, 0x00, 0x00, 0x04,
+  0x68, 0x74, 0x74, 0x70, 0x00, 0x00, 0x00, 0x08,
+  0x3a, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+  0x00, 0x00, 0x00, 0x08, 0x48, 0x54, 0x54, 0x50,
+  0x2f, 0x31, 0x2e, 0x31, 0x00, 0x00, 0x00, 0xff,
+  0xff
+\}
+\end{DoxyCode}
+A push stream with an odd Stream\+ID 
+
+Definition at line 764 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!push\+Stream\+Without\+Assoc@{push\+Stream\+Without\+Assoc}}
+\index{push\+Stream\+Without\+Assoc@{push\+Stream\+Without\+Assoc}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{push\+Stream\+Without\+Assoc}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t push\+Stream\+Without\+Assoc[$\,$]}\label{SPDYCodecTest_8cpp_a165531b605495d0351b390a535ee45ff}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x01, 0x02, 0x00, 0x00, 0x91,
+  0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x38, 0x30, 0xe3, 0xc6, 0xa7, 0xc2,
+  0x00, 0x77, 0x00, 0x88, 0xff, 0x00, 0x00, 0x00,
+  0x05, 0x00, 0x00, 0x00, 0x05, 0x3a, 0x68, 0x6f,
+  0x73, 0x74, 0x00, 0x00, 0x00, 0x0b, 0x77, 0x77,
+  0x77, 0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f,
+  0x6d, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x6d, 0x65,
+  0x74, 0x68, 0x6f, 0x64, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x05, 0x3a, 0x70, 0x61, 0x74,
+  0x68, 0x00, 0x00, 0x00, 0x14, 0x68, 0x74, 0x74,
+  0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77,
+  0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f, 0x6d,
+  0x2f, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x73, 0x63,
+  0x68, 0x65, 0x6d, 0x65, 0x00, 0x00, 0x00, 0x04,
+  0x68, 0x74, 0x74, 0x70, 0x00, 0x00, 0x00, 0x08,
+  0x3a, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+  0x00, 0x00, 0x00, 0x08, 0x48, 0x54, 0x54, 0x50,
+  0x2f, 0x31, 0x2e, 0x31, 0x00, 0x00, 0x00, 0xff,
+  0xff
+\}
+\end{DoxyCode}
+A push stream with assoc\+Stream\+ID = S\+P\+D\+Y\+Codec\+::\+No\+Stream 
+
+Definition at line 850 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!push\+Stream\+Without\+Unidirectional@{push\+Stream\+Without\+Unidirectional}}
+\index{push\+Stream\+Without\+Unidirectional@{push\+Stream\+Without\+Unidirectional}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{push\+Stream\+Without\+Unidirectional}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t push\+Stream\+Without\+Unidirectional[$\,$]}\label{SPDYCodecTest_8cpp_ab4cb6d938e2a873e310c486c0cee91b5}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x91,
+  0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01,
+  0x00, 0x00, 0x38, 0x30, 0xe3, 0xc6, 0xa7, 0xc2,
+  0x00, 0x77, 0x00, 0x88, 0xff, 0x00, 0x00, 0x00,
+  0x05, 0x00, 0x00, 0x00, 0x05, 0x3a, 0x68, 0x6f,
+  0x73, 0x74, 0x00, 0x00, 0x00, 0x0b, 0x77, 0x77,
+  0x77, 0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f,
+  0x6d, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x6d, 0x65,
+  0x74, 0x68, 0x6f, 0x64, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x05, 0x3a, 0x70, 0x61, 0x74,
+  0x68, 0x00, 0x00, 0x00, 0x14, 0x68, 0x74, 0x74,
+  0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77,
+  0x2e, 0x66, 0x6f, 0x6f, 0x2e, 0x63, 0x6f, 0x6d,
+  0x2f, 0x00, 0x00, 0x00, 0x07, 0x3a, 0x73, 0x63,
+  0x68, 0x65, 0x6d, 0x65, 0x00, 0x00, 0x00, 0x04,
+  0x68, 0x74, 0x74, 0x70, 0x00, 0x00, 0x00, 0x08,
+  0x3a, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+  0x00, 0x00, 0x00, 0x08, 0x48, 0x54, 0x54, 0x50,
+  0x2f, 0x31, 0x2e, 0x31, 0x00, 0x00, 0x00, 0xff,
+  0xff
+\}
+\end{DoxyCode}
+A push stream without unidirectional flag 
+
+Definition at line 807 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!short\+Syn\+Reply@{short\+Syn\+Reply}}
+\index{short\+Syn\+Reply@{short\+Syn\+Reply}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{short\+Syn\+Reply}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t short\+Syn\+Reply[$\,$]}\label{SPDYCodecTest_8cpp_aaf11c23b1f3ffc803f34c33681037eda}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x02, 0x00, 0x02, 0x01, 0x00, 0x00, 0x04, 
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+\}
+\end{DoxyCode}
+A syn reply frame with invalid length 
+
+Definition at line 515 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by do\+Short\+Syn\+Reply\+Test().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!short\+Syn\+Stream@{short\+Syn\+Stream}}
+\index{short\+Syn\+Stream@{short\+Syn\+Stream}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{short\+Syn\+Stream}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t short\+Syn\+Stream[$\,$]}\label{SPDYCodecTest_8cpp_a35aaa70cdcea29aa370cd7452c56e994}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x01,
+  0x01, 0x00, 0x00, 0x04,  
+  0x61, 0x62, 0x63, 0x64
+\}
+\end{DoxyCode}
+
+
+Definition at line 32 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!spdy3\+Unknown\+Ctl\+Frame@{spdy3\+Unknown\+Ctl\+Frame}}
+\index{spdy3\+Unknown\+Ctl\+Frame@{spdy3\+Unknown\+Ctl\+Frame}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{spdy3\+Unknown\+Ctl\+Frame}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t spdy3\+Unknown\+Ctl\+Frame[$\,$]}\label{SPDYCodecTest_8cpp_ac8d0fd94110856975f810f2ca4d3b026}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{ 0x80, 0x03, 0x00, 0x0B, 
+  0x00, 0x00, 0x00, 0x02, 
+  0xD4, 0x74 
+\}
+\end{DoxyCode}
+
+
+Definition at line 313 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+\index{S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}!syn\+Stream@{syn\+Stream}}
+\index{syn\+Stream@{syn\+Stream}!S\+P\+D\+Y\+Codec\+Test.\+cpp@{S\+P\+D\+Y\+Codec\+Test.\+cpp}}
+\subsubsection[{syn\+Stream}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t syn\+Stream[$\,$]}\label{SPDYCodecTest_8cpp_af23220e16cbf20c486ace9d0fd258e2f}
+A request from firefox for facebook.\+com 
+
+Definition at line 108 of file S\+P\+D\+Y\+Codec\+Test.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+

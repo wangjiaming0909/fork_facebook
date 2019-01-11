@@ -1,0 +1,388 @@
+\section{proxygen/lib/utils/test/\+Async\+Timeout\+Set\+Test.cpp File Reference}
+\label{AsyncTimeoutSetTest_8cpp}\index{proxygen/lib/utils/test/\+Async\+Timeout\+Set\+Test.\+cpp@{proxygen/lib/utils/test/\+Async\+Timeout\+Set\+Test.\+cpp}}
+{\ttfamily \#include $<$folly/io/async/\+Event\+Base.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/\+Event\+Util.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/test/\+Mock\+Timeout\+Manager.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/test/\+Undelayed\+Destruction.\+h$>$}\\*
+{\ttfamily \#include $<$folly/io/async/test/\+Util.\+h$>$}\\*
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/utils/\+Async\+Timeout\+Set.\+h$>$}\\*
+{\ttfamily \#include $<$boost/container/flat\+\_\+map.\+hpp$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Mock\+Timeout\+Clock}
+\item 
+class {\bf Test\+Timeout}
+\item 
+class {\bf Timeout\+Test}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Stack\+Timeout\+Set} = folly\+::\+Undelayed\+Destruction$<$ {\bf Async\+Timeout\+Set} $>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Timeout\+Test}, Fire\+Once)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Timeout\+Test}, Switch\+Timeout\+Set)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Timeout\+Test}, Cancel\+Timeout)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Timeout\+Test}, Destroy\+Timeout\+Set)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Timeout\+Test}, At\+Most\+EveryN)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}!Stack\+Timeout\+Set@{Stack\+Timeout\+Set}}
+\index{Stack\+Timeout\+Set@{Stack\+Timeout\+Set}!Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}}
+\subsubsection[{Stack\+Timeout\+Set}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Stack\+Timeout\+Set} =  folly\+::\+Undelayed\+Destruction$<${\bf Async\+Timeout\+Set}$>$}\label{AsyncTimeoutSetTest_8cpp_abc4a423f58a2c6bdce0cd7fd25ad681d}
+
+
+Definition at line 27 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Timeout\+Test, Fire\+Once)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Timeout\+Test}}]{, }
+\item[{Fire\+Once}]{}
+\end{DoxyParamCaption}
+)}\label{AsyncTimeoutSetTest_8cpp_a9147219910ef9df96fc21ab6caafa7b4}
+
+
+Definition at line 146 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+References Test\+Timeout\+::timestamps.
+
+
+\begin{DoxyCode}
+146                               \{
+147   StackTimeoutSet ts10(&timeoutManager\_, milliseconds(10), milliseconds(0),
+148                        &timeoutClock\_);
+149   StackTimeoutSet ts5(&timeoutManager\_, milliseconds(5), milliseconds(0),
+150                       &timeoutClock\_);
+151 
+152   \textcolor{keyword}{const} AsyncTimeoutSet::Callback* nullCallback = \textcolor{keyword}{nullptr};
+153   ASSERT\_EQ(ts10.front(), nullCallback);
+154   ASSERT\_EQ(ts5.front(), nullCallback);
+155 
+156   TestTimeout t1;
+157   TestTimeout t2;
+158   TestTimeout t3;
+159 
+160   ts5.scheduleTimeout(&t1); \textcolor{comment}{// fires at time=5}
+161 
+162   \textcolor{comment}{// tick forward to time=2 and schedule another 5ms (@7ms) and a}
+163   \textcolor{comment}{// 10ms (12ms) timeout}
+164 
+165   setClock(milliseconds(2));
+166 
+167   ts5.scheduleTimeout(&t2);
+168   ts10.scheduleTimeout(&t3);
+169 
+170   ASSERT\_EQ(ts10.front(), &t3);
+171   ASSERT\_EQ(ts5.front(), &t1);
+172 
+173   setClock(milliseconds(5));
+174   ASSERT\_EQ(ts5.front(), &t2);
+175 
+176   setClock(milliseconds(7));
+177   ASSERT\_EQ(ts5.front(), nullCallback);
+178 
+179   ASSERT\_EQ(t1.timestamps.size(), 1);
+180   ASSERT\_EQ(t2.timestamps.size(), 1);
+181 
+182   setClock(milliseconds(12));
+183 
+184   ASSERT\_EQ(t3.timestamps.size(), 1);
+185 
+186   ASSERT\_EQ(ts10.front(), nullCallback);
+187 
+188   ASSERT\_EQ(t1.timestamps[0], milliseconds(5));
+189   ASSERT\_EQ(t2.timestamps[0], milliseconds(7));
+190   ASSERT\_EQ(t3.timestamps[0], milliseconds(12));
+191 \}
+\end{DoxyCode}
+\index{Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Timeout\+Test, Switch\+Timeout\+Set)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Timeout\+Test}}]{, }
+\item[{Switch\+Timeout\+Set}]{}
+\end{DoxyParamCaption}
+)}\label{AsyncTimeoutSetTest_8cpp_abc55939b9a948ec00e2988a80417bb2a}
+
+
+Definition at line 197 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+References Test\+Timeout\+::timestamps.
+
+
+\begin{DoxyCode}
+197                                       \{
+198   StackTimeoutSet ts10(&timeoutManager\_, milliseconds(10), milliseconds(0),
+199                        &timeoutClock\_);
+200   StackTimeoutSet ts5(&timeoutManager\_, milliseconds(5), milliseconds(0),
+201                       &timeoutClock\_);
+202 
+203   TestTimeout t1(&ts5, &ts10, &ts5);
+204   TestTimeout t2(&ts10, &ts10, &ts5);
+205   TestTimeout t3(&ts5, &ts5, &ts10, &ts5);
+206 
+207   ts5.scheduleTimeout(&t1);
+208 
+209   loop();
+210 
+211   ASSERT\_EQ(t1.timestamps.size(), 3);
+212   ASSERT\_EQ(t2.timestamps.size(), 3);
+213   ASSERT\_EQ(t3.timestamps.size(), 4);
+214 
+215   ASSERT\_EQ(t1.timestamps[0], milliseconds(5));
+216   ASSERT\_EQ(t1.timestamps[1] - t1.timestamps[0], milliseconds(10));
+217   ASSERT\_EQ(t1.timestamps[2] - t1.timestamps[1], milliseconds(5));
+218 
+219   ASSERT\_EQ(t2.timestamps[0], milliseconds(10));
+220   ASSERT\_EQ(t2.timestamps[1] - t2.timestamps[0], milliseconds(10));
+221   ASSERT\_EQ(t2.timestamps[2] - t2.timestamps[1], milliseconds(5));
+222 
+223   ASSERT\_EQ(t3.timestamps[0], milliseconds(5));
+224   ASSERT\_EQ(t3.timestamps[1] - t3.timestamps[0], milliseconds(5));
+225   ASSERT\_EQ(t3.timestamps[2] - t3.timestamps[1], milliseconds(10));
+226   ASSERT\_EQ(t3.timestamps[3] - t3.timestamps[2], milliseconds(5));
+227   ASSERT\_EQ(timeoutClock\_.millisecondsSinceEpoch(), milliseconds(25));
+228 \}
+\end{DoxyCode}
+\index{Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Timeout\+Test, Cancel\+Timeout)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Timeout\+Test}}]{, }
+\item[{Cancel\+Timeout}]{}
+\end{DoxyParamCaption}
+)}\label{AsyncTimeoutSetTest_8cpp_ae0954cc18d0e37792680c229d003f55b}
+
+
+Definition at line 233 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Async\+Timeout\+Set\+::\+Callback\+::cancel\+Timeout(), Test\+Timeout\+::fn, and Test\+Timeout\+::timestamps.
+
+
+\begin{DoxyCode}
+233                                    \{
+234   StackTimeoutSet ts5(&timeoutManager\_, milliseconds(5), milliseconds(0),
+235                       &timeoutClock\_);
+236   StackTimeoutSet ts10(&timeoutManager\_, milliseconds(10), milliseconds(0),
+237                        &timeoutClock\_);
+238   StackTimeoutSet ts20(&timeoutManager\_, milliseconds(20), milliseconds(0),
+239                        &timeoutClock\_);
+240 
+241   \textcolor{comment}{// Create several timeouts that will all fire in 5ms.}
+242   TestTimeout t5\_1(&ts5);
+243   TestTimeout t5\_2(&ts5);
+244   TestTimeout t5\_3(&ts5);
+245   TestTimeout t5\_4(&ts5);
+246   TestTimeout t5\_5(&ts5);
+247 
+248   \textcolor{comment}{// Also create a few timeouts to fire in 10ms}
+249   TestTimeout t10\_1(&ts10);
+250   TestTimeout t10\_2(&ts10);
+251   TestTimeout t10\_3(&ts10);
+252 
+253   TestTimeout t20\_1(&ts20);
+254   TestTimeout t20\_2(&ts20);
+255 
+256   \textcolor{comment}{// Have t5\_1 cancel t5\_2 and t5\_4.}
+257   \textcolor{comment}{//}
+258   \textcolor{comment}{// Cancelling t5\_2 will test cancelling a timeout that is at the head of the}
+259   \textcolor{comment}{// list and ready to be fired.}
+260   \textcolor{comment}{//}
+261   \textcolor{comment}{// Cancelling t5\_4 will test cancelling a timeout in the middle of the list}
+262   t5\_1.fn = [&] \{
+263     t5\_2.cancelTimeout();
+264     t5\_4.cancelTimeout();
+265   \};
+266 
+267   \textcolor{comment}{// Have t5\_3 cancel t5\_5.}
+268   \textcolor{comment}{// This will test cancelling the last remaining timeout.}
+269   \textcolor{comment}{//}
+270   \textcolor{comment}{// Then have t5\_3 reschedule itself.}
+271   t5\_3.fn = [&] \{
+272     t5\_5.cancelTimeout();
+273     \textcolor{comment}{// Reset our function so we won't continually reschedule ourself}
+274     \textcolor{keyword}{auto} fn = std::move(t5\_3.fn);
+275     ts5.scheduleTimeout(&t5\_3);
+276 
+277     \textcolor{comment}{// Also test cancelling timeouts in another timeset that isn't ready to}
+278     \textcolor{comment}{// fire yet.}
+279     \textcolor{comment}{//}
+280     \textcolor{comment}{// Cancel the middle timeout in ts10.}
+281     t10\_2.cancelTimeout();
+282     \textcolor{comment}{// Cancel both the timeouts in ts20.}
+283     t20\_1.cancelTimeout();
+284     t20\_2.cancelTimeout();
+285   \};
+286 
+287   loop();
+288 
+289   ASSERT\_EQ(t5\_1.timestamps.size(), 1);
+290   ASSERT\_EQ(t5\_1.timestamps[0], milliseconds(5));
+291 
+292   ASSERT\_EQ(t5\_3.timestamps.size(), 2);
+293   ASSERT\_EQ(t5\_3.timestamps[0], milliseconds(5));
+294   ASSERT\_EQ(t5\_3.timestamps[1] - t5\_3.timestamps[0], milliseconds(5));
+295 
+296   ASSERT\_EQ(t10\_1.timestamps.size(), 1);
+297   ASSERT\_EQ(t10\_1.timestamps[0], milliseconds(10));
+298 
+299   ASSERT\_EQ(t10\_3.timestamps.size(), 1);
+300   ASSERT\_EQ(t10\_3.timestamps[0], milliseconds(10));
+301 
+302   \textcolor{comment}{// Cancelled timeouts}
+303   ASSERT\_EQ(t5\_2.timestamps.size(), 0);
+304   ASSERT\_EQ(t5\_4.timestamps.size(), 0);
+305   ASSERT\_EQ(t5\_5.timestamps.size(), 0);
+306   ASSERT\_EQ(t10\_2.timestamps.size(), 0);
+307   ASSERT\_EQ(t20\_1.timestamps.size(), 0);
+308   ASSERT\_EQ(t20\_2.timestamps.size(), 0);
+309   ASSERT\_EQ(timeoutClock\_.millisecondsSinceEpoch(), milliseconds(10));
+310 \}
+\end{DoxyCode}
+\index{Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Timeout\+Test, Destroy\+Timeout\+Set)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Timeout\+Test}}]{, }
+\item[{Destroy\+Timeout\+Set}]{}
+\end{DoxyParamCaption}
+)}\label{AsyncTimeoutSetTest_8cpp_af818a61000f0741d9c8bf90c04e494d7}
+
+
+Definition at line 315 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+
+References Test\+Timeout\+::fn.
+
+
+\begin{DoxyCode}
+315                                        \{
+316   AsyncTimeoutSet::UniquePtr ts5(\textcolor{keyword}{new} AsyncTimeoutSet(
+317         &timeoutManager\_, milliseconds(5), milliseconds(0), &timeoutClock\_));
+318   AsyncTimeoutSet::UniquePtr ts10(\textcolor{keyword}{new} AsyncTimeoutSet(
+319         &timeoutManager\_, milliseconds(10), milliseconds(0), &timeoutClock\_));
+320 
+321   TestTimeout t5\_1(ts5.get());
+322   TestTimeout t5\_2(ts5.get());
+323   TestTimeout t5\_3(ts5.get());
+324 
+325   TestTimeout t10\_1(ts10.get());
+326   TestTimeout t10\_2(ts10.get());
+327 
+328   \textcolor{comment}{// Have t5\_1 destroy ts10}
+329   t5\_1.fn = [&] \{ ts10.reset(); \};
+330   \textcolor{comment}{// Have t5\_2 destroy ts5}
+331   \textcolor{comment}{// Note that this will call destroy() on ts5 inside ts5's timeoutExpired()}
+332   \textcolor{comment}{// method.}
+333   t5\_2.fn = [&] \{ ts5.reset(); \};
+334 
+335   loop();
+336 
+337   ASSERT\_EQ(t5\_1.timestamps.size(), 1);
+338   ASSERT\_EQ(t5\_1.timestamps[0], milliseconds(5));
+339   ASSERT\_EQ(t5\_2.timestamps.size(), 1);
+340   ASSERT\_EQ(t5\_2.timestamps[0], milliseconds(5));
+341 
+342   ASSERT\_EQ(t5\_3.timestamps.size(), 0);
+343   ASSERT\_EQ(t10\_1.timestamps.size(), 0);
+344   ASSERT\_EQ(t10\_2.timestamps.size(), 0);
+345   ASSERT\_EQ(timeoutClock\_.millisecondsSinceEpoch(), milliseconds(5));
+346 \}
+\end{DoxyCode}
+\index{Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Async\+Timeout\+Set\+Test.\+cpp@{Async\+Timeout\+Set\+Test.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Timeout\+Test, At\+Most\+Every\+N)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Timeout\+Test}}]{, }
+\item[{At\+Most\+EveryN}]{}
+\end{DoxyParamCaption}
+)}\label{AsyncTimeoutSetTest_8cpp_a03f3c87a10a20f2ecc40f876d70cadfc}
+
+
+Definition at line 352 of file Async\+Timeout\+Set\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+352                                   \{
+353   \textcolor{comment}{// Create a timeout set with a 25ms interval, to fire no more than once}
+354   \textcolor{comment}{// every 6ms.}
+355   milliseconds interval(25);
+356   milliseconds atMostEveryN(6);
+357   StackTimeoutSet ts25(&timeoutManager\_, interval, atMostEveryN,
+358                        &timeoutClock\_);
+359 
+360   \textcolor{comment}{// Create 60 timeouts to be added to ts25 at 1ms intervals.}
+361   uint32\_t numTimeouts = 60;
+362   std::vector<TestTimeout> timeouts(numTimeouts);
+363 
+364   \textcolor{comment}{// Create a scheduler timeout to add the timeouts 1ms apart.}
+365   \textcolor{comment}{// Note, these will start firing partway through scheduling them}
+366   \textcolor{keywordflow}{for} (uint32\_t index = 0; index < numTimeouts; index++) \{
+367     setClock(milliseconds(index));
+368     timeouts[index].timeoutExpired();
+369     ts25.scheduleTimeout(&timeouts[index]);
+370   \}
+371 
+372   loop();
+373 
+374   \textcolor{comment}{// We scheduled timeouts 1ms apart, when the AsyncTimeoutSet is only allowed}
+375   \textcolor{comment}{// to wake up at most once every 3ms.  It will therefore wake up every 3ms}
+376   \textcolor{comment}{// and fire groups of approximately 3 timeouts at a time.}
+377   \textcolor{comment}{//}
+378   \textcolor{comment}{// This is "approximately 3" since it may get slightly behind and fire 4 in}
+379   \textcolor{comment}{// one interval, etc.  CHECK\_TIMEOUT normally allows a few milliseconds of}
+380   \textcolor{comment}{// tolerance.  We have to add the same into our checking algorithm here.}
+381   \textcolor{keywordflow}{for} (uint32\_t idx = 0; idx < numTimeouts; ++idx) \{
+382     ASSERT\_EQ(timeouts[idx].timestamps.size(), 2);
+383 
+384     \textcolor{keyword}{auto} scheduledTime = timeouts[idx].timestamps[0] + interval;
+385     \textcolor{keyword}{auto} firedTime = timeouts[idx].timestamps[1];
+386     \textcolor{comment}{// Assert that the timeout fired at roughly the right time.}
+387     \textcolor{comment}{// CHECK\_TIMEOUT() normally has a tolerance of 5ms.  Allow an additional}
+388     \textcolor{comment}{// atMostEveryN.}
+389     milliseconds tolerance = atMostEveryN;
+390     ASSERT\_GE(firedTime, scheduledTime);
+391     ASSERT\_LT(firedTime, scheduledTime + tolerance);
+392 
+393     \textcolor{comment}{// Assert that the difference between the previous timeout and now was}
+394     \textcolor{comment}{// either very small (fired in the same event loop), or larger than}
+395     \textcolor{comment}{// atMostEveryN.}
+396     \textcolor{keywordflow}{if} (idx == 0) \{
+397       \textcolor{comment}{// no previous value}
+398       \textcolor{keywordflow}{continue};
+399     \}
+400     \textcolor{keyword}{auto} prev = timeouts[idx - 1].timestamps[1];
+401 
+402     \textcolor{keyword}{auto} delta = firedTime - prev;
+403     \textcolor{keywordflow}{if} (delta >= milliseconds(1)) \{
+404       ASSERT\_GE(delta, atMostEveryN);
+405     \}
+406   \}
+407   ASSERT\_LE(timeoutClock\_.millisecondsSinceEpoch(),
+408             milliseconds(numTimeouts) + interval + atMostEveryN);
+409 \}
+\end{DoxyCode}

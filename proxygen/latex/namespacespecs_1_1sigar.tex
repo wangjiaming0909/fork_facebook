@@ -1,0 +1,37 @@
+\section{specs.\+sigar Namespace Reference}
+\label{namespacespecs_1_1sigar}\index{specs.\+sigar@{specs.\+sigar}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf fbcode\+\_\+builder\+\_\+spec} (builder)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{specs\+::sigar@{specs\+::sigar}!fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}}
+\index{fbcode\+\_\+builder\+\_\+spec@{fbcode\+\_\+builder\+\_\+spec}!specs\+::sigar@{specs\+::sigar}}
+\subsubsection[{fbcode\+\_\+builder\+\_\+spec(builder)}]{\setlength{\rightskip}{0pt plus 5cm}def specs.\+sigar.\+fbcode\+\_\+builder\+\_\+spec (
+\begin{DoxyParamCaption}
+\item[{}]{builder}
+\end{DoxyParamCaption}
+)}\label{namespacespecs_1_1sigar_aceb920f2d07144467af75889235f1b39}
+
+
+Definition at line 11 of file sigar.\+py.
+
+
+\begin{DoxyCode}
+11 \textcolor{keyword}{def }fbcode_builder_spec(builder):
+12     builder.add\_option(
+13         \textcolor{stringliteral}{'hyperic/sigar:autoconf\_options'}, \{\textcolor{stringliteral}{'CFLAGS'} : \textcolor{stringliteral}{'-fgnu89-inline'}\})
+14     \textcolor{keywordflow}{return} \{
+15         \textcolor{stringliteral}{'steps'}: [
+16             builder.github\_project\_workdir(\textcolor{stringliteral}{'hyperic/sigar'}, \textcolor{stringliteral}{'.'}),
+17             builder.step(\textcolor{stringliteral}{'Build and install sigar'}, [
+18                 builder.run(ShellQuoted(\textcolor{stringliteral}{'./autogen.sh'})),
+19                 builder.configure(\textcolor{stringliteral}{'hyperic/sigar'}),
+20                 builder.make\_and\_install(),
+21             ]),
+22         ],
+23     \}
+24 \end{DoxyCode}

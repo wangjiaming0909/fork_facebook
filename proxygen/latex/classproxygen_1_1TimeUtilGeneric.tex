@@ -1,0 +1,130 @@
+\section{proxygen\+:\+:Time\+Util\+Generic$<$ Clock\+Type $>$ Class Template Reference}
+\label{classproxygen_1_1TimeUtilGeneric}\index{proxygen\+::\+Time\+Util\+Generic$<$ Clock\+Type $>$@{proxygen\+::\+Time\+Util\+Generic$<$ Clock\+Type $>$}}
+
+
+{\ttfamily \#include $<$Time.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Time\+Util\+Generic$<$ Clock\+Type $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1TimeUtilGeneric}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf $\sim$\+Time\+Util\+Generic} ()
+\item 
+virtual std\+::chrono\+::time\+\_\+point$<$ Clock\+Type $>$ {\bf now} () const 
+\item 
+virtual uint64\+\_\+t {\bf ms\+Since\+Epoch} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::chrono\+::time\+\_\+point$<$ Clock\+Type $>$ \& {\bf get\+Zero\+Time\+Point} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Clock\+Type = Steady\+Clock$>$\\*
+class proxygen\+::\+Time\+Util\+Generic$<$ Clock\+Type $>$}
+
+Class used to get steady time. We use a separate class to mock it easier. 
+
+Definition at line 170 of file Time.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}!````~Time\+Util\+Generic@{$\sim$\+Time\+Util\+Generic}}
+\index{````~Time\+Util\+Generic@{$\sim$\+Time\+Util\+Generic}!proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}}
+\subsubsection[{$\sim$\+Time\+Util\+Generic()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = Steady\+Clock$>$ virtual {\bf proxygen\+::\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::$\sim${\bf Time\+Util\+Generic} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1TimeUtilGeneric_a146fc8850c97a77d6a2f39a8254650d7}
+
+
+Definition at line 172 of file Time.\+h.
+
+
+\begin{DoxyCode}
+172 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}!get\+Zero\+Time\+Point@{get\+Zero\+Time\+Point}}
+\index{get\+Zero\+Time\+Point@{get\+Zero\+Time\+Point}!proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}}
+\subsubsection[{get\+Zero\+Time\+Point()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = Steady\+Clock$>$ static const std\+::chrono\+::time\+\_\+point$<$Clock\+Type$>$\& {\bf proxygen\+::\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::get\+Zero\+Time\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{classproxygen_1_1TimeUtilGeneric_a4af1dbf0e06700ef1ffa20e617c2949a}
+
+
+Definition at line 178 of file Time.\+h.
+
+
+
+Referenced by proxygen\+::compress\+::\+Sim\+Streaming\+Callback\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+178                                                                   \{
+179     \textcolor{keyword}{const} \textcolor{keyword}{static} std::chrono::time\_point<ClockType> kZeroTimePoint\{\};
+180     \textcolor{keywordflow}{return} kZeroTimePoint;
+181   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}!ms\+Since\+Epoch@{ms\+Since\+Epoch}}
+\index{ms\+Since\+Epoch@{ms\+Since\+Epoch}!proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}}
+\subsubsection[{ms\+Since\+Epoch()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = Steady\+Clock$>$ virtual uint64\+\_\+t {\bf proxygen\+::\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::ms\+Since\+Epoch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1TimeUtilGeneric_aaba70064aab4d308d2c81d6a78e7aee6}
+Please use strongly typed time\+\_\+point. This is for avoiding the copy and garbage collection of time\+\_\+point in Lua. 
+
+Definition at line 187 of file Time.\+h.
+
+
+
+References proxygen\+::milliseconds\+Since\+Epoch().
+
+
+\begin{DoxyCode}
+187                                   \{
+188     \textcolor{keywordflow}{return} millisecondsSinceEpoch().count();
+189   \}
+\end{DoxyCode}
+\index{proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}!now@{now}}
+\index{now@{now}!proxygen\+::\+Time\+Util\+Generic@{proxygen\+::\+Time\+Util\+Generic}}
+\subsubsection[{now() const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Clock\+Type  = Steady\+Clock$>$ virtual std\+::chrono\+::time\+\_\+point$<$Clock\+Type$>$ {\bf proxygen\+::\+Time\+Util\+Generic}$<$ Clock\+Type $>$\+::now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1TimeUtilGeneric_ab6ff63ee7c90a00f3c95983605cdf0f2}
+
+
+Reimplemented in {\bf proxygen\+::\+Mock\+Time\+Util\+Generic$<$ Clock\+Type $>$} \doxyref{}{p.}{classproxygen_1_1MockTimeUtilGeneric_a74bfc54ce08e35f0a9282ba7d3ca5d28}.
+
+
+
+Definition at line 174 of file Time.\+h.
+
+
+
+Referenced by proxygen\+::\+Trace\+Event\+::end(), and proxygen\+::\+Trace\+Event\+::start().
+
+
+\begin{DoxyCode}
+174                                                      \{
+175     \textcolor{keywordflow}{return} getCurrentTime<ClockType>();
+176   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Time.\+h}\end{DoxyCompactItemize}

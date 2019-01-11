@@ -1,0 +1,347 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Settings Class Reference}
+\label{classproxygen_1_1HTTPSettings}\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+
+
+{\ttfamily \#include $<$H\+T\+T\+P\+Settings.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Settings} ()
+\item 
+{\bf H\+T\+T\+P\+Settings} (const std\+::initializer\+\_\+list$<$ {\bf Setting\+Pair} $>$ \&initial\+Settings)
+\item 
+void {\bf set\+Setting} ({\bf Settings\+Id} id, {\bf Settings\+Value} val)
+\item 
+void {\bf unset\+Setting} ({\bf Settings\+Id} id)
+\item 
+const {\bf H\+T\+T\+P\+Setting} $\ast$ {\bf get\+Setting} ({\bf Settings\+Id} id) const 
+\item 
+{\bf Settings\+Value} {\bf get\+Setting} ({\bf Settings\+Id} id, {\bf Settings\+Value} default\+Val) const 
+\item 
+std\+::size\+\_\+t {\bf get\+Num\+Settings} () const 
+\item 
+const std\+::vector$<$ {\bf H\+T\+T\+P\+Setting} $>$ \& {\bf get\+All\+Settings} ()
+\item 
+void {\bf clear\+Settings} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ {\bf H\+T\+T\+P\+Setting} $>$\+::iterator {\bf get\+Setting\+Iter} ({\bf Settings\+Id} id)
+\item 
+std\+::vector$<$ {\bf H\+T\+T\+P\+Setting} $>$\+::const\+\_\+iterator {\bf get\+Setting\+Const\+Iter} ({\bf Settings\+Id} id) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ {\bf H\+T\+T\+P\+Setting} $>$ {\bf settings\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 35 of file H\+T\+T\+P\+Settings.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!H\+T\+T\+P\+Settings@{H\+T\+T\+P\+Settings}}
+\index{H\+T\+T\+P\+Settings@{H\+T\+T\+P\+Settings}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{H\+T\+T\+P\+Settings()}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Settings\+::\+H\+T\+T\+P\+Settings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSettings_aa318848f84d7bff16842b219bb970511}
+
+
+Definition at line 38 of file H\+T\+T\+P\+Settings.\+h.
+
+
+
+References proxygen\+::\+E\+N\+A\+B\+L\+E\+\_\+\+P\+U\+SH, proxygen\+::\+H\+E\+A\+D\+E\+R\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE, and proxygen\+::\+M\+A\+X\+\_\+\+F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE.
+
+
+\begin{DoxyCode}
+39       : settings_(\{\{SettingsId::HEADER_TABLE_SIZE, 4096\},
+40                    \{SettingsId::ENABLE_PUSH, 1\},
+41                    \{SettingsId::MAX_FRAME_SIZE, 16384\}\}) \{
+42   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!H\+T\+T\+P\+Settings@{H\+T\+T\+P\+Settings}}
+\index{H\+T\+T\+P\+Settings@{H\+T\+T\+P\+Settings}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{H\+T\+T\+P\+Settings(const std\+::initializer\+\_\+list$<$ Setting\+Pair $>$ \&initial\+Settings)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Settings\+::\+H\+T\+T\+P\+Settings (
+\begin{DoxyParamCaption}
+\item[{const std\+::initializer\+\_\+list$<$ {\bf Setting\+Pair} $>$ \&}]{initial\+Settings}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classproxygen_1_1HTTPSettings_a2fb224aa688e1626c694c8956c6360b1}
+
+
+Definition at line 43 of file H\+T\+T\+P\+Settings.\+h.
+
+
+\begin{DoxyCode}
+44                                                                \{
+45     settings_.reserve(initialSettings.size());
+46     \textcolor{comment}{// TODO: setSetting involves looping over all settings so the below actually}
+47     \textcolor{comment}{// models as O(n^2) which is pretty bad.  Can't change it outright without}
+48     \textcolor{comment}{// making sure we handle duplicates (same setting id)}
+49     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& setting : initialSettings) \{
+50       setSetting(setting.first, setting.second);
+51     \}
+52   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!clear\+Settings@{clear\+Settings}}
+\index{clear\+Settings@{clear\+Settings}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{clear\+Settings()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Settings\+::clear\+Settings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSettings_ade14aee4c8feb632d9428308fe3a46ef}
+
+
+Definition at line 64 of file H\+T\+T\+P\+Settings.\+h.
+
+
+\begin{DoxyCode}
+64                        \{
+65     settings_.clear();
+66   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!get\+All\+Settings@{get\+All\+Settings}}
+\index{get\+All\+Settings@{get\+All\+Settings}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{get\+All\+Settings()}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::vector$<${\bf H\+T\+T\+P\+Setting}$>$\& proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+All\+Settings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSettings_ad82fd1abca438f98a16314895eacec08}
+
+
+Definition at line 61 of file H\+T\+T\+P\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Settings(), and proxygen\+::\+H\+T\+T\+P2\+Codec\+::generate\+Settings().
+
+
+\begin{DoxyCode}
+61                                                  \{
+62     \textcolor{keywordflow}{return} settings_;
+63   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!get\+Num\+Settings@{get\+Num\+Settings}}
+\index{get\+Num\+Settings@{get\+Num\+Settings}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{get\+Num\+Settings() const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::size\+\_\+t proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+Num\+Settings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSettings_ada8800dd5e80e2946505de8459dba968}
+
+
+Definition at line 58 of file H\+T\+T\+P\+Settings.\+h.
+
+
+
+Referenced by proxygen\+::\+S\+P\+D\+Y\+Codec\+::generate\+Settings(), and T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+58                                    \{
+59     \textcolor{keywordflow}{return} settings_.size();
+60   \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!get\+Setting@{get\+Setting}}
+\index{get\+Setting@{get\+Setting}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{get\+Setting(\+Settings\+Id id) const }]{\setlength{\rightskip}{0pt plus 5cm}const {\bf H\+T\+T\+P\+Setting} $\ast$ proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+Setting (
+\begin{DoxyParamCaption}
+\item[{{\bf Settings\+Id}}]{id}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1HTTPSettings_a920c60367ea7f5e595d29d41677fa73d}
+
+
+Definition at line 33 of file H\+T\+T\+P\+Settings.\+cpp.
+
+
+
+References get\+Setting\+Const\+Iter(), and settings\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P2\+Codec\+::encode\+Headers(), proxygen\+::\+H\+T\+T\+P\+Session\+::get\+Codec\+Send\+Window\+Size(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+Settings(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::\+H\+T\+T\+P2\+Codec(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::max\+Recv\+Frame\+Size(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::max\+Send\+Frame\+Size(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Settings(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Syn\+Stream(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Frame(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Headers\+Check\+Concurrent\+Streams(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::parse\+Push\+Promise(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::peer\+Has\+Websockets(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::supports\+Ex\+Transactions(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::supports\+Push\+Transactions(), T\+E\+S\+T(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+33                                                                \{
+34   \textcolor{keyword}{auto} iter = getSettingConstIter(\textcolor{keywordtype}{id});
+35   \textcolor{keywordflow}{if} (iter != settings_.end()) \{
+36     \textcolor{keywordflow}{return} &(*iter);
+37   \} \textcolor{keywordflow}{else} \{
+38     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+39   \}
+40 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!get\+Setting@{get\+Setting}}
+\index{get\+Setting@{get\+Setting}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{get\+Setting(\+Settings\+Id id, Settings\+Value default\+Val) const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf Settings\+Value} proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+Setting (
+\begin{DoxyParamCaption}
+\item[{{\bf Settings\+Id}}]{id, }
+\item[{{\bf Settings\+Value}}]{default\+Val}
+\end{DoxyParamCaption}
+) const}\label{classproxygen_1_1HTTPSettings_ab7e75662661e7abde2e2654058d9d9b3}
+
+
+Definition at line 42 of file H\+T\+T\+P\+Settings.\+cpp.
+
+
+
+References get\+Setting\+Const\+Iter(), and settings\+\_\+.
+
+
+\begin{DoxyCode}
+43                                                                          \{
+44   \textcolor{keyword}{auto} iter = getSettingConstIter(\textcolor{keywordtype}{id});
+45   \textcolor{keywordflow}{if} (iter != settings_.end()) \{
+46     \textcolor{keywordflow}{return} (*iter).value;
+47   \} \textcolor{keywordflow}{else} \{
+48     \textcolor{keywordflow}{return} defaultValue;
+49   \}
+50 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!get\+Setting\+Const\+Iter@{get\+Setting\+Const\+Iter}}
+\index{get\+Setting\+Const\+Iter@{get\+Setting\+Const\+Iter}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{get\+Setting\+Const\+Iter(\+Settings\+Id id) const }]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf H\+T\+T\+P\+Setting} $>$\+::const\+\_\+iterator proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+Setting\+Const\+Iter (
+\begin{DoxyParamCaption}
+\item[{{\bf Settings\+Id}}]{id}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSettings_a377c1f6256a0ca7577000ceb34f26af9}
+
+
+Definition at line 58 of file H\+T\+T\+P\+Settings.\+cpp.
+
+
+
+References settings\+\_\+.
+
+
+
+Referenced by get\+Setting().
+
+
+\begin{DoxyCode}
+59                          \{
+60   \textcolor{keywordflow}{return} std::find\_if(settings_.begin(),
+61                       settings_.end(),
+62                       [&](HTTPSetting \textcolor{keyword}{const}& s) \{ \textcolor{keywordflow}{return} s.id == id; \});
+63 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!get\+Setting\+Iter@{get\+Setting\+Iter}}
+\index{get\+Setting\+Iter@{get\+Setting\+Iter}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{get\+Setting\+Iter(\+Settings\+Id id)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf H\+T\+T\+P\+Setting} $>$\+::iterator proxygen\+::\+H\+T\+T\+P\+Settings\+::get\+Setting\+Iter (
+\begin{DoxyParamCaption}
+\item[{{\bf Settings\+Id}}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSettings_ac93e16095d5b69ef1c8fd1c386ff7d62}
+
+
+Definition at line 52 of file H\+T\+T\+P\+Settings.\+cpp.
+
+
+
+References settings\+\_\+.
+
+
+
+Referenced by set\+Setting(), and unset\+Setting().
+
+
+\begin{DoxyCode}
+52                                                                          \{
+53   \textcolor{keywordflow}{return} std::find\_if(settings_.begin(),
+54                       settings_.end(),
+55                       [&](HTTPSetting \textcolor{keyword}{const}& s) \{ \textcolor{keywordflow}{return} s.id == id; \});
+56 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!set\+Setting@{set\+Setting}}
+\index{set\+Setting@{set\+Setting}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{set\+Setting(\+Settings\+Id id, Settings\+Value val)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Settings\+::set\+Setting (
+\begin{DoxyParamCaption}
+\item[{{\bf Settings\+Id}}]{id, }
+\item[{{\bf Settings\+Value}}]{val}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPSettings_af5fd0957f06ce721b9749c5f2e7f78f4}
+
+
+Definition at line 16 of file H\+T\+T\+P\+Settings.\+cpp.
+
+
+
+References get\+Setting\+Iter(), and settings\+\_\+.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::enable\+Ex\+Headers\+Settings(), proxygen\+::\+H\+T\+T\+P2\+Codec\+::handle\+Settings(), H\+T\+T\+P\+Downstream\+Test$<$ S\+P\+D\+Y3\+\_\+1\+Codec\+Pair $>$\+::\+H\+T\+T\+P\+Downstream\+Test(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Native\+Protocol\+Upgrade\+Impl(), proxygen\+::\+S\+P\+D\+Y\+Codec\+::on\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Egress\+Settings(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Flow\+Control(), proxygen\+::\+H\+T\+T\+P\+Session\+::set\+Max\+Concurrent\+Incoming\+Streams(), proxygen\+::\+H\+T\+T\+P\+Session\+::setup\+Codec(), T\+E\+S\+T(), and T\+E\+S\+T\+\_\+\+F().
+
+
+\begin{DoxyCode}
+16                                                               \{
+17   \textcolor{keyword}{auto} iter = getSettingIter(\textcolor{keywordtype}{id});
+18   \textcolor{keywordflow}{if} (iter != settings_.end()) \{
+19     (*iter).value = val;
+20   \} \textcolor{keywordflow}{else} \{
+21     settings_.emplace\_back(\textcolor{keywordtype}{id}, val);
+22   \}
+23 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!unset\+Setting@{unset\+Setting}}
+\index{unset\+Setting@{unset\+Setting}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{unset\+Setting(\+Settings\+Id id)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Settings\+::unset\+Setting (
+\begin{DoxyParamCaption}
+\item[{{\bf Settings\+Id}}]{id}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPSettings_a8597b195f8d3aeadd3c39c08e9b724c2}
+
+
+Definition at line 25 of file H\+T\+T\+P\+Settings.\+cpp.
+
+
+
+References get\+Setting\+Iter(), and settings\+\_\+.
+
+
+
+Referenced by T\+E\+S\+T().
+
+
+\begin{DoxyCode}
+25                                              \{
+26   \textcolor{keyword}{auto} iter = getSettingIter(\textcolor{keywordtype}{id});
+27   \textcolor{keywordflow}{if} (iter != settings_.end()) \{
+28     *iter = settings_.back();
+29     settings_.pop\_back();
+30   \}
+31 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}!settings\+\_\+@{settings\+\_\+}}
+\index{settings\+\_\+@{settings\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Settings@{proxygen\+::\+H\+T\+T\+P\+Settings}}
+\subsubsection[{settings\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf H\+T\+T\+P\+Setting}$>$ proxygen\+::\+H\+T\+T\+P\+Settings\+::settings\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSettings_af5d8be24c4dd91fc7caa1d4d23cbfaac}
+
+
+Definition at line 78 of file H\+T\+T\+P\+Settings.\+h.
+
+
+
+Referenced by get\+Setting(), get\+Setting\+Const\+Iter(), get\+Setting\+Iter(), set\+Setting(), and unset\+Setting().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P\+Settings.\+h}\item 
+proxygen/lib/http/codec/{\bf H\+T\+T\+P\+Settings.\+cpp}\end{DoxyCompactItemize}

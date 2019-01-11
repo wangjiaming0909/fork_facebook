@@ -1,0 +1,632 @@
+\section{Mock\+Codec\+Downstream\+Test Class Reference}
+\label{classMockCodecDownstreamTest}\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+Inheritance diagram for Mock\+Codec\+Downstream\+Test\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMockCodecDownstreamTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Mock\+Codec\+Downstream\+Test} ()
+\item 
+void {\bf on\+Write\+Chain} (folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::shared\+\_\+ptr$<$ I\+O\+Buf $>$, Write\+Flags)
+\item 
+{\bf $\sim$\+Mock\+Codec\+Downstream\+Test} () override
+\item 
+void {\bf Set\+Up} () override
+\item 
+{\footnotesize template$<$class T $>$ }\\void {\bf on\+Ingress\+Impl} ({\bf T} f)
+\item 
+void {\bf test\+Goaway} (bool double\+Goaway, bool drop\+Connection)
+\item 
+void {\bf test\+Conn\+Flow\+Control\+Blocked} (bool timeout)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Event\+Base {\bf event\+Base\+\_\+}
+\item 
+Strict\+Mock$<$ {\bf Mock\+H\+T\+T\+P\+Codec} $>$ $\ast$ {\bf codec\+\_\+}
+\item 
+std\+::string {\bf user\+Agent\+\_\+} \{\char`\"{}Mock\+Codec\char`\"{}\}
+\item 
+{\bf H\+T\+T\+P\+Codec\+::\+Callback} $\ast$ {\bf codec\+Callback\+\_\+} \{{\bf nullptr}\}
+\item 
+Nice\+Mock$<$ Mock\+Async\+Transport $>$ $\ast$ {\bf transport\+\_\+}
+\item 
+folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback $\ast$ {\bf transport\+Cb\+\_\+}
+\item 
+folly\+::\+H\+H\+Wheel\+Timer\+::\+Unique\+Ptr {\bf transaction\+Timeouts\+\_\+}
+\item 
+Strict\+Mock$<$ {\bf Mock\+Controller} $>$ {\bf mock\+Controller\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Downstream\+Session} $\ast$ {\bf http\+Session\+\_\+}
+\item 
+{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} {\bf push\+Stream\+I\+D\+\_\+} \{0\}
+\item 
+bool {\bf reusable\+\_\+} \{true\}
+\item 
+bool {\bf transport\+Good\+\_\+} \{true\}
+\item 
+bool {\bf drain\+Pending\+\_\+} \{false\}
+\item 
+bool {\bf double\+Goaway\+\_\+} \{false\}
+\item 
+bool {\bf live\+Goaways\+\_\+} \{false\}
+\item 
+bool {\bf invoke\+Write\+Success\+\_\+} \{false\}
+\item 
+uint32\+\_\+t {\bf write\+Count\+\_\+} \{0\}
+\item 
+std\+::vector$<$ folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$ $>$ {\bf cbs\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 52 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{Mock\+Codec\+Downstream\+Test()}]{\setlength{\rightskip}{0pt plus 5cm}Mock\+Codec\+Downstream\+Test\+::\+Mock\+Codec\+Downstream\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMockCodecDownstreamTest_ac74012b1766a6f78a19eded511049a1c}
+
+
+Definition at line 54 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+
+References k\+Default\+Ingress\+Settings, proxygen\+::local\+Addr, proxygen\+::mock\+Transport\+Info, on\+Write\+Chain(), and proxygen\+::peer\+Addr.
+
+
+\begin{DoxyCode}
+55     : eventBase_(),
+56       codec_(\textcolor{keyword}{new} StrictMock<MockHTTPCodec>()),
+57       transport_(\textcolor{keyword}{new} NiceMock<MockAsyncTransport>()),
+58       transactionTimeouts_(makeInternalTimeoutSet(&eventBase_)) \{
+59 
+60     EXPECT\_CALL(*transport_, writeChain(\_, \_, \_))
+61       .WillRepeatedly(Invoke(\textcolor{keyword}{this}, &MockCodecDownstreamTest::onWriteChain));
+62     EXPECT\_CALL(*transport_, good())
+63       .WillRepeatedly(ReturnPointee(&transportGood_));
+64     EXPECT\_CALL(*transport_, closeNow())
+65       .WillRepeatedly(Assign(&transportGood_, \textcolor{keyword}{false}));
+66     EXPECT\_CALL(*transport_, getEventBase())
+67       .WillRepeatedly(Return(&eventBase_));
+68     EXPECT\_CALL(*transport_, setReadCB(\_))
+69       .WillRepeatedly(SaveArg<0>(&transportCb_));
+70     EXPECT\_CALL(mockController_, getGracefulShutdownTimeout())
+71       .WillRepeatedly(Return(std::chrono::milliseconds(0)));
+72     EXPECT\_CALL(mockController_, attachSession(\_));
+73     EXPECT\_CALL(*codec_, setCallback(\_))
+74       .WillRepeatedly(SaveArg<0>(&codecCallback_));
+75     EXPECT\_CALL(*codec_, supportsParallelRequests())
+76       .WillRepeatedly(Return(\textcolor{keyword}{true}));
+77     EXPECT\_CALL(*codec_, supportsPushTransactions())
+78       .WillRepeatedly(Return(\textcolor{keyword}{true}));
+79     EXPECT\_CALL(*codec_, getTransportDirection())
+80       .WillRepeatedly(Return(TransportDirection::DOWNSTREAM));
+81     EXPECT\_CALL(*codec_, getEgressSettings());
+82     EXPECT\_CALL(*codec_, supportsStreamFlowControl())
+83       .WillRepeatedly(Return(\textcolor{keyword}{true}));
+84     EXPECT\_CALL(*codec_, getProtocol())
+85       .WillRepeatedly(Return(CodecProtocol::SPDY\_3\_1));
+86     EXPECT\_CALL(*codec_, getUserAgent())
+87       .WillRepeatedly(ReturnRef(userAgent_));
+88     EXPECT\_CALL(*codec_, setParserPaused(\_))
+89       .WillRepeatedly(Return());
+90     EXPECT\_CALL(*codec_, supportsSessionFlowControl())
+91       .WillRepeatedly(Return(\textcolor{keyword}{true})); \textcolor{comment}{// simulate spdy 3.1}
+92     EXPECT\_CALL(*codec_, getIngressSettings())
+93       .WillRepeatedly(Return(&kDefaultIngressSettings));
+94     EXPECT\_CALL(*codec_, isReusable())
+95       .WillRepeatedly(ReturnPointee(&reusable_));
+96     EXPECT\_CALL(*codec_, isWaitingToDrain())
+97       .WillRepeatedly(ReturnPointee(&drainPending_));
+98     EXPECT\_CALL(*codec_, generateSettings(\_));
+99     EXPECT\_CALL(*codec_, getDefaultWindowSize())
+100       .WillRepeatedly(Return(65536));
+101     EXPECT\_CALL(*codec_, createStream())
+102       .WillRepeatedly(InvokeWithoutArgs([&] \{
+103             \textcolor{keywordflow}{return} pushStreamID_ += 2;
+104           \}));
+105     EXPECT\_CALL(*codec_, enableDoubleGoawayDrain())
+106       .WillRepeatedly(Invoke([&] \{ doubleGoaway_ = \textcolor{keyword}{true}; \}));
+107     EXPECT\_CALL(*codec_, generateGoaway(\_, \_, \_, \_))
+108         .WillRepeatedly(Invoke([\textcolor{keyword}{this}](IOBufQueue& writeBuf,
+109                                       HTTPCodec::StreamID \textcolor{comment}{/*lastStream*/},
+110                                       ErrorCode,
+111                                       std::shared\_ptr<folly::IOBuf>) \{
+112           \textcolor{keywordflow}{if} (reusable_) \{
+113             reusable_ = \textcolor{keyword}{false};
+114             drainPending_ = doubleGoaway_;
+115           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!drainPending_) \{
+116             \textcolor{keywordflow}{return} 0;
+117           \} \textcolor{keywordflow}{else} \{
+118             drainPending_ = \textcolor{keyword}{false};
+119           \}
+120           \textcolor{keywordflow}{if} (liveGoaways_) \{
+121             writeBuf.append(\textcolor{keywordtype}{string}(\textcolor{stringliteral}{"x"}));
+122           \}
+123           \textcolor{keywordflow}{return} 1;
+124         \}));
+125     EXPECT\_CALL(*codec_, generateRstStream(\_, \_, \_))
+126       .WillRepeatedly(Return(1));
+127     EXPECT\_CALL(*codec_, addPriorityNodes(\_, \_, \_))
+128       .WillOnce(Return(0));
+129     EXPECT\_CALL(*codec_, mapPriorityToDependency(\_))
+130       .WillRepeatedly(Return(0));
+131 
+132     HTTPSession::setDefaultReadBufferLimit(65536);
+133     httpSession_ = \textcolor{keyword}{new} HTTPDownstreamSession(
+134         transactionTimeouts_.get(),
+135         AsyncTransportWrapper::UniquePtr(transport_), localAddr, peerAddr,
+136         &mockController_, std::unique\_ptr<HTTPCodec>(codec_),
+137         mockTransportInfo, \textcolor{keyword}{nullptr});
+138     httpSession_->startNow();
+139     eventBase_.loop();
+140   \}
+\end{DoxyCode}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!````~Mock\+Codec\+Downstream\+Test@{$\sim$\+Mock\+Codec\+Downstream\+Test}}
+\index{````~Mock\+Codec\+Downstream\+Test@{$\sim$\+Mock\+Codec\+Downstream\+Test}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{$\sim$\+Mock\+Codec\+Downstream\+Test() override}]{\setlength{\rightskip}{0pt plus 5cm}Mock\+Codec\+Downstream\+Test\+::$\sim$\+Mock\+Codec\+Downstream\+Test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classMockCodecDownstreamTest_a97a8b30de9dd2835cbe96fc8b6bd0f18}
+
+
+Definition at line 153 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+153                                       \{
+154     AsyncSocketException ex(AsyncSocketException::UNKNOWN, \textcolor{stringliteral}{""});
+155     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& cb : cbs_) \{
+156       cb->writeErr(0, ex);
+157     \}
+158   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!on\+Ingress\+Impl@{on\+Ingress\+Impl}}
+\index{on\+Ingress\+Impl@{on\+Ingress\+Impl}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{on\+Ingress\+Impl(\+T f)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void Mock\+Codec\+Downstream\+Test\+::on\+Ingress\+Impl (
+\begin{DoxyParamCaption}
+\item[{{\bf T}}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMockCodecDownstreamTest_aec80da897f7b391d9a43008b1e511aea}
+
+
+Definition at line 167 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+167                           \{
+168     EXPECT\_CALL(*codec_, onIngress(\_))
+169       .WillOnce(Invoke([&f] (\textcolor{keyword}{const} IOBuf& buf) \{
+170             CHECK\_GT(buf.computeChainDataLength(), 0);
+171             \textcolor{comment}{// The test should be independent of the dummy buffer,}
+172             \textcolor{comment}{// so don't pass it in.}
+173             f();
+174             \textcolor{keywordflow}{return} buf.computeChainDataLength();
+175           \}));
+176 
+177     \textcolor{keywordtype}{void}* buf;
+178     \textcolor{keywordtype}{size\_t} bufSize;
+179     transportCb_->getReadBuffer(&buf, &bufSize);
+180     transportCb_->readDataAvailable(bufSize);
+181   \}
+\end{DoxyCode}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!on\+Write\+Chain@{on\+Write\+Chain}}
+\index{on\+Write\+Chain@{on\+Write\+Chain}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{on\+Write\+Chain(folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$callback, std\+::shared\+\_\+ptr$<$ I\+O\+Buf $>$, Write\+Flags)}]{\setlength{\rightskip}{0pt plus 5cm}void Mock\+Codec\+Downstream\+Test\+::on\+Write\+Chain (
+\begin{DoxyParamCaption}
+\item[{folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback $\ast$}]{callback, }
+\item[{std\+::shared\+\_\+ptr$<$ I\+O\+Buf $>$}]{, }
+\item[{Write\+Flags}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMockCodecDownstreamTest_ac3999eccf7a3d3b67f5e3d3da6f44cc3}
+
+
+Definition at line 142 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+
+Referenced by Mock\+Codec\+Downstream\+Test().
+
+
+\begin{DoxyCode}
+144                                 \{
+145     writeCount_++;
+146     \textcolor{keywordflow}{if} (invokeWriteSuccess_) \{
+147       callback->writeSuccess();
+148     \} \textcolor{keywordflow}{else} \{
+149       cbs_.push\_back(callback);
+150     \}
+151   \}
+\end{DoxyCode}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!Set\+Up@{Set\+Up}}
+\index{Set\+Up@{Set\+Up}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{Set\+Up() override}]{\setlength{\rightskip}{0pt plus 5cm}void Mock\+Codec\+Downstream\+Test\+::\+Set\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classMockCodecDownstreamTest_aab362df8b1ea698974383fba4e600ab6}
+
+
+Definition at line 160 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+\begin{DoxyCode}
+160                         \{
+161     HTTPSession::setDefaultWriteBufferLimit(65536);
+162   \}
+\end{DoxyCode}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!test\+Conn\+Flow\+Control\+Blocked@{test\+Conn\+Flow\+Control\+Blocked}}
+\index{test\+Conn\+Flow\+Control\+Blocked@{test\+Conn\+Flow\+Control\+Blocked}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{test\+Conn\+Flow\+Control\+Blocked(bool timeout)}]{\setlength{\rightskip}{0pt plus 5cm}void Mock\+Codec\+Downstream\+Test\+::test\+Conn\+Flow\+Control\+Blocked (
+\begin{DoxyParamCaption}
+\item[{bool}]{timeout}
+\end{DoxyParamCaption}
+)}\label{classMockCodecDownstreamTest_a2bd41911d00b08ae6ebec3b1198bf8cb}
+
+
+Definition at line 968 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+
+References proxygen\+::\+Exception\+::get\+Proxygen\+Error(), proxygen\+::k\+Error\+Timeout, proxygen\+::http2\+::k\+Initial\+Window, make\+Buf(), proxygen\+::make\+Get\+Request(), and proxygen\+::make\+Response().
+
+
+\begin{DoxyCode}
+968                                                                      \{
+969   \textcolor{comment}{// Let the connection level flow control window fill and then make sure}
+970   \textcolor{comment}{// control frames still can be processed}
+971   InSequence enforceOrder;
+972   NiceMock<MockHTTPHandler> handler1;
+973   NiceMock<MockHTTPHandler> handler2;
+974   \textcolor{keyword}{auto} wantToWrite = spdy::kInitialWindow + 50000;
+975   \textcolor{keyword}{auto} wantToWriteStr = folly::to<string>(wantToWrite);
+976   \textcolor{keyword}{auto} req1 = makeGetRequest();
+977   \textcolor{keyword}{auto} req2 = makeGetRequest();
+978   \textcolor{keyword}{auto} resp1 = makeResponse(200);
+979   resp1->getHeaders().set(HTTP\_HEADER\_CONTENT\_LENGTH, wantToWriteStr);
+980   \textcolor{keyword}{auto} resp2 = makeResponse(200);
+981   resp2->getHeaders().set(HTTP\_HEADER\_CONTENT\_LENGTH, wantToWriteStr);
+982   invokeWriteSuccess_ = \textcolor{keyword}{true};
+983 
+984   EXPECT\_CALL(mockController_, getRequestHandler(\_, \_))
+985     .WillOnce(Return(&handler1));
+986   EXPECT\_CALL(handler1, setTransaction(\_))
+987     .WillOnce(SaveArg<0>(&handler1.txn\_));
+988   EXPECT\_CALL(handler1, onHeadersComplete(\_));
+989   EXPECT\_CALL(*codec_, generateHeader(\_, 1, \_, \_, \_))
+990     .WillOnce(Invoke([] (folly::IOBufQueue& writeBuf,
+991                          HTTPCodec::StreamID,
+992                          \textcolor{keyword}{const} HTTPMessage&,
+993                          \textcolor{keywordtype}{bool},
+994                          HTTPHeaderSize*) \{
+995                        writeBuf.append(\textcolor{stringliteral}{""}, 1);
+996                      \}));
+997   \textcolor{keywordtype}{unsigned} bodyLen = 0;
+998   EXPECT\_CALL(*codec_, generateBody(\_, 1, \_, \_, \textcolor{keyword}{false}))
+999       .WillRepeatedly(Invoke([&](folly::IOBufQueue& \textcolor{comment}{/*writeBuf*/},
+1000                                  HTTPCodec::StreamID,
+1001                                  std::shared\_ptr<folly::IOBuf> chain,
+1002                                  folly::Optional<uint8\_t>,
+1003                                  \textcolor{keywordtype}{bool} \textcolor{comment}{/*eom*/}) \{
+1004         bodyLen += chain->computeChainDataLength();
+1005         \textcolor{keywordflow}{return} 0; \textcolor{comment}{// don't want byte events}
+1006       \}));
+1007 
+1008   codecCallback_->onMessageBegin(1, req1.get());
+1009   codecCallback_->onHeadersComplete(1, std::move(req1));
+1010   codecCallback_->onWindowUpdate(1, wantToWrite); \textcolor{comment}{// ensure the per-stream}
+1011                                                   \textcolor{comment}{// window doesn't block}
+1012   handler1.txn\_->sendHeaders(*resp1);
+1013   handler1.txn\_->sendBody(makeBuf(wantToWrite)); \textcolor{comment}{// conn blocked, stream open}
+1014   handler1.txn\_->sendEOM();
+1015   eventBase_.loop(); \textcolor{comment}{// actually send (most of) the body}
+1016   CHECK\_EQ(bodyLen, spdy::kInitialWindow); \textcolor{comment}{// should have written a full window}
+1017 
+1018   EXPECT\_CALL(mockController_, getRequestHandler(\_, \_))
+1019     .WillOnce(Return(&handler2));
+1020   EXPECT\_CALL(handler2, setTransaction(\_))
+1021     .WillOnce(SaveArg<0>(&handler2.txn\_));
+1022   EXPECT\_CALL(handler2, onHeadersComplete(\_));
+1023   EXPECT\_CALL(*codec_, generateHeader(\_, 3, \_, \_, \_))
+1024     .WillOnce(Invoke([] (folly::IOBufQueue& writeBuf,
+1025                          HTTPCodec::StreamID,
+1026                          \textcolor{keyword}{const} HTTPMessage&,
+1027                          \textcolor{keywordtype}{bool},
+1028                          HTTPHeaderSize*) \{
+1029                        writeBuf.append(\textcolor{stringliteral}{""}, 1);
+1030                      \}));
+1031 
+1032   \textcolor{keyword}{auto} writeCount = writeCount_;
+1033 
+1034   \textcolor{comment}{// Make sure we can send headers of response to a second request}
+1035   codecCallback_->onMessageBegin(3, req2.get());
+1036   codecCallback_->onHeadersComplete(3, std::move(req2));
+1037   handler2.txn\_->sendHeaders(*resp2);
+1038 
+1039   eventBase_.loop();
+1040 
+1041   EXPECT\_EQ(writeCount + 1, writeCount_);
+1042 
+1043   \textcolor{keywordflow}{if} (timeout) \{
+1044     \textcolor{comment}{// don't send a window update, the handlers will get timeouts}
+1045     EXPECT\_CALL(handler1, onError(\_))
+1046       .WillOnce(Invoke([] (\textcolor{keyword}{const} HTTPException& ex) \{
+1047             EXPECT\_EQ(ex.getProxygenError(), kErrorTimeout);
+1048           \}));
+1049     EXPECT\_CALL(handler2, onError(\_))
+1050       .WillOnce(Invoke([] (\textcolor{keyword}{const} HTTPException& ex) \{
+1051             EXPECT\_EQ(ex.getProxygenError(), kErrorTimeout);
+1052           \}));
+1053     EXPECT\_CALL(mockController_, detachSession(\_));
+1054     \textcolor{comment}{// send a window update to refresh the stream level timeout}
+1055     codecCallback_->onWindowUpdate(1, 1);
+1056     \textcolor{comment}{// silly, the timeout set is internal and there's no fd, so hold the}
+1057     \textcolor{comment}{// eventBase open until the timeout can fire}
+1058     eventBase_.runAfterDelay([] \{\}, 500);
+1059 
+1060     transactionTimeouts_->cancelAll();
+1061   \} \textcolor{keywordflow}{else} \{
+1062     \textcolor{comment}{// Give a connection level window update of 10 bytes -- this}
+1063     \textcolor{comment}{// should allow 10 bytes of the txn1 response to be written}
+1064     codecCallback_->onWindowUpdate(0, 10);
+1065     EXPECT\_CALL(*codec_, generateBody(\_, 1, PtrBufHasLen(uint64\_t(10)),
+1066                                       \_, \textcolor{keyword}{false}));
+1067     eventBase_.loop();
+1068 
+1069     \textcolor{comment}{// Just tear everything down now.}
+1070     EXPECT\_CALL(handler1, detachTransaction());
+1071     codecCallback_->onAbort(handler1.txn\_->getID(),
+1072                             ErrorCode::INTERNAL\_ERROR);
+1073     eventBase_.loop();
+1074 
+1075     EXPECT\_CALL(handler2, detachTransaction());
+1076     EXPECT\_CALL(mockController_, detachSession(\_));
+1077     httpSession_->dropConnection();
+1078   \}
+1079 
+1080   eventBase_.loop();
+1081 \}
+\end{DoxyCode}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!test\+Goaway@{test\+Goaway}}
+\index{test\+Goaway@{test\+Goaway}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{test\+Goaway(bool double\+Goaway, bool drop\+Connection)}]{\setlength{\rightskip}{0pt plus 5cm}void Mock\+Codec\+Downstream\+Test\+::test\+Goaway (
+\begin{DoxyParamCaption}
+\item[{bool}]{double\+Goaway, }
+\item[{bool}]{drop\+Connection}
+\end{DoxyParamCaption}
+)}\label{classMockCodecDownstreamTest_a9033beeec81a42859cb7366dcf31c6b8}
+
+
+Definition at line 1275 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+
+References proxygen\+::make\+Get\+Request().
+
+
+\begin{DoxyCode}
+1276                                                               \{
+1277   NiceMock<MockHTTPHandler> handler;
+1278   MockHTTPHandler pushHandler;
+1279 
+1280   liveGoaways_ = \textcolor{keyword}{true};
+1281   \textcolor{keywordflow}{if} (doubleGoaway) \{
+1282     EXPECT\_CALL(mockController_, getRequestHandler(\_, \_))
+1283       .WillOnce(Return(&handler));
+1284     EXPECT\_CALL(handler, setTransaction(\_))
+1285       .WillOnce(SaveArg<0>(&handler.txn\_));
+1286 
+1287     EXPECT\_CALL(handler, onHeadersComplete(\_));
+1288     EXPECT\_CALL(handler, onEOM())
+1289       .WillOnce(Invoke([&] \{
+1290             handler.sendReply();
+1291           \}));
+1292     EXPECT\_CALL(*codec_, generateHeader(\_, 1, \_, \_, \_));
+1293     EXPECT\_CALL(*codec_, generateEOM(\_, 1));
+1294     EXPECT\_CALL(handler, detachTransaction());
+1295 
+1296     \textcolor{comment}{// Turn on double GOAWAY drain}
+1297     codec_->enableDoubleGoawayDrain();
+1298   \}
+1299 
+1300   \textcolor{comment}{// Send a GOAWAY acking uninitiated transactions}
+1301   EXPECT\_FALSE(drainPending_);
+1302   httpSession_->notifyPendingShutdown();
+1303   EXPECT\_EQ(drainPending_, doubleGoaway);
+1304   EXPECT\_FALSE(reusable_);
+1305 
+1306   \textcolor{keywordflow}{if} (doubleGoaway) \{
+1307     \textcolor{comment}{// Should be able to process new requests}
+1308     \textcolor{keyword}{auto} req1 = makeGetRequest();
+1309     codecCallback_->onMessageBegin(1, req1.get());
+1310     codecCallback_->onHeadersComplete(1, std::move(req1));
+1311     codecCallback_->onMessageComplete(1, \textcolor{keyword}{false});
+1312   \}
+1313 
+1314   folly::AsyncTransportWrapper::WriteCallback* cb = \textcolor{keyword}{nullptr};
+1315   EXPECT\_CALL(*transport_, writeChain(\_, \_, \_))
+1316     .WillOnce(Invoke([&] (folly::AsyncTransportWrapper::WriteCallback* callback,
+1317                           \textcolor{keyword}{const} shared\_ptr<IOBuf>,
+1318                           WriteFlags) \{
+1319                        \textcolor{comment}{// don't immediately flush the goaway}
+1320                        cb = callback;
+1321                      \}));
+1322   \textcolor{keywordflow}{if} (doubleGoaway || !dropConnection) \{
+1323     \textcolor{comment}{// single goaway, drop connection doesn't get onIngressEOF}
+1324     EXPECT\_CALL(*codec_, onIngressEOF());
+1325   \}
+1326   eventBase_.loopOnce();
+1327 
+1328   EXPECT\_CALL(mockController_, detachSession(\_));
+1329   \textcolor{keywordflow}{if} (dropConnection) \{
+1330     EXPECT\_CALL(*transport_, closeWithReset())
+1331       .Times(AtLeast(1))
+1332       .WillOnce(DoAll(Assign(&transportGood_, \textcolor{keyword}{false}),
+1333                       Invoke([cb] \{
+1334                           AsyncSocketException ex(
+1335                             AsyncSocketException::UNKNOWN, \textcolor{stringliteral}{""});
+1336                           cb->writeErr(0, ex);
+1337                         \})));
+1338 
+1339     httpSession_->dropConnection();
+1340   \} \textcolor{keywordflow}{else} \{
+1341     EXPECT\_CALL(*codec_, isBusy());
+1342     httpSession_->closeWhenIdle();
+1343     cb->writeSuccess();
+1344   \}
+1345   EXPECT\_FALSE(drainPending_);
+1346   EXPECT\_FALSE(reusable_);
+1347 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!cbs\+\_\+@{cbs\+\_\+}}
+\index{cbs\+\_\+@{cbs\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{cbs\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$folly\+::\+Async\+Transport\+Wrapper\+::\+Write\+Callback$\ast$$>$ Mock\+Codec\+Downstream\+Test\+::cbs\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a601f24c3b3137d27b0a4273d8ac98798}
+
+
+Definition at line 207 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!codec\+\_\+@{codec\+\_\+}}
+\index{codec\+\_\+@{codec\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{codec\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Strict\+Mock$<${\bf Mock\+H\+T\+T\+P\+Codec}$>$$\ast$ Mock\+Codec\+Downstream\+Test\+::codec\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_afa86bb8ff86f67c1e2436ab674d1a64e}
+
+
+Definition at line 191 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!codec\+Callback\+\_\+@{codec\+Callback\+\_\+}}
+\index{codec\+Callback\+\_\+@{codec\+Callback\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{codec\+Callback\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+::\+Callback}$\ast$ Mock\+Codec\+Downstream\+Test\+::codec\+Callback\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a9141176d7356c8ca873dda52f0887f28}
+
+
+Definition at line 193 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!double\+Goaway\+\_\+@{double\+Goaway\+\_\+}}
+\index{double\+Goaway\+\_\+@{double\+Goaway\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{double\+Goaway\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Mock\+Codec\+Downstream\+Test\+::double\+Goaway\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a02022963516b09714afe497a3aaa7dbf}
+
+
+Definition at line 203 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!drain\+Pending\+\_\+@{drain\+Pending\+\_\+}}
+\index{drain\+Pending\+\_\+@{drain\+Pending\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{drain\+Pending\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Mock\+Codec\+Downstream\+Test\+::drain\+Pending\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a79f0df328b8d256439981c1fa50cc810}
+
+
+Definition at line 202 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!event\+Base\+\_\+@{event\+Base\+\_\+}}
+\index{event\+Base\+\_\+@{event\+Base\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{event\+Base\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Event\+Base Mock\+Codec\+Downstream\+Test\+::event\+Base\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a43f82be01f23d14fff8fcbceb7e073f4}
+
+
+Definition at line 189 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!http\+Session\+\_\+@{http\+Session\+\_\+}}
+\index{http\+Session\+\_\+@{http\+Session\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{http\+Session\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Downstream\+Session}$\ast$ Mock\+Codec\+Downstream\+Test\+::http\+Session\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a61556f194b4d4b078fcd3e6d375b1d8f}
+
+
+Definition at line 198 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!invoke\+Write\+Success\+\_\+@{invoke\+Write\+Success\+\_\+}}
+\index{invoke\+Write\+Success\+\_\+@{invoke\+Write\+Success\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{invoke\+Write\+Success\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Mock\+Codec\+Downstream\+Test\+::invoke\+Write\+Success\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_ad41a3616bbfef34903c2293a55d64ba8}
+
+
+Definition at line 205 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!live\+Goaways\+\_\+@{live\+Goaways\+\_\+}}
+\index{live\+Goaways\+\_\+@{live\+Goaways\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{live\+Goaways\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Mock\+Codec\+Downstream\+Test\+::live\+Goaways\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_acd0838883688ce6fee9fef2954c095fe}
+
+
+Definition at line 204 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!mock\+Controller\+\_\+@{mock\+Controller\+\_\+}}
+\index{mock\+Controller\+\_\+@{mock\+Controller\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{mock\+Controller\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Strict\+Mock$<${\bf Mock\+Controller}$>$ Mock\+Codec\+Downstream\+Test\+::mock\+Controller\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a21b0e38f6eb4c3482726d475ff9f945e}
+
+
+Definition at line 197 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!push\+Stream\+I\+D\+\_\+@{push\+Stream\+I\+D\+\_\+}}
+\index{push\+Stream\+I\+D\+\_\+@{push\+Stream\+I\+D\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{push\+Stream\+I\+D\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Codec\+::\+Stream\+ID} Mock\+Codec\+Downstream\+Test\+::push\+Stream\+I\+D\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_ad3f47cc7672fffb6a7ec2ef8346ce334}
+
+
+Definition at line 199 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!reusable\+\_\+@{reusable\+\_\+}}
+\index{reusable\+\_\+@{reusable\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{reusable\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Mock\+Codec\+Downstream\+Test\+::reusable\+\_\+ \{true\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_accadb714b9d9945313cbe772afff25d2}
+
+
+Definition at line 200 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!transaction\+Timeouts\+\_\+@{transaction\+Timeouts\+\_\+}}
+\index{transaction\+Timeouts\+\_\+@{transaction\+Timeouts\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{transaction\+Timeouts\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+H\+H\+Wheel\+Timer\+::\+Unique\+Ptr Mock\+Codec\+Downstream\+Test\+::transaction\+Timeouts\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a66a1896a50a01cb23c1e23ade3685202}
+
+
+Definition at line 196 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!transport\+\_\+@{transport\+\_\+}}
+\index{transport\+\_\+@{transport\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{transport\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}Nice\+Mock$<$Mock\+Async\+Transport$>$$\ast$ Mock\+Codec\+Downstream\+Test\+::transport\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a445a79baa54f93a437088459c47f0eb9}
+
+
+Definition at line 194 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!transport\+Cb\+\_\+@{transport\+Cb\+\_\+}}
+\index{transport\+Cb\+\_\+@{transport\+Cb\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{transport\+Cb\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Async\+Transport\+Wrapper\+::\+Read\+Callback$\ast$ Mock\+Codec\+Downstream\+Test\+::transport\+Cb\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a69a172e29cd5dbe1bf16a3ef7dc8a247}
+
+
+Definition at line 195 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!transport\+Good\+\_\+@{transport\+Good\+\_\+}}
+\index{transport\+Good\+\_\+@{transport\+Good\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{transport\+Good\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}bool Mock\+Codec\+Downstream\+Test\+::transport\+Good\+\_\+ \{true\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a2f512472fa1f3d227c915f4d38f001f5}
+
+
+Definition at line 201 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!user\+Agent\+\_\+@{user\+Agent\+\_\+}}
+\index{user\+Agent\+\_\+@{user\+Agent\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{user\+Agent\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Mock\+Codec\+Downstream\+Test\+::user\+Agent\+\_\+ \{\char`\"{}Mock\+Codec\char`\"{}\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a39a7c662122701a53ba0e01bfd8dbeb9}
+
+
+Definition at line 192 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+\index{Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}!write\+Count\+\_\+@{write\+Count\+\_\+}}
+\index{write\+Count\+\_\+@{write\+Count\+\_\+}!Mock\+Codec\+Downstream\+Test@{Mock\+Codec\+Downstream\+Test}}
+\subsubsection[{write\+Count\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Mock\+Codec\+Downstream\+Test\+::write\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [protected]}}\label{classMockCodecDownstreamTest_a8e44e6698e61f758dc07dfe9f03f20d7}
+
+
+Definition at line 206 of file Mock\+Codec\+Downstream\+Test.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/test/{\bf Mock\+Codec\+Downstream\+Test.\+cpp}\end{DoxyCompactItemize}

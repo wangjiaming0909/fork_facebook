@@ -1,0 +1,50 @@
+\section{proxygen\+:\+:Ascii\+Case\+Underscore\+Insensitive Struct Reference}
+\label{structproxygen_1_1AsciiCaseUnderscoreInsensitive}\index{proxygen\+::\+Ascii\+Case\+Underscore\+Insensitive@{proxygen\+::\+Ascii\+Case\+Underscore\+Insensitive}}
+
+
+{\ttfamily \#include $<$Util\+Inl.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf operator()} (char lhs, char rhs) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 25 of file Util\+Inl.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Ascii\+Case\+Underscore\+Insensitive@{proxygen\+::\+Ascii\+Case\+Underscore\+Insensitive}!operator()@{operator()}}
+\index{operator()@{operator()}!proxygen\+::\+Ascii\+Case\+Underscore\+Insensitive@{proxygen\+::\+Ascii\+Case\+Underscore\+Insensitive}}
+\subsubsection[{operator()(char lhs, char rhs) const }]{\setlength{\rightskip}{0pt plus 5cm}bool proxygen\+::\+Ascii\+Case\+Underscore\+Insensitive\+::operator() (
+\begin{DoxyParamCaption}
+\item[{char}]{lhs, }
+\item[{char}]{rhs}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1AsciiCaseUnderscoreInsensitive_a256cd3e8583a3c7a867355134c38e478}
+
+
+Definition at line 26 of file Util\+Inl.\+h.
+
+
+\begin{DoxyCode}
+26                                             \{
+27     \textcolor{keywordflow}{if} (lhs == \textcolor{charliteral}{'\_'}) \{
+28       lhs = \textcolor{charliteral}{'-'};
+29     \}
+30     \textcolor{keywordflow}{if} (rhs == \textcolor{charliteral}{'\_'}) \{
+31       rhs = \textcolor{charliteral}{'-'};
+32     \}
+33     \textcolor{keywordflow}{return} folly::AsciiCaseInsensitive()(lhs, rhs);
+34   \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/utils/{\bf Util\+Inl.\+h}\end{DoxyCompactItemize}

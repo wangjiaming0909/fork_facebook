@@ -1,0 +1,122 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Transaction\+:\+:Priority\+Sample\+:\+:Weighted\+Accumulator Struct Reference}
+\label{structproxygen_1_1HTTPTransaction_1_1PrioritySample_1_1WeightedAccumulator}\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf accumulate} (uint64\+\_\+t weighted, uint64\+\_\+t total)
+\item 
+void {\bf accumulate\+Weighted} (uint64\+\_\+t weighted)
+\item 
+void {\bf accumulate\+Total} (uint64\+\_\+t total)
+\item 
+double {\bf get\+Weighted\+Average} () const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t {\bf weighted\+\_\+} \{0\}
+\item 
+uint64\+\_\+t {\bf total\+\_\+} \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 1399 of file H\+T\+T\+P\+Transaction.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}!accumulate@{accumulate}}
+\index{accumulate@{accumulate}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}}
+\subsubsection[{accumulate(uint64\+\_\+t weighted, uint64\+\_\+t total)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator\+::accumulate (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{weighted, }
+\item[{uint64\+\_\+t}]{total}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTPTransaction_1_1PrioritySample_1_1WeightedAccumulator_a0e48d5522d53c88ec33ad9cc4845e264}
+
+
+Definition at line 1400 of file H\+T\+T\+P\+Transaction.\+cpp.
+
+
+\begin{DoxyCode}
+1400                                                        \{
+1401       weighted_ += weighted;
+1402       total_ += total;
+1403     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}!accumulate\+Total@{accumulate\+Total}}
+\index{accumulate\+Total@{accumulate\+Total}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}}
+\subsubsection[{accumulate\+Total(uint64\+\_\+t total)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator\+::accumulate\+Total (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{total}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTPTransaction_1_1PrioritySample_1_1WeightedAccumulator_a3c9724eba927afeff034fc65eb403070}
+
+
+Definition at line 1409 of file H\+T\+T\+P\+Transaction.\+cpp.
+
+
+\begin{DoxyCode}
+1409                                          \{
+1410       total_ += total;
+1411     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}!accumulate\+Weighted@{accumulate\+Weighted}}
+\index{accumulate\+Weighted@{accumulate\+Weighted}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}}
+\subsubsection[{accumulate\+Weighted(uint64\+\_\+t weighted)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator\+::accumulate\+Weighted (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{weighted}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTPTransaction_1_1PrioritySample_1_1WeightedAccumulator_a9a19b9f0e020d8b9188609cfd1e06ed0}
+
+
+Definition at line 1405 of file H\+T\+T\+P\+Transaction.\+cpp.
+
+
+\begin{DoxyCode}
+1405                                                \{
+1406       weighted_ += weighted;
+1407     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}!get\+Weighted\+Average@{get\+Weighted\+Average}}
+\index{get\+Weighted\+Average@{get\+Weighted\+Average}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}}
+\subsubsection[{get\+Weighted\+Average() const }]{\setlength{\rightskip}{0pt plus 5cm}double proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator\+::get\+Weighted\+Average (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structproxygen_1_1HTTPTransaction_1_1PrioritySample_1_1WeightedAccumulator_a7b14a6af99901e883402a0a2c9b1b6b2}
+
+
+Definition at line 1413 of file H\+T\+T\+P\+Transaction.\+cpp.
+
+
+\begin{DoxyCode}
+1413                                       \{
+1414       \textcolor{keywordflow}{return} total_ ? (double)weighted_ / (\textcolor{keywordtype}{double})total_ : 0;
+1415     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}!total\+\_\+@{total\+\_\+}}
+\index{total\+\_\+@{total\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}}
+\subsubsection[{total\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator\+::total\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{structproxygen_1_1HTTPTransaction_1_1PrioritySample_1_1WeightedAccumulator_a5fd1e28a743f218a789fb0d94dcc8a43}
+
+
+Definition at line 1418 of file H\+T\+T\+P\+Transaction.\+cpp.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}!weighted\+\_\+@{weighted\+\_\+}}
+\index{weighted\+\_\+@{weighted\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator@{proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator}}
+\subsubsection[{weighted\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+H\+T\+T\+P\+Transaction\+::\+Priority\+Sample\+::\+Weighted\+Accumulator\+::weighted\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}\label{structproxygen_1_1HTTPTransaction_1_1PrioritySample_1_1WeightedAccumulator_a1b5fd6793bc422153cadeeebe5c95bdd}
+
+
+Definition at line 1417 of file H\+T\+T\+P\+Transaction.\+cpp.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Transaction.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,38 @@
+var classproxygen_1_1HTTPParallelCodec =
+[
+    [ "ClosingState", "classproxygen_1_1HTTPParallelCodec.html#ae04875cba8aa230866e6b31fda912788", [
+      [ "OPEN", "classproxygen_1_1HTTPParallelCodec.html#ae04875cba8aa230866e6b31fda912788a0bcae6624a04d605ca6661d993761fb5", null ],
+      [ "OPEN_WITH_GRACEFUL_DRAIN_ENABLED", "classproxygen_1_1HTTPParallelCodec.html#ae04875cba8aa230866e6b31fda912788ad2ba42ddf335e2c3898b266a3bd2d07d", null ],
+      [ "FIRST_GOAWAY_SENT", "classproxygen_1_1HTTPParallelCodec.html#ae04875cba8aa230866e6b31fda912788a90534ad327f2f9f87877af0feb44f20a", null ],
+      [ "CLOSING", "classproxygen_1_1HTTPParallelCodec.html#ae04875cba8aa230866e6b31fda912788a05dd9998cb41e6906d970b3adbe4ef31", null ],
+      [ "CLOSED", "classproxygen_1_1HTTPParallelCodec.html#ae04875cba8aa230866e6b31fda912788a9aa06c99581844ca981b01e53a5774ad", null ]
+    ] ],
+    [ "HTTPParallelCodec", "classproxygen_1_1HTTPParallelCodec.html#ad264bac19cb28b870b7df13cfe26dc2c", null ],
+    [ "closeOnEgressComplete", "classproxygen_1_1HTTPParallelCodec.html#ac357627d351750a2b83554e9c54ee897", null ],
+    [ "createStream", "classproxygen_1_1HTTPParallelCodec.html#afb26e85cb535c7aa21e4e94573e1ae62", null ],
+    [ "deliverCallbackIfAllowed", "classproxygen_1_1HTTPParallelCodec.html#ad7a452e4351970436e30f0d98805905a", null ],
+    [ "enableDoubleGoawayDrain", "classproxygen_1_1HTTPParallelCodec.html#aadc403f7b08038c6248a3347dc4b9889", null ],
+    [ "getLastIncomingStreamID", "classproxygen_1_1HTTPParallelCodec.html#a8edc01e450e7b804de510a014daa6774", null ],
+    [ "getTransportDirection", "classproxygen_1_1HTTPParallelCodec.html#aff679d9863268dfbed7410f363d35771", null ],
+    [ "isBusy", "classproxygen_1_1HTTPParallelCodec.html#a56ed3b0817a9cdb1de2776a21dcbbb43", null ],
+    [ "isInitiatedStream", "classproxygen_1_1HTTPParallelCodec.html#a0422944b64e6633a99c0d8857f940a60", null ],
+    [ "isReusable", "classproxygen_1_1HTTPParallelCodec.html#a65874f05fa9f3389a80c7410bd1d60e3", null ],
+    [ "isStreamIngressEgressAllowed", "classproxygen_1_1HTTPParallelCodec.html#a7c41c9f6e0dfae9dde2200b5bc69a7e8", null ],
+    [ "isWaitingToDrain", "classproxygen_1_1HTTPParallelCodec.html#a0da986ba36698070bfc66d224390d436", null ],
+    [ "onIngressEOF", "classproxygen_1_1HTTPParallelCodec.html#a32f80b9f4fb9d18e690140c3566bf6a4", null ],
+    [ "onIngressUpgradeMessage", "classproxygen_1_1HTTPParallelCodec.html#acc847966e76df6ab0ddb00672a9ed26e", null ],
+    [ "setCallback", "classproxygen_1_1HTTPParallelCodec.html#a6c0d6ae3bec7b8a748f2033aec3ba5bf", null ],
+    [ "setNextEgressStreamId", "classproxygen_1_1HTTPParallelCodec.html#a9efcafdf243b9cd79a361395d385640d", null ],
+    [ "setParserPaused", "classproxygen_1_1HTTPParallelCodec.html#a59e47166849bc57ced9c657092ff370f", null ],
+    [ "supportsParallelRequests", "classproxygen_1_1HTTPParallelCodec.html#a62894a2b9453882cf8a79715edbf1635", null ],
+    [ "supportsSessionFlowControl", "classproxygen_1_1HTTPParallelCodec.html#a2c2e5591e9331db3a9d740f64ab62b1d", null ],
+    [ "supportsStreamFlowControl", "classproxygen_1_1HTTPParallelCodec.html#a2f8dd0d3baba658c5abc81f2258bdc13", null ],
+    [ "callback_", "classproxygen_1_1HTTPParallelCodec.html#a133cbf0746ef85e8de0ddfcdc0b50cea", null ],
+    [ "egressGoawayAck_", "classproxygen_1_1HTTPParallelCodec.html#ab2900045cb5c5b642de05a8b7dce1d7d", null ],
+    [ "goawayErrorMessage_", "classproxygen_1_1HTTPParallelCodec.html#aed7daf649a236b9ee61fedb8342c6504", null ],
+    [ "ingressGoawayAck_", "classproxygen_1_1HTTPParallelCodec.html#a38d991451a33940bd26561a635b43672", null ],
+    [ "lastStreamID_", "classproxygen_1_1HTTPParallelCodec.html#a8781ab6ac873aeaa1a74e3319e60862d", null ],
+    [ "nextEgressStreamID_", "classproxygen_1_1HTTPParallelCodec.html#aaaa16ce728288f7aa5ed44b540338b3d", null ],
+    [ "sessionClosing_", "classproxygen_1_1HTTPParallelCodec.html#a2e1ded2a66e7cb50440fca9920db0f02", null ],
+    [ "transportDirection_", "classproxygen_1_1HTTPParallelCodec.html#a40a35f36bab5409ccc1c62b8221c4fe6", null ]
+];

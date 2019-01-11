@@ -1,0 +1,146 @@
+\section{Proxy\+Service\+:\+:Session\+Wrapper Class Reference}
+\label{classProxyService_1_1SessionWrapper}\index{Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}}
+
+
+{\ttfamily \#include $<$Session\+Wrapper.\+h$>$}
+
+Inheritance diagram for Proxy\+Service\+:\+:Session\+Wrapper\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classProxyService_1_1SessionWrapper}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Session\+Wrapper} ({\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} $\ast$session)
+\item 
+{\bf $\sim$\+Session\+Wrapper} () override
+\item 
+{\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} $\ast$ {\bf operator-\/$>$} () const 
+\item 
+void {\bf on\+Destroy} (const {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \&) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} $\ast$ {\bf session\+\_\+} \{{\bf nullptr}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file Session\+Wrapper.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}!Session\+Wrapper@{Session\+Wrapper}}
+\index{Session\+Wrapper@{Session\+Wrapper}!Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}}
+\subsubsection[{Session\+Wrapper(proxygen\+::\+H\+T\+T\+P\+Upstream\+Session $\ast$session)}]{\setlength{\rightskip}{0pt plus 5cm}Proxy\+Service\+::\+Session\+Wrapper\+::\+Session\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{{\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session} $\ast$}]{session}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\label{classProxyService_1_1SessionWrapper_ae654d27916b186ba637846a89edabd28}
+
+
+Definition at line 20 of file Session\+Wrapper.\+h.
+
+
+
+References session\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::set\+Info\+Callback().
+
+
+\begin{DoxyCode}
+21     : session_(session) \{
+22     session_->setInfoCallback(\textcolor{keyword}{this});
+23   \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}!````~Session\+Wrapper@{$\sim$\+Session\+Wrapper}}
+\index{````~Session\+Wrapper@{$\sim$\+Session\+Wrapper}!Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}}
+\subsubsection[{$\sim$\+Session\+Wrapper() override}]{\setlength{\rightskip}{0pt plus 5cm}Proxy\+Service\+::\+Session\+Wrapper\+::$\sim$\+Session\+Wrapper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classProxyService_1_1SessionWrapper_aa7739ca36504f034652eacfa3ef133db}
+
+
+Definition at line 25 of file Session\+Wrapper.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Upstream\+Session\+::drain(), and session\+\_\+.
+
+
+\begin{DoxyCode}
+25                              \{
+26     \textcolor{keywordflow}{if} (session_) \{
+27       session_->drain();
+28     \}
+29   \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}!on\+Destroy@{on\+Destroy}}
+\index{on\+Destroy@{on\+Destroy}!Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}}
+\subsubsection[{on\+Destroy(const proxygen\+::\+H\+T\+T\+P\+Session\+Base \&) override}]{\setlength{\rightskip}{0pt plus 5cm}void Proxy\+Service\+::\+Session\+Wrapper\+::on\+Destroy (
+\begin{DoxyParamCaption}
+\item[{const {\bf proxygen\+::\+H\+T\+T\+P\+Session\+Base} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}\label{classProxyService_1_1SessionWrapper_ac89eb4add50157194ce64e0fee0dfa88}
+
+
+Definition at line 36 of file Session\+Wrapper.\+h.
+
+
+
+References session\+\_\+.
+
+
+\begin{DoxyCode}
+36                                                           \{
+37     session_ = \textcolor{keyword}{nullptr};
+38   \}
+\end{DoxyCode}
+\index{Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}}
+\subsubsection[{operator-\/$>$() const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}$\ast$ Proxy\+Service\+::\+Session\+Wrapper\+::operator-\/$>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classProxyService_1_1SessionWrapper_a82e218201d1988aac6b3eed43278b479}
+
+
+Definition at line 31 of file Session\+Wrapper.\+h.
+
+
+
+References session\+\_\+.
+
+
+\begin{DoxyCode}
+31                                                   \{
+32     \textcolor{keywordflow}{return} session_;
+33   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}!session\+\_\+@{session\+\_\+}}
+\index{session\+\_\+@{session\+\_\+}!Proxy\+Service\+::\+Session\+Wrapper@{Proxy\+Service\+::\+Session\+Wrapper}}
+\subsubsection[{session\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf proxygen\+::\+H\+T\+T\+P\+Upstream\+Session}$\ast$ Proxy\+Service\+::\+Session\+Wrapper\+::session\+\_\+ \{{\bf nullptr}\}\hspace{0.3cm}{\ttfamily [private]}}\label{classProxyService_1_1SessionWrapper_ae33648bef3b893c760ff3b97be233847}
+
+
+Definition at line 17 of file Session\+Wrapper.\+h.
+
+
+
+Referenced by on\+Destroy(), operator-\/$>$(), Session\+Wrapper(), and $\sim$\+Session\+Wrapper().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/httpserver/samples/proxy/{\bf Session\+Wrapper.\+h}\end{DoxyCompactItemize}

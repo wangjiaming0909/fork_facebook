@@ -1,0 +1,39 @@
+\section{proxygen/lib/http/\+R\+F\+C2616.h File Reference}
+\label{RFC2616_8h}\index{proxygen/lib/http/\+R\+F\+C2616.\+h@{proxygen/lib/http/\+R\+F\+C2616.\+h}}
+{\ttfamily \#include $<$folly/\+Optional.\+h$>$}\\*
+{\ttfamily \#include $<$folly/\+Range.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Method.\+h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ {\bf proxygen}
+\item 
+ {\bf proxygen\+::\+R\+F\+C2616}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf proxygen\+::\+R\+F\+C2616\+::\+Token\+Q\+Pair} = std\+::pair$<$ folly\+::\+String\+Piece, double $>$
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf proxygen\+::\+R\+F\+C2616\+::\+Body\+Allowed} \{ {\bf proxygen\+::\+R\+F\+C2616\+::\+Body\+Allowed\+::\+D\+E\+F\+I\+N\+ED}, 
+{\bf proxygen\+::\+R\+F\+C2616\+::\+Body\+Allowed\+::\+N\+O\+T\+\_\+\+D\+E\+F\+I\+N\+ED}, 
+{\bf proxygen\+::\+R\+F\+C2616\+::\+Body\+Allowed\+::\+N\+O\+T\+\_\+\+A\+L\+L\+O\+W\+ED}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Body\+Allowed {\bf proxygen\+::\+R\+F\+C2616\+::is\+Request\+Body\+Allowed} (folly\+::\+Optional$<$ {\bf H\+T\+T\+P\+Method} $>$ method)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::response\+Body\+Must\+Be\+Empty} (unsigned status)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::body\+Implied} (const H\+T\+T\+P\+Headers \&headers)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::parse\+Qvalues} (folly\+::\+String\+Piece value, std\+::vector$<$ Token\+Q\+Pair $>$ \&output)
+\item 
+bool {\bf proxygen\+::\+R\+F\+C2616\+::parse\+Byte\+Range\+Spec} (folly\+::\+String\+Piece value, unsigned long \&out\+First\+Byte, unsigned long \&out\+Last\+Byte, unsigned long \&out\+Instance\+Length)
+\end{DoxyCompactItemize}

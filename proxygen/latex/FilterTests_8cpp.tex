@@ -1,0 +1,366 @@
+\section{proxygen/lib/http/codec/test/\+Filter\+Tests.cpp File Reference}
+\label{FilterTests_8cpp}\index{proxygen/lib/http/codec/test/\+Filter\+Tests.\+cpp@{proxygen/lib/http/codec/test/\+Filter\+Tests.\+cpp}}
+{\ttfamily \#include $<$folly/portability/\+G\+Test.\+h$>$}\\*
+{\ttfamily \#include $<$limits$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Header\+Size.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/\+H\+T\+T\+P\+Message.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+Flow\+Control\+Filter.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/\+H\+T\+T\+P\+Checks.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Mock\+H\+T\+T\+P\+Codec.\+h$>$}\\*
+{\ttfamily \#include $<$proxygen/lib/http/codec/test/\+Test\+Utils.\+h$>$}\\*
+{\ttfamily \#include $<$random$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Mock\+Flow\+Control\+Callback}
+\item 
+class {\bf Filter\+Test}
+\item 
+class {\bf H\+T\+T\+P\+Checks\+Test}
+\item 
+class {\bf Flow\+Control\+Filter\+Test$<$ init\+Size $>$}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using {\bf Default\+Flow\+Control} = {\bf Flow\+Control\+Filter\+Test}$<$ 0 $>$
+\item 
+using {\bf Big\+Window} = {\bf Flow\+Control\+Filter\+Test}$<$ 1000000 $>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf M\+A\+T\+C\+H\+ER} (Is\+Flow\+Exception,\char`\"{}\char`\"{})
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Default\+Flow\+Control}, Flow\+Control\+Construct)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Default\+Flow\+Control}, Send\+Update)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Big\+Window}, Recv\+Too\+Much)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf Big\+Window}, Remote\+Increase)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P\+Checks\+Test}, Send\+Trace\+Body\+Death)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P\+Checks\+Test}, Send\+Get\+Body)
+\item 
+{\bf T\+E\+S\+T\+\_\+F} ({\bf H\+T\+T\+P\+Checks\+Test}, Recv\+Trace\+Body)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!Big\+Window@{Big\+Window}}
+\index{Big\+Window@{Big\+Window}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{Big\+Window}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Big\+Window} =  {\bf Flow\+Control\+Filter\+Test}$<$1000000$>$}\label{FilterTests_8cpp_af90eaf653cc2c60e496f0dd2068e4b25}
+
+
+Definition at line 100 of file Filter\+Tests.\+cpp.
+
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!Default\+Flow\+Control@{Default\+Flow\+Control}}
+\index{Default\+Flow\+Control@{Default\+Flow\+Control}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{Default\+Flow\+Control}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Default\+Flow\+Control} =  {\bf Flow\+Control\+Filter\+Test}$<$0$>$}\label{FilterTests_8cpp_a0bd48c0f910bb259dd310f0143cd6df9}
+
+
+Definition at line 99 of file Filter\+Tests.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!M\+A\+T\+C\+H\+ER@{M\+A\+T\+C\+H\+ER}}
+\index{M\+A\+T\+C\+H\+ER@{M\+A\+T\+C\+H\+ER}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{M\+A\+T\+C\+H\+E\+R(\+Is\+Flow\+Exception,"""")}]{\setlength{\rightskip}{0pt plus 5cm}M\+A\+T\+C\+H\+ER (
+\begin{DoxyParamCaption}
+\item[{Is\+Flow\+Exception}]{, }
+\item[{\char`\"{}\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_a79ceeb6fa238caf40af9501c2a93c30a}
+
+
+Definition at line 102 of file Filter\+Tests.\+cpp.
+
+
+
+References proxygen\+::\+F\+L\+O\+W\+\_\+\+C\+O\+N\+T\+R\+O\+L\+\_\+\+E\+R\+R\+OR.
+
+
+\begin{DoxyCode}
+102                              \{
+103   \textcolor{keywordflow}{return} arg->hasCodecStatusCode() &&
+104     arg->getCodecStatusCode() == ErrorCode::FLOW\_CONTROL\_ERROR &&
+105     !arg->hasHttpStatusCode() &&
+106     !arg->hasProxygenError();
+107 \}
+\end{DoxyCode}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Default\+Flow\+Control, Flow\+Control\+Construct)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Default\+Flow\+Control}}]{, }
+\item[{Flow\+Control\+Construct}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_aad6c0702a7f375a753d6c56177f000ee}
+
+
+Definition at line 109 of file Filter\+Tests.\+cpp.
+
+
+
+References E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE, proxygen\+::make\+Buf(), and proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding.
+
+
+\begin{DoxyCode}
+109                                                  \{
+110   \textcolor{comment}{// Constructing the filter with a low capacity defaults to kInitialCapacity}
+111   \textcolor{comment}{// initial capacity, so no window update should have been generated in}
+112   \textcolor{comment}{// the constructor}
+113   InSequence enforceSequence;
+114   ASSERT\_EQ(writeBuf\_.chainLength(), 0);
+115 
+116   \textcolor{comment}{// Our send window is limited to kInitialCapacity}
+117   chain\_->generateBody(writeBuf\_, 1,
+118                        makeBuf(kInitialCapacity - 1),
+119                        HTTPCodec::NoPadding, \textcolor{keyword}{false});
+120 
+121   \textcolor{comment}{// the window isn't full yet, so getting a window update shouldn't give a}
+122   \textcolor{comment}{// callback informing us that it is open again}
+123   callbackStart\_->onWindowUpdate(0, 1);
+124 
+125   \textcolor{comment}{// Now fill the window (2 more bytes)}
+126   EXPECT\_CALL(flowCallback\_, onConnectionSendWindowClosed());
+127   chain\_->generateBody(writeBuf\_, 1, makeBuf(2), HTTPCodec::NoPadding, \textcolor{keyword}{false});
+128   \textcolor{comment}{// get the callback informing the window is open once we get a window update}
+129   EXPECT\_CALL(flowCallback\_, onConnectionSendWindowOpen());
+130   callbackStart\_->onWindowUpdate(0, 1);
+131 
+132   \textcolor{comment}{// Overflowing the window is fatal. Write 2 bytes (only 1 byte left in window)}
+133   EXPECT_DEATH_NO_CORE(chain\_->generateBody(writeBuf\_, 1, makeBuf(2),
+134                                             HTTPCodec::NoPadding, \textcolor{keyword}{false}),
+135                        \textcolor{stringliteral}{".*"});
+136 \}
+\end{DoxyCode}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Default\+Flow\+Control, Send\+Update)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Default\+Flow\+Control}}]{, }
+\item[{Send\+Update}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_ae85ab4aded1d9a646dd11dc32c382532}
+
+
+Definition at line 138 of file Filter\+Tests.\+cpp.
+
+
+
+References proxygen\+::make\+Buf().
+
+
+\begin{DoxyCode}
+138                                        \{
+139   \textcolor{comment}{// Make sure we send a window update when the window decreases below half}
+140   InSequence enforceSequence;
+141   EXPECT\_CALL(callback\_, onBody(\_, \_, \_))
+142     .WillRepeatedly(Return());
+143 
+144   \textcolor{comment}{// Have half the window outstanding}
+145   callbackStart\_->onBody(1, makeBuf(kInitialCapacity / 2 + 1), 0);
+146   filter\_->ingressBytesProcessed(writeBuf\_, kInitialCapacity / 2);
+147 
+148   \textcolor{comment}{// It should wait until the "+1" is ack'd to generate the coallesced update}
+149   EXPECT\_CALL(*codec\_,
+150               generateWindowUpdate(\_, 0, kInitialCapacity / 2 + 1));
+151   filter\_->ingressBytesProcessed(writeBuf\_, 1);
+152 \}
+\end{DoxyCode}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Big\+Window, Recv\+Too\+Much)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Big\+Window}}]{, }
+\item[{Recv\+Too\+Much}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_ad7b4325604a570ed8e9f91229799fce2}
+
+
+Definition at line 154 of file Filter\+Tests.\+cpp.
+
+
+
+References proxygen\+::make\+Buf().
+
+
+\begin{DoxyCode}
+154                                \{
+155   \textcolor{comment}{// Constructing the filter with a large capacity causes a WINDOW\_UPDATE}
+156   \textcolor{comment}{// for stream zero to be generated}
+157   ASSERT\_GT(writeBuf\_.chainLength(), 0);
+158 
+159   InSequence enforceSequence;
+160   EXPECT\_CALL(callback\_, onBody(\_, \_, \_));
+161   EXPECT\_CALL(callback\_, onError(0, IsFlowException(), \_))
+162       .WillOnce(Invoke([](HTTPCodec::StreamID,
+163                           std::shared\_ptr<HTTPException> exc,
+164                           \textcolor{keywordtype}{bool} \textcolor{comment}{/*newTxn*/}) \{
+165         ASSERT\_EQ(
+166             \textcolor{stringliteral}{"Failed to reserve receive window, window size=0, "}
+167             \textcolor{stringliteral}{"amount=1"},
+168             std::string(exc->what()));
+169       \}));
+170 
+171   \textcolor{comment}{// Receive the max amount advertised}
+172   callbackStart\_->onBody(1, makeBuf(recvWindow\_), 0);
+173   ASSERT\_TRUE(chain\_->isReusable());
+174   \textcolor{comment}{// Receive 1 byte too much}
+175   callbackStart\_->onBody(1, makeBuf(1), 0);
+176   ASSERT\_FALSE(chain\_->isReusable());
+177 \}
+\end{DoxyCode}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+Big\+Window, Remote\+Increase)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf Big\+Window}}]{, }
+\item[{Remote\+Increase}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_ab6cb3ba2d048cf48bf3dee8f7d08e8a3}
+
+
+Definition at line 179 of file Filter\+Tests.\+cpp.
+
+
+
+References proxygen\+::make\+Buf(), and proxygen\+::\+H\+T\+T\+P\+Codec\+::\+No\+Padding.
+
+
+\begin{DoxyCode}
+179                                   \{
+180   \textcolor{comment}{// The remote side sends us a window update for stream=0, increasing our}
+181   \textcolor{comment}{// available window}
+182   InSequence enforceSequence;
+183 
+184   ASSERT\_EQ(filter\_->getAvailableSend(), kInitialCapacity);
+185   callbackStart\_->onWindowUpdate(0, 10);
+186   ASSERT\_EQ(filter\_->getAvailableSend(), kInitialCapacity + 10);
+187 
+188   EXPECT\_CALL(flowCallback\_, onConnectionSendWindowClosed());
+189   chain\_->generateBody(writeBuf\_, 1,
+190                        makeBuf(kInitialCapacity + 10),
+191                        HTTPCodec::NoPadding, \textcolor{keyword}{false});
+192   ASSERT\_EQ(filter\_->getAvailableSend(), 0);
+193 
+194   \textcolor{comment}{// Now the remote side sends a HUGE update (just barely legal)}
+195   \textcolor{comment}{// Since the window was full, this generates a callback from the filter}
+196   \textcolor{comment}{// telling us the window is no longer full.}
+197   EXPECT\_CALL(flowCallback\_, onConnectionSendWindowOpen());
+198   callbackStart\_->onWindowUpdate(0, std::numeric\_limits<int32\_t>::max());
+199   ASSERT\_EQ(filter\_->getAvailableSend(), std::numeric\_limits<int32\_t>::max());
+200 
+201   \textcolor{comment}{// Now overflow it by 1}
+202   EXPECT\_CALL(callback\_, onError(0, IsFlowException(), \_))
+203       .WillOnce(Invoke([](HTTPCodec::StreamID,
+204                           std::shared\_ptr<HTTPException> exc,
+205                           \textcolor{keywordtype}{bool} \textcolor{comment}{/*newTxn*/}) \{
+206         ASSERT\_EQ(
+207             \textcolor{stringliteral}{"Failed to update send window, outstanding=0, "}
+208             \textcolor{stringliteral}{"amount=1"},
+209             std::string(exc->what()));
+210       \}));
+211   callbackStart\_->onWindowUpdate(0, 1);
+212   ASSERT\_FALSE(chain\_->isReusable());
+213 \}
+\end{DoxyCode}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P\+Checks\+Test, Send\+Trace\+Body\+Death)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Checks\+Test}}]{, }
+\item[{Send\+Trace\+Body\+Death}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_a56770401e1c370ecbf1f480013e61c35}
+
+
+Definition at line 215 of file Filter\+Tests.\+cpp.
+
+
+
+References E\+X\+P\+E\+C\+T\+\_\+\+D\+E\+A\+T\+H\+\_\+\+N\+O\+\_\+\+C\+O\+RE, proxygen\+::get\+Post\+Request(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method().
+
+
+\begin{DoxyCode}
+215                                            \{
+216   \textcolor{comment}{// It is NOT allowed to send a TRACE with a body.}
+217 
+218   HTTPMessage msg = getPostRequest();
+219   msg.setMethod(\textcolor{stringliteral}{"TRACE"});
+220 
+221   EXPECT_DEATH_NO_CORE(chain\_->generateHeader(writeBuf\_, 0, msg), \textcolor{stringliteral}{".*"});
+222 \}
+\end{DoxyCode}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P\+Checks\+Test, Send\+Get\+Body)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Checks\+Test}}]{, }
+\item[{Send\+Get\+Body}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_a3b49e7bcac447091c792132fefa1ecfe}
+
+
+Definition at line 224 of file Filter\+Tests.\+cpp.
+
+
+
+References proxygen\+::get\+Post\+Request(), and proxygen\+::\+H\+T\+T\+P\+Message\+::set\+Method().
+
+
+\begin{DoxyCode}
+224                                     \{
+225   \textcolor{comment}{// It is allowed to send a GET with a content-length. It is up to the}
+226   \textcolor{comment}{// server to ignore it.}
+227 
+228   EXPECT\_CALL(*codec\_, generateHeader(\_, \_, \_, \_, \_));
+229 
+230   HTTPMessage msg = getPostRequest();
+231   msg.setMethod(\textcolor{stringliteral}{"GET"});
+232 
+233   chain\_->generateHeader(writeBuf\_, 0, msg);
+234 \}
+\end{DoxyCode}
+\index{Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}!T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}}
+\index{T\+E\+S\+T\+\_\+F@{T\+E\+S\+T\+\_\+F}!Filter\+Tests.\+cpp@{Filter\+Tests.\+cpp}}
+\subsubsection[{T\+E\+S\+T\+\_\+\+F(\+H\+T\+T\+P\+Checks\+Test, Recv\+Trace\+Body)}]{\setlength{\rightskip}{0pt plus 5cm}T\+E\+S\+T\+\_\+F (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Checks\+Test}}]{, }
+\item[{Recv\+Trace\+Body}]{}
+\end{DoxyParamCaption}
+)}\label{FilterTests_8cpp_a90fb03b561c90095484cdb6ded03109f}
+
+
+Definition at line 236 of file Filter\+Tests.\+cpp.
+
+
+
+References proxygen\+::make\+Post\+Request().
+
+
+\begin{DoxyCode}
+236                                       \{
+237   \textcolor{comment}{// In proxygen, we deal with receiving a TRACE with a body by 400'ing it}
+238 
+239   EXPECT\_CALL(callback\_, onError(\_, \_, \_))
+240     .WillOnce(Invoke([] (HTTPCodec::StreamID,
+241                          std::shared\_ptr<HTTPException> exc,
+242                          \textcolor{keywordtype}{bool} newTxn) \{
+243                        ASSERT\_TRUE(newTxn);
+244                        ASSERT\_EQ(exc->getHttpStatusCode(), 400);
+245                        ASSERT\_EQ(0,
+246                          strcmp(\textcolor{stringliteral}{"RFC2616: Request Body Not Allowed"},
+247                                 exc->what()));
+248         \}));
+249 
+250   \textcolor{keyword}{auto} msg = makePostRequest();
+251   msg->setMethod(\textcolor{stringliteral}{"TRACE"});
+252 
+253   callbackStart\_->onHeadersComplete(0, std::move(msg));
+254 \}
+\end{DoxyCode}

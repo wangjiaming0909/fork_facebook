@@ -1,0 +1,335 @@
+\section{proxygen\+:\+:H\+T\+T\+P\+Session\+:\+:Write\+Segment Class Reference}
+\label{classproxygen_1_1HTTPSession_1_1WriteSegment}\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+Inheritance diagram for proxygen\+:\+:H\+T\+T\+P\+Session\+:\+:Write\+Segment\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classproxygen_1_1HTTPSession_1_1WriteSegment}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Write\+Segment} ({\bf H\+T\+T\+P\+Session} $\ast$session, uint64\+\_\+t length)
+\item 
+void {\bf set\+Cork} (bool cork)
+\item 
+void {\bf set\+E\+OR} (bool eor)
+\item 
+void {\bf detach} ()
+\item 
+folly\+::\+Write\+Flags {\bf get\+Flags} ()
+\item 
+uint64\+\_\+t {\bf get\+Length} () const 
+\item 
+void {\bf write\+Success} () noexceptoverride
+\item 
+void {\bf write\+Err} (size\+\_\+t bytes\+Written, const folly\+::\+Async\+Socket\+Exception \&) noexceptoverride
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+Intrusive\+List\+Hook {\bf list\+Hook}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf remove} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf H\+T\+T\+P\+Session} $\ast$ {\bf session\+\_\+}
+\item 
+uint64\+\_\+t {\bf length\+\_\+}
+\item 
+folly\+::\+Write\+Flags {\bf flags\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper class to track write buffers until they have been fully written and can be deleted. 
+
+Definition at line 854 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!Write\+Segment@{Write\+Segment}}
+\index{Write\+Segment@{Write\+Segment}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{Write\+Segment(\+H\+T\+T\+P\+Session $\ast$session, uint64\+\_\+t length)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::\+Write\+Segment (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+Session} $\ast$}]{session, }
+\item[{uint64\+\_\+t}]{length}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a8c942de3ab46c2669e462aeed24136ad}
+
+
+Definition at line 63 of file H\+T\+T\+P\+Session.\+cpp.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::run\+Loop\+Callback().
+
+
+\begin{DoxyCode}
+66   : session_(session),
+67     length_(length) \{
+68 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!detach@{detach}}
+\index{detach@{detach}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{detach()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::detach (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_ae65b155c0a83e90bfe153c37f1e26bba}
+Clear the session. This is used if the session does not want to receive future notification about this segment. 
+
+Definition at line 78 of file H\+T\+T\+P\+Session.\+cpp.
+
+
+
+References session\+\_\+.
+
+
+\begin{DoxyCode}
+78                                 \{
+79   \textcolor{keyword}{remove}();
+80   session_ = \textcolor{keyword}{nullptr};
+81 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!get\+Flags@{get\+Flags}}
+\index{get\+Flags@{get\+Flags}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{get\+Flags()}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Write\+Flags proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::get\+Flags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a932b6f4acb020015ccf23ce0d072289f}
+
+
+Definition at line 881 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::run\+Loop\+Callback().
+
+
+\begin{DoxyCode}
+881                                \{
+882       \textcolor{keywordflow}{return} flags_;
+883     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!get\+Length@{get\+Length}}
+\index{get\+Length@{get\+Length}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{get\+Length() const }]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::get\+Length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a0364a980e04509e2eb0746b2c590e947}
+
+
+Definition at line 885 of file H\+T\+T\+P\+Session.\+h.
+
+
+\begin{DoxyCode}
+885                                \{
+886       \textcolor{keywordflow}{return} length_;
+887     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!remove@{remove}}
+\index{remove@{remove}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{remove()}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::remove (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_acd65795342711d8c3b4c3907d71d4b9a}
+Unlink this segment from the list. 
+
+Definition at line 71 of file H\+T\+T\+P\+Session.\+cpp.
+
+
+
+References list\+Hook, and session\+\_\+.
+
+
+\begin{DoxyCode}
+71                                 \{
+72   DCHECK(session_);
+73   DCHECK(listHook.is\_linked());
+74   listHook.unlink();
+75 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!set\+Cork@{set\+Cork}}
+\index{set\+Cork@{set\+Cork}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{set\+Cork(bool cork)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::set\+Cork (
+\begin{DoxyParamCaption}
+\item[{bool}]{cork}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a9225925b5ff3d2640db9ff47a94cd62b}
+
+
+Definition at line 859 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::run\+Loop\+Callback().
+
+
+\begin{DoxyCode}
+859                             \{
+860       \textcolor{keywordflow}{if} (cork) \{
+861         flags_ = flags_ | folly::WriteFlags::CORK;
+862       \} \textcolor{keywordflow}{else} \{
+863         unSet(flags_, folly::WriteFlags::CORK);
+864       \}
+865     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!set\+E\+OR@{set\+E\+OR}}
+\index{set\+E\+OR@{set\+E\+OR}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{set\+E\+O\+R(bool eor)}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::set\+E\+OR (
+\begin{DoxyParamCaption}
+\item[{bool}]{eor}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_ad10d8473fdade2883493383aafa39eb9}
+
+
+Definition at line 867 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+References proxygen\+::\+H\+T\+T\+P\+Session\+::detach().
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P\+Session\+::run\+Loop\+Callback().
+
+
+\begin{DoxyCode}
+867                           \{
+868       \textcolor{keywordflow}{if} (eor) \{
+869         flags_ = flags_ | folly::WriteFlags::EOR;
+870       \} \textcolor{keywordflow}{else} \{
+871         unSet(flags_, folly::WriteFlags::EOR);
+872       \}
+873     \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!write\+Err@{write\+Err}}
+\index{write\+Err@{write\+Err}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{write\+Err(size\+\_\+t bytes\+Written, const folly\+::\+Async\+Socket\+Exception \&) noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Err (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{bytes\+Written, }
+\item[{const folly\+::\+Async\+Socket\+Exception \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a9e3f5d6ab6e54b15f8fd097f4bcbde3c}
+
+
+Definition at line 102 of file H\+T\+T\+P\+Session.\+cpp.
+
+
+
+References proxygen\+::\+Filter\+Chain$<$ T1, T2, Filter\+Type, set\+\_\+callback, Take\+Ownership $>$\+::add(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::attach\+To\+Session\+Controller(), proxygen\+::\+H\+T\+T\+P\+Session\+::byte\+Event\+Tracker\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::codec\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::draining\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::drain\+Timeout\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::flow\+Control\+Timeout\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::get\+Controller(), proxygen\+::\+H\+T\+T\+P\+Codec\+::get\+Default\+Window\+Size(), proxygen\+::\+H\+T\+T\+P\+Codec\+::get\+Protocol(), proxygen\+::\+H\+T\+T\+P\+Session\+::\+H\+T\+T\+P\+Session(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+H\+T\+T\+P\+Session\+Base(), proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::info\+Callback\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::ingress\+Error\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::ingress\+Upgraded\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::initial\+Receive\+Window\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::in\+Loop\+Callback\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::in\+Resume\+\_\+, proxygen\+::is\+H\+T\+T\+P2\+Codec\+Protocol(), proxygen\+::local\+Addr, proxygen\+::\+H\+T\+T\+P\+Session\+::max\+Concurrent\+Incoming\+Streams\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::next\+Egress\+Results\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+Base\+::\+Info\+Callback\+::on\+Create(), proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Error(), proxygen\+::peer\+Addr, proxygen\+::\+H\+T\+T\+P\+Session\+::pending\+Pause\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::reads\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::receive\+Session\+Window\+Size\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::receive\+Stream\+Window\+Size\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::reset\+After\+Draining\+Writes\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::reset\+Socket\+On\+Shutdown\+\_\+, session\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::\+Flow\+Control\+Timeout\+::set\+Timeout\+Duration(), proxygen\+::\+H\+T\+T\+P\+Session\+::setup\+Codec(), proxygen\+::\+H\+T\+T\+P\+Session\+::sock\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::started\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::timeout\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::txn\+Egress\+Queue\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::writes\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::writes\+Draining\+\_\+, and proxygen\+::\+H\+T\+T\+P\+Session\+::write\+Timeout\+\_\+.
+
+
+\begin{DoxyCode}
+103                                                                              \{
+104   \textcolor{comment}{// After one segment fails to write, we clear the session\_}
+105   \textcolor{comment}{// pointer in all subsequent write segments, so we ignore their}
+106   \textcolor{comment}{// writeError() callbacks.}
+107   \textcolor{keywordflow}{if} (session_) \{
+108     \textcolor{keyword}{remove}();
+109     session_->onWriteError(bytesWritten, ex);
+110   \}
+111   \textcolor{keyword}{delete} \textcolor{keyword}{this};
+112 \}
+\end{DoxyCode}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!write\+Success@{write\+Success}}
+\index{write\+Success@{write\+Success}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{write\+Success() noexceptoverride}]{\setlength{\rightskip}{0pt plus 5cm}void proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::write\+Success (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_af854ce1762df6ac9445f70bb628d36da}
+
+
+Definition at line 84 of file H\+T\+T\+P\+Session.\+cpp.
+
+
+
+References length\+\_\+, proxygen\+::\+H\+T\+T\+P\+Session\+::on\+Write\+Success(), and session\+\_\+.
+
+
+\begin{DoxyCode}
+84                                                \{
+85   \textcolor{comment}{// Unlink this write segment from the list before calling}
+86   \textcolor{comment}{// the session's onWriteSuccess() callback because, in the}
+87   \textcolor{comment}{// case where this is the last write for the connection,}
+88   \textcolor{comment}{// onWriteSuccess() looks for an empty write segment list}
+89   \textcolor{comment}{// as one of the criteria for shutting down the connection.}
+90   \textcolor{keyword}{remove}();
+91 
+92   \textcolor{comment}{// session\_ should never be nullptr for a successful write}
+93   \textcolor{comment}{// The session is only cleared after a write error or timeout, and all}
+94   \textcolor{comment}{// AsyncTransport write failures are fatal.  If session\_ is nullptr at this}
+95   \textcolor{comment}{// point it means the AsyncTransport implementation is not failing}
+96   \textcolor{comment}{// subsequent writes correctly after an error.}
+97   session_->onWriteSuccess(length_);
+98   \textcolor{keyword}{delete} \textcolor{keyword}{this};
+99 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!flags\+\_\+@{flags\+\_\+}}
+\index{flags\+\_\+@{flags\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{flags\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Write\+Flags proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::flags\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_acb8e4ee45536ca33ad6cbfd3800eb9f9}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+      folly::WriteFlags::NONE\}
+\end{DoxyCode}
+
+
+Definition at line 905 of file H\+T\+T\+P\+Session.\+h.
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!length\+\_\+@{length\+\_\+}}
+\index{length\+\_\+@{length\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{length\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::length\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a2db2e497e42ed04e02e9293fd5cac9e9}
+
+
+Definition at line 904 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by write\+Success().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!list\+Hook@{list\+Hook}}
+\index{list\+Hook@{list\+Hook}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{list\+Hook}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Intrusive\+List\+Hook proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::list\+Hook}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a2d3195f8a57e7ae05710d66c99a12783}
+
+
+Definition at line 895 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by remove().
+
+\index{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}!session\+\_\+@{session\+\_\+}}
+\index{session\+\_\+@{session\+\_\+}!proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment@{proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment}}
+\subsubsection[{session\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+Session}$\ast$ proxygen\+::\+H\+T\+T\+P\+Session\+::\+Write\+Segment\+::session\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classproxygen_1_1HTTPSession_1_1WriteSegment_a5d9b8dc3d58c3d793c8666fb03d89c97}
+
+
+Definition at line 903 of file H\+T\+T\+P\+Session.\+h.
+
+
+
+Referenced by detach(), remove(), write\+Err(), and write\+Success().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session.\+h}\item 
+proxygen/lib/http/session/{\bf H\+T\+T\+P\+Session.\+cpp}\end{DoxyCompactItemize}

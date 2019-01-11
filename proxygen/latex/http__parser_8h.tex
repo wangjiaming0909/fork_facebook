@@ -1,0 +1,2421 @@
+\section{proxygen/external/http\+\_\+parser/http\+\_\+parser.h File Reference}
+\label{http__parser_8h}\index{proxygen/external/http\+\_\+parser/http\+\_\+parser.\+h@{proxygen/external/http\+\_\+parser/http\+\_\+parser.\+h}}
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf http\+\_\+parser}
+\item 
+struct {\bf http\+\_\+parser\+\_\+settings}
+\item 
+struct {\bf http\+\_\+parser\+\_\+url}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}~1
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}~0
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+S\+T\+R\+I\+CT}~0
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+D\+E\+B\+UG}~0
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE}~(80$\ast$1024)
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+M\+AP}(XX)
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+G\+EN}(n,  s)~H\+P\+E\+\_\+\#\#n,
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO}(p)~((enum {\bf http\+\_\+errno}) (p)-\/$>${\bf http\+\_\+errno})
+\item 
+\#define {\bf H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE}(p)~0
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct {\bf http\+\_\+parser} {\bf http\+\_\+parser}
+\item 
+typedef struct {\bf http\+\_\+parser\+\_\+settings} {\bf http\+\_\+parser\+\_\+settings}
+\item 
+typedef struct {\bf http\+\_\+parser\+\_\+result} {\bf http\+\_\+parser\+\_\+result}
+\item 
+typedef int($\ast$ {\bf http\+\_\+data\+\_\+cb}) ({\bf http\+\_\+parser} $\ast$, const char $\ast$at, size\+\_\+t length)
+\item 
+typedef int($\ast$ {\bf http\+\_\+cb}) ({\bf http\+\_\+parser} $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf http\+\_\+method} \{ \\*
+{\bf H\+T\+T\+P\+\_\+\+D\+E\+L\+E\+TE} = 0, 
+{\bf H\+T\+T\+P\+\_\+\+G\+ET}, 
+{\bf H\+T\+T\+P\+\_\+\+H\+E\+AD}, 
+{\bf H\+T\+T\+P\+\_\+\+P\+O\+ST}, 
+\\*
+{\bf H\+T\+T\+P\+\_\+\+P\+UT}, 
+{\bf H\+T\+T\+P\+\_\+\+C\+O\+N\+N\+E\+CT}, 
+{\bf H\+T\+T\+P\+\_\+\+O\+P\+T\+I\+O\+NS}, 
+{\bf H\+T\+T\+P\+\_\+\+T\+R\+A\+CE}, 
+\\*
+{\bf H\+T\+T\+P\+\_\+\+C\+O\+PY}, 
+{\bf H\+T\+T\+P\+\_\+\+L\+O\+CK}, 
+{\bf H\+T\+T\+P\+\_\+\+M\+K\+C\+OL}, 
+{\bf H\+T\+T\+P\+\_\+\+M\+O\+VE}, 
+\\*
+{\bf H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+F\+I\+ND}, 
+{\bf H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+P\+A\+T\+CH}, 
+{\bf H\+T\+T\+P\+\_\+\+U\+N\+L\+O\+CK}, 
+{\bf H\+T\+T\+P\+\_\+\+R\+E\+P\+O\+RT}, 
+\\*
+{\bf H\+T\+T\+P\+\_\+\+M\+K\+A\+C\+T\+I\+V\+I\+TY}, 
+{\bf H\+T\+T\+P\+\_\+\+C\+H\+E\+C\+K\+O\+UT}, 
+{\bf H\+T\+T\+P\+\_\+\+M\+E\+R\+GE}, 
+{\bf H\+T\+T\+P\+\_\+\+M\+S\+E\+A\+R\+CH}, 
+\\*
+{\bf H\+T\+T\+P\+\_\+\+N\+O\+T\+I\+FY}, 
+{\bf H\+T\+T\+P\+\_\+\+S\+U\+B\+S\+C\+R\+I\+BE}, 
+{\bf H\+T\+T\+P\+\_\+\+U\+N\+S\+U\+B\+S\+C\+R\+I\+BE}, 
+{\bf H\+T\+T\+P\+\_\+\+P\+A\+T\+CH}
+ \}
+\item 
+enum {\bf http\+\_\+parser\+\_\+type} \{ {\bf H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST}, 
+{\bf H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE}, 
+{\bf H\+T\+T\+P\+\_\+\+B\+O\+TH}
+ \}
+\item 
+enum {\bf flags} \{ {\bf F\+\_\+\+C\+H\+U\+N\+K\+ED} = 1 $<$$<$ 0, 
+{\bf F\+\_\+\+T\+R\+A\+I\+L\+I\+NG} = 1 $<$$<$ 3, 
+{\bf F\+\_\+\+U\+P\+G\+R\+A\+DE} = 1 $<$$<$ 4, 
+{\bf F\+\_\+\+S\+K\+I\+P\+B\+O\+DY} = 1 $<$$<$ 5
+ \}
+\item 
+enum {\bf http\+\_\+errno} \{ \\*
+{\bf H\+P\+E\+\_\+\+OK}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+begin}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+path}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+query\+\_\+string}, 
+\\*
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+url}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+fragment}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+field}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+value}, 
+\\*
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+headers\+\_\+complete}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+body}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+complete}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+reason}, 
+\\*
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+header}, 
+{\bf H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+complete}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+O\+F\+\_\+\+S\+T\+A\+TE}, 
+{\bf H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW}, 
+\\*
+{\bf H\+P\+E\+\_\+\+C\+L\+O\+S\+E\+D\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+A\+T\+US}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD}, 
+\\*
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+RL}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+O\+ST}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+O\+RT}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+A\+TH}, 
+\\*
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+Q\+U\+E\+R\+Y\+\_\+\+S\+T\+R\+I\+NG}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+R\+A\+G\+M\+E\+NT}, 
+{\bf H\+P\+E\+\_\+\+L\+F\+\_\+\+E\+X\+P\+E\+C\+T\+ED}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN}, 
+\\*
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}, 
+{\bf H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE}, 
+{\bf H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE}, 
+\\*
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+S\+T\+A\+NT}, 
+{\bf H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+S\+T\+A\+TE}, 
+\\*
+{\bf H\+P\+E\+\_\+\+S\+T\+R\+I\+CT}, 
+{\bf H\+P\+E\+\_\+\+P\+A\+U\+S\+ED}, 
+{\bf H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN}
+ \}
+\item 
+enum {\bf http\+\_\+parser\+\_\+url\+\_\+fields} \{ \\*
+{\bf U\+F\+\_\+\+S\+C\+H\+E\+MA} = 0, 
+{\bf U\+F\+\_\+\+H\+O\+ST} = 1, 
+{\bf U\+F\+\_\+\+P\+O\+RT} = 2, 
+{\bf U\+F\+\_\+\+P\+A\+TH} = 3, 
+\\*
+{\bf U\+F\+\_\+\+Q\+U\+E\+RY} = 4, 
+{\bf U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT} = 5, 
+{\bf U\+F\+\_\+\+U\+S\+E\+R\+I\+N\+FO} = 6, 
+{\bf U\+F\+\_\+\+M\+AX} = 7
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf http\+\_\+parser\+\_\+init} ({\bf http\+\_\+parser} $\ast${\bf parser}, enum {\bf http\+\_\+parser\+\_\+type} type)
+\item 
+size\+\_\+t {\bf http\+\_\+parser\+\_\+execute} ({\bf http\+\_\+parser} $\ast${\bf parser}, const {\bf http\+\_\+parser\+\_\+settings} $\ast${\bf settings}, const char $\ast$data, size\+\_\+t len)
+\item 
+const char $\ast$ {\bf http\+\_\+method\+\_\+str} (enum {\bf http\+\_\+method} m)
+\item 
+const char $\ast$ {\bf http\+\_\+errno\+\_\+name} (enum {\bf http\+\_\+errno} err)
+\item 
+const char $\ast$ {\bf http\+\_\+errno\+\_\+description} (enum {\bf http\+\_\+errno} err)
+\item 
+int {\bf http\+\_\+parser\+\_\+parse\+\_\+url} (const char $\ast$buf, size\+\_\+t buflen, int is\+\_\+connect, struct {\bf http\+\_\+parser\+\_\+url} $\ast$u)
+\item 
+void {\bf http\+\_\+parser\+\_\+pause} ({\bf http\+\_\+parser} $\ast${\bf parser}, int paused)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+G\+EN@{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+G\+EN}}
+\index{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+G\+EN@{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+G\+EN}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+G\+EN}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+G\+EN(
+\begin{DoxyParamCaption}
+\item[{}]{n, }
+\item[{}]{s}
+\end{DoxyParamCaption}
+)~H\+P\+E\+\_\+\#\#n,}\label{http__parser_8h_a686e9a27372975330d034ecb3ead862c}
+
+
+Definition at line 195 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+M\+AP@{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+M\+AP}}
+\index{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+M\+AP@{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+M\+AP}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+M\+AP}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+E\+R\+R\+N\+O\+\_\+\+M\+AP(
+\begin{DoxyParamCaption}
+\item[{}]{XX}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_a50da2aea232a876bcafc5ea85b465912}
+
+
+Definition at line 139 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE@{H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE@{H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE~(80$\ast$1024)}\label{http__parser_8h_a6272a7f92e0f1b66e07680f32f6f21b6}
+
+
+Definition at line 64 of file http\+\_\+parser.\+h.
+
+
+
+Referenced by http\+\_\+parser\+\_\+execute().
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+D\+E\+B\+UG@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+D\+E\+B\+UG}}
+\index{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+D\+E\+B\+UG@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+D\+E\+B\+UG}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+D\+E\+B\+UG}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+D\+E\+B\+UG~0}\label{http__parser_8h_ad2fb956887426877129d24a45201a154}
+
+
+Definition at line 59 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO}}
+\index{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO(
+\begin{DoxyParamCaption}
+\item[{}]{p}
+\end{DoxyParamCaption}
+)~((enum {\bf http\+\_\+errno}) (p)-\/$>${\bf http\+\_\+errno})}\label{http__parser_8h_a356ebaa93536e6f94c2948a1416697c7}
+
+
+Definition at line 202 of file http\+\_\+parser.\+h.
+
+
+
+Referenced by http\+\_\+parser\+\_\+execute(), http\+\_\+parser\+\_\+pause(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress\+E\+O\+F(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Parser\+Error(), print\+\_\+error(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Parser\+Paused(), test\+\_\+header\+\_\+overflow\+\_\+error(), test\+\_\+message\+\_\+pause(), and test\+\_\+simple().
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE}}
+\index{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+N\+O\+\_\+\+L\+I\+NE(
+\begin{DoxyParamCaption}
+\item[{}]{p}
+\end{DoxyParamCaption}
+)~0}\label{http__parser_8h_a490a850bc8e165e8647de1c71e33ae86}
+
+
+Definition at line 208 of file http\+\_\+parser.\+h.
+
+
+
+Referenced by print\+\_\+error().
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+S\+T\+R\+I\+CT@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+S\+T\+R\+I\+CT}}
+\index{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+S\+T\+R\+I\+CT@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+S\+T\+R\+I\+CT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+S\+T\+R\+I\+CT}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+S\+T\+R\+I\+CT~0}\label{http__parser_8h_a7daf883828d97fafe5726998f0e05146}
+
+
+Definition at line 52 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}
+\index{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR~1}\label{http__parser_8h_abfeef6f3e39791acc311791feda09d27}
+
+
+Definition at line 24 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}}
+\index{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR@{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR~0}\label{http__parser_8h_ab8479153443ca4fe95b3de5adb0224de}
+
+
+Definition at line 25 of file http\+\_\+parser.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+cb@{http\+\_\+cb}}
+\index{http\+\_\+cb@{http\+\_\+cb}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+cb}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ http\+\_\+cb) ({\bf http\+\_\+parser} $\ast$)}\label{http__parser_8h_aa87f59f70dbc2c48f11a6d9a3e00addc}
+
+
+Definition at line 86 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+data\+\_\+cb@{http\+\_\+data\+\_\+cb}}
+\index{http\+\_\+data\+\_\+cb@{http\+\_\+data\+\_\+cb}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+data\+\_\+cb}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ http\+\_\+data\+\_\+cb) ({\bf http\+\_\+parser} $\ast$, const char $\ast$at, size\+\_\+t length)}\label{http__parser_8h_a7a2b17230dcd129c4ed47e3f9c5110a2}
+
+
+Definition at line 85 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser@{http\+\_\+parser}}
+\index{http\+\_\+parser@{http\+\_\+parser}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf http\+\_\+parser} {\bf http\+\_\+parser}}\label{http__parser_8h_a402f99e6fefc59341c050462c844f9cb}
+
+
+Definition at line 67 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+result@{http\+\_\+parser\+\_\+result}}
+\index{http\+\_\+parser\+\_\+result@{http\+\_\+parser\+\_\+result}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+result}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf http\+\_\+parser\+\_\+result} {\bf http\+\_\+parser\+\_\+result}}\label{http__parser_8h_ab8f441a408aa8739f5641fbba4281d3b}
+
+
+Definition at line 69 of file http\+\_\+parser.\+h.
+
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+settings@{http\+\_\+parser\+\_\+settings}}
+\index{http\+\_\+parser\+\_\+settings@{http\+\_\+parser\+\_\+settings}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+settings}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf http\+\_\+parser\+\_\+settings} {\bf http\+\_\+parser\+\_\+settings}}\label{http__parser_8h_ac5e078ef0f2f2bfa5d132469a58a5674}
+
+
+Definition at line 68 of file http\+\_\+parser.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!flags@{flags}}
+\index{flags@{flags}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf flags}}\label{http__parser_8h_ab6b306ef981f5e21bb41ea2c2dbe8cd9}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+\_\+\+C\+H\+U\+N\+K\+ED@{F\+\_\+\+C\+H\+U\+N\+K\+ED}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!F\+\_\+\+C\+H\+U\+N\+K\+ED@{F\+\_\+\+C\+H\+U\+N\+K\+ED}}\item[{\em 
+F\+\_\+\+C\+H\+U\+N\+K\+ED\label{http__parser_8h_ab6b306ef981f5e21bb41ea2c2dbe8cd9a092619f8f7babc8fc3fa7533e78c3c29}
+}]\index{F\+\_\+\+T\+R\+A\+I\+L\+I\+NG@{F\+\_\+\+T\+R\+A\+I\+L\+I\+NG}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!F\+\_\+\+T\+R\+A\+I\+L\+I\+NG@{F\+\_\+\+T\+R\+A\+I\+L\+I\+NG}}\item[{\em 
+F\+\_\+\+T\+R\+A\+I\+L\+I\+NG\label{http__parser_8h_ab6b306ef981f5e21bb41ea2c2dbe8cd9aa75b5b1dcec2decaa7386264d4e1dc29}
+}]\index{F\+\_\+\+U\+P\+G\+R\+A\+DE@{F\+\_\+\+U\+P\+G\+R\+A\+DE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!F\+\_\+\+U\+P\+G\+R\+A\+DE@{F\+\_\+\+U\+P\+G\+R\+A\+DE}}\item[{\em 
+F\+\_\+\+U\+P\+G\+R\+A\+DE\label{http__parser_8h_ab6b306ef981f5e21bb41ea2c2dbe8cd9a600ff486c803dcf2ec13453bdaf1100c}
+}]\index{F\+\_\+\+S\+K\+I\+P\+B\+O\+DY@{F\+\_\+\+S\+K\+I\+P\+B\+O\+DY}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!F\+\_\+\+S\+K\+I\+P\+B\+O\+DY@{F\+\_\+\+S\+K\+I\+P\+B\+O\+DY}}\item[{\em 
+F\+\_\+\+S\+K\+I\+P\+B\+O\+DY\label{http__parser_8h_ab6b306ef981f5e21bb41ea2c2dbe8cd9ae71592851a69f477b80b1947399c1740}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 127 of file http\+\_\+parser.\+h.
+
+
+\begin{DoxyCode}
+128   \{ F_CHUNKED               = 1 << 0
+129   , F_TRAILING              = 1 << 3
+130   , F_UPGRADE               = 1 << 4
+131   , F_SKIPBODY              = 1 << 5
+132   \};
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+errno@{http\+\_\+errno}}
+\index{http\+\_\+errno@{http\+\_\+errno}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+errno}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf http\+\_\+errno}}\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{H\+P\+E\+\_\+\+OK@{H\+P\+E\+\_\+\+OK}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+OK@{H\+P\+E\+\_\+\+OK}}\item[{\em 
+H\+P\+E\+\_\+\+OK\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64adf532f653497f3085108a5e1f097aa8e}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+begin@{H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+begin}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+begin@{H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+begin}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+begin\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a5b44995fcd173cf38a88fc3ceaf0cb41}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+path@{H\+P\+E\+\_\+\+C\+B\+\_\+path}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+path@{H\+P\+E\+\_\+\+C\+B\+\_\+path}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+path\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64af011781c333e7a8d4c041af2c048b9a0}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+query\+\_\+string@{H\+P\+E\+\_\+\+C\+B\+\_\+query\+\_\+string}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+query\+\_\+string@{H\+P\+E\+\_\+\+C\+B\+\_\+query\+\_\+string}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+query\+\_\+string\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64aa1682aae566009ed9164f377a8c08211}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+url@{H\+P\+E\+\_\+\+C\+B\+\_\+url}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+url@{H\+P\+E\+\_\+\+C\+B\+\_\+url}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+url\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64ae15b73f73f8aad8c5e39d03b29414f9b}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+fragment@{H\+P\+E\+\_\+\+C\+B\+\_\+fragment}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+fragment@{H\+P\+E\+\_\+\+C\+B\+\_\+fragment}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+fragment\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64aa6a2f396eb7a5347aab278831786cd2c}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+field@{H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+field}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+field@{H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+field}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+field\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64ade6f685cd47ad03c836aeee97efff1ed}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+value@{H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+value}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+value@{H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+value}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+header\+\_\+value\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64aceed4040be7acf32b6bceb3aace8405e}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+headers\+\_\+complete@{H\+P\+E\+\_\+\+C\+B\+\_\+headers\+\_\+complete}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+headers\+\_\+complete@{H\+P\+E\+\_\+\+C\+B\+\_\+headers\+\_\+complete}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+headers\+\_\+complete\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a5d82bb467f93eed296d892408c44816a}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+body@{H\+P\+E\+\_\+\+C\+B\+\_\+body}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+body@{H\+P\+E\+\_\+\+C\+B\+\_\+body}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+body\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a5dc4b0888f48cd87fc3ded374ffac8a2}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+complete@{H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+complete}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+complete@{H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+complete}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+message\+\_\+complete\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64ae0f56ef0ecc6638fb0594d130a1ee490}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+reason@{H\+P\+E\+\_\+\+C\+B\+\_\+reason}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+reason@{H\+P\+E\+\_\+\+C\+B\+\_\+reason}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+reason\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a0fbc2052fe66f90ba7b74c1c0960beb2}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+header@{H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+header}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+header@{H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+header}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+header\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a69ccadce5be8074b104b19aa74dce556}
+}]\index{H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+complete@{H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+complete}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+complete@{H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+complete}}\item[{\em 
+H\+P\+E\+\_\+\+C\+B\+\_\+chunk\+\_\+complete\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a008e232118d6133c4dbdd9770d926694}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+O\+F\+\_\+\+S\+T\+A\+TE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+O\+F\+\_\+\+S\+T\+A\+TE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+O\+F\+\_\+\+S\+T\+A\+TE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+O\+F\+\_\+\+S\+T\+A\+TE}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+O\+F\+\_\+\+S\+T\+A\+TE\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a4103809c185fee62b11c188ff0eab39a}
+}]\index{H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW@{H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW@{H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW}}\item[{\em 
+H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a5270cdc2f8af1802ccf3a2f33fde9307}
+}]\index{H\+P\+E\+\_\+\+C\+L\+O\+S\+E\+D\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON@{H\+P\+E\+\_\+\+C\+L\+O\+S\+E\+D\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+C\+L\+O\+S\+E\+D\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON@{H\+P\+E\+\_\+\+C\+L\+O\+S\+E\+D\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON}}\item[{\em 
+H\+P\+E\+\_\+\+C\+L\+O\+S\+E\+D\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a7fbc6a25f20237b1cc795db489312e8e}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a5a1b7ae13c36ef37fd52b2b68112b501}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+A\+T\+US@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+A\+T\+US}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+A\+T\+US@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+A\+T\+US}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+A\+T\+US\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64aa4a2007f1dc03bf22aff5ca8885f6b59}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64ac031cfd48285e22ddec18964f6281f6e}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+RL@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+RL}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+RL@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+RL}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+RL\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64ad92573bf62e7b0a13d398926a984fa9d}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+O\+ST@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+O\+ST}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+O\+ST@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+O\+ST}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+O\+ST\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a6391e880280eda55707145bda1170294}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+O\+RT@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+O\+RT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+O\+RT@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+O\+RT}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+O\+RT\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a3e7c3b8a95f34bbd40ea047fcd43ffa5}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+A\+TH@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+A\+TH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+A\+TH@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+A\+TH}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+A\+TH\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a69e17a8b5a35b9f93ea914224c2d4f2a}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+Q\+U\+E\+R\+Y\+\_\+\+S\+T\+R\+I\+NG@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+Q\+U\+E\+R\+Y\+\_\+\+S\+T\+R\+I\+NG}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+Q\+U\+E\+R\+Y\+\_\+\+S\+T\+R\+I\+NG@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+Q\+U\+E\+R\+Y\+\_\+\+S\+T\+R\+I\+NG}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+Q\+U\+E\+R\+Y\+\_\+\+S\+T\+R\+I\+NG\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a383ef24f0ac59de1c128ca776d813865}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+R\+A\+G\+M\+E\+NT@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+R\+A\+G\+M\+E\+NT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+R\+A\+G\+M\+E\+NT@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+R\+A\+G\+M\+E\+NT}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+R\+A\+G\+M\+E\+NT\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64afa80e3a0c0dd1c93cf0a11cacbd59079}
+}]\index{H\+P\+E\+\_\+\+L\+F\+\_\+\+E\+X\+P\+E\+C\+T\+ED@{H\+P\+E\+\_\+\+L\+F\+\_\+\+E\+X\+P\+E\+C\+T\+ED}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+L\+F\+\_\+\+E\+X\+P\+E\+C\+T\+ED@{H\+P\+E\+\_\+\+L\+F\+\_\+\+E\+X\+P\+E\+C\+T\+ED}}\item[{\em 
+H\+P\+E\+\_\+\+L\+F\+\_\+\+E\+X\+P\+E\+C\+T\+ED\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64af9f23325bd502239af0326a0b407b41d}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64ac0348f1ca04bf4d882affcd0249336b5}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a18b873c41a1d7aa9ee9486f719aa7509}
+}]\index{H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH@{H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH@{H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH}}\item[{\em 
+H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a0de84a5a3fc46e496618b6ca68cbf720}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a36842cc306c491da8c42023be68585e9}
+}]\index{H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE@{H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE@{H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE}}\item[{\em 
+H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a449b28e6f5083e5c19648f0bbab377ba}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a10642ba93abe9e1e16012e955f397bf0}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64aec20cca6f364741da3f23c57bc94b4cf}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+S\+T\+A\+NT@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+S\+T\+A\+NT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+S\+T\+A\+NT@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+S\+T\+A\+NT}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+S\+T\+A\+NT\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a1b9ec4aeef6f168f9d711c27a0c6faa8}
+}]\index{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+S\+T\+A\+TE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+S\+T\+A\+TE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+S\+T\+A\+TE@{H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+S\+T\+A\+TE}}\item[{\em 
+H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+S\+T\+A\+TE\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64abb98b653c0972e3e22bc5ff8b57d0d55}
+}]\index{H\+P\+E\+\_\+\+S\+T\+R\+I\+CT@{H\+P\+E\+\_\+\+S\+T\+R\+I\+CT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+S\+T\+R\+I\+CT@{H\+P\+E\+\_\+\+S\+T\+R\+I\+CT}}\item[{\em 
+H\+P\+E\+\_\+\+S\+T\+R\+I\+CT\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a7f92de0f01b2d0e37209854069183f16}
+}]\index{H\+P\+E\+\_\+\+P\+A\+U\+S\+ED@{H\+P\+E\+\_\+\+P\+A\+U\+S\+ED}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+P\+A\+U\+S\+ED@{H\+P\+E\+\_\+\+P\+A\+U\+S\+ED}}\item[{\em 
+H\+P\+E\+\_\+\+P\+A\+U\+S\+ED\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64aed64f2a65634183e8f708ac80af3f6f2}
+}]\index{H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN@{H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN@{H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN}}\item[{\em 
+H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN\label{http__parser_8h_a14687aec2341ce0e62db2e543dd1da64a36cb81d8c40b00602b558f82a38eaecc}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 196 of file http\+\_\+parser.\+h.
+
+
+\begin{DoxyCode}
+196                 \{
+197   HTTP_ERRNO_MAP(HTTP_ERRNO_GEN)
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+method@{http\+\_\+method}}
+\index{http\+\_\+method@{http\+\_\+method}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+method}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf http\+\_\+method}}\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{H\+T\+T\+P\+\_\+\+D\+E\+L\+E\+TE@{H\+T\+T\+P\+\_\+\+D\+E\+L\+E\+TE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+D\+E\+L\+E\+TE@{H\+T\+T\+P\+\_\+\+D\+E\+L\+E\+TE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+D\+E\+L\+E\+TE\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a427575ab776ed70f0aa76667affc3942}
+}]\index{H\+T\+T\+P\+\_\+\+G\+ET@{H\+T\+T\+P\+\_\+\+G\+ET}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+G\+ET@{H\+T\+T\+P\+\_\+\+G\+ET}}\item[{\em 
+H\+T\+T\+P\+\_\+\+G\+ET\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a4ad23c3d2f21f7502ba058ef89518166}
+}]\index{H\+T\+T\+P\+\_\+\+H\+E\+AD@{H\+T\+T\+P\+\_\+\+H\+E\+AD}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+H\+E\+AD@{H\+T\+T\+P\+\_\+\+H\+E\+AD}}\item[{\em 
+H\+T\+T\+P\+\_\+\+H\+E\+AD\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8ab547cb50f6792b41c3e7d52ee0f8e442}
+}]\index{H\+T\+T\+P\+\_\+\+P\+O\+ST@{H\+T\+T\+P\+\_\+\+P\+O\+ST}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+O\+ST@{H\+T\+T\+P\+\_\+\+P\+O\+ST}}\item[{\em 
+H\+T\+T\+P\+\_\+\+P\+O\+ST\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8aa763023b51da2b3618f24cbf994b34bf}
+}]\index{H\+T\+T\+P\+\_\+\+P\+UT@{H\+T\+T\+P\+\_\+\+P\+UT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+UT@{H\+T\+T\+P\+\_\+\+P\+UT}}\item[{\em 
+H\+T\+T\+P\+\_\+\+P\+UT\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a2415577115dd0cd5d5a5aa62d52e1512}
+}]\index{H\+T\+T\+P\+\_\+\+C\+O\+N\+N\+E\+CT@{H\+T\+T\+P\+\_\+\+C\+O\+N\+N\+E\+CT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+C\+O\+N\+N\+E\+CT@{H\+T\+T\+P\+\_\+\+C\+O\+N\+N\+E\+CT}}\item[{\em 
+H\+T\+T\+P\+\_\+\+C\+O\+N\+N\+E\+CT\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a73feb27a5ac46d923d5c636f797b3e76}
+}]\index{H\+T\+T\+P\+\_\+\+O\+P\+T\+I\+O\+NS@{H\+T\+T\+P\+\_\+\+O\+P\+T\+I\+O\+NS}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+O\+P\+T\+I\+O\+NS@{H\+T\+T\+P\+\_\+\+O\+P\+T\+I\+O\+NS}}\item[{\em 
+H\+T\+T\+P\+\_\+\+O\+P\+T\+I\+O\+NS\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a86aa5540a666a38528d28bd7591cb251}
+}]\index{H\+T\+T\+P\+\_\+\+T\+R\+A\+CE@{H\+T\+T\+P\+\_\+\+T\+R\+A\+CE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+T\+R\+A\+CE@{H\+T\+T\+P\+\_\+\+T\+R\+A\+CE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+T\+R\+A\+CE\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8aeb1f77f6a1e09403704128086deecf6c}
+}]\index{H\+T\+T\+P\+\_\+\+C\+O\+PY@{H\+T\+T\+P\+\_\+\+C\+O\+PY}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+C\+O\+PY@{H\+T\+T\+P\+\_\+\+C\+O\+PY}}\item[{\em 
+H\+T\+T\+P\+\_\+\+C\+O\+PY\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8adb9611ac2f3fbaa16b21eddc40791b7c}
+}]\index{H\+T\+T\+P\+\_\+\+L\+O\+CK@{H\+T\+T\+P\+\_\+\+L\+O\+CK}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+L\+O\+CK@{H\+T\+T\+P\+\_\+\+L\+O\+CK}}\item[{\em 
+H\+T\+T\+P\+\_\+\+L\+O\+CK\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8aa7119ecfb8aece4bbfb7a261331abddf}
+}]\index{H\+T\+T\+P\+\_\+\+M\+K\+C\+OL@{H\+T\+T\+P\+\_\+\+M\+K\+C\+OL}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+M\+K\+C\+OL@{H\+T\+T\+P\+\_\+\+M\+K\+C\+OL}}\item[{\em 
+H\+T\+T\+P\+\_\+\+M\+K\+C\+OL\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a850ffd3aeeb1d55b124aa6d1f990b3a6}
+}]\index{H\+T\+T\+P\+\_\+\+M\+O\+VE@{H\+T\+T\+P\+\_\+\+M\+O\+VE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+M\+O\+VE@{H\+T\+T\+P\+\_\+\+M\+O\+VE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+M\+O\+VE\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8ad284635f2909fb5b9640928cb0e705c7}
+}]\index{H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+F\+I\+ND@{H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+F\+I\+ND}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+F\+I\+ND@{H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+F\+I\+ND}}\item[{\em 
+H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+F\+I\+ND\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a3d253975870f94c93f049575afaff83d}
+}]\index{H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+P\+A\+T\+CH@{H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+P\+A\+T\+CH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+P\+A\+T\+CH@{H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+P\+A\+T\+CH}}\item[{\em 
+H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+P\+A\+T\+CH\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a12eca1105638a830128e9dc989318f92}
+}]\index{H\+T\+T\+P\+\_\+\+U\+N\+L\+O\+CK@{H\+T\+T\+P\+\_\+\+U\+N\+L\+O\+CK}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+U\+N\+L\+O\+CK@{H\+T\+T\+P\+\_\+\+U\+N\+L\+O\+CK}}\item[{\em 
+H\+T\+T\+P\+\_\+\+U\+N\+L\+O\+CK\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a81202ae84a8fc30e687bc5059958c477}
+}]\index{H\+T\+T\+P\+\_\+\+R\+E\+P\+O\+RT@{H\+T\+T\+P\+\_\+\+R\+E\+P\+O\+RT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+R\+E\+P\+O\+RT@{H\+T\+T\+P\+\_\+\+R\+E\+P\+O\+RT}}\item[{\em 
+H\+T\+T\+P\+\_\+\+R\+E\+P\+O\+RT\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a544d35cc7e95e6a0be97122ab744f2bd}
+}]\index{H\+T\+T\+P\+\_\+\+M\+K\+A\+C\+T\+I\+V\+I\+TY@{H\+T\+T\+P\+\_\+\+M\+K\+A\+C\+T\+I\+V\+I\+TY}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+M\+K\+A\+C\+T\+I\+V\+I\+TY@{H\+T\+T\+P\+\_\+\+M\+K\+A\+C\+T\+I\+V\+I\+TY}}\item[{\em 
+H\+T\+T\+P\+\_\+\+M\+K\+A\+C\+T\+I\+V\+I\+TY\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a2bf319204b9298444ae66023a78ba9b4}
+}]\index{H\+T\+T\+P\+\_\+\+C\+H\+E\+C\+K\+O\+UT@{H\+T\+T\+P\+\_\+\+C\+H\+E\+C\+K\+O\+UT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+C\+H\+E\+C\+K\+O\+UT@{H\+T\+T\+P\+\_\+\+C\+H\+E\+C\+K\+O\+UT}}\item[{\em 
+H\+T\+T\+P\+\_\+\+C\+H\+E\+C\+K\+O\+UT\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8abcc115ec0192f6a56fd7ca8564c9e30e}
+}]\index{H\+T\+T\+P\+\_\+\+M\+E\+R\+GE@{H\+T\+T\+P\+\_\+\+M\+E\+R\+GE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+M\+E\+R\+GE@{H\+T\+T\+P\+\_\+\+M\+E\+R\+GE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+M\+E\+R\+GE\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a4851e8dca997a9b41099f2d8f14be069}
+}]\index{H\+T\+T\+P\+\_\+\+M\+S\+E\+A\+R\+CH@{H\+T\+T\+P\+\_\+\+M\+S\+E\+A\+R\+CH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+M\+S\+E\+A\+R\+CH@{H\+T\+T\+P\+\_\+\+M\+S\+E\+A\+R\+CH}}\item[{\em 
+H\+T\+T\+P\+\_\+\+M\+S\+E\+A\+R\+CH\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a20ba2a33b5833d9a16cca5a1ba9de8e3}
+}]\index{H\+T\+T\+P\+\_\+\+N\+O\+T\+I\+FY@{H\+T\+T\+P\+\_\+\+N\+O\+T\+I\+FY}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+N\+O\+T\+I\+FY@{H\+T\+T\+P\+\_\+\+N\+O\+T\+I\+FY}}\item[{\em 
+H\+T\+T\+P\+\_\+\+N\+O\+T\+I\+FY\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a39f145838eada9b10c689e4a2b154ccf}
+}]\index{H\+T\+T\+P\+\_\+\+S\+U\+B\+S\+C\+R\+I\+BE@{H\+T\+T\+P\+\_\+\+S\+U\+B\+S\+C\+R\+I\+BE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+S\+U\+B\+S\+C\+R\+I\+BE@{H\+T\+T\+P\+\_\+\+S\+U\+B\+S\+C\+R\+I\+BE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+S\+U\+B\+S\+C\+R\+I\+BE\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a59dcf849dc60543ed33bdb9ccd476daf}
+}]\index{H\+T\+T\+P\+\_\+\+U\+N\+S\+U\+B\+S\+C\+R\+I\+BE@{H\+T\+T\+P\+\_\+\+U\+N\+S\+U\+B\+S\+C\+R\+I\+BE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+U\+N\+S\+U\+B\+S\+C\+R\+I\+BE@{H\+T\+T\+P\+\_\+\+U\+N\+S\+U\+B\+S\+C\+R\+I\+BE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+U\+N\+S\+U\+B\+S\+C\+R\+I\+BE\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8a930cc3d0451fc715afb07adb2267198f}
+}]\index{H\+T\+T\+P\+\_\+\+P\+A\+T\+CH@{H\+T\+T\+P\+\_\+\+P\+A\+T\+CH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+P\+A\+T\+CH@{H\+T\+T\+P\+\_\+\+P\+A\+T\+CH}}\item[{\em 
+H\+T\+T\+P\+\_\+\+P\+A\+T\+CH\label{http__parser_8h_aacd5f203e33ac338ca5cb8f02a3ff3b8ae1345469c9ff83a10676dd96e7acf0dc}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 90 of file http\+\_\+parser.\+h.
+
+
+\begin{DoxyCode}
+91   \{ HTTP_DELETE    = 0
+92   , HTTP_GET
+93   , HTTP_HEAD
+94   , HTTP_POST
+95   , HTTP_PUT
+96   \textcolor{comment}{/* pathological */}
+97   , HTTP_CONNECT
+98   , HTTP_OPTIONS
+99   , HTTP_TRACE
+100   \textcolor{comment}{/* webdav */}
+101   , HTTP_COPY
+102   , HTTP_LOCK
+103   , HTTP_MKCOL
+104   , HTTP_MOVE
+105   , HTTP_PROPFIND
+106   , HTTP_PROPPATCH
+107   , HTTP_UNLOCK
+108   \textcolor{comment}{/* subversion */}
+109   , HTTP_REPORT
+110   , HTTP_MKACTIVITY
+111   , HTTP_CHECKOUT
+112   , HTTP_MERGE
+113   \textcolor{comment}{/* upnp */}
+114   , HTTP_MSEARCH
+115   , HTTP_NOTIFY
+116   , HTTP_SUBSCRIBE
+117   , HTTP_UNSUBSCRIBE
+118   \textcolor{comment}{/* RFC-5789 */}
+119   , HTTP_PATCH
+120   \};
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+type@{http\+\_\+parser\+\_\+type}}
+\index{http\+\_\+parser\+\_\+type@{http\+\_\+parser\+\_\+type}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf http\+\_\+parser\+\_\+type}}\label{http__parser_8h_af9d6d304f8c255158175951b434cfa7a}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST@{H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST@{H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST}}\item[{\em 
+H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST\label{http__parser_8h_af9d6d304f8c255158175951b434cfa7aa9f727b57e9e9c1651ee0df29aa1b1713}
+}]\index{H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE@{H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE}}\item[{\em 
+H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE\label{http__parser_8h_af9d6d304f8c255158175951b434cfa7aa132597b93208763e8e81c4a4a0e8a642}
+}]\index{H\+T\+T\+P\+\_\+\+B\+O\+TH@{H\+T\+T\+P\+\_\+\+B\+O\+TH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!H\+T\+T\+P\+\_\+\+B\+O\+TH@{H\+T\+T\+P\+\_\+\+B\+O\+TH}}\item[{\em 
+H\+T\+T\+P\+\_\+\+B\+O\+TH\label{http__parser_8h_af9d6d304f8c255158175951b434cfa7aadac18fbd072752213fd5308bb5fc8684}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 123 of file http\+\_\+parser.\+h.
+
+
+\begin{DoxyCode}
+123 \{ HTTP_REQUEST, HTTP_RESPONSE, HTTP_BOTH \};
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+url\+\_\+fields@{http\+\_\+parser\+\_\+url\+\_\+fields}}
+\index{http\+\_\+parser\+\_\+url\+\_\+fields@{http\+\_\+parser\+\_\+url\+\_\+fields}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+url\+\_\+fields}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf http\+\_\+parser\+\_\+url\+\_\+fields}}\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4eb}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{U\+F\+\_\+\+S\+C\+H\+E\+MA@{U\+F\+\_\+\+S\+C\+H\+E\+MA}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+S\+C\+H\+E\+MA@{U\+F\+\_\+\+S\+C\+H\+E\+MA}}\item[{\em 
+U\+F\+\_\+\+S\+C\+H\+E\+MA\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4ebab2b8b31b30d6bc897dde653f6cc9f06c}
+}]\index{U\+F\+\_\+\+H\+O\+ST@{U\+F\+\_\+\+H\+O\+ST}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+H\+O\+ST@{U\+F\+\_\+\+H\+O\+ST}}\item[{\em 
+U\+F\+\_\+\+H\+O\+ST\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4ebaf2aeb0b896645bd8100ca0f1e263a12f}
+}]\index{U\+F\+\_\+\+P\+O\+RT@{U\+F\+\_\+\+P\+O\+RT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+P\+O\+RT@{U\+F\+\_\+\+P\+O\+RT}}\item[{\em 
+U\+F\+\_\+\+P\+O\+RT\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4eba357b6dc1326ed55be377b0d839e8ca0f}
+}]\index{U\+F\+\_\+\+P\+A\+TH@{U\+F\+\_\+\+P\+A\+TH}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+P\+A\+TH@{U\+F\+\_\+\+P\+A\+TH}}\item[{\em 
+U\+F\+\_\+\+P\+A\+TH\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4eba86b9abfa220db7b834490d8b36e915af}
+}]\index{U\+F\+\_\+\+Q\+U\+E\+RY@{U\+F\+\_\+\+Q\+U\+E\+RY}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+Q\+U\+E\+RY@{U\+F\+\_\+\+Q\+U\+E\+RY}}\item[{\em 
+U\+F\+\_\+\+Q\+U\+E\+RY\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4ebabc8500a49ccad1cd91d66d1eefb503cc}
+}]\index{U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT@{U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT@{U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT}}\item[{\em 
+U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4eba32fb35461b96b6872f1427b2d51d1c30}
+}]\index{U\+F\+\_\+\+U\+S\+E\+R\+I\+N\+FO@{U\+F\+\_\+\+U\+S\+E\+R\+I\+N\+FO}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+U\+S\+E\+R\+I\+N\+FO@{U\+F\+\_\+\+U\+S\+E\+R\+I\+N\+FO}}\item[{\em 
+U\+F\+\_\+\+U\+S\+E\+R\+I\+N\+FO\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4ebacb4a85c6a7d6cd0b64ec6e91e7ba8689}
+}]\index{U\+F\+\_\+\+M\+AX@{U\+F\+\_\+\+M\+AX}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!U\+F\+\_\+\+M\+AX@{U\+F\+\_\+\+M\+AX}}\item[{\em 
+U\+F\+\_\+\+M\+AX\label{http__parser_8h_a9ca1f91c2958091e2ac9e9b2f903d4eba4b40c88291e4fa018de04553e7e1adfd}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 263 of file http\+\_\+parser.\+h.
+
+
+\begin{DoxyCode}
+265   \{ UF_SCHEMA           = 0
+266   , UF_HOST             = 1
+267   , UF_PORT             = 2
+268   , UF_PATH             = 3
+269   , UF_QUERY            = 4
+270   , UF_FRAGMENT         = 5
+271   , UF_USERINFO         = 6
+272   , UF_MAX              = 7
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+errno\+\_\+description@{http\+\_\+errno\+\_\+description}}
+\index{http\+\_\+errno\+\_\+description@{http\+\_\+errno\+\_\+description}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+errno\+\_\+description(enum http\+\_\+errno err)}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ http\+\_\+errno\+\_\+description (
+\begin{DoxyParamCaption}
+\item[{enum {\bf http\+\_\+errno}}]{err}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_a6dde757b0dee9b791e5d525c1ff2da0d}
+
+
+Definition at line 2186 of file http\+\_\+parser.\+c.
+
+
+
+References http\+\_\+strerror\+\_\+tab.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Parser\+Error(), and print\+\_\+error().
+
+
+\begin{DoxyCode}
+2187                                             \{
+2188   assert(err < (\textcolor{keyword}{sizeof}(http_strerror_tab)/\textcolor{keyword}{sizeof}(http_strerror_tab[0])));
+2189   \textcolor{keywordflow}{return} http_strerror_tab[err].description;
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+errno\+\_\+name@{http\+\_\+errno\+\_\+name}}
+\index{http\+\_\+errno\+\_\+name@{http\+\_\+errno\+\_\+name}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+errno\+\_\+name(enum http\+\_\+errno err)}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ http\+\_\+errno\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{enum {\bf http\+\_\+errno}}]{err}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_a8a93ed79c5d48491b72945ce11f75f7f}
+
+
+Definition at line 2180 of file http\+\_\+parser.\+c.
+
+
+
+References http\+\_\+strerror\+\_\+tab.
+
+
+
+Referenced by test\+\_\+simple().
+
+
+\begin{DoxyCode}
+2181                                      \{
+2182   assert(err < (\textcolor{keyword}{sizeof}(http_strerror_tab)/\textcolor{keyword}{sizeof}(http_strerror_tab[0])));
+2183   \textcolor{keywordflow}{return} http_strerror_tab[err].name;
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+method\+\_\+str@{http\+\_\+method\+\_\+str}}
+\index{http\+\_\+method\+\_\+str@{http\+\_\+method\+\_\+str}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+method\+\_\+str(enum http\+\_\+method m)}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ http\+\_\+method\+\_\+str (
+\begin{DoxyParamCaption}
+\item[{enum {\bf http\+\_\+method}}]{m}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_acdafb72b3fddca085841586537406859}
+
+
+Definition at line 2159 of file http\+\_\+parser.\+c.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Headers\+Complete().
+
+
+\begin{DoxyCode}
+2161 \{
+2162   \textcolor{keywordflow}{return} method_strings[m];
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+execute@{http\+\_\+parser\+\_\+execute}}
+\index{http\+\_\+parser\+\_\+execute@{http\+\_\+parser\+\_\+execute}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+execute(http\+\_\+parser $\ast$parser, const http\+\_\+parser\+\_\+settings $\ast$settings, const char $\ast$data, size\+\_\+t len)}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t http\+\_\+parser\+\_\+execute (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{parser, }
+\item[{const {\bf http\+\_\+parser\+\_\+settings} $\ast$}]{settings, }
+\item[{const char $\ast$}]{data, }
+\item[{size\+\_\+t}]{len}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_a5034165465db6c488ce8b75fd0f72faf}
+
+
+Definition at line 602 of file http\+\_\+parser.\+c.
+
+
+
+References \+\_\+\+C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+D\+A\+TA, BS, C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+D\+A\+TA, C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+D\+A\+T\+A\+\_\+\+N\+O\+A\+D\+V\+A\+N\+CE, C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+N\+O\+T\+I\+FY, C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+N\+O\+T\+I\+F\+Y\+\_\+\+N\+O\+A\+D\+V\+A\+N\+CE, C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+S\+P\+A\+CE, C\+H\+U\+N\+K\+ED, C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH, http\+\_\+parser\+::content\+\_\+length, CR, F\+\_\+\+C\+H\+U\+N\+K\+ED, F\+\_\+\+S\+K\+I\+P\+B\+O\+DY, F\+\_\+\+T\+R\+A\+I\+L\+I\+NG, F\+\_\+\+U\+P\+G\+R\+A\+DE, http\+\_\+parser\+::flags, h\+\_\+content\+\_\+length, h\+\_\+general, h\+\_\+general\+\_\+and\+\_\+quote, h\+\_\+general\+\_\+and\+\_\+quote\+\_\+and\+\_\+escape, h\+\_\+matching\+\_\+content\+\_\+length, h\+\_\+matching\+\_\+transfer\+\_\+encoding, h\+\_\+matching\+\_\+transfer\+\_\+encoding\+\_\+chunked, h\+\_\+matching\+\_\+upgrade, h\+\_\+transfer\+\_\+encoding, h\+\_\+transfer\+\_\+encoding\+\_\+chunked, h\+\_\+upgrade, http\+\_\+parser\+::header\+\_\+state, H\+P\+E\+\_\+\+C\+B\+\_\+headers\+\_\+complete, H\+P\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+O\+V\+E\+R\+F\+L\+OW, H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE, H\+P\+E\+\_\+\+H\+U\+G\+E\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+H\+U\+N\+K\+\_\+\+S\+I\+ZE, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+S\+T\+A\+NT, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+N\+T\+E\+N\+T\+\_\+\+L\+E\+N\+G\+TH, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+E\+O\+F\+\_\+\+S\+T\+A\+TE, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+F\+R\+A\+G\+M\+E\+NT, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+T\+O\+K\+EN, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+H\+O\+ST, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+T\+E\+R\+N\+A\+L\+\_\+\+S\+T\+A\+TE, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+M\+E\+T\+H\+OD, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+A\+TH, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+O\+RT, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+Q\+U\+E\+R\+Y\+\_\+\+S\+T\+R\+I\+NG, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+T\+A\+T\+US, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+P\+G\+R\+A\+DE, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+U\+RL, H\+P\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+V\+E\+R\+S\+I\+ON, H\+P\+E\+\_\+\+L\+F\+\_\+\+E\+X\+P\+E\+C\+T\+ED, H\+P\+E\+\_\+\+OK, H\+P\+E\+\_\+\+S\+T\+R\+I\+CT, H\+P\+E\+\_\+\+U\+N\+K\+N\+O\+WN, H\+T\+T\+P\+\_\+\+C\+H\+E\+C\+K\+O\+UT, H\+T\+T\+P\+\_\+\+C\+O\+N\+N\+E\+CT, H\+T\+T\+P\+\_\+\+C\+O\+PY, H\+T\+T\+P\+\_\+\+D\+E\+L\+E\+TE, http\+\_\+parser\+::http\+\_\+errno, H\+T\+T\+P\+\_\+\+G\+ET, H\+T\+T\+P\+\_\+\+H\+E\+AD, H\+T\+T\+P\+\_\+\+L\+O\+CK, http\+\_\+parser\+::http\+\_\+major, H\+T\+T\+P\+\_\+\+M\+A\+X\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE, H\+T\+T\+P\+\_\+\+M\+E\+R\+GE, http\+\_\+parser\+::http\+\_\+minor, H\+T\+T\+P\+\_\+\+M\+K\+A\+C\+T\+I\+V\+I\+TY, H\+T\+T\+P\+\_\+\+M\+K\+C\+OL, H\+T\+T\+P\+\_\+\+M\+O\+VE, H\+T\+T\+P\+\_\+\+M\+S\+E\+A\+R\+CH, H\+T\+T\+P\+\_\+\+N\+O\+T\+I\+FY, H\+T\+T\+P\+\_\+\+O\+P\+T\+I\+O\+NS, H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO, H\+T\+T\+P\+\_\+\+P\+A\+T\+CH, H\+T\+T\+P\+\_\+\+P\+O\+ST, H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+F\+I\+ND, H\+T\+T\+P\+\_\+\+P\+R\+O\+P\+P\+A\+T\+CH, H\+T\+T\+P\+\_\+\+P\+UT, H\+T\+T\+P\+\_\+\+R\+E\+P\+O\+RT, H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST, H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE, H\+T\+T\+P\+\_\+\+S\+U\+B\+S\+C\+R\+I\+BE, H\+T\+T\+P\+\_\+\+T\+R\+A\+CE, H\+T\+T\+P\+\_\+\+U\+N\+L\+O\+CK, H\+T\+T\+P\+\_\+\+U\+N\+S\+U\+B\+S\+C\+R\+I\+BE, http\+\_\+parser\+::index, I\+S\+\_\+\+A\+L\+P\+HA, I\+S\+\_\+\+A\+L\+P\+H\+A\+N\+UM, I\+S\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+H\+AR, I\+S\+\_\+\+H\+EX, I\+S\+\_\+\+H\+O\+S\+T\+\_\+\+C\+H\+AR, I\+S\+\_\+\+N\+UM, I\+S\+\_\+\+U\+R\+L\+\_\+\+C\+H\+AR, LF, L\+O\+W\+ER, M\+A\+RK, http\+\_\+parser\+::method, M\+IN, M\+O\+V\+E\+\_\+\+F\+A\+ST, M\+O\+V\+E\+\_\+\+T\+H\+E\+\_\+\+H\+E\+AD, N\+E\+W\+\_\+\+M\+E\+S\+S\+A\+GE, http\+\_\+parser\+::nread, http\+\_\+parser\+\_\+settings\+::on\+\_\+headers\+\_\+complete, P\+A\+R\+S\+I\+N\+G\+\_\+\+H\+E\+A\+D\+ER, QT, R\+E\+T\+U\+RN, s\+\_\+body\+\_\+identity, s\+\_\+body\+\_\+identity\+\_\+eof, s\+\_\+chunk\+\_\+data, s\+\_\+chunk\+\_\+data\+\_\+almost\+\_\+done, s\+\_\+chunk\+\_\+data\+\_\+done, s\+\_\+chunk\+\_\+parameters, s\+\_\+chunk\+\_\+size, s\+\_\+chunk\+\_\+size\+\_\+almost\+\_\+done, s\+\_\+chunk\+\_\+size\+\_\+start, s\+\_\+header\+\_\+almost\+\_\+done, s\+\_\+header\+\_\+field, s\+\_\+header\+\_\+field\+\_\+start, s\+\_\+header\+\_\+value, s\+\_\+header\+\_\+value\+\_\+lws, s\+\_\+header\+\_\+value\+\_\+start, s\+\_\+headers\+\_\+almost\+\_\+done, s\+\_\+headers\+\_\+done, s\+\_\+message\+\_\+done, s\+\_\+pre\+\_\+start\+\_\+req, s\+\_\+pre\+\_\+start\+\_\+req\+\_\+or\+\_\+res, s\+\_\+pre\+\_\+start\+\_\+res, s\+\_\+req\+\_\+first\+\_\+http\+\_\+major, s\+\_\+req\+\_\+first\+\_\+http\+\_\+minor, s\+\_\+req\+\_\+fragment, s\+\_\+req\+\_\+fragment\+\_\+start, s\+\_\+req\+\_\+host, s\+\_\+req\+\_\+host\+\_\+done, s\+\_\+req\+\_\+host\+\_\+ipv6, s\+\_\+req\+\_\+host\+\_\+start, s\+\_\+req\+\_\+http\+\_\+H, s\+\_\+req\+\_\+http\+\_\+\+HT, s\+\_\+req\+\_\+http\+\_\+\+H\+TT, s\+\_\+req\+\_\+http\+\_\+\+H\+T\+TP, s\+\_\+req\+\_\+http\+\_\+major, s\+\_\+req\+\_\+http\+\_\+minor, s\+\_\+req\+\_\+http\+\_\+start, s\+\_\+req\+\_\+line\+\_\+almost\+\_\+done, s\+\_\+req\+\_\+method, s\+\_\+req\+\_\+path, s\+\_\+req\+\_\+port, s\+\_\+req\+\_\+query\+\_\+string, s\+\_\+req\+\_\+query\+\_\+string\+\_\+start, s\+\_\+req\+\_\+schema, s\+\_\+req\+\_\+schema\+\_\+slash, s\+\_\+req\+\_\+schema\+\_\+slash\+\_\+slash, s\+\_\+req\+\_\+spaces\+\_\+before\+\_\+url, s\+\_\+res\+\_\+first\+\_\+http\+\_\+major, s\+\_\+res\+\_\+first\+\_\+http\+\_\+minor, s\+\_\+res\+\_\+first\+\_\+status\+\_\+code, s\+\_\+res\+\_\+H, s\+\_\+res\+\_\+\+HT, s\+\_\+res\+\_\+\+H\+TT, s\+\_\+res\+\_\+\+H\+T\+TP, s\+\_\+res\+\_\+http\+\_\+major, s\+\_\+res\+\_\+http\+\_\+minor, s\+\_\+res\+\_\+line\+\_\+almost\+\_\+done, s\+\_\+res\+\_\+or\+\_\+resp\+\_\+H, s\+\_\+res\+\_\+status, s\+\_\+res\+\_\+status\+\_\+code, s\+\_\+start\+\_\+req, s\+\_\+start\+\_\+req\+\_\+or\+\_\+res, s\+\_\+start\+\_\+res, S\+E\+T\+\_\+\+E\+R\+R\+NO, http\+\_\+parser\+::state, http\+\_\+parser\+::status\+\_\+code, S\+T\+R\+I\+C\+T\+\_\+\+C\+H\+E\+CK, T\+O\+K\+EN, T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+N\+C\+O\+D\+I\+NG, http\+\_\+parser\+::type, U\+P\+G\+R\+A\+DE, and http\+\_\+parser\+::upgrade.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::on\+Ingress\+E\+O\+F(), parse(), parse\+\_\+count\+\_\+body(), parse\+\_\+pause(), test\+\_\+header\+\_\+overflow\+\_\+error(), and test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body().
+
+
+\begin{DoxyCode}
+607 \{
+608   \textcolor{keywordtype}{char} c, ch;
+609   int8\_t unhex\_val;
+610   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *p = data;
+611 
+612   \textcolor{comment}{/* Optimization: within the parsing loop below, we refer to this}
+613 \textcolor{comment}{   * local copy of the state rather than parser->state.  The compiler}
+614 \textcolor{comment}{   * can't be sure whether parser->state will change during a callback,}
+615 \textcolor{comment}{   * so it generates a lot of memory loads and stores to keep a register}
+616 \textcolor{comment}{   * copy of the state in sync with the memory copy.  We know, however,}
+617 \textcolor{comment}{   * that the callbacks aren't allowed to change the parser state, so}
+618 \textcolor{comment}{   * the parsing loop works with this local variable and only copies}
+619 \textcolor{comment}{   * the value back to parser->loop before returning or invoking a}
+620 \textcolor{comment}{   * callback.}
+621 \textcolor{comment}{   */}
+622   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} state = parser->state;
+623   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lenient = 0;
+624 
+625   \textcolor{comment}{/* We're in an error state. Don't bother doing anything. */}
+626   \textcolor{keywordflow}{if} (HTTP_PARSER_ERRNO(parser) != HPE_OK) \{
+627     RETURN(0);
+628   \}
+629 
+630   \textcolor{keywordflow}{if} (len == 0) \{
+631     \textcolor{keywordflow}{switch} (state) \{
+632       \textcolor{keywordflow}{case} s_body_identity_eof:
+633         \textcolor{comment}{/* Use of CALLBACK\_NOTIFY() here would erroneously return 1 byte read if}
+634 \textcolor{comment}{         * we got paused.}
+635 \textcolor{comment}{         */}
+636         CALLBACK_NOTIFY_NOADVANCE(message\_complete);
+637         RETURN(0);
+638 
+639       \textcolor{keywordflow}{case} s_pre_start_req_or_res:
+640       \textcolor{keywordflow}{case} s_pre_start_res:
+641       \textcolor{keywordflow}{case} s_pre_start_req:
+642         RETURN(0);
+643 
+644       \textcolor{keywordflow}{default}:
+645         SET_ERRNO(HPE_INVALID_EOF_STATE);
+646         RETURN(1);
+647     \}
+648   \}
+649 
+650   \textcolor{comment}{/* technically we could combine all of these (except for url\_mark) into one}
+651 \textcolor{comment}{     variable, saving stack space, but it seems more clear to have them}
+652 \textcolor{comment}{     separated. */}
+653   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *header\_field\_mark = 0;
+654   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *header\_value\_mark = 0;
+655   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *url\_mark = 0;
+656   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *reason\_mark = 0;
+657   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *body\_mark = 0;
+658 
+659   \textcolor{keywordflow}{if} (state == s_header_field)
+660     header\_field\_mark = data;
+661   \textcolor{keywordflow}{if} (state == s_header_value)
+662     header\_value\_mark = data;
+663   \textcolor{keywordflow}{if} (state == s_req_path ||
+664       state == s_req_schema ||
+665       state == s_req_schema_slash ||
+666       state == s_req_schema_slash_slash ||
+667       state == s_req_port ||
+668       state == s_req_query_string_start ||
+669       state == s_req_query_string ||
+670       state == s_req_host_start ||
+671       state == s_req_host ||
+672       state == s_req_host_ipv6 ||
+673       state == s_req_host_done ||
+674       state == s_req_fragment_start ||
+675       state == s_req_fragment)
+676     url\_mark = data;
+677   \textcolor{keywordflow}{if} (state == s_res_status)
+678     reason\_mark = data;
+679 
+680   \textcolor{comment}{/* Used only for overflow checking. If the parser is in a parsing-headers}
+681 \textcolor{comment}{   * state, then its value is equal to max(data, the beginning of the current}
+682 \textcolor{comment}{   * message or chunk). If the parser is in a not-parsing-headers state, then}
+683 \textcolor{comment}{   * its value is irrelevant.}
+684 \textcolor{comment}{   */}
+685   \textcolor{keyword}{const} \textcolor{keywordtype}{char}* data\_or\_header\_data\_start = data;
+686 
+687   \textcolor{keywordflow}{for} (p = data; p != data + len; p++) \{
+688     ch = *p;
+689 
+690     reexecute\_byte:
+691     \textcolor{keywordflow}{switch} (state) \{
+692 
+693       \textcolor{keywordflow}{case} s_pre_start_req_or_res:
+694         \textcolor{keywordflow}{if} (ch == CR || ch == LF)
+695           \textcolor{keywordflow}{break};
+696         state = s_start_req_or_res;
+697         CALLBACK_NOTIFY_NOADVANCE(message\_begin);
+698         \textcolor{keywordflow}{goto} reexecute\_byte;
+699 
+700       \textcolor{keywordflow}{case} s_start_req_or_res:
+701       \{
+702         parser->flags = 0;
+703         parser->content_length = -1;
+704 
+705         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'H'}) \{
+706           state = s_res_or_resp_H;
+707         \} \textcolor{keywordflow}{else} \{
+708           parser->type = HTTP_REQUEST;
+709           state = s_start_req;
+710           \textcolor{keywordflow}{goto} reexecute\_byte;
+711         \}
+712 
+713         \textcolor{keywordflow}{break};
+714       \}
+715 
+716       \textcolor{keywordflow}{case} s_res_or_resp_H:
+717         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'T'}) \{
+718           parser->type = HTTP_RESPONSE;
+719           state = s_res_HT;
+720         \} \textcolor{keywordflow}{else} \{
+721           \textcolor{keywordflow}{if} (ch != \textcolor{charliteral}{'E'}) \{
+722             SET_ERRNO(HPE_INVALID_CONSTANT);
+723             \textcolor{keywordflow}{goto} error;
+724           \}
+725 
+726           parser->type = HTTP_REQUEST;
+727           parser->method = HTTP_HEAD;
+728           parser->index = 2;
+729           state = s_req_method;
+730         \}
+731         \textcolor{keywordflow}{break};
+732 
+733       \textcolor{keywordflow}{case} s_pre_start_res:
+734         \textcolor{keywordflow}{if} (ch == CR || ch == LF)
+735           \textcolor{keywordflow}{break};
+736         state = s_start_res;
+737         CALLBACK_NOTIFY_NOADVANCE(message\_begin);
+738         \textcolor{keywordflow}{goto} reexecute\_byte;
+739 
+740       \textcolor{keywordflow}{case} s_start_res:
+741       \{
+742         parser->flags = 0;
+743         parser->content_length = -1;
+744 
+745         \textcolor{keywordflow}{switch} (ch) \{
+746           \textcolor{keywordflow}{case} \textcolor{charliteral}{'H'}:
+747             state = s_res_H;
+748             \textcolor{keywordflow}{break};
+749 
+750           \textcolor{keywordflow}{default}:
+751             SET_ERRNO(HPE_INVALID_CONSTANT);
+752             \textcolor{keywordflow}{goto} error;
+753         \}
+754 
+755         \textcolor{keywordflow}{break};
+756       \}
+757 
+758       \textcolor{keywordflow}{case} s_res_H:
+759         STRICT_CHECK(ch != \textcolor{charliteral}{'T'});
+760         state = s_res_HT;
+761         \textcolor{keywordflow}{break};
+762 
+763       \textcolor{keywordflow}{case} s_res_HT:
+764         STRICT_CHECK(ch != \textcolor{charliteral}{'T'});
+765         state = s_res_HTT;
+766         \textcolor{keywordflow}{break};
+767 
+768       \textcolor{keywordflow}{case} s_res_HTT:
+769         STRICT_CHECK(ch != \textcolor{charliteral}{'P'});
+770         state = s_res_HTTP;
+771         \textcolor{keywordflow}{break};
+772 
+773       \textcolor{keywordflow}{case} s_res_HTTP:
+774         STRICT_CHECK(ch != \textcolor{charliteral}{'/'});
+775         state = s_res_first_http_major;
+776         \textcolor{keywordflow}{break};
+777 
+778       \textcolor{keywordflow}{case} s_res_first_http_major:
+779         \textcolor{keywordflow}{if} (ch < '0' || ch > \textcolor{charliteral}{'9'}) \{
+780           SET_ERRNO(HPE_INVALID_VERSION);
+781           \textcolor{keywordflow}{goto} error;
+782         \}
+783 
+784         parser->http_major = ch - \textcolor{charliteral}{'0'};
+785         state = s_res_http_major;
+786         \textcolor{keywordflow}{break};
+787 
+788       \textcolor{comment}{/* major HTTP version or dot */}
+789       \textcolor{keywordflow}{case} s_res_http_major:
+790       \{
+791         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'.'}) \{
+792           state = s_res_first_http_minor;
+793           \textcolor{keywordflow}{break};
+794         \}
+795 
+796         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+797           SET_ERRNO(HPE_INVALID_VERSION);
+798           \textcolor{keywordflow}{goto} error;
+799         \}
+800 
+801         parser->http_major *= 10;
+802         parser->http_major += ch - \textcolor{charliteral}{'0'};
+803 
+804         \textcolor{keywordflow}{if} (parser->http_major > 999) \{
+805           SET_ERRNO(HPE_INVALID_VERSION);
+806           \textcolor{keywordflow}{goto} error;
+807         \}
+808 
+809         \textcolor{keywordflow}{break};
+810       \}
+811 
+812       \textcolor{comment}{/* first digit of minor HTTP version */}
+813       \textcolor{keywordflow}{case} s_res_first_http_minor:
+814         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+815           SET_ERRNO(HPE_INVALID_VERSION);
+816           \textcolor{keywordflow}{goto} error;
+817         \}
+818 
+819         parser->http_minor = ch - \textcolor{charliteral}{'0'};
+820         state = s_res_http_minor;
+821         \textcolor{keywordflow}{break};
+822 
+823       \textcolor{comment}{/* minor HTTP version or end of request line */}
+824       \textcolor{keywordflow}{case} s_res_http_minor:
+825       \{
+826         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{' '}) \{
+827           state = s_res_first_status_code;
+828           \textcolor{keywordflow}{break};
+829         \}
+830 
+831         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+832           SET_ERRNO(HPE_INVALID_VERSION);
+833           \textcolor{keywordflow}{goto} error;
+834         \}
+835 
+836         parser->http_minor *= 10;
+837         parser->http_minor += ch - \textcolor{charliteral}{'0'};
+838 
+839         \textcolor{keywordflow}{if} (parser->http_minor > 999) \{
+840           SET_ERRNO(HPE_INVALID_VERSION);
+841           \textcolor{keywordflow}{goto} error;
+842         \}
+843 
+844         \textcolor{keywordflow}{break};
+845       \}
+846 
+847       \textcolor{keywordflow}{case} s_res_first_status_code:
+848       \{
+849         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+850           \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{' '}) \{
+851             \textcolor{keywordflow}{break};
+852           \}
+853 
+854           SET_ERRNO(HPE_INVALID_STATUS);
+855           \textcolor{keywordflow}{goto} error;
+856         \}
+857         parser->status_code = ch - \textcolor{charliteral}{'0'};
+858         state = s_res_status_code;
+859         \textcolor{keywordflow}{break};
+860       \}
+861 
+862       \textcolor{keywordflow}{case} s_res_status_code:
+863       \{
+864         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+865           \textcolor{keywordflow}{switch} (ch) \{
+866             \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+867               state = s_res_status;
+868               \textcolor{keywordflow}{break};
+869             \textcolor{keywordflow}{case} CR:
+870               state = s_res_line_almost_done;
+871               \textcolor{keywordflow}{break};
+872             \textcolor{keywordflow}{case} LF:
+873               state = s_header_field_start;
+874               \textcolor{keywordflow}{break};
+875             \textcolor{keywordflow}{default}:
+876               SET_ERRNO(HPE_INVALID_STATUS);
+877               \textcolor{keywordflow}{goto} error;
+878           \}
+879           \textcolor{keywordflow}{break};
+880         \}
+881 
+882         parser->status_code *= 10;
+883         parser->status_code += ch - \textcolor{charliteral}{'0'};
+884 
+885         \textcolor{keywordflow}{if} (parser->status_code > 999) \{
+886           SET_ERRNO(HPE_INVALID_STATUS);
+887           \textcolor{keywordflow}{goto} error;
+888         \}
+889 
+890         \textcolor{keywordflow}{break};
+891       \}
+892 
+893       \textcolor{keywordflow}{case} s_res_status:
+894         \textcolor{comment}{/* the human readable status. e.g. "NOT FOUND" */}
+895         MARK(reason);
+896         \textcolor{keywordflow}{if} (ch == CR) \{
+897           state = s_res_line_almost_done;
+898           CALLBACK_DATA(reason);
+899           \textcolor{keywordflow}{break};
+900         \}
+901 
+902         \textcolor{keywordflow}{if} (ch == LF) \{
+903           state = s_header_field_start;
+904           CALLBACK_DATA(reason);
+905           \textcolor{keywordflow}{break};
+906         \}
+907         \textcolor{keywordflow}{break};
+908 
+909       \textcolor{keywordflow}{case} s_res_line_almost_done:
+910         STRICT_CHECK(ch != LF);
+911         state = s_header_field_start;
+912         \textcolor{keywordflow}{break};
+913 
+914       \textcolor{keywordflow}{case} s_pre_start_req:
+915         \textcolor{keywordflow}{if} (ch == CR || ch == LF) \{
+916           \textcolor{keywordflow}{break};
+917         \}
+918         state = s_start_req;
+919         CALLBACK_NOTIFY_NOADVANCE(message\_begin);
+920         \textcolor{keywordflow}{goto} reexecute\_byte;
+921 
+922       \textcolor{keywordflow}{case} s_start_req:
+923       \{
+924         parser->flags = 0;
+925         parser->content_length = -1;
+926 
+927         \textcolor{keywordflow}{if} (!IS_ALPHA(ch)) \{
+928           SET_ERRNO(HPE_INVALID_METHOD);
+929           \textcolor{keywordflow}{goto} error;
+930         \}
+931 
+932         parser->method = (\textcolor{keyword}{enum} http_method) 0;
+933         parser->index = 1;
+934         \textcolor{keywordflow}{switch} (ch) \{
+935           \textcolor{keywordflow}{case} \textcolor{charliteral}{'C'}: parser->method = HTTP_CONNECT; \textcolor{comment}{/* or COPY, CHECKOUT */} \textcolor{keywordflow}{break};
+936           \textcolor{keywordflow}{case} \textcolor{charliteral}{'D'}: parser->method = HTTP_DELETE; \textcolor{keywordflow}{break};
+937           \textcolor{keywordflow}{case} \textcolor{charliteral}{'G'}: parser->method = HTTP_GET; \textcolor{keywordflow}{break};
+938           \textcolor{keywordflow}{case} \textcolor{charliteral}{'H'}: parser->method = HTTP_HEAD; \textcolor{keywordflow}{break};
+939           \textcolor{keywordflow}{case} \textcolor{charliteral}{'L'}: parser->method = HTTP_LOCK; \textcolor{keywordflow}{break};
+940           \textcolor{keywordflow}{case} \textcolor{charliteral}{'M'}: parser->method = HTTP_MKCOL; \textcolor{comment}{/* or MOVE, MKACTIVITY, MERGE, M-SEARCH */} \textcolor{keywordflow}{break};
+941           \textcolor{keywordflow}{case} \textcolor{charliteral}{'N'}: parser->method = HTTP_NOTIFY; \textcolor{keywordflow}{break};
+942           \textcolor{keywordflow}{case} \textcolor{charliteral}{'O'}: parser->method = HTTP_OPTIONS; \textcolor{keywordflow}{break};
+943           \textcolor{keywordflow}{case} \textcolor{charliteral}{'P'}: parser->method = HTTP_POST;
+944             \textcolor{comment}{/* or PROPFIND or PROPPATCH or PUT or PATCH */}
+945             \textcolor{keywordflow}{break};
+946           \textcolor{keywordflow}{case} \textcolor{charliteral}{'R'}: parser->method = HTTP_REPORT; \textcolor{keywordflow}{break};
+947           \textcolor{keywordflow}{case} \textcolor{charliteral}{'S'}: parser->method = HTTP_SUBSCRIBE; \textcolor{keywordflow}{break};
+948           \textcolor{keywordflow}{case} \textcolor{charliteral}{'T'}: parser->method = HTTP_TRACE; \textcolor{keywordflow}{break};
+949           \textcolor{keywordflow}{case} \textcolor{charliteral}{'U'}: parser->method = HTTP_UNLOCK; \textcolor{comment}{/* or UNSUBSCRIBE */} \textcolor{keywordflow}{break};
+950           \textcolor{keywordflow}{default}:
+951             SET_ERRNO(HPE_INVALID_METHOD);
+952             \textcolor{keywordflow}{goto} error;
+953         \}
+954         state = s_req_method;
+955 
+956         \textcolor{keywordflow}{break};
+957       \}
+958 
+959       \textcolor{keywordflow}{case} s_req_method:
+960       \{
+961         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'\(\backslash\)0'}) \{
+962           SET_ERRNO(HPE_INVALID_METHOD);
+963           \textcolor{keywordflow}{goto} error;
+964         \}
+965 
+966         \textcolor{keyword}{const} \textcolor{keywordtype}{char} *matcher = method_strings[parser->method];
+967         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{' '} && matcher[parser->index] == \textcolor{charliteral}{'\(\backslash\)0'}) \{
+968           state = s_req_spaces_before_url;
+969         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ch == matcher[parser->index]) \{
+970           ; \textcolor{comment}{/* nada */}
+971         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->method == HTTP_CONNECT) \{
+972           \textcolor{keywordflow}{if} (parser->index == 1 && ch == \textcolor{charliteral}{'H'}) \{
+973             parser->method = HTTP_CHECKOUT;
+974           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == 2  && ch == \textcolor{charliteral}{'P'}) \{
+975             parser->method = HTTP_COPY;
+976           \} \textcolor{keywordflow}{else} \{
+977             \textcolor{keywordflow}{goto} error;
+978           \}
+979         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->method == HTTP_MKCOL) \{
+980           \textcolor{keywordflow}{if} (parser->index == 1 && ch == \textcolor{charliteral}{'O'}) \{
+981             parser->method = HTTP_MOVE;
+982           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == 1 && ch == \textcolor{charliteral}{'E'}) \{
+983             parser->method = HTTP_MERGE;
+984           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == 1 && ch == \textcolor{charliteral}{'-'}) \{
+985             parser->method = HTTP_MSEARCH;
+986           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == 2 && ch == \textcolor{charliteral}{'A'}) \{
+987             parser->method = HTTP_MKACTIVITY;
+988           \} \textcolor{keywordflow}{else} \{
+989             \textcolor{keywordflow}{goto} error;
+990           \}
+991         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == 1 && parser->method == HTTP_POST) \{
+992           \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'R'}) \{
+993             parser->method = HTTP_PROPFIND; \textcolor{comment}{/* or HTTP\_PROPPATCH */}
+994           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'U'}) \{
+995             parser->method = HTTP_PUT;
+996           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'A'}) \{
+997             parser->method = HTTP_PATCH;
+998           \} \textcolor{keywordflow}{else} \{
+999             \textcolor{keywordflow}{goto} error;
+1000           \}
+1001         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == 2 && parser->method == HTTP_UNLOCK && ch == \textcolor{charliteral}{'S'}) \{
+1002           parser->method = HTTP_UNSUBSCRIBE;
+1003         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == 4 && parser->method == HTTP_PROPFIND && ch == \textcolor{charliteral}{'P'}) \{
+1004           parser->method = HTTP_PROPPATCH;
+1005         \} \textcolor{keywordflow}{else} \{
+1006           SET_ERRNO(HPE_INVALID_METHOD);
+1007           \textcolor{keywordflow}{goto} error;
+1008         \}
+1009 
+1010         ++parser->index;
+1011         \textcolor{keywordflow}{break};
+1012       \}
+1013 
+1014       \textcolor{keywordflow}{case} s_req_spaces_before_url:
+1015       \{
+1016         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{' '}) \textcolor{keywordflow}{break};
+1017 
+1018         \textcolor{comment}{// CONNECT requests must be followed by a <host>:<port>}
+1019         \textcolor{keywordflow}{if} (parser->method == HTTP_CONNECT) \{
+1020           MARK(url);
+1021           state = s_req_host_start;
+1022           \textcolor{keywordflow}{goto} reexecute\_byte;
+1023         \}
+1024 
+1025         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'/'} || ch == \textcolor{charliteral}{'*'}) \{
+1026           MARK(url);
+1027           state = s_req_path;
+1028           \textcolor{keywordflow}{break};
+1029         \}
+1030 
+1031         \textcolor{comment}{/* Proxied requests are followed by scheme of an absolute URI (alpha).}
+1032 \textcolor{comment}{         * All other methods are followed by '/' or '*' (handled above).}
+1033 \textcolor{comment}{         */}
+1034         \textcolor{keywordflow}{if} (IS_ALPHA(ch)) \{
+1035           MARK(url);
+1036           state = s_req_schema;
+1037           \textcolor{keywordflow}{break};
+1038         \}
+1039 
+1040         SET_ERRNO(HPE_INVALID_URL);
+1041         \textcolor{keywordflow}{goto} error;
+1042       \}
+1043 
+1044       \textcolor{keywordflow}{case} s_req_schema:
+1045       \{
+1046         \textcolor{keywordflow}{if} (IS_ALPHA(ch)) \textcolor{keywordflow}{break};
+1047 
+1048         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{':'}) \{
+1049           state = s_req_schema_slash;
+1050           \textcolor{keywordflow}{break};
+1051         \}
+1052 
+1053         SET_ERRNO(HPE_INVALID_URL);
+1054         \textcolor{keywordflow}{goto} error;
+1055       \}
+1056 
+1057       \textcolor{keywordflow}{case} s_req_schema_slash:
+1058         STRICT_CHECK(ch != \textcolor{charliteral}{'/'});
+1059         state = s_req_schema_slash_slash;
+1060         \textcolor{keywordflow}{break};
+1061 
+1062       \textcolor{keywordflow}{case} s_req_schema_slash_slash:
+1063         STRICT_CHECK(ch != \textcolor{charliteral}{'/'});
+1064         state = s_req_host_start;
+1065         \textcolor{keywordflow}{break};
+1066 
+1067       \textcolor{keywordflow}{case} s_req_host_start:
+1068         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'['}) \{
+1069           state = s_req_host_ipv6;
+1070           \textcolor{keywordflow}{break};
+1071         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (IS_ALPHANUM(ch)) \{
+1072           state = s_req_host;
+1073           \textcolor{keywordflow}{break};
+1074         \}
+1075 
+1076         SET_ERRNO(HPE_INVALID_HOST);
+1077         \textcolor{keywordflow}{goto} error;
+1078 
+1079       \textcolor{keywordflow}{case} s_req_host:
+1080         \textcolor{keywordflow}{if} (IS_HOST_CHAR(ch)) \textcolor{keywordflow}{break};
+1081         state = s_req_host_done;
+1082         \textcolor{keywordflow}{goto} reexecute\_byte;
+1083 
+1084       \textcolor{keywordflow}{case} s_req_host_ipv6:
+1085         \textcolor{keywordflow}{if} (IS_HEX(ch) || ch == \textcolor{charliteral}{':'}) \textcolor{keywordflow}{break};
+1086         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{']'}) \{
+1087           state = s_req_host_done;
+1088           \textcolor{keywordflow}{break};
+1089         \}
+1090 
+1091         SET_ERRNO(HPE_INVALID_HOST);
+1092         \textcolor{keywordflow}{goto} error;
+1093 
+1094       \textcolor{keywordflow}{case} s_req_host_done:
+1095         \textcolor{keywordflow}{switch} (ch) \{
+1096           \textcolor{keywordflow}{case} \textcolor{charliteral}{':'}:
+1097             state = s_req_port;
+1098             \textcolor{keywordflow}{break};
+1099           \textcolor{keywordflow}{case} \textcolor{charliteral}{'/'}:
+1100             state = s_req_path;
+1101             \textcolor{keywordflow}{break};
+1102           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1103             \textcolor{comment}{/* The request line looks like:}
+1104 \textcolor{comment}{             *   "GET http://foo.bar.com HTTP/1.1"}
+1105 \textcolor{comment}{             * That is, there is no path.}
+1106 \textcolor{comment}{             */}
+1107             state = s_req_http_start;
+1108             CALLBACK_DATA(url);
+1109             \textcolor{keywordflow}{break};
+1110           \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+1111             state = s_req_query_string_start;
+1112             \textcolor{keywordflow}{break};
+1113           \textcolor{keywordflow}{default}:
+1114             SET_ERRNO(HPE_INVALID_HOST);
+1115             \textcolor{keywordflow}{goto} error;
+1116         \}
+1117 
+1118         \textcolor{keywordflow}{break};
+1119 
+1120       \textcolor{keywordflow}{case} s_req_port:
+1121       \{
+1122         \textcolor{keywordflow}{if} (IS_NUM(ch)) \textcolor{keywordflow}{break};
+1123         \textcolor{keywordflow}{switch} (ch) \{
+1124           \textcolor{keywordflow}{case} \textcolor{charliteral}{'/'}:
+1125             state = s_req_path;
+1126             \textcolor{keywordflow}{break};
+1127           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1128             \textcolor{comment}{/* The request line looks like:}
+1129 \textcolor{comment}{             *   "GET http://foo.bar.com:1234 HTTP/1.1"}
+1130 \textcolor{comment}{             * That is, there is no path.}
+1131 \textcolor{comment}{             */}
+1132             state = s_req_http_start;
+1133             CALLBACK_DATA(url);
+1134             \textcolor{keywordflow}{break};
+1135           \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+1136             state = s_req_query_string_start;
+1137             \textcolor{keywordflow}{break};
+1138           \textcolor{keywordflow}{default}:
+1139             SET_ERRNO(HPE_INVALID_PORT);
+1140             \textcolor{keywordflow}{goto} error;
+1141         \}
+1142         \textcolor{keywordflow}{break};
+1143       \}
+1144 
+1145       \textcolor{keywordflow}{case} s_req_path:
+1146       \{
+1147         \textcolor{keywordflow}{if} (IS_URL_CHAR(ch)) \textcolor{keywordflow}{break};
+1148 
+1149         \textcolor{keywordflow}{switch} (ch) \{
+1150           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1151             state = s_req_http_start;
+1152             CALLBACK_DATA(url);
+1153             \textcolor{keywordflow}{break};
+1154           \textcolor{keywordflow}{case} CR:
+1155             parser->http_major = 0;
+1156             parser->http_minor = 9;
+1157             state = s_headers_almost_done;
+1158             CALLBACK_DATA(url);
+1159             \textcolor{keywordflow}{break};
+1160           \textcolor{keywordflow}{case} LF:
+1161             parser->http_major = 0;
+1162             parser->http_minor = 9;
+1163             state = s_headers_almost_done;
+1164             CALLBACK_DATA(url);
+1165             \textcolor{keywordflow}{goto} reexecute\_byte;
+1166             \textcolor{keywordflow}{break};
+1167           \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+1168             state = s_req_query_string_start;
+1169             \textcolor{keywordflow}{break};
+1170           \textcolor{keywordflow}{case} \textcolor{charliteral}{'#'}:
+1171             state = s_req_fragment_start;
+1172             \textcolor{keywordflow}{break};
+1173           \textcolor{keywordflow}{default}:
+1174             SET_ERRNO(HPE_INVALID_PATH);
+1175             \textcolor{keywordflow}{goto} error;
+1176         \}
+1177         \textcolor{keywordflow}{break};
+1178       \}
+1179 
+1180       \textcolor{keywordflow}{case} s_req_query_string_start:
+1181       \{
+1182         \textcolor{keywordflow}{if} (IS_URL_CHAR(ch)) \{
+1183           state = s_req_query_string;
+1184           \textcolor{keywordflow}{break};
+1185         \}
+1186 
+1187         \textcolor{keywordflow}{switch} (ch) \{
+1188           \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+1189             \textcolor{keywordflow}{break}; \textcolor{comment}{/* XXX ignore extra '?' ... is this right? */}
+1190           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1191             state = s_req_http_start;
+1192             CALLBACK_DATA(url);
+1193             \textcolor{keywordflow}{break};
+1194           \textcolor{keywordflow}{case} CR:
+1195             parser->http_major = 0;
+1196             parser->http_minor = 9;
+1197             state = s_headers_almost_done;
+1198             CALLBACK_DATA(url);
+1199             \textcolor{keywordflow}{break};
+1200           \textcolor{keywordflow}{case} LF:
+1201             parser->http_major = 0;
+1202             parser->http_minor = 9;
+1203             state = s_headers_almost_done;
+1204             CALLBACK_DATA(url);
+1205             \textcolor{keywordflow}{goto} reexecute\_byte;
+1206             \textcolor{keywordflow}{break};
+1207           \textcolor{keywordflow}{case} \textcolor{charliteral}{'#'}:
+1208             state = s_req_fragment_start;
+1209             \textcolor{keywordflow}{break};
+1210           \textcolor{keywordflow}{default}:
+1211             SET_ERRNO(HPE_INVALID_QUERY_STRING);
+1212             \textcolor{keywordflow}{goto} error;
+1213         \}
+1214         \textcolor{keywordflow}{break};
+1215       \}
+1216 
+1217       \textcolor{keywordflow}{case} s_req_query_string:
+1218       \{
+1219         \textcolor{keywordflow}{if} (IS_URL_CHAR(ch)) \textcolor{keywordflow}{break};
+1220 
+1221         \textcolor{keywordflow}{switch} (ch) \{
+1222           \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+1223             \textcolor{comment}{/* allow extra '?' in query string */}
+1224             \textcolor{keywordflow}{break};
+1225           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1226             state = s_req_http_start;
+1227             CALLBACK_DATA(url);
+1228             \textcolor{keywordflow}{break};
+1229           \textcolor{keywordflow}{case} CR:
+1230             parser->http_major = 0;
+1231             parser->http_minor = 9;
+1232             state = s_headers_almost_done;
+1233             CALLBACK_DATA(url);
+1234             \textcolor{keywordflow}{break};
+1235           \textcolor{keywordflow}{case} LF:
+1236             parser->http_major = 0;
+1237             parser->http_minor = 9;
+1238             state = s_headers_almost_done;
+1239             CALLBACK_DATA(url);
+1240             \textcolor{keywordflow}{goto} reexecute\_byte;
+1241             \textcolor{keywordflow}{break};
+1242           \textcolor{keywordflow}{case} \textcolor{charliteral}{'#'}:
+1243             state = s_req_fragment_start;
+1244             \textcolor{keywordflow}{break};
+1245           \textcolor{keywordflow}{default}:
+1246             SET_ERRNO(HPE_INVALID_QUERY_STRING);
+1247             \textcolor{keywordflow}{goto} error;
+1248         \}
+1249         \textcolor{keywordflow}{break};
+1250       \}
+1251 
+1252       \textcolor{keywordflow}{case} s_req_fragment_start:
+1253       \{
+1254         \textcolor{keywordflow}{if} (IS_URL_CHAR(ch)) \{
+1255           state = s_req_fragment;
+1256           \textcolor{keywordflow}{break};
+1257         \}
+1258 
+1259         \textcolor{keywordflow}{switch} (ch) \{
+1260           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1261             state = s_req_http_start;
+1262             CALLBACK_DATA(url);
+1263             \textcolor{keywordflow}{break};
+1264           \textcolor{keywordflow}{case} CR:
+1265             parser->http_major = 0;
+1266             parser->http_minor = 9;
+1267             state = s_headers_almost_done;
+1268             CALLBACK_DATA(url);
+1269             \textcolor{keywordflow}{break};
+1270           \textcolor{keywordflow}{case} LF:
+1271             parser->http_major = 0;
+1272             parser->http_minor = 9;
+1273             state = s_headers_almost_done;
+1274             CALLBACK_DATA(url);
+1275             \textcolor{keywordflow}{goto} reexecute\_byte;
+1276             \textcolor{keywordflow}{break};
+1277           \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+1278             state = s_req_fragment;
+1279             \textcolor{keywordflow}{break};
+1280           \textcolor{keywordflow}{case} \textcolor{charliteral}{'#'}:
+1281             \textcolor{keywordflow}{break};
+1282           \textcolor{keywordflow}{default}:
+1283             SET_ERRNO(HPE_INVALID_FRAGMENT);
+1284             \textcolor{keywordflow}{goto} error;
+1285         \}
+1286         \textcolor{keywordflow}{break};
+1287       \}
+1288 
+1289       \textcolor{keywordflow}{case} s_req_fragment:
+1290       \{
+1291         \textcolor{keywordflow}{if} (IS_URL_CHAR(ch)) \textcolor{keywordflow}{break};
+1292 
+1293         \textcolor{keywordflow}{switch} (ch) \{
+1294           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1295             state = s_req_http_start;
+1296             CALLBACK_DATA(url);
+1297             \textcolor{keywordflow}{break};
+1298           \textcolor{keywordflow}{case} CR:
+1299             parser->http_major = 0;
+1300             parser->http_minor = 9;
+1301             state = s_headers_almost_done;
+1302             CALLBACK_DATA(url);
+1303             \textcolor{keywordflow}{break};
+1304           \textcolor{keywordflow}{case} LF:
+1305             parser->http_major = 0;
+1306             parser->http_minor = 9;
+1307             state = s_headers_almost_done;
+1308             CALLBACK_DATA(url);
+1309             \textcolor{keywordflow}{goto} reexecute\_byte;
+1310             \textcolor{keywordflow}{break};
+1311           \textcolor{keywordflow}{case} \textcolor{charliteral}{'?'}:
+1312           \textcolor{keywordflow}{case} \textcolor{charliteral}{'#'}:
+1313             \textcolor{keywordflow}{break};
+1314           \textcolor{keywordflow}{default}:
+1315             SET_ERRNO(HPE_INVALID_FRAGMENT);
+1316             \textcolor{keywordflow}{goto} error;
+1317         \}
+1318         \textcolor{keywordflow}{break};
+1319       \}
+1320 
+1321       \textcolor{keywordflow}{case} s_req_http_start:
+1322         \textcolor{keywordflow}{switch} (ch) \{
+1323           \textcolor{keywordflow}{case} \textcolor{charliteral}{'H'}:
+1324             state = s_req_http_H;
+1325             \textcolor{keywordflow}{break};
+1326           \textcolor{keywordflow}{case} \textcolor{charliteral}{' '}:
+1327             \textcolor{keywordflow}{break};
+1328           \textcolor{keywordflow}{default}:
+1329             SET_ERRNO(HPE_INVALID_CONSTANT);
+1330             \textcolor{keywordflow}{goto} error;
+1331         \}
+1332         \textcolor{keywordflow}{break};
+1333 
+1334       \textcolor{keywordflow}{case} s_req_http_H:
+1335         STRICT_CHECK(ch != \textcolor{charliteral}{'T'});
+1336         state = s_req_http_HT;
+1337         \textcolor{keywordflow}{break};
+1338 
+1339       \textcolor{keywordflow}{case} s_req_http_HT:
+1340         STRICT_CHECK(ch != \textcolor{charliteral}{'T'});
+1341         state = s_req_http_HTT;
+1342         \textcolor{keywordflow}{break};
+1343 
+1344       \textcolor{keywordflow}{case} s_req_http_HTT:
+1345         STRICT_CHECK(ch != \textcolor{charliteral}{'P'});
+1346         state = s_req_http_HTTP;
+1347         \textcolor{keywordflow}{break};
+1348 
+1349       \textcolor{keywordflow}{case} s_req_http_HTTP:
+1350         STRICT_CHECK(ch != \textcolor{charliteral}{'/'});
+1351         state = s_req_first_http_major;
+1352         \textcolor{keywordflow}{break};
+1353 
+1354       \textcolor{comment}{/* first digit of major HTTP version */}
+1355       \textcolor{keywordflow}{case} s_req_first_http_major:
+1356         \textcolor{keywordflow}{if} (ch < '0' || ch > \textcolor{charliteral}{'9'}) \{
+1357           SET_ERRNO(HPE_INVALID_VERSION);
+1358           \textcolor{keywordflow}{goto} error;
+1359         \}
+1360 
+1361         parser->http_major = ch - \textcolor{charliteral}{'0'};
+1362         state = s_req_http_major;
+1363         \textcolor{keywordflow}{break};
+1364 
+1365       \textcolor{comment}{/* major HTTP version or dot */}
+1366       \textcolor{keywordflow}{case} s_req_http_major:
+1367       \{
+1368         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{'.'}) \{
+1369           state = s_req_first_http_minor;
+1370           \textcolor{keywordflow}{break};
+1371         \}
+1372 
+1373         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+1374           SET_ERRNO(HPE_INVALID_VERSION);
+1375           \textcolor{keywordflow}{goto} error;
+1376         \}
+1377 
+1378         parser->http_major *= 10;
+1379         parser->http_major += ch - \textcolor{charliteral}{'0'};
+1380 
+1381         \textcolor{keywordflow}{if} (parser->http_major > 999) \{
+1382           SET_ERRNO(HPE_INVALID_VERSION);
+1383           \textcolor{keywordflow}{goto} error;
+1384         \}
+1385 
+1386         \textcolor{keywordflow}{break};
+1387       \}
+1388 
+1389       \textcolor{comment}{/* first digit of minor HTTP version */}
+1390       \textcolor{keywordflow}{case} s_req_first_http_minor:
+1391         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+1392           SET_ERRNO(HPE_INVALID_VERSION);
+1393           \textcolor{keywordflow}{goto} error;
+1394         \}
+1395 
+1396         parser->http_minor = ch - \textcolor{charliteral}{'0'};
+1397         state = s_req_http_minor;
+1398         \textcolor{keywordflow}{break};
+1399 
+1400       \textcolor{comment}{/* minor HTTP version or end of request line */}
+1401       \textcolor{keywordflow}{case} s_req_http_minor:
+1402       \{
+1403         \textcolor{keywordflow}{if} (ch == CR) \{
+1404           \textcolor{keywordflow}{if} (parser->http_major== 0 && parser->http_minor == 9) \{
+1405             state = s_headers_almost_done;
+1406           \} \textcolor{keywordflow}{else} \{
+1407             state = s_req_line_almost_done;
+1408           \}
+1409           \textcolor{keywordflow}{break};
+1410         \}
+1411 
+1412         \textcolor{keywordflow}{if} (ch == LF) \{
+1413           \textcolor{keywordflow}{if} (parser->http_major == 0 && parser->http_minor == 9) \{
+1414             state = s_headers_almost_done;
+1415             \textcolor{keywordflow}{goto} reexecute\_byte;
+1416           \} \textcolor{keywordflow}{else} \{
+1417             state = s_header_field_start;
+1418           \}
+1419           \textcolor{keywordflow}{break};
+1420         \}
+1421 
+1422         \textcolor{comment}{/* XXX allow spaces after digit? */}
+1423 
+1424         \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+1425           SET_ERRNO(HPE_INVALID_VERSION);
+1426           \textcolor{keywordflow}{goto} error;
+1427         \}
+1428 
+1429         parser->http_minor *= 10;
+1430         parser->http_minor += ch - \textcolor{charliteral}{'0'};
+1431 
+1432         \textcolor{keywordflow}{if} (parser->http_minor > 999) \{
+1433           SET_ERRNO(HPE_INVALID_VERSION);
+1434           \textcolor{keywordflow}{goto} error;
+1435         \}
+1436 
+1437         \textcolor{keywordflow}{break};
+1438       \}
+1439 
+1440       \textcolor{comment}{/* end of request line */}
+1441       \textcolor{keywordflow}{case} s_req_line_almost_done:
+1442       \{
+1443         \textcolor{keywordflow}{if} (ch != LF) \{
+1444           SET_ERRNO(HPE_LF_EXPECTED);
+1445           \textcolor{keywordflow}{goto} error;
+1446         \}
+1447 
+1448         state = s_header_field_start;
+1449         \textcolor{keywordflow}{break};
+1450       \}
+1451 
+1452       \textcolor{keywordflow}{case} s_header_field_start:
+1453       \{
+1454         \textcolor{keywordflow}{if} (ch == CR) \{
+1455           state = s_headers_almost_done;
+1456           \textcolor{keywordflow}{break};
+1457         \}
+1458 
+1459         \textcolor{keywordflow}{if} (ch == LF) \{
+1460           \textcolor{comment}{/* they might be just sending \(\backslash\)n instead of \(\backslash\)r\(\backslash\)n so this would be}
+1461 \textcolor{comment}{           * the second \(\backslash\)n to denote the end of headers*/}
+1462           state = s_headers_almost_done;
+1463           \textcolor{keywordflow}{goto} reexecute\_byte;
+1464         \}
+1465 
+1466         c = TOKEN(ch);
+1467 
+1468         \textcolor{keywordflow}{if} (!c) \{
+1469           SET_ERRNO(HPE_INVALID_HEADER_TOKEN);
+1470           \textcolor{keywordflow}{goto} error;
+1471         \}
+1472 
+1473         MARK(header\_field);
+1474 
+1475         parser->index = 0;
+1476         state = s_header_field;
+1477 
+1478         \textcolor{keywordflow}{switch} (c) \{
+1479           \textcolor{keywordflow}{case} \textcolor{charliteral}{'c'}:
+1480             parser->header_state = h_matching_content_length;
+1481             \textcolor{keywordflow}{break};
+1482 
+1483           \textcolor{keywordflow}{case} \textcolor{charliteral}{'t'}:
+1484             parser->header_state = h_matching_transfer_encoding;
+1485             \textcolor{keywordflow}{break};
+1486 
+1487           \textcolor{keywordflow}{case} \textcolor{charliteral}{'u'}:
+1488             parser->header_state = h_matching_upgrade;
+1489             \textcolor{keywordflow}{break};
+1490 
+1491           \textcolor{keywordflow}{default}:
+1492             parser->header_state = h_general;
+1493             \textcolor{keywordflow}{break};
+1494         \}
+1495         \textcolor{keywordflow}{break};
+1496       \}
+1497 
+1498       \textcolor{keywordflow}{case} s_header_field:
+1499       \{
+1500         c = TOKEN(ch);
+1501 
+1502         \textcolor{keywordflow}{if} (c) \{
+1503           \textcolor{keywordflow}{switch} (parser->header_state) \{
+1504             \textcolor{keywordflow}{case} h_general:
+1505 
+1506               \textcolor{comment}{// fast-forwarding, wheeeeeee!}
+1507 \textcolor{preprocessor}{              #define MOVE\_THE\_HEAD do \{ \(\backslash\)}
+1508 \textcolor{preprocessor}{                ++p;                     \(\backslash\)}
+1509 \textcolor{preprocessor}{                if (!TOKEN(*p)) \{        \(\backslash\)}
+1510 \textcolor{preprocessor}{                  ch = *p;               \(\backslash\)}
+1511 \textcolor{preprocessor}{                  goto notatoken;        \(\backslash\)}
+1512 \textcolor{preprocessor}{                \}                        \(\backslash\)}
+1513 \textcolor{preprocessor}{              \} while(0);}
+1514 
+1515               \textcolor{keywordflow}{if} (data + len - p >= 9) \{
+1516                 MOVE_THE_HEAD
+1517                 MOVE_THE_HEAD
+1518                 MOVE_THE_HEAD
+1519                 MOVE_THE_HEAD
+1520                 MOVE_THE_HEAD
+1521                 MOVE_THE_HEAD
+1522                 MOVE_THE_HEAD
+1523                 MOVE_THE_HEAD
+1524               \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (data + len - p >= 4) \{
+1525                 MOVE_THE_HEAD
+1526                 MOVE_THE_HEAD
+1527                 MOVE_THE_HEAD
+1528               \}
+1529 
+1530               \textcolor{keywordflow}{break};
+1531 
+1532             \textcolor{comment}{/* content-length */}
+1533 
+1534             \textcolor{keywordflow}{case} h_matching_content_length:
+1535               parser->index++;
+1536               \textcolor{keywordflow}{if} (parser->index > \textcolor{keyword}{sizeof}(CONTENT_LENGTH)-1
+1537                   || c != CONTENT_LENGTH[parser->index]) \{
+1538                 parser->header_state = h_general;
+1539               \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == \textcolor{keyword}{sizeof}(CONTENT_LENGTH)-2) \{
+1540                 parser->header_state = h_content_length;
+1541               \}
+1542               \textcolor{keywordflow}{break};
+1543 
+1544             \textcolor{comment}{/* transfer-encoding */}
+1545 
+1546             \textcolor{keywordflow}{case} h_matching_transfer_encoding:
+1547               parser->index++;
+1548               \textcolor{keywordflow}{if} (parser->index > \textcolor{keyword}{sizeof}(TRANSFER_ENCODING)-1
+1549                   || c != TRANSFER_ENCODING[parser->index]) \{
+1550                 parser->header_state = h_general;
+1551               \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == \textcolor{keyword}{sizeof}(TRANSFER_ENCODING)-2) \{
+1552                 parser->header_state = h_transfer_encoding;
+1553               \}
+1554               \textcolor{keywordflow}{break};
+1555 
+1556             \textcolor{comment}{/* upgrade */}
+1557 
+1558             \textcolor{keywordflow}{case} h_matching_upgrade:
+1559               parser->index++;
+1560               \textcolor{keywordflow}{if} (parser->index > \textcolor{keyword}{sizeof}(UPGRADE)-1
+1561                   || c != UPGRADE[parser->index]) \{
+1562                 parser->header_state = h_general;
+1563               \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == \textcolor{keyword}{sizeof}(UPGRADE)-2) \{
+1564                 parser->header_state = h_upgrade;
+1565               \}
+1566               \textcolor{keywordflow}{break};
+1567 
+1568             \textcolor{keywordflow}{case} h_content_length:
+1569             \textcolor{keywordflow}{case} h_transfer_encoding:
+1570             \textcolor{keywordflow}{case} h_upgrade:
+1571               \textcolor{keywordflow}{if} (ch != \textcolor{charliteral}{' '}) parser->header_state = h_general;
+1572               \textcolor{keywordflow}{break};
+1573 
+1574             \textcolor{keywordflow}{default}:
+1575               assert(0 && \textcolor{stringliteral}{"Unknown header\_state"});
+1576               \textcolor{keywordflow}{break};
+1577           \}
+1578           \textcolor{keywordflow}{break};
+1579         \}
+1580 
+1581         notatoken:
+1582         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{':'}) \{
+1583           state = s_header_value_start;
+1584           \textcolor{comment}{// do not allow headers with trailing whitespaces}
+1585           \textcolor{comment}{// https://tools.ietf.org/html/rfc7230#section-3.2.4}
+1586           \textcolor{keywordflow}{if} (p - header\_field\_mark > 1 &&
+1587               data[p - data - 1] == \textcolor{charliteral}{' '}) \{
+1588             SET_ERRNO(HPE_INVALID_HEADER_TOKEN);
+1589             \textcolor{keywordflow}{goto} error;
+1590           \}
+1591           CALLBACK_DATA(header\_field);
+1592           \textcolor{keywordflow}{break};
+1593         \}
+1594 
+1595         SET_ERRNO(HPE_INVALID_HEADER_TOKEN);
+1596         \textcolor{keywordflow}{goto} error;
+1597       \}
+1598 
+1599       \textcolor{keywordflow}{case} s_header_value_start:
+1600       \{
+1601         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{' '} || ch == \textcolor{charliteral}{'\(\backslash\)t'}) \textcolor{keywordflow}{break};
+1602 
+1603         MARK(header\_value);
+1604 
+1605         state = s_header_value;
+1606         parser->index = 0;
+1607 
+1608         \textcolor{comment}{// Error out if a content\_length, transfer\_encoding, or upgrade header}
+1609         \textcolor{comment}{// was present with no actual value.  These headers correspond with}
+1610         \textcolor{comment}{// special parser states that without the below accept empty header}
+1611         \textcolor{comment}{// values and so we can reject such requests here in the parser.}
+1612         \textcolor{comment}{// If more headers are added, can consider moving to a hash/map based}
+1613         \textcolor{comment}{// model below.}
+1614         \textcolor{keywordflow}{if} (ch == CR || ch == LF) \{
+1615           \textcolor{keywordflow}{if} (parser->header_state == h_content_length) \{
+1616             SET_ERRNO(HPE_INVALID_CONTENT_LENGTH);
+1617           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->header_state == h_transfer_encoding) \{
+1618             SET_ERRNO(HPE_INVALID_TRANSFER_ENCODING);
+1619           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->header_state == h_upgrade) \{
+1620             SET_ERRNO(HPE_INVALID_UPGRADE);
+1621           \}
+1622 
+1623           \textcolor{keywordflow}{if} (parser->http_errno != HPE_OK) \{
+1624             \textcolor{keywordflow}{goto} error;
+1625           \}
+1626         \}
+1627 
+1628         \textcolor{keywordflow}{if} (ch == CR) \{
+1629           STRICT_CHECK(parser->quote != 0);
+1630           parser->header_state = h_general;
+1631           state = s_header_almost_done;
+1632           CALLBACK_DATA(header\_value);
+1633           \textcolor{keywordflow}{break};
+1634         \}
+1635 
+1636         \textcolor{keywordflow}{if} (ch == LF) \{
+1637           STRICT_CHECK(parser->quote != 0);
+1638           state = s_header_field_start;
+1639           CALLBACK_DATA(header\_value);
+1640           \textcolor{keywordflow}{break};
+1641         \}
+1642 
+1643         c = LOWER(ch);
+1644 
+1645         \textcolor{keywordflow}{switch} (parser->header_state) \{
+1646           \textcolor{keywordflow}{case} h_upgrade:
+1647             parser->flags |= F_UPGRADE;
+1648             parser->header_state = h_general;
+1649             \textcolor{keywordflow}{break};
+1650 
+1651           \textcolor{keywordflow}{case} h_transfer_encoding:
+1652             \textcolor{comment}{/* looking for 'Transfer-Encoding: chunked' */}
+1653             \textcolor{keywordflow}{if} (\textcolor{charliteral}{'c'} == c) \{
+1654               parser->header_state = h_matching_transfer_encoding_chunked;
+1655             \} \textcolor{keywordflow}{else} \{
+1656               parser->header_state = h_general;
+1657             \}
+1658             \textcolor{keywordflow}{break};
+1659 
+1660           \textcolor{keywordflow}{case} h_content_length:
+1661             \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+1662               SET_ERRNO(HPE_INVALID_CONTENT_LENGTH);
+1663               \textcolor{keywordflow}{goto} error;
+1664             \}
+1665 
+1666             parser->content_length = ch - \textcolor{charliteral}{'0'};
+1667             \textcolor{keywordflow}{break};
+1668 
+1669           \textcolor{keywordflow}{default}:
+1670             parser->header_state = ch == QT ? h_general_and_quote : h_general;
+1671             \textcolor{keywordflow}{break};
+1672         \}
+1673         \textcolor{keywordflow}{break};
+1674       \}
+1675 
+1676       \textcolor{keywordflow}{case} s_header_value:
+1677       \{
+1678         cr\_or\_lf\_or\_qt:
+1679         \textcolor{keywordflow}{if} (ch == CR &&
+1680             parser->header_state != h_general_and_quote_and_escape) \{
+1681           state = s_header_almost_done;
+1682           CALLBACK_DATA(header\_value);
+1683           \textcolor{keywordflow}{break};
+1684         \}
+1685 
+1686         \textcolor{keywordflow}{if} (ch == LF &&
+1687             parser->header_state != h_general_and_quote_and_escape) \{
+1688           state = s_header_almost_done;
+1689           CALLBACK_DATA_NOADVANCE(header\_value);
+1690           \textcolor{keywordflow}{goto} reexecute\_byte;
+1691         \}
+1692 
+1693         \textcolor{keywordflow}{if} (!lenient && !IS_HEADER_CHAR(ch) &&
+1694             parser->header_state != h_general_and_quote_and_escape) \{
+1695           SET_ERRNO(HPE_INVALID_HEADER_TOKEN);
+1696           \textcolor{keywordflow}{goto} error;
+1697         \}
+1698 
+1699         \textcolor{keywordflow}{switch} (parser->header_state) \{
+1700           \textcolor{keywordflow}{case} h_general:
+1701             \textcolor{keywordflow}{if} (ch == QT) \{
+1702               parser->header_state = h_general_and_quote;
+1703             \}
+1704 
+1705             \textcolor{comment}{// fast-forwarding, wheee!}
+1706 \textcolor{preprocessor}{            #define MOVE\_FAST do \{                    \(\backslash\)}
+1707 \textcolor{preprocessor}{              ++p;                                    \(\backslash\)}
+1708 \textcolor{preprocessor}{              ch = *p;                                \(\backslash\)}
+1709 \textcolor{preprocessor}{              if (ch == CR || ch == LF || ch == QT || \(\backslash\)}
+1710 \textcolor{preprocessor}{                  ch == BS || !IS\_HEADER\_CHAR(ch)) \{  \(\backslash\)}
+1711 \textcolor{preprocessor}{                goto cr\_or\_lf\_or\_qt;                  \(\backslash\)}
+1712 \textcolor{preprocessor}{              \}                                       \(\backslash\)}
+1713 \textcolor{preprocessor}{            \} while(0);}
+1714 
+1715             \textcolor{keywordflow}{if} (data + len - p >= 12) \{
+1716               MOVE_FAST
+1717               MOVE_FAST
+1718               MOVE_FAST
+1719               MOVE_FAST
+1720               MOVE_FAST
+1721               MOVE_FAST
+1722               MOVE_FAST
+1723               MOVE_FAST
+1724               MOVE_FAST
+1725               MOVE_FAST
+1726               MOVE_FAST
+1727             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (data + len - p >= 5) \{
+1728               MOVE_FAST
+1729               MOVE_FAST
+1730               MOVE_FAST
+1731               MOVE_FAST
+1732             \}
+1733 
+1734             \textcolor{keywordflow}{break};
+1735 
+1736           \textcolor{keywordflow}{case} h_general_and_quote:
+1737             \textcolor{keywordflow}{if} (ch == QT) \{
+1738               parser->header_state = h_general;
+1739             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ch == BS) \{
+1740               parser->header_state = h_general_and_quote_and_escape;
+1741             \}
+1742             \textcolor{keywordflow}{break};
+1743 
+1744           \textcolor{keywordflow}{case} h_general_and_quote_and_escape:
+1745             parser->header_state = h_general_and_quote;
+1746             \textcolor{keywordflow}{break};
+1747 
+1748           \textcolor{comment}{// Not sure the below is relevant anymore as from}
+1749           \textcolor{comment}{// s\_header\_value\_start it appears as though we can never}
+1750           \textcolor{comment}{// be in the situation below}
+1751           \textcolor{keywordflow}{case} h_transfer_encoding:
+1752             SET_ERRNO(HPE_INVALID_HEADER_TOKEN);
+1753             \textcolor{keywordflow}{goto} error;
+1754             \textcolor{keywordflow}{break};
+1755 
+1756           \textcolor{keywordflow}{case} h_content_length:
+1757             \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{' '}) \textcolor{keywordflow}{break};
+1758             \textcolor{keywordflow}{if} (!IS_NUM(ch)) \{
+1759               SET_ERRNO(HPE_INVALID_CONTENT_LENGTH);
+1760               \textcolor{keywordflow}{goto} error;
+1761             \}
+1762 
+1763             \textcolor{keywordflow}{if} (parser->content_length > ((INT64\_MAX - 10) / 10)) \{
+1764               \textcolor{comment}{/* overflow */}
+1765               SET_ERRNO(HPE_HUGE_CONTENT_LENGTH);
+1766               \textcolor{keywordflow}{goto} error;
+1767             \}
+1768 
+1769             parser->content_length *= 10;
+1770             parser->content_length += ch - \textcolor{charliteral}{'0'};
+1771             \textcolor{keywordflow}{break};
+1772 
+1773           \textcolor{comment}{/* Transfer-Encoding: chunked */}
+1774           \textcolor{keywordflow}{case} h_matching_transfer_encoding_chunked:
+1775             parser->index++;
+1776             \textcolor{keywordflow}{if} (parser->index > \textcolor{keyword}{sizeof}(CHUNKED)-1
+1777                 || LOWER(ch) != CHUNKED[parser->index]) \{
+1778               parser->header_state = h_general;
+1779             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->index == \textcolor{keyword}{sizeof}(CHUNKED)-2) \{
+1780               parser->header_state = h_transfer_encoding_chunked;
+1781             \}
+1782             \textcolor{keywordflow}{break};
+1783 
+1784           \textcolor{keywordflow}{case} h_transfer_encoding_chunked:
+1785             \textcolor{keywordflow}{if} (ch != \textcolor{charliteral}{' '}) \{
+1786               parser->header_state = h_general;
+1787             \}
+1788             \textcolor{keywordflow}{break};
+1789 
+1790           \textcolor{keywordflow}{default}:
+1791             state = s_header_value;
+1792             parser->header_state = h_general;
+1793             \textcolor{keywordflow}{break};
+1794         \}
+1795         \textcolor{keywordflow}{break};
+1796       \}
+1797 
+1798       \textcolor{keywordflow}{case} s_header_almost_done:
+1799       \{
+1800         \textcolor{keywordflow}{if} (ch == LF) \{
+1801           state = s_header_value_lws;
+1802         \} \textcolor{keywordflow}{else} \{
+1803           state = s_header_value;
+1804         \}
+1805 
+1806         \textcolor{keywordflow}{switch} (parser->header_state) \{
+1807           \textcolor{keywordflow}{case} h_transfer_encoding_chunked:
+1808             parser->flags |= F_CHUNKED;
+1809             \textcolor{keywordflow}{break};
+1810           \textcolor{keywordflow}{default}:
+1811             \textcolor{keywordflow}{break};
+1812         \}
+1813 
+1814         \textcolor{keywordflow}{if} (ch != LF) \{
+1815           CALLBACK_SPACE(header\_value);
+1816         \}
+1817 
+1818         \textcolor{keywordflow}{break};
+1819       \}
+1820 
+1821       \textcolor{keywordflow}{case} s_header_value_lws:
+1822       \{
+1823         \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{' '} || ch == \textcolor{charliteral}{'\(\backslash\)t'})
+1824         \{
+1825           state = s_header_value_start;
+1826           CALLBACK_SPACE(header\_value);
+1827         \}
+1828         \textcolor{keywordflow}{else}
+1829         \{
+1830           state = s_header_field_start;
+1831           \textcolor{keywordflow}{goto} reexecute\_byte;
+1832         \}
+1833         \textcolor{keywordflow}{break};
+1834       \}
+1835 
+1836       \textcolor{keywordflow}{case} s_headers_almost_done:
+1837       \{
+1838         STRICT_CHECK(ch != LF);
+1839 
+1840         \textcolor{keywordflow}{if} (ch != LF) \{
+1841           SET_ERRNO(HPE_STRICT);
+1842           \textcolor{keywordflow}{goto} error;
+1843         \}
+1844 
+1845         \textcolor{keywordflow}{if} (parser->flags & F_TRAILING) \{
+1846           \textcolor{comment}{/* End of a chunked request */}
+1847           state = s_message_done;
+1848           CALLBACK_NOTIFY_NOADVANCE(chunk\_complete);
+1849           \textcolor{keywordflow}{goto} reexecute\_byte;
+1850         \}
+1851 
+1852         state = s_headers_done;
+1853 
+1854         \textcolor{comment}{/* Set this here so that on\_headers\_complete() callbacks can see it */}
+1855         parser->upgrade =
+1856             (parser->flags & F_UPGRADE || parser->method == HTTP_CONNECT);
+1857 
+1858         \textcolor{comment}{/* Here we call the headers\_complete callback. This is somewhat}
+1859 \textcolor{comment}{         * different than other callbacks because if the user returns 1, we}
+1860 \textcolor{comment}{         * will interpret that as saying that this message has no body. This}
+1861 \textcolor{comment}{         * is needed for the annoying case of receiving a response to a HEAD}
+1862 \textcolor{comment}{         * request.}
+1863 \textcolor{comment}{         *}
+1864 \textcolor{comment}{         * We'd like to use CALLBACK\_NOTIFY\_NOADVANCE() here but we cannot, so}
+1865 \textcolor{comment}{         * we have to simulate it by handling a change in errno below.}
+1866 \textcolor{comment}{         */}
+1867         \textcolor{keywordtype}{size\_t} header\_size = p - data + 1;
+1868         \textcolor{keywordflow}{switch} (settings->on_headers_complete(parser, \textcolor{keyword}{nullptr}, header\_size)) \{
+1869           \textcolor{keywordflow}{case} 0:
+1870             \textcolor{keywordflow}{break};
+1871 
+1872           \textcolor{keywordflow}{case} 1:
+1873             parser->flags |= F_SKIPBODY;
+1874             \textcolor{keywordflow}{break};
+1875 
+1876           \textcolor{keywordflow}{default}:
+1877             SET_ERRNO(HPE_CB_headers_complete);
+1878             RETURN(p - data); \textcolor{comment}{/* Error */}
+1879         \}
+1880 
+1881         \textcolor{keywordflow}{if} (HTTP_PARSER_ERRNO(parser) != HPE_OK) \{
+1882           RETURN(p - data);
+1883         \}
+1884 
+1885         \textcolor{keywordflow}{goto} reexecute\_byte;
+1886       \}
+1887 
+1888       \textcolor{keywordflow}{case} s_headers_done:
+1889       \{
+1890         STRICT_CHECK(ch != LF);
+1891 
+1892         \textcolor{comment}{// we're done parsing headers, reset overflow counters}
+1893         parser->nread = 0;
+1894         \textcolor{comment}{// (if we now move to s\_body\_*, then this is irrelevant)}
+1895         data\_or\_header\_data\_start = p;
+1896 
+1897         \textcolor{keywordtype}{int} hasBody = parser->flags & F_CHUNKED || parser->content_length > 0;
+1898         \textcolor{keywordflow}{if} (parser->upgrade && (parser->method == HTTP_CONNECT ||
+1899                                 (parser->flags & F_SKIPBODY) || !hasBody)) \{
+1900           \textcolor{comment}{/* Exit, the rest of the message is in a different protocol. */}
+1901           state = NEW_MESSAGE();
+1902           CALLBACK_NOTIFY(message\_complete);
+1903           RETURN((p - data) + 1);
+1904         \}
+1905 
+1906         \textcolor{keywordflow}{if} (parser->flags & F_SKIPBODY) \{
+1907           state = NEW_MESSAGE();
+1908           CALLBACK_NOTIFY(message\_complete);
+1909         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->flags & F_CHUNKED) \{
+1910           \textcolor{comment}{/* chunked encoding - ignore Content-Length header */}
+1911           state = s_chunk_size_start;
+1912         \} \textcolor{keywordflow}{else} \{
+1913           \textcolor{keywordflow}{if} (parser->content_length == 0) \{
+1914             \textcolor{comment}{/* Content-Length header given but zero: Content-Length: 0\(\backslash\)r\(\backslash\)n */}
+1915             state = NEW_MESSAGE();
+1916             CALLBACK_NOTIFY(message\_complete);
+1917           \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parser->content_length > 0) \{
+1918             \textcolor{comment}{/* Content-Length header given and non-zero */}
+1919             state = s_body_identity;
+1920           \} \textcolor{keywordflow}{else} \{
+1921             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} sc = parser->status_code;
+1922             \textcolor{keywordflow}{if} (parser->type == HTTP_REQUEST ||
+1923                 ((100 <= sc && sc <= 199) || sc == 204 || sc == 304)) \{
+1924               \textcolor{comment}{/* Assume content-length 0 - read the next */}
+1925               state = NEW_MESSAGE();
+1926               CALLBACK_NOTIFY(message\_complete);
+1927             \} \textcolor{keywordflow}{else} \{
+1928               \textcolor{comment}{/* Read body until EOF */}
+1929               state = s_body_identity_eof;
+1930             \}
+1931           \}
+1932         \}
+1933 
+1934         \textcolor{keywordflow}{break};
+1935       \}
+1936 
+1937       \textcolor{keywordflow}{case} s_body_identity:
+1938       \{
+1939         uint64\_t to\_read = MIN(parser->content_length, (data + len) - p);
+1940 
+1941         assert(parser->content_length > 0);
+1942 
+1943         \textcolor{comment}{/* The difference between advancing content\_length and p is because}
+1944 \textcolor{comment}{         * the latter will automatically advance on the next loop iteration.}
+1945 \textcolor{comment}{         * Further, if content\_length ends up at 0, we want to see the last}
+1946 \textcolor{comment}{         * byte again for our message complete callback.}
+1947 \textcolor{comment}{         */}
+1948         MARK(body);
+1949         parser->content_length -= to\_read;
+1950         p += to\_read - 1;
+1951 
+1952         \textcolor{keywordflow}{if} (parser->content_length == 0) \{
+1953           state = s_message_done;
+1954 
+1955           \textcolor{comment}{/* Mimic CALLBACK\_DATA\_NOADVANCE() but with one extra byte.}
+1956 \textcolor{comment}{           *}
+1957 \textcolor{comment}{           * The alternative to doing this is to wait for the next byte to}
+1958 \textcolor{comment}{           * trigger the data callback, just as in every other case. The}
+1959 \textcolor{comment}{           * problem with this is that this makes it difficult for the test}
+1960 \textcolor{comment}{           * harness to distinguish between complete-on-EOF and}
+1961 \textcolor{comment}{           * complete-on-length. It's not clear that this distinction is}
+1962 \textcolor{comment}{           * important for applications, but let's keep it for now.}
+1963 \textcolor{comment}{           */}
+1964           _CALLBACK_DATA(body, p - body\_mark + 1, p - data);
+1965           \textcolor{keywordflow}{goto} reexecute\_byte;
+1966         \}
+1967 
+1968         \textcolor{keywordflow}{break};
+1969       \}
+1970 
+1971       \textcolor{comment}{/* read until EOF */}
+1972       \textcolor{keywordflow}{case} s_body_identity_eof:
+1973         MARK(body);
+1974         p = data + len - 1;
+1975 
+1976         \textcolor{keywordflow}{break};
+1977 
+1978       \textcolor{keywordflow}{case} s_message_done:
+1979         state = NEW_MESSAGE();
+1980         parser->nread = 0;
+1981         data\_or\_header\_data\_start = p;
+1982         CALLBACK_NOTIFY(message\_complete);
+1983         \textcolor{keywordflow}{if} (parser->upgrade) \{
+1984           \textcolor{comment}{/* Exit, the rest of the message is in a different protocol. */}
+1985           RETURN((p - data) + 1);
+1986         \}
+1987         \textcolor{keywordflow}{break};
+1988 
+1989       \textcolor{keywordflow}{case} s_chunk_size_start:
+1990       \{
+1991         assert(parser->flags & F_CHUNKED);
+1992 
+1993         unhex\_val = unhex[(\textcolor{keywordtype}{unsigned} char)ch];
+1994         \textcolor{keywordflow}{if} (unhex\_val == -1) \{
+1995           SET_ERRNO(HPE_INVALID_CHUNK_SIZE);
+1996           \textcolor{keywordflow}{goto} error;
+1997         \}
+1998 
+1999         parser->content_length = unhex\_val;
+2000         state = s_chunk_size;
+2001         \textcolor{keywordflow}{break};
+2002       \}
+2003 
+2004       \textcolor{keywordflow}{case} s_chunk_size:
+2005       \{
+2006         assert(parser->flags & F_CHUNKED);
+2007 
+2008         \textcolor{keywordflow}{if} (ch == CR) \{
+2009           state = s_chunk_size_almost_done;
+2010           \textcolor{keywordflow}{break};
+2011         \}
+2012 
+2013         unhex\_val = unhex[(\textcolor{keywordtype}{unsigned} char)ch];
+2014 
+2015         \textcolor{keywordflow}{if} (unhex\_val == -1) \{
+2016           \textcolor{keywordflow}{if} (ch == \textcolor{charliteral}{';'} || ch == \textcolor{charliteral}{' '}) \{
+2017             state = s_chunk_parameters;
+2018             \textcolor{keywordflow}{break};
+2019           \}
+2020 
+2021           SET_ERRNO(HPE_INVALID_CHUNK_SIZE);
+2022           \textcolor{keywordflow}{goto} error;
+2023         \}
+2024 
+2025         \textcolor{keywordflow}{if} (parser->content_length > (INT64\_MAX - unhex\_val) >> 4) \{
+2026           \textcolor{comment}{/* overflow */}
+2027           SET_ERRNO(HPE_HUGE_CHUNK_SIZE);
+2028           \textcolor{keywordflow}{goto} error;
+2029         \}
+2030         parser->content_length *= 16;
+2031         parser->content_length += unhex\_val;
+2032         \textcolor{keywordflow}{break};
+2033       \}
+2034 
+2035       \textcolor{keywordflow}{case} s_chunk_parameters:
+2036       \{
+2037         assert(parser->flags & F_CHUNKED);
+2038         \textcolor{comment}{/*}
+2039 \textcolor{comment}{         * just ignore this shit. TODO check for overflow}
+2040 \textcolor{comment}{         * TODO: It would be nice to pass this information to the}
+2041 \textcolor{comment}{         * on\_chunk\_header callback.}
+2042 \textcolor{comment}{         */}
+2043         \textcolor{keywordflow}{if} (ch == CR) \{
+2044           state = s_chunk_size_almost_done;
+2045           \textcolor{keywordflow}{break};
+2046         \}
+2047         \textcolor{keywordflow}{break};
+2048       \}
+2049 
+2050       \textcolor{keywordflow}{case} s_chunk_size_almost_done:
+2051       \{
+2052         assert(parser->flags & F_CHUNKED);
+2053         STRICT_CHECK(ch != LF);
+2054 
+2055         \textcolor{keywordflow}{if} (parser->content_length == 0) \{
+2056           parser->flags |= F_TRAILING;
+2057           state = s_header_field_start;
+2058           CALLBACK_NOTIFY(chunk\_header);
+2059         \} \textcolor{keywordflow}{else} \{
+2060           state = s_chunk_data;
+2061           CALLBACK_NOTIFY(chunk\_header);
+2062         \}
+2063         \textcolor{keywordflow}{break};
+2064       \}
+2065 
+2066       \textcolor{keywordflow}{case} s_chunk_data:
+2067       \{
+2068         uint64\_t to\_read = MIN(parser->content_length, (data + len) - p);
+2069 
+2070         assert(parser->flags & F_CHUNKED);
+2071         assert(parser->content_length > 0);
+2072 
+2073         \textcolor{comment}{/* See the explanation in s\_body\_identity for why the content}
+2074 \textcolor{comment}{         * length and data pointers are managed this way.}
+2075 \textcolor{comment}{         */}
+2076         MARK(body);
+2077         parser->content_length -= to\_read;
+2078         p += to\_read - 1;
+2079 
+2080         \textcolor{keywordflow}{if} (parser->content_length == 0) \{
+2081           state = s_chunk_data_almost_done;
+2082         \}
+2083 
+2084         \textcolor{keywordflow}{break};
+2085       \}
+2086 
+2087       \textcolor{keywordflow}{case} s_chunk_data_almost_done:
+2088         assert(parser->flags & F_CHUNKED);
+2089         assert(parser->content_length == 0);
+2090         STRICT_CHECK(ch != CR);
+2091         state = s_chunk_data_done;
+2092         CALLBACK_DATA(body);
+2093         \textcolor{keywordflow}{break};
+2094 
+2095       \textcolor{keywordflow}{case} s_chunk_data_done:
+2096         assert(parser->flags & F_CHUNKED);
+2097         STRICT_CHECK(ch != LF);
+2098         state = s_chunk_size_start;
+2099         parser->nread = 0;
+2100         data\_or\_header\_data\_start = p;
+2101         CALLBACK_NOTIFY(chunk\_complete);
+2102         \textcolor{keywordflow}{break};
+2103 
+2104       \textcolor{keywordflow}{default}:
+2105         assert(0 && \textcolor{stringliteral}{"unhandled state"});
+2106         SET_ERRNO(HPE_INVALID_INTERNAL_STATE);
+2107         \textcolor{keywordflow}{goto} error;
+2108     \}
+2109   \}
+2110 
+2111   \textcolor{comment}{/* We can check for overflow here because in Proxygen, len <= ~8KB and so the}
+2112 \textcolor{comment}{   * worst thing that can happen is that we catch the overflow at 88KB rather}
+2113 \textcolor{comment}{   * than at 80KB.}
+2114 \textcolor{comment}{   * In case of chunk encoding, we count the overflow for every}
+2115 \textcolor{comment}{   * chunk separately.}
+2116 \textcolor{comment}{   * We zero the nread counter (and reset data\_or\_header\_data\_start) when we}
+2117 \textcolor{comment}{   * start parsing a new message or a new chunk.}
+2118 \textcolor{comment}{   */}
+2119   \textcolor{keywordflow}{if} (PARSING_HEADER(state)) \{
+2120     parser->nread += p - data\_or\_header\_data\_start;
+2121     \textcolor{keywordflow}{if} (parser->nread > HTTP_MAX_HEADER_SIZE) \{
+2122       SET_ERRNO(HPE_HEADER_OVERFLOW);
+2123       \textcolor{keywordflow}{goto} error;
+2124     \}
+2125   \}
+2126 
+2127   \textcolor{comment}{/* Run callbacks for any marks that we have leftover after we ran out of}
+2128 \textcolor{comment}{   * bytes. There should be at most one of these set, so it's OK to invoke}
+2129 \textcolor{comment}{   * them in series (unset marks will not result in callbacks).}
+2130 \textcolor{comment}{   *}
+2131 \textcolor{comment}{   * We use the NOADVANCE() variety of callbacks here because 'p' has already}
+2132 \textcolor{comment}{   * overflowed 'data' and this allows us to correct for the off-by-one that}
+2133 \textcolor{comment}{   * we'd otherwise have (since CALLBACK\_DATA() is meant to be run with a 'p'}
+2134 \textcolor{comment}{   * value that's in-bounds).}
+2135 \textcolor{comment}{   */}
+2136 
+2137   assert(((header\_field\_mark ? 1 : 0) +
+2138           (header\_value\_mark ? 1 : 0) +
+2139           (url\_mark ? 1 : 0)  +
+2140           (reason\_mark ? 1 : 0)  +
+2141           (body\_mark ? 1 : 0)) <= 1);
+2142 
+2143   CALLBACK_DATA_NOADVANCE(header\_field);
+2144   CALLBACK_DATA_NOADVANCE(header\_value);
+2145   CALLBACK_DATA_NOADVANCE(url);
+2146   CALLBACK_DATA_NOADVANCE(reason);
+2147   CALLBACK_DATA_NOADVANCE(body);
+2148 
+2149   RETURN(len);
+2150 
+2151 error:
+2152   \textcolor{keywordflow}{if} (HTTP_PARSER_ERRNO(parser) == HPE_OK) \{
+2153     SET_ERRNO(HPE_UNKNOWN);
+2154   \}
+2155 
+2156   RETURN(p - data);
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+init@{http\+\_\+parser\+\_\+init}}
+\index{http\+\_\+parser\+\_\+init@{http\+\_\+parser\+\_\+init}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+init(http\+\_\+parser $\ast$parser, enum http\+\_\+parser\+\_\+type type)}]{\setlength{\rightskip}{0pt plus 5cm}void http\+\_\+parser\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{parser, }
+\item[{enum {\bf http\+\_\+parser\+\_\+type}}]{type}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_a089b18502c937358df2adcea83db22bb}
+
+
+Definition at line 2166 of file http\+\_\+parser.\+c.
+
+
+
+References http\+\_\+parser\+::flags, H\+P\+E\+\_\+\+OK, http\+\_\+parser\+::http\+\_\+errno, http\+\_\+parser\+::http\+\_\+major, http\+\_\+parser\+::http\+\_\+minor, H\+T\+T\+P\+\_\+\+R\+E\+Q\+U\+E\+ST, H\+T\+T\+P\+\_\+\+R\+E\+S\+P\+O\+N\+SE, http\+\_\+parser\+::method, http\+\_\+parser\+::nread, s\+\_\+pre\+\_\+start\+\_\+req, s\+\_\+pre\+\_\+start\+\_\+req\+\_\+or\+\_\+res, s\+\_\+pre\+\_\+start\+\_\+res, http\+\_\+parser\+::state, http\+\_\+parser\+::type, and http\+\_\+parser\+::upgrade.
+
+
+
+Referenced by proxygen\+::\+H\+T\+T\+P1x\+Codec\+::\+H\+T\+T\+P1x\+Codec(), parser\+\_\+init(), test\+\_\+header\+\_\+overflow\+\_\+error(), and test\+\_\+no\+\_\+overflow\+\_\+long\+\_\+body().
+
+
+\begin{DoxyCode}
+2168 \{
+2169   parser->type = t;
+2170   parser->state = (t == HTTP_REQUEST ? s_pre_start_req : (t == HTTP_RESPONSE ? 
+      s_pre_start_res : s_pre_start_req_or_res));
+2171   parser->nread = 0;
+2172   parser->upgrade = 0;
+2173   parser->flags = 0;
+2174   parser->method = 0;
+2175   parser->http_major = 0;
+2176   parser->http_minor = 0;
+2177   parser->http_errno = HPE_OK;
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+parse\+\_\+url@{http\+\_\+parser\+\_\+parse\+\_\+url}}
+\index{http\+\_\+parser\+\_\+parse\+\_\+url@{http\+\_\+parser\+\_\+parse\+\_\+url}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+parse\+\_\+url(const char $\ast$buf, size\+\_\+t buflen, int is\+\_\+connect, struct http\+\_\+parser\+\_\+url $\ast$u)}]{\setlength{\rightskip}{0pt plus 5cm}int http\+\_\+parser\+\_\+parse\+\_\+url (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buf, }
+\item[{size\+\_\+t}]{buflen, }
+\item[{int}]{is\+\_\+connect, }
+\item[{struct {\bf http\+\_\+parser\+\_\+url} $\ast$}]{u}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_aeb269310a348fd68fd001b30b690fc83}
+
+
+Definition at line 2332 of file http\+\_\+parser.\+c.
+
+
+
+References http\+\_\+parser\+\_\+url\+::field\+\_\+data, http\+\_\+parser\+\_\+url\+::field\+\_\+set, http\+\_\+parse\+\_\+host(), http\+\_\+parser\+\_\+url\+::len, http\+\_\+parser\+\_\+url\+::off, parse\+\_\+url\+\_\+char(), http\+\_\+parser\+\_\+url\+::port, s\+\_\+dead, s\+\_\+req\+\_\+fragment, s\+\_\+req\+\_\+fragment\+\_\+start, s\+\_\+req\+\_\+path, s\+\_\+req\+\_\+query\+\_\+string, s\+\_\+req\+\_\+query\+\_\+string\+\_\+start, s\+\_\+req\+\_\+schema, s\+\_\+req\+\_\+schema\+\_\+slash, s\+\_\+req\+\_\+schema\+\_\+slash\+\_\+slash, s\+\_\+req\+\_\+server, s\+\_\+req\+\_\+server\+\_\+start, s\+\_\+req\+\_\+server\+\_\+with\+\_\+at, s\+\_\+req\+\_\+spaces\+\_\+before\+\_\+url, U\+F\+\_\+\+F\+R\+A\+G\+M\+E\+NT, U\+F\+\_\+\+H\+O\+ST, U\+F\+\_\+\+M\+AX, U\+F\+\_\+\+P\+A\+TH, U\+F\+\_\+\+P\+O\+RT, U\+F\+\_\+\+Q\+U\+E\+RY, and U\+F\+\_\+\+S\+C\+H\+E\+MA.
+
+
+
+Referenced by proxygen\+::\+Parse\+U\+R\+L\+::parse(), and test\+\_\+parse\+\_\+url().
+
+
+\begin{DoxyCode}
+2335 \{
+2336   \textcolor{keyword}{enum} state s;
+2337   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *p;
+2338   \textcolor{keyword}{enum} http_parser_url_fields uf, old\_uf;
+2339   \textcolor{keywordtype}{int} found\_at = 0;
+2340 
+2341   u->port = u->field_set = 0;
+2342   s = is\_connect ? s_req_server_start : s_req_spaces_before_url;
+2343   uf = old\_uf = UF_MAX;
+2344 
+2345   \textcolor{keywordflow}{for} (p = buf; p < buf + buflen; p++) \{
+2346     s = parse_url_char(s, *p);
+2347 
+2348     \textcolor{comment}{/* Figure out the next field that we're operating on */}
+2349     \textcolor{keywordflow}{switch} (s) \{
+2350       \textcolor{keywordflow}{case} s_dead:
+2351         \textcolor{keywordflow}{return} 1;
+2352 
+2353       \textcolor{comment}{/* Skip delimeters */}
+2354       \textcolor{keywordflow}{case} s_req_schema_slash:
+2355       \textcolor{keywordflow}{case} s_req_schema_slash_slash:
+2356       \textcolor{keywordflow}{case} s_req_server_start:
+2357       \textcolor{keywordflow}{case} s_req_query_string_start:
+2358       \textcolor{keywordflow}{case} s_req_fragment_start:
+2359         \textcolor{keywordflow}{continue};
+2360 
+2361       \textcolor{keywordflow}{case} s_req_schema:
+2362         uf = UF_SCHEMA;
+2363         \textcolor{keywordflow}{break};
+2364 
+2365       \textcolor{keywordflow}{case} s_req_server_with_at:
+2366         found\_at = 1;
+2367 
+2368       \textcolor{comment}{/* FALLTHROUGH */}
+2369       \textcolor{keywordflow}{case} s_req_server:
+2370         uf = UF_HOST;
+2371         \textcolor{keywordflow}{break};
+2372 
+2373       \textcolor{keywordflow}{case} s_req_path:
+2374         uf = UF_PATH;
+2375         \textcolor{keywordflow}{break};
+2376 
+2377       \textcolor{keywordflow}{case} s_req_query_string:
+2378         uf = UF_QUERY;
+2379         \textcolor{keywordflow}{break};
+2380 
+2381       \textcolor{keywordflow}{case} s_req_fragment:
+2382         uf = UF_FRAGMENT;
+2383         \textcolor{keywordflow}{break};
+2384 
+2385       \textcolor{keywordflow}{default}:
+2386         assert(!\textcolor{stringliteral}{"Unexpected state"});
+2387         \textcolor{keywordflow}{return} 1;
+2388     \}
+2389 
+2390     \textcolor{comment}{/* Nothing's changed; soldier on */}
+2391     \textcolor{keywordflow}{if} (uf == old\_uf) \{
+2392       u->field_data[uf].len++;
+2393       \textcolor{keywordflow}{continue};
+2394     \}
+2395 
+2396     u->field_data[uf].off = p - buf;
+2397     u->field_data[uf].len = 1;
+2398 
+2399     u->field_set |= (1 << uf);
+2400     old\_uf = uf;
+2401   \}
+2402 
+2403   \textcolor{comment}{/* host must be present if there is a schema */}
+2404   \textcolor{comment}{/* parsing http:///toto will fail */}
+2405   \textcolor{keywordflow}{if} ((u->field_set & ((1 << UF_SCHEMA) | (1 << UF_HOST))) != 0) \{
+2406     \textcolor{keywordflow}{if} (http_parse_host(buf, u, found\_at) != 0) \{
+2407       \textcolor{keywordflow}{return} 1;
+2408     \}
+2409   \}
+2410 
+2411   \textcolor{comment}{/* CONNECT requests can only contain "hostname:port" */}
+2412   \textcolor{keywordflow}{if} (is\_connect && u->field_set != ((1 << UF_HOST)|(1 << UF_PORT))) \{
+2413     \textcolor{keywordflow}{return} 1;
+2414   \}
+2415 
+2416   \textcolor{keywordflow}{if} (u->field_set & (1 << UF_PORT)) \{
+2417     \textcolor{comment}{/* Don't bother with endp; we've already validated the string */}
+2418     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} v = strtoul(buf + u->field_data[UF_PORT].off, \textcolor{keyword}{nullptr}, 10);
+2419 
+2420     \textcolor{comment}{/* Ports have a max value of 2^16 */}
+2421     \textcolor{keywordflow}{if} (v > 0xffff) \{
+2422       \textcolor{keywordflow}{return} 1;
+2423     \}
+2424 
+2425     u->port = (uint16\_t) v;
+2426   \}
+2427 
+2428   \textcolor{keywordflow}{return} 0;
+\end{DoxyCode}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!http\+\_\+parser\+\_\+pause@{http\+\_\+parser\+\_\+pause}}
+\index{http\+\_\+parser\+\_\+pause@{http\+\_\+parser\+\_\+pause}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{http\+\_\+parser\+\_\+pause(http\+\_\+parser $\ast$parser, int paused)}]{\setlength{\rightskip}{0pt plus 5cm}void http\+\_\+parser\+\_\+pause (
+\begin{DoxyParamCaption}
+\item[{{\bf http\+\_\+parser} $\ast$}]{parser, }
+\item[{int}]{paused}
+\end{DoxyParamCaption}
+)}\label{http__parser_8h_ab67d625ad2fe1623825eec73e18817de}
+
+
+Definition at line 2431 of file http\+\_\+parser.\+c.
+
+
+
+References H\+P\+E\+\_\+\+OK, H\+P\+E\+\_\+\+P\+A\+U\+S\+ED, H\+T\+T\+P\+\_\+\+P\+A\+R\+S\+E\+R\+\_\+\+E\+R\+R\+NO, and S\+E\+T\+\_\+\+E\+R\+R\+NO.
+
+
+
+Referenced by pause\+\_\+body\+\_\+cb(), pause\+\_\+chunk\+\_\+complete\+\_\+cb(), pause\+\_\+chunk\+\_\+header\+\_\+cb(), pause\+\_\+header\+\_\+field\+\_\+cb(), pause\+\_\+header\+\_\+value\+\_\+cb(), pause\+\_\+headers\+\_\+complete\+\_\+cb(), pause\+\_\+message\+\_\+begin\+\_\+cb(), pause\+\_\+message\+\_\+complete\+\_\+cb(), pause\+\_\+request\+\_\+url\+\_\+cb(), pause\+\_\+response\+\_\+reason\+\_\+cb(), proxygen\+::\+H\+T\+T\+P1x\+Codec\+::set\+Parser\+Paused(), and test\+\_\+message\+\_\+pause().
+
+
+\begin{DoxyCode}
+2432                                                    \{
+2433   \textcolor{comment}{/* Users should only be pausing/unpausing a parser that is not in an error}
+2434 \textcolor{comment}{   * state. In non-debug builds, there's not much that we can do about this}
+2435 \textcolor{comment}{   * other than ignore it.}
+2436 \textcolor{comment}{   */}
+2437   \textcolor{keywordflow}{if} (HTTP_PARSER_ERRNO(parser) == HPE_OK ||
+2438       HTTP_PARSER_ERRNO(parser) == HPE_PAUSED) \{
+2439     SET_ERRNO((paused) ? HPE_PAUSED : HPE_OK);
+2440   \} \textcolor{keywordflow}{else} \{
+2441     assert(0 && \textcolor{stringliteral}{"Attempting to pause parser in error state"});
+2442   \}
+\end{DoxyCode}

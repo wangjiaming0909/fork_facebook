@@ -1,0 +1,211 @@
+\section{proxygen\+:\+:Byte\+Event Class Reference}
+\label{classproxygen_1_1ByteEvent}\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+
+
+{\ttfamily \#include $<$Byte\+Events.\+h$>$}
+
+Inheritance diagram for proxygen\+:\+:Byte\+Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classproxygen_1_1ByteEvent}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Event\+Type} \{ \\*
+{\bf F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE}, 
+{\bf L\+A\+S\+T\+\_\+\+B\+Y\+TE}, 
+{\bf P\+I\+N\+G\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+S\+E\+NT}, 
+{\bf F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE}, 
+\\*
+{\bf T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Byte\+Event} (uint64\+\_\+t byte\+Offset, {\bf Event\+Type} event\+Type)
+\item 
+virtual {\bf $\sim$\+Byte\+Event} ()
+\item 
+virtual {\bf H\+T\+T\+P\+Transaction} $\ast$ {\bf get\+Transaction} ()
+\item 
+virtual int64\+\_\+t {\bf get\+Latency} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+folly\+::\+Intrusive\+List\+Hook {\bf list\+Hook}
+\item 
+{\bf Event\+Type} {\bf event\+Type\+\_\+}\+:3
+\item 
+size\+\_\+t {\bf eom\+Tracked\+\_\+}\+:1
+\item 
+uint64\+\_\+t {\bf byte\+Offset\+\_\+}\+:(8$\ast$sizeof(uint64\+\_\+t)-\/4)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file Byte\+Events.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!Event\+Type@{Event\+Type}}
+\index{Event\+Type@{Event\+Type}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{Event\+Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf proxygen\+::\+Byte\+Event\+::\+Event\+Type}}\label{classproxygen_1_1ByteEvent_a3fdae6f245b9ed404854edde218bb549}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE@{F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE@{F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE}}\item[{\em 
+F\+I\+R\+S\+T\+\_\+\+B\+Y\+TE\label{classproxygen_1_1ByteEvent_a3fdae6f245b9ed404854edde218bb549a78a8d6c539da12626be6923ae965fec2}
+}]\index{L\+A\+S\+T\+\_\+\+B\+Y\+TE@{L\+A\+S\+T\+\_\+\+B\+Y\+TE}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!L\+A\+S\+T\+\_\+\+B\+Y\+TE@{L\+A\+S\+T\+\_\+\+B\+Y\+TE}}\item[{\em 
+L\+A\+S\+T\+\_\+\+B\+Y\+TE\label{classproxygen_1_1ByteEvent_a3fdae6f245b9ed404854edde218bb549af5c7f685ff574ac3be87f40fb8fd7604}
+}]\index{P\+I\+N\+G\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+S\+E\+NT@{P\+I\+N\+G\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+S\+E\+NT}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!P\+I\+N\+G\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+S\+E\+NT@{P\+I\+N\+G\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+S\+E\+NT}}\item[{\em 
+P\+I\+N\+G\+\_\+\+R\+E\+P\+L\+Y\+\_\+\+S\+E\+NT\label{classproxygen_1_1ByteEvent_a3fdae6f245b9ed404854edde218bb549a67ec99a70c7a12ff5d9b96f4099f566e}
+}]\index{F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE@{F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE@{F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE}}\item[{\em 
+F\+I\+R\+S\+T\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+B\+Y\+TE\label{classproxygen_1_1ByteEvent_a3fdae6f245b9ed404854edde218bb549aecd719926c50a3c8df227a23ba4a737a}
+}]\index{T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE@{T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE@{T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE}}\item[{\em 
+T\+R\+A\+C\+K\+E\+D\+\_\+\+B\+Y\+TE\label{classproxygen_1_1ByteEvent_a3fdae6f245b9ed404854edde218bb549aca4ce19dad7f039195e8cfbc25e1fa53}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 21 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+21                  \{
+22     FIRST_BYTE,
+23     LAST_BYTE,
+24     PING_REPLY_SENT,
+25     FIRST_HEADER_BYTE,
+26     TRACKED_BYTE,
+27   \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!Byte\+Event@{Byte\+Event}}
+\index{Byte\+Event@{Byte\+Event}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{Byte\+Event(uint64\+\_\+t byte\+Offset, Event\+Type event\+Type)}]{\setlength{\rightskip}{0pt plus 5cm}proxygen\+::\+Byte\+Event\+::\+Byte\+Event (
+\begin{DoxyParamCaption}
+\item[{uint64\+\_\+t}]{byte\+Offset, }
+\item[{{\bf Event\+Type}}]{event\+Type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classproxygen_1_1ByteEvent_a8bcde32e10c23693b5c5ba2a80f5b4ff}
+
+
+Definition at line 29 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+30       : eventType_(eventType), eomTracked_(0), byteOffset_(byteOffset) \{\}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!````~Byte\+Event@{$\sim$\+Byte\+Event}}
+\index{````~Byte\+Event@{$\sim$\+Byte\+Event}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{$\sim$\+Byte\+Event()}]{\setlength{\rightskip}{0pt plus 5cm}virtual proxygen\+::\+Byte\+Event\+::$\sim$\+Byte\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEvent_a0ba49c1967be95ad9564ba93686c6f74}
+
+
+Definition at line 31 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+31 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!get\+Latency@{get\+Latency}}
+\index{get\+Latency@{get\+Latency}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{get\+Latency()}]{\setlength{\rightskip}{0pt plus 5cm}virtual int64\+\_\+t proxygen\+::\+Byte\+Event\+::get\+Latency (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEvent_affa839c44c453c209acc72b93580e9e1}
+
+
+Reimplemented in {\bf proxygen\+::\+Ping\+Byte\+Event} \doxyref{}{p.}{classproxygen_1_1PingByteEvent_ab465512f266054d2ef8d3b455c4bc11f}.
+
+
+
+Definition at line 33 of file Byte\+Events.\+h.
+
+
+
+Referenced by proxygen\+::\+Ping\+Byte\+Event\+::\+Ping\+Byte\+Event().
+
+
+\begin{DoxyCode}
+33 \{ \textcolor{keywordflow}{return} -1; \}
+\end{DoxyCode}
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!get\+Transaction@{get\+Transaction}}
+\index{get\+Transaction@{get\+Transaction}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{get\+Transaction()}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf H\+T\+T\+P\+Transaction}$\ast$ proxygen\+::\+Byte\+Event\+::get\+Transaction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classproxygen_1_1ByteEvent_a1b193cbf3dcac88db6d439d0f7a3b798}
+
+
+Reimplemented in {\bf proxygen\+::\+Transaction\+Byte\+Event} \doxyref{}{p.}{classproxygen_1_1TransactionByteEvent_affb42e3c628b508a798b44e6367b13ef}.
+
+
+
+Definition at line 32 of file Byte\+Events.\+h.
+
+
+\begin{DoxyCode}
+32 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr}; \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!byte\+Offset\+\_\+@{byte\+Offset\+\_\+}}
+\index{byte\+Offset\+\_\+@{byte\+Offset\+\_\+}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{byte\+Offset\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}uint64\+\_\+t proxygen\+::\+Byte\+Event\+::byte\+Offset\+\_\+}\label{classproxygen_1_1ByteEvent_a3f554bdf7dfb4bce5005412a21bbf8e7}
+
+
+Definition at line 38 of file Byte\+Events.\+h.
+
+
+
+Referenced by proxygen\+::operator$<$$<$().
+
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!eom\+Tracked\+\_\+@{eom\+Tracked\+\_\+}}
+\index{eom\+Tracked\+\_\+@{eom\+Tracked\+\_\+}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{eom\+Tracked\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t proxygen\+::\+Byte\+Event\+::eom\+Tracked\+\_\+}\label{classproxygen_1_1ByteEvent_a59de6d66d0415d15f75b8bc74af5259c}
+
+
+Definition at line 37 of file Byte\+Events.\+h.
+
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!event\+Type\+\_\+@{event\+Type\+\_\+}}
+\index{event\+Type\+\_\+@{event\+Type\+\_\+}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{event\+Type\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Event\+Type} proxygen\+::\+Byte\+Event\+::event\+Type\+\_\+}\label{classproxygen_1_1ByteEvent_a5f6425b89dc8d2eac3ad1ce17739f737}
+
+
+Definition at line 36 of file Byte\+Events.\+h.
+
+
+
+Referenced by proxygen\+::operator$<$$<$().
+
+\index{proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}!list\+Hook@{list\+Hook}}
+\index{list\+Hook@{list\+Hook}!proxygen\+::\+Byte\+Event@{proxygen\+::\+Byte\+Event}}
+\subsubsection[{list\+Hook}]{\setlength{\rightskip}{0pt plus 5cm}folly\+::\+Intrusive\+List\+Hook proxygen\+::\+Byte\+Event\+::list\+Hook}\label{classproxygen_1_1ByteEvent_a37dc552e16debcee7125fd2160b30ae7}
+
+
+Definition at line 35 of file Byte\+Events.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+proxygen/lib/http/session/{\bf Byte\+Events.\+h}\end{DoxyCompactItemize}
