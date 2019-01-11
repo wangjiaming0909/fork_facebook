@@ -24,7 +24,8 @@
 #include <type_traits>
 #include <utility>
 
-namespace folly {
+namespace folly
+{
 
 /**
  * DelayedDestructionBase is a helper class to ensure objects are not deleted
@@ -43,14 +44,15 @@ namespace folly {
  * DelayedDestructionBase does not perform any locking.  It is intended to be
  * used only from a single thread.
  */
-class DelayedDestructionBase {
- public:
-  DelayedDestructionBase(const DelayedDestructionBase&) = delete;
-  DelayedDestructionBase& operator=(const DelayedDestructionBase&) = delete;
+class DelayedDestructionBase
+{
+  public:
+    DelayedDestructionBase(const DelayedDestructionBase &) = delete;
+    DelayedDestructionBase &operator=(const DelayedDestructionBase &) = delete;
 
-  virtual ~DelayedDestructionBase() = default;
+    virtual ~DelayedDestructionBase() = default;
 
-  /**
+    /**
    * Classes should create a DestructorGuard object on the stack in any
    * function that may invoke callback functions.
    *
@@ -59,151 +61,171 @@ class DelayedDestructionBase {
    * object, causing problems when the callback function returns and the
    * guarded object's method resumes execution.
    */
-  class DestructorGuard {
-   public:
-    explicit DestructorGuard(DelayedDestructionBase* dd) : dd_(dd) {
-      if (dd_ != nullptr) {
-        ++dd_->guardCount_;
-        assert(dd_->guardCount_ > 0); // check for wrapping
-      }
-    }
-
-    DestructorGuard(const DestructorGuard& dg) : DestructorGuard(dg.dd_) {}
-
-    DestructorGuard(DestructorGuard&& dg) noexcept
-        : dd_(std::exchange(dg.dd_, nullptr)) {}
-
-    DestructorGuard& operator=(DestructorGuard dg) noexcept {
-      std::swap(dd_, dg.dd_);
-      return *this;
-    }
-
-    DestructorGuard& operator=(DelayedDestructionBase* dd) {
-      *this = DestructorGuard(dd);
-      return *this;
-    }
-
-    ~DestructorGuard() {
-      if (dd_ != nullptr) {
-        assert(dd_->guardCount_ > 0);
-        --dd_->guardCount_;
-        if (dd_->guardCount_ == 0) {
-          dd_->onDelayedDestroy(true);
+    class DestructorGuard
+    {
+      public:
+        explicit DestructorGuard(DelayedDestructionBase *dd) : dd_(dd)
+        {
+            if (dd_ != nullptr)
+            {
+                ++dd_->guardCount_;
+                assert(dd_->guardCount_ > 0); // check for wrapping
+            }
         }
-      }
-    }
 
-    DelayedDestructionBase* get() const {
-      return dd_;
-    }
+        DestructorGuard(const DestructorGuard &dg) : DestructorGuard(dg.dd_) {}
 
-    explicit operator bool() const {
-      return dd_ != nullptr;
-    }
+        DestructorGuard(DestructorGuard &&dg) noexcept
+            : dd_(std::exchange(dg.dd_, nullptr)) {}
 
-   private:
-    DelayedDestructionBase* dd_;
-  };
+        DestructorGuard &operator=(DestructorGuard dg) noexcept
+        {
+            std::swap(dd_, dg.dd_);
+            return *this;
+        }
 
-  /**
+        DestructorGuard &operator=(DelayedDestructionBase *dd)
+        {
+            *this = DestructorGuard(dd);
+            return *this;
+        }
+
+        ~DestructorGuard()
+        {
+            if (dd_ != nullptr)
+            {
+                assert(dd_->guardCount_ > 0);
+                --dd_->guardCount_;
+                if (dd_->guardCount_ == 0)
+                {
+                    dd_->onDelayedDestroy(true);
+                }
+            }
+        }
+
+        DelayedDestructionBase *get() const
+        {
+            return dd_;
+        }
+
+        explicit operator bool() const
+        {
+            return dd_ != nullptr;
+        }
+
+      private:
+        DelayedDestructionBase *dd_;
+    };
+
+    /**
    * This smart pointer is a convenient way to manage a concrete
    * DelayedDestructorBase child. It can replace the equivalent raw pointer and
    * provide automatic memory management.
    */
-  template <typename AliasType>
-  class IntrusivePtr : private DestructorGuard {
-    template <typename CopyAliasType>
-    friend class IntrusivePtr;
+    template <typename AliasType>
+    class IntrusivePtr : private DestructorGuard
+    {
+        template <typename CopyAliasType>
+        friend class IntrusivePtr;
 
-   public:
-    template <typename... Args>
-    static IntrusivePtr<AliasType> make(Args&&... args) {
-      return {new AliasType(std::forward<Args>(args)...)};
-    }
+      public:
+        template <typename... Args>
+        static IntrusivePtr<AliasType> make(Args &&... args)
+        {
+            return {new AliasType(std::forward<Args>(args)...)};
+        }
 
-    IntrusivePtr() = default;
-    IntrusivePtr(const IntrusivePtr&) = default;
-    IntrusivePtr(IntrusivePtr&&) noexcept = default;
+        IntrusivePtr() = default;
+        IntrusivePtr(const IntrusivePtr &) = default;
+        IntrusivePtr(IntrusivePtr &&) noexcept = default;
 
-    template <
-        typename CopyAliasType,
-        typename = typename std::enable_if<
-            std::is_convertible<CopyAliasType*, AliasType*>::value>::type>
-    IntrusivePtr(const IntrusivePtr<CopyAliasType>& copy)
-        : DestructorGuard(copy) {}
+        template <
+            typename CopyAliasType,
+            typename = typename std::enable_if<
+                std::is_convertible<CopyAliasType *, AliasType *>::value>::type>
+        IntrusivePtr(const IntrusivePtr<CopyAliasType> &copy)
+            : DestructorGuard(copy) {}
 
-    template <
-        typename CopyAliasType,
-        typename = typename std::enable_if<
-            std::is_convertible<CopyAliasType*, AliasType*>::value>::type>
-    IntrusivePtr(IntrusivePtr<CopyAliasType>&& copy)
-        : DestructorGuard(std::move(copy)) {}
+        template <
+            typename CopyAliasType,
+            typename = typename std::enable_if<
+                std::is_convertible<CopyAliasType *, AliasType *>::value>::type>
+        IntrusivePtr(IntrusivePtr<CopyAliasType> &&copy)
+            : DestructorGuard(std::move(copy)) {}
 
-    explicit IntrusivePtr(AliasType* dd) : DestructorGuard(dd) {}
+        explicit IntrusivePtr(AliasType *dd) : DestructorGuard(dd) {}
 
-    // Copying from a unique_ptr is safe because if the upcast to
-    // DelayedDestructionBase works, then the instance is already using
-    // intrusive ref-counting.
-    template <
-        typename CopyAliasType,
-        typename Deleter,
-        typename = typename std::enable_if<
-            std::is_convertible<CopyAliasType*, AliasType*>::value>::type>
-    explicit IntrusivePtr(const std::unique_ptr<CopyAliasType, Deleter>& copy)
-        : DestructorGuard(copy.get()) {}
+        // Copying from a unique_ptr is safe because if the upcast to
+        // DelayedDestructionBase works, then the instance is already using
+        // intrusive ref-counting.
+        template <
+            typename CopyAliasType,
+            typename Deleter,
+            typename = typename std::enable_if<
+                std::is_convertible<CopyAliasType *, AliasType *>::value>::type>
+        explicit IntrusivePtr(const std::unique_ptr<CopyAliasType, Deleter> &copy)
+            : DestructorGuard(copy.get()) {}
 
-    IntrusivePtr& operator=(const IntrusivePtr&) = default;
-    IntrusivePtr& operator=(IntrusivePtr&&) noexcept = default;
+        IntrusivePtr &operator=(const IntrusivePtr &) = default;
+        IntrusivePtr &operator=(IntrusivePtr &&) noexcept = default;
 
-    template <
-        typename CopyAliasType,
-        typename = typename std::enable_if<
-            std::is_convertible<CopyAliasType*, AliasType*>::value>::type>
-    IntrusivePtr& operator=(IntrusivePtr<CopyAliasType> copy) noexcept {
-      DestructorGuard::operator=(copy);
-      return *this;
-    }
+        template <
+            typename CopyAliasType,
+            typename = typename std::enable_if<
+                std::is_convertible<CopyAliasType *, AliasType *>::value>::type>
+        IntrusivePtr &operator=(IntrusivePtr<CopyAliasType> copy) noexcept
+        {
+            DestructorGuard::operator=(copy);
+            return *this;
+        }
 
-    IntrusivePtr& operator=(AliasType* dd) {
-      DestructorGuard::operator=(dd);
-      return *this;
-    }
+        IntrusivePtr &operator=(AliasType *dd)
+        {
+            DestructorGuard::operator=(dd);
+            return *this;
+        }
 
-    void reset(AliasType* dd = nullptr) {
-      *this = dd;
-    }
+        void reset(AliasType *dd = nullptr)
+        {
+            *this = dd;
+        }
 
-    AliasType* get() const {
-      return static_cast<AliasType*>(DestructorGuard::get());
-    }
+        AliasType *get() const
+        {
+            return static_cast<AliasType *>(DestructorGuard::get());
+        }
 
-    AliasType& operator*() const {
-      return *get();
-    }
+        AliasType &operator*() const
+        {
+            return *get();
+        }
 
-    AliasType* operator->() const {
-      return get();
-    }
+        AliasType *operator->() const
+        {
+            return get();
+        }
 
-    explicit operator bool() const {
-      return DestructorGuard::operator bool();
-    }
-  };
+        explicit operator bool() const
+        {
+            return DestructorGuard::operator bool();
+        }
+    };
 
- protected:
-  DelayedDestructionBase() : guardCount_(0) {}
+  protected:
+    DelayedDestructionBase() : guardCount_(0) {}
 
-  /**
+    /**
    * Get the number of DestructorGuards currently protecting this object.
    *
    * This is primarily intended for debugging purposes, such as asserting
    * that an object has at least 1 guard.
    */
-  uint32_t getDestructorGuardCount() const {
-    return guardCount_;
-  }
+    uint32_t getDestructorGuardCount() const
+    {
+        return guardCount_;
+    }
 
-  /**
+    /**
    * Implement onDelayedDestroy in subclasses.
    * onDelayedDestroy() is invoked when the object is potentially being
    * destroyed.
@@ -212,10 +234,10 @@ class DelayedDestructionBase {
    *                 of a DestructorGuard object, or false if onDelayedDestroy()
    *                 is being called directly from the destructor.
    */
-  virtual void onDelayedDestroy(bool delayed) = 0;
+    virtual void onDelayedDestroy(bool delayed) = 0;
 
- private:
-  /**
+  private:
+    /**
    * guardCount_ is incremented by DestructorGuard, to indicate that one of
    * the DelayedDestructionBase object's methods is currently running.
    *
@@ -224,74 +246,86 @@ class DelayedDestructionBase {
    * DelayedDestructionBase objects to invoke callbacks without having to worry
    * about being deleted before the callback returns.
    */
-  uint32_t guardCount_;
+    uint32_t guardCount_;
 };
 
 inline bool operator==(
-    const DelayedDestructionBase::DestructorGuard& left,
-    const DelayedDestructionBase::DestructorGuard& right) {
-  return left.get() == right.get();
+    const DelayedDestructionBase::DestructorGuard &left,
+    const DelayedDestructionBase::DestructorGuard &right)
+{
+    return left.get() == right.get();
 }
 inline bool operator!=(
-    const DelayedDestructionBase::DestructorGuard& left,
-    const DelayedDestructionBase::DestructorGuard& right) {
-  return left.get() != right.get();
+    const DelayedDestructionBase::DestructorGuard &left,
+    const DelayedDestructionBase::DestructorGuard &right)
+{
+    return left.get() != right.get();
 }
 inline bool operator==(
-    const DelayedDestructionBase::DestructorGuard& left,
-    std::nullptr_t) {
-  return left.get() == nullptr;
+    const DelayedDestructionBase::DestructorGuard &left,
+    std::nullptr_t)
+{
+    return left.get() == nullptr;
 }
 inline bool operator==(
     std::nullptr_t,
-    const DelayedDestructionBase::DestructorGuard& right) {
-  return nullptr == right.get();
+    const DelayedDestructionBase::DestructorGuard &right)
+{
+    return nullptr == right.get();
 }
 inline bool operator!=(
-    const DelayedDestructionBase::DestructorGuard& left,
-    std::nullptr_t) {
-  return left.get() != nullptr;
+    const DelayedDestructionBase::DestructorGuard &left,
+    std::nullptr_t)
+{
+    return left.get() != nullptr;
 }
 inline bool operator!=(
     std::nullptr_t,
-    const DelayedDestructionBase::DestructorGuard& right) {
-  return nullptr != right.get();
+    const DelayedDestructionBase::DestructorGuard &right)
+{
+    return nullptr != right.get();
 }
 
 template <typename LeftAliasType, typename RightAliasType>
 inline bool operator==(
-    const DelayedDestructionBase::IntrusivePtr<LeftAliasType>& left,
-    const DelayedDestructionBase::IntrusivePtr<RightAliasType>& right) {
-  return left.get() == right.get();
+    const DelayedDestructionBase::IntrusivePtr<LeftAliasType> &left,
+    const DelayedDestructionBase::IntrusivePtr<RightAliasType> &right)
+{
+    return left.get() == right.get();
 }
 template <typename LeftAliasType, typename RightAliasType>
 inline bool operator!=(
-    const DelayedDestructionBase::IntrusivePtr<LeftAliasType>& left,
-    const DelayedDestructionBase::IntrusivePtr<RightAliasType>& right) {
-  return left.get() != right.get();
+    const DelayedDestructionBase::IntrusivePtr<LeftAliasType> &left,
+    const DelayedDestructionBase::IntrusivePtr<RightAliasType> &right)
+{
+    return left.get() != right.get();
 }
 template <typename LeftAliasType>
 inline bool operator==(
-    const DelayedDestructionBase::IntrusivePtr<LeftAliasType>& left,
-    std::nullptr_t) {
-  return left.get() == nullptr;
+    const DelayedDestructionBase::IntrusivePtr<LeftAliasType> &left,
+    std::nullptr_t)
+{
+    return left.get() == nullptr;
 }
 template <typename RightAliasType>
 inline bool operator==(
     std::nullptr_t,
-    const DelayedDestructionBase::IntrusivePtr<RightAliasType>& right) {
-  return nullptr == right.get();
+    const DelayedDestructionBase::IntrusivePtr<RightAliasType> &right)
+{
+    return nullptr == right.get();
 }
 template <typename LeftAliasType>
 inline bool operator!=(
-    const DelayedDestructionBase::IntrusivePtr<LeftAliasType>& left,
-    std::nullptr_t) {
-  return left.get() != nullptr;
+    const DelayedDestructionBase::IntrusivePtr<LeftAliasType> &left,
+    std::nullptr_t)
+{
+    return left.get() != nullptr;
 }
 template <typename RightAliasType>
 inline bool operator!=(
     std::nullptr_t,
-    const DelayedDestructionBase::IntrusivePtr<RightAliasType>& right) {
-  return nullptr != right.get();
+    const DelayedDestructionBase::IntrusivePtr<RightAliasType> &right)
+{
+    return nullptr != right.get();
 }
 } // namespace folly
