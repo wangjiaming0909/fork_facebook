@@ -351,3 +351,8 @@
 #define EVENT__ssize_t SSIZE_T
 
 #endif
+
+#define EVENT__HAVE_SELECT
+#define EVENT__HAVE_SYS_SELECT_H
+#define EVENT__HAVE_SYS_TIME_H
+#define EVENT__HAVE_POLL

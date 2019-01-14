@@ -160,8 +160,7 @@ evthread_posix_cond_wait(void *cond_, void *lock_, const struct timeval *tv)
 	}
 }
 
-int
-evthread_use_pthreads(void)
+int evthread_use_pthreads(void)
 {
 	struct evthread_lock_callbacks cbs = {
 		EVTHREAD_LOCK_API_VERSION,

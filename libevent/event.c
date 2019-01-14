@@ -516,8 +516,7 @@ event_init(void)
 	return (base);
 }
 
-struct event_base *
-event_base_new(void)
+struct event_base * event_base_new(void)
 {
 	struct event_base *base = NULL;
 	struct event_config *cfg = event_config_new();
@@ -601,8 +600,7 @@ event_disable_debug_mode(void)
 #endif
 }
 
-struct event_base *
-event_base_new_with_config(const struct event_config *cfg)
+struct event_base * event_base_new_with_config(const struct event_config *cfg)
 {
 	int i;
 	struct event_base *base;
@@ -673,6 +671,9 @@ event_base_new_with_config(const struct event_config *cfg)
 	    base->max_dispatch_time.tv_sec == -1)
 		base->limit_callbacks_after_prio = INT_MAX;
 
+//*************************************************************
+//这个for循环以此检查使用哪个系统函数，优先使用epoll > poll > select
+//eventops 是一个静态的数组，里面可能存在多个这种系统函数，但是只找第一个就行
 	for (i = 0; eventops[i] && !base->evbase; i++) {
 		if (cfg != NULL) {
 			/* determine if this backend should be avoided */
@@ -689,8 +690,10 @@ event_base_new_with_config(const struct event_config *cfg)
 		    event_is_method_disabled(eventops[i]->name))
 			continue;
 
+		//找到一个，for循环就退出了
 		base->evsel = eventops[i];
 
+		//对应结构体会设置其各种操作函数的指针
 		base->evbase = base->evsel->init(base);
 	}
 
@@ -701,6 +704,7 @@ event_base_new_with_config(const struct event_config *cfg)
 		event_base_free(base);
 		return NULL;
 	}
+//*************************************************************
 
 	if (evutil_getenv_("EVENT_SHOW_METHOD"))
 		event_msgx("libevent using: %s", base->evsel->name);
@@ -1919,8 +1923,7 @@ event_loop(int flags)
 	return event_base_loop(current_base, flags);
 }
 
-int
-event_base_loop(struct event_base *base, int flags)
+int event_base_loop(struct event_base *base, int flags)
 {
 	const struct eventop *evsel = base->evsel;
 	struct timeval tv;
@@ -1929,9 +1932,9 @@ event_base_loop(struct event_base *base, int flags)
 
 	/* Grab the lock.  We will release it inside evsel.dispatch, and again
 	 * as we invoke user callbacks. */
-	EVBASE_ACQUIRE_LOCK(base, th_base_lock);
+	EVBASE_ACQUIRE_LOCK(base, th_base_lock);//th_base_lock是base的锁
 
-	if (base->running_loop) {
+	if (base->running_loop) {//如果已经在event_base_loop之中了
 		event_warnx("%s: reentrant invocation.  Only one event_base_loop"
 		    " can run on each event_base at once.", __func__);
 		EVBASE_RELEASE_LOCK(base, th_base_lock);
@@ -1989,6 +1992,7 @@ event_base_loop(struct event_base *base, int flags)
 
 		clear_time_cache(base);
 
+		//dispatch在设置evsel(eventop*)时就确定了(比方说是select)
 		res = evsel->dispatch(base, tv_p);
 
 		if (res == -1) {
@@ -2106,8 +2110,13 @@ event_base_once(struct event_base *base, evutil_socket_t fd, short events,
 	return (0);
 }
 
-int
-event_assign(struct event *ev, struct event_base *base, evutil_socket_t fd, short events, void (*callback)(evutil_socket_t, short, void *), void *arg)
+int event_assign(
+	struct event *ev, 
+	struct event_base *base, 
+	evutil_socket_t fd, 
+	short events, 
+	void (*callback)(evutil_socket_t, short, void *), 
+	void *arg)
 {
 	if (!base)
 		base = current_base;
@@ -3370,8 +3379,9 @@ event_queue_insert_inserted(struct event_base *base, struct event *ev)
 	ev->ev_flags |= EVLIST_INSERTED;
 }
 
-static void
-event_queue_insert_active(struct event_base *base, struct event_callback *evcb)
+static void event_queue_insert_active(
+	struct event_base *base, 
+	struct event_callback *evcb)
 {
 	EVENT_BASE_ASSERT_LOCKED(base);
 
