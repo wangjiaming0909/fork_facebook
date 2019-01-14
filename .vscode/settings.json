@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.makefile": "makefile",
+        "*.proj": "msbuild",
+        "*.cjson": "jsonc",
+        "*.wxss": "css",
+        "*.wxs": "javascript",
+        "xiosbase": "cpp"
+    }
+}
