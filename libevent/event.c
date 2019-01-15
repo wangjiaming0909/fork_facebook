@@ -1960,15 +1960,18 @@ int event_base_loop(struct event_base *base, int flags)
 		base->event_continue = 0;
 		base->n_deferreds_queued = 0;
 
+//************************************************************
+//在每次循环时,首先检查各种退出情况
 		/* Terminate the loop if we have been asked to */
-		if (base->event_gotterm) {
+		if (base->event_gotterm) {//term
 			break;
 		}
 
-		if (base->event_break) {
+		if (base->event_break) {//break
 			break;
 		}
 
+		//no active callbacks && 设置了non-block, 等一个timeout?
 		tv_p = &tv;
 		if (!N_ACTIVE_CALLBACKS(base) && !(flags & EVLOOP_NONBLOCK)) {
 			timeout_next(base, &tv_p);
@@ -1987,12 +1990,14 @@ int event_base_loop(struct event_base *base, int flags)
 			retval = 1;
 			goto done;
 		}
+//************************************************************
 
-		event_queue_make_later_events_active(base);
+		event_queue_make_later_events_active(base);//make later event active
 
 		clear_time_cache(base);
 
-		//dispatch在设置evsel(eventop*)时就确定了(比方说是select)
+		//dispatch在设置evsel(eventop*)时就确定了(比方说是select.c中的dispatch)
+		//select
 		res = evsel->dispatch(base, tv_p);
 
 		if (res == -1) {
@@ -3442,17 +3447,19 @@ event_queue_insert_timeout(struct event_base *base, struct event *ev)
 	}
 }
 
-static void
-event_queue_make_later_events_active(struct event_base *base)
+static void event_queue_make_later_events_active(struct event_base *base)
 {
 	struct event_callback *evcb;
-	EVENT_BASE_ASSERT_LOCKED(base);
+	EVENT_BASE_ASSERT_LOCKED(base);//locked in event_base_loop
 
+//从active_later_queue中取出下一个应该激活的event_callback: TAILQ_FIRST
+//放入activequeues中对应priority队列的最后: TAILQ_INSERT_TAIL
 	while ((evcb = TAILQ_FIRST(&base->active_later_queue))) {
 		TAILQ_REMOVE(&base->active_later_queue, evcb, evcb_active_next);
 		evcb->evcb_flags = (evcb->evcb_flags & ~EVLIST_ACTIVE_LATER) | EVLIST_ACTIVE;
 		EVUTIL_ASSERT(evcb->evcb_pri < base->nactivequeues);
 		TAILQ_INSERT_TAIL(&base->activequeues[evcb->evcb_pri], evcb, evcb_active_next);
+
 		base->n_deferreds_queued += (evcb->evcb_closure == EV_CLOSURE_CB_SELF);
 	}
 }

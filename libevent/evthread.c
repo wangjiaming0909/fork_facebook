@@ -341,8 +341,7 @@ evthread_enable_lock_debugging(void)
 	event_global_setup_locks_(0);
 }
 
-int
-evthread_is_debug_lock_held_(void *lock_)
+int evthread_is_debug_lock_held_(void *lock_)
 {
 	struct debug_lock *lock = lock_;
 	if (! lock->count)
