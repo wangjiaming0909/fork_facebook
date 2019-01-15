@@ -507,10 +507,12 @@ int event_base_update_cache_time(struct event_base *base)
 	return 0;
 }
 
+//利用evcb查找到event的位置
 static inline struct event *
 event_callback_to_event(struct event_callback *evcb)
 {
 	EVUTIL_ASSERT((evcb->evcb_flags & EVLIST_INIT));
+	//利用ev_evcallback在event结构中的offset，从evcb推导出event结构的位置
 	return EVUTIL_UPCAST(evcb, struct event, ev_evcallback);
 }
 
@@ -1706,15 +1708,17 @@ event_persist_closure(struct event_base *base, struct event *ev)
 
 /*
   Helper for event_process_active to process all the events in a single queue,
-  releasing the lock as we go.  This function requires that the lock be held
-  when it's invoked.  Returns -1 if we get a signal or an event_break that
-  means we should stop processing any active events now.  Otherwise returns
-  the number of non-internal event_callbacks that we processed.
+  releasing the lock as we go.  
+  This function requires that the lock be held when it's invoked.  
+  Returns -1 if we get a signal or an event_break that
+  means we should stop processing any active events now.  
+  Otherwise returns the number of non-internal event_callbacks that we processed.
 */
-static int
-event_process_active_single_queue(struct event_base *base,
-								  struct evcallback_list *activeq,
-								  int max_to_process, const struct timeval *endtime)
+static int event_process_active_single_queue(
+	struct event_base *base,
+	struct evcallback_list *activeq,
+	int max_to_process, 
+	const struct timeval *endtime)
 {
 	struct event_callback *evcb;
 	int count = 0;
@@ -1726,7 +1730,7 @@ event_process_active_single_queue(struct event_base *base,
 		struct event *ev = NULL;
 		if (evcb->evcb_flags & EVLIST_INIT)
 		{
-			ev = event_callback_to_event(evcb);
+			ev = event_callback_to_event(evcb);//拿到event指针
 
 			if (ev->ev_events & EV_PERSIST || ev->ev_flags & EVLIST_FINALIZING)
 				event_queue_remove_active(base, evcb);
@@ -1847,8 +1851,7 @@ event_process_active_single_queue(struct event_base *base,
  * priority ones.
  */
 
-static int
-event_process_active(struct event_base *base)
+static int event_process_active(struct event_base *base)
 {
 	/* Caller must hold th_base_lock */
 	struct evcallback_list *activeq = NULL;
@@ -2111,7 +2114,7 @@ int event_base_loop(struct event_base *base, int flags)
 
 		timeout_process(base);
 
-		if (N_ACTIVE_CALLBACKS(base))
+		if (N_ACTIVE_CALLBACKS(base))//has active cbs
 		{
 			int n = event_process_active(base);
 			if ((flags & EVLOOP_ONCE) && N_ACTIVE_CALLBACKS(base) == 0 && n != 0)
@@ -2331,8 +2334,12 @@ event_base_get_running_event(struct event_base *base)
 	return ev;
 }
 
-struct event *
-event_new(struct event_base *base, evutil_socket_t fd, short events, void (*cb)(evutil_socket_t, short, void *), void *arg)
+struct event * event_new(
+	struct event_base *base, 
+	evutil_socket_t fd, 
+	short events, 
+	void (*cb)(evutil_socket_t, short, void *), 
+	void *arg)
 {
 	struct event *ev;
 	ev = mm_malloc(sizeof(struct event));
@@ -3386,8 +3393,10 @@ event_queue_remove_inserted(struct event_base *base, struct event *ev)
 	DECR_EVENT_COUNT(base, ev->ev_flags);
 	ev->ev_flags &= ~EVLIST_INSERTED;
 }
-static void
-event_queue_remove_active(struct event_base *base, struct event_callback *evcb)
+
+static void event_queue_remove_active(
+	struct event_base *base, 
+	struct event_callback *evcb)
 {
 	EVENT_BASE_ASSERT_LOCKED(base);
 	if (EVUTIL_FAILURE_CHECK(!(evcb->evcb_flags & EVLIST_ACTIVE)))
@@ -3403,6 +3412,7 @@ event_queue_remove_active(struct event_base *base, struct event_callback *evcb)
 	TAILQ_REMOVE(&base->activequeues[evcb->evcb_pri],
 				 evcb, evcb_active_next);
 }
+
 static void
 event_queue_remove_active_later(struct event_base *base, struct event_callback *evcb)
 {
@@ -3862,8 +3872,10 @@ evthread_make_base_notifiable_nolock_(struct event_base *base)
 	return event_add_nolock_(&base->th_notify, NULL, 0);
 }
 
-int event_base_foreach_event_nolock_(struct event_base *base,
-									 event_base_foreach_event_cb fn, void *arg)
+int event_base_foreach_event_nolock_(
+	struct event_base *base,
+	event_base_foreach_event_cb fn, 
+	void *arg)
 {
 	int r, i;
 	unsigned u;
@@ -3987,8 +3999,10 @@ dump_active_event_fn(const struct event_base *base, const struct event *e, void 
 	return 0;
 }
 
-int event_base_foreach_event(struct event_base *base,
-							 event_base_foreach_event_cb fn, void *arg)
+int event_base_foreach_event(
+	struct event_base *base,
+	event_base_foreach_event_cb fn, 
+	void *arg)
 {
 	int r;
 	if ((!fn) || (!base))
