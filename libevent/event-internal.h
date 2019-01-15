@@ -222,7 +222,7 @@ struct event_base {
 	/** Data to implement the common signal handler code. */
 	struct evsig_info sig;
 
-	/** Number of virtual events */
+	/** Number of virtual events */ //?what is virtual events
 	int virtual_event_count;
 	/** Maximum number of virtual events active */
 	int virtual_event_count_max;
@@ -244,7 +244,7 @@ struct event_base {
 	int event_continue;
 
 	/** The currently running priority of events */
-	int event_running_priority;
+	int event_running_priority;//*current running priority
 
 	/** Set if we're running the event_base_loop function, to prevent
 	 * reentrant invocation. */
@@ -358,6 +358,12 @@ struct event_config_entry {
  * that we're about to allocate. */
 struct event_config {
 	TAILQ_HEAD(event_configq, event_config_entry) entries;
+	/*
+	struct event_configq{
+		struct event_config_entry* tqh_first;
+		struct event_config_entry** tqh_last;
+	};
+	*/
 
 	int n_cpus_hint;
 	struct timeval max_dispatch_interval;

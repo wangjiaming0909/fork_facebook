@@ -623,7 +623,8 @@ void event_disable_debug_mode(void)
 #endif
 }
 
-struct event_base *event_base_new_with_config(const struct event_config *cfg)
+struct event_base *event_base_new_with_config(
+	const struct event_config *cfg)
 {
 	int i;
 	struct event_base *base;
@@ -1198,15 +1199,15 @@ event_get_supported_methods(void)
 	return (methods);
 }
 
-struct event_config *
-event_config_new(void)
+struct event_config * event_config_new(void)
 {
 	struct event_config *cfg = mm_calloc(1, sizeof(*cfg));
 
 	if (cfg == NULL)
 		return (NULL);
 
-	TAILQ_INIT(&cfg->entries);
+	TAILQ_INIT(&cfg->entries);//get event_configq's address
+	//TAILQ_INIT init the q, first = NULL, last = &first, last is a **
 	cfg->max_dispatch_interval.tv_sec = -1;
 	cfg->max_dispatch_callbacks = INT_MAX;
 	cfg->limit_callbacks_after_prio = 1;
