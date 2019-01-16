@@ -68,6 +68,8 @@ inline bool isLWS(char c) {
 class HTTPHeaders {
  public:
    struct HTTPHeaderName {
+     //CODE means constructed with HTTPHeaderCode
+     //STRING means constructed with const char* or folly::StringPiece
      enum Type { CODE, STRING };
      union {
        folly::StringPiece name_;
@@ -102,12 +104,14 @@ class HTTPHeaders {
    * Add the header 'name' with value 'value'; if other instances of this
    * header name exist, they will be retained.
    */
+  //为什么一会用folly::StringPiece一会用std::string
   void add(folly::StringPiece name, folly::StringPiece value);
   template <typename T> // T = string
   void add(folly::StringPiece name, T&& value);
   template <typename T> // T = string
   void add(HTTPHeaderCode code, T&& value);
   void add(headers_initializer_list l);
+  //?what is rawAdd
   void rawAdd(const std::string& name, const std::string& value);
 
   void addFromCodec(const char* str, size_t len, std::string&& value);
