@@ -100,10 +100,8 @@ class HTTPConnector:
     folly::EventBase* eventBase,
     const folly::SocketAddress& connectAddr,
     std::chrono::milliseconds timeoutMs = std::chrono::milliseconds(0),
-    const folly::AsyncSocket::OptionMap& socketOptions =
-      folly::AsyncSocket::emptyOptionMap,
-    const folly::SocketAddress& bindAddr =
-      folly::AsyncSocket::anyAddress());
+    const folly::AsyncSocket::OptionMap& socketOptions = folly::AsyncSocket::emptyOptionMap,
+    const folly::SocketAddress& bindAddr = folly::AsyncSocket::anyAddress());
 
   /**
    * Begin the process of getting a secure connection to the server

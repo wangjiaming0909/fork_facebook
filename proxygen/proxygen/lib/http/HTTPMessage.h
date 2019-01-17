@@ -812,14 +812,14 @@ class HTTPMessage {
 
   std::pair<uint8_t, uint8_t> version_;
   HTTPHeaders headers_;
-  HTTPHeaders strippedPerHopHeaders_;
+  HTTPHeaders strippedPerHopHeaders_;//?
   HTTPHeaderSize size_;
   std::unique_ptr<HTTPHeaders> trailers_;
 
   int sslVersion_;
-  const char* sslCipher_;
-  const std::string* protoStr_;
-  uint8_t pri_;
+  const char* sslCipher_;//??
+  const std::string* protoStr_;//??
+  uint8_t pri_;//??
   folly::Optional<HTTPPriority> h2Pri_;
 
   mutable bool parsedCookies_:1;

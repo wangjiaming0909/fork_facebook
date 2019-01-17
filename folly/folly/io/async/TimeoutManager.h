@@ -44,9 +44,7 @@ class TimeoutManager {
   /**
    * Attaches/detaches TimeoutManager to AsyncTimeout
    */
-  virtual void attachTimeoutManager(
-      AsyncTimeout* obj,
-      InternalEnum internal) = 0;
+  virtual void attachTimeoutManager( AsyncTimeout* obj, InternalEnum internal) = 0;
   virtual void detachTimeoutManager(AsyncTimeout* obj) = 0;
 
   /**
