@@ -8,6 +8,7 @@
         "xiosbase": "cpp",
         "array": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "ios": "cpp"
     }
 }
