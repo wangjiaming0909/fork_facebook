@@ -12,8 +12,8 @@
 
 namespace proxygen {
 
-class DefaultHTTPCodecFactory : public HTTPCodecFactory {
  public:
+class DefaultHTTPCodecFactory : public HTTPCodecFactory {
   explicit DefaultHTTPCodecFactory(bool forceHTTP1xCodecTo1_1);
   ~DefaultHTTPCodecFactory() override = default;
 
