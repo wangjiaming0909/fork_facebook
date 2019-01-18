@@ -32,7 +32,7 @@ namespace wangle {
  * A ConnectionManager keeps track of ManagedConnections.
  */
 class ConnectionManager: public folly::DelayedDestruction,
-                         private ManagedConnection::Callback {
+                         private ManagedConnection::Callback {//??private 继承自一个抽象类
  public:
 
   /**

@@ -36,6 +36,7 @@ class ManagedConnection:
 
   ManagedConnection();
 
+//Callback会更改ManagedConnection对象
   class Callback {
   public:
     virtual ~Callback() = default;

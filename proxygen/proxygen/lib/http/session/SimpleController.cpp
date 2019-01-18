@@ -19,8 +19,8 @@ SimpleController::SimpleController(HTTPSessionAcceptor* acceptor)
     : acceptor_(acceptor) {
 }
 
-HTTPTransactionHandler* SimpleController::getRequestHandler(
-  HTTPTransaction& txn, HTTPMessage* msg) {
+HTTPTransactionHandler* SimpleController::getRequestHandler( HTTPTransaction& txn, HTTPMessage* msg) 
+{
   return acceptor_->newHandler(txn, msg);
 }
 

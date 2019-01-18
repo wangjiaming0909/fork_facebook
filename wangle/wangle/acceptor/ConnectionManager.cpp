@@ -301,8 +301,11 @@ ConnectionManager::dropConnections(double pct) {
   }
 }
 
-void
-ConnectionManager::onActivated(ManagedConnection& conn) {
+//inhereted from private ManageredConnection::Callback
+//??Callback是一个抽象类
+//??为什么要 private 继承自一个抽象类
+//他不是要继承Callback的接口, onActivated 和 onDeactivated 这两个函数, 因为private继承
+void ConnectionManager::onActivated(ManagedConnection& conn) {
   auto it = conns_.iterator_to(conn);
   if (it == idleIterator_) {
     idleIterator_++;
@@ -311,8 +314,7 @@ ConnectionManager::onActivated(ManagedConnection& conn) {
   conns_.push_front(conn);
 }
 
-void
-ConnectionManager::onDeactivated(ManagedConnection& conn) {
+void ConnectionManager::onDeactivated(ManagedConnection& conn) {
   auto it = conns_.iterator_to(conn);
   bool moveDrainIter = false;
   if (it == drainIterator_) {
