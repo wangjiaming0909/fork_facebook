@@ -329,13 +329,18 @@ class HTTPTransactionTransportCallback {
 };
 
 class HTTPTransaction
-    : public folly::HHWheelTimer::Callback
+//?? public 继承自这个 HHWheelTimer::Callback means that HTTPTransaction 具有 Callback 的所有接口
+//?? 因此 HTTPTransaction 应能够响应 timer 超时, timer 被 canceled 等事件
+//?? 至于具体的实现是由 HTTPTransaction 自己实现的
+    : public folly::HHWheelTimer::Callback//?? timeout 时的 callbacks
     , public folly::DelayedDestructionBase 
     {
 public:
     using Handler = HTTPTransactionHandler;
     using PushHandler = HTTPPushTransactionHandler;
 
+//?? Transport 应该包含 一个 sock_stream, 因为Transport是 HTTP 抽象， sock_stream 是 socket 上传输的抽象
+//?? sendBody, sendHeaders, sendChunkHeaders(?), sendEOM(?)
   class Transport {
    public:
     virtual ~Transport() { }

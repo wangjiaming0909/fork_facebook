@@ -279,6 +279,7 @@ class HTTPSessionBase : public wangle::ManagedConnection {
     readBufLimit_ = limit;
   }
 
+//?? sounds like that transport is a sock_stream in ace
   /**
    * Start reading from the transport and send any introductory messages
    * to the remote side. This function must be called once per session to
@@ -338,6 +339,8 @@ class HTTPSessionBase : public wangle::ManagedConnection {
     prioritySample_ = sampled;
   }
 
+//? overrides? 并没有继承，何来的重写
+//* 可以写成 HTTPSessionBase 包含一个 Transport, getLocalAddress时, 返回 Transport 的address
   // public HTTPTransaction::Transport overrides
   const folly::SocketAddress& getLocalAddress() const noexcept /*override*/ {
     return localAddr_;
