@@ -24,7 +24,8 @@
 #include <memory>
 #include <utility>
 
-namespace folly {
+namespace folly
+{
 
 class EventBase;
 class RequestContext;
@@ -33,17 +34,18 @@ class TimeoutManager;
 /**
  * AsyncTimeout is used to asynchronously wait for a timeout to occur.
  */
-class AsyncTimeout : private boost::noncopyable {
- public:
-  typedef TimeoutManager::InternalEnum InternalEnum;
+class AsyncTimeout : private boost::noncopyable
+{
+  public:
+    typedef TimeoutManager::InternalEnum InternalEnum;
 
-  /**
+    /**
    * Create a new AsyncTimeout object, driven by the specified TimeoutManager.
    */
-  explicit AsyncTimeout(TimeoutManager* timeoutManager);
-  explicit AsyncTimeout(EventBase* eventBase);
+    explicit AsyncTimeout(TimeoutManager *timeoutManager);
+    explicit AsyncTimeout(EventBase *eventBase);
 
-  /**
+    /**
    * Create a new internal AsyncTimeout object.
    *
    * Internal timeouts are like regular timeouts, but will not stop the
@@ -57,29 +59,29 @@ class AsyncTimeout : private boost::noncopyable {
    * the event loop will exit even though the internal timeout is still
    * installed.
    */
-  AsyncTimeout(TimeoutManager* timeoutManager, InternalEnum internal);
-  AsyncTimeout(EventBase* eventBase, InternalEnum internal);
+    AsyncTimeout(TimeoutManager *timeoutManager, InternalEnum internal);
+    AsyncTimeout(EventBase *eventBase, InternalEnum internal);
 
-  /**
+    /**
    * Create a new AsyncTimeout object, not yet assigned to a TimeoutManager.
    *
    * attachEventBase() must be called prior to scheduling the timeout.
    */
-  AsyncTimeout();
+    AsyncTimeout();
 
-  /**
+    /**
    * AsyncTimeout destructor.
    *
    * The timeout will be automatically cancelled if it is running.
    */
-  virtual ~AsyncTimeout();
+    virtual ~AsyncTimeout();
 
-  /**
+    /**
    * timeoutExpired() is invoked when the timeout period has expired.
    */
-  virtual void timeoutExpired() noexcept = 0;
+    virtual void timeoutExpired() noexcept = 0;
 
-  /**
+    /**
    * Schedule the timeout to fire in the specified number of milliseconds.
    *
    * After the specified number of milliseconds has elapsed, timeoutExpired()
@@ -95,20 +97,20 @@ class AsyncTimeout : private boost::noncopyable {
    *         always unscheduled, even if scheduleTimeout() was just
    *         rescheduling an existing timeout.
    */
-  bool scheduleTimeout(uint32_t milliseconds);
-  bool scheduleTimeout(TimeoutManager::timeout_type timeout);
+    bool scheduleTimeout(uint32_t milliseconds);
+    bool scheduleTimeout(TimeoutManager::timeout_type timeout);
 
-  /**
+    /**
    * Cancel the timeout, if it is running.
    */
-  void cancelTimeout();
+    void cancelTimeout();
 
-  /**
+    /**
    * Returns true if the timeout is currently scheduled.
    */
-  bool isScheduled() const;
+    bool isScheduled() const;
 
-  /**
+    /**
    * Attach the timeout to a TimeoutManager.
    *
    * This may only be called if the timeout is not currently attached to a
@@ -121,14 +123,14 @@ class AsyncTimeout : private boost::noncopyable {
    * internal event.  TimeoutManager::loop() will return when there are no more
    * non-internal events remaining.
    */
-  void attachTimeoutManager(
-      TimeoutManager* timeoutManager,
-      InternalEnum internal = InternalEnum::NORMAL);
-  void attachEventBase(
-      EventBase* eventBase,
-      InternalEnum internal = InternalEnum::NORMAL);
+    void attachTimeoutManager(
+        TimeoutManager *timeoutManager,
+        InternalEnum internal = InternalEnum::NORMAL);
+    void attachEventBase(
+        EventBase *eventBase,
+        InternalEnum internal = InternalEnum::NORMAL);
 
-  /**
+    /**
    * Detach the timeout from its TimeoutManager.
    *
    * This may only be called when the timeout is not running.
@@ -137,21 +139,23 @@ class AsyncTimeout : private boost::noncopyable {
    *
    * This method must be called from the current TimeoutManager's thread.
    */
-  void detachTimeoutManager();
-  void detachEventBase();
+    void detachTimeoutManager();
+    void detachEventBase();
 
-  const TimeoutManager* getTimeoutManager() {
-    return timeoutManager_;
-  }
+    const TimeoutManager *getTimeoutManager()
+    {
+        return timeoutManager_;
+    }
 
-  /**
+    /**
    * Returns the internal handle to the event
    */
-  struct event* getEvent() {
-    return &event_;
-  }
+    struct event *getEvent()
+    {
+        return &event_;
+    }
 
-  /**
+    /**
    * Convenience function that wraps a function object as
    * an AsyncTimeout instance and returns the wrapper.
    *
@@ -175,12 +179,12 @@ class AsyncTimeout : private boost::noncopyable {
    *
    * @author: Marcelo Juchem <marcelo@fb.com>
    */
-  template <typename TCallback>
-  static std::unique_ptr<AsyncTimeout> make(
-      TimeoutManager& manager,
-      TCallback&& callback);
+    template <typename TCallback>
+    static std::unique_ptr<AsyncTimeout> make(
+        TimeoutManager &manager,
+        TCallback &&callback);
 
-  /**
+    /**
    * Convenience function that wraps a function object as
    * an AsyncTimeout instance and returns the wrapper
    * after scheduling it using the given TimeoutManager.
@@ -209,29 +213,30 @@ class AsyncTimeout : private boost::noncopyable {
    *
    * @author: Marcelo Juchem <marcelo@fb.com>
    */
-  template <typename TCallback>
-  static std::unique_ptr<AsyncTimeout> schedule(
-      TimeoutManager::timeout_type timeout,
-      TimeoutManager& manager,
-      TCallback&& callback);
+    template <typename TCallback>
+    static std::unique_ptr<AsyncTimeout> schedule(
+        TimeoutManager::timeout_type timeout,
+        TimeoutManager &manager,
+        TCallback &&callback);
 
- private:
-  static void libeventCallback(libevent_fd_t fd, short events, void* arg);
+  private:
+    static void libeventCallback(libevent_fd_t fd, short events, void *arg);
 
-  struct event event_;
+    struct event event_;
 
-  /*
+    /*
    * Store a pointer to the TimeoutManager.  We only use this
    * for some assert() statements, to make sure that AsyncTimeout is always
    * used from the correct thread.
    */
-  TimeoutManager* timeoutManager_;
+    TimeoutManager *timeoutManager_;
 
-  // Save the request context for when the timeout fires.
-  std::shared_ptr<RequestContext> context_;
+    // Save the request context for when the timeout fires.
+    std::shared_ptr<RequestContext> context_;
 };
 
-namespace detail {
+namespace detail
+{
 
 /**
  * Wraps a function object as an AsyncTimeout instance.
@@ -239,41 +244,45 @@ namespace detail {
  * @author: Marcelo Juchem <marcelo@fb.com>
  */
 template <typename TCallback>
-struct async_timeout_wrapper : public AsyncTimeout {
-  template <typename UCallback>
-  async_timeout_wrapper(TimeoutManager* manager, UCallback&& callback)
-      : AsyncTimeout(manager), callback_(std::forward<UCallback>(callback)) {}
+struct async_timeout_wrapper : public AsyncTimeout
+{
+    template <typename UCallback>
+    async_timeout_wrapper(TimeoutManager *manager, UCallback &&callback)
+        : AsyncTimeout(manager), callback_(std::forward<UCallback>(callback)) {}
 
-  void timeoutExpired() noexcept override {
-    static_assert(
-        noexcept(std::declval<TCallback>()()),
-        "callback must be declared noexcept, e.g.: `[]() noexcept {}`");
-    callback_();
-  }
+    void timeoutExpired() noexcept override
+    {
+        static_assert(
+            noexcept(std::declval<TCallback>()()),
+            "callback must be declared noexcept, e.g.: `[]() noexcept {}`");
+        callback_();
+    }
 
- private:
-  TCallback callback_;
+  private:
+    TCallback callback_;
 };
 
 } // namespace detail
 
 template <typename TCallback>
 std::unique_ptr<AsyncTimeout> AsyncTimeout::make(
-    TimeoutManager& manager,
-    TCallback&& callback) {
-  return std::unique_ptr<AsyncTimeout>(
-      new detail::async_timeout_wrapper<typename std::decay<TCallback>::type>(
-          std::addressof(manager), std::forward<TCallback>(callback)));
+    TimeoutManager &manager,
+    TCallback &&callback)
+{
+    return std::unique_ptr<AsyncTimeout>(
+        new detail::async_timeout_wrapper<typename std::decay<TCallback>::type>(
+            std::addressof(manager), std::forward<TCallback>(callback)));
 }
 
 template <typename TCallback>
 std::unique_ptr<AsyncTimeout> AsyncTimeout::schedule(
     TimeoutManager::timeout_type timeout,
-    TimeoutManager& manager,
-    TCallback&& callback) {
-  auto wrapper = AsyncTimeout::make(manager, std::forward<TCallback>(callback));
-  wrapper->scheduleTimeout(timeout);
-  return wrapper;
+    TimeoutManager &manager,
+    TCallback &&callback)
+{
+    auto wrapper = AsyncTimeout::make(manager, std::forward<TCallback>(callback));
+    wrapper->scheduleTimeout(timeout);
+    return wrapper;
 }
 
 } // namespace folly

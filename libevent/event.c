@@ -3069,9 +3069,7 @@ void event_active(struct event *ev, int res, short ncalls)
 }
 
 void event_active_nolock_(
-	struct event *ev,
-	int res,
-	short ncalls)
+	struct event *ev, int res, short ncalls)
 {
 	struct event_base *base;
 
@@ -3149,8 +3147,8 @@ void event_active_later_nolock_(struct event *ev, int res)
 	event_callback_activate_later_nolock_(base, event_to_event_callback(ev));
 }
 
-int event_callback_activate_(struct event_base *base,
-							 struct event_callback *evcb)
+int event_callback_activate_(
+	struct event_base *base, struct event_callback *evcb)
 {
 	int r;
 	EVBASE_ACQUIRE_LOCK(base, th_base_lock);
@@ -3159,8 +3157,8 @@ int event_callback_activate_(struct event_base *base,
 	return r;
 }
 
-int event_callback_activate_nolock_(struct event_base *base,
-									struct event_callback *evcb)
+int event_callback_activate_nolock_(
+	struct event_base *base, struct event_callback *evcb)
 {
 	int r = 1;
 

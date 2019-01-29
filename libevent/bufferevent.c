@@ -381,8 +381,7 @@ bufferevent_init_common_(struct bufferevent_private *bufev_private,
 	return 0;
 }
 
-void
-bufferevent_setcb(struct bufferevent *bufev,
+void bufferevent_setcb(struct bufferevent *bufev,
     bufferevent_data_cb readcb, bufferevent_data_cb writecb,
     bufferevent_event_cb eventcb, void *cbarg)
 {
@@ -474,8 +473,7 @@ bufferevent_read_buffer(struct bufferevent *bufev, struct evbuffer *buf)
 	return (evbuffer_add_buffer(buf, bufev->input));
 }
 
-int
-bufferevent_enable(struct bufferevent *bufev, short event)
+int bufferevent_enable(struct bufferevent *bufev, short event)
 {
 	struct bufferevent_private *bufev_private = BEV_UPCAST(bufev);
 	short impl_events = event;

@@ -375,8 +375,7 @@ bufferevent_socket_new(struct event_base *base, evutil_socket_t fd,
 	return bufev;
 }
 
-int
-bufferevent_socket_connect(struct bufferevent *bev,
+int bufferevent_socket_connect(struct bufferevent *bev,
     const struct sockaddr *sa, int socklen)
 {
 	struct bufferevent_private *bufev_p = BEV_UPCAST(bev);
@@ -399,33 +398,35 @@ bufferevent_socket_connect(struct bufferevent *bev,
 		ownfd = 1;
 	}
 	if (sa) {
-#ifdef _WIN32
-		if (bufferevent_async_can_connect_(bev)) {
-			bufferevent_setfd(bev, fd);
-			r = bufferevent_async_connect_(bev, fd, sa, socklen);
-			if (r < 0)
-				goto freesock;
-			bufev_p->connecting = 1;
-			result = 0;
-			goto done;
-		} else
-#endif
+// #ifdef _WIN32
+// 		if (bufferevent_async_can_connect_(bev)) {
+// 			bufferevent_setfd(bev, fd);
+// 			r = bufferevent_async_connect_(bev, fd, sa, socklen);
+// 			if (r < 0)
+// 				goto freesock;
+// 			bufev_p->connecting = 1;
+// 			result = 0;
+// 			goto done;
+// 		} else
+// #endif
+		//如果connect立即返回0, 表示EWOULDBLOCK
 		r = evutil_socket_connect_(&fd, sa, socklen);
 		if (r < 0)
 			goto freesock;
 	}
-#ifdef _WIN32
-	/* ConnectEx() isn't always around, even when IOCP is enabled.
-	 * Here, we borrow the socket object's write handler to fall back
-	 * on a non-blocking connect() when ConnectEx() is unavailable. */
-	if (BEV_IS_ASYNC(bev)) {
-		event_assign(&bev->ev_write, bev->ev_base, fd,
-		    EV_WRITE|EV_PERSIST|EV_FINALIZE, bufferevent_writecb, bev);
-	}
-#endif
+// #ifdef _WIN32
+// 	/* ConnectEx() isn't always around, even when IOCP is enabled.
+// 	 * Here, we borrow the socket object's write handler to fall back
+// 	 * on a non-blocking connect() when ConnectEx() is unavailable. */
+// 	if (BEV_IS_ASYNC(bev)) {
+// 		event_assign(&bev->ev_write, bev->ev_base, fd,
+// 		    EV_WRITE|EV_PERSIST|EV_FINALIZE, bufferevent_writecb, bev);
+// 	}
+// #endif
 	bufferevent_setfd(bev, fd);
 	if (r == 0) {
-		if (! be_socket_enable(bev, EV_WRITE)) {
+		//EWOULDBLOCK 异步connect
+		if (! be_socket_enable(bev, EV_WRITE)) {//add write event
 			bufev_p->connecting = 1;
 			result = 0;
 			goto done;
@@ -563,15 +564,12 @@ bufferevent_new(evutil_socket_t fd,
 }
 
 
-static int
-be_socket_enable(struct bufferevent *bufev, short event)
+static int be_socket_enable(struct bufferevent *bufev, short event)
 {
-	if (event & EV_READ &&
-	    bufferevent_add_event_(&bufev->ev_read, &bufev->timeout_read) == -1)
-			return -1;
-	if (event & EV_WRITE &&
-	    bufferevent_add_event_(&bufev->ev_write, &bufev->timeout_write) == -1)
-			return -1;
+	if (event & EV_READ && bufferevent_add_event_(&bufev->ev_read, &bufev->timeout_read) == -1)
+		return -1;
+	if (event & EV_WRITE && bufferevent_add_event_(&bufev->ev_write, &bufev->timeout_write) == -1)
+		return -1;
 	return 0;
 }
 

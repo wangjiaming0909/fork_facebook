@@ -373,7 +373,7 @@ evhttp_write_buffer(struct evhttp_connection *evcon,
 	 * EV_READ, since we *do* want to learn about any close events.) */
 	bufferevent_setcb(evcon->bufev,
 	    NULL, /*read*/
-	    evhttp_write_cb,
+	    evhttp_write_cb,//invoke the evcon's evcon->cb(evcon->cb_args)
 	    evhttp_error_cb,
 	    evcon);
 
@@ -623,8 +623,7 @@ evhttp_make_header(struct evhttp_connection *evcon, struct evhttp_request *req)
 	}
 }
 
-void
-evhttp_connection_set_max_headers_size(struct evhttp_connection *evcon,
+void evhttp_connection_set_max_headers_size(struct evhttp_connection *evcon,
     ev_ssize_t new_max_headers_size)
 {
 	if (new_max_headers_size<0)
@@ -787,8 +786,7 @@ evhttp_connection_fail_(struct evhttp_connection *evcon,
 
 /* Bufferevent callback: invoked when any data has been written from an
  * http connection's bufferevent */
-static void
-evhttp_write_cb(struct bufferevent *bufev, void *arg)
+static void evhttp_write_cb(struct bufferevent *bufev, void *arg)
 {
 	struct evhttp_connection *evcon = arg;
 
@@ -1281,8 +1279,7 @@ evhttp_connection_set_local_port(struct evhttp_connection *evcon,
 	evcon->bind_port = port;
 }
 
-static void
-evhttp_request_dispatch(struct evhttp_connection* evcon)
+static void evhttp_request_dispatch(struct evhttp_connection* evcon)
 {
 	struct evhttp_request *req = TAILQ_FIRST(&evcon->requests);
 
@@ -1542,8 +1539,7 @@ evhttp_error_cb(struct bufferevent *bufev, short what, void *arg)
 /*
  * Event callback for asynchronous connection attempt.
  */
-static void
-evhttp_connection_cb(struct bufferevent *bufev, short what, void *arg)
+static void evhttp_connection_cb(struct bufferevent *bufev, short what, void *arg)
 {
 	struct evhttp_connection *evcon = arg;
 	int error;
@@ -1557,10 +1553,10 @@ evhttp_connection_cb(struct bufferevent *bufev, short what, void *arg)
 		 * when connecting to a local address.  the cleanup is going
 		 * to reschedule this function call.
 		 */
-#ifndef _WIN32
-		if (errno == ECONNREFUSED)
-			goto cleanup;
-#endif
+// #ifndef _WIN32
+// 		if (errno == ECONNREFUSED)
+// 			goto cleanup;
+// #endif
 		evhttp_error_cb(bufev, what, arg);
 		return;
 	}
@@ -2534,8 +2530,7 @@ evhttp_connection_get_addr(struct evhttp_connection *evcon)
 	return bufferevent_socket_get_conn_address_(evcon->bufev);
 }
 
-int
-evhttp_connection_connect_(struct evhttp_connection *evcon)
+int evhttp_connection_connect_(struct evhttp_connection *evcon)
 {
 	int old_state = evcon->state;
 	const char *address = evcon->address;
@@ -2618,8 +2613,7 @@ evhttp_connection_connect_(struct evhttp_connection *evcon)
  * this will start the connection.
  */
 
-int
-evhttp_make_request(struct evhttp_connection *evcon,
+int evhttp_make_request(struct evhttp_connection *evcon,
     struct evhttp_request *req,
     enum evhttp_cmd_type type, const char *uri)
 {
@@ -2652,7 +2646,10 @@ evhttp_make_request(struct evhttp_connection *evcon,
 
 	/* If the connection object is not connected; make it so */
 	if (!evhttp_connected(evcon)) {
+
+		//set connection callback, connect asyncly (bufferevent_setcb)
 		int res = evhttp_connection_connect_(evcon);
+
 		/* evhttp_connection_fail_(), which is called through
 		 * evhttp_connection_connect_(), assumes that req lies in
 		 * evcon->requests.  Thus, enqueue the request in advance and

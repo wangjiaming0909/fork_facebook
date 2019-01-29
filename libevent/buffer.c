@@ -510,8 +510,7 @@ evbuffer_run_callbacks(struct evbuffer *buffer, int running_deferred)
 	}
 }
 
-void
-evbuffer_invoke_callbacks_(struct evbuffer *buffer)
+void evbuffer_invoke_callbacks_(struct evbuffer *buffer)
 {
 	if (LIST_EMPTY(&buffer->callbacks)) {
 		buffer->n_add_for_cb = buffer->n_del_for_cb = 0;
@@ -958,8 +957,7 @@ PREPEND_CHAIN(struct evbuffer *dst, struct evbuffer *src)
 	}
 }
 
-int
-evbuffer_add_buffer(struct evbuffer *outbuf, struct evbuffer *inbuf)
+int evbuffer_add_buffer(struct evbuffer *outbuf, struct evbuffer *inbuf)
 {
 	struct evbuffer_chain *pinned, *last;
 	size_t in_total_len, out_total_len;
