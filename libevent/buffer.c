@@ -153,8 +153,8 @@ static int evbuffer_ptr_subtract(struct evbuffer *buf, struct evbuffer_ptr *pos,
 static int evbuffer_file_segment_materialize(struct evbuffer_file_segment *seg);
 static inline void evbuffer_chain_incref(struct evbuffer_chain *chain);
 
-static struct evbuffer_chain *
-evbuffer_chain_new(size_t size)
+//策略是将buffer的内存空间分配在当前结构体之后了
+static struct evbuffer_chain * evbuffer_chain_new(size_t size)
 {
 	struct evbuffer_chain *chain;
 	size_t to_alloc;
@@ -162,9 +162,11 @@ evbuffer_chain_new(size_t size)
 	if (size > EVBUFFER_CHAIN_MAX - EVBUFFER_CHAIN_SIZE)
 		return (NULL);
 
+	//多出来的空间就是buffer的内存空间
 	size += EVBUFFER_CHAIN_SIZE;
 
 	/* get the next largest memory that can hold the buffer */
+	//小于max的一半就逐步递增分配, 大于一半就直接分配
 	if (size < EVBUFFER_CHAIN_MAX / 2) {
 		to_alloc = MIN_BUFFER_SIZE;
 		while (to_alloc < size) {
@@ -175,6 +177,7 @@ evbuffer_chain_new(size_t size)
 	}
 
 	/* we get everything in one chunk */
+	//多分配了to_alloc - EVBUFFER_CHAIN_SIZE的内存
 	if ((chain = mm_malloc(to_alloc)) == NULL)
 		return (NULL);
 
@@ -185,6 +188,7 @@ evbuffer_chain_new(size_t size)
 	/* this way we can manipulate the buffer to different addresses,
 	 * which is required for mmap for example.
 	 */
+	//buffer指针指向的内存就在当前结构体内存之后
 	chain->buffer = EVBUFFER_CHAIN_EXTRA(unsigned char, chain);
 
 	chain->refcnt = 1;
