@@ -196,6 +196,9 @@ static struct evbuffer_chain * evbuffer_chain_new(size_t size)
 	return (chain);
 }
 
+//? release一个chain的内存
+//?	chain里面可能有buffer的内存, 需要检查有还是没有
+
 static inline void
 evbuffer_chain_free(struct evbuffer_chain *chain)
 {
