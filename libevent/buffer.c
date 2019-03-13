@@ -1095,8 +1095,8 @@ done:
 	return result;
 }
 
-int
-evbuffer_drain(struct evbuffer *buf, size_t len)
+//貌似是从evbuffer中删除len个byte,并且不用返回
+int evbuffer_drain(struct evbuffer *buf, size_t len)
 {
 	struct evbuffer_chain *chain, *next;
 	size_t remaining, old_len;
@@ -1111,7 +1111,7 @@ evbuffer_drain(struct evbuffer *buf, size_t len)
 	if (buf->freeze_start) {
 		result = -1;
 		goto done;
-	}
+	} 
 
 	if (len >= old_len && !HAS_PINNED_R(buf)) {
 		len = old_len;
@@ -1164,8 +1164,8 @@ done:
 }
 
 /* Reads data from an event buffer and drains the bytes read */
-int
-evbuffer_remove(struct evbuffer *buf, void *data_out, size_t datlen)
+//返回前datlen个字节, 并从evbuffer中删除这datlen个字节
+int evbuffer_remove(struct evbuffer *buf, void *data_out, size_t datlen)
 {
 	ev_ssize_t n;
 	EVBUFFER_LOCK(buf);
@@ -1365,8 +1365,8 @@ evbuffer_pullup(struct evbuffer *buf, ev_ssize_t size)
 	if (size == 0 || (size_t)size > buf->total_len)
 		goto done;
 
-	/* No need to pull up anything; the first size bytes are
-	 * already here. */
+	/* No need to pull up anything; the first size bytes are already here. */
+	//第一个chain里面已经有足够的数据返回了
 	if (chain->off >= (size_t)size) {
 		result = chain->buffer + chain->misalign;
 		goto done;
@@ -1722,8 +1722,7 @@ done:
 
 /* Adds data to an event buffer */
 
-int
-evbuffer_add(struct evbuffer *buf, const void *data_in, size_t datlen)
+int evbuffer_add(struct evbuffer *buf, const void *data_in, size_t datlen)
 {
 	struct evbuffer_chain *chain, *tmp;
 	const unsigned char *data = data_in;
@@ -1747,7 +1746,7 @@ evbuffer_add(struct evbuffer *buf, const void *data_in, size_t datlen)
 	}
 
 	/* If there are no chains allocated for this buffer, allocate one
-	 * big enough to hold all the data. */
+	   big enough to hold all the data. */
 	if (chain == NULL) {
 		chain = evbuffer_chain_new(datlen);
 		if (!chain)
@@ -1761,8 +1760,7 @@ evbuffer_add(struct evbuffer *buf, const void *data_in, size_t datlen)
 		    (ev_uint64_t)chain->misalign <= EVBUFFER_CHAIN_MAX);
 		remain = chain->buffer_len - (size_t)chain->misalign - chain->off;
 		if (remain >= datlen) {
-			/* there's enough space to hold all the data in the
-			 * current last chain */
+			/* there's enough space to hold all the data in the current last chain */
 			memcpy(chain->buffer + chain->misalign + chain->off,
 			    data, datlen);
 			chain->off += datlen;
@@ -1902,8 +1900,7 @@ done:
 }
 
 /** Helper: realigns the memory in chain->buffer so that misalign is 0. */
-static void
-evbuffer_chain_align(struct evbuffer_chain *chain)
+static void evbuffer_chain_align(struct evbuffer_chain *chain)
 {
 	EVUTIL_ASSERT(!(chain->flags & EVBUFFER_IMMUTABLE));
 	EVUTIL_ASSERT(!(chain->flags & EVBUFFER_MEM_PINNED_ANY));
@@ -2773,8 +2770,7 @@ done:
 	return pos;
 }
 
-int
-evbuffer_peek(struct evbuffer *buffer, ev_ssize_t len,
+int evbuffer_peek(struct evbuffer *buffer, ev_ssize_t len,
     struct evbuffer_ptr *start_at,
     struct evbuffer_iovec *vec, int n_vec)
 {

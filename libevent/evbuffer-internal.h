@@ -96,7 +96,7 @@ struct evbuffer {
 	 * is the first chain, or it is NULL, then the last_with_datap pointer
 	 * is &buf->first.
 	 */
-	struct evbuffer_chain **last_with_datap;
+	struct evbuffer_chain **last_with_datap;//指向最后一个有数据的chain
 
 	/** Total amount of bytes stored in all chains.*/
 	size_t total_len;
