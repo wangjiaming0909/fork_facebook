@@ -197,7 +197,9 @@ static struct evbuffer_chain * evbuffer_chain_new(size_t size)
 }
 
 //? release一个chain的内存
-//?	chain里面可能有buffer的内存, 需要检查有还是没有
+//?	chain里面可能有buffer的内存, 需要检查有还是没有(buffer是chain里面一个指针)
+//? 有的情况是:     在直接new chain的时候分配的内存
+//// 没有的情况是: 	可能这个buffer指向的内存是别处申请的,如此就要检查ref count, 是否删除这块内存
 
 static inline void
 evbuffer_chain_free(struct evbuffer_chain *chain)
@@ -208,13 +210,14 @@ evbuffer_chain_free(struct evbuffer_chain *chain)
 		return;
 	}
 
-	if (CHAIN_PINNED(chain)) {
+	if (CHAIN_PINNED(chain)) {//!what is pin??
 		/* will get freed once no longer dangling */
 		chain->refcnt++;
 		chain->flags |= EVBUFFER_DANGLING;
 		return;
 	}
 
+ //感觉像是: buffer引用了其他位置的内存, 这个reference中有cleanup_cb, 因此对这个引用的位置clean就行
 	/* safe to release chain, it's either a referencing
 	 * chain or all references to it have been freed */
 	if (chain->flags & EVBUFFER_REFERENCE) {
@@ -227,6 +230,8 @@ evbuffer_chain_free(struct evbuffer_chain *chain)
 			    chain->buffer_len,
 			    info->extra);
 	}
+
+//? 什么是FILESEGMENT
 	if (chain->flags & EVBUFFER_FILESEGMENT) {
 		struct evbuffer_chain_file_segment *info =
 		    EVBUFFER_CHAIN_EXTRA(
@@ -240,6 +245,7 @@ evbuffer_chain_free(struct evbuffer_chain *chain)
 			evbuffer_file_segment_free(info->segment);
 		}
 	}
+//? 什么是MULTICAST
 	if (chain->flags & EVBUFFER_MULTICAST) {
 		struct evbuffer_multicast_parent *info =
 		    EVBUFFER_CHAIN_EXTRA(
@@ -259,8 +265,7 @@ evbuffer_chain_free(struct evbuffer_chain *chain)
 	mm_free(chain);
 }
 
-static void
-evbuffer_free_all_chains(struct evbuffer_chain *chain)
+static void evbuffer_free_all_chains(struct evbuffer_chain *chain)
 {
 	struct evbuffer_chain *next;
 	for (; chain; chain = next) {
@@ -270,8 +275,7 @@ evbuffer_free_all_chains(struct evbuffer_chain *chain)
 }
 
 #ifndef NDEBUG
-static int
-evbuffer_chains_all_empty(struct evbuffer_chain *chain)
+static int evbuffer_chains_all_empty(struct evbuffer_chain *chain)
 {
 	for (; chain; chain = chain->next) {
 		if (chain->off)
@@ -312,9 +316,7 @@ evbuffer_free_trailing_empty_chains(struct evbuffer *buf)
 /* Add a single chain 'chain' to the end of 'buf', freeing trailing empty
  * chains as necessary.  Requires lock.  Does not schedule callbacks.
  */
-static void
-evbuffer_chain_insert(struct evbuffer *buf,
-    struct evbuffer_chain *chain)
+static void evbuffer_chain_insert(struct evbuffer *buf, struct evbuffer_chain *chain)
 {
 	ASSERT_EVBUFFER_LOCKED(buf);
 	if (*buf->last_with_datap == NULL) {
@@ -343,15 +345,13 @@ evbuffer_chain_insert_new(struct evbuffer *buf, size_t datlen)
 	return chain;
 }
 
-void
-evbuffer_chain_pin_(struct evbuffer_chain *chain, unsigned flag)
+void evbuffer_chain_pin_(struct evbuffer_chain *chain, unsigned flag)
 {
 	EVUTIL_ASSERT((chain->flags & flag) == 0);
 	chain->flags |= flag;
 }
 
-void
-evbuffer_chain_unpin_(struct evbuffer_chain *chain, unsigned flag)
+void evbuffer_chain_unpin_(struct evbuffer_chain *chain, unsigned flag)
 {
 	EVUTIL_ASSERT((chain->flags & flag) != 0);
 	chain->flags &= ~flag;
@@ -359,14 +359,12 @@ evbuffer_chain_unpin_(struct evbuffer_chain *chain, unsigned flag)
 		evbuffer_chain_free(chain);
 }
 
-static inline void
-evbuffer_chain_incref(struct evbuffer_chain *chain)
+static inline void evbuffer_chain_incref(struct evbuffer_chain *chain)
 {
     ++chain->refcnt;
 }
 
-struct evbuffer *
-evbuffer_new(void)
+struct evbuffer * evbuffer_new(void)
 {
 	struct evbuffer *buffer;
 
@@ -381,8 +379,7 @@ evbuffer_new(void)
 	return (buffer);
 }
 
-int
-evbuffer_set_flags(struct evbuffer *buf, ev_uint64_t flags)
+int evbuffer_set_flags(struct evbuffer *buf, ev_uint64_t flags)
 {
 	EVBUFFER_LOCK(buf);
 	buf->flags |= (ev_uint32_t)flags;
@@ -390,8 +387,7 @@ evbuffer_set_flags(struct evbuffer *buf, ev_uint64_t flags)
 	return 0;
 }
 
-int
-evbuffer_clear_flags(struct evbuffer *buf, ev_uint64_t flags)
+int evbuffer_clear_flags(struct evbuffer *buf, ev_uint64_t flags)
 {
 	EVBUFFER_LOCK(buf);
 	buf->flags &= ~(ev_uint32_t)flags;
@@ -399,23 +395,20 @@ evbuffer_clear_flags(struct evbuffer *buf, ev_uint64_t flags)
 	return 0;
 }
 
-void
-evbuffer_incref_(struct evbuffer *buf)
+void evbuffer_incref_(struct evbuffer *buf)
 {
 	EVBUFFER_LOCK(buf);
 	++buf->refcnt;
 	EVBUFFER_UNLOCK(buf);
 }
 
-void
-evbuffer_incref_and_lock_(struct evbuffer *buf)
+void evbuffer_incref_and_lock_(struct evbuffer *buf)
 {
 	EVBUFFER_LOCK(buf);
 	++buf->refcnt;
 }
 
-int
-evbuffer_defer_callbacks(struct evbuffer *buffer, struct event_base *base)
+int evbuffer_defer_callbacks(struct evbuffer *buffer, struct event_base *base)
 {
 	EVBUFFER_LOCK(buffer);
 	buffer->cb_queue = base;
@@ -427,8 +420,7 @@ evbuffer_defer_callbacks(struct evbuffer *buffer, struct event_base *base)
 	return 0;
 }
 
-int
-evbuffer_enable_locking(struct evbuffer *buf, void *lock)
+int evbuffer_enable_locking(struct evbuffer *buf, void *lock)
 {
 #ifdef EVENT__DISABLE_THREAD_SUPPORT
 	return -1;
@@ -451,16 +443,14 @@ evbuffer_enable_locking(struct evbuffer *buf, void *lock)
 #endif
 }
 
-void
-evbuffer_set_parent_(struct evbuffer *buf, struct bufferevent *bev)
+void evbuffer_set_parent_(struct evbuffer *buf, struct bufferevent *bev)
 {
 	EVBUFFER_LOCK(buf);
 	buf->parent = bev;
 	EVBUFFER_UNLOCK(buf);
 }
 
-static void
-evbuffer_run_callbacks(struct evbuffer *buffer, int running_deferred)
+static void evbuffer_run_callbacks(struct evbuffer *buffer, int running_deferred)
 {
 	struct evbuffer_cb_entry *cbent, *next;
 	struct evbuffer_cb_info info;
