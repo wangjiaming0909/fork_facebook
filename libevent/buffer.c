@@ -153,7 +153,7 @@ static int evbuffer_ptr_subtract(struct evbuffer *buf, struct evbuffer_ptr *pos,
 static int evbuffer_file_segment_materialize(struct evbuffer_file_segment *seg);
 static inline void evbuffer_chain_incref(struct evbuffer_chain *chain);
 
-//策略是将buffer的内存空间分配在当前结构体之后了
+//策略是将chain指向的内存空间分配在当前结构体之后了
 static struct evbuffer_chain * evbuffer_chain_new(size_t size)
 {
 	struct evbuffer_chain *chain;
@@ -162,11 +162,11 @@ static struct evbuffer_chain * evbuffer_chain_new(size_t size)
 	if (size > EVBUFFER_CHAIN_MAX - EVBUFFER_CHAIN_SIZE)
 		return (NULL);
 
-	//多出来的空间就是buffer的内存空间
+	//多出来的空间就是 chain 结构体的内存空间
 	size += EVBUFFER_CHAIN_SIZE;
 
 	/* get the next largest memory that can hold the buffer */
-	//小于max的一半就逐步递增分配, 大于一半就直接分配
+	//小于max的一半就逐步递增分配, 大于一半就直接分配, 尽量分配 512 或者1024的偶数倍内存空间 
 	if (size < EVBUFFER_CHAIN_MAX / 2) {
 		to_alloc = MIN_BUFFER_SIZE;
 		while (to_alloc < size) {
