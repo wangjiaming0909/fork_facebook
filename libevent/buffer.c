@@ -316,6 +316,9 @@ evbuffer_free_trailing_empty_chains(struct evbuffer *buf)
 /* Add a single chain 'chain' to the end of 'buf', freeing trailing empty
  * chains as necessary.  Requires lock.  Does not schedule callbacks.
  */
+//我猜在insert的时候，已经确保了最后一个有数据的chain 已经是满的了
+//因此，只需要free 掉最后空的chain， 把当前chain 加到最后就行了
+//此函数在头文件中并没有声明，感觉像仅internal use
 static void evbuffer_chain_insert(struct evbuffer *buf, struct evbuffer_chain *chain)
 {
 	ASSERT_EVBUFFER_LOCKED(buf);
