@@ -1904,14 +1904,11 @@ static void evbuffer_chain_align(struct evbuffer_chain *chain)
 #define MAX_TO_COPY_IN_EXPAND 4096
 #define MAX_TO_REALIGN_IN_EXPAND 2048
 
-/** Helper: return true iff we should realign chain to fit datalen bytes of
-    data in it. */
-static int
-evbuffer_chain_should_realign(struct evbuffer_chain *chain,
-    size_t datlen)
+/** Helper: return true iff we should realign chain to fit datalen bytes of data in it. */
+static int evbuffer_chain_should_realign(struct evbuffer_chain *chain, size_t datlen)
 {
-	return chain->buffer_len - chain->off >= datlen &&
-	    (chain->off < chain->buffer_len / 2) &&
+	return chain->buffer_len - chain->off >= datlen && 		//* 当前 chain 可以容纳datalen
+	    (chain->off < chain->buffer_len / 2) &&				//* 当前 chain 中只有一半以下的数据
 	    (chain->off <= MAX_TO_REALIGN_IN_EXPAND);
 }
 
@@ -1949,6 +1946,7 @@ evbuffer_expand_singlechain(struct evbuffer *buf, size_t datlen)
 		goto ok;
 	}
 
+	//此chain 中可用空间小于datalen, 如果这个chain 是个空的, 那么就直接插入一个新的可以容纳datalen的新的chain
 	/* If the chain is completely empty, just replace it by adding a new
 	 * empty chain. */
 	if (chain->off == 0) {
@@ -1972,7 +1970,11 @@ evbuffer_expand_singlechain(struct evbuffer *buf, size_t datlen)
 	 * CHAIN_SPACE_LEN(chain) bytes in the former last chunk.  If we
 	 * resize, we have to copy chain->off bytes.
 	 */
-
+	//! 3 种策略
+		//? 1, 把当前的最后一个chunk resize 一下, 使其后面没有空余空间, 然后直接 往最后 添加(插入, 因此可能之后还有空的chunk)一个 chunk就行
+		//? 2, 直接 add一个新的chunk (之前的chunk之后的可用空间就浪费了)
+		//? 3, 将当前最后一个chunk中数据考出来, new 一个chunk(大小是之前的off + datalen),把考出来的数据, 考进去
+	//?? 
 	/* Would expanding this chunk be affordable and worthwhile? */
 	if (CHAIN_SPACE_LEN(chain) < chain->buffer_len / 8 ||
 	    chain->off > MAX_TO_COPY_IN_EXPAND ||
