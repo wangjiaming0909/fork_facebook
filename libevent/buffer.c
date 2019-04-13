@@ -2864,6 +2864,11 @@ evbuffer_add_vprintf(struct evbuffer *buf, const char *fmt, va_list ap)
 		va_copy(aq, ap);
 
 		sz = evutil_vsnprintf(buffer, space, fmt, aq);
+		//1, space 已经足够塞下格式化之后的字符串, 则返回值 sz 应小于 space 走第三个if
+		//2, 如果space 并不能塞下格式化之后的字符串，那么表示此字符串被space截断之后塞进了buffer, 
+			//排除出错以及太大的情况， 分别对应第一和第二个if
+			//此时应走第四个if，根据返回值sz进行expand, sz返回的是格式化字符串的长度，并且不包含结尾'\0', 因此sz+1
+			//重新回到for循环的开始，这次可以走选项1,结束
 
 		va_end(aq);
 
