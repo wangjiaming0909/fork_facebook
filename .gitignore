@@ -1,9 +1,6 @@
-.vscode/ipch/da26a3c230c4a40c/BUFFER.ipch
-.vscode/ipch/658dc249ef4308fa/BUFFEREVENT.ipch
-.vscode/ipch/658dc249ef4308fa/mmap_address.bin
-.vscode/ipch/c0ccd02416b898f7/CRYPTUTIL.ipch
-.vscode/ipch/c0ccd02416b898f7/mmap_address.bin
-.vscode/ipch/da26a3c230c4a40c/mmap_address.bin
+.vscode/**/*
+**/*.bin
+**/*.ipch
 proxygen/proxygen/.vscode/ipch/3479c1b55c94808c/mmap_address.bin
 proxygen/proxygen/.vscode/ipch/4037f9ba285af4a7/mmap_address.bin
 proxygen/proxygen/.vscode/ipch/404ed90e0733eac0/mmap_address.bin
