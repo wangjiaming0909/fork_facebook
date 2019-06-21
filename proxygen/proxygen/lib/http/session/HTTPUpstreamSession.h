@@ -32,27 +32,19 @@ class HTTPUpstreamSession final: public HTTPSession {
    *                         priority levels.
    */
   HTTPUpstreamSession(
-      const WheelTimerInstance& timeout,
-      folly::AsyncTransportWrapper::UniquePtr&& sock,
-      const folly::SocketAddress& localAddr,
-      const folly::SocketAddress& peerAddr,
-      std::unique_ptr<HTTPCodec> codec,
-      const wangle::TransportInfo& tinfo,
-      InfoCallback* infoCallback,
-      uint8_t maxVirtualPri = 0,
-      std::shared_ptr<const PriorityMapFactory> priorityMapFactory =
-          std::shared_ptr<const PriorityMapFactory>()) :
-    HTTPSession(
-        timeout,
-        std::move(sock),
-        localAddr,
-        peerAddr,
-        nullptr,
-        std::move(codec),
-        tinfo,
-        infoCallback),
-    maxVirtualPriorityLevel_(priorityMapFactory ? 0 : maxVirtualPri),
-    priorityMapFactory_(priorityMapFactory) {
+    const WheelTimerInstance& timeout,
+    folly::AsyncTransportWrapper::UniquePtr&& sock,
+    const folly::SocketAddress& localAddr,
+    const folly::SocketAddress& peerAddr,
+    std::unique_ptr<HTTPCodec> codec,
+    const wangle::TransportInfo& tinfo,
+    InfoCallback* infoCallback,
+    uint8_t maxVirtualPri = 0,
+    std::shared_ptr<const PriorityMapFactory> priorityMapFactory = std::shared_ptr<const PriorityMapFactory>()) 
+      : HTTPSession( timeout, std::move(sock), localAddr, peerAddr, nullptr, std::move(codec), tinfo, infoCallback)
+      , maxVirtualPriorityLevel_(priorityMapFactory ? 0 : maxVirtualPri)
+      , priorityMapFactory_(priorityMapFactory) 
+  {
     if (sock_) {
       auto asyncSocket = sock_->getUnderlyingTransport<folly::AsyncSocket>();
       if (asyncSocket) {
