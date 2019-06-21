@@ -191,8 +191,7 @@ class Range {
    * args which are const.
    */
   typedef typename std::conditional<
-      std::is_same<Iter, char*>::value ||
-          std::is_same<Iter, unsigned char*>::value,
+      std::is_same<Iter, char*>::value || std::is_same<Iter, unsigned char*>::value,
       Range<const value_type*>,
       Range<Iter>>::type const_range_type;
 

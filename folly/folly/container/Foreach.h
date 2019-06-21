@@ -167,6 +167,8 @@ FOLLY_CPP14_CONSTEXPR decltype(auto) fetch(Sequence&& sequence, Index&& index);
  * If you need access to the iterators please write an explicit iterator loop
  * and use a counter variable
  */
+
+//_FE_ANON(s1_) --> FOR_EACH_s1_ && __LINE__
 #define FOR_EACH_ENUMERATE(count, i, c)                                      \
   if (bool _FE_ANON(s1_) = false) {                                          \
   } else                                                                     \
