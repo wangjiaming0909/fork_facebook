@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "thread.h": "c",
+        "socket.h": "c",
+        "struct_iovec.h": "c",
+        "stddef.h": "c"
+    }
+}

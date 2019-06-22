@@ -558,9 +558,7 @@ evutil_gettime_monotonic_(struct evutil_monotonic_timer *base,
    wants to or not.
  */
 
-int
-evutil_configure_monotonic_time_(struct evutil_monotonic_timer *base,
-    int precise)
+int evutil_configure_monotonic_time_(struct evutil_monotonic_timer *base, int precise)
 {
 	memset(base, 0, sizeof(*base));
 	return 0;

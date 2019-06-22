@@ -89,19 +89,6 @@ struct evconnlistener_event {
 	struct event listener;
 };
 
-#ifdef _WIN32
-struct evconnlistener_iocp {
-	struct evconnlistener base;
-	evutil_socket_t fd;
-	struct event_base *event_base;
-	struct event_iocp_port *port;
-	short n_accepting;
-	unsigned shutting_down : 1;
-	unsigned event_added : 1;
-	struct accepting_socket **accepting;
-};
-#endif
-
 #define LOCK(listener) EVLOCK_LOCK((listener)->lock, 0)
 #define UNLOCK(listener) EVLOCK_UNLOCK((listener)->lock, 0)
 
@@ -152,22 +139,15 @@ static const struct evconnlistener_ops evconnlistener_event_ops = {
 
 static void listener_read_cb(evutil_socket_t, short, void *);
 
-struct evconnlistener *
-evconnlistener_new(struct event_base *base,
-    evconnlistener_cb cb, void *ptr, unsigned flags, int backlog,
+struct evconnlistener * evconnlistener_new(
+	struct event_base *base,
+    evconnlistener_cb cb, 
+	void *ptr, 
+	unsigned flags, 
+	int backlog,
     evutil_socket_t fd)
 {
 	struct evconnlistener_event *lev;
-
-#ifdef _WIN32
-	if (base && event_base_get_iocp_(base)) {
-		const struct win32_extension_fns *ext =
-			event_get_win32_extension_fns_();
-		if (ext->AcceptEx && ext->GetAcceptExSockaddrs)
-			return evconnlistener_new_async(base, cb, ptr, flags,
-				backlog, fd);
-	}
-#endif
 
 	if (backlog > 0) {
 		if (listen(fd, backlog) < 0)

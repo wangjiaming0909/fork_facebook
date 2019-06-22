@@ -71,18 +71,6 @@ struct evutil_monotonic_timer {
 	int monotonic_clock;
 #endif
 
-#ifdef HAVE_WIN32_MONOTONIC
-	ev_GetTickCount_func GetTickCount64_fn;
-	ev_GetTickCount_func GetTickCount_fn;
-	ev_uint64_t last_tick_count;
-	ev_uint64_t adjust_tick_count;
-
-	ev_uint64_t first_tick;
-	ev_uint64_t first_counter;
-	double usec_per_count;
-	int use_performance_counter;
-#endif
-
 	struct timeval adjust_monotonic_clock;
 	struct timeval last_time;
 };

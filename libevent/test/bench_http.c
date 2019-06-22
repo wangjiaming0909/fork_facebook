@@ -27,14 +27,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifdef _WIN32
-#include <winsock2.h>
-#else
 #include <sys/socket.h>
 #include <sys/resource.h>
 #include <sys/time.h>
 #include <unistd.h>
-#endif
 #include <fcntl.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -93,13 +89,8 @@ main(int argc, char **argv)
 	ev_uint16_t port = 8080;
 	char *endptr = NULL;
 
-#ifdef _WIN32
-	WSADATA WSAData;
-	WSAStartup(0x101, &WSAData);
-#else
 	if (signal(SIGPIPE, SIG_IGN) == SIG_ERR)
 		return (1);
-#endif
 
 	setbuf(stdout, NULL);
 	setbuf(stderr, NULL);
@@ -138,15 +129,6 @@ main(int argc, char **argv)
 				exit(1);
 			}
 			break;
-#ifdef _WIN32
-		case 'i':
-			use_iocp = 1;
-#ifdef EVTHREAD_USE_WINDOWS_THREADS_IMPLEMENTED
-			evthread_use_windows_threads();
-#endif
-			event_config_set_flag(cfg,EVENT_BASE_FLAG_STARTUP_IOCP);
-			break;
-#endif
 		default:
 			fprintf(stderr, "Illegal argument \"%c\"\n", c);
 			exit(1);

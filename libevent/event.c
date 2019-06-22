@@ -423,8 +423,7 @@ static void event_debug_assert_socket_nonblocking_(evutil_socket_t fd) { (void)f
  * clock_gettime or gettimeofday as appropriate to find out the right time.
  * Return 0 on success, -1 on failure.
  */
-static int
-gettime(struct event_base *base, struct timeval *tp)
+static int gettime(struct event_base *base, struct timeval *tp)
 {
 	EVENT_BASE_ASSERT_LOCKED(base);
 
@@ -552,8 +551,7 @@ struct event_base *event_base_new(void)
 
 /** Return true iff 'method' is the name of a method that 'cfg' tells us to
  * avoid. */
-static int
-event_config_is_avoided_method(const struct event_config *cfg,
+static int event_config_is_avoided_method(const struct event_config *cfg,
 							   const char *method)
 {
 	struct event_config_entry *entry;
@@ -623,8 +621,7 @@ void event_disable_debug_mode(void)
 #endif
 }
 
-struct event_base *event_base_new_with_config(
-	const struct event_config *cfg)
+struct event_base *event_base_new_with_config( const struct event_config *cfg)
 {
 	int i;
 	struct event_base *base;
@@ -728,6 +725,8 @@ struct event_base *event_base_new_with_config(
 		base->evsel = eventops[i];
 
 		//对应结构体会设置其各种操作函数的指针
+		//init 返回所选用的io分发器(epoll, poll, select) 等自定义的结构(epollop, pollop, selectop)
+		//因此base->evbase里存储了 io 复用需要的结构和数据信息
 		base->evbase = base->evsel->init(base);
 	}
 
@@ -745,7 +744,7 @@ struct event_base *event_base_new_with_config(
 		event_msgx("libevent using: %s", base->evsel->name);
 
 	/* allocate a single active event queue */
-	if (event_base_priority_init(base, 1) < 0)
+	if (event_base_priority_init(base, 1) < 0) //? what does it mean of being one of priority
 	{
 		event_base_free(base);
 		return NULL;
@@ -774,42 +773,16 @@ struct event_base *event_base_new_with_config(
 	}
 #endif
 
-#ifdef _WIN32
-	if (cfg && (cfg->flags & EVENT_BASE_FLAG_STARTUP_IOCP))
-		event_base_start_iocp_(base, cfg->n_cpus_hint);
-#endif
-
 	return (base);
 }
 
 int event_base_start_iocp_(struct event_base *base, int n_cpus)
 {
-#ifdef _WIN32
-	if (base->iocp)
-		return 0;
-	base->iocp = event_iocp_port_launch_(n_cpus);
-	if (!base->iocp)
-	{
-		event_warnx("%s: Couldn't launch IOCP", __func__);
-		return -1;
-	}
-	return 0;
-#else
 	return -1;
-#endif
 }
 
 void event_base_stop_iocp_(struct event_base *base)
 {
-#ifdef _WIN32
-	int rv;
-
-	if (!base->iocp)
-		return;
-	rv = event_iocp_shutdown_(base->iocp, -1);
-	EVUTIL_ASSERT(rv >= 0);
-	base->iocp = NULL;
-#endif
 }
 
 static int
@@ -1298,6 +1271,7 @@ int event_priority_init(int npriorities)
 	return event_base_priority_init(current_base, npriorities);
 }
 
+//set how many priorities should have in the base
 int event_base_priority_init(struct event_base *base, int npriorities)
 {
 	int i, r;
@@ -1305,12 +1279,16 @@ int event_base_priority_init(struct event_base *base, int npriorities)
 
 	EVBASE_ACQUIRE_LOCK(base, th_base_lock);
 
+	//should not have active events and check npriorities
+	//acitve event count --> active_callbacks
 	if (N_ACTIVE_CALLBACKS(base) || npriorities < 1 || npriorities >= EVENT_MAX_PRIORITIES)
 		goto err;
 
+	//if the size of nactivequeues (evcallback_list) is the same as npriorities, do nothing
 	if (npriorities == base->nactivequeues)
 		goto ok;
 
+	//if already have active queues in the evcallback_list, free it first, set nactivequeues to 0
 	if (base->nactivequeues)
 	{
 		mm_free(base->activequeues);
