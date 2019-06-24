@@ -2743,8 +2743,7 @@ int event_add_nolock_(struct event *ev, const struct timeval *tv,
 	 */
 	if (tv != NULL && !(ev->ev_flags & EVLIST_TIMEOUT))
 	{
-		if (min_heap_reserve_(&base->timeheap,
-							  1 + min_heap_size_(&base->timeheap)) == -1)
+		if (min_heap_reserve_(&base->timeheap, 1 + min_heap_size_(&base->timeheap)) == -1)
 			return (-1); /* ENOMEM == errno */
 	}
 

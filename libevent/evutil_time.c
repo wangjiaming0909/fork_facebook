@@ -65,8 +65,7 @@
 
 #ifndef EVENT__HAVE_GETTIMEOFDAY
 /* No gettimeofday; this must be windows. */
-int
-evutil_gettimeofday(struct timeval *tv, struct timezone *tz)
+int evutil_gettimeofday(struct timeval *tv, struct timezone *tz)
 {
 #ifdef _MSC_VER
 #define U64_LITERAL(n) n##ui64
@@ -564,8 +563,8 @@ int evutil_configure_monotonic_time_(struct evutil_monotonic_timer *base, int pr
 	return 0;
 }
 
-int
-evutil_gettime_monotonic_(struct evutil_monotonic_timer *base,
+int evutil_gettime_monotonic_(
+	struct evutil_monotonic_timer *base,
     struct timeval *tp)
 {
 	if (evutil_gettimeofday(tp, NULL) < 0)
