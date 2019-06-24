@@ -3383,8 +3383,7 @@ evbuffer_cb_clear_flags(struct evbuffer *buffer,
 	return 0;
 }
 
-int
-evbuffer_freeze(struct evbuffer *buffer, int start)
+int evbuffer_freeze(struct evbuffer *buffer, int start)
 {
 	EVBUFFER_LOCK(buffer);
 	if (start)

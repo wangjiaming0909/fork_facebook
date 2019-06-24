@@ -177,8 +177,7 @@ struct evconnlistener * evconnlistener_new(
 		EVTHREAD_ALLOC_LOCK(lev->base.lock, EVTHREAD_LOCKTYPE_RECURSIVE);
 	}
 
-	event_assign(&lev->listener, base, fd, EV_READ|EV_PERSIST,
-	    listener_read_cb, lev);
+	event_assign(&lev->listener, base, fd, EV_READ|EV_PERSIST, listener_read_cb, lev);
 
 	if (!(flags & LEV_OPT_DISABLED))
 	    evconnlistener_enable(&lev->base);
@@ -186,9 +185,13 @@ struct evconnlistener * evconnlistener_new(
 	return &lev->base;
 }
 
-struct evconnlistener *
-evconnlistener_new_bind(struct event_base *base, evconnlistener_cb cb,
-    void *ptr, unsigned flags, int backlog, const struct sockaddr *sa,
+struct evconnlistener * evconnlistener_new_bind(
+    struct event_base *base, 
+    evconnlistener_cb cb,
+    void *ptr, 
+    unsigned flags, 
+    int backlog, 
+    const struct sockaddr *sa,
     int socklen)
 {
 	struct evconnlistener *listener;
@@ -268,8 +271,7 @@ event_listener_destroy(struct evconnlistener *lev)
 	event_debug_unassign(&lev_e->listener);
 }
 
-int
-evconnlistener_enable(struct evconnlistener *lev)
+int evconnlistener_enable(struct evconnlistener *lev)
 {
 	int r;
 	LOCK(lev);

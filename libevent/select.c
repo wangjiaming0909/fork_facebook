@@ -136,8 +136,7 @@ check_selectop(struct selectop *sop)
 #define check_selectop(sop) do { (void) sop; } while (0)
 #endif
 
-static int
-select_dispatch(struct event_base *base, struct timeval *tv)
+static int select_dispatch(struct event_base *base, struct timeval *tv)
 {
 	int res=0, i, j, nfds;
 	struct selectop *sop = base->evbase;

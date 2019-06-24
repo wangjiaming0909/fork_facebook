@@ -124,8 +124,8 @@ bufferevent_socket_set_conn_address_(struct bufferevent *bev,
 	memcpy(&bev_p->conn_address, addr, addrlen);
 }
 
-static void
-bufferevent_socket_outbuf_cb(struct evbuffer *buf,
+static void bufferevent_socket_outbuf_cb(
+	struct evbuffer *buf,
     const struct evbuffer_cb_info *cbinfo,
     void *arg)
 {
@@ -339,23 +339,19 @@ bufferevent_writecb(evutil_socket_t fd, short event, void *arg)
 	bufferevent_decref_and_unlock_(bufev);
 }
 
-struct bufferevent *
-bufferevent_socket_new(struct event_base *base, evutil_socket_t fd,
+struct bufferevent * bufferevent_socket_new(
+	struct event_base *base, 
+	evutil_socket_t fd,
     int options)
 {
 	struct bufferevent_private *bufev_p;
 	struct bufferevent *bufev;
 
-#ifdef _WIN32
-	if (base && event_base_get_iocp_(base))
-		return bufferevent_async_new_(base, fd, options);
-#endif
-
 	if ((bufev_p = mm_calloc(1, sizeof(struct bufferevent_private)))== NULL)
 		return NULL;
 
-	if (bufferevent_init_common_(bufev_p, base, &bufferevent_ops_socket,
-				    options) < 0) {
+	if (bufferevent_init_common_(bufev_p, base, &bufferevent_ops_socket, options) < 0) 
+	{
 		mm_free(bufev_p);
 		return NULL;
 	}
@@ -398,31 +394,11 @@ int bufferevent_socket_connect(struct bufferevent *bev,
 		ownfd = 1;
 	}
 	if (sa) {
-// #ifdef _WIN32
-// 		if (bufferevent_async_can_connect_(bev)) {
-// 			bufferevent_setfd(bev, fd);
-// 			r = bufferevent_async_connect_(bev, fd, sa, socklen);
-// 			if (r < 0)
-// 				goto freesock;
-// 			bufev_p->connecting = 1;
-// 			result = 0;
-// 			goto done;
-// 		} else
-// #endif
 		//如果connect立即返回0, 表示EWOULDBLOCK
 		r = evutil_socket_connect_(&fd, sa, socklen);
 		if (r < 0)
 			goto freesock;
 	}
-// #ifdef _WIN32
-// 	/* ConnectEx() isn't always around, even when IOCP is enabled.
-// 	 * Here, we borrow the socket object's write handler to fall back
-// 	 * on a non-blocking connect() when ConnectEx() is unavailable. */
-// 	if (BEV_IS_ASYNC(bev)) {
-// 		event_assign(&bev->ev_write, bev->ev_base, fd,
-// 		    EV_WRITE|EV_PERSIST|EV_FINALIZE, bufferevent_writecb, bev);
-// 	}
-// #endif
 	bufferevent_setfd(bev, fd);
 	if (r == 0) {
 		//EWOULDBLOCK 异步connect

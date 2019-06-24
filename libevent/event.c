@@ -2224,13 +2224,20 @@ int event_assign(
 
 	ev->ev_base = base;
 
+	//ev->ev_evcallback.evcb_cb_union.evcb_callback = callback;
 	ev->ev_callback = callback;
+	//ev->ev_evcallback.evcb_arg = arg;
 	ev->ev_arg = arg;
+	//ev->ev_evcallback.evcb_flags;
+	ev->ev_flags = EVLIST_INIT;
+
 	ev->ev_fd = fd;
 	ev->ev_events = events;
 	ev->ev_res = 0;
-	ev->ev_flags = EVLIST_INIT;
+
+	//ev->ev_.ev_signal.ev_ncalls = 0;
 	ev->ev_ncalls = 0;
+	//ev->ev_.ev_signal.ev_pncalls = NULL;
 	ev->ev_pncalls = NULL;
 
 	if (events & EV_SIGNAL)
@@ -2647,8 +2654,7 @@ evthread_notify_base_eventfd(struct event_base *base)
 /** Tell the thread currently running the event_loop for base (if any) that it
  * needs to stop waiting in its dispatch function (if it is) and process all
  * active callbacks. */
-static int
-evthread_notify_base(struct event_base *base)
+static int evthread_notify_base(struct event_base *base)
 {
 	EVENT_BASE_ASSERT_LOCKED(base);
 	if (!base->th_notify_fn)

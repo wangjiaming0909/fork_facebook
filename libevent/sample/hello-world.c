@@ -29,14 +29,12 @@ static const char MESSAGE[] = "Hello, World!\n";
 
 static const int PORT = 9995;
 
-static void listener_cb(struct evconnlistener *, evutil_socket_t,
-    struct sockaddr *, int socklen, void *);
+static void listener_cb(struct evconnlistener *, evutil_socket_t, struct sockaddr *, int socklen, void *);
 static void conn_writecb(struct bufferevent *, void *);
 static void conn_eventcb(struct bufferevent *, short, void *);
 static void signal_cb(evutil_socket_t, short, void *);
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct event_base *base;
 	struct evconnlistener *listener;
@@ -81,9 +79,12 @@ main(int argc, char **argv)
 	return 0;
 }
 
-static void
-listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
-    struct sockaddr *sa, int socklen, void *user_data)
+static void listener_cb(
+	struct evconnlistener *listener, 
+	evutil_socket_t fd,
+	struct sockaddr *sa, 
+	int socklen, 
+	void *user_data)
 {
 	struct event_base *base = user_data;
 	struct bufferevent *bev;

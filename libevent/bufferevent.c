@@ -305,8 +305,8 @@ bufferevent_trigger_event(struct bufferevent *bufev, short what, int options)
 	bufferevent_decref_and_unlock_(bufev);
 }
 
-int
-bufferevent_init_common_(struct bufferevent_private *bufev_private,
+int bufferevent_init_common_(
+	struct bufferevent_private *bufev_private,
     struct event_base *base,
     const struct bufferevent_ops *ops,
     enum bufferevent_options options)
