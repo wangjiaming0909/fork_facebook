@@ -2093,11 +2093,15 @@ int event_base_loop(struct event_base *base, int flags)
 
 		update_time_cache(base);
 
-		timeout_process(base);
+		//dispatch返回:
+		//		1, 某个fd有事件响应, 
+		// 		2, 没有fd响应,但是超时时间到了
+		//	从timer list中检查已经超时的timer, 从timer list中删除, 并响应其处理事件
+		timeout_process(base);//处理掉所有timeout事件
 
 		if (N_ACTIVE_CALLBACKS(base))//has active cbs
 		{
-			int n = event_process_active(base);
+			int n = event_process_active(base);//处理应该响应的io或者signal事件
 			if ((flags & EVLOOP_ONCE) && N_ACTIVE_CALLBACKS(base) == 0 && n != 0)
 				done = 1;
 		}
@@ -3313,8 +3317,7 @@ out:
 }
 
 /* Activate every event whose timeout has elapsed. */
-static void
-timeout_process(struct event_base *base)
+static void timeout_process(struct event_base *base)
 {
 	/* Caller must hold lock. */
 	struct timeval now;
@@ -3569,8 +3572,7 @@ event_queue_insert_active_later(struct event_base *base, struct event_callback *
 	TAILQ_INSERT_TAIL(&base->active_later_queue, evcb, evcb_active_next);
 }
 
-static void
-event_queue_insert_timeout(struct event_base *base, struct event *ev)
+static void event_queue_insert_timeout(struct event_base *base, struct event *ev)
 {
 	EVENT_BASE_ASSERT_LOCKED(base);
 

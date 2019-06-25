@@ -168,8 +168,8 @@ static int select_dispatch(struct event_base *base, struct timeval *tv)
 
 	EVBASE_RELEASE_LOCK(base, th_base_lock);
 
-	res = select(nfds, sop->event_readset_out,
-	    sop->event_writeset_out, NULL, tv);
+	res = select(nfds, sop->event_readset_out, sop->event_writeset_out, NULL, tv);
+	//timeout 是返回0
 
 	EVBASE_ACQUIRE_LOCK(base, th_base_lock);
 
