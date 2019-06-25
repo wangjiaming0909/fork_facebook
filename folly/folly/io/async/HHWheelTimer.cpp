@@ -105,7 +105,8 @@ void HHWheelTimer::scheduleTimeoutImpl(
     Callback* callback,
     std::chrono::milliseconds timeout,
     int64_t nextTickToProcess,
-    int64_t nextTick) {
+    int64_t nextTick) 
+{
   int64_t due = timeToWheelTicks(timeout) + nextTick;
   int64_t diff = due - nextTickToProcess;
   CallbackList* list;
@@ -137,7 +138,8 @@ void HHWheelTimer::scheduleTimeoutImpl(
 
 void HHWheelTimer::scheduleTimeout(
     Callback* callback,
-    std::chrono::milliseconds timeout) {
+    std::chrono::milliseconds timeout) 
+{
   // Cancel the callback if it happens to be scheduled already.
   callback->cancelTimeout();
   callback->requestContext_ = RequestContext::saveContext();

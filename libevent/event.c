@@ -2079,6 +2079,8 @@ int event_base_loop(struct event_base *base, int flags)
 
 		//dispatch在设置evsel(eventop*)时就确定了(比方说是select.c中的dispatch)
 		//select
+		//主线程阻塞在此处, 当主线程被唤醒时(通过eventfd或者其他的方式)
+		//从select或者epoll返回
 		res = evsel->dispatch(base, tv_p);
 
 		if (res == -1)
@@ -2280,7 +2282,7 @@ int event_assign(
 int event_base_set(struct event_base *base, struct event *ev)
 {
 	/* Only innocent events may be assigned to a different base */
-	if (ev->ev_flags != EVLIST_INIT)
+	if (ev->ev_flags != EVLIST_INIT)//EVLIST_INIT 是在 event_assign 的时候设置的(初始化)
 		return (-1);
 
 	event_debug_assert_is_setup_(ev);
@@ -2626,11 +2628,7 @@ evthread_notify_base_default(struct event_base *base)
 	char buf[1];
 	int r;
 	buf[0] = (char)0;
-#ifdef _WIN32
-	r = send(base->th_notify_fd[1], buf, 1, 0);
-#else
 	r = write(base->th_notify_fd[1], buf, 1);
-#endif
 	return (r < 0 && !EVUTIL_ERR_IS_EAGAIN(errno)) ? -1 : 0;
 }
 

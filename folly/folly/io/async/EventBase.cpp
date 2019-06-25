@@ -720,7 +720,7 @@ void EventBase::attachTimeoutManager(AsyncTimeout* obj, InternalEnum internal) {
   assert(ev->ev_base == nullptr);
 
   event_base_set(getLibeventBase(), ev);
-  if (internal == AsyncTimeout::InternalEnum::INTERNAL) {
+  if (internal == AsyncTimeout::InternalEnum::INTERNAL) {//默认internal为normal
     // Set the EVLIST_INTERNAL flag
     event_ref_flags(ev) |= EVLIST_INTERNAL;
   }

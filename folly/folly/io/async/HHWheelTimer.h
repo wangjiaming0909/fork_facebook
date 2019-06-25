@@ -209,7 +209,7 @@ class HHWheelTimer : private folly::AsyncTimeout,
    */
   void scheduleTimeout(Callback* callback, std::chrono::milliseconds timeout);
 
-  /**
+  /*
    * Schedule the specified Callback to be invoked after the
    * default timeout interval.
    *
