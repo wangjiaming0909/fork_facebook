@@ -279,8 +279,8 @@ class HHWheelTimer : private folly::AsyncTimeout,
 
   static constexpr int WHEEL_BUCKETS = 4;
   static constexpr int WHEEL_BITS = 8;
-  static constexpr unsigned int WHEEL_SIZE = (1 << WHEEL_BITS);
-  static constexpr unsigned int WHEEL_MASK = (WHEEL_SIZE - 1);
+  static constexpr unsigned int WHEEL_SIZE = (1 << WHEEL_BITS);//10000000
+  static constexpr unsigned int WHEEL_MASK = (WHEEL_SIZE - 1);//01111111
   static constexpr uint32_t LARGEST_SLOT = 0xffffffffUL;
 
   typedef Callback::List CallbackList;
@@ -310,11 +310,7 @@ class HHWheelTimer : private folly::AsyncTimeout,
    *                           yet. Can be less than nextTick if we're lagging.
    * @nextTick                 next tick based on the actual time
    */
-  void scheduleTimeoutImpl(
-      Callback* callback,
-      std::chrono::milliseconds timeout,
-      int64_t nextTickToProcess,
-      int64_t nextTick);
+  void scheduleTimeoutImpl( Callback* callback, std::chrono::milliseconds timeout, int64_t nextTickToProcess, int64_t nextTick);
   void scheduleNextTimeout(int64_t nextTick);
 
   size_t cancelTimeoutsFromList(CallbackList& timeouts);
