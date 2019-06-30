@@ -105,6 +105,9 @@ HHWheelTimer::~HHWheelTimer()
     cancelAll();
 }
 
+//though the method is called scheduleTimeoutImpl, but actually, it didn't register the timeout event into the EventBase
+// when the time goes, every timer will expire, ${timeout} will decrease, ${timeout} will decrease to be smaller than WHEEL_SIZE
+//
 void HHWheelTimer::scheduleTimeoutImpl(Callback *callback, std::chrono::milliseconds timeout, int64_t nextTickToProcess, int64_t nextTick)
 {
     int64_t due = timeToWheelTicks(timeout) + nextTick;
@@ -325,6 +328,7 @@ size_t HHWheelTimer::cancelAll()
     return count;
 }
 
+//only in scheduleNextTimeout that add and del timeout event in the EventBase
 void HHWheelTimer::scheduleNextTimeout(int64_t nextTick)
 {
     int64_t tick = 1;
