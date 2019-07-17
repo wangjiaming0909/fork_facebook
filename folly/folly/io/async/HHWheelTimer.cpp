@@ -329,6 +329,7 @@ size_t HHWheelTimer::cancelAll()
 }
 
 //only in scheduleNextTimeout that add and del timeout event in the EventBase
+//从scheduleTimeout调到这儿时，nextTick就是当前时间所在的tick(绝对位置)
 void HHWheelTimer::scheduleNextTimeout(int64_t nextTick)
 {
     int64_t tick = 1;
@@ -340,11 +341,12 @@ void HHWheelTimer::scheduleNextTimeout(int64_t nextTick)
         auto it = folly::findFirstSet(bi + (nextTick & WHEEL_MASK), bi_end);
         if (it == bi_end)
         {
-            tick = WHEEL_SIZE - ((nextTick - 1) & WHEEL_MASK);
+          tick = WHEEL_SIZE - ((nextTick - 1) & WHEEL_MASK);
         }
         else
         {
-            tick = std::distance(bi + (nextTick & WHEEL_MASK), it) + 1;
+          //如果nextTick小于WHEEL_MASK, 那么tick就是从现在起还要经过几个tick此timer会超时
+          tick = std::distance(bi + (nextTick & WHEEL_MASK), it) + 1;
         }
     }
 

@@ -1,3 +1,17 @@
+/**
+ * 有几种情况：
+ * 1. timer中为空, 刚创建好timer，距离创建好timer没有经过一个bucket所代表的时间
+ *  往timer中放了一个1s的timeout，
+ *  那么此timeout会 被放到第一个bucket中，并且bitmap中的对应位置会被置位，其位置于在bucket中的一致
+ *  然后调用sheduleNextTimeout，此时首先从bitmap中寻找最小的置位点，
+ *  到第一个bucket中的对应位置，找到这个CallbackList,计算出再经过几个tick会超时，设置到EventBase中
+ * 2. timer中为空，创建好timer，经过了一个bucket所代表的时间之后
+ *  此时schedule一个1s的timeout，在往WHEEL中放的时候，
+ *  
+ *  
+ */
+
+
 /*
  * Copyright 2014-present Facebook, Inc.
  *
