@@ -6,7 +6,9 @@
  *  然后调用sheduleNextTimeout，此时首先从bitmap中寻找最小的置位点，
  *  到第一个bucket中的对应位置，找到这个CallbackList,计算出再经过几个tick会超时，设置到EventBase中
  * 2. timer中为空，创建好timer，经过了一个bucket所代表的时间之后
- *  此时schedule一个1s的timeout，在往WHEEL中放的时候，
+ *  此时schedule一个1s的timeout，在往WHEEL中放的时候，会被放到第二个bucket中的对应位置, 
+ *  bitmap 没有置位. 
+ *  之后调用scheduleNextTimeout, 
  *  
  *  
  */
